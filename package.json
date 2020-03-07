@@ -1,0 +1,47 @@
+{
+  "name": "respec-to-epub",
+  "version": "1.0.0",
+  "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
+  "main": "ts-node src/main.ts",
+  "scripts": {
+    "build": "tsc",
+    "run": "node dist/main.js",
+    "docs": "typedoc src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iherman/respec-to-epub.git"
+  },
+  "keywords": [
+    "respec",
+    "epub"
+  ],
+  "author": "Ivan Herman",
+  "license": "W3C-20150513",
+  "bugs": {
+    "url": "https://github.com/iherman/respec-to-epub/issues"
+  },
+  "homepage": "https://github.com/iherman/respec-to-epub#readme",
+  "dependencies": {
+    "@types/underscore": "^1.9.4",
+    "archiver": "^3.1.1",
+    "jsdom": "^16.2.0",
+    "node-fetch": "^2.6.0",
+    "parse5": "^5.1.1",
+    "underscore": "^1.9.2",
+    "url": "^0.11.0",
+    "valid-url": "^1.0.9",
+    "xmlbuilder2": "^1.4.3",
+    "xmlserializer": "^0.6.1"
+  },
+  "devDependencies": {
+    "@types/archiver": "^3.1.0",
+    "@types/jsdom": "^16.1.0",
+    "@types/node": "^13.7.7",
+    "@types/node-fetch": "^2.5.5",
+    "@types/valid-url": "^1.0.2",
+    "@types/xmlserializer": "^0.6.0",
+    "typedoc": "^0.16.11",
+    "typescript": "^3.8.3"
+  }
+}
