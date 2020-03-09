@@ -1,3 +1,7 @@
+/**
+ * Wrappers around the fetch function.
+ */
+
 export type URL = string;
 
 import * as node_fetch from 'node-fetch';
@@ -23,22 +27,8 @@ export const css_media_type = 'text/css';
 /** Media type for SVG */
 export const svg_media_type = 'image/svg+xml';
 
-/** Media type for PNG Images */
-
-
-
+/** These media types refer to textual content, no reason to bother about streaming... */
 const text_content = [json_media_type, jsonld_media_type, html_media_type, xhtml_media_type, css_media_type, svg_media_type];
-
-
-
-/**
- * The types of documents that are considered in this module
- */
-enum MediaType {
-    json = 'json',
-    html = 'html',
-    xhtml = 'xhtml'
-};
 
 /**
 * Basic sanity check on a URL that is supposed to be used to retrieve a Web Resource.
@@ -59,7 +49,7 @@ enum MediaType {
 * @returns  - the URL itself (which might be slightly improved by the valid-url method) or null if this is, in fact, not a URL
 * @throws  if it pretends to be a URL, but it is not acceptable for some reasons.
 */
-function check_Web_url(address: URL): URL {
+const check_Web_url = (address: URL): URL => {
     const parsed = urlHandler.parse(address);
     if (parsed.protocol === null) {
         // This is not a URL, should be used as a file name
@@ -103,11 +93,13 @@ function check_Web_url(address: URL): URL {
  */
 const my_fetch: ((arg:string) => Promise<any>) = (process !== undefined) ? node_fetch.default : fetch;
 
-export interface FetchReturn {
-    content: any;
-    media_type: string
-};
-
+/**
+ * Fetch a resource.
+ *
+ * @param resource_url - the resource to be fetched
+ * @returns - resource; either a simple text, or a Stream
+ * @async
+ */
 export async function fetch_resource(resource_url: URL): Promise<any> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
@@ -133,11 +125,11 @@ export async function fetch_resource(resource_url: URL): Promise<any> {
                             resolve(response.text());
                         }
                     } else {
-                        reject(new Error(`HTTP response ${response.status}: ${response.statusText}`));
+                        reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
                     }
                 })
                 .catch((err) => {
-                    reject(new Error(`Problem accessing ${final_url}: ${err}`));
+                    reject(new Error(`Problem accessing ${resource_url}: ${err}`));
                 });
         } catch (err) {
             reject(err);
@@ -145,6 +137,14 @@ export async function fetch_resource(resource_url: URL): Promise<any> {
     });
 }
 
+
+/**
+ * Fetch the media type of the resource.
+ *
+ * @param resource_url - the resource to be fetched
+ * @returns - resource; either a simple text, or a Stream
+ * @async
+ */
 export async function fetch_type(resource_url: URL): Promise<string> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
@@ -158,17 +158,18 @@ export async function fetch_type(resource_url: URL): Promise<string> {
                         // If the response content type is set (which is usually the case, but not in all cases...)
                         resolve(response.headers.get('content-type'));
                     } else {
-                        reject(new Error(`HTTP response ${response.status}: ${response.statusText}`));
+                        reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
                     }
                 })
                 .catch((err) => {
-                    reject(new Error(`Problem accessing ${final_url}: ${err}`));
+                    reject(new Error(`Problem accessing ${resource_url}: ${err}`));
                 });
         } catch (err) {
             reject(err);
         }
     });
 }
+
 
 /**
  * Fetch an HTML file via [[fetch_resource]] and parse the result into the DOM.

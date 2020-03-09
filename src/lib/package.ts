@@ -150,9 +150,9 @@ export class PackageWrapper {
                     "item" : [
                         {
                             "@href": "nav.xhtml",
-                            "@id": "start",
                             "@media-type":"application/xhtml+xml",
-                            "@properties":"nav"
+                            "@properties":"nav",
+                            "@id": "nav",
                         },
                         // {
                         //     "@href": "toc.ncx",
@@ -161,13 +161,13 @@ export class PackageWrapper {
                         // },
                         {
                             "@href": "cover.xhtml",
+                            "@media-type": "application/xhtml+xml",
                             "@id": "start",
-                            "@media-type": "application/xhtml+xml"
                         },
                         {
                             "@href": "Overview.xhtml",
+                            "@media-type": "application/xhtml+xml",
                             "@id": "main",
-                            "@media-type": "application/xhtml+xml"
                         }
                     ]
                 },
