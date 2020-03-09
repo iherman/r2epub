@@ -5,7 +5,7 @@ import * as fs     from 'fs';
 import archiver    from 'archiver';
 import * as stream from 'stream';
 
-/** The content of the required `container.xml` file. The root is set to `index.opf` at the top level */
+/** The content of the required `container.xml` file. The root is set to `package.opf` at the top level */
 const container_xml = `
 <?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -29,6 +29,10 @@ const container_xml = `
 export class OCF {
     private book: archiver.Archiver;
 
+    /**
+     *
+     * @param name - the file name of the final file
+     */
     constructor(name: string) {
         this.book = archiver.create('zip', {zlib: {level: 9}});
         const output = fs.createWriteStream(name);

@@ -1,5 +1,8 @@
 /**
- * Wrapper around the package
+ * Wrapper around the package. The details of the various interfaces are in the
+ * [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
+ *
+ * (The encoding of the interfaces rely on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), used to generate an XML file out of a set of JS objects.)
  */
 import { convert } from "xmlbuilder2";
 
@@ -111,7 +114,7 @@ export class PackageWrapper {
      */
     constructor(identifier :string, title :string) {
         this.thePackage = {
-            "package": {
+            package: {
                 "@xmlns" : "http://www.idpf.org/2007/opf",
                 "@xmlns:dc": "http://purl.org/dc/elements/1.1/",
                 "@prefix" : "cc: http://creativecommons.org/ns#",
@@ -160,11 +163,6 @@ export class PackageWrapper {
                         //     "@media-type":"application/x-dtbncx+xml"
                         // },
                         {
-                            "@href": "cover.xhtml",
-                            "@media-type": "application/xhtml+xml",
-                            "@id": "start",
-                        },
-                        {
                             "@href": "Overview.xhtml",
                             "@media-type": "application/xhtml+xml",
                             "@id": "main",
@@ -202,7 +200,7 @@ export class PackageWrapper {
     add_creators(creators: string[]): void {
         creators.forEach((creator: string) => {
             this.thePackage.package.metadata["dc:creator"].push({
-                "@role": "author",
+                "@role": "editor",
                 "#": creator
             });
         });
