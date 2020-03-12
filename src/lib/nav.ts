@@ -2,7 +2,7 @@
  * Creation of the navigation file
  */
 import { ResourceRef, Global } from './process';
-import * as create_xhtml       from './create_xhtml';
+import * as xhtml              from './xhtml';
 
 const nav :string = `<?xml version="1.0"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
@@ -59,7 +59,7 @@ export function create_nav_file(global :Global) :ResourceRef[] {
         relative_url : 'nav.xhtml',
         id           : 'nav',
         properties   : 'nav',
-        text_content : create_xhtml.convert_text(final_nav)
+        text_content : xhtml.convert_text(final_nav)
     })
 
     return retval;

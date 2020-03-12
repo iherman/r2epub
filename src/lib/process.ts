@@ -6,13 +6,13 @@ import * as jsdom      from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
-import { fetch_html, fetch_resource, fetch_type, xhtml_media_type, URL } from './fetch';
-import * as package_document from './package_document';
-import * as css              from './css';
-import * as cover            from './cover';
-import * as nav              from './nav';
-import * as ocf              from './ocf';
-import * as create_xhtml     from './create_xhtml';
+import { fetch_html, fetch_resource, fetch_type, URL } from './fetch';
+import * as opf   from './opf';
+import * as css   from './css';
+import * as cover from './cover';
+import * as nav   from './nav';
+import * as ocf   from './ocf';
+import * as xhtml from './xhtml';
 
 
 /**
@@ -59,7 +59,7 @@ export interface Global {
     /**
      * The class used for the generation of the EPUB opf file
      */
-    package?      :package_document.PackageWrapper
+    package?      :opf.PackageWrapper
 
     /**
      * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[process]]
@@ -165,7 +165,7 @@ export async function process(document_url: string) {
         // Create the package content, and populate it with the essential metadata using the configuration
         const title = global.html_element.querySelector('title').textContent;
         const identifier = `https://www.w3.org/TR/${global.config.shortName}/`;
-        global.package = new package_document.PackageWrapper(identifier, title);
+        global.package = new opf.PackageWrapper(identifier, title);
         global.package.add_creators(global.config.editors.map((entry: any) => `${entry.name}, ${entry.company}`));
 
         const date = global.html_element.querySelector('time.dt-published');
@@ -347,7 +347,6 @@ const generate_epub = async (global: Global) => {
  * The following properties are set, if applicable:
  *
  * - [mathml](https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml): there is an explicit usage of mathml
- * - [remote-resource](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): whether there are remote resources. This is set by default: virtually any document has just resources, e.g., license, references...
  * - [scripted](https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted): there are active scripts
  * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage
  *
@@ -359,10 +358,10 @@ const generate_overview_item = (global: Global): ResourceRef[] => {
         media_type   : 'application/xhtml+xml',
         id           : 'main',
         relative_url : 'Overview.xhtml',
-        text_content : create_xhtml.convert_dom(global.dom)
+        text_content : xhtml.convert_dom(global.dom)
     }
 
-    const properties = ['remote-resources'];
+    const properties = [];
 
     // 1. Mathml usage
     if (global.html_element.querySelector('mathml') !== null) {
