@@ -156,11 +156,6 @@ export class PackageWrapper {
                         //     "@id": "ncx",
                         //     "@media-type":"application/x-dtbncx+xml"
                         // },
-                        {
-                            "@href": "Overview.xhtml",
-                            "@media-type": "application/xhtml+xml",
-                            "@id": "main",
-                        }
                     ]
                 },
                 spine : {

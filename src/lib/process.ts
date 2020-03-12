@@ -62,7 +62,10 @@ export interface Global {
     package?      :package_document.PackageWrapper
 
     /**
-     * List of extra resources, to be added to the opf file and into the final EPUB file
+     * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[process]]
+     * function is to collect all relevant resources; once done, this array is used to generate the final
+     * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file
+     * as well as to collect the resources themselves and add them to the final epub file.
      */
     resources?    :ResourceRef[]
 }
@@ -116,11 +119,17 @@ const resource_references :LocalLinks[] = [
  * 3. Collect all the resources (see [[resource_references]]); the relative urls and the media types are all
  * added to [[global]], to be added to the EPUB file and the opf file later
  * 4. Add the reference to the W3C logo
- * 5. Add some of the global W3C CSS files, and auxillary image files
- * 6. Create a cover file
- * 7. Create a nav file
- * 8. Finalize the package file
- * 9. Download all resources into the EPUB file
+ * 5. Add the reference to the generic fixup script.
+ * 6. Add some of the global W3C CSS files, and auxillary image files
+ * 7. Create a cover file
+ * 8. Create a nav file
+ * 9. Main resource (i.e., Overview.xhtml) entry, with relevant properties
+ * 10. Finalize the package file based on the collected resources in [[Global.resources]]
+ * 11. Download all resources into the EPUB file
+ *
+ * All the entries are collected in the in a [[Global.resources]] array, to be then added to the
+ * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
+ * the resources into the final epub result.
  *
  * @param document_url - The URL for the (generated) file
  * @async
@@ -164,9 +173,8 @@ export async function process(document_url: string) {
     }
 
     // ------------------------------------------
-    // 3. Collect all the resources
+    // 3. Collect all the extra resources from the Overview.html file
     global.resources = await get_extra_resources(global);
-
 
     // ------------------------------------------
     // 4. Add the reference to the W3C logo
@@ -184,21 +192,41 @@ export async function process(document_url: string) {
     }
 
     // ------------------------------------------
-    // 5. Add some of the global W3C CSS files, and auxillary image files
+    // 5. Add the reference to the generic fixup script. I am not sure it is really necessary
+    // but it may not harm...
+    {
+        const fixup_element = global.html_element.querySelector('script[src="https://www.w3.org/scripts/TR/2016/fixup.js"]');
+        if (fixup_element !== null) {
+            const relative_url = 'scripts/TR/2016/fixup.js';
+            fixup_element.setAttribute('src', relative_url);
+            global.resources.push({
+                relative_url : relative_url,
+                media_type   : 'text/javascript',
+                absolute_url : 'https://www.w3.org/scripts/TR/2016/fixup.js'
+            })
+        }
+    }
+
+    // ------------------------------------------
+    // 6. Add some of the global W3C CSS files, and auxillary image files
     global.resources = [...global.resources, ...css.extract(global)]
 
     // ------------------------------------------
-    // 6. Create a cover file
+    // 7. Create a cover file
     global.resources = [...cover.create_cover_page(global), ...global.resources, ];
 
     // ------------------------------------------
-    // 7. Create a nav file
+    // 8. Create a nav file
     global.resources = [...nav.create_nav_file(global), ...global.resources];
 
     // ------------------------------------------
-    // 8. Finalize the package file
+    // 9. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
+    global.resources = [...generate_overview_item(global), ...global.resources];
+
+    // ------------------------------------------
+    // 10. Finalize the package file
     {
-        // Populate the global package with the additional resources
+        // Populate the global package with the resource item
         let res_id_num = 1;
         global.resources.forEach((resource) => {
             if (resource.relative_url) {
@@ -210,13 +238,13 @@ export async function process(document_url: string) {
                 });
                 res_id_num++;
             }
-         })
+        })
     }
 
     // console.log(global.package.serialize())
-    // 9. Download all resources into the EPUB file
+    // 11. Download all resources into the EPUB file
     await generate_epub(global);
- }
+}
 
 
 /**
@@ -281,6 +309,7 @@ const get_extra_resources = async (global: Global): Promise<ResourceRef[]> => {
  * The generated epub file name is `shortName.epub`
  *
  * @param global - Global data
+ * @async
  */
 const generate_epub = async (global: Global) => {
     const the_book = new ocf.OCF(`${global.config.shortName}.epub`);
@@ -289,11 +318,6 @@ const generate_epub = async (global: Global) => {
     // Add the package to the archives, with a fixed name:
     the_book.append(global.package.serialize(),'package.opf');
 
-    // Add the core file as 'Overview.xhtml'
-    the_book.append(create_xhtml.convert_dom(global.dom),'Overview.xhtml');
-
-    // Add the cover page
-    // Add the TOC page
     // Add all the resources
     {
         // First, find the resources where the content is simply a text; this can be archived directly
@@ -310,4 +334,57 @@ const generate_epub = async (global: Global) => {
     }
 
     await the_book.finalize();
+}
+
+
+/**
+ * Generate the resource entry for the Overview.xhtml item into the package; that includes setting the various manifest item
+ * properties, see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab).
+ *
+ * The following properties are set, if applicable:
+ *
+ * - [mathml](https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml): there is an explicit usage of mathml
+ * - [remote-resource](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): whether there are remote resources. This is set by default: virtually any document has just resources, e.g., license, references...
+ * - [scripted](https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted): there are active scripts
+ * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage
+ *
+ * @param global - Global data
+ * @return - a single element array with the resource definition of the `Overview.xhtml` entry
+ */
+const generate_overview_item = (global: Global): ResourceRef[] => {
+    const retval :ResourceRef = {
+        media_type   : 'application/xhtml+xml',
+        id           : 'main',
+        relative_url : 'Overview.xhtml',
+        text_content : create_xhtml.convert_dom(global.dom)
+    }
+
+    const properties = ['remote-resource'];
+
+    // 1. Mathml usage
+    if (global.html_element.querySelector('mathml') !== null) {
+        properties.push('mathml');
+    }
+
+    // 2. are there active scripts
+    const scripts = Array.from(global.html_element.querySelectorAll('script'));
+    const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
+        if (element.hasAttribute('type')) {
+            const type = element.getAttribute('type');
+            return ['application/javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript'].includes(type);
+        } else {
+            return true;
+        }
+    })
+    if (is_there_script) {
+        properties.push('scripted');
+    }
+
+    // 3. explicit svg usage
+    if (global.html_element.querySelector('svg') !== null) {
+        properties.push('svg');
+    }
+
+    retval.properties = properties.join(' ');
+    return [retval];
 }
