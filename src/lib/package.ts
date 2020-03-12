@@ -151,12 +151,6 @@ export class PackageWrapper {
                 },
                 manifest : {
                     "item" : [
-                        {
-                            "@href": "nav.xhtml",
-                            "@media-type":"application/xhtml+xml",
-                            "@properties":"nav",
-                            "@id": "nav",
-                        },
                         // {
                         //     "@href": "toc.ncx",
                         //     "@id": "ncx",
@@ -189,6 +183,10 @@ export class PackageWrapper {
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
     add_manifest_item(item :ManifestItem) :void {
+        if (item['@properties'] === undefined) {
+            delete item['@properties'];
+        }
+
         this.thePackage.package.manifest.item.push(item);
     }
 

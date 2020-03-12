@@ -10,6 +10,7 @@ import { fetch_html, fetch_resource, fetch_type, xhtml_media_type, URL } from '.
 import { PackageWrapper } from './package';
 import * as css           from './css';
 import * as cover         from './cover';
+import * as nav           from './nav';
 import { OCF }            from './ocf';
 import * as create_xhtml  from './create_xhtml';
 
@@ -31,7 +32,10 @@ export interface ResourceRef {
     text_content?  :string,
 
     /** The item must have a fixed id, rather than a generated one */
-    id?            :string
+    id?            :string,
+
+    /** Extra properties, defined by the package specification, to be added to the entry */
+    properties?    :string
 }
 
 
@@ -110,8 +114,9 @@ const resource_references :LocalLinks[] = [
  * 4. Add the reference to the W3C logo
  * 5. Add some of the global W3C CSS files, and auxillary image files
  * 6. Create a cover file
- * 7. Create a TOC file
- * 8. Download all resources into the EPUB file
+ * 7. Create a nav file
+ * 8. Finalize the package file
+ * 9. Download all resources into the EPUB file
  *
  * @param document_url - The URL for the (generated) file
  * @async
@@ -180,13 +185,14 @@ export async function process(document_url: string) {
 
     // ------------------------------------------
     // 6. Create a cover file
-    global.resources = [...global.resources, ...cover.create_cover_page(global)]
+    global.resources = [...cover.create_cover_page(global), ...global.resources, ];
 
     // ------------------------------------------
-    // 7. Create a TOC file
+    // 7. Create a nav file
+    global.resources = [...nav.create_nav_file(global), ...global.resources];
 
     // ------------------------------------------
-    // 8. Download/finalize all resources into the EPUB file
+    // 8. Finalize the package file
     {
         // Populate the global package with the additional resources
         let res_id_num = 1;
@@ -195,13 +201,16 @@ export async function process(document_url: string) {
                 global.package.add_manifest_item({
                     "@href"       : resource.relative_url,
                     "@media-type" : resource.media_type,
-                    "@id"         : resource.id || `res_id${res_id_num}`
+                    "@id"         : resource.id || `res_id${res_id_num}`,
+                    "@properties" : resource.properties
                 });
                 res_id_num++;
             }
          })
     }
 
+    // console.log(global.package.serialize())
+    // 9. Download all resources into the EPUB file
     await generate_epub(global, `${global.config.shortName}.epub`);
  }
 
@@ -269,7 +278,7 @@ const generate_epub = async (global: Global, epub_file_name: string) => {
     the_book.append(global.package.serialize(),'package.opf');
 
     // Add the core file as 'Overview.xhtml'
-    the_book.append(create_xhtml.convert(global.dom),'Overview.xhtml');
+    the_book.append(create_xhtml.convert_dom(global.dom),'Overview.xhtml');
 
     // Add the cover page
     // Add the TOC page

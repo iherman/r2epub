@@ -108,5 +108,5 @@ export function create_cover_page(global :Global) :ResourceRef[] {
         text_content : final_cover
     })
 
-    return retval;
+    return retval.reverse();
 }
