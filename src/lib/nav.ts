@@ -33,6 +33,11 @@ const nav :string = `<?xml version="1.0" encoding="UTF-8"?>
 </html>
 `
 
+/**
+ *
+ * @param global - global data
+ * @returns - Resource representing the nav.xhtml file
+ */
 export function create_nav_file(global :Global) :ResourceRef[] {
     const retval :ResourceRef[] = [];
 

@@ -7,12 +7,12 @@ import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type, xhtml_media_type, URL } from './fetch';
-import { PackageWrapper } from './package';
-import * as css           from './css';
-import * as cover         from './cover';
-import * as nav           from './nav';
-import { OCF }            from './ocf';
-import * as create_xhtml  from './create_xhtml';
+import * as package_document from './package_document';
+import * as css              from './css';
+import * as cover            from './cover';
+import * as nav              from './nav';
+import * as ocf              from './ocf';
+import * as create_xhtml     from './create_xhtml';
 
 
 /**
@@ -59,7 +59,7 @@ export interface Global {
     /**
      * The class used for the generation of the EPUB opf file
      */
-    package?      :PackageWrapper
+    package?      :package_document.PackageWrapper
 
     /**
      * List of extra resources, to be added to the opf file and into the final EPUB file
@@ -101,6 +101,10 @@ const resource_references :LocalLinks[] = [
     {
         query : 'object',
         attr  : 'data'
+    },
+    {
+        query : 'script',
+        attr  : 'src'
     }
 ]
 
@@ -152,7 +156,7 @@ export async function process(document_url: string) {
         // Create the package content, and populate it with the essential metadata using the configuration
         const title = global.html_element.querySelector('title').textContent;
         const identifier = `https://www.w3.org/TR/${global.config.shortName}/`;
-        global.package = new PackageWrapper(identifier, title);
+        global.package = new package_document.PackageWrapper(identifier, title);
         global.package.add_creators(global.config.editors.map((entry: any) => `${entry.name}, ${entry.company}`));
 
         const date = global.html_element.querySelector('time.dt-published');
@@ -211,7 +215,7 @@ export async function process(document_url: string) {
 
     // console.log(global.package.serialize())
     // 9. Download all resources into the EPUB file
-    await generate_epub(global, `${global.config.shortName}.epub`);
+    await generate_epub(global);
  }
 
 
@@ -270,8 +274,16 @@ const get_extra_resources = async (global: Global): Promise<ResourceRef[]> => {
 }
 
 
-const generate_epub = async (global: Global, epub_file_name: string) => {
-    const the_book = new OCF(epub_file_name);
+/**
+ * Create the final epub file: download all resources, if applicable, and then add all of them, plus the
+ * generated content (package file, nav file, the original content file, etc) to an OCF instance.
+ *
+ * The generated epub file name is `shortName.epub`
+ *
+ * @param global - Global data
+ */
+const generate_epub = async (global: Global) => {
+    const the_book = new ocf.OCF(`${global.config.shortName}.epub`);
 
     // The OCF class adds the fixed file like mime type and such automatically.
     // Add the package to the archives, with a fixed name:
