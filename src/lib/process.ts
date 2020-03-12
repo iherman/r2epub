@@ -183,10 +183,13 @@ export async function process(document_url: string) {
         if (logo_element !== null) {
             const relative_url = 'StyleSheets/TR/2016/logos/W3C.svg';
             logo_element.setAttribute('src', relative_url);
+            // There is an ugly story here. The SVG version of the logo, as stored on the W3C site, includes a reference
+            // the very complex SVG DTD, and epubcheck does not like it (EPUB v. 3 does not like it, I guess). So
+            // I created a version of the logo without it and stored it at a fix URL...
             global.resources.push({
                 relative_url : relative_url,
                 media_type   : 'image/svg+xml',
-                absolute_url : 'https://www.w3.org/StyleSheets/TR/2016/logos/W3C'
+                absolute_url : 'https://www.w3.org/People/Ivan/StyleSheets/W3C_TR_2016.svg'
             })
         }
     }
@@ -359,7 +362,7 @@ const generate_overview_item = (global: Global): ResourceRef[] => {
         text_content : create_xhtml.convert_dom(global.dom)
     }
 
-    const properties = ['remote-resource'];
+    const properties = ['remote-resources'];
 
     // 1. Mathml usage
     if (global.html_element.querySelector('mathml') !== null) {

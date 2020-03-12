@@ -27,8 +27,24 @@ export const css_media_type = 'text/css';
 /** Media type for SVG */
 export const svg_media_type = 'image/svg+xml';
 
+/** Media type for javascript */
+export const js_media_type = 'text/javascript';
+
+/** Media type for ecmascript */
+export const es_media_type = 'text/ecmascript';
+
 /** These media types refer to textual content, no reason to bother about streaming... */
-const text_content = [json_media_type, jsonld_media_type, html_media_type, xhtml_media_type, css_media_type, svg_media_type];
+const text_content = [
+    json_media_type,
+    jsonld_media_type,
+    html_media_type,
+    xhtml_media_type,
+    css_media_type,
+    svg_media_type,
+    js_media_type,
+    es_media_type
+];
+
 
 /**
 * Basic sanity check on a URL that is supposed to be used to retrieve a Web Resource.
@@ -82,6 +98,7 @@ const check_Web_url = (address: URL): URL => {
     return retval;
 }
 
+
 /**
  * The effective fetch implementation run by the rest of the code.
  *
@@ -92,6 +109,7 @@ const check_Web_url = (address: URL): URL => {
  * I guess this makes this entry a bit polyfill like:-)
  */
 const my_fetch: ((arg:string) => Promise<any>) = (process !== undefined) ? node_fetch.default : fetch;
+
 
 /**
  * Fetch a resource.

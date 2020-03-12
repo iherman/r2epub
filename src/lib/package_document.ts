@@ -108,6 +108,9 @@ export class PackageWrapper {
     /** The Package document content itself, stored in a JSON object for an easier manipulation */
     thePackage: Package;
 
+    /** Id generated to the editors for cross reference */
+    id: number = 0;
+
     /**
      * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
      * @param title - Title of the publication
@@ -193,9 +196,16 @@ export class PackageWrapper {
     add_creators(creators: string[]): void {
         creators.forEach((creator: string) => {
             this.thePackage.package.metadata["dc:creator"].push({
-                "@role": "editor",
-                "#": creator
+                "@id"   : `creatorid_${this.id}`,
+                "#"     : creator
             });
+            this.thePackage.package.metadata["meta"].push({
+                "@refines"  :  `#creatorid_${this.id}`,
+                "@property" : "role",
+                "@scheme"   : "marc:relators",
+                "#"         : "edt"
+            });
+            this.id++;
         });
     }
 
@@ -207,11 +217,11 @@ export class PackageWrapper {
     add_dates(date :string): void {
         this.thePackage.package.metadata.meta.push({
             "@property": "dcterms:date",
-            "#": date
+            "#": `${date}T00:00:00Z`
         });
         this.thePackage.package.metadata.meta.push({
             "@property": "dcterms:modified",
-            "#": date
+            "#": `${date}T00:00:00Z`
         })
     }
 

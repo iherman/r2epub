@@ -6,8 +6,7 @@ import archiver    from 'archiver';
 import * as stream from 'stream';
 
 /** The content of the required `container.xml` file. The root is set to `package.opf` at the top level */
-const container_xml = `
-<?xml version="1.0"?>
+const container_xml = `<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
     <rootfiles>
         <rootfile full-path="package.opf" media-type="application/oebps-package+xml" />

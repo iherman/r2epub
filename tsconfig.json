@@ -33,6 +33,6 @@
         "hideGenerator": true,
         "listInvalidSymbolLinks": true,
         "ignoreCompilerErrors": true,
-        "name" : "Converting HTML documents produced by Respec into EPUB 3"
+        "name" : "Converting HTML documents produced by Respec into EPUB 3.2"
     }
 }

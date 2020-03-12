@@ -11,7 +11,7 @@ const cover = `<?xml version="1.0" encoding="utf-8"?>
   <head>
     <meta charset="utf-8" />
     <title>%%%TITLE1%%%</title>
-    <link type="text/css" rel="stylesheet" href="StyleSheets/cover.css" />
+    <link type="text/css" rel="stylesheet" href="StyleSheets/base.css" />
     <style type="text/css">
 	  body {
 		padding: 0 0 0 0 !important;
@@ -83,7 +83,7 @@ export function create_cover_page(global :Global) :ResourceRef[] {
         },
         {
             media_type   : 'text/css',
-            relative_url : 'StyleSheets/cover.css',
+            relative_url : 'StyleSheets/base.css',
             absolute_url : 'https://www.w3.org/StyleSheets/base.css'
         }
     ]
@@ -102,7 +102,7 @@ export function create_cover_page(global :Global) :ResourceRef[] {
         .replace('%%%DATE%%%', date.textContent);
 
     retval.push({
-        media_type   : 'application/html+xml',
+        media_type   : 'application/xhtml+xml',
         relative_url : 'cover.xhtml',
         id           : 'start',
         text_content : final_cover

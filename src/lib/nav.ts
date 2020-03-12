@@ -4,15 +4,14 @@
 import { ResourceRef, Global } from './process';
 import * as create_xhtml       from './create_xhtml';
 
-const nav :string = `<?xml version="1.0" encoding="UTF-8"?>
+const nav :string = `<?xml version="1.0"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
     <head>
         <title>
             %%%Title%%% — Contents
         </title>
-        <meta name="date" />
-        <link rel="stylesheet" type="text/css" href="StyleSheets/TR/base.css" />
-        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="StyleSheets/base.css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
         ol {
             list-style-type: none;
@@ -23,13 +22,7 @@ const nav :string = `<?xml version="1.0" encoding="UTF-8"?>
         <nav epub:type="toc" id="toc">
 %%%TOC%%%
         </nav>
-        <nav epub:type="landmarks" id="landmarks">
-          <ol epub:type="list">
-            <li><a epub:type="bodymatter" href="Overview.xhtml">Begin reading</a></li>
-            <li><a epub:type="toc" href="nav.xhtml">Table of Contents</a></li>
-          </ol>
-        </nav>
-    </body>
+     </body>
 </html>
 `
 
@@ -47,16 +40,26 @@ export function create_nav_file(global :Global) :ResourceRef[] {
     if (toc_ol === null) {
         throw "No TOC element???"
     }
+
+    // It seems that there are some bugs in the TOC generators which result in <ol> elements that are empty.
+    // epubcheck is picky and flags these...
+    const ols = Array.from(toc_ol.querySelectorAll('ol'));
+    ols.forEach((ol_element :Element) => {
+        if (ol_element.childElementCount === 0) {
+            ol_element.remove()
+        }
+    })
+
     const final_nav = nav
         .replace('%%%Title%%%', title)
         .replace('%%%TOC%%%', toc_ol.innerHTML.replace(/href="#/g,'href="Overview.xhtml#'));
 
     retval.push({
-        media_type   : 'application/html+xml',
+        media_type   : 'application/xhtml+xml',
         relative_url : 'nav.xhtml',
         id           : 'nav',
         properties   : 'nav',
-        text_content : final_nav
+        text_content : create_xhtml.convert_text(final_nav)
     })
 
     return retval;
