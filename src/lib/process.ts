@@ -13,6 +13,7 @@ import * as cover from './cover';
 import * as nav   from './nav';
 import * as ocf   from './ocf';
 import * as xhtml from './xhtml';
+import { parse } from 'parse5';
 
 
 /**
@@ -90,24 +91,16 @@ interface LocalLinks {
  */
 const resource_references :LocalLinks[] = [
     {
-        query : 'img',
+        query : 'img, script, audio, video, source',
         attr  : 'src'
     },
     {
-        query : 'a',
-        attr  : 'href'
-    },
-    {
-        query : 'link[rel="stylesheet"]',
+        query : 'a, link[rel="stylesheet"]',
         attr  : 'href'
     },
     {
         query : 'object',
         attr  : 'data'
-    },
-    {
-        query : 'script',
-        attr  : 'src'
     }
 ]
 
@@ -349,6 +342,7 @@ const generate_epub = async (global: Global) => {
  * - [mathml](https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml): there is an explicit usage of mathml
  * - [scripted](https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted): there are active scripts
  * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage
+ * - [remote-resources](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): remote resources, typically video or audio, possibly images
  *
  * @param global - Global data
  * @return - a single element array with the resource definition of the `Overview.xhtml` entry
@@ -369,22 +363,40 @@ const generate_overview_item = (global: Global): ResourceRef[] => {
     }
 
     // 2. are there active scripts
-    const scripts = Array.from(global.html_element.querySelectorAll('script'));
-    const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
-        if (element.hasAttribute('type')) {
-            const type = element.getAttribute('type');
-            return ['application/javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript'].includes(type);
-        } else {
-            return true;
+    {
+        const scripts = Array.from(global.html_element.querySelectorAll('script'));
+        const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
+            if (element.hasAttribute('type')) {
+                const type = element.getAttribute('type');
+                return ['application/javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript'].includes(type);
+            } else {
+                return true;
+            }
+        })
+        if (is_there_script) {
+            properties.push('scripted');
         }
-    })
-    if (is_there_script) {
-        properties.push('scripted');
     }
 
     // 3. explicit svg usage
     if (global.html_element.querySelector('svg') !== null) {
         properties.push('svg');
+    }
+
+    // 4. external resources
+    {
+        const sources = Array.from(global.html_element.querySelectorAll('video, audio, img, source'));
+        const is_there_external_resources = sources.find((element: HTMLElement): boolean => {
+            if (element.hasAttribute('src')) {
+                const parsed = urlHandler.parse(element.getAttribute('src'));
+                return parsed.protocol !== null && (parsed.host !== null && parsed.host !== 'www.w3.org');
+            } else {
+                return false;
+            }
+        })
+        if (is_there_external_resources) {
+            properties.push('remote-resources');
+        }
     }
 
     retval.properties = properties.join(' ');
