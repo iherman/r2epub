@@ -15,6 +15,35 @@ import * as ocf   from './ocf';
 import * as xhtml from './xhtml';
 import { parse } from 'parse5';
 
+/**
+ * CLI arguments used by the [[generate]] entry function.
+ *
+ * The index file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * before further processing. In that case, it is also possible to set some of the configuration options,
+ * overwriting the values set in the `config` entry of the original file. The possible alternate
+ * config values are listed in the interface; see the
+ * [respec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details.
+ *
+ */
+export interface Arguments {
+    /** The URL of the relevant HTML file */
+    url             :string,
+
+    /**
+     * Is the source in respec?
+     */
+    respec          :boolean,
+
+    publishDate     :string,
+    specStatus      :string,
+    shortName       :string,
+    addSectionLinks :string,
+    maxTocLevel     :number,
+    [x :string] :any
+}
+
+/** URL of the spec generator service, used if the source has to be transformed first */
+const spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
 /**
  * Interface for the resources that, eventually, should be added to the EPUB file
@@ -104,9 +133,15 @@ const resource_references :LocalLinks[] = [
     }
 ]
 
+export interface spec_generator {
+    run     :boolean,
+    config? :string[]
+}
+
 /**
  * Main processing steps:
  *
+ * 0. Get hold of the main document's DOM; this may mean that the document must be transformed via the spec generator first to run it through respec
  * 1. Gather all the global information ([[Global]])
  * 2. Add the basic metadata (authors, dates) to the opf file
  * 3. Collect all the resources (see [[resource_references]]); the relative urls and the media types are all
@@ -120,25 +155,46 @@ const resource_references :LocalLinks[] = [
  * 10. Finalize the package file based on the collected resources in [[Global.resources]]
  * 11. Download all resources into the EPUB file
  *
- * All the entries are collected in the in a [[Global.resources]] array, to be then added to the
+ *
+ * All the resource entries are collected in the in a [[Global.resources]] array, to be then added to the
  * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
  * the resources into the final epub result.
  *
- * @param document_url - The URL for the (generated) file
+ * @param document_url - The invocation arguments, see [[Arguments]] for the details
  * @async
  */
-export async function process(document_url: string) {
+export async function generate(cli_arguments: Arguments) {
+    /** Generate the URL used to get the final document DOM */
+    const full_url = () => {
+        if (cli_arguments.respec) {
+            const config_options :string[] = _.keys(cli_arguments)
+                .filter((key) => key !== 'url' && key !== 'respec')
+                .map( (key :string) :string => {
+                    if (cli_arguments[key] === null) {
+                        return null;
+                    } else {
+                        return `${key}=${cli_arguments[key]}`
+                    }
+                })
+                .filter( (val) => val !== null);
+                const query_string = config_options.length === 0 ? '' : `?${config_options.join('&')}`;
+                return `${spec_generator}${cli_arguments.url}${query_string}`
+        } else {
+            return cli_arguments.url;
+        }
+    }
 
     // ------------------------------------------
     // 1. Get hold of the local information
     const global :Global = {
-        document_url : document_url,
+        document_url : cli_arguments.url,
         resources : []
     }
 
     {
-        // get hold of the document as a DOM node.
-        global.dom          = await fetch_html(document_url);
+
+        const fetch_url = full_url();
+        global.dom = await fetch_html(fetch_url);
         global.html_element = global.dom.window.document.documentElement;
     }
 
