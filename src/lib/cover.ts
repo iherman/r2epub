@@ -1,7 +1,7 @@
 /**
  * Creation of a cover page
+ * @packageDocumentation
  */
-
 import { ResourceRef, Global } from './process';
 
 /** The template to be used for the cover page */

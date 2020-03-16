@@ -1,5 +1,6 @@
 /**
- * Creation of the navigation file
+ * Creation of the navigation file.
+ * @packageDocumentation
  */
 import { ResourceRef, Global } from './process';
 import * as xhtml              from './xhtml';

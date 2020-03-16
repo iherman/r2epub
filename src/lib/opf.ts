@@ -3,6 +3,7 @@
  * [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
  *
  * (The encoding of the interfaces rely on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), used to generate an XML file out of a set of JS objects.)
+ * @packageDocumentation
  */
 import { convert } from "xmlbuilder2";
 

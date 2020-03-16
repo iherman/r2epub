@@ -33,8 +33,9 @@
  * The easy (i.e., well structured) cases are assembled in the [[specStatus_simple]];
  * these can be handled automatically. The characteristics of 'non-standard' cases
  * (e.g., BG/CG documents) are described in the [[specStatus_css]] object, based on the [[specStatus_css_mappings]] interface.
+ *
+ * @packageDocumentation
 */
-
 import { ResourceRef, Global } from './process';
 import * as urlHandler from 'url';
 

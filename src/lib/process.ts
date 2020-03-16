@@ -1,7 +1,7 @@
 /**
  * Main processing steps for the creation of EPUB files. See [[process]] for the details.
- */
-
+ * @packageDocumentation
+*/
 import * as jsdom      from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
@@ -135,9 +135,9 @@ interface LocalLinks {
 /**
  * Arrays of query/attribute pairs that may refer to a resource to be collected:
  *
- * - image elements
+ * - image, audio, and video, elements
  * - `a` elements
- * - links to stylesheets
+ * - links to stylesheets and scripts
  * - `object` elements
  */
 const resource_references :LocalLinks[] = [
@@ -167,7 +167,7 @@ export interface spec_generator {
  * 1. Gather all the global information ([[Global]])
  * 2. Add the basic metadata (authors, dates) to the opf file
  * 3. Collect all the resources (see [[resource_references]]); the relative urls and the media types are all
- * added to [[global]], to be added to the EPUB file and the opf file later
+ * collected in a global structure, to be added to the EPUB file and the opf file later
  * 4. Add the reference to the W3C logo
  * 5. Add the reference to the generic fixup script.
  * 6. Add some of the global W3C CSS files, and auxillary image files

@@ -1,5 +1,7 @@
 /**
  * Simple wrapper around the archiver package to create an OCF specific packaging for EPUB.
+ *
+ * @packageDocumentation
  */
 import * as fs     from 'fs';
 import archiver    from 'archiver';

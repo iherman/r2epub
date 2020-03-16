@@ -1,7 +1,7 @@
 /**
  * Wrappers around the fetch function.
+ * @packageDocumentation
  */
-
 export type URL = string;
 
 import * as node_fetch from 'node-fetch';

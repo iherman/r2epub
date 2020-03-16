@@ -5,6 +5,8 @@
  * originally published in:
  *
  * https://www.npmjs.com/package/xmlserializer
+ *
+ * @packageDocumentation
  */
 import { parse }             from 'parse5';
 import { serializeToString } from 'xmlserializer';

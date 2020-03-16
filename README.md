@@ -2,22 +2,19 @@
 
 Typescript program to assist in turning W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2. (The script does **not** aim at being a generic HTML->EPUB solution, it is indeed tailored at W3C TR documents based on ReSpec.)
 
-If used from another program, the main entry point is at the [[process]] function, which creates the EPUB 3.2 file. There is also a simple CLI implemented in [[main]] which works as follows:
+If used from another program, the main entry point is at the [[generate]] function, which creates the EPUB 3.2 file. There is also a simple CLI implemented in [[main]] which works as follows:
 
 ```
 Options:
   --help                 Show help  [boolean]
   -r, --respec           The source is in respec  [boolean] [default: false]
-  -p, --package          [Debug] Do not generate an EPUB file, just print the package file content  [boolean] [default: false]
-  -t, --trace            [Debug] Print built in trace information  [boolean] [default: false]
   -d, --publishDate      Publication date  [string] [default: null]
   -s, --specStatus       Specification type  [string] [default: null]
   -l, --addSectionLinks  Add section links with "§"  [string] [default: null]
   -m, --maxTocLevel      Max TOC level  [number] [default: null]
-  --version              Show version number  [boolean]
 ```
 
-The documentation is also available [on-line](https://iherman.github.io/PubManifest/docs/index.html).
+The documentation is also available [on-line](https://iherman.github.io/respec-to-epub/docs/index.html).
 
 ## Implementation specificities
 
