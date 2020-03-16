@@ -15,6 +15,15 @@ import * as ocf   from './ocf';
 import * as xhtml from './xhtml';
 import { parse } from 'parse5';
 
+
+/**
+ * Config options, to be used as part of the input arguments in [[Arguments]].
+ */
+export interface ConfigOptions {
+    [x :string] :string
+}
+
+
 /**
  * CLI arguments used by the [[generate]] entry function.
  *
@@ -27,19 +36,27 @@ import { parse } from 'parse5';
  */
 export interface Arguments {
     /** The URL of the relevant HTML file */
-    url             :string,
+    url     :string,
 
     /**
      * Is the source in respec?
      */
-    respec          :boolean,
+    respec  :boolean,
 
-    publishDate     :string,
-    specStatus      :string,
-    shortName       :string,
-    addSectionLinks :string,
-    maxTocLevel     :number,
-    [x :string] :any
+    /**
+     * Debug option: just print the package file on the console, do not generate and epub file
+     */
+    package :boolean,
+
+    /**
+     * Debug option: print built-in trace information
+     */
+    trace :boolean,
+
+    /**
+     * Collection of respec config options, to be used with the spec generator (if applicable)
+     */
+    config  :ConfigOptions
 }
 
 /** URL of the spec generator service, used if the source has to be transformed first */
@@ -85,6 +102,11 @@ export interface Global {
      * object, as JSON, into the header of the generated content.
     */
     config?       :any,
+
+    /**
+     * Whether trace information should be printed to the console
+     */
+    trace         :boolean
 
     /**
      * The class used for the generation of the EPUB opf file
@@ -167,33 +189,35 @@ export async function generate(cli_arguments: Arguments) {
     /** Generate the URL used to get the final document DOM */
     const full_url = () => {
         if (cli_arguments.respec) {
-            const config_options :string[] = _.keys(cli_arguments)
-                .filter((key) => key !== 'url' && key !== 'respec')
+            const config_options :string[] = _.keys(cli_arguments.config)
                 .map( (key :string) :string => {
-                    if (cli_arguments[key] === null) {
+                    if (cli_arguments.config[key] === null) {
                         return null;
                     } else {
-                        return `${key}=${cli_arguments[key]}`
+                        return `${key}=${cli_arguments.config[key]}`
                     }
                 })
-                .filter( (val) => val !== null);
-                const query_string = config_options.length === 0 ? '' : `?${config_options.join('&')}`;
-                return `${spec_generator}${cli_arguments.url}${query_string}`
-        } else {
+                .filter((val) => val !== null);
+            const query_string = config_options.length === 0 ? '' : `?${config_options.join('&')}`;
+            return `${spec_generator}${cli_arguments.url}${query_string}`
+       } else {
             return cli_arguments.url;
         }
     }
+
+    if (cli_arguments.trace) console.log(`Input arguments: ${JSON.stringify(cli_arguments)}`);
 
     // ------------------------------------------
     // 1. Get hold of the local information
     const global :Global = {
         document_url : cli_arguments.url,
-        resources : []
+        trace        : cli_arguments.trace,
+        resources    : []
     }
 
     {
-
         const fetch_url = full_url();
+        if (global.trace) console.log(`URL for the spec to be fetched: ${fetch_url}`);
         global.dom = await fetch_html(fetch_url);
         global.html_element = global.dom.window.document.documentElement;
     }
@@ -206,6 +230,7 @@ export async function generate(cli_arguments: Arguments) {
         } else {
             global.config = JSON.parse(initial_config_element.textContent);
         }
+        if (global.trace) console.log(`global config set`);
     }
 
     // ------------------------------------------
@@ -219,6 +244,7 @@ export async function generate(cli_arguments: Arguments) {
 
         const date = global.html_element.querySelector('time.dt-published');
         global.package.add_dates(date.getAttribute('datetime'));
+        if (global.trace) console.log(`global metadata set`);
     }
 
     // ------------------------------------------
@@ -293,9 +319,13 @@ export async function generate(cli_arguments: Arguments) {
         })
     }
 
-    // console.log(global.package.serialize())
-    // 11. Download all resources into the EPUB file
-    await generate_epub(global);
+    // There is a tiny debug branch at this point...
+    if (cli_arguments.package) {
+        console.log(global.package.serialize())
+    } else {
+        // 11. Download all resources into the EPUB file
+        await generate_epub(global);
+    }
 }
 
 
@@ -342,6 +372,7 @@ const get_extra_resources = async (global: Global): Promise<ResourceRef[]> => {
     // (Why couldn't I put this into the chain???)
     const relative_urls = _.uniq(target_urls);
     const absolute_urls = relative_urls.map((ref :string) :string => urlHandler.resolve(global.document_url, ref));
+    if (global.trace) console.log(`getting the resources' content types via a set of fetches`);
     const media_types   = await Promise.all(absolute_urls.map((url) => fetch_type(url)));
 
     return _.zip(relative_urls, media_types, absolute_urls).map((entry: string[]) :ResourceRef => {
@@ -373,6 +404,7 @@ const generate_epub = async (global: Global) => {
     // Add all the resources
     {
         // First, find the resources where the content is simply a text; this can be archived directly
+        if (global.trace) console.log(`append locally generated contents to the epub file`);
         global.resources
             .filter((resource: ResourceRef): boolean => resource.text_content ? true : false)
             .forEach((resource: ResourceRef): void => the_book.append(resource.text_content, resource.relative_url));
@@ -381,7 +413,10 @@ const generate_epub = async (global: Global) => {
         const to_be_fetched = global.resources.filter((resource: ResourceRef): boolean => resource.absolute_url ? true : false);
         const file_names = to_be_fetched.map((resource :ResourceRef): URL => resource.relative_url);
         const urls       = to_be_fetched.map((resource :ResourceRef): URL => resource.absolute_url);
+
+        if (global.trace) console.log(`fetch the external resources`);
         const contents   = await Promise.all(urls.map((url: URL): Promise<any> => fetch_resource(url)));
+        if (global.trace) console.log(`append external resources to the epub file`);
         _.zip(contents, file_names).forEach((arg: [any,string]) :void => the_book.append(arg[0], arg[1]));
     }
 

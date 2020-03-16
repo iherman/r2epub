@@ -65,7 +65,7 @@ const text_content = [
 * @returns  - the URL itself (which might be slightly improved by the valid-url method) or null if this is, in fact, not a URL
 * @throws  if it pretends to be a URL, but it is not acceptable for some reasons.
 */
-const check_Web_url = (address: URL): URL => {
+const check_Web_url = (address :URL) :URL => {
     const parsed = urlHandler.parse(address);
     if (parsed.protocol === null) {
         // This is not a URL, should be used as a file name
@@ -108,17 +108,18 @@ const check_Web_url = (address: URL): URL => {
  *
  * I guess this makes this entry a bit polyfill like:-)
  */
-const my_fetch: ((arg:string) => Promise<any>) = (process !== undefined) ? node_fetch.default : fetch;
+const my_fetch: ((arg :string) => Promise<any>) = (process !== undefined) ? node_fetch.default : fetch;
 
 
 /**
  * Fetch a resource.
  *
  * @param resource_url - the resource to be fetched
+ * @param force_text - the resource should be returned as text in case no content type is set by the server
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
-export async function fetch_resource(resource_url: URL): Promise<any> {
+export async function fetch_resource(resource_url :URL, force_text :boolean = false) :Promise<any> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -135,7 +136,12 @@ export async function fetch_resource(resource_url: URL): Promise<any> {
                                 // the simple way, just return text...
                                 resolve(response.text())
                             } else {
-                                resolve(response.body)
+                                if (force_text){
+                                    resolve(response.text())
+                                } else {
+                                    // return the body without processing, ie, as a stream
+                                    resolve(response.body)
+                                }
                             }
                         } else {
                             // No type information on return, let us hope this is something proper
@@ -163,7 +169,7 @@ export async function fetch_resource(resource_url: URL): Promise<any> {
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
-export async function fetch_type(resource_url: URL): Promise<string> {
+export async function fetch_type(resource_url :URL) :Promise<string> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -197,9 +203,9 @@ export async function fetch_type(resource_url: URL): Promise<string> {
  * @return - DOM object for the parsed HTML
  * @throws Error if something goes wrong with fetch or DOM Parsing
  */
-export async function fetch_html(html_url: URL): Promise<jsdom.JSDOM> {
+export async function fetch_html(html_url :URL) :Promise<jsdom.JSDOM> {
     try {
-        const body = await fetch_resource(html_url);
+        const body = await fetch_resource(html_url, true);
         const retval = new jsdom.JSDOM(body, { url: html_url });
         return retval;
     } catch (err) {
