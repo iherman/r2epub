@@ -50,6 +50,7 @@ import * as urlHandler from 'url';
 const extra_css = `
 body {
     padding: 0 0 0 0 !important;
+    max-width: none !important;
 }
 
 h2 {
