@@ -3,7 +3,7 @@
  * @packageDocumentation
  */
 /* Main imports */
-import { generate, Arguments } from './lib/process';
+import { create_epub, Arguments } from './lib/process';
 import yargs = require('yargs')
 
 /**
@@ -62,7 +62,7 @@ async function main() {
      }
 
     try {
-        await generate(args);
+        await create_epub(args);
     } catch(e) {
         console.error(`EPUB Generation error: "${e}"`);
     }
