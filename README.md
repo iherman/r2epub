@@ -14,7 +14,7 @@ Options:
   -m, --maxTocLevel      Max TOC level  [number] [default: null]
 ```
 
-The documentation is also available [on-line](https://iherman.github.io/respec-to-epub/docs/index.html).
+The documentation is also available [on-line](https://iherman.github.io/respec-to-epub/).
 
 ## Implementation specificities
 
