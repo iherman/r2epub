@@ -1,5 +1,6 @@
 /**
- * Main processing steps for the creation of EPUB files. See [[process]] for the details.
+ * Main processing steps for the creation of EPUB files. See the [[create_epub]] and [[create_epub_from_dom]] entry points for the details.
+ *
  * @packageDocumentation
 */
 import * as jsdom      from 'jsdom';
@@ -39,7 +40,7 @@ export interface DebugOptions {
 }
 
 /**
- * CLI arguments used by the [[generate]] entry function.
+ * CLI arguments used by the [[create_epub]] entry function.
  *
  * The index file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
  * before further processing. In that case, it is also possible to set some of the configuration options,
@@ -123,7 +124,7 @@ export interface Global {
     opf_content?  :opf.PackageWrapper
 
     /**
-     * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[process]]
+     * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[create_epub_from_dom]]
      * function is to collect all relevant resources; once done, this array is used to generate the final
      * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file
      * as well as to collect the resources themselves and add them to the final epub file.
@@ -168,21 +169,6 @@ export interface spec_generator {
     run     :boolean,
     config? :string[]
 }
-
-
-
-// export async function create_epub_from_dom(url :string, dom: jsdom.JSDOM, debug :DebugOptions = { package : false, trace : false}) :Promise<ocf.OCF> {
-//     // 1. Get hold of the local information
-
-//     const global :Global = {
-//         document_url : url,
-//         trace        : debug.trace,
-//         package      : debug.package,
-//         resources    : []
-//     }
-
-// }
-
 
 /**
  * Create an EPUB 3.2, ie, an OCF file from the original content
@@ -375,6 +361,7 @@ export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug 
     } else {
         // 11. Download all resources into the EPUB file
         const retval :ocf.OCF = await generate_epub(global);
+        return retval;
     }
 }
 

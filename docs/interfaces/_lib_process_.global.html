@@ -95,6 +95,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.global.html#document_url" class="tsd-kind-icon">document_<wbr>url</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.global.html#dom" class="tsd-kind-icon">dom</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.global.html#html_element" class="tsd-kind-icon">html_<wbr>element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.global.html#opf_content" class="tsd-kind-icon">opf_<wbr>content</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.global.html#package" class="tsd-kind-icon">package</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.global.html#resources" class="tsd-kind-icon">resources</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.global.html#trace" class="tsd-kind-icon">trace</a></li>
@@ -111,7 +112,7 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/27db693/src/lib/process.ts#L104">lib/process.ts:104</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L109">lib/process.ts:109</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -127,7 +128,7 @@
 					<div class="tsd-signature tsd-kind-icon">document_<wbr>url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/27db693/src/lib/process.ts#L92">lib/process.ts:92</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L97">lib/process.ts:97</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -142,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">dom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSDOM</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/27db693/src/lib/process.ts#L95">lib/process.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L100">lib/process.ts:100</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -157,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">html_<wbr>element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/27db693/src/lib/process.ts#L98">lib/process.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L103">lib/process.ts:103</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -167,12 +168,12 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="package" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> package</h3>
-					<div class="tsd-signature tsd-kind-icon">package<span class="tsd-signature-symbol">:</span> <a href="../classes/_lib_opf_.packagewrapper.html" class="tsd-signature-type">PackageWrapper</a></div>
+					<a name="opf_content" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> opf_<wbr>content</h3>
+					<div class="tsd-signature tsd-kind-icon">opf_<wbr>content<span class="tsd-signature-symbol">:</span> <a href="../classes/_lib_opf_.packagewrapper.html" class="tsd-signature-type">PackageWrapper</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/27db693/src/lib/process.ts#L114">lib/process.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L124">lib/process.ts:124</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -182,17 +183,32 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="package" class="tsd-anchor"></a>
+					<h3>package</h3>
+					<div class="tsd-signature tsd-kind-icon">package<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L119">lib/process.ts:119</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>[Debug] Whether the opf instance should be should be printed to the console instead of generating an EPUB file</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="resources" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> resources</h3>
 					<div class="tsd-signature tsd-kind-icon">resources<span class="tsd-signature-symbol">:</span> <a href="_lib_process_.resourceref.html" class="tsd-signature-type">ResourceRef</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/27db693/src/lib/process.ts#L122">lib/process.ts:122</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L132">lib/process.ts:132</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[process]]
+							<p>List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the <a href="../modules/_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a>
 								function is to collect all relevant resources; once done, this array is used to generate the final
 								<a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def"><code>package.opf</code></a> file
 							as well as to collect the resources themselves and add them to the final epub file.</p>
@@ -205,12 +221,12 @@
 					<div class="tsd-signature tsd-kind-icon">trace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/27db693/src/lib/process.ts#L109">lib/process.ts:109</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L114">lib/process.ts:114</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Whether trace information should be printed to the console</p>
+							<p>[Debug] Whether trace information should be printed to the console</p>
 						</div>
 					</div>
 				</section>
@@ -259,6 +275,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_process_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_process_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
@@ -275,6 +294,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_lib_process_.global.html#html_element" class="tsd-kind-icon">html_<wbr>element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_process_.global.html#opf_content" class="tsd-kind-icon">opf_<wbr>content</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_lib_process_.global.html#package" class="tsd-kind-icon">package</a>
@@ -305,7 +327,10 @@
 						<a href="../modules/_lib_process_.html#spec_generator-1" class="tsd-kind-icon">spec_<wbr>generator</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_lib_process_.html#generate" class="tsd-kind-icon">generate</a>
+						<a href="../modules/_lib_process_.html#create_epub" class="tsd-kind-icon">create_<wbr>epub</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_lib_process_.html#create_epub_from_dom" class="tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="../modules/_lib_process_.html#generate_epub" class="tsd-kind-icon">generate_<wbr>epub</a>
