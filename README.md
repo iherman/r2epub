@@ -2,7 +2,8 @@
 
 Typescript program to assist in turning W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2. (The script does **not** aim at being a generic HTML->EPUB solution, it is indeed tailored at W3C TR documents based on ReSpec.)
 
-If used from another program, the main entry point is at the [[generate]] function, which creates the EPUB 3.2 file. There is also a simple CLI implemented in [[main]] which works as follows:
+If used from another program, the main entry point are the [[create_epub]] and [[create_epub_from_dom]] functions, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
+There is also a simple CLI implemented in [[main]] which works as follows:
 
 ```
 Options:
@@ -18,7 +19,7 @@ The documentation is also available [on-line](https://iherman.github.io/respec-t
 
 ## Implementation specificities
 
-The implementation is in Typescript and on top of `node.js`. The project can be downloaded via cloning and and can be installed via the standard `npm` processing.
+The implementation is in Typescript and on top of `node.js`. The project can be downloaded via cloning and can be installed via a standard `npm` processing.
 
 
 ---

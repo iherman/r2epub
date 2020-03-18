@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Converting HTML documents produced by Respec into EPUB 3.2</title>
+	<title>DebugOptions | Converting HTML documents produced by Respec into EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Converting HTML documents produced by Respec into EPUB 3.2</a>
+					<a href="../index.html" class="title">Converting HTML documents produced by Respec into EPUB 3.2</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,75 +53,181 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_lib_process_.html">&quot;lib/process&quot;</a>
+				</li>
+				<li>
+					<a href="_lib_process_.debugoptions.html">DebugOptions</a>
 				</li>
 			</ul>
-			<h1>Converting HTML documents produced by Respec into EPUB 3.2</h1>
+			<h1>Interface DebugOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#respec-to-epub" id="respec-to-epub" style="color: inherit; text-decoration: none;">
-					<h1>Respec to EPUB</h1>
-				</a>
-				<p>Typescript program to assist in turning W3C documents, produced by <a href="https://github.com/w3c/respec">ReSpec</a>, to EPUB 3.2. (The script does <strong>not</strong> aim at being a generic HTML-&gt;EPUB solution, it is indeed tailored at W3C TR documents based on ReSpec.)</p>
-				<p>If used from another program, the main entry point are the <a href="modules/_lib_process_.html#create_epub">create_epub</a> and <a href="modules/_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a> functions, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
-				There is also a simple CLI implemented in <a href="modules/_main_.html#main">main</a> which works as follows:</p>
-				<pre><code>Options:
-  --help                 Show help  [<span class="hljs-built_in">boolean</span>]
-  -r, --respec           The source is <span class="hljs-keyword">in</span> respec  [<span class="hljs-built_in">boolean</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">false</span>]
-  -d, --publishDate      Publication date  [<span class="hljs-built_in">string</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]
-  -s, --specStatus       Specification <span class="hljs-keyword">type</span>  [<span class="hljs-built_in">string</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]
-  -l, --addSectionLinks  Add section links <span class="hljs-keyword">with</span> <span class="hljs-string">"§"</span>  [<span class="hljs-built_in">string</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]
-  -m, --maxTocLevel      Max TOC level  [<span class="hljs-built_in">number</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]</code></pre><p>The documentation is also available <a href="https://iherman.github.io/respec-to-epub/">on-line</a>.</p>
-				<a href="#implementation-specificities" id="implementation-specificities" style="color: inherit; text-decoration: none;">
-					<h2>Implementation specificities</h2>
-				</a>
-				<p>The implementation is in Typescript and on top of <code>node.js</code>. The project can be downloaded via cloning and can be installed via a standard <code>npm</code> processing.</p>
-				<hr>
-				<p>Several years ago I have already made a similar program called <a href="https://github.com/iherman/respec2epub">Respec2EPUB</a>. That version is that it was written in Python 2; alas!, with the demise of Python 2 in favor of Python 3, that module will become unusable soon. (E.g., latest Debian releases do not even install Python 2 any more.) Instead of fighting through the 2-&gt;3 conversion, I decided to re-write the program, making it a bit simpler along the way.</p>
-			</div>
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Debug options</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DebugOptions</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="_lib_process_.arguments.html" class="tsd-signature-type">Arguments</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.debugoptions.html#package" class="tsd-kind-icon">package</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.debugoptions.html#trace" class="tsd-kind-icon">trace</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="package" class="tsd-anchor"></a>
+					<h3>package</h3>
+					<div class="tsd-signature tsd-kind-icon">package<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L34">lib/process.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Debug option: just print the package file on the console, do not generate and epub file</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="trace" class="tsd-anchor"></a>
+					<h3>trace</h3>
+					<div class="tsd-signature tsd-kind-icon">trace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L39">lib/process.ts:39</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Debug option: print built-in trace information</p>
+						</div>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
+						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_css_.html">&quot;lib/css&quot;</a>
+						<a href="../modules/_lib_css_.html">&quot;lib/css&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_fetch_.html">&quot;lib/fetch&quot;</a>
+						<a href="../modules/_lib_fetch_.html">&quot;lib/fetch&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
+						<a href="../modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_ocf_.html">&quot;lib/ocf&quot;</a>
+						<a href="../modules/_lib_ocf_.html">&quot;lib/ocf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
+						<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_lib_process_.html">&quot;lib/process&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_process_.html">&quot;lib/process&quot;</a>
+						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_main_.html">&quot;main&quot;</a>
+						<a href="../modules/_main_.html">&quot;main&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_process_.arguments.html" class="tsd-kind-icon">Arguments</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_process_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_process_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_process_.debugoptions.html#package" class="tsd-kind-icon">package</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_process_.debugoptions.html#trace" class="tsd-kind-icon">trace</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_process_.global.html" class="tsd-kind-icon">Global</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_process_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_process_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_process_.spec_generator.html" class="tsd-kind-icon">spec_<wbr>generator</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_process_.html#resource_references" class="tsd-kind-icon">resource_<wbr>references</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_lib_process_.html#spec_generator-1" class="tsd-kind-icon">spec_<wbr>generator</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_lib_process_.html#create_epub" class="tsd-kind-icon">create_<wbr>epub</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_lib_process_.html#create_epub_from_dom" class="tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_process_.html#generate_epub" class="tsd-kind-icon">generate_<wbr>epub</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_process_.html#generate_overview_item" class="tsd-kind-icon">generate_<wbr>overview_<wbr>item</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_process_.html#get_extra_resources" class="tsd-kind-icon">get_<wbr>extra_<wbr>resources</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -188,7 +294,7 @@
 	</div>
 </footer>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

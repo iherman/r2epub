@@ -185,7 +185,6 @@ export class PackageWrapper {
         if (item['@properties'] === undefined) {
             delete item['@properties'];
         }
-
         this.thePackage.package.manifest.item.push(item);
     }
 

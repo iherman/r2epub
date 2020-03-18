@@ -1,12 +1,13 @@
 /**
- * Main processing steps for the creation of EPUB files. See [[process]] for the details.
+ * Main processing steps for the creation of EPUB files. See the [[create_epub]] and [[create_epub_from_dom]] entry points for the details.
+ *
  * @packageDocumentation
 */
 import * as jsdom      from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
-import { fetch_html, fetch_resource, fetch_type, URL } from './fetch';
+import { fetch_html, fetch_resource, fetch_type, URL, html_media_type } from './fetch';
 import * as opf   from './opf';
 import * as css   from './css';
 import * as cover from './cover';
@@ -23,27 +24,11 @@ export interface ConfigOptions {
     [x :string] :string
 }
 
-
 /**
- * CLI arguments used by the [[generate]] entry function.
- *
- * The index file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
- * before further processing. In that case, it is also possible to set some of the configuration options,
- * overwriting the values set in the `config` entry of the original file. The possible alternate
- * config values are listed in the interface; see the
- * [respec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details.
- *
+ * Debug options
  */
-export interface Arguments {
-    /** The URL of the relevant HTML file */
-    url     :string,
-
-    /**
-     * Is the source in respec?
-     */
-    respec  :boolean,
-
-    /**
+export interface DebugOptions {
+      /**
      * Debug option: just print the package file on the console, do not generate and epub file
      */
     package :boolean,
@@ -52,6 +37,26 @@ export interface Arguments {
      * Debug option: print built-in trace information
      */
     trace :boolean,
+}
+
+/**
+ * CLI arguments used by the [[create_epub]] entry function.
+ *
+ * The index file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * before further processing. In that case, it is also possible to set some of the configuration options,
+ * overwriting the values set in the `config` entry of the original file. The possible alternate
+ * config values are listed in the interface; see the
+ * [respec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details.
+ *
+ */
+export interface Arguments extends DebugOptions {
+    /** The URL of the relevant HTML file */
+    url     :string,
+
+    /**
+     * Is the source in respec?
+     */
+    respec  :boolean,
 
     /**
      * Collection of respec config options, to be used with the spec generator (if applicable)
@@ -104,17 +109,22 @@ export interface Global {
     config?       :any,
 
     /**
-     * Whether trace information should be printed to the console
+     * [Debug] Whether trace information should be printed to the console
      */
     trace         :boolean
 
     /**
-     * The class used for the generation of the EPUB opf file
+     * [Debug] Whether the opf instance should be should be printed to the console instead of generating an EPUB file
      */
-    package?      :opf.PackageWrapper
+    package         :boolean
 
     /**
-     * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[process]]
+     * The class used for the generation of the EPUB opf file
+     */
+    opf_content?  :opf.PackageWrapper
+
+    /**
+     * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[create_epub_from_dom]]
      * function is to collect all relevant resources; once done, this array is used to generate the final
      * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file
      * as well as to collect the resources themselves and add them to the final epub file.
@@ -161,31 +171,19 @@ export interface spec_generator {
 }
 
 /**
- * Main processing steps:
+ * Create an EPUB 3.2, ie, an OCF file from the original content
  *
- * 0. Get hold of the main document's DOM; this may mean that the document must be transformed via the spec generator first to run it through respec
- * 1. Gather all the global information ([[Global]])
- * 2. Add the basic metadata (authors, dates) to the opf file
- * 3. Collect all the resources (see [[resource_references]]); the relative urls and the media types are all
- * collected in a global structure, to be added to the EPUB file and the opf file later
- * 4. Add the reference to the W3C logo
- * 5. Add the reference to the generic fixup script.
- * 6. Add some of the global W3C CSS files, and auxillary image files
- * 7. Create a cover file
- * 8. Create a nav file
- * 9. Main resource (i.e., Overview.xhtml) entry, with relevant properties
- * 10. Finalize the package file based on the collected resources in [[Global.resources]]
- * 11. Download all resources into the EPUB file
+ * This function is a wrapper around [[create_epub_from_dom]]:
+ *
+ * 1. Creates the DOM, which means, possibly, the original content is ran through the respec processor (if necessary)
+ * 2. Calls [[create_epub_from_dom]] to generate the OCF content
+ * 3. "Finalizes" the OCF content, i.e., dump everything to a file
  *
  *
- * All the resource entries are collected in the in a [[Global.resources]] array, to be then added to the
- * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
- * the resources into the final epub result.
- *
- * @param document_url - The invocation arguments, see [[Arguments]] for the details
+ * @param cli_arguments - CLI arguments, see [[Arguments]]
  * @async
  */
-export async function generate(cli_arguments: Arguments) {
+export async function create_epub(cli_arguments: Arguments) {
     /** Generate the URL used to get the final document DOM */
     const full_url = () => {
         if (cli_arguments.respec) {
@@ -207,19 +205,56 @@ export async function generate(cli_arguments: Arguments) {
 
     if (cli_arguments.trace) console.log(`Input arguments: ${JSON.stringify(cli_arguments)}`);
 
+    const fetch_url = full_url();
+    if (cli_arguments.trace) console.log(`URL for the spec to be fetched: ${fetch_url}`);
+    const dom :jsdom.JSDOM      = await fetch_html(fetch_url);
+    const ocf_instance :ocf.OCF = await create_epub_from_dom(cli_arguments.url, dom, { package : cli_arguments.package, trace : cli_arguments.trace});
+
+    // There is a tiny debug branch at this point...
+    if (cli_arguments.package === false) {
+        // Finalize, i.e., put into a file, the OCF instance:
+        await ocf_instance.finalize();
+    }
+}
+
+
+/**
+ * Create an OCF instance from the original content.
+ *
+ * 1. Gather all the global information ([[Global]])
+ * 2. Add the basic metadata (authors, dates) to the opf file
+ * 3. Collect all the resources (see [[resource_references]]); the relative urls and the media types are all
+ * collected in a global structure, to be added to the EPUB file and the opf file later
+ * 4. Add the reference to the W3C logo
+ * 5. Add the reference to the generic fixup script.
+ * 6. Add some of the global W3C CSS files, and auxillary image files
+ * 7. Create a cover file
+ * 8. Create a nav file
+ * 9. Main resource (i.e., Overview.xhtml) entry, with relevant properties
+ * 10. Finalize the package file based on the collected resources in [[Global.resources]]
+ * 11. Download all resources into the EPUB file
+ *
+ *
+ * All the resource entries are collected in the in a [[Global.resources]] array, to be then added to the
+ * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
+ * the resources into the final epub result.
+ *
+ * @param url - The url of the document (serves also as a base for all the other resources)
+ * @param dom - The DOM of the final format of the document (i.e., the original document may have gone through a respec processing...)
+ * @param debug - Debug options, see [[DebugOptions]]. Initialized to no debug
+ * @returns - The zip archive with the epub content, i.e., an OCF instance
+ * @async
+ */
+export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug :DebugOptions = { package : false, trace : false}) :Promise<ocf.OCF> {
     // ------------------------------------------
     // 1. Get hold of the local information
     const global :Global = {
-        document_url : cli_arguments.url,
-        trace        : cli_arguments.trace,
-        resources    : []
-    }
-
-    {
-        const fetch_url = full_url();
-        if (global.trace) console.log(`URL for the spec to be fetched: ${fetch_url}`);
-        global.dom = await fetch_html(fetch_url);
-        global.html_element = global.dom.window.document.documentElement;
+        dom           : dom,
+        html_element  : dom.window.document.documentElement,
+        document_url  : url,
+        trace         : debug.trace,
+        package       : debug.package,
+        resources     : []
     }
 
     {
@@ -239,11 +274,11 @@ export async function generate(cli_arguments: Arguments) {
         // Create the package content, and populate it with the essential metadata using the configuration
         const title = global.html_element.querySelector('title').textContent;
         const identifier = `https://www.w3.org/TR/${global.config.shortName}/`;
-        global.package = new opf.PackageWrapper(identifier, title);
-        global.package.add_creators(global.config.editors.map((entry: any) => `${entry.name}, ${entry.company}`));
+        global.opf_content = new opf.PackageWrapper(identifier, title);
+        global.opf_content.add_creators(global.config.editors.map((entry: any) => `${entry.name}, ${entry.company}`));
 
         const date = global.html_element.querySelector('time.dt-published');
-        global.package.add_dates(date.getAttribute('datetime'));
+        global.opf_content.add_dates(date.getAttribute('datetime'));
         if (global.trace) console.log(`global metadata set`);
     }
 
@@ -308,7 +343,7 @@ export async function generate(cli_arguments: Arguments) {
         let res_id_num = 1;
         global.resources.forEach((resource) => {
             if (resource.relative_url) {
-                global.package.add_manifest_item({
+                global.opf_content.add_manifest_item({
                     "@href"       : resource.relative_url,
                     "@media-type" : resource.media_type,
                     "@id"         : resource.id || `res_id${res_id_num}`,
@@ -320,11 +355,13 @@ export async function generate(cli_arguments: Arguments) {
     }
 
     // There is a tiny debug branch at this point...
-    if (cli_arguments.package) {
-        console.log(global.package.serialize())
+    if (global.package) {
+        console.log(global.opf_content.serialize());
+        return {} as ocf.OCF;
     } else {
         // 11. Download all resources into the EPUB file
-        await generate_epub(global);
+        const retval :ocf.OCF = await generate_epub(global);
+        return retval;
     }
 }
 
@@ -382,45 +419,6 @@ const get_extra_resources = async (global: Global): Promise<ResourceRef[]> => {
             absolute_url : entry[2],
         }
     });
-}
-
-
-/**
- * Create the final epub file: download all resources, if applicable, and then add all of them, plus the
- * generated content (package file, nav file, the original content file, etc) to an OCF instance.
- *
- * The generated epub file name is `shortName.epub`
- *
- * @param global - Global data
- * @async
- */
-const generate_epub = async (global: Global) => {
-    const the_book = new ocf.OCF(`${global.config.shortName}.epub`);
-
-    // The OCF class adds the fixed file like mime type and such automatically.
-    // Add the package to the archives, with a fixed name:
-    the_book.append(global.package.serialize(),'package.opf');
-
-    // Add all the resources
-    {
-        // First, find the resources where the content is simply a text; this can be archived directly
-        if (global.trace) console.log(`append locally generated contents to the epub file`);
-        global.resources
-            .filter((resource: ResourceRef): boolean => resource.text_content ? true : false)
-            .forEach((resource: ResourceRef): void => the_book.append(resource.text_content, resource.relative_url));
-
-        // Second, find the resources where the content must be fetched...
-        const to_be_fetched = global.resources.filter((resource: ResourceRef): boolean => resource.absolute_url ? true : false);
-        const file_names = to_be_fetched.map((resource :ResourceRef): URL => resource.relative_url);
-        const urls       = to_be_fetched.map((resource :ResourceRef): URL => resource.absolute_url);
-
-        if (global.trace) console.log(`fetch the external resources`);
-        const contents   = await Promise.all(urls.map((url: URL): Promise<any> => fetch_resource(url)));
-        if (global.trace) console.log(`append external resources to the epub file`);
-        _.zip(contents, file_names).forEach((arg: [any,string]) :void => the_book.append(arg[0], arg[1]));
-    }
-
-    await the_book.finalize();
 }
 
 
@@ -492,4 +490,42 @@ const generate_overview_item = (global: Global): ResourceRef[] => {
 
     retval.properties = properties.join(' ');
     return [retval];
+}
+
+
+/**
+ * Create the final epub file: download all resources, if applicable, and then add all of them, plus the
+ * generated content (package file, nav file, the original content file, etc) to an OCF instance.
+ *
+ * The generated epub file name is `shortName.epub`
+ *
+ * @param global - Global data
+ * @async
+ */
+const generate_epub = async (global: Global): Promise<ocf.OCF> => {
+    const the_book = new ocf.OCF(`${global.config.shortName}.epub`);
+
+    // The OCF class adds the fixed file like mime type and such automatically.
+    // Add the package to the archives, with a fixed name:
+    the_book.append(global.opf_content.serialize(),'package.opf');
+
+    // Add all the resources
+    {
+        // First, find the resources where the content is simply a text; this can be archived directly
+        if (global.trace) console.log(`append locally generated contents to the epub file`);
+        global.resources
+            .filter((resource: ResourceRef): boolean => resource.text_content ? true : false)
+            .forEach((resource: ResourceRef): void => the_book.append(resource.text_content, resource.relative_url));
+
+        // Second, find the resources where the content must be fetched...
+        const to_be_fetched = global.resources.filter((resource: ResourceRef): boolean => resource.absolute_url ? true : false);
+        const file_names = to_be_fetched.map((resource :ResourceRef): URL => resource.relative_url);
+        const urls       = to_be_fetched.map((resource :ResourceRef): URL => resource.absolute_url);
+
+        if (global.trace) console.log(`fetch the external resources`);
+        const contents   = await Promise.all(urls.map((url: URL): Promise<any> => fetch_resource(url)));
+        if (global.trace) console.log(`append external resources to the epub file`);
+        _.zip(contents, file_names).forEach((arg: [any,string]) :void => the_book.append(arg[0], arg[1]));
+    }
+    return the_book;
 }
