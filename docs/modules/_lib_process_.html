@@ -74,6 +74,19 @@
 						</a>
 					</div>
 					<p>Main processing steps for the creation of EPUB files. See the <a href="_lib_process_.html#create_epub">create_epub</a> and <a href="_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a> entry points for the details.</p>
+					<p>On a high level, the task of creating the EPUB file consists of</p>
+					<ul>
+						<li>Collecting all the dependent resources like images, scripts, css files, audio, video, etc, that are &quot;part&quot; of the specification. In practical terms that means all resources with a relative URL should be collected.</li>
+						<li>Setting the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in <code>https://www.w3.org/StyleSheet/TR/2016/*</code>;
+							these style files, and related images, depend on the exact nature of the TR document: REC, WD, etc. All of these should be collected as additional resources, and their (absolute) URL-s must be
+						changed to relative ones.</li>
+						<li>Following similar actions to CSS files (though less complex) for some system wide javascript files.</li>
+						<li>Extracting the various metadata items (title, editors, dates, etc.) to set them in the package file.</li>
+						<li>Removing the TOC from the TR document (i.e., making it <code>display:none</code>), extract that HTML fragment and combine it into a separate <code>nav</code> file, per EPUB3 specification.</li>
+						<li>Converting the original content into XHTML</li>
+						<li>Creating the package file with the right resource and spine entries.</li>
+						<li>Creating the OPF file containing all the resources collected and created in the previous steps.</li>
+					</ul>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -120,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">resource_<wbr>references<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_process_.locallinks.html" class="tsd-signature-type">LocalLinks</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{query : &#x27;img, script, audio, video, source&#x27;,attr  : &#x27;src&#x27;},{query : &#x27;a, link[rel&#x3D;&quot;stylesheet&quot;]&#x27;,attr  : &#x27;href&#x27;},{query : &#x27;object&#x27;,attr  : &#x27;data&#x27;}]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L159">lib/process.ts:159</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dd7cccb/src/lib/process.ts#L172">lib/process.ts:172</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -141,7 +154,7 @@
 					<div class="tsd-signature tsd-kind-icon">spec_<wbr>generator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"https://labs.w3.org/spec-generator/?type&#x3D;respec&amp;url&#x3D;"</span><span class="tsd-signature-symbol"> = &quot;https://labs.w3.org/spec-generator/?type&#x3D;respec&amp;url&#x3D;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L73">lib/process.ts:73</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dd7cccb/src/lib/process.ts#L86">lib/process.ts:86</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -163,7 +176,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L192">lib/process.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dd7cccb/src/lib/process.ts#L205">lib/process.ts:205</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -201,7 +214,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L254">lib/process.ts:254</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dd7cccb/src/lib/process.ts#L267">lib/process.ts:267</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -268,7 +281,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L513">lib/process.ts:513</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dd7cccb/src/lib/process.ts#L526">lib/process.ts:526</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -302,7 +315,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L447">lib/process.ts:447</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dd7cccb/src/lib/process.ts#L460">lib/process.ts:460</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -341,7 +354,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L385">lib/process.ts:385</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dd7cccb/src/lib/process.ts#L398">lib/process.ts:398</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

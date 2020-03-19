@@ -3,6 +3,19 @@
  *
  * Main processing steps for the creation of EPUB files. See the [[create_epub]] and [[create_epub_from_dom]] entry points for the details.
  *
+ * On a high level, the task of creating the EPUB file consists of
+ *
+ * * Collecting all the dependent resources like images, scripts, css files, audio, video, etc, that are "part" of the specification. In practical terms that means all resources with a relative URL should be collected.
+ * * Setting the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in `https://www.w3.org/StyleSheet/TR/2016/*`;
+ *   these style files, and related images, depend on the exact nature of the TR document: REC, WD, etc. All of these should be collected as additional resources, and their (absolute) URL-s must be
+ *   changed to relative ones.
+ * * Following similar actions to CSS files (though less complex) for some system wide javascript files.
+ * * Extracting the various metadata items (title, editors, dates, etc.) to set them in the package file.
+ * * Removing the TOC from the TR document (i.e., making it `display:none`), extract that HTML fragment and combine it into a separate `nav` file, per EPUB3 specification.
+ * * Converting the original content into XHTML
+ * * Creating the package file with the right resource and spine entries.
+ * * Creating the OPF file containing all the resources collected and created in the previous steps.
+ *
  * @packageDocumentation
 */
 import * as jsdom      from 'jsdom';
