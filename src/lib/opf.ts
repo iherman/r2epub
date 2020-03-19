@@ -1,12 +1,24 @@
 /**
- * Wrapper around the package. The details of the various interfaces are in the
+ * ## The OPF package
+ *
+ * Wrapper around the package. The details of the various entries are in the
  * [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
  *
- * (The encoding of the interfaces rely on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), used to generate an XML file out of a set of JS objects.)
+ * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
+ * the details; the short overview is:
+ *
+ * - JSON names starting with `@` represent an attribute
+ * - JSON name `#` represent textual content of the element.
+ *
  * @packageDocumentation
  */
 import { convert } from "xmlbuilder2";
 
+// These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.2 package. See that document for details.
+
+/**
+ * @hidden
+ */
 interface ManifestItem {
     "@href"           :string,
     "@id"             :string,
@@ -15,15 +27,24 @@ interface ManifestItem {
     "@media-overlay"? :string
 }
 
+/**
+ * @hidden
+ */
 interface Manifest {
     "item" : ManifestItem[]
 }
 
+/**
+ * @hidden
+ */
 interface DCIdentifier {
     "@id"? :string,
     "#"    :string
 }
 
+/**
+ * @hidden
+ */
 interface DCTitle {
     "@id"?       :string,
     "@dir"?      :string,
@@ -31,11 +52,17 @@ interface DCTitle {
     "#"          :string
 }
 
+/**
+ * @hidden
+ */
 interface DCLang {
     "@id"? :string,
     "#"    :string
 }
 
+/**
+ * @hidden
+ */
 interface Meta {
     "@property"  :string
     "@id"?       :string,
@@ -46,6 +73,9 @@ interface Meta {
     "#"?         :string
 }
 
+/**
+ * @hidden
+ */
 interface Link {
     "@rel"         :string,
     "@href"        :string,
@@ -55,12 +85,18 @@ interface Link {
     "@refines"?    :string,
 }
 
+/**
+ * @hidden
+ */
 interface Creator {
     "@id"?   :string,
     "@role"? :string,
     "#"      :string
 }
 
+/**
+ * @hidden
+ */
 interface Metadata {
     "dc:identifier"    :DCIdentifier[],
     "dc:title"         :DCTitle[],
@@ -71,10 +107,16 @@ interface Metadata {
     [propName: string] :any;
 }
 
+/**
+ * @hidden
+ */
 interface Spine {
     itemref: SpineItemRef[]
 }
 
+/**
+ * @hidden
+ */
 interface SpineItemRef {
     "@idref"       :string,
     "@id"?         :string,
@@ -82,6 +124,9 @@ interface SpineItemRef {
     "@properties"? :string
 }
 
+/**
+ * @hidden
+ */
 interface PackageContent {
     "@xmlns"             :string,
     "@unique-identifier" :string,
@@ -96,6 +141,9 @@ interface PackageContent {
     "spine"              :Spine
 }
 
+/**
+ * Encoding of the XML structure of the package file, as defined in the EPUB specification, in JSON.
+ */
 interface Package {
     "package" :PackageContent
 }
@@ -106,11 +154,15 @@ interface Package {
  * The types and default values do not reflect all possibilities of Package documents, only those that are relevant for W3C Technical reports.
  */
 export class PackageWrapper {
-    /** The Package document content itself, stored in a JSON object for an easier manipulation */
-    thePackage: Package;
+    /** The Package document content itself, stored in a JSON object for an easier manipulation
+     * @hidden
+     */
+    private thePackage: Package;
 
-    /** Id generated to the editors for cross reference */
-    id: number = 0;
+    /** Id generated to the editors for cross reference
+     * @hidden
+     */
+    private id: number = 0;
 
     /**
      * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
@@ -196,11 +248,11 @@ export class PackageWrapper {
     add_creators(creators: string[]): void {
         creators.forEach((creator: string) => {
             this.thePackage.package.metadata["dc:creator"].push({
-                "@id"   : `creatorid_${this.id}`,
+                "@id"   : `creator_id_${this.id}`,
                 "#"     : creator
             });
             this.thePackage.package.metadata["meta"].push({
-                "@refines"  :  `#creatorid_${this.id}`,
+                "@refines"  :  `#creator_id_${this.id}`,
                 "@property" : "role",
                 "@scheme"   : "marc:relators",
                 "#"         : "edt"

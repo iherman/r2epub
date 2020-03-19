@@ -1,3 +1,15 @@
+"use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * ## OCF Package
  *
@@ -5,10 +17,8 @@
  *
  * @packageDocumentation
  */
-import * as fs     from 'fs';
-import archiver    from 'archiver';
-import * as stream from 'stream';
-
+const fs = __importStar(require("fs"));
+const archiver_1 = __importDefault(require("archiver"));
 /**
  * The content of the required `container.xml` file. The root is set to `package.opf` at the top level
  */
@@ -18,8 +28,7 @@ const container_xml = `<?xml version="1.0"?>
         <rootfile full-path="package.opf" media-type="application/oebps-package+xml" />
     </rootfiles>
 </container>
-`
-
+`;
 /**
  * EPUB 3.2 OCF package.
  *
@@ -31,22 +40,18 @@ const container_xml = `<?xml version="1.0"?>
  * Both of these files are stored uncompressed.
  *
  */
-export class OCF {
-    private book: archiver.Archiver;
-
+class OCF {
     /**
      *
      * @param name - the file name of the final package
      */
-    constructor(name: string) {
-        this.book = archiver.create('zip', {zlib: {level: 9}});
+    constructor(name) {
+        this.book = archiver_1.default.create('zip', { zlib: { level: 9 } });
         const output = fs.createWriteStream(name);
         this.book.pipe(output);
-
-        this.book.append('application/epub+zip', {name: 'mimetype', store: true});
-        this.book.append(container_xml, {name: 'META-INF/container.xml', store: true});
+        this.book.append('application/epub+zip', { name: 'mimetype', store: true });
+        this.book.append(container_xml, { name: 'META-INF/container.xml', store: true });
     }
-
     /**
      * Store a compressed content in the OCF file. The input can be a simple text or a Stream
      * (the relevant `archiver` function takes care of disambiguation).
@@ -54,16 +59,18 @@ export class OCF {
      * @param content - Content to be stored
      * @param path_name - Path name of the file for the content
      */
-    append(content: string|stream.Readable, path_name: string): void {
-        this.book.append(content, {name: path_name, store: false});
+    append(content, path_name) {
+        this.book.append(content, { name: path_name, store: false });
     }
-
     /**
      * Finalize, a.k.a. close the OCF file. This creates the final file on the file system.
      *
      * @async
      */
-    async finalize(): Promise<any> {
+    async finalize() {
         return this.book.finalize();
     }
-};
+}
+exports.OCF = OCF;
+;
+//# sourceMappingURL=ocf.js.map

@@ -74,11 +74,10 @@
 					<div class="lead">
 						<p>CLI arguments used by the <a href="../modules/_lib_process_.html#create_epub">create_epub</a> entry function.</p>
 					</div>
-					<p>The index file may have to be run through the W3C <a href="https://labs.w3.org/spec-generator/">spec generator service</a>
-						before further processing. In that case, it is also possible to set some of the configuration options,
-						overwriting the values set in the <code>config</code> entry of the original file. The possible alternate
-						config values are listed in the interface; see the
-					<a href="https://github.com/w3c/respec/wiki/ReSpec-Editor&#39;s-Guide">respec editor&#39;s guide</a> for details.</p>
+					<p>The original content file may have to be run through the W3C <a href="https://labs.w3.org/spec-generator/">spec generator service</a>
+						before further processing. If that is the case (see <a href="_lib_process_.arguments.html#respec">Arguments.respec</a>), it is also possible to set some of the ReSpec configuration options,
+						overwriting the values set in the <code>config</code> entry of the original file (see <a href="_lib_process_.arguments.html#config">Arguments.config</a>). See the
+					<a href="https://github.com/w3c/respec/wiki/ReSpec-Editor&#39;s-Guide">ReSpec editor&#39;s guide</a> for details of the values.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -119,12 +118,12 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="_lib_process_.configoptions.html" class="tsd-signature-type">ConfigOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L64">lib/process.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L69">lib/process.ts:69</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Collection of respec config options, to be used with the spec generator (if applicable)</p>
+							<p>Collection of respec config options, to be used with the spec generator (if applicable).</p>
 						</div>
 					</div>
 				</section>
@@ -135,12 +134,12 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_lib_process_.debugoptions.html">DebugOptions</a>.<a href="_lib_process_.debugoptions.html#package">package</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L34">lib/process.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L40">lib/process.ts:40</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Debug option: just print the package file on the console, do not generate and epub file</p>
+							<p>Debug option: just print the package file on the console, do not generate and epub file.</p>
 						</div>
 					</div>
 				</section>
@@ -150,12 +149,12 @@
 					<div class="tsd-signature tsd-kind-icon">respec<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L59">lib/process.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L64">lib/process.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Is the source in respec?</p>
+							<p>Is the source in ReSpec?</p>
 						</div>
 					</div>
 				</section>
@@ -166,12 +165,12 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_lib_process_.debugoptions.html">DebugOptions</a>.<a href="_lib_process_.debugoptions.html#trace">trace</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L39">lib/process.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L45">lib/process.ts:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Debug option: print built-in trace information</p>
+							<p>Debug option: print built-in trace information.</p>
 						</div>
 					</div>
 				</section>
@@ -181,12 +180,12 @@
 					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L54">lib/process.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L59">lib/process.ts:59</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The URL of the relevant HTML file</p>
+							<p>The URL of the relevant HTML file.</p>
 						</div>
 					</div>
 				</section>

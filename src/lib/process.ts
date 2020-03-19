@@ -1,4 +1,6 @@
 /**
+ * ## Main entry points
+ *
  * Main processing steps for the creation of EPUB files. See the [[create_epub]] and [[create_epub_from_dom]] entry points for the details.
  *
  * @packageDocumentation
@@ -7,7 +9,7 @@ import * as jsdom      from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
-import { fetch_html, fetch_resource, fetch_type, URL, html_media_type } from './fetch';
+import { fetch_html, fetch_resource, fetch_type, URL, xhtml_media_type, svg_media_type, js_media_type, es_media_type } from './fetch';
 import * as opf   from './opf';
 import * as css   from './css';
 import * as cover from './cover';
@@ -18,7 +20,11 @@ import { parse } from 'parse5';
 
 
 /**
- * Config options, to be used as part of the input arguments in [[Arguments]].
+ * Config options, to be used as part of the input arguments in [[Arguments]] to overwrite the `config` options of ReSpec.
+ * (See [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide).)
+ *
+ * Note that the interface definition does not restrict the possible values; however, not
+ * all values are usable by overwriting the original values on-the-fly. The CLI for the program (see [[main]]) defines a few useful values.
  */
 export interface ConfigOptions {
     [x :string] :string
@@ -29,12 +35,12 @@ export interface ConfigOptions {
  */
 export interface DebugOptions {
       /**
-     * Debug option: just print the package file on the console, do not generate and epub file
+     * Debug option: just print the package file on the console, do not generate and epub file.
      */
     package :boolean,
 
     /**
-     * Debug option: print built-in trace information
+     * Debug option: print built-in trace information.
      */
     trace :boolean,
 }
@@ -42,24 +48,23 @@ export interface DebugOptions {
 /**
  * CLI arguments used by the [[create_epub]] entry function.
  *
- * The index file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
- * before further processing. In that case, it is also possible to set some of the configuration options,
- * overwriting the values set in the `config` entry of the original file. The possible alternate
- * config values are listed in the interface; see the
- * [respec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details.
+ * The original content file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * before further processing. If that is the case (see [[Arguments.respec]]), it is also possible to set some of the ReSpec configuration options,
+ * overwriting the values set in the `config` entry of the original file (see [[Arguments.config]]). See the
+ * [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details of the values.
  *
  */
 export interface Arguments extends DebugOptions {
-    /** The URL of the relevant HTML file */
+    /** The URL of the relevant HTML file. */
     url     :string,
 
     /**
-     * Is the source in respec?
+     * Is the source in ReSpec?
      */
     respec  :boolean,
 
     /**
-     * Collection of respec config options, to be used with the spec generator (if applicable)
+     * Collection of respec config options, to be used with the spec generator (if applicable).
      */
     config  :ConfigOptions
 }
@@ -149,6 +154,7 @@ interface LocalLinks {
  * - `a` elements
  * - links to stylesheets and scripts
  * - `object` elements
+ *
  */
 const resource_references :LocalLinks[] = [
     {
@@ -180,7 +186,7 @@ export interface spec_generator {
  * 3. "Finalizes" the OCF content, i.e., dump everything to a file
  *
  *
- * @param cli_arguments - CLI arguments, see [[Arguments]]
+ * @param cli_arguments
  * @async
  */
 export async function create_epub(cli_arguments: Arguments) {
@@ -221,18 +227,18 @@ export async function create_epub(cli_arguments: Arguments) {
 /**
  * Create an OCF instance from the original content.
  *
- * 1. Gather all the global information ([[Global]])
- * 2. Add the basic metadata (authors, dates) to the opf file
- * 3. Collect all the resources (see [[resource_references]]); the relative urls and the media types are all
- * collected in a global structure, to be added to the EPUB file and the opf file later
- * 4. Add the reference to the W3C logo
+ * 1. Gather all the global information ([[Global]]).
+ * 2. Add the basic metadata (authors, dates) to the opf file.
+ * 3. Collect all the resources (see [[resource_references]]); the relative urls and the media types are
+ * collected in a global structure, to be added to the EPUB file and the opf file later.
+ * 4. Add the reference to a W3C logo.
  * 5. Add the reference to the generic fixup script.
- * 6. Add some of the global W3C CSS files, and auxillary image files
- * 7. Create a cover file
- * 8. Create a nav file
- * 9. Main resource (i.e., Overview.xhtml) entry, with relevant properties
- * 10. Finalize the package file based on the collected resources in [[Global.resources]]
- * 11. Download all resources into the EPUB file
+ * 6. Add some of the global W3C CSS files, and auxillary image files.
+ * 7. Create a cover file.
+ * 8. Create a nav file.
+ * 9. Main resource (i.e., Overview.xhtml) entry, with relevant properties.
+ * 10. Finalize the package file based on the collected resources in [[Global.resources]].
+ * 11. Download all resources into the EPUB file.
  *
  *
  * All the resource entries are collected in the in a [[Global.resources]] array, to be then added to the
@@ -298,7 +304,7 @@ export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug 
             // I created a version of the logo without it and stored it at a fix URL...
             global.resources.push({
                 relative_url : relative_url,
-                media_type   : 'image/svg+xml',
+                media_type   : svg_media_type,
                 absolute_url : 'https://www.w3.org/People/Ivan/StyleSheets/W3C_TR_2016.svg'
             })
         }
@@ -314,7 +320,7 @@ export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug 
             fixup_element.setAttribute('src', relative_url);
             global.resources.push({
                 relative_url : relative_url,
-                media_type   : 'text/javascript',
+                media_type   : js_media_type,
                 absolute_url : 'https://www.w3.org/scripts/TR/2016/fixup.js'
             })
         }
@@ -322,7 +328,7 @@ export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug 
 
     // ------------------------------------------
     // 6. Add some of the global W3C CSS files, and auxillary image files
-    global.resources = [...global.resources, ...css.extract(global)]
+    global.resources = [...global.resources, ...css.extract_css(global)]
 
     // ------------------------------------------
     // 7. Create a cover file
@@ -370,7 +376,9 @@ export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug 
  * Collect the references to the extra resources, to be added to the EPUB file as well as the package opf file.
  * It relies on searching through the HTML source file, based on the query patterns given in [[resource_references]].
  *
- * @param global - global data
+ * The media type of all entries are established by issuing a HEAD request to the respective resource.
+ *
+ * @param global
  * @returns - list of additional resources
  * @async
  */
@@ -423,22 +431,22 @@ const get_extra_resources = async (global: Global): Promise<ResourceRef[]> => {
 
 
 /**
- * Generate the resource entry for the Overview.xhtml item into the package; that includes setting the various manifest item
- * properties, see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab).
+ * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
+ * properties (see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab)).
  *
  * The following properties are set, if applicable:
  *
- * - [mathml](https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml): there is an explicit usage of mathml
- * - [scripted](https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted): there are active scripts
- * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage
- * - [remote-resources](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): remote resources, typically video or audio, possibly images
+ * - [mathml](https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml): there is an explicit usage of mathml.
+ * - [scripted](https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted): there are active scripts.
+ * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage.
+ * - [remote-resources](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): there are remote resources, typically video, audio, or images.
  *
- * @param global - Global data
+ * @param global
  * @return - a single element array with the resource definition of the `Overview.xhtml` entry
  */
 const generate_overview_item = (global: Global): ResourceRef[] => {
     const retval :ResourceRef = {
-        media_type   : 'application/xhtml+xml',
+        media_type   : xhtml_media_type,
         id           : 'main',
         relative_url : 'Overview.xhtml',
         text_content : xhtml.convert_dom(global.dom)
@@ -457,7 +465,7 @@ const generate_overview_item = (global: Global): ResourceRef[] => {
         const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
             if (element.hasAttribute('type')) {
                 const type = element.getAttribute('type');
-                return ['application/javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript'].includes(type);
+                return ['application/javascript', 'application/ecmascript', js_media_type, es_media_type].includes(type);
             } else {
                 return true;
             }
@@ -494,12 +502,12 @@ const generate_overview_item = (global: Global): ResourceRef[] => {
 
 
 /**
- * Create the final epub file: download all resources, if applicable, and then add all of them, plus the
- * generated content (package file, nav file, the original content file, etc) to an OCF instance.
+ * Create the final epub file (ie, an OCF instance): download all resources, if applicable, add them all, as well as the
+ * generated content (package file, nav file, the original content file, etc.) to an OCF instance.
  *
- * The generated epub file name is `shortName.epub`
+ * The generated epub file name is `shortName.epub`.
  *
- * @param global - Global data
+ * @param global
  * @async
  */
 const generate_epub = async (global: Global): Promise<ocf.OCF> => {

@@ -1,12 +1,5 @@
-/**
- * ## Cover page
- *
- * Creation of a cover page.
- *
- * @packageDocumentation
- */
-import { ResourceRef, Global } from './process';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * The template to be used for the cover page.
  * @hidden
@@ -72,33 +65,30 @@ const cover = `<?xml version="1.0" encoding="utf-8"?>
     </div>
   </body>
 </html>
-`
-
+`;
 /**
  * Create the cover page: it is an XHTML file with title, editors, copyright information, and a disclaimer whereby the EPUB version of the document is not authoritative.
  *
  * @param global
  * @returns - resources for a cover page, as well as long W3C logo (appearing on the cover page) and a relevant css file.
  */
-export function create_cover_page(global :Global) :ResourceRef[] {
+function create_cover_page(global) {
     // The W3C long logo must be added to the overall resources
-    const retval :ResourceRef[] = [
+    const retval = [
         {
-            media_type   : 'image/png',
-            relative_url : 'Icons/w3c_main.png',
-            absolute_url : 'https://www.w3.org/Icons/w3c_main.png'
+            media_type: 'image/png',
+            relative_url: 'Icons/w3c_main.png',
+            absolute_url: 'https://www.w3.org/Icons/w3c_main.png'
         },
         {
-            media_type   : 'text/css',
-            relative_url : 'StyleSheets/base.css',
-            absolute_url : 'https://www.w3.org/StyleSheets/base.css'
+            media_type: 'text/css',
+            relative_url: 'StyleSheets/base.css',
+            absolute_url: 'https://www.w3.org/StyleSheets/base.css'
         }
-    ]
-
-    const get_editors = () :string => global.config.editors.map((entry: any) => `${entry.name}, ${entry.company}`).join('; ');
+    ];
+    const get_editors = () => global.config.editors.map((entry) => `${entry.name}, ${entry.company}`).join('; ');
     const title = global.html_element.querySelector('title').textContent;
     const date = global.html_element.querySelector('time.dt-published');
-
     const final_cover = cover
         .replace('%%%TITLE1%%%', title)
         .replace('%%%TITLE2%%%', title)
@@ -107,13 +97,13 @@ export function create_cover_page(global :Global) :ResourceRef[] {
         .replace('%%%ORIGINAL%%%', global.document_url)
         .replace('%%%%ISODATE%%%%', date.getAttribute('datetime'))
         .replace('%%%DATE%%%', date.textContent);
-
     retval.push({
-        media_type   : 'application/xhtml+xml',
-        relative_url : 'cover.xhtml',
-        id           : 'start',
-        text_content : final_cover
-    })
-
+        media_type: 'application/xhtml+xml',
+        relative_url: 'cover.xhtml',
+        id: 'start',
+        text_content: final_cover
+    });
     return retval.reverse();
 }
+exports.create_cover_page = create_cover_page;
+//# sourceMappingURL=cover.js.map

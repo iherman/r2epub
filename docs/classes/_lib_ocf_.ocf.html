@@ -74,7 +74,7 @@
 					<div class="lead">
 						<p>EPUB 3.2 OCF package.</p>
 					</div>
-					<p>The constructor generates the required files, as described in the <a href="https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml">Spec</a>, namely:</p>
+					<p>The constructor generates and adds the required content files, as described in the <a href="https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml">EPUB Specification</a>, namely:</p>
 					<ul>
 						<li>The <code>mimetype</code> file</li>
 						<li>The <code>container.xml</code> file, see the value in <a href="../modules/_lib_ocf_.html#container_xml">container_xml</a></li>
@@ -128,7 +128,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/ocf.ts#L31">lib/ocf.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/ocf.ts#L35">lib/ocf.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -139,7 +139,7 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the file name of the final file</p>
+											<p>the file name of the final package</p>
 										</div>
 									</div>
 								</li>
@@ -157,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">book<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Archiver</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/ocf.ts#L31">lib/ocf.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/ocf.ts#L35">lib/ocf.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -168,18 +168,19 @@
 					<a name="append" class="tsd-anchor"></a>
 					<h3>append</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">append<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">stream.Readable</span>, file_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">append<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">stream.Readable</span>, path_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/ocf.ts#L52">lib/ocf.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/ocf.ts#L57">lib/ocf.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Store a compressed content in the OCF file</p>
+									<p>Store a compressed content in the OCF file. The input can be a simple text or a Stream
+									(the relevant <code>archiver</code> function takes care of disambiguation).</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -191,9 +192,9 @@
 									</div>
 								</li>
 								<li>
-									<h5>file_name: <span class="tsd-signature-type">string</span></h5>
+									<h5>path_name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Path ame of the file for the content</p>
+										<p>Path name of the file for the content</p>
 									</div>
 								</li>
 							</ul>
@@ -211,12 +212,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/ocf.ts#L61">lib/ocf.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/ocf.ts#L66">lib/ocf.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Finalize, a.k.a. close the OCF file.</p>
+									<p>Finalize, a.k.a. close the OCF file. This creates the final file on the file system.</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>async</dt>

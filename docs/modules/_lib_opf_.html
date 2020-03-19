@@ -69,10 +69,18 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Wrapper around the package. The details of the various interfaces are in the
-						<a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc">EPUB Packages 3.2 Specification</a>.</p>
+						<a href="#the-opf-package" id="the-opf-package" style="color: inherit; text-decoration: none;">
+							<h2>The OPF package</h2>
+						</a>
 					</div>
-					<p>(The encoding of the interfaces rely on the <a href="https://oozcitak.github.io/xmlbuilder2/"><code>xmlbuilder2</code> package</a>, used to generate an XML file out of a set of JS objects.)</p>
+					<p>Wrapper around the package. The details of the various entries are in the
+					<a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc">EPUB Packages 3.2 Specification</a>.</p>
+					<p>The module relies on the <a href="https://oozcitak.github.io/xmlbuilder2/"><code>xmlbuilder2</code> package</a>, which generates an XML file out of a set of JS objects. See the documentation of that library for
+					the details; the short overview is:</p>
+					<ul>
+						<li>JSON names starting with <code>@</code> represent an attribute</li>
+						<li>JSON name <code>#</code> represent textual content of the element.</li>
+					</ul>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -88,19 +96,7 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.creator.html" class="tsd-kind-icon">Creator</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.dcidentifier.html" class="tsd-kind-icon">DCIdentifier</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.dclang.html" class="tsd-kind-icon">DCLang</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.dctitle.html" class="tsd-kind-icon">DCTitle</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.link.html" class="tsd-kind-icon">Link</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.manifest.html" class="tsd-kind-icon">Manifest</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.manifestitem.html" class="tsd-kind-icon">Manifest<wbr>Item</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.meta.html" class="tsd-kind-icon">Meta</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.metadata.html" class="tsd-kind-icon">Metadata</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.package.html" class="tsd-kind-icon">Package</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.packagecontent.html" class="tsd-kind-icon">Package<wbr>Content</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.spine.html" class="tsd-kind-icon">Spine</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_opf_.spineitemref.html" class="tsd-kind-icon">Spine<wbr>Item<wbr>Ref</a></li>
 							</ul>
 						</section>
 					</div>
@@ -148,43 +144,7 @@
 						<a href="../classes/_lib_opf_.packagewrapper.html" class="tsd-kind-icon">Package<wbr>Wrapper</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.creator.html" class="tsd-kind-icon">Creator</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.dcidentifier.html" class="tsd-kind-icon">DCIdentifier</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.dclang.html" class="tsd-kind-icon">DCLang</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.dctitle.html" class="tsd-kind-icon">DCTitle</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.link.html" class="tsd-kind-icon">Link</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.manifest.html" class="tsd-kind-icon">Manifest</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.manifestitem.html" class="tsd-kind-icon">Manifest<wbr>Item</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.meta.html" class="tsd-kind-icon">Meta</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.metadata.html" class="tsd-kind-icon">Metadata</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="../interfaces/_lib_opf_.package.html" class="tsd-kind-icon">Package</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.packagecontent.html" class="tsd-kind-icon">Package<wbr>Content</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.spine.html" class="tsd-kind-icon">Spine</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.spineitemref.html" class="tsd-kind-icon">Spine<wbr>Item<wbr>Ref</a>
 					</li>
 				</ul>
 			</nav>

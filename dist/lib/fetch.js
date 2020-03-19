@@ -1,75 +1,63 @@
-/**
- * ## Fetch
- *
- * Wrappers around the fetch function.
- *
- * @packageDocumentation
- */
-export type URL = string;
-
-import * as node_fetch from 'node-fetch';
-import * as urlHandler from 'url';
-import * as validUrl   from 'valid-url';
-import * as jsdom      from 'jsdom';
-
+"use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_fetch = __importStar(require("node-fetch"));
+const urlHandler = __importStar(require("url"));
+const validUrl = __importStar(require("valid-url"));
+const jsdom = __importStar(require("jsdom"));
 /** Media type for JSON
  * @hidden
 */
 const json_media_type = 'application/json';
-
 /** Media type for JSON-LD
  * @hidden
 */
 const jsonld_media_type = 'application/ld+json';
-
 /** Media type for HTML
  * @hidden
 */
 const html_media_type = 'text/html';
-
 /** Media type for XHTML
  * @hidden
 */
-export const xhtml_media_type = 'application/xhtml+xml';
-
+exports.xhtml_media_type = 'application/xhtml+xml';
 /** Media type for CSS
  * @hidden
 */
-export const css_media_type = 'text/css';
-
+exports.css_media_type = 'text/css';
 /** Media type for SVG
  * @hidden
 */
-export const svg_media_type = 'image/svg+xml';
-
+exports.svg_media_type = 'image/svg+xml';
 /** Media type for javascript
  * @hidden
 */
-export const js_media_type = 'text/javascript';
-
+exports.js_media_type = 'text/javascript';
 /** Media type for ecmascript
  * @hidden
 */
-export const es_media_type = 'text/ecmascript';
-
+exports.es_media_type = 'text/ecmascript';
 /** Media type for PNG image
  * @hidden
  */
-export const png_media_type = 'image/png';
-
+exports.png_media_type = 'image/png';
 /** These media types refer to textual content, no reason to bother about streaming... */
 const text_content = [
     json_media_type,
     jsonld_media_type,
     html_media_type,
-    xhtml_media_type,
-    css_media_type,
-    svg_media_type,
-    js_media_type,
-    es_media_type
+    exports.xhtml_media_type,
+    exports.css_media_type,
+    exports.svg_media_type,
+    exports.js_media_type,
+    exports.es_media_type
 ];
-
-
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
 *
@@ -88,24 +76,21 @@ const text_content = [
 * @returns  - the URL itself (which might be slightly improved by the valid-url method) or `null` if this is, in fact, not a URL
 * @throws  if `address` pretends to be a URL, but it is not acceptable for some reasons.
 */
-const check_Web_url = (address :URL) :URL => {
+const check_Web_url = (address) => {
     const parsed = urlHandler.parse(address);
     if (parsed.protocol === null) {
         // This is not a URL, should be used as a file name
         throw new Error(`"${address}": Invalid URL: no protocol`);
     }
-
     // Check whether we use the right protocol
     if (['http:', 'https:'].includes(parsed.protocol) === false) {
-       throw new Error(`"${address}": URL is not dereferencable`);
+        throw new Error(`"${address}": URL is not dereferencable`);
     }
-
     // Run through the URL validator
     const retval = validUrl.isWebUri(address);
     if (retval === undefined) {
         throw new Error(`"${address}": the URL isn't valid`);
     }
-
     // Check the port
     if (parsed.port !== null) {
         try {
@@ -113,15 +98,14 @@ const check_Web_url = (address :URL) :URL => {
             if (portNumber <= 1024) {
                 throw new Error(`"${address}": Unsafe port number used in URL (${parsed.port})`);
             }
-        } catch(e) {
+        }
+        catch (e) {
             throw new Error(`"${address}": Invalid port number used in URL (${parsed.port})`);
         }
     }
     // If we got this far, this is a proper URL, ready to be used.
     return retval;
-}
-
-
+};
 /**
  * The effective fetch implementation run by the rest of the code.
  *
@@ -133,9 +117,7 @@ const check_Web_url = (address :URL) :URL => {
  *
  * I guess this makes this entry a bit polyfill like:-)
  */
-const my_fetch: ((arg :string) => Promise<any>) = (process !== undefined) ? node_fetch.default : fetch;
-
-
+const my_fetch = (process !== undefined) ? node_fetch.default : fetch;
 /**
  * Fetch a resource.
  *
@@ -144,7 +126,7 @@ const my_fetch: ((arg :string) => Promise<any>) = (process !== undefined) ? node
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
-export async function fetch_resource(resource_url :URL, force_text :boolean = false) :Promise<any> {
+async function fetch_resource(resource_url, force_text = false) {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -153,40 +135,44 @@ export async function fetch_resource(resource_url :URL, force_text :boolean = fa
             const final_url = check_Web_url(resource_url);
             my_fetch(final_url)
                 .then((response) => {
-                    if (response.ok) {
-                        // If the response content type is set (which is usually the case, but not in all cases...)
-                        const response_type = response.headers.get('content-type');
-                        if (response_type && response_type !== '') {
-                            if  (text_content.includes(response_type)) {
-                                // the simple way, just return text...
-                                resolve(response.text())
-                            } else {
-                                if (force_text){
-                                    resolve(response.text())
-                                } else {
-                                    // return the body without processing, ie, as a stream
-                                    resolve(response.body)
-                                }
-                            }
-                        } else {
-                            // No type information on return, let us hope this is something proper
-                            // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
+                if (response.ok) {
+                    // If the response content type is set (which is usually the case, but not in all cases...)
+                    const response_type = response.headers.get('content-type');
+                    if (response_type && response_type !== '') {
+                        if (text_content.includes(response_type)) {
+                            // the simple way, just return text...
                             resolve(response.text());
                         }
-                    } else {
-                        reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                        else {
+                            if (force_text) {
+                                resolve(response.text());
+                            }
+                            else {
+                                // return the body without processing, ie, as a stream
+                                resolve(response.body);
+                            }
+                        }
                     }
-                })
+                    else {
+                        // No type information on return, let us hope this is something proper
+                        // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
+                        resolve(response.text());
+                    }
+                }
+                else {
+                    reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                }
+            })
                 .catch((err) => {
-                    reject(new Error(`Problem accessing ${resource_url}: ${err}`));
-                });
-        } catch (err) {
+                reject(new Error(`Problem accessing ${resource_url}: ${err}`));
+            });
+        }
+        catch (err) {
             reject(err);
         }
     });
 }
-
-
+exports.fetch_resource = fetch_resource;
 /**
  * Fetch the media type of the resource.
  *
@@ -194,7 +180,7 @@ export async function fetch_resource(resource_url :URL, force_text :boolean = fa
  * @returns - the media type
  * @async
  */
-export async function fetch_type(resource_url :URL) :Promise<string> {
+async function fetch_type(resource_url) {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -203,23 +189,24 @@ export async function fetch_type(resource_url :URL) :Promise<string> {
             const final_url = check_Web_url(resource_url);
             my_fetch(final_url)
                 .then((response) => {
-                    if (response.ok) {
-                        // If the response content type is set (which is usually the case, but not in all cases...)
-                        resolve(response.headers.get('content-type'));
-                    } else {
-                        reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
-                    }
-                })
+                if (response.ok) {
+                    // If the response content type is set (which is usually the case, but not in all cases...)
+                    resolve(response.headers.get('content-type'));
+                }
+                else {
+                    reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                }
+            })
                 .catch((err) => {
-                    reject(new Error(`Problem accessing ${resource_url}: ${err}`));
-                });
-        } catch (err) {
+                reject(new Error(`Problem accessing ${resource_url}: ${err}`));
+            });
+        }
+        catch (err) {
             reject(err);
         }
     });
 }
-
-
+exports.fetch_type = fetch_type;
 /**
  * Fetch an HTML file via [[fetch_resource]] and parse the result into a DOM instance.
  *
@@ -228,13 +215,15 @@ export async function fetch_type(resource_url :URL) :Promise<string> {
  * @return - DOM object for the parsed HTML
  * @throws Error if something goes wrong with fetch or DOM Parsing
  */
-export async function fetch_html(html_url :URL) :Promise<jsdom.JSDOM> {
+async function fetch_html(html_url) {
     try {
         const body = await fetch_resource(html_url, true);
         const retval = new jsdom.JSDOM(body, { url: html_url });
         return retval;
-    } catch (err) {
+    }
+    catch (err) {
         throw new Error(`HTML parsing error in ${html_url}: ${err}`);
     }
 }
-
+exports.fetch_html = fetch_html;
+//# sourceMappingURL=fetch.js.map

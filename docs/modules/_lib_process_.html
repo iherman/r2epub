@@ -69,8 +69,11 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Main processing steps for the creation of EPUB files. See the <a href="_lib_process_.html#create_epub">create_epub</a> and <a href="_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a> entry points for the details.</p>
+						<a href="#main-entry-points" id="main-entry-points" style="color: inherit; text-decoration: none;">
+							<h2>Main entry points</h2>
+						</a>
 					</div>
+					<p>Main processing steps for the creation of EPUB files. See the <a href="_lib_process_.html#create_epub">create_epub</a> and <a href="_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a> entry points for the details.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -117,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">resource_<wbr>references<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_process_.locallinks.html" class="tsd-signature-type">LocalLinks</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{query : &#x27;img, script, audio, video, source&#x27;,attr  : &#x27;src&#x27;},{query : &#x27;a, link[rel&#x3D;&quot;stylesheet&quot;]&#x27;,attr  : &#x27;href&#x27;},{query : &#x27;object&#x27;,attr  : &#x27;data&#x27;}]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L153">lib/process.ts:153</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L159">lib/process.ts:159</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -138,7 +141,7 @@
 					<div class="tsd-signature tsd-kind-icon">spec_<wbr>generator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"https://labs.w3.org/spec-generator/?type&#x3D;respec&amp;url&#x3D;"</span><span class="tsd-signature-symbol"> = &quot;https://labs.w3.org/spec-generator/?type&#x3D;respec&amp;url&#x3D;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L68">lib/process.ts:68</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L73">lib/process.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -160,7 +163,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L186">lib/process.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L192">lib/process.ts:192</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -182,9 +185,6 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>cli_arguments: <a href="../interfaces/_lib_process_.arguments.html" class="tsd-signature-type">Arguments</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>CLI arguments, see <a href="../interfaces/_lib_process_.arguments.html">Arguments</a></p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -201,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L248">lib/process.ts:248</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L254">lib/process.ts:254</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -209,18 +209,18 @@
 									<p>Create an OCF instance from the original content.</p>
 								</div>
 								<ol>
-									<li>Gather all the global information (<a href="../interfaces/_lib_process_.global.html">Global</a>)</li>
-									<li>Add the basic metadata (authors, dates) to the opf file</li>
-									<li>Collect all the resources (see <a href="_lib_process_.html#resource_references">resource_references</a>); the relative urls and the media types are all
-									collected in a global structure, to be added to the EPUB file and the opf file later</li>
-									<li>Add the reference to the W3C logo</li>
+									<li>Gather all the global information (<a href="../interfaces/_lib_process_.global.html">Global</a>).</li>
+									<li>Add the basic metadata (authors, dates) to the opf file.</li>
+									<li>Collect all the resources (see <a href="_lib_process_.html#resource_references">resource_references</a>); the relative urls and the media types are
+									collected in a global structure, to be added to the EPUB file and the opf file later.</li>
+									<li>Add the reference to a W3C logo.</li>
 									<li>Add the reference to the generic fixup script.</li>
-									<li>Add some of the global W3C CSS files, and auxillary image files</li>
-									<li>Create a cover file</li>
-									<li>Create a nav file</li>
-									<li>Main resource (i.e., Overview.xhtml) entry, with relevant properties</li>
-									<li>Finalize the package file based on the collected resources in <a href="../interfaces/_lib_process_.global.html#resources">Global.resources</a></li>
-									<li>Download all resources into the EPUB file</li>
+									<li>Add some of the global W3C CSS files, and auxillary image files.</li>
+									<li>Create a cover file.</li>
+									<li>Create a nav file.</li>
+									<li>Main resource (i.e., Overview.xhtml) entry, with relevant properties.</li>
+									<li>Finalize the package file based on the collected resources in <a href="../interfaces/_lib_process_.global.html#resources">Global.resources</a>.</li>
+									<li>Download all resources into the EPUB file.</li>
 								</ol>
 								<p>All the resource entries are collected in the in a <a href="../interfaces/_lib_process_.global.html#resources">Global.resources</a> array, to be then added to the
 									<a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def"><code>package.opf</code></a> file as well as to download
@@ -268,15 +268,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L505">lib/process.ts:505</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L513">lib/process.ts:513</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create the final epub file: download all resources, if applicable, and then add all of them, plus the
-									generated content (package file, nav file, the original content file, etc) to an OCF instance.</p>
+									<p>Create the final epub file (ie, an OCF instance): download all resources, if applicable, add them all, as well as the
+									generated content (package file, nav file, the original content file, etc.) to an OCF instance.</p>
 								</div>
-								<p>The generated epub file name is <code>shortName.epub</code></p>
+								<p>The generated epub file name is <code>shortName.epub</code>.</p>
 								<dl class="tsd-comment-tags">
 									<dt>async</dt>
 									<dd></dd>
@@ -286,11 +286,6 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>global: <a href="../interfaces/_lib_process_.global.html" class="tsd-signature-type">Global</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Global data</p>
-										</div>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/_lib_ocf_.ocf.html" class="tsd-signature-type">OCF</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -307,31 +302,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L439">lib/process.ts:439</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L447">lib/process.ts:447</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Generate the resource entry for the Overview.xhtml item into the package; that includes setting the various manifest item
-									properties, see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a>.</p>
+									<p>Generate the resource entry for the <code>Overview.xhtml</code> item into the package; that includes setting the various manifest item
+									properties (see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a>).</p>
 								</div>
 								<p>The following properties are set, if applicable:</p>
 								<ul>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml">mathml</a>: there is an explicit usage of mathml</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted">scripted</a>: there are active scripts</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg">svg</a>: there is explicit svg usage</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources">remote-resources</a>: remote resources, typically video or audio, possibly images</li>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml">mathml</a>: there is an explicit usage of mathml.</li>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted">scripted</a>: there are active scripts.</li>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg">svg</a>: there is explicit svg usage.</li>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources">remote-resources</a>: there are remote resources, typically video, audio, or images.</li>
 								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>global: <a href="../interfaces/_lib_process_.global.html" class="tsd-signature-type">Global</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Global data</p>
-										</div>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_lib_process_.resourceref.html" class="tsd-signature-type">ResourceRef</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -351,7 +341,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7a92680/src/lib/process.ts#L377">lib/process.ts:377</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/2a4cd14/src/lib/process.ts#L385">lib/process.ts:385</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -359,6 +349,7 @@
 									<p>Collect the references to the extra resources, to be added to the EPUB file as well as the package opf file.
 									It relies on searching through the HTML source file, based on the query patterns given in <a href="_lib_process_.html#resource_references">resource_references</a>.</p>
 								</div>
+								<p>The media type of all entries are established by issuing a HEAD request to the respective resource.</p>
 								<dl class="tsd-comment-tags">
 									<dt>async</dt>
 									<dd></dd>
@@ -368,11 +359,6 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>global: <a href="../interfaces/_lib_process_.global.html" class="tsd-signature-type">Global</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>global data</p>
-										</div>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_lib_process_.resourceref.html" class="tsd-signature-type">ResourceRef</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>

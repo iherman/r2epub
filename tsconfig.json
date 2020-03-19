@@ -29,7 +29,6 @@
     ],
     "typedocOptions" : {
         "out" : "docs",
-        "disableOutputCheck": true,
         "hideGenerator": true,
         "listInvalidSymbolLinks": true,
         "ignoreCompilerErrors": true,
