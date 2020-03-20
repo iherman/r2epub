@@ -29,7 +29,6 @@ import * as cover from './cover';
 import * as nav   from './nav';
 import * as ocf   from './ocf';
 import * as xhtml from './xhtml';
-import { parse } from 'parse5';
 
 
 /**
@@ -318,7 +317,7 @@ export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug 
             global.resources.push({
                 relative_url : relative_url,
                 media_type   : svg_media_type,
-                absolute_url : 'https://www.w3.org/People/Ivan/StyleSheets/W3C_TR_2016.svg'
+                absolute_url : 'https://www.w3.org/People/Ivan/TR_EPUB/W3C_logo.svg'
             })
         }
     }

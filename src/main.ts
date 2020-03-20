@@ -1,3 +1,4 @@
+#! /usr/local/bin/node
 /**
  * Main CLI entry point to the ReSpec to EPUB 3.2 conversion.
  * @packageDocumentation

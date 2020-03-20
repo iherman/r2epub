@@ -24,7 +24,8 @@
  * The approach chosen to convert the content to the EPUB file is therefore as follows:
  *
  * - The core reference in the HTML file is changed to the (stable) `base.css` file. This file is copied
- * into the EPUB file.
+ * into the EPUB file from my own place on W3C; it is a modified version of the "real" `base.css` file insofar as it removes
+ * the TOC related statements (and adds some page breaking instructions)
  * - An extra css file is created, stored in the in the EPUB file and referred to from the resulting HTML file, setting
  * the right background with a relative URL. This is done by using a simple template, which simply a copy of the
  * relevant template on the W3C site.
@@ -45,74 +46,6 @@ import { css_media_type, svg_media_type, png_media_type }      from './fetch';
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
 
 
-/**
- * Book specific css additions. This is necessary to:
- *
- * - Take care of page breaks (although, alas!, not many reading system handles these properly. Yet?)
- * - Turn off the built-in TOC altogether; it is moved to a separate nav file, and displayed by the reading system.
- *
- */
-const extra_css = `
-body {
-    padding: 0 0 0 0 !important;
-    max-width: none !important;
-}
-
-h2 {
-    page-break-before: always;
-    page-break-inside: avoid;
-    page-break-after: avoid;
-}
-
-div.head h2 {
-    page-break-before: auto;
-    page-break-inside: avoid;
-    page-break-after: avoid;
-}
-
-figure {
-    page-break-inside: avoid;
-}
-
-h3, h4, h5 {
-    page-break-after: avoid;
-}
-
-dl dt {
-    page-break-after: avoid;
-}
-
-dl dd {
-    page-break-before: avoid;
-}
-
-div.example, div.note, pre.idl, .warning, table.parameters, table.exceptions {
-    page-break-inside: avoid;
-}
-
-p {
-    orphans: 4;
-    widows: 2;
-}
-
-#toc-nav, #toc-toggle-inline {
-    display:none;
-}
-
-#back-to-top, .toc-toggle {
-    display: none;
-}
-
-.figure, figure {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-nav#toc {
-    display: none
-}
-`
-
 
 /**
  * The basic background css template
@@ -123,7 +56,6 @@ const background_template = `
 body {
     background-image: url(logos/%%%LOGO%%%);
 }
-${extra_css}
 `;
 
 /**
@@ -139,7 +71,6 @@ body {
 html {
     background: white url(logos/UD-watermark.png);
 }
-${extra_css}
 `
 
 /**
@@ -159,16 +90,15 @@ const bg_template   = `
     body:not(.toc-inline) #toc {
         padding-top: 150px;
         background-attachment: local !important;
-    };
+    }
 }
 
 @media screen {
     body.toc-sidebar #toc {
         padding-top: 150px;
         background-attachment: local !important;
-    };
+    }
 }
-${extra_css}
 `;
 
 /**
@@ -197,7 +127,7 @@ body {
     body.toc-sidebar #toc {
         padding-top: 160px;
         background-attachment: local !important;
-    };
+    }
 }
 
 body {
@@ -208,7 +138,6 @@ html {
     background: white url(logos/UD-watermark.png);
     background-repeat: repeat-x;
 }
-${extra_css}
 `;
 
 /**
@@ -231,16 +160,15 @@ body {
     body:not(.toc-inline) #toc {
         padding-top: 160px;
         background-attachment: local !important;
-    };
+    }
 }
 
 @media screen {
     body.toc-sidebar #toc {
         padding-top: 160px;
         background-attachment: local !important;
-    };
+    }
 }
-${extra_css}
 `;
 
 
@@ -370,7 +298,7 @@ export function extract_css(global: Global): ResourceRef[] {
         retval.push({
             relative_url : 'StyleSheets/TR/2016/base.css',
             media_type   : css_media_type,
-            absolute_url : 'https://www.w3.org/StyleSheets/TR/2016/base.css'
+            absolute_url : 'https://www.w3.org/People/Ivan/TR_EPUB/base.css'
         })
 
         // The html content should be modified to refer to the base directly
