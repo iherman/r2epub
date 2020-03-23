@@ -23,12 +23,13 @@ import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type, URL, xhtml_media_type, svg_media_type, js_media_type, es_media_type } from './fetch';
-import * as opf   from './opf';
-import * as css   from './css';
-import * as cover from './cover';
-import * as nav   from './nav';
-import * as ocf   from './ocf';
-import * as xhtml from './xhtml';
+import * as opf      from './opf';
+import * as css      from './css';
+import * as cover    from './cover';
+import * as nav      from './nav';
+import * as ocf      from './ocf';
+import * as xhtml    from './xhtml';
+import * as overview from './overview'
 
 
 /**
@@ -352,7 +353,7 @@ export async function create_epub_from_dom(url :string, dom :jsdom.JSDOM, debug 
 
     // ------------------------------------------
     // 9. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
-    global.resources = [...generate_overview_item(global), ...global.resources];
+    global.resources = [...overview.generate_overview_item(global), ...global.resources];
 
     // ------------------------------------------
     // 10. Finalize the package file
@@ -439,77 +440,6 @@ const get_extra_resources = async (global: Global): Promise<ResourceRef[]> => {
             absolute_url : entry[2],
         }
     });
-}
-
-
-/**
- * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
- * properties (see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab)).
- *
- * The following properties are set, if applicable:
- *
- * - [mathml](https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml): there is an explicit usage of mathml.
- * - [scripted](https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted): there are active scripts.
- * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage.
- * - [remote-resources](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): there are remote resources, typically video, audio, or images.
- *
- * @param global
- * @return - a single element array with the resource definition of the `Overview.xhtml` entry
- */
-const generate_overview_item = (global: Global): ResourceRef[] => {
-    const retval :ResourceRef = {
-        media_type   : xhtml_media_type,
-        id           : 'main',
-        relative_url : 'Overview.xhtml',
-        text_content : xhtml.convert_dom(global.dom)
-    }
-
-    const properties = [];
-
-    // 1. Mathml usage
-    if (global.html_element.querySelector('mathml') !== null) {
-        properties.push('mathml');
-    }
-
-    // 2. are there active scripts
-    {
-        const scripts = Array.from(global.html_element.querySelectorAll('script'));
-        const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
-            if (element.hasAttribute('type')) {
-                const type = element.getAttribute('type');
-                return ['application/javascript', 'application/ecmascript', js_media_type, es_media_type].includes(type);
-            } else {
-                return true;
-            }
-        })
-        if (is_there_script) {
-            properties.push('scripted');
-        }
-    }
-
-    // 3. explicit svg usage
-    if (global.html_element.querySelector('svg') !== null) {
-        properties.push('svg');
-    }
-
-    // 4. external resources
-    {
-        const sources = Array.from(global.html_element.querySelectorAll('video, audio, img, source'));
-        const is_there_external_resources = sources.find((element: HTMLElement): boolean => {
-            if (element.hasAttribute('src')) {
-                const parsed = urlHandler.parse(element.getAttribute('src'));
-                return parsed.protocol !== null && (parsed.host !== null && parsed.host !== 'www.w3.org');
-            } else {
-                return false;
-            }
-        })
-        if (is_there_external_resources) {
-            properties.push('remote-resources');
-        }
-    }
-
-    retval.properties = properties.join(' ');
-    return [retval];
 }
 
 

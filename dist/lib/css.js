@@ -11,73 +11,6 @@ const urlHandler = __importStar(require("url"));
 const fetch_1 = require("./fetch");
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
 /**
- * Book specific css additions. This is necessary to:
- *
- * - Take care of page breaks (although, alas!, not many reading system handles these properly. Yet?)
- * - Turn off the built-in TOC altogether; it is moved to a separate nav file, and displayed by the reading system.
- *
- */
-const extra_css = `
-body {
-    padding: 0 0 0 0 !important;
-    max-width: none !important;
-}
-
-h2 {
-    page-break-before: always;
-    page-break-inside: avoid;
-    page-break-after: avoid;
-}
-
-div.head h2 {
-    page-break-before: auto;
-    page-break-inside: avoid;
-    page-break-after: avoid;
-}
-
-figure {
-    page-break-inside: avoid;
-}
-
-h3, h4, h5 {
-    page-break-after: avoid;
-}
-
-dl dt {
-    page-break-after: avoid;
-}
-
-dl dd {
-    page-break-before: avoid;
-}
-
-div.example, div.note, pre.idl, .warning, table.parameters, table.exceptions {
-    page-break-inside: avoid;
-}
-
-p {
-    orphans: 4;
-    widows: 2;
-}
-
-#toc-nav, #toc-toggle-inline {
-    display:none;
-}
-
-#back-to-top, .toc-toggle {
-    display: none;
-}
-
-.figure, figure {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-nav#toc {
-    display: none
-}
-`;
-/**
  * The basic background css template
  *
  * @hidden
@@ -86,7 +19,6 @@ const background_template = `
 body {
     background-image: url(logos/%%%LOGO%%%);
 }
-${extra_css}
 `;
 /**
  * CSS template for 'undefined' documents; it also has a watermark
@@ -101,7 +33,6 @@ body {
 html {
     background: white url(logos/UD-watermark.png);
 }
-${extra_css}
 `;
 /**
  * Template used for BG documents. The logo behavior is different (it takes more space).
@@ -112,24 +43,30 @@ const bg_template = `
     body {
         background-image: url('logos/%%%LOGO%%%');
         background-size: auto !important;
+    }
+    div[role~="main"] {
         padding-left: 150px;
     }
+
 }
 
 @media screen and (min-width: 78em) {
     body:not(.toc-inline) #toc {
-        padding-top: 150px;
         background-attachment: local !important;
-    };
+    }
+    div[role~="main"] {
+        padding-top: 150px;
+    }
 }
 
 @media screen {
     body.toc-sidebar #toc {
-        padding-top: 150px;
         background-attachment: local !important;
-    };
+    }
+    div[role~="main"] {
+        padding-top: 150px;
+    }
 }
-${extra_css}
 `;
 /**
  * Template used for CG draft documents. The logo behavior is different (it takes more space) and it uses the common watermark
@@ -141,23 +78,27 @@ body {
     background-size: auto !important;
 }
 @media screen and (min-width: 28em) {
-    body {
+    div[role~="main"] {
         padding-left: 160px;
     }
 }
 
 @media screen and (min-width: 78em) {
     body:not(.toc-inline) #toc {
-        padding-top: 160px;
         background-attachment: local !important;
     };
+    div[role~="main"] {
+        padding-top: 160px;
+    }
 }
 
 @media screen {
     body.toc-sidebar #toc {
-        padding-top: 160px;
         background-attachment: local !important;
-    };
+    }
+    div[role~="main"] {
+        padding-top: 160px;
+    }
 }
 
 body {
@@ -168,7 +109,6 @@ html {
     background: white url(logos/UD-watermark.png);
     background-repeat: repeat-x;
 }
-${extra_css}
 `;
 /**
  * Template used for CG final documents. The logo behavior is different (it takes more space)
@@ -181,25 +121,28 @@ body {
 }
 
 @media screen and (min-width: 28em) {
-    body {
+    div[role~="main"] {
         padding-left: 160px;
     }
 }
 
 @media screen and (min-width: 78em) {
     body:not(.toc-inline) #toc {
-        padding-top: 160px;
         background-attachment: local !important;
-    };
+    }
+    div[role~="main"] {
+        padding-top: 160px;
+    }
 }
 
 @media screen {
     body.toc-sidebar #toc {
-        padding-top: 160px;
         background-attachment: local !important;
-    };
+    }
+    div[role~="main"] {
+        padding-top: 160px;
+    }
 }
-${extra_css}
 `;
 /* --------------------------------- Data on CSS behavior per specStatus values------------------------------------- */
 /** `specStatus` values with a common, 'standard' behavior: distinct logos based on value,
@@ -292,7 +235,7 @@ function extract_css(global) {
         retval.push({
             relative_url: 'StyleSheets/TR/2016/base.css',
             media_type: fetch_1.css_media_type,
-            absolute_url: 'https://www.w3.org/StyleSheets/TR/2016/base.css'
+            absolute_url: 'https://www.w3.org/People/Ivan/TR_EPUB/base.css'
         });
         // The html content should be modified to refer to the base directly
         the_link.setAttribute('href', 'StyleSheets/TR/2016/base.css');
