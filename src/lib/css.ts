@@ -24,7 +24,7 @@
  * The approach chosen to convert the content to the EPUB file is therefore as follows:
  *
  * - The core reference in the HTML file is changed to the (stable) `base.css` file. This file is copied
- * into the EPUB file from my own place on W3C; it is a modified version of the "real" `base.css` file insofar as it removes
+ * into the EPUB file from my own site on W3C; it is a modified version of the "real" `base.css` file insofar as it removes
  * the TOC related statements (and adds some page breaking instructions)
  * - An extra css file is created, stored in the in the EPUB file and referred to from the resulting HTML file, setting
  * the right background with a relative URL. This is done by using a simple template, which simply a copy of the
@@ -44,8 +44,6 @@ import * as urlHandler         from 'url';
 import { css_media_type, svg_media_type, png_media_type }      from './fetch';
 
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
-
-
 
 /**
  * The basic background css template
