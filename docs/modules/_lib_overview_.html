@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/ocf&quot; | Converting HTML documents produced by Respec into EPUB 3.2</title>
+	<title>&quot;lib/overview&quot; | Converting HTML documents produced by Respec into EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_lib_ocf_.html">&quot;lib/ocf&quot;</a>
+					<a href="_lib_overview_.html">&quot;lib/overview&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;lib/ocf&quot;</h1>
+			<h1>External module &quot;lib/overview&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -69,11 +69,17 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#ocf-package" id="ocf-package" style="color: inherit; text-decoration: none;">
-							<h2>OCF Package</h2>
+						<a href="#generate-the-codeoverviewxhtmlcode-entry" id="generate-the-codeoverviewxhtmlcode-entry" style="color: inherit; text-decoration: none;">
+							<h2>Generate the <code>Overview.xhtml</code> entry</h2>
 						</a>
 					</div>
-					<p>Simple wrapper around the <code>archiver</code> package to create an OCF specific packaging for EPUB.</p>
+					<p>Generation involves two different steps:</p>
+					<ol>
+						<li>The package entry for <code>Overview.xhtml</code> may contain a <code>properties</code> attribute; see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a> for further details.</li>
+						<li>Due to the rigidity of the iBook reader, the DOM tree has to change: all children of the <code>&lt;body&gt;</code> should be encapsulated into a top level block
+							element (we use <code>&lt;div role=&quot;main&quot;&gt;</code>). This is because iBook imposes a zero padding on the body element, and that cannot be controlled by the user;
+						the introduction of the top level block element allows for suitable CSS adjustments.</li>
+					</ol>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -81,36 +87,55 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_lib_ocf_.ocf.html" class="tsd-kind-icon">OCF</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_lib_ocf_.html#container_xml" class="tsd-kind-icon">container_<wbr>xml</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_overview_.html#generate_overview_item" class="tsd-kind-icon">generate_<wbr>overview_<wbr>item</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="container_xml" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> container_<wbr>xml</h3>
-					<div class="tsd-signature tsd-kind-icon">container_<wbr>xml<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"&lt;?xml version&#x3D;&quot;1.0&quot;?&gt;&lt;container version&#x3D;&quot;1.0&quot; xmlns&#x3D;&quot;urn:oasis:names:tc:opendocument:xmlns:container&quot;&gt;&lt;rootfiles&gt;&lt;rootfile full-path&#x3D;&quot;package.opf&quot; media-type&#x3D;&quot;application/oebps-package+xml&quot; /&gt;&lt;/rootfiles&gt;&lt;/container&gt;"</span><span class="tsd-signature-symbol"> = &#x60;&lt;?xml version&#x3D;&quot;1.0&quot;?&gt;&lt;container version&#x3D;&quot;1.0&quot; xmlns&#x3D;&quot;urn:oasis:names:tc:opendocument:xmlns:container&quot;&gt;&lt;rootfiles&gt;&lt;rootfile full-path&#x3D;&quot;package.opf&quot; media-type&#x3D;&quot;application/oebps-package+xml&quot; /&gt;&lt;/rootfiles&gt;&lt;/container&gt;&#x60;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/99b67b0/src/lib/ocf.ts#L15">lib/ocf.ts:15</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The content of the required <code>container.xml</code> file. The root is set to <code>package.opf</code> at the top level</p>
-						</div>
-					</div>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="generate_overview_item" class="tsd-anchor"></a>
+					<h3>generate_<wbr>overview_<wbr>item</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">generate_<wbr>overview_<wbr>item<span class="tsd-signature-symbol">(</span>global<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_process_.global.html" class="tsd-signature-type">Global</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_process_.resourceref.html" class="tsd-signature-type">ResourceRef</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in lib/overview.ts:36</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate the resource entry for the <code>Overview.xhtml</code> item into the package; that includes setting the various manifest item
+									properties (see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a>).</p>
+								</div>
+								<p>The following properties are set, if applicable:</p>
+								<ul>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml">mathml</a>: there is an explicit usage of mathml.</li>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted">scripted</a>: there are active scripts.</li>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg">svg</a>: there is explicit svg usage.</li>
+									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources">remote-resources</a>: there are remote resources, typically video, audio, or images.</li>
+								</ul>
+								<p>The function also modifies the DOM tree by introducing a <code>&lt;main&gt;</code> element right as a child of <code>body</code></p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>global: <a href="../interfaces/_lib_process_.global.html" class="tsd-signature-type">Global</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_lib_process_.resourceref.html" class="tsd-signature-type">ResourceRef</a><span class="tsd-signature-symbol">[]</span></h4>
+							<ul>
+								<li>a single element array with the resource definition of the <code>Overview.xhtml</code> entry</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -132,13 +157,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_nav_.html">&quot;lib/nav&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_lib_ocf_.html">&quot;lib/ocf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_opf_.html">&quot;lib/opf&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -154,11 +179,8 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_lib_ocf_.ocf.html" class="tsd-kind-icon">OCF</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_lib_ocf_.html#container_xml" class="tsd-kind-icon">container_<wbr>xml</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_lib_overview_.html#generate_overview_item" class="tsd-kind-icon">generate_<wbr>overview_<wbr>item</a>
 					</li>
 				</ul>
 			</nav>

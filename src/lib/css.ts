@@ -35,8 +35,6 @@
  * these can be handled automatically. The characteristics of "non-standard" cases
  * (e.g., BG/CG documents) are described in the [[specStatus_css]] object, based on the [[specStatus_css_mappings]] interface.
  *
- * Beyond the mechanism described above, the EPUB specific CSS file also includes some extra CSS statements, see [[extra_css]].
- *
  * @packageDocumentation
 */
 import { ResourceRef, Global } from './process';
@@ -80,21 +78,28 @@ const bg_template   = `
     body {
         background-image: url('logos/%%%LOGO%%%');
         background-size: auto !important;
+    }
+    div[role~="main"] {
         padding-left: 150px;
     }
+
 }
 
 @media screen and (min-width: 78em) {
     body:not(.toc-inline) #toc {
-        padding-top: 150px;
         background-attachment: local !important;
+    }
+    div[role~="main"] {
+        padding-top: 150px;
     }
 }
 
 @media screen {
     body.toc-sidebar #toc {
-        padding-top: 150px;
         background-attachment: local !important;
+    }
+    div[role~="main"] {
+        padding-top: 150px;
     }
 }
 `;
@@ -109,22 +114,26 @@ body {
     background-size: auto !important;
 }
 @media screen and (min-width: 28em) {
-    body {
+    div[role~="main"] {
         padding-left: 160px;
     }
 }
 
 @media screen and (min-width: 78em) {
     body:not(.toc-inline) #toc {
-        padding-top: 160px;
         background-attachment: local !important;
     };
+    div[role~="main"] {
+        padding-top: 160px;
+    }
 }
 
 @media screen {
     body.toc-sidebar #toc {
-        padding-top: 160px;
         background-attachment: local !important;
+    }
+    div[role~="main"] {
+        padding-top: 160px;
     }
 }
 
@@ -149,22 +158,26 @@ body {
 }
 
 @media screen and (min-width: 28em) {
-    body {
+    div[role~="main"] {
         padding-left: 160px;
     }
 }
 
 @media screen and (min-width: 78em) {
     body:not(.toc-inline) #toc {
-        padding-top: 160px;
         background-attachment: local !important;
+    }
+    div[role~="main"] {
+        padding-top: 160px;
     }
 }
 
 @media screen {
     body.toc-sidebar #toc {
-        padding-top: 160px;
         background-attachment: local !important;
+    }
+    div[role~="main"] {
+        padding-top: 160px;
     }
 }
 `;

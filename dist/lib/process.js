@@ -15,7 +15,7 @@ const css = __importStar(require("./css"));
 const cover = __importStar(require("./cover"));
 const nav = __importStar(require("./nav"));
 const ocf = __importStar(require("./ocf"));
-const xhtml = __importStar(require("./xhtml"));
+const overview = __importStar(require("./overview"));
 /** URL of the spec generator service, used if the source has to be transformed first */
 const spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url=';
 /**
@@ -168,7 +168,7 @@ async function create_epub_from_dom(url, dom, debug = { package: false, trace: f
             global.resources.push({
                 relative_url: relative_url,
                 media_type: fetch_1.svg_media_type,
-                absolute_url: 'https://www.w3.org/People/Ivan/StyleSheets/W3C_TR_2016.svg'
+                absolute_url: 'https://www.w3.org/People/Ivan/TR_EPUB/W3C_logo.svg'
             });
         }
     }
@@ -198,7 +198,7 @@ async function create_epub_from_dom(url, dom, debug = { package: false, trace: f
     global.resources = [...nav.create_nav_file(global), ...global.resources];
     // ------------------------------------------
     // 9. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
-    global.resources = [...generate_overview_item(global), ...global.resources];
+    global.resources = [...overview.generate_overview_item(global), ...global.resources];
     // ------------------------------------------
     // 10. Finalize the package file
     {
@@ -282,71 +282,6 @@ const get_extra_resources = async (global) => {
             absolute_url: entry[2],
         };
     });
-};
-/**
- * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
- * properties (see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab)).
- *
- * The following properties are set, if applicable:
- *
- * - [mathml](https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml): there is an explicit usage of mathml.
- * - [scripted](https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted): there are active scripts.
- * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage.
- * - [remote-resources](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): there are remote resources, typically video, audio, or images.
- *
- * @param global
- * @return - a single element array with the resource definition of the `Overview.xhtml` entry
- */
-const generate_overview_item = (global) => {
-    const retval = {
-        media_type: fetch_1.xhtml_media_type,
-        id: 'main',
-        relative_url: 'Overview.xhtml',
-        text_content: xhtml.convert_dom(global.dom)
-    };
-    const properties = [];
-    // 1. Mathml usage
-    if (global.html_element.querySelector('mathml') !== null) {
-        properties.push('mathml');
-    }
-    // 2. are there active scripts
-    {
-        const scripts = Array.from(global.html_element.querySelectorAll('script'));
-        const is_there_script = scripts.find((element) => {
-            if (element.hasAttribute('type')) {
-                const type = element.getAttribute('type');
-                return ['application/javascript', 'application/ecmascript', fetch_1.js_media_type, fetch_1.es_media_type].includes(type);
-            }
-            else {
-                return true;
-            }
-        });
-        if (is_there_script) {
-            properties.push('scripted');
-        }
-    }
-    // 3. explicit svg usage
-    if (global.html_element.querySelector('svg') !== null) {
-        properties.push('svg');
-    }
-    // 4. external resources
-    {
-        const sources = Array.from(global.html_element.querySelectorAll('video, audio, img, source'));
-        const is_there_external_resources = sources.find((element) => {
-            if (element.hasAttribute('src')) {
-                const parsed = urlHandler.parse(element.getAttribute('src'));
-                return parsed.protocol !== null && (parsed.host !== null && parsed.host !== 'www.w3.org');
-            }
-            else {
-                return false;
-            }
-        });
-        if (is_there_external_resources) {
-            properties.push('remote-resources');
-        }
-    }
-    retval.properties = properties.join(' ');
-    return [retval];
 };
 /**
  * Create the final epub file (ie, an OCF instance): download all resources, if applicable, add them all, as well as the
