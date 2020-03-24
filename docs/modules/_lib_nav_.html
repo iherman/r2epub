@@ -101,13 +101,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/99b67b0/src/lib/nav.ts#L44">lib/nav.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/b081295/src/lib/nav.ts#L47">lib/nav.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Create a navigation file, and return the necessary resource (to be added to the overall set of resources).</p>
 								</div>
+								<p>The content of the original TOC element is serialized (using the <code>innerHTML</code> DOM method) and the result is added to a textual HTML template.
+								The only change on the original content is the replacement of the purely fragment URLs in the TOC with a relative URL to <code>Overview.xhtml</code>.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">

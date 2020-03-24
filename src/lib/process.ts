@@ -3,18 +3,18 @@
  *
  * Main processing steps for the creation of EPUB files. See the [[create_epub]] and [[create_epub_from_dom]] entry points for the details.
  *
- * On a high level, the task of creating the EPUB file consists of
+ * On a high level, the task of creating the EPUB file consists of:
  *
  * * Collecting all the dependent resources like images, scripts, css files, audio, video, etc, that are "part" of the specification. In practical terms that means all resources with a relative URL should be collected.
  * * Setting the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in `https://www.w3.org/StyleSheet/TR/2016/*`;
- *   these style files, and related images, depend on the exact nature of the TR document: REC, WD, etc. All of these should be collected as additional resources, and their (absolute) URL-s must be
- *   changed to relative ones.
+ *   these style files, and related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. See the [“css” module](./_lib_css_.html) for further details.
  * * Following similar actions to CSS files (though less complex) for some system wide javascript files.
  * * Extracting the various metadata items (title, editors, dates, etc.) to set them in the package file.
- * * Removing the TOC from the TR document (i.e., making it `display:none`), extract that HTML fragment and combine it into a separate `nav` file, per EPUB3 specification.
- * * Converting the original content into XHTML
- * * Creating the package file with the right resource and spine entries.
- * * Creating the OPF file containing all the resources collected and created in the previous steps.
+ * * Removing the TOC from the TR document (i.e., making it `display:none`), extracting that HTML fragment and combining it into a separate `nav` file, per EPUB3 specification. See the [“nav” module](./_lib_nav_.html) for further details.
+ * * Creating a cover page. See the [“cover” module](./_lib_cover_.html) for further details.
+ * * Extracting some OPF properties from the original HTML files, modifying the DOM tree to abide to some specificities of reading systems (like iBooks) and converting the result content into XHTML. See the [“overview” module](./_lib_overview_.html) for further details.
+ * * Creating the package (OPF) file with the right resource and spine entries. See the [“opf” module](./_lib_opf_.html) for further details.
+ * * Creating the OCF file (i.e., the final EPUB instance) containing all the resources collected and created in the previous steps. See the [“ocf” module](./_lib_ocf_.html) for further details.
  *
  * @packageDocumentation
 */
@@ -184,19 +184,14 @@ const resource_references :LocalLinks[] = [
     }
 ]
 
-export interface spec_generator {
-    run     :boolean,
-    config? :string[]
-}
-
 /**
  * Create an EPUB 3.2, ie, an OCF file from the original content
  *
  * This function is a wrapper around [[create_epub_from_dom]]:
  *
- * 1. Creates the DOM, which means, possibly, the original content is ran through the respec processor (if necessary)
- * 2. Calls [[create_epub_from_dom]] to generate the OCF content
- * 3. "Finalizes" the OCF content, i.e., dump everything to a file
+ * 1. Creates the DOM, which means, possibly, the original content is ran through the respec processor (if necessary).
+ * 2. Calls [[create_epub_from_dom]] to generate the OCF content.
+ * 3. "Finalizes" the OCF content, i.e., dump everything to a file.
  *
  *
  * @param cli_arguments
@@ -254,9 +249,9 @@ export async function create_epub(cli_arguments: Arguments) {
  * 11. Download all resources into the EPUB file.
  *
  *
- * All the resource entries are collected in the in a [[Global.resources]] array, to be then added to the
+ * All the resource entries are first collected in the in a [[Global.resources]] array, to be then added to the
  * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
- * the resources into the final epub result.
+ * the resources into the final epub result (see the last two steps above).
  *
  * @param url - The url of the document (serves also as a base for all the other resources)
  * @param dom - The DOM of the final format of the document (i.e., the original document may have gone through a respec processing...)

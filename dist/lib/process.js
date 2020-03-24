@@ -46,9 +46,9 @@ const resource_references = [
  *
  * This function is a wrapper around [[create_epub_from_dom]]:
  *
- * 1. Creates the DOM, which means, possibly, the original content is ran through the respec processor (if necessary)
- * 2. Calls [[create_epub_from_dom]] to generate the OCF content
- * 3. "Finalizes" the OCF content, i.e., dump everything to a file
+ * 1. Creates the DOM, which means, possibly, the original content is ran through the respec processor (if necessary).
+ * 2. Calls [[create_epub_from_dom]] to generate the OCF content.
+ * 3. "Finalizes" the OCF content, i.e., dump everything to a file.
  *
  *
  * @param cli_arguments
@@ -106,9 +106,9 @@ exports.create_epub = create_epub;
  * 11. Download all resources into the EPUB file.
  *
  *
- * All the resource entries are collected in the in a [[Global.resources]] array, to be then added to the
+ * All the resource entries are first collected in the in a [[Global.resources]] array, to be then added to the
  * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
- * the resources into the final epub result.
+ * the resources into the final epub result (see the last two steps above).
  *
  * @param url - The url of the document (serves also as a base for all the other resources)
  * @param dom - The DOM of the final format of the document (i.e., the original document may have gone through a respec processing...)

@@ -2,7 +2,7 @@
 
 Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2.
 
-If used from another program, the main entry point are the [[create_epub]] and [[create_epub_from_dom]] functions, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
+If used from another program, the main entry point are the [[create_epub]] and [[create_epub_from_dom]] functions in the [“process” module](modules/_lib_process_.html), which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
 There is also a simple CLI implemented in [[main]] which works as follows:
 
 ```text
@@ -25,4 +25,7 @@ The implementation is in Typescript and on top of `node.js`. The project can be 
 
 ---
 
-Several years ago I have already made a similar program called [Respec2EPUB](https://github.com/iherman/respec2epub). That version is that it was written in Python 2; alas!, with the demise of Python 2 in favor of Python 3, that module will become unusable soon. (E.g., latest Debian releases do not even install Python 2 any more.) Instead of fighting through the 2->3 conversion, I decided to re-write the program, making it a bit simpler along the way.
+Several years ago I have already made a similar program called [Respec2EPUB](https://github.com/iherman/respec2epub). That version was written in Python 2;
+alas!, with the demise of Python 2 in favor of Python 3, it will become unusable soon. (E.g., latest Debian releases do not
+even install Python 2 any more.) Instead of fighting through the 2->3 conversion, I decided to re-write the program, making it a bit
+simpler along the way.

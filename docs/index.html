@@ -68,7 +68,7 @@
 					<h1>ReSpec to EPUB</h1>
 				</a>
 				<p>Typescript program to convert W3C documents, produced by <a href="https://github.com/w3c/respec">ReSpec</a>, to EPUB 3.2.</p>
-				<p>If used from another program, the main entry point are the <a href="modules/_lib_process_.html#create_epub">create_epub</a> and <a href="modules/_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a> functions, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
+				<p>If used from another program, the main entry point are the <a href="modules/_lib_process_.html#create_epub">create_epub</a> and <a href="modules/_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a> functions in the <a href="modules/_lib_process_.html">“process” module</a>, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
 				There is also a simple CLI implemented in <a href="modules/_main_.html#main">main</a> which works as follows:</p>
 				<pre><code class="language-text">Options:
   --help                 Show help  [boolean]
@@ -84,7 +84,10 @@
 				</a>
 				<p>The implementation is in Typescript and on top of <code>node.js</code>. The project can be downloaded via cloning and can be installed via a standard <code>npm</code> processing.</p>
 				<hr>
-				<p>Several years ago I have already made a similar program called <a href="https://github.com/iherman/respec2epub">Respec2EPUB</a>. That version is that it was written in Python 2; alas!, with the demise of Python 2 in favor of Python 3, that module will become unusable soon. (E.g., latest Debian releases do not even install Python 2 any more.) Instead of fighting through the 2-&gt;3 conversion, I decided to re-write the program, making it a bit simpler along the way.</p>
+				<p>Several years ago I have already made a similar program called <a href="https://github.com/iherman/respec2epub">Respec2EPUB</a>. That version was written in Python 2;
+					alas!, with the demise of Python 2 in favor of Python 3, it will become unusable soon. (E.g., latest Debian releases do not
+					even install Python 2 any more.) Instead of fighting through the 2-&gt;3 conversion, I decided to re-write the program, making it a bit
+				simpler along the way.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

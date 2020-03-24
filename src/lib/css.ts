@@ -23,11 +23,14 @@
  *
  * The approach chosen to convert the content to the EPUB file is therefore as follows:
  *
- * - The core reference in the HTML file is changed to the (stable) `base.css` file. This file is copied
- * into the EPUB file from my own site on W3C; it is a modified version of the "real" `base.css` file insofar as it removes
- * the TOC related statements (and adds some page breaking instructions)
+ * - The core reference in the HTML file is changed to a (stable) `base.css` file. This file is copied
+ * into the EPUB file from a separate, but fixed, [URI](https://www.w3.org/People/Ivan/TR_EPUB/base.css)]. This is a
+ * modified version of the "real" `base.css` with:
+ *     - the TOC related statements have been removed
+ *     - some page breaking instructions are added
+ *     - the margins/padding of the page is set on a different HTML element, see the [separate “overview” module](./_lib_overview_.html) for further details.
  * - An extra css file is created, stored in the in the EPUB file and referred to from the resulting HTML file, setting
- * the right background with a relative URL. This is done by using a simple template, which simply a copy of the
+ * the right background with a relative URL. This is done by using a simple template, which is imply a copy of the
  * relevant template on the W3C site.
  *     - In some cases the template is more complex (e.g., CG or BG documents due to different logo sizes) and may also include a watermark. Luckily, the watermark is always the same file, which simplifies things somewhat.
  *

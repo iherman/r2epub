@@ -13,14 +13,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * ## OCF Package
  *
- * Simple wrapper around the `archiver` package to create an OCF specific packaging for EPUB.
+ * Simple wrapper around the [npm archiver](https://www.npmjs.com/package/archiver) package to create an OCF specific packaging for EPUB.
+ *
+ * The core of the module is in the [[OCF]] class.
  *
  * @packageDocumentation
  */
 const fs = __importStar(require("fs"));
 const archiver_1 = __importDefault(require("archiver"));
 /**
- * The content of the required `container.xml` file. The root is set to `package.opf` at the top level
+ * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
  */
 const container_xml = `<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -35,7 +37,7 @@ const container_xml = `<?xml version="1.0"?>
  * The constructor generates and adds the required content files, as described in the [EPUB Specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml), namely:
  *
  * * The `mimetype` file
- * * The `container.xml` file, see the value in [[container_xml]]
+ * * The `container.xml` file, see the value in [[container_xml]].
  *
  * Both of these files are stored uncompressed.
  *
@@ -43,7 +45,7 @@ const container_xml = `<?xml version="1.0"?>
 class OCF {
     /**
      *
-     * @param name - the file name of the final package
+     * @param name the file name of the final package
      */
     constructor(name) {
         this.book = archiver_1.default.create('zip', { zlib: { level: 9 } });

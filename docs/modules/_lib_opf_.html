@@ -78,9 +78,11 @@
 					<p>The module relies on the <a href="https://oozcitak.github.io/xmlbuilder2/"><code>xmlbuilder2</code> package</a>, which generates an XML file out of a set of JS objects. See the documentation of that library for
 					the details; the short overview is:</p>
 					<ul>
-						<li>JSON names starting with <code>@</code> represent an attribute</li>
-						<li>JSON name <code>#</code> represent textual content of the element.</li>
+						<li>JSON names starting with <code>&quot;@&quot;&quot;</code> represent an attribute.</li>
+						<li>JSON name <code>&quot;#&quot;&quot;</code> represent textual content of the element.</li>
+						<li>Otherwise a JSON name refers to an embedded dictionary representing a subelement in XML.</li>
 					</ul>
+					<p>The core of the module is in the <a href="../classes/_lib_opf_.packagewrapper.html">PackageWrapper</a> class.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">

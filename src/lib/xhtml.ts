@@ -1,10 +1,9 @@
 /**
  * ## XHTML conversion from HTML5
  *
- * Convert an HTML5 content (in text) into XHTML5.
+ * Convert an HTML5 content (in text or a DOM) into bona fide XHTML5.
  *
- * It seems that the XHTML serialization of jsdom and others may not be flawless. This module contains a workaround the problems
- * originally published in:
+ * It seems that the XHTML serialization of [`jsdom`](https://www.npmjs.com/package/jsdom) (used elsewhere in this library) may not be flawless. This module contains a workaround for the problems originally published in:
  *
  * https://www.npmjs.com/package/xmlserializer
  *

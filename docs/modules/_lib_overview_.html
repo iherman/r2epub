@@ -78,7 +78,7 @@
 						<li>The package entry for <code>Overview.xhtml</code> may contain a <code>properties</code> attribute; see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a> for further details.</li>
 						<li>Due to the rigidity of the iBook reader, the DOM tree has to change: all children of the <code>&lt;body&gt;</code> should be encapsulated into a top level block
 							element (we use <code>&lt;div role=&quot;main&quot;&gt;</code>). This is because iBook imposes a zero padding on the body element, and that cannot be controlled by the user;
-						the introduction of the top level block element allows for suitable CSS adjustments.</li>
+						the introduction of the top level block element allows for suitable CSS adjustments in the <a href="https://www.w3.org/People/Ivan/TR_EPUB/base.css">common css file</a>.</li>
 					</ol>
 				</div>
 			</section>
@@ -107,7 +107,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/overview.ts:36</li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/b081295/src/lib/overview.ts#L36">lib/overview.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

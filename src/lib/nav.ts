@@ -38,6 +38,9 @@ const nav :string = `<?xml version="1.0"?>
 /**
  * Create a navigation file, and return the necessary resource (to be added to the overall set of resources).
  *
+ * The content of the original TOC element is serialized (using the `innerHTML` DOM method) and the result is added to a textual HTML template.
+ * The only change on the original content is the replacement of the purely fragment URLs in the TOC with a relative URL to `Overview.xhtml`.
+ *
  * @param global - global data
  * @returns - Resource representing the nav.xhtml file
  */
