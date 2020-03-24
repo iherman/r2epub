@@ -106,7 +106,7 @@ export function  generate_overview_item(global: Global): ResourceRef[] {
         media_type   : xhtml_media_type,
         id           : 'main',
         relative_url : 'Overview.xhtml',
-        text_content : xhtml.convert_dom(global.dom),
+        text_content : xhtml.convert(global.dom),
         properties   : properties.join(' ')
     }]
 }
