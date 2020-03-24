@@ -85,8 +85,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_xhtml_.html#convert_dom" class="tsd-kind-icon">convert_<wbr>dom</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_xhtml_.html#convert_text" class="tsd-kind-icon">convert_<wbr>text</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,61 +94,30 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="convert_dom" class="tsd-anchor"></a>
-					<h3>convert_<wbr>dom</h3>
+					<a name="convert" class="tsd-anchor"></a>
+					<h3>convert</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">convert_<wbr>dom<span class="tsd-signature-symbol">(</span>html_dom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">convert<span class="tsd-signature-symbol">(</span>html<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/b081295/src/lib/xhtml.ts#L23">lib/xhtml.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dead124/src/lib/xhtml.ts#L23">lib/xhtml.ts:23</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Convert an HTML5 content (as a DOM) into XHTML5.</p>
+									<p>Convert an HTML5 content (in text or as a DOM) into XHTML5.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>html_dom: <span class="tsd-signature-type">JSDOM</span></h5>
+									<h5>html: <span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>DOM element of the HTML file</p>
+										<p>the original content</p>
 									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<ul>
-								<li>Same content serialized as XHTML</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="convert_text" class="tsd-anchor"></a>
-					<h3>convert_<wbr>text</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">convert_<wbr>text<span class="tsd-signature-symbol">(</span>html_text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/b081295/src/lib/xhtml.ts#L33">lib/xhtml.ts:33</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Convert an HTML5 content (in text) into XHTML5.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>html_text: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -202,10 +170,7 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_lib_xhtml_.html#convert_dom" class="tsd-kind-icon">convert_<wbr>dom</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_lib_xhtml_.html#convert_text" class="tsd-kind-icon">convert_<wbr>text</a>
+						<a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a>
 					</li>
 				</ul>
 			</nav>

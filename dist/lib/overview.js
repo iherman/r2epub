@@ -105,7 +105,7 @@ function generate_overview_item(global) {
             media_type: fetch_1.xhtml_media_type,
             id: 'main',
             relative_url: 'Overview.xhtml',
-            text_content: xhtml.convert_dom(global.dom),
+            text_content: xhtml.convert(global.dom),
             properties: properties.join(' ')
         }];
 }
