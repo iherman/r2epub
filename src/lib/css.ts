@@ -277,6 +277,8 @@ const specStatus_css :specStatus_mapping = {
     },
 }
 
+export const general_epub_files = 'https://www.w3.org/People/Ivan/TR_EPUB/';
+
 /* ---------------------------------------------- Main entry point ----------------------------------------- */
 
 /**
@@ -312,7 +314,7 @@ export function extract_css(global: Global): ResourceRef[] {
         retval.push({
             relative_url : 'StyleSheets/TR/2016/base.css',
             media_type   : css_media_type,
-            absolute_url : 'https://www.w3.org/People/Ivan/TR_EPUB/base.css'
+            absolute_url : `${general_epub_files}base.css`
         })
 
         // The html content should be modified to refer to the base directly
@@ -338,10 +340,11 @@ export function extract_css(global: Global): ResourceRef[] {
             template = template.replace('%%%LOGO%%%', css_extras.logo_name);
 
             // Before we forget, add the file to the resources!
+            const media_type = css_extras.logo_media_type || svg_media_type;
             retval.push({
                 relative_url : `StyleSheets/TR/2016/logos/${css_extras.logo_name}`,
-                media_type   : css_extras.logo_media_type || svg_media_type,
-                absolute_url : `https://www.w3.org/StyleSheets/TR/2016/logos/${css_extras.logo_name}`
+                media_type   : media_type,
+                absolute_url : media_type === svg_media_type ? `${general_epub_files}${css_extras.logo_name}` : `https://www.w3.org/StyleSheets/TR/2016/logos/${css_extras.logo_name}`
             })
 
             if (css_extras.watermark) {
