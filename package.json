@@ -23,9 +23,10 @@
   },
   "homepage": "https://github.com/iherman/respec-to-epub#readme",
   "dependencies": {
+    "@types/jszip": "^3.1.7",
     "@types/underscore": "^1.9.4",
-    "archiver": "^3.1.1",
     "jsdom": "^16.2.0",
+    "jszip": "^3.2.2",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.0",
     "parse5": "^5.1.1",
@@ -37,7 +38,6 @@
     "yargs": "^15.3.0"
   },
   "devDependencies": {
-    "@types/archiver": "^3.1.0",
     "@types/jsdom": "^16.1.0",
     "@types/node": "^13.7.7",
     "@types/node-fetch": "^2.5.5",

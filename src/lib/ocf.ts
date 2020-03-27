@@ -1,15 +1,15 @@
 /**
  * ## OCF Package
  *
- * Simple wrapper around the [npm archiver](https://www.npmjs.com/package/archiver) package to create an OCF specific packaging for EPUB.
+ * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB.
  *
  * The core of the module is in the [[OCF]] class.
  *
  * @packageDocumentation
  */
 import * as fs     from 'fs';
-import archiver    from 'archiver';
 import * as stream from 'stream';
+import JSZip       from 'jszip';
 
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
@@ -34,19 +34,19 @@ const container_xml :string = `<?xml version="1.0"?>
  *
  */
 export class OCF {
-    private book: archiver.Archiver;
+    private book: JSZip;
+    private name: string;
 
     /**
      *
      * @param name the file name of the final package
      */
     constructor(name: string) {
-        this.book = archiver.create('zip', {zlib: {level: 9}});
-        const output = fs.createWriteStream(name);
-        this.book.pipe(output);
+        this.book = new JSZip();
+        this.name = name;
 
-        this.book.append('application/epub+zip', {name: 'mimetype', store: true});
-        this.book.append(container_xml, {name: 'META-INF/container.xml', store: true});
+        this.book.file('mimetype', 'application/epub+zip', {compression: 'STORE'});
+        this.book.file('META-INF/container.xml', container_xml, {compression: 'STORE'})
     }
 
     /**
@@ -57,7 +57,7 @@ export class OCF {
      * @param path_name - Path name of the file for the content
      */
     append(content: string|stream.Readable, path_name: string): void {
-        this.book.append(content, {name: path_name, store: false});
+        this.book.file(path_name, content, {compression: 'DEFLATE'});
     }
 
     /**
@@ -66,6 +66,14 @@ export class OCF {
      * @async
      */
     async finalize(): Promise<any> {
-        return this.book.finalize();
+        const blob = await this.book.generateAsync({
+            type: 'nodebuffer',
+            mimeType: 'application/epub+zip',
+            compressionOptions: {
+                level: 9
+            }
+        });
+        fs.writeFileSync(this.name, blob);
+        return;
     }
 };
