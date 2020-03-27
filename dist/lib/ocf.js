@@ -13,14 +13,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * ## OCF Package
  *
- * Simple wrapper around the [npm archiver](https://www.npmjs.com/package/archiver) package to create an OCF specific packaging for EPUB.
+ * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB.
  *
  * The core of the module is in the [[OCF]] class.
  *
  * @packageDocumentation
  */
 const fs = __importStar(require("fs"));
-const archiver_1 = __importDefault(require("archiver"));
+const jszip_1 = __importDefault(require("jszip"));
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
  */
@@ -48,11 +48,10 @@ class OCF {
      * @param name the file name of the final package
      */
     constructor(name) {
-        this.book = archiver_1.default.create('zip', { zlib: { level: 9 } });
-        const output = fs.createWriteStream(name);
-        this.book.pipe(output);
-        this.book.append('application/epub+zip', { name: 'mimetype', store: true });
-        this.book.append(container_xml, { name: 'META-INF/container.xml', store: true });
+        this.book = new jszip_1.default();
+        this.name = name;
+        this.book.file('mimetype', 'application/epub+zip', { compression: 'STORE' });
+        this.book.file('META-INF/container.xml', container_xml, { compression: 'STORE' });
     }
     /**
      * Store a compressed content in the OCF file. The input can be a simple text or a Stream
@@ -62,7 +61,7 @@ class OCF {
      * @param path_name - Path name of the file for the content
      */
     append(content, path_name) {
-        this.book.append(content, { name: path_name, store: false });
+        this.book.file(path_name, content, { compression: 'DEFLATE' });
     }
     /**
      * Finalize, a.k.a. close the OCF file. This creates the final file on the file system.
@@ -70,7 +69,15 @@ class OCF {
      * @async
      */
     async finalize() {
-        return this.book.finalize();
+        const blob = await this.book.generateAsync({
+            type: 'nodebuffer',
+            mimeType: 'application/epub+zip',
+            compressionOptions: {
+                level: 9
+            }
+        });
+        fs.writeFileSync(this.name, blob);
+        return;
     }
 }
 exports.OCF = OCF;
