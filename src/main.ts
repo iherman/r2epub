@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /* Main imports */
-import { create_epub, Arguments } from './lib/process';
+import { respec_to_epub, Arguments } from './lib/process';
 
 /** @hidden */
 import yargs = require('yargs')
@@ -60,8 +60,6 @@ async function main() {
     const args :Arguments = {
         url             : argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0],
         respec          : argv.r,
-        package         : argv.p,
-        trace           : argv.t,
         config          : {
             publishDate     : argv.d,
             specStatus      : argv.s,
@@ -71,7 +69,9 @@ async function main() {
      }
 
     try {
-        await create_epub(args);
+        const process = new respec_to_epub(argv.t, argv.p);
+        console.log('got the process')
+        await process.create_epub(args);
     } catch(e) {
         console.error(`EPUB Generation error: "${e}"`);
     }
