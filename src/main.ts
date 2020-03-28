@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /* Main imports */
-import { respec_to_epub, Arguments } from './lib/process';
+import { RespecToEPUB, Arguments } from './lib/process';
 
 /** @hidden */
 import yargs = require('yargs')
@@ -69,7 +69,7 @@ async function main() {
      }
 
     try {
-        const process = new respec_to_epub(argv.t, argv.p);
+        const process = new RespecToEPUB(argv.t, argv.p);
         console.log('got the process')
         await process.create_epub(args);
     } catch(e) {
