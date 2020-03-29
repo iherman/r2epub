@@ -11,53 +11,7 @@ const node_fetch = __importStar(require("node-fetch"));
 const urlHandler = __importStar(require("url"));
 const validUrl = __importStar(require("valid-url"));
 const jsdom = __importStar(require("jsdom"));
-/** Media type for JSON
- * @hidden
-*/
-const json_media_type = 'application/json';
-/** Media type for JSON-LD
- * @hidden
-*/
-const jsonld_media_type = 'application/ld+json';
-/** Media type for HTML
- * @hidden
-*/
-const html_media_type = 'text/html';
-/** Media type for XHTML
- * @hidden
-*/
-exports.xhtml_media_type = 'application/xhtml+xml';
-/** Media type for CSS
- * @hidden
-*/
-exports.css_media_type = 'text/css';
-/** Media type for SVG
- * @hidden
-*/
-exports.svg_media_type = 'image/svg+xml';
-/** Media type for javascript
- * @hidden
-*/
-exports.js_media_type = 'text/javascript';
-/** Media type for ecmascript
- * @hidden
-*/
-exports.es_media_type = 'text/ecmascript';
-/** Media type for PNG image
- * @hidden
- */
-exports.png_media_type = 'image/png';
-/** These media types refer to textual content, no reason to bother about streaming... */
-const text_content = [
-    json_media_type,
-    jsonld_media_type,
-    html_media_type,
-    exports.xhtml_media_type,
-    exports.css_media_type,
-    exports.svg_media_type,
-    exports.js_media_type,
-    exports.es_media_type
-];
+const constants = __importStar(require("./constants"));
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
 *
@@ -139,7 +93,7 @@ async function fetch_resource(resource_url, force_text = false) {
                     // If the response content type is set (which is usually the case, but not in all cases...)
                     const response_type = response.headers.get('content-type');
                     if (response_type && response_type !== '') {
-                        if (text_content.includes(response_type)) {
+                        if (constants.text_content.includes(response_type)) {
                             // the simple way, just return text...
                             resolve(response.text());
                         }

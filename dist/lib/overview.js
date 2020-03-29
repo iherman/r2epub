@@ -22,7 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 */
 const urlHandler = __importStar(require("url"));
 const xhtml = __importStar(require("./xhtml"));
-const fetch_1 = require("./fetch");
+const constants = __importStar(require("./constants"));
 /**
  * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
  * properties (see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab)).
@@ -52,7 +52,7 @@ function generate_overview_item(global) {
         const is_there_script = scripts.find((element) => {
             if (element.hasAttribute('type')) {
                 const type = element.getAttribute('type');
-                return ['application/javascript', 'application/ecmascript', fetch_1.js_media_type, fetch_1.es_media_type].includes(type);
+                return ['application/javascript', 'application/ecmascript', constants.media_types.js, constants.media_types.es].includes(type);
             }
             else {
                 return true;
@@ -102,7 +102,7 @@ function generate_overview_item(global) {
     }
     body.append(main_element);
     return [{
-            media_type: fetch_1.xhtml_media_type,
+            media_type: constants.media_types.xhtml,
             id: 'main',
             relative_url: 'Overview.xhtml',
             text_content: xhtml.convert(global.dom),

@@ -40,9 +40,9 @@
  *
  * @packageDocumentation
 */
-import { ResourceRef, Global } from './process';
-import * as urlHandler         from 'url';
-import { css_media_type, svg_media_type, png_media_type }      from './fetch';
+import { ResourceRef, Global }  from './process';
+import * as urlHandler          from 'url';
+import * as constants           from './constants';
 
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
 
@@ -224,7 +224,7 @@ const specStatus_css :specStatus_mapping = {
     'UNOFFICIAL' : {
         watermark        : true,
         logo_name        : 'UD.png',
-        logo_media_type  : png_media_type,
+        logo_media_type  : constants.media_types.png,
         special_template : undefined_template
     },
 
@@ -251,33 +251,31 @@ const specStatus_css :specStatus_mapping = {
     'BG-DRAFT' : {
         watermark        : false,
         logo_name        : 'back-bg-draft.png',
-        logo_media_type  : png_media_type,
+        logo_media_type  : constants.media_types.png,
         special_template : bg_template
     },
 
     'BG-FINAL' : {
         watermark        : false,
         logo_name        : 'back-bg-final.png',
-        logo_media_type  : png_media_type,
+        logo_media_type  : constants.media_types.png,
         special_template : bg_template
     },
 
     'CG-DRAFT' : {
         watermark        : true,
         logo_name        : 'back-cg-draft.png',
-        logo_media_type  : png_media_type,
+        logo_media_type  : constants.media_types.png,
         special_template : cg_draft_template
     },
 
     'CG-FINAL' : {
         watermark        : false,
         logo_name        : 'back-cg-final.png',
-        logo_media_type  : png_media_type,
+        logo_media_type  : constants.media_types.png,
         special_template : cg_final_template
     },
 }
-
-export const general_epub_files = 'https://www.w3.org/People/Ivan/TR_EPUB/';
 
 /* ---------------------------------------------- Main entry point ----------------------------------------- */
 
@@ -312,13 +310,13 @@ export function extract_css(global: Global): ResourceRef[] {
     if (the_link !== undefined) {
         // 'base' CSS file, to be added
         retval.push({
-            relative_url : 'StyleSheets/TR/2016/base.css',
-            media_type   : css_media_type,
-            absolute_url : `${general_epub_files}base.css`
+            relative_url : `${constants.local_style_files}base.css`,
+            media_type   : constants.media_types.css,
+            absolute_url : `${constants.modified_epub_files}base.css`
         })
 
         // The html content should be modified to refer to the base directly
-        the_link.setAttribute('href', 'StyleSheets/TR/2016/base.css');
+        the_link.setAttribute('href', `${constants.local_style_files}base.css`);
 
         // Here comes the extra complication: depending on the respec spec status type, extra actions may have to be
         // taken...
@@ -340,31 +338,32 @@ export function extract_css(global: Global): ResourceRef[] {
             template = template.replace('%%%LOGO%%%', css_extras.logo_name);
 
             // Before we forget, add the file to the resources!
-            const media_type = css_extras.logo_media_type || svg_media_type;
+            const media_type = css_extras.logo_media_type || constants.media_types.svg;
+            const orig_logo_url   = media_type === constants.media_types.svg ? constants.modified_epub_files : constants.TR_logo_files;
             retval.push({
-                relative_url : `StyleSheets/TR/2016/logos/${css_extras.logo_name}`,
+                relative_url : `${constants.local_style_files}logos/${css_extras.logo_name}`,
                 media_type   : media_type,
-                absolute_url : media_type === svg_media_type ? `${general_epub_files}${css_extras.logo_name}` : `https://www.w3.org/StyleSheets/TR/2016/logos/${css_extras.logo_name}`
+                absolute_url : `${orig_logo_url}${css_extras.logo_name}`
             })
 
             if (css_extras.watermark) {
                 // Before we forget, add the file to the resources!
                 retval.push({
-                    relative_url : 'StyleSheets/TR/2016/logos/UD-watermark.png',
-                    media_type   : png_media_type,
-                    absolute_url : 'https://www.w3.org/StyleSheets/TR/2016/logos/$UD-watermark.png'
+                    relative_url : `${constants.local_style_files}logos/UD-watermark.png`,
+                    media_type   : constants.media_types.png,
+                    absolute_url : `${constants.TR_logo_files}UD-watermark.png`
                 })
             }
 
             // The epub CSS reference has to be added to the html source and to the return values
             retval.push({
-                relative_url : 'StyleSheets/TR/2016/epub.css',
-                media_type   : css_media_type,
+                relative_url : `${constants.local_style_files}epub.css`,
+                media_type   : constants.media_types.css,
                 text_content : template
             });
 
             const new_css_link = global.html_element.ownerDocument.createElement('link');
-            new_css_link.setAttribute('href', 'StyleSheets/TR/2016/epub.css');
+            new_css_link.setAttribute('href', `${constants.local_style_files}epub.css`);
             new_css_link.setAttribute('rel', 'stylesheet');
             the_link.parentElement.append(new_css_link);
         }

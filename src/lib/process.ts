@@ -10,13 +10,14 @@ import * as jsdom      from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
-import { fetch_html, fetch_resource, fetch_type, URL, xhtml_media_type, svg_media_type, js_media_type, es_media_type } from './fetch';
-import * as opf      from './opf';
-import * as css      from './css';
-import * as cover    from './cover';
-import * as nav      from './nav';
-import * as ocf      from './ocf';
-import * as overview from './overview'
+import { fetch_html, fetch_resource, fetch_type, URL } from './fetch';
+import * as constants  from './constants';
+import * as opf        from './opf';
+import * as css        from './css';
+import * as cover      from './cover';
+import * as nav        from './nav';
+import * as ocf        from './ocf';
+import * as overview   from './overview'
 
 
 /**
@@ -68,9 +69,6 @@ export interface Arguments {
      */
     config  :ConfigOptions
 }
-
-/** URL of the spec generator service, used if the source has to be transformed first */
-const spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
 /**
  * Interface for the resources that, eventually, should be added to the EPUB file
@@ -229,7 +227,7 @@ export class RespecToEPUB {
                     })
                     .filter((val) => val !== null);
                 const query_string = config_options.length === 0 ? '' : `?${config_options.join('&')}`;
-                return `${spec_generator}${cli_arguments.url}${query_string}`
+                return `${constants.spec_generator}${cli_arguments.url}${query_string}`
            } else {
                 return cli_arguments.url;
             }
@@ -317,15 +315,15 @@ export class RespecToEPUB {
         {
             const logo_element = this.global.html_element.querySelector('img[alt="W3C"]');
             if (logo_element !== null) {
-                const relative_url = 'StyleSheets/TR/2016/logos/W3C.svg';
+                const relative_url =  `${constants.local_style_files}logos/W3C.svg`;
                 logo_element.setAttribute('src', relative_url);
                 // There is an ugly story here. The SVG version of the logo, as stored on the W3C site, includes a reference
                 // the very complex SVG DTD, and epubcheck does not like it (EPUB v. 3 does not like it, I guess). So
                 // I created a version of the logo without it and stored it at a fix URL...
                 this.global.resources.push({
                     relative_url : relative_url,
-                    media_type   : svg_media_type,
-                    absolute_url : `${css.general_epub_files}W3C_logo.svg`
+                    media_type   : constants.media_types.svg,
+                    absolute_url : `${constants.modified_epub_files}W3C_logo.svg`
                 })
             }
         }
@@ -334,14 +332,14 @@ export class RespecToEPUB {
         // 5. Add the reference to the generic fixup script. I am not sure it is really necessary
         // but it may not harm...
         {
-            const fixup_element = this.global.html_element.querySelector('script[src="https://www.w3.org/scripts/TR/2016/fixup.js"]');
+            const fixup_element = this.global.html_element.querySelector(`script[src="${constants.fixup_js}"]`);
             if (fixup_element !== null) {
                 const relative_url = 'scripts/TR/2016/fixup.js';
                 fixup_element.setAttribute('src', relative_url);
                 this.global.resources.push({
                     relative_url : relative_url,
-                    media_type   : js_media_type,
-                    absolute_url : 'https://www.w3.org/scripts/TR/2016/fixup.js'
+                    media_type   : constants.media_types.js,
+                    absolute_url : constants.fixup_js
                 })
             }
         }

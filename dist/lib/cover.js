@@ -1,5 +1,13 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const constants = __importStar(require("./constants"));
 /**
  * The template to be used for the cover page.
  * @hidden
@@ -98,7 +106,7 @@ function create_cover_page(global) {
         .replace('%%%%ISODATE%%%%', date.getAttribute('datetime'))
         .replace('%%%DATE%%%', date.textContent);
     retval.push({
-        media_type: 'application/xhtml+xml',
+        media_type: constants.media_types.xhtml,
         relative_url: 'cover.xhtml',
         id: 'start',
         text_content: final_cover

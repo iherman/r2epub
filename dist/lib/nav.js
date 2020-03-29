@@ -8,6 +8,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const xhtml = __importStar(require("./xhtml"));
+const constants = __importStar(require("./constants"));
 /**
  * Template of the XHTML file
  *
@@ -63,7 +64,7 @@ function create_nav_file(global) {
         .replace('%%%Title%%%', title)
         .replace('%%%TOC%%%', toc_ol.innerHTML.replace(/href="#/g, 'href="Overview.xhtml#'));
     retval.push({
-        media_type: 'application/xhtml+xml',
+        media_type: constants.media_types.xhtml,
         relative_url: 'nav.xhtml',
         id: 'nav',
         properties: 'nav',

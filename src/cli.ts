@@ -70,7 +70,6 @@ async function main() {
 
     try {
         const process = new RespecToEPUB(argv.t, argv.p);
-        console.log('got the process')
         await process.create_epub(args);
     } catch(e) {
         console.error(`EPUB Generation error: "${e}"`);
