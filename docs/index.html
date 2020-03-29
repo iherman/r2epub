@@ -68,8 +68,8 @@
 					<h1>ReSpec to EPUB</h1>
 				</a>
 				<p>Typescript program to convert W3C documents, produced by <a href="https://github.com/w3c/respec">ReSpec</a>, to EPUB 3.2.</p>
-				<p>If used from another program, the main entry point are the <a href="modules/_lib_process_.html#create_epub">create_epub</a> and <a href="modules/_lib_process_.html#create_epub_from_dom">create_epub_from_dom</a> functions in the <a href="modules/_lib_process_.html">“process” module</a>, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
-				There is also a simple CLI implemented in <a href="modules/_main_.html#main">main</a> which works as follows:</p>
+				<p>If used from another program, the main entry point are the <a href="classes/_lib_process_.respectoepub.html#create_epub">create_epub</a> and <a href="classes/_lib_process_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a> methods in the <a href="modules/_lib_process_.html">“process” module</a>, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
+				There is also a simple CLI implemented in <a href="modules/_cli_.html#main">main</a> which works as follows:</p>
 				<pre><code class="language-text">Options:
   --help                 Show help  [boolean]
   -r, --respec           The source is in respec  [boolean] [default: false]
@@ -97,6 +97,12 @@
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_cli_.html">&quot;cli&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -122,9 +128,6 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_main_.html">&quot;main&quot;</a>
 					</li>
 				</ul>
 			</nav>

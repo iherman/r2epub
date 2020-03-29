@@ -6,6 +6,8 @@
  * @packageDocumentation
  */
 import { ResourceRef, Global } from './process';
+import * as constants          from './constants';
+
 
 /**
  * The template to be used for the cover page.
@@ -109,7 +111,7 @@ export function create_cover_page(global :Global) :ResourceRef[] {
         .replace('%%%DATE%%%', date.textContent);
 
     retval.push({
-        media_type   : 'application/xhtml+xml',
+        media_type   : constants.media_types.xhtml,
         relative_url : 'cover.xhtml',
         id           : 'start',
         text_content : final_cover

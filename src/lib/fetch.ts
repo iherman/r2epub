@@ -11,64 +11,7 @@ import * as node_fetch from 'node-fetch';
 import * as urlHandler from 'url';
 import * as validUrl   from 'valid-url';
 import * as jsdom      from 'jsdom';
-
-/** Media type for JSON
- * @hidden
-*/
-const json_media_type = 'application/json';
-
-/** Media type for JSON-LD
- * @hidden
-*/
-const jsonld_media_type = 'application/ld+json';
-
-/** Media type for HTML
- * @hidden
-*/
-const html_media_type = 'text/html';
-
-/** Media type for XHTML
- * @hidden
-*/
-export const xhtml_media_type = 'application/xhtml+xml';
-
-/** Media type for CSS
- * @hidden
-*/
-export const css_media_type = 'text/css';
-
-/** Media type for SVG
- * @hidden
-*/
-export const svg_media_type = 'image/svg+xml';
-
-/** Media type for javascript
- * @hidden
-*/
-export const js_media_type = 'text/javascript';
-
-/** Media type for ecmascript
- * @hidden
-*/
-export const es_media_type = 'text/ecmascript';
-
-/** Media type for PNG image
- * @hidden
- */
-export const png_media_type = 'image/png';
-
-/** These media types refer to textual content, no reason to bother about streaming... */
-const text_content = [
-    json_media_type,
-    jsonld_media_type,
-    html_media_type,
-    xhtml_media_type,
-    css_media_type,
-    svg_media_type,
-    js_media_type,
-    es_media_type
-];
-
+import * as constants  from './constants';
 
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
@@ -157,7 +100,7 @@ export async function fetch_resource(resource_url :URL, force_text :boolean = fa
                         // If the response content type is set (which is usually the case, but not in all cases...)
                         const response_type = response.headers.get('content-type');
                         if (response_type && response_type !== '') {
-                            if  (text_content.includes(response_type)) {
+                            if  (constants.text_content.includes(response_type)) {
                                 // the simple way, just return text...
                                 resolve(response.text())
                             } else {

@@ -21,6 +21,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const fs = __importStar(require("fs"));
 const jszip_1 = __importDefault(require("jszip"));
+const constants = __importStar(require("./constants"));
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
  */
@@ -50,7 +51,7 @@ class OCF {
     constructor(name) {
         this.book = new jszip_1.default();
         this.name = name;
-        this.book.file('mimetype', 'application/epub+zip', { compression: 'STORE' });
+        this.book.file('mimetype', constants.media_types.epub, { compression: 'STORE' });
         this.book.file('META-INF/container.xml', container_xml, { compression: 'STORE' });
     }
     /**
@@ -71,7 +72,7 @@ class OCF {
     async finalize() {
         const blob = await this.book.generateAsync({
             type: 'nodebuffer',
-            mimeType: 'application/epub+zip',
+            mimeType: constants.media_types.epub,
             compressionOptions: {
                 level: 9
             }

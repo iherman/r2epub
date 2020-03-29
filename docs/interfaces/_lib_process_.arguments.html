@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>CLI arguments used by the <a href="../modules/_lib_process_.html#create_epub">create_epub</a> entry function.</p>
+						<p>CLI arguments used by the <a href="../classes/_lib_process_.respectoepub.html#create_epub">create_epub</a> entry function.</p>
 					</div>
 					<p>The original content file may have to be run through the W3C <a href="https://labs.w3.org/spec-generator/">spec generator service</a>
 						before further processing. If that is the case (see <a href="_lib_process_.arguments.html#respec">Arguments.respec</a>), it is also possible to set some of the ReSpec configuration options,
@@ -84,12 +84,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="_lib_process_.debugoptions.html" class="tsd-signature-type">DebugOptions</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">Arguments</span>
-							</li>
-						</ul>
+						<span class="target">Arguments</span>
 					</li>
 				</ul>
 			</section>
@@ -101,9 +96,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.arguments.html#config" class="tsd-kind-icon">config</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_process_.arguments.html#package" class="tsd-kind-icon">package</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.arguments.html#respec" class="tsd-kind-icon">respec</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_process_.arguments.html#trace" class="tsd-kind-icon">trace</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.arguments.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
@@ -118,28 +111,12 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="_lib_process_.configoptions.html" class="tsd-signature-type">ConfigOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/d54b3c3/src/lib/process.ts#L82">lib/process.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/process.ts#L70">lib/process.ts:70</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Collection of respec config options, to be used with the spec generator (if applicable).</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="package" class="tsd-anchor"></a>
-					<h3>package</h3>
-					<div class="tsd-signature tsd-kind-icon">package<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_process_.debugoptions.html">DebugOptions</a>.<a href="_lib_process_.debugoptions.html#package">package</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/d54b3c3/src/lib/process.ts#L53">lib/process.ts:53</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Debug option: just print the package file on the console, do not generate and epub file.</p>
 						</div>
 					</div>
 				</section>
@@ -149,28 +126,12 @@
 					<div class="tsd-signature tsd-kind-icon">respec<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/d54b3c3/src/lib/process.ts#L77">lib/process.ts:77</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/process.ts#L65">lib/process.ts:65</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Is the source in ReSpec?</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="trace" class="tsd-anchor"></a>
-					<h3>trace</h3>
-					<div class="tsd-signature tsd-kind-icon">trace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_process_.debugoptions.html">DebugOptions</a>.<a href="_lib_process_.debugoptions.html#trace">trace</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/d54b3c3/src/lib/process.ts#L58">lib/process.ts:58</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Debug option: print built-in trace information.</p>
 						</div>
 					</div>
 				</section>
@@ -180,7 +141,7 @@
 					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/d54b3c3/src/lib/process.ts#L72">lib/process.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/process.ts#L60">lib/process.ts:60</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -196,6 +157,12 @@
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_cli_.html">&quot;cli&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -224,13 +191,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_main_.html">&quot;main&quot;</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_lib_process_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
@@ -239,14 +206,8 @@
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_lib_process_.arguments.html#config" class="tsd-kind-icon">config</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_lib_process_.arguments.html#package" class="tsd-kind-icon">package</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_lib_process_.arguments.html#respec" class="tsd-kind-icon">respec</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_lib_process_.arguments.html#trace" class="tsd-kind-icon">trace</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_lib_process_.arguments.html#url" class="tsd-kind-icon">url</a>
@@ -269,24 +230,6 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_process_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_lib_process_.html#resource_references" class="tsd-kind-icon">resource_<wbr>references</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_lib_process_.html#spec_generator" class="tsd-kind-icon">spec_<wbr>generator</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_lib_process_.html#create_epub" class="tsd-kind-icon">create_<wbr>epub</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_lib_process_.html#create_epub_from_dom" class="tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_lib_process_.html#generate_epub" class="tsd-kind-icon">generate_<wbr>epub</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_lib_process_.html#get_extra_resources" class="tsd-kind-icon">get_<wbr>extra_<wbr>resources</a>
 					</li>
 				</ul>
 			</nav>

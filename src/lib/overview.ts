@@ -12,10 +12,9 @@
  * @packageDocumentation
 */
 import * as urlHandler from 'url';
-
-import { ResourceRef, Global }                            from './process';
-import * as xhtml                                         from './xhtml';
-import { xhtml_media_type, js_media_type, es_media_type } from './fetch';
+import { ResourceRef, Global } from './process';
+import * as xhtml              from './xhtml';
+import * as constants          from './constants';
 
 /**
  * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
@@ -50,7 +49,7 @@ export function  generate_overview_item(global: Global): ResourceRef[] {
         const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
             if (element.hasAttribute('type')) {
                 const type = element.getAttribute('type');
-                return ['application/javascript', 'application/ecmascript', js_media_type, es_media_type].includes(type);
+                return ['application/javascript', 'application/ecmascript', constants.media_types.js, constants.media_types.es].includes(type);
             } else {
                 return true;
             }
@@ -103,7 +102,7 @@ export function  generate_overview_item(global: Global): ResourceRef[] {
 
 
     return [{
-        media_type   : xhtml_media_type,
+        media_type   : constants.media_types.xhtml,
         id           : 'main',
         relative_url : 'Overview.xhtml',
         text_content : xhtml.convert(global.dom),

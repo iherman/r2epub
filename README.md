@@ -2,7 +2,7 @@
 
 Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2.
 
-If used from another program, the main entry point are the [[create_epub]] and [[create_epub_from_dom]] functions in the [“process” module](modules/_lib_process_.html), which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
+If used from another program, the main entry point are the [[create_epub]] and [[create_epub_from_dom]] methods in the [“process” module](modules/_lib_process_.html), which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
 There is also a simple CLI implemented in [[main]] which works as follows:
 
 ```text

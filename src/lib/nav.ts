@@ -7,6 +7,8 @@
  */
 import { ResourceRef, Global } from './process';
 import * as xhtml              from './xhtml';
+import * as constants          from './constants';
+
 
 /**
  * Template of the XHTML file
@@ -68,7 +70,7 @@ export function create_nav_file(global :Global) :ResourceRef[] {
         .replace('%%%TOC%%%', toc_ol.innerHTML.replace(/href="#/g,'href="Overview.xhtml#'));
 
     retval.push({
-        media_type   : 'application/xhtml+xml',
+        media_type   : constants.media_types.xhtml,
         relative_url : 'nav.xhtml',
         id           : 'nav',
         properties   : 'nav',
