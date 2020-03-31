@@ -7,11 +7,10 @@
  *
  * @packageDocumentation
  */
-import * as fs     from 'fs';
-import * as stream from 'stream';
-import JSZip       from 'jszip';
+import * as fs         from 'fs';
+import * as stream     from 'stream';
+import JSZip           from 'jszip';
 import * as constants  from './constants';
-import { media_types } from './constants';
 
 
 /**

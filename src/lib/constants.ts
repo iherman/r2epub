@@ -47,3 +47,42 @@ export const modified_epub_files  :string = 'https://www.w3.org/People/Ivan/TR_E
 
 /** Local (relative) URL for styles and logos */
 export const local_style_files    :string = 'StyleSheets/TR/2016/';
+
+/** @hidden */
+const allow_methods :string[] = ['GET', 'HEAD'];
+
+/** @hidden */
+const allow_headers :string[] = [
+    'Range',
+    'Content-Type',
+    'Origin',
+    'X-Requested-With',
+    'Accept',
+    'Accept-Language',
+    'Content-Language'
+];
+
+/** @hidden */
+const expose_headers :string[] = [
+    'Accept-Ranges',
+    'Content-Encoding',
+    'Content-Type',
+    'Content-Length',
+    'Content-Range',
+    'Content-Language',
+    'Cache-Control',
+    'Expires',
+    'Last-Modified',
+    'Pragma'
+]
+
+
+/**
+ * CORS headers, to be added to the server response
+ */
+export const CORS_headers = {
+    'Access-Control-Allow-Origin'   : '*',
+    'Access-Control-Allow-Methods'  : allow_methods.join(','),
+    'Access-Control-Allow-Headers'  : allow_headers.join(','),
+    'Access-Control-Expose-Headers' : expose_headers.join(',')
+}
