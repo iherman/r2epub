@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -6,20 +9,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * ## OCF Package
- *
- * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB.
- *
- * The core of the module is in the [[OCF]] class.
- *
- * @packageDocumentation
- */
-const fs = __importStar(require("fs"));
 const jszip_1 = __importDefault(require("jszip"));
 const constants = __importStar(require("./constants"));
 /**
@@ -49,6 +39,7 @@ class OCF {
      * @param name the file name of the final package
      */
     constructor(name) {
+        this.content = null;
         this.book = new jszip_1.default();
         this.name = name;
         this.book.file('mimetype', constants.media_types.epub, { compression: 'STORE' });
@@ -69,16 +60,33 @@ class OCF {
      *
      * @async
      */
-    async finalize() {
-        const blob = await this.book.generateAsync({
-            type: 'nodebuffer',
-            mimeType: constants.media_types.epub,
-            compressionOptions: {
-                level: 9
-            }
-        });
-        fs.writeFileSync(this.name, blob);
-        return;
+    // async finalize(): Promise<any> {
+    //     const blob :Buffer = await this.book.generateAsync({
+    //         type: 'nodebuffer',
+    //         mimeType: constants.media_types.epub,
+    //         compressionOptions: {
+    //             level: 9
+    //         }
+    //     });
+    //     fs.writeFileSync(this.name, blob);
+    //     return;
+    // }
+    /**
+     * Return the final content of the book. If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
+     *
+     * @async
+     */
+    async get_content() {
+        if (this.content === null) {
+            this.content = await this.book.generateAsync({
+                type: 'nodebuffer',
+                mimeType: constants.media_types.epub,
+                compressionOptions: {
+                    level: 9
+                }
+            });
+        }
+        return this.content;
     }
 }
 exports.OCF = OCF;

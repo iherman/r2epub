@@ -40,7 +40,7 @@
  *
  * @packageDocumentation
 */
-import { ResourceRef, Global }  from './process';
+import { ResourceRef, Global }  from './conversion';
 import * as urlHandler          from 'url';
 import * as constants           from './constants';
 

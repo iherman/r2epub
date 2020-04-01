@@ -25,7 +25,7 @@ import * as overview   from './overview'
  * (See [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide).)
  *
  * Note that the interface definition does not restrict the possible values; however, not
- * all values are usable by overwriting the original values on-the-fly. The CLI for the program (see [[main]]) defines a few useful values.
+ * all values are usable by overwriting the original values on-the-fly. The CLI for the package (see [[cli]]) defines a few useful values.
  */
 export interface ConfigOptions {
     [x :string] :string
@@ -210,45 +210,44 @@ export class RespecToEPUB {
      * 3. "Finalizes" the OCF content, i.e., dump everything to a file.
      *
      *
-     * @param cli_arguments
+     * @param document - Reference to the original document; this may have to be transformed by respec on-the-fly.
      * @async
      */
-    async create_epub(cli_arguments: Arguments) {
+    async create_epub(document: Arguments) :Promise<ocf.OCF> {
         /** Generate the URL used to get the final document DOM */
         const full_url = () => {
-            if (cli_arguments.respec) {
-                const config_options :string[] = _.keys(cli_arguments.config)
+            if (document.respec) {
+                // Yep, the content has to go through the respec transformation service
+                // Collect the possible query parameters to control some details of the respec transformation
+                const config_options :string[] = _.keys(document.config)
                     .map( (key :string) :string => {
-                        if (cli_arguments.config[key] === null) {
+                        if (document.config[key] === null) {
                             return null;
                         } else {
-                            return `${key}=${cli_arguments.config[key]}`
+                            return `${key}=${document.config[key]}`
                         }
                     })
                     .filter((val) => val !== null);
                 const query_string = config_options.length === 0 ? '' : `?${config_options.join('&')}`;
-                return `${constants.spec_generator}${cli_arguments.url}${query_string}`
+                return `${constants.spec_generator}${document.url}${query_string}`
            } else {
-                return cli_arguments.url;
+                return document.url;
             }
         }
 
-        if (this.global.trace) console.log(`Input arguments: ${JSON.stringify(cli_arguments)}`);
+        if (this.global.trace) console.log(`Input arguments: ${JSON.stringify(document)}`);
 
+        // Fetch the real content (with a possible respec transformation) as a DOM tree for further processing
         const fetch_url = full_url();
         if (this.global.trace) console.log(`URL for the spec to be fetched: ${fetch_url}`);
-        const dom :jsdom.JSDOM      = await fetch_html(fetch_url);
-        const ocf_instance :ocf.OCF = await this.create_epub_from_dom(cli_arguments.url, dom);
+        const dom :jsdom.JSDOM = await fetch_html(fetch_url);
 
-        // There is a tiny debug branch at this point...
-        if (this.global.package === false) {
-            // Finalize, i.e., put into a file, the OCF instance:
-            await ocf_instance.finalize();
-        }
+        return await this.create_epub_from_dom(document.url, dom);
     }
 
+
     /**
-     * Create an OCF instance from the original content.
+     * Create an OCF instance from DOM representing the original content.
      *
      * 1. Gather all the global information ([[Global]]).
      * 2. Add the basic metadata (authors, dates) to the opf file.

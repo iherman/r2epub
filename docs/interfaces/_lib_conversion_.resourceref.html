@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DebugOptions | Converting HTML documents produced by Respec into EPUB 3.2</title>
+	<title>ResourceRef | Converting HTML documents produced by Respec into EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_process_.html">&quot;lib/process&quot;</a>
+					<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_process_.debugoptions.html">DebugOptions</a>
+					<a href="_lib_conversion_.resourceref.html">ResourceRef</a>
 				</li>
 			</ul>
-			<h1>Interface DebugOptions</h1>
+			<h1>Interface ResourceRef</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Debug options</p>
+						<p>Interface for the resources that, eventually, should be added to the EPUB file</p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DebugOptions</span>
+						<span class="target">ResourceRef</span>
 					</li>
 				</ul>
 			</section>
@@ -91,8 +91,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.debugoptions.html#package" class="tsd-kind-icon">package</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_process_.debugoptions.html#trace" class="tsd-kind-icon">trace</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.resourceref.html#absolute_url" class="tsd-kind-icon">absolute_<wbr>url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.resourceref.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.resourceref.html#media_type" class="tsd-kind-icon">media_<wbr>type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.resourceref.html#properties" class="tsd-kind-icon">properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.resourceref.html#relative_url" class="tsd-kind-icon">relative_<wbr>url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.resourceref.html#text_content" class="tsd-kind-icon">text_<wbr>content</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,32 +105,92 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="package" class="tsd-anchor"></a>
-					<h3>package</h3>
-					<div class="tsd-signature tsd-kind-icon">package<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="absolute_url" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> absolute_<wbr>url</h3>
+					<div class="tsd-signature tsd-kind-icon">absolute_<wbr>url<span class="tsd-signature-symbol">:</span> <a href="../modules/_lib_fetch_.html#url" class="tsd-signature-type">URL</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/process.ts#L41">lib/process.ts:41</a></li>
+							<li>Defined in lib/conversion.ts:84</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Debug option: just print the package file on the console, do not generate and epub file.</p>
+							<p>URL of the resource in case it must be fetched</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="trace" class="tsd-anchor"></a>
-					<h3>trace</h3>
-					<div class="tsd-signature tsd-kind-icon">trace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/process.ts#L46">lib/process.ts:46</a></li>
+							<li>Defined in lib/conversion.ts:90</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Debug option: print built-in trace information.</p>
+							<p>The item must have a fixed id, rather than a generated one</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="media_type" class="tsd-anchor"></a>
+					<h3>media_<wbr>type</h3>
+					<div class="tsd-signature tsd-kind-icon">media_<wbr>type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/conversion.ts:81</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Media type of the resource; this must be added to the package manifest entry</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="properties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> properties</h3>
+					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/conversion.ts:93</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Extra properties, defined by the package specification, to be added to the entry</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="relative_url" class="tsd-anchor"></a>
+					<h3>relative_<wbr>url</h3>
+					<div class="tsd-signature tsd-kind-icon">relative_<wbr>url<span class="tsd-signature-symbol">:</span> <a href="../modules/_lib_fetch_.html#url" class="tsd-signature-type">URL</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/conversion.ts:78</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The URL to be used within the EPUB; relative to the top of the file</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="text_content" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> text_<wbr>content</h3>
+					<div class="tsd-signature tsd-kind-icon">text_<wbr>content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/conversion.ts:87</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Content of the resource in case it is generated by this program</p>
 						</div>
 					</div>
 				</section>
@@ -143,6 +207,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -165,49 +232,61 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_lib_process_.html">&quot;lib/process&quot;</a>
-					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_server_.html">&quot;server&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_lib_process_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
+						<a href="../classes/_lib_conversion_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.arguments.html" class="tsd-kind-icon">Arguments</a>
+						<a href="_lib_conversion_.arguments.html" class="tsd-kind-icon">Arguments</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
+						<a href="_lib_conversion_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_conversion_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_conversion_.global.html" class="tsd-kind-icon">Global</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_conversion_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
+						<a href="_lib_conversion_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_process_.debugoptions.html#package" class="tsd-kind-icon">package</a>
+								<a href="_lib_conversion_.resourceref.html#absolute_url" class="tsd-kind-icon">absolute_<wbr>url</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_process_.debugoptions.html#trace" class="tsd-kind-icon">trace</a>
+								<a href="_lib_conversion_.resourceref.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_conversion_.resourceref.html#media_type" class="tsd-kind-icon">media_<wbr>type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_conversion_.resourceref.html#properties" class="tsd-kind-icon">properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_conversion_.resourceref.html#relative_url" class="tsd-kind-icon">relative_<wbr>url</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_conversion_.resourceref.html#text_content" class="tsd-kind-icon">text_<wbr>content</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.global.html" class="tsd-kind-icon">Global</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_lib_process_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

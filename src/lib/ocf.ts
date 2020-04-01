@@ -7,7 +7,6 @@
  *
  * @packageDocumentation
  */
-import * as fs         from 'fs';
 import * as stream     from 'stream';
 import JSZip           from 'jszip';
 import * as constants  from './constants';
@@ -36,8 +35,9 @@ const container_xml :string = `<?xml version="1.0"?>
  *
  */
 export class OCF {
-    private book: JSZip;
-    private name: string;
+    private book    :JSZip;
+    name    :string;
+    private content :Buffer = null;
 
     /**
      *
@@ -67,15 +67,33 @@ export class OCF {
      *
      * @async
      */
-    async finalize(): Promise<any> {
-        const blob = await this.book.generateAsync({
-            type: 'nodebuffer',
-            mimeType: constants.media_types.epub,
-            compressionOptions: {
-                level: 9
-            }
-        });
-        fs.writeFileSync(this.name, blob);
-        return;
+    // async finalize(): Promise<any> {
+    //     const blob :Buffer = await this.book.generateAsync({
+    //         type: 'nodebuffer',
+    //         mimeType: constants.media_types.epub,
+    //         compressionOptions: {
+    //             level: 9
+    //         }
+    //     });
+    //     fs.writeFileSync(this.name, blob);
+    //     return;
+    // }
+
+    /**
+     * Return the final content of the book. If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
+     *
+     * @async
+     */
+    async get_content() :Promise<Buffer> {
+        if (this.content === null) {
+            this.content = await this.book.generateAsync({
+                type: 'nodebuffer',
+                mimeType: constants.media_types.epub,
+                compressionOptions: {
+                    level: 9
+                }
+            });
+        }
+        return this.content;
     }
 };

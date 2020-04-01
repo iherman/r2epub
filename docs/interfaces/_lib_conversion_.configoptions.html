@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LocalLinks | Converting HTML documents produced by Respec into EPUB 3.2</title>
+	<title>ConfigOptions | Converting HTML documents produced by Respec into EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_process_.html">&quot;lib/process&quot;</a>
+					<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_process_.locallinks.html">LocalLinks</a>
+					<a href="_lib_conversion_.configoptions.html">ConfigOptions</a>
 				</li>
 			</ul>
-			<h1>Interface LocalLinks</h1>
+			<h1>Interface ConfigOptions</h1>
 		</div>
 	</div>
 </header>
@@ -72,64 +72,32 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Interface for the HTML DOM elements, to be considered for possible internal references.</p>
+						<p>Config options, to be used as part of the input arguments in <a href="_lib_conversion_.arguments.html">Arguments</a> to overwrite the <code>config</code> options of ReSpec.
+						(See <a href="https://github.com/w3c/respec/wiki/ReSpec-Editor&#39;s-Guide">ReSpec editor&#39;s guide</a>.)</p>
 					</div>
+					<p>Note that the interface definition does not restrict the possible values; however, not
+					all values are usable by overwriting the original values on-the-fly. The CLI for the package (see <a href="../modules/_cli_.html#cli">cli</a>) defines a few useful values.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LocalLinks</span>
+						<span class="target">ConfigOptions</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_process_.locallinks.html#attr" class="tsd-kind-icon">attr</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_process_.locallinks.html#query" class="tsd-kind-icon">query</a></li>
-							</ul>
-						</section>
+			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-external-module">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>x: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Config options, to be used as part of the input arguments in <a href="_lib_conversion_.arguments.html">Arguments</a> to overwrite the <code>config</code> options of ReSpec.
+						(See <a href="https://github.com/w3c/respec/wiki/ReSpec-Editor&#39;s-Guide">ReSpec editor&#39;s guide</a>.)</p>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="attr" class="tsd-anchor"></a>
-					<h3>attr</h3>
-					<div class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/process.ts#L145">lib/process.ts:145</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Attribute name to extract the resource URL</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="query" class="tsd-anchor"></a>
-					<h3>query</h3>
-					<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/process.ts#L143">lib/process.ts:143</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>CSS selector to locate the right DOM elements</p>
-						</div>
-					</div>
-				</section>
+					<p>Note that the interface definition does not restrict the possible values; however, not
+					all values are usable by overwriting the original values on-the-fly. The CLI for the package (see <a href="../modules/_cli_.html#cli">cli</a>) defines a few useful values.</p>
+				</div>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -143,6 +111,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -165,48 +136,40 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_lib_process_.html">&quot;lib/process&quot;</a>
-					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_server_.html">&quot;server&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_lib_process_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
+						<a href="../classes/_lib_conversion_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.arguments.html" class="tsd-kind-icon">Arguments</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.global.html" class="tsd-kind-icon">Global</a>
+						<a href="_lib_conversion_.arguments.html" class="tsd-kind-icon">Arguments</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_lib_process_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_lib_process_.locallinks.html#attr" class="tsd-kind-icon">attr</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_lib_process_.locallinks.html#query" class="tsd-kind-icon">query</a>
-							</li>
-						</ul>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_conversion_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_process_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
+						<a href="_lib_conversion_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_conversion_.global.html" class="tsd-kind-icon">Global</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_conversion_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_conversion_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
 					</li>
 				</ul>
 			</nav>

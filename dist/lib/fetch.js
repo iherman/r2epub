@@ -91,7 +91,7 @@ async function fetch_resource(resource_url, force_text = false) {
                 .then((response) => {
                 if (response.ok) {
                     // If the response content type is set (which is usually the case, but not in all cases...)
-                    const response_type = response.headers.get('content-type');
+                    const response_type = response.headers.get('content-type').split(';')[0].trim();
                     if (response_type && response_type !== '') {
                         if (constants.text_content.includes(response_type)) {
                             // the simple way, just return text...
@@ -145,7 +145,8 @@ async function fetch_type(resource_url) {
                 .then((response) => {
                 if (response.ok) {
                     // If the response content type is set (which is usually the case, but not in all cases...)
-                    resolve(response.headers.get('content-type'));
+                    const type = response.headers.get('content-type');
+                    resolve(type.split(';')[0].trim());
                 }
                 else {
                     reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));

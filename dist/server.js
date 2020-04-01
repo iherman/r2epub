@@ -1,3 +1,4 @@
+"use strict";
 /**
  * ## Simple server for EPUB generation
  *
@@ -43,99 +44,75 @@
 
  * @packageDocumentation
  */
-
-
-import http            from 'http';
-import * as urlHandler from 'url';
-import * as _          from 'underscore';
-import * as constants  from './lib/constants';
-import * as conversion from './lib/conversion';
-import * as ocf        from './lib/ocf';
-
-
-/**
- * Return value of [[get_epub]], to be handled by the server;
- */
-interface Content {
-    /**
-     * The real epub content: a Buffer as generated through the [[OCF]] class.
-     */
-    content :Buffer;
-    /**
-     * Additional HTTP Response headers, to accompany the full response. (File name, dates, etc.).
-     */
-    headers :object;
-}
-
-/**
- * @hidden
- */
-interface Query {
-    [index :string] :string|string[]
-}
-
-
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const http_1 = __importDefault(require("http"));
+const urlHandler = __importStar(require("url"));
+const _ = __importStar(require("underscore"));
+const constants = __importStar(require("./lib/constants"));
+const conversion = __importStar(require("./lib/conversion"));
 /**
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming URL's query string.
  *
  * @param query - The query string from the client
  * @throws no URL has been specified
  */
-async function get_epub(query :Query) : Promise<Content> {
+async function get_epub(query) {
     if (query === null || query.url === undefined) {
-        throw "No URL has been specified"
-    } else {
-        const document :conversion.Arguments = {
-            url    : query.url as string,
-            respec : query.respec === undefined ? false : query.respec === 'true' || query.respec === 'True',
-            config : _.omit(query, 'respec', 'url'),
-        }
-
+        throw "No URL has been specified";
+    }
+    else {
+        const document = {
+            url: query.url,
+            respec: query.respec === undefined ? false : query.respec === 'true' || query.respec === 'True',
+            config: _.omit(query, 'respec', 'url'),
+        };
         const conversion_process = new conversion.RespecToEPUB(false, false);
-        const the_ocf :ocf.OCF   = await conversion_process.create_epub(document);
-        const content :Buffer    = await the_ocf.get_content();
-
+        const the_ocf = await conversion_process.create_epub(document);
+        const content = await the_ocf.get_content();
         return {
-            content : content,
-            headers : {
-                'Content-type'        : constants.media_types.epub,
+            content: content,
+            headers: {
+                'Content-type': constants.media_types.epub,
                 // 'Content-Length'      : content.length,
-                'Expires'             : (new Date()).toString(),
-                'Content-Disposition' : `attachment; filename=${the_ocf.name}`
+                'Expires': (new Date()).toString(),
+                'Content-Disposition': `attachment; filename=${the_ocf.name}`
             }
-        }
+        };
     }
 }
-
-
 /**
  * Run a rudimentary Web server calling out to [[create_epub]] via [[get_epub]] to return an EPUB 3.2 instance when invoked.
  *
  * @param port - port number
  */
-
-async function serve(port :string = constants.port_number) {
-    http.createServer( async (request :http.IncomingMessage, response :http.ServerResponse) => {
+async function serve(port = constants.port_number) {
+    http_1.default.createServer(async (request, response) => {
         try {
-            const query :Query = urlHandler.parse(request.url, true).query;
-            const the_book :Content = await get_epub(query);
-
-            response.writeHead(200, _.extend(
-                the_book.headers,
-                constants.CORS_headers
-            ));
+            const query = urlHandler.parse(request.url, true).query;
+            const the_book = await get_epub(query);
+            response.writeHead(200, _.extend(the_book.headers, constants.CORS_headers));
             response.write(the_book.content);
             response.end();
-        } catch(e) {
+        }
+        catch (e) {
             response.writeHead(400, {
-                'Content-type' : 'text/plain'
+                'Content-type': 'text/plain'
             });
             response.write(`Error during EPUB generation: ${e.toString()}`);
             response.end();
         }
     }).listen(port);
 }
-
 // Let the user choose the port number...
 process.argv.length > 2 && isNaN(Number(process.argv[2])) === false ? serve(process.argv[2]) : serve();
-
+//# sourceMappingURL=server.js.map

@@ -1,12 +1,12 @@
 "use strict";
 /**
- * Various ants used all over the place...
+ * `Global constants used at various places.
  *
  * @packageDocumentation
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Various media types that are used in the code
+ * Various media types that are used in the code.
  */
 exports.media_types = {
     json: 'application/json',
@@ -31,14 +31,50 @@ exports.text_content = [
     exports.media_types.js,
     exports.media_types.es
 ];
-/** URL of the spec generator service, used if the source has to be transformed first */
+/** Default port number for the server (set to the default HTTP port number, in fact) */
+exports.port_number = '80';
+/** URL of the spec generator service, used if the source has to be transformed via respec first. */
 exports.spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url=';
-/** Base URL for the official W3C files (`base.css`, logos in SVG format) */
-exports.TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
-/** Generic 'fixup' javascript */
+/** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
 exports.fixup_js = 'https://www.w3.org/scripts/TR/2016/fixup.js';
-/** Base URL for the modified W3C files (`base.css`, logos in SVG format) */
+/** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
+exports.TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
+/** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
 exports.modified_epub_files = 'https://www.w3.org/People/Ivan/TR_EPUB/';
 /** Local (relative) URL for styles and logos */
 exports.local_style_files = 'StyleSheets/TR/2016/';
+/** @hidden */
+const allow_methods = ['GET', 'HEAD'];
+/** @hidden */
+const allow_headers = [
+    'Range',
+    'Content-Type',
+    'Origin',
+    'X-Requested-With',
+    'Accept',
+    'Accept-Language',
+    'Content-Language'
+];
+/** @hidden */
+const expose_headers = [
+    'Accept-Ranges',
+    'Content-Encoding',
+    'Content-Type',
+    'Content-Length',
+    'Content-Range',
+    'Content-Language',
+    'Cache-Control',
+    'Expires',
+    'Last-Modified',
+    'Pragma'
+];
+/**
+ * CORS headers, to be added to the server response
+ */
+exports.CORS_headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': allow_methods.join(','),
+    'Access-Control-Allow-Headers': allow_headers.join(','),
+    'Access-Control-Expose-Headers': expose_headers.join(',')
+};
 //# sourceMappingURL=constants.js.map

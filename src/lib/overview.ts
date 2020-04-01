@@ -12,7 +12,7 @@
  * @packageDocumentation
 */
 import * as urlHandler from 'url';
-import { ResourceRef, Global } from './process';
+import { ResourceRef, Global } from './conversion';
 import * as xhtml              from './xhtml';
 import * as constants          from './constants';
 

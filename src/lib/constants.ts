@@ -33,6 +33,10 @@ export const text_content :string[] = [
     media_types.es
 ];
 
+
+/** Default port number for the server (set to the default HTTP port number, in fact) */
+export const port_number :string = '80';
+
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
 export const spec_generator       :string = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
