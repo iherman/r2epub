@@ -63,23 +63,6 @@ export class OCF {
     }
 
     /**
-     * Finalize, a.k.a. close the OCF file. This creates the final file on the file system.
-     *
-     * @async
-     */
-    // async finalize(): Promise<any> {
-    //     const blob :Buffer = await this.book.generateAsync({
-    //         type: 'nodebuffer',
-    //         mimeType: constants.media_types.epub,
-    //         compressionOptions: {
-    //             level: 9
-    //         }
-    //     });
-    //     fs.writeFileSync(this.name, blob);
-    //     return;
-    // }
-
-    /**
      * Return the final content of the book. If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
      *
      * @async
