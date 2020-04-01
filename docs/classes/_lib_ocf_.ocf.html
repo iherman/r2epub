@@ -100,18 +100,19 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_ocf_.ocf.html#book" class="tsd-kind-icon">book</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_ocf_.ocf.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_ocf_.ocf.html#content" class="tsd-kind-icon">content</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#append" class="tsd-kind-icon">append</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#finalize" class="tsd-kind-icon">finalize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#get_content" class="tsd-kind-icon">get_<wbr>content</a></li>
 							</ul>
 						</section>
 					</div>
@@ -129,7 +130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/ocf.ts#L41">lib/ocf.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/lib/ocf.ts#L40">lib/ocf.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -150,7 +151,7 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="book" class="tsd-anchor"></a>
@@ -158,17 +159,27 @@
 					<div class="tsd-signature tsd-kind-icon">book<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSZip</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/ocf.ts#L40">lib/ocf.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/lib/ocf.ts#L38">lib/ocf.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="content" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> content</h3>
+					<div class="tsd-signature tsd-kind-icon">content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> = null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/lib/ocf.ts#L40">lib/ocf.ts:40</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> name</h3>
+					<h3>name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/ocf.ts#L41">lib/ocf.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/lib/ocf.ts#L39">lib/ocf.ts:39</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -185,7 +196,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/ocf.ts#L62">lib/ocf.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/lib/ocf.ts#L61">lib/ocf.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -214,28 +225,28 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="finalize" class="tsd-anchor"></a>
-					<h3>finalize</h3>
+					<a name="get_content" class="tsd-anchor"></a>
+					<h3>get_<wbr>content</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">finalize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get_<wbr>content<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/c1d2b93/src/lib/ocf.ts#L71">lib/ocf.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/lib/ocf.ts#L87">lib/ocf.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Finalize, a.k.a. close the OCF file. This creates the final file on the file system.</p>
+									<p>Return the final content of the book. If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>async</dt>
 									<dd></dd>
 								</dl>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -252,6 +263,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -275,10 +289,10 @@
 						<a href="../modules/_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_process_.html">&quot;lib/process&quot;</a>
+						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+						<a href="../modules/_server_.html">&quot;server&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -296,13 +310,16 @@
 								<a href="_lib_ocf_.ocf.html#book" class="tsd-kind-icon">book</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_lib_ocf_.ocf.html#content" class="tsd-kind-icon">content</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_lib_ocf_.ocf.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_ocf_.ocf.html#append" class="tsd-kind-icon">append</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_lib_ocf_.ocf.html#finalize" class="tsd-kind-icon">finalize</a>
+								<a href="_lib_ocf_.ocf.html#get_content" class="tsd-kind-icon">get_<wbr>content</a>
 							</li>
 						</ul>
 					</li>

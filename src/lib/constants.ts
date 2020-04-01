@@ -33,6 +33,10 @@ export const text_content :string[] = [
     media_types.es
 ];
 
+
+/** Default port number for the server (set to the default HTTP port number, in fact) */
+export const port_number :string = '80';
+
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
 export const spec_generator       :string = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
@@ -47,3 +51,42 @@ export const modified_epub_files  :string = 'https://www.w3.org/People/Ivan/TR_E
 
 /** Local (relative) URL for styles and logos */
 export const local_style_files    :string = 'StyleSheets/TR/2016/';
+
+/** @hidden */
+const allow_methods :string[] = ['GET', 'HEAD'];
+
+/** @hidden */
+const allow_headers :string[] = [
+    'Range',
+    'Content-Type',
+    'Origin',
+    'X-Requested-With',
+    'Accept',
+    'Accept-Language',
+    'Content-Language'
+];
+
+/** @hidden */
+const expose_headers :string[] = [
+    'Accept-Ranges',
+    'Content-Encoding',
+    'Content-Type',
+    'Content-Length',
+    'Content-Range',
+    'Content-Language',
+    'Cache-Control',
+    'Expires',
+    'Last-Modified',
+    'Pragma'
+]
+
+
+/**
+ * CORS headers, to be added to the server response
+ */
+export const CORS_headers = {
+    'Access-Control-Allow-Origin'   : '*',
+    'Access-Control-Allow-Methods'  : allow_methods.join(','),
+    'Access-Control-Allow-Headers'  : allow_headers.join(','),
+    'Access-Control-Expose-Headers' : expose_headers.join(',')
+}

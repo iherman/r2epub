@@ -3,11 +3,17 @@
 Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2.
 
 If used from another program, the main entry point are the [[create_epub]] and [[create_epub_from_dom]] methods in the [“process” module](modules/_lib_process_.html), which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
-There is also a simple CLI implemented in [[main]] which works as follows:
 
-```text
+## Package usage
+
+### Command line interface
+
+There is a simple CLI implemented in [[cli]] which works as follows:
+
+```txt
 Options:
   --help                 Show help  [boolean]
+  -o, --output           The name of the output file [string]
   -r, --respec           The source is in respec  [boolean] [default: false]
   -d, --publishDate      Publication date  [string] [default: null]
   -s, --specStatus       Specification type [string] [default: null]
@@ -17,11 +23,45 @@ Options:
 
 For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). These flags are only operational if the `-r` flag is also set.
 
-The documentation is also available [on-line](https://iherman.github.io/respec-to-epub/).
+In the absence of the `-o` flag the output will be `shortName.epub`, where the value of `shortName` is extracted from the [ReSpec configuration](https://github.com/w3c/respec/wiki/shortName).
+
+### Server interface
+
+There is a simple server implemented in [[serve]]: running
+
+```txt
+node dist/server
+```
+
+starts a rudimentary Web server that generate epub instances for URL-s of the sort:
+
+```
+https://epub.example.org?url=https://www.example.org/doc.html
+```
+
+This would create and return the EPUB 3.2 instance corresponding to `https://www.example.org/doc.html`. Query parameters for `respec`, `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` can be added, just like for the command line. I.e.,
+
+```
+https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specStatus=REC
+```
+
+converts the original file via respec, with the `specStatus` value set to `REC`.
+
+By default, the server uses the standard `http` port number 80. A port number can be added on the command line as follows:
+
+```txt
+node dist/server 9000
+```
+
+to start the server on the port 9000.
 
 ## Implementation specificities
 
 The implementation is in Typescript and on top of `node.js`. The project can be downloaded via cloning and can be installed via a standard `npm` processing.
+
+The documentation is also available [on-line](https://iherman.github.io/respec-to-epub/).
+
+Note that the on-the-fly conversion via respec is achieved running the original source through the separate `https://labs.w3.org/spec-generator/` service. Alas!, that service may be down, and this package has no control over that…
 
 ---
 
