@@ -73,123 +73,23 @@ html {
 `
 
 /**
- * Template used for BG documents. The logo behavior is different (it takes more space).
- * @hidden
- */
-const bg_template   = `
-@media screen and (min-width: 28em) {
-    body {
-        background-image: url('logos/%%%LOGO%%%');
-        background-size: auto !important;
-    }
-    div[role~="main"] {
-        padding-left: 150px;
-    }
-
-}
-
-@media screen and (min-width: 78em) {
-    body:not(.toc-inline) #toc {
-        background-attachment: local !important;
-    }
-    div[role~="main"] {
-        padding-top: 150px;
-    }
-}
-
-@media screen {
-    body.toc-sidebar #toc {
-        background-attachment: local !important;
-    }
-    div[role~="main"] {
-        padding-top: 150px;
-    }
-}
-`;
-
-/**
  * Template used for CG draft documents. The logo behavior is different (it takes more space) and it uses the common watermark
  * @hidden
  */
 const cg_draft_template = `
-body {
-    background-image: url('logos/%%%LOGO%%%');
-    background-size: auto !important;
-}
-@media screen and (min-width: 28em) {
-    div[role~="main"] {
-        padding-left: 160px;
-    }
-}
-
-@media screen and (min-width: 78em) {
-    body:not(.toc-inline) #toc {
-        background-attachment: local !important;
-    };
-    div[role~="main"] {
-        padding-top: 160px;
-    }
-}
-
-@media screen {
-    body.toc-sidebar #toc {
-        background-attachment: local !important;
-    }
-    div[role~="main"] {
-        padding-top: 160px;
-    }
-}
-
 body {
     background-color: transparent;
 }
 
 html {
     background: white url(logos/UD-watermark.png);
-    background-repeat: repeat-x;
 }
 `;
-
-/**
- * Template used for CG final documents. The logo behavior is different (it takes more space)
- * @hidden
- */
-const cg_final_template = `
-body {
-    background-image: url('logos/%%%LOGO%%%');
-    background-size: auto !important;
-}
-
-@media screen and (min-width: 28em) {
-    div[role~="main"] {
-        padding-left: 160px;
-    }
-}
-
-@media screen and (min-width: 78em) {
-    body:not(.toc-inline) #toc {
-        background-attachment: local !important;
-    }
-    div[role~="main"] {
-        padding-top: 160px;
-    }
-}
-
-@media screen {
-    body.toc-sidebar #toc {
-        background-attachment: local !important;
-    }
-    div[role~="main"] {
-        padding-top: 160px;
-    }
-}
-`;
-
 
 /* --------------------------------- Data on CSS behavior per specStatus values------------------------------------- */
 
-
-/** `specStatus` values with a common, 'standard' behavior: distinct logos based on value,
+/**
+ * `specStatus` values with a common, 'standard' behavior: distinct logos based on value,
  * no watermark, simple background template
  */
 const specStatus_simple = [
@@ -219,6 +119,11 @@ interface specStatus_mapping {
 /**
  * Mapping from `specStatus` to its relevant description for the cases when a simple, automatic mapping
  * is not possible. See [[specStatus_css_mappings]] for the definition of the terms.
+ *
+ * Note that the following spec status values do _not_ have an entry (nor do they appear in [[specStatus_simple]]): `base`, `BG-DRAFT`, `BG-FINAL`, and `CG-FINAL`.
+ * This is deliberate: for the BG/CG documents the TR style has a big logo on the left at the top of the TOC column, something that is unnecessary for the EPUB case where that TOC
+ * column is non-existent altogether; on the other hand, it leads to a narrower content that is detrimental in many reading systems. (`CG-DRAFT has a watermark, hence its presence.)
+ * As for the `base` value, there is no logo or other style addition altogether.
  */
 const specStatus_css :specStatus_mapping = {
     'UNOFFICIAL' : {
@@ -248,32 +153,11 @@ const specStatus_css :specStatus_mapping = {
         logo_name       : 'WG-Note.svg',
     },
 
-    'BG-DRAFT' : {
-        watermark        : false,
-        logo_name        : 'back-bg-draft.png',
-        logo_media_type  : constants.media_types.png,
-        special_template : bg_template
-    },
-
-    'BG-FINAL' : {
-        watermark        : false,
-        logo_name        : 'back-bg-final.png',
-        logo_media_type  : constants.media_types.png,
-        special_template : bg_template
-    },
-
     'CG-DRAFT' : {
         watermark        : true,
-        logo_name        : 'back-cg-draft.png',
+        logo_name        : null,
         logo_media_type  : constants.media_types.png,
         special_template : cg_draft_template
-    },
-
-    'CG-FINAL' : {
-        watermark        : false,
-        logo_name        : 'back-cg-final.png',
-        logo_media_type  : constants.media_types.png,
-        special_template : cg_final_template
     },
 }
 
@@ -335,19 +219,21 @@ export function extract_css(global: Global): ResourceRef[] {
             let template = css_extras.special_template || background_template;
 
             // The logo file references must be adapted in the template
-            template = template.replace('%%%LOGO%%%', css_extras.logo_name);
+            if (css_extras.logo_name !== null) {
+                template = template.replace('%%%LOGO%%%', css_extras.logo_name);
 
-            // Before we forget, add the file to the resources!
-            const media_type = css_extras.logo_media_type || constants.media_types.svg;
-            const orig_logo_url   = media_type === constants.media_types.svg ? constants.modified_epub_files : constants.TR_logo_files;
-            retval.push({
-                relative_url : `${constants.local_style_files}logos/${css_extras.logo_name}`,
-                media_type   : media_type,
-                absolute_url : `${orig_logo_url}${css_extras.logo_name}`
-            })
+                // Before we forget, add the logo file to the resources!
+                const media_type    = css_extras.logo_media_type || constants.media_types.svg;
+                const orig_logo_url = media_type === constants.media_types.svg ? constants.modified_epub_files : constants.TR_logo_files;
+                retval.push({
+                    relative_url : `${constants.local_style_files}logos/${css_extras.logo_name}`,
+                    media_type   : media_type,
+                    absolute_url : `${orig_logo_url}${css_extras.logo_name}`
+                })
+            }
 
             if (css_extras.watermark) {
-                // Before we forget, add the file to the resources!
+                // Add the watermark file to the resources!
                 retval.push({
                     relative_url : `${constants.local_style_files}logos/UD-watermark.png`,
                     media_type   : constants.media_types.png,
@@ -355,7 +241,7 @@ export function extract_css(global: Global): ResourceRef[] {
                 })
             }
 
-            // The epub CSS reference has to be added to the html source and to the return values
+            // The extra epub CSS reference has to be added to the html source and to the return values
             retval.push({
                 relative_url : `${constants.local_style_files}epub.css`,
                 media_type   : constants.media_types.css,
