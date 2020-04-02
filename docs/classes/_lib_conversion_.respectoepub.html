@@ -79,16 +79,17 @@
 					<p>Main processing steps for the creation of EPUB files. See the <a href="_lib_conversion_.respectoepub.html#create_epub">create_epub</a> and <a href="_lib_conversion_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a> entry points for the details.</p>
 					<p>On a high level, the task of creating the EPUB file consists of:</p>
 					<ul>
-						<li>Collecting all the dependent resources like images, scripts, css files, audio, video, etc, that are &quot;part&quot; of the specification. In practical terms that means all resources with a relative URL should be collected.</li>
-						<li>Setting the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in <code>https://www.w3.org/StyleSheet/TR/2016/*</code>;
-						these style files, and related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. See the <a href="./_lib_css_.html">“css” module</a> for further details.</li>
-						<li>Following similar actions to CSS files (though less complex) for some system wide javascript files.</li>
-						<li>Extracting the various metadata items (title, editors, dates, etc.) to set them in the package file.</li>
-						<li>Removing the TOC from the TR document (i.e., making it <code>display:none</code>), extracting that HTML fragment and combining it into a separate <code>nav</code> file, per EPUB3 specification. See the <a href="./_lib_nav_.html">“nav” module</a> for further details.</li>
-						<li>Creating a cover page. See the <a href="./_lib_cover_.html">“cover” module</a> for further details.</li>
-						<li>Extracting some OPF properties from the original HTML files, modifying the DOM tree to abide to some specificities of reading systems (like iBooks) and converting the result content into XHTML. See the <a href="./_lib_overview_.html">“overview” module</a> for further details.</li>
-						<li>Creating the package (OPF) file with the right resource and spine entries. See the <a href="./_lib_opf_.html">“opf” module</a> for further details.</li>
-						<li>Creating the OCF file (i.e., the final EPUB instance) containing all the resources collected and created in the previous steps. See the <a href="./_lib_ocf_.html">“ocf” module</a> for further details.</li>
+						<li>Collect all the dependent resources like images, scripts, css files, audio, video, etc, that are &quot;part&quot; of the specification. In practical terms that means all resources with a relative URL should be collected.</li>
+						<li>Set the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in <code>https://www.w3.org/StyleSheet/TR/2016/*</code>;
+						these style files, and the related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. (See the <a href="./_lib_css_.html">“css” module</a>.)</li>
+						<li>Follow similar actions for some system wide javascript files (although, at this moment, it is a single JS file that must be taken care of).</li>
+						<li>Extract the various metadata items (title, editors, dates, etc.) for the package file.</li>
+						<li>Remove the TOC from the TR document (i.e., making it <code>display:none</code>), extract that HTML fragment and put it into a separate <code>nav</code> file, per EPUB3 specification. (See the <a href="./_lib_nav_.html">“nav” module</a>.)</li>
+						<li>Create a cover page. (See the <a href="./_lib_cover_.html">“cover” module</a>.)</li>
+						<li>Extract OPF properties from the original HTML content to be added to spine entries. (See the <a href="./_lib_overview_.html">“overview” module</a>.)</li>
+						<li>Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and converting the result content into XHTML. (See the <a href="./_lib_overview_.html">“overview” module</a>.)</li>
+						<li>Create the package (OPF) file with the right resource and spine entries. (See the <a href="./_lib_opf_.html">“opf” module</a>.)</li>
+						<li>Create the OCF file (i.e., the final EPUB instance) containing all the resources collected and created in the previous steps. (See the <a href="./_lib_ocf_.html">“ocf” module</a>.)</li>
 					</ul>
 				</div>
 			</section>
@@ -141,7 +142,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/conversion.ts:193</li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/lib/conversion.ts#L194">lib/conversion.ts:194</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -166,7 +167,7 @@
 					<div class="tsd-signature tsd-kind-icon">global<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_conversion_.global.html" class="tsd-signature-type">Global</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in lib/conversion.ts:193</li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/lib/conversion.ts#L194">lib/conversion.ts:194</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,7 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">resource_<wbr>references<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_conversion_.locallinks.html" class="tsd-signature-type">LocalLinks</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{query : &#x27;img, script, audio, video, source&#x27;,attr  : &#x27;src&#x27;},{query : &#x27;a, link[rel&#x3D;&quot;stylesheet&quot;]&#x27;,attr  : &#x27;href&#x27;},{query : &#x27;object&#x27;,attr  : &#x27;data&#x27;}]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in lib/conversion.ts:178</li>
+							<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/lib/conversion.ts#L179">lib/conversion.ts:179</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -204,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/conversion.ts:216</li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/lib/conversion.ts#L217">lib/conversion.ts:217</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,7 +246,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/conversion.ts:276</li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/lib/conversion.ts#L277">lib/conversion.ts:277</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -306,7 +307,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/conversion.ts:457</li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/lib/conversion.ts#L458">lib/conversion.ts:458</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -334,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/conversion.ts:401</li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/lib/conversion.ts#L402">lib/conversion.ts:402</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

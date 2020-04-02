@@ -5,6 +5,7 @@
   "main": "ts-node src/cli.ts",
   "scripts": {
     "build": "tsc",
+    "dist": "tsc",
     "run": "node dist/cli.js",
     "serve": "node dist/server.js",
     "docs": "typedoc src/"
