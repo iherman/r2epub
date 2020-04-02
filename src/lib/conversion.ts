@@ -224,11 +224,11 @@ export class RespecToEPUB {
                         if (document.config[key] === null) {
                             return null;
                         } else {
-                            return `${key}=${document.config[key]}`
+                            return `${key}%3D${document.config[key]}`
                         }
                     })
                     .filter((val) => val !== null);
-                const query_string = config_options.length === 0 ? '' : `?${config_options.join('&')}`;
+                const query_string = config_options.length === 0 ? '' : `%3F${config_options.join('%26')}`;
                 return `${constants.spec_generator}${document.url}${query_string}`
            } else {
                 return document.url;
