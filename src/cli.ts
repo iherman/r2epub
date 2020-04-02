@@ -15,7 +15,7 @@
  *  --version              Show version number  [boolean]
  * ```
  *
- * For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). These flags are only operational if the `-r` flag is also set.
+ * For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). If any of those flags is set, `-r` is implied (i.e., it is not necessary to set it explicitly).
  *
  * This function is a wrapper around [[create_epub]].
  *
@@ -73,7 +73,7 @@ async function cli() {
 
     const args :conversion.Arguments = {
         url             : argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0],
-        respec          : argv.r,
+        respec          : argv.r || argv.d || argv.s || argv.l || argv.m,
         config          : {
             publishDate     : argv.d,
             specStatus      : argv.s,

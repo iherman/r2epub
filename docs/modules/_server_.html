@@ -74,13 +74,13 @@
 						</a>
 					</div>
 					<p>It takes the parameters in a query string, generates and returns an epub to the caller.</p>
-					<p>The query parameters are</p>
+					<p>The possible query parameters are</p>
 					<pre><code>url              The URL <span class="hljs-keyword">for</span> the content
 respec           Whether the source <span class="hljs-keyword">is</span> <span class="hljs-keyword">in</span> respec (<span class="hljs-keyword">true</span>) <span class="hljs-keyword">or</span> a final HTML (<span class="hljs-keyword">false</span>).
 publishDate      <span class="hljs-keyword">Publication</span> <span class="hljs-type">date</span>
 specStatus       Specification <span class="hljs-keyword">type</span>
 addSectionLinks  <span class="hljs-keyword">Add</span> section links <span class="hljs-keyword">with</span> "§"
-maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>By default, the value of <code>respec</code> is <code>false</code>. This query entry <em>must</em> be set for the other options to be effective.</p>
+maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>By default, the value of <code>respec</code> is <code>false</code>. However, if one of <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, or <code>maxTocLevel</code> are set, <code>respec=true</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 					<p>The module is a wrapper around a standard node.js <code>http.CreateServer</code>, and a call to <a href="../classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a>.</p>
 					<a href="#usage-examples" id="usage-examples" style="color: inherit; text-decoration: none;">
 						<h3>Usage examples:</h3>
@@ -124,7 +124,7 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/server.ts#L84">server.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/server.ts#L84">server.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -160,7 +160,7 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/3eea561/src/server.ts#L117">server.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/dc4ddf4/src/server.ts#L119">server.ts:119</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

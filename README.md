@@ -21,7 +21,7 @@ Options:
   -m, --maxTocLevel      Max TOC level [number] [default: null]
 ```
 
-For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). These flags are only operational if the `-r` flag is also set.
+For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). If any of those flags is set, `-r` is implied (i.e., it is not necessary to set it explicitly).
 
 In the absence of the `-o` flag the output will be `shortName.epub`, where the value of `shortName` is extracted from the [ReSpec configuration](https://github.com/w3c/respec/wiki/shortName).
 
@@ -45,7 +45,7 @@ This would create and return the EPUB 3.2 instance corresponding to `https://www
 https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specStatus=REC
 ```
 
-converts the original file via respec, with the `specStatus` value set to `REC`.
+converts the original file via respec, with the `specStatus` value set to `REC`. If one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
 
 By default, the server uses the standard `http` port number 80. A port number can be added on the command line as follows:
 

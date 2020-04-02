@@ -24,16 +24,17 @@ const overview = __importStar(require("./overview"));
  *
  * On a high level, the task of creating the EPUB file consists of:
  *
- * * Collecting all the dependent resources like images, scripts, css files, audio, video, etc, that are "part" of the specification. In practical terms that means all resources with a relative URL should be collected.
- * * Setting the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in `https://www.w3.org/StyleSheet/TR/2016/*`;
- *   these style files, and related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. See the [“css” module](./_lib_css_.html) for further details.
- * * Following similar actions to CSS files (though less complex) for some system wide javascript files.
- * * Extracting the various metadata items (title, editors, dates, etc.) to set them in the package file.
- * * Removing the TOC from the TR document (i.e., making it `display:none`), extracting that HTML fragment and combining it into a separate `nav` file, per EPUB3 specification. See the [“nav” module](./_lib_nav_.html) for further details.
- * * Creating a cover page. See the [“cover” module](./_lib_cover_.html) for further details.
- * * Extracting some OPF properties from the original HTML files, modifying the DOM tree to abide to some specificities of reading systems (like iBooks) and converting the result content into XHTML. See the [“overview” module](./_lib_overview_.html) for further details.
- * * Creating the package (OPF) file with the right resource and spine entries. See the [“opf” module](./_lib_opf_.html) for further details.
- * * Creating the OCF file (i.e., the final EPUB instance) containing all the resources collected and created in the previous steps. See the [“ocf” module](./_lib_ocf_.html) for further details.
+ * * Collect all the dependent resources like images, scripts, css files, audio, video, etc, that are "part" of the specification. In practical terms that means all resources with a relative URL should be collected.
+ * * Set the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in `https://www.w3.org/StyleSheet/TR/2016/*`;
+ *   these style files, and the related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. (See the [“css” module](./_lib_css_.html).)
+ * * Follow similar actions for some system wide javascript files (although, at this moment, it is a single JS file that must be taken care of).
+ * * Extract the various metadata items (title, editors, dates, etc.) for the package file.
+ * * Remove the TOC from the TR document (i.e., making it `display:none`), extract that HTML fragment and put it into a separate `nav` file, per EPUB3 specification. (See the [“nav” module](./_lib_nav_.html).)
+ * * Create a cover page. (See the [“cover” module](./_lib_cover_.html).)
+ * * Extract OPF properties from the original HTML content to be added to spine entries. (See the [“overview” module](./_lib_overview_.html).)
+ * * Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and converting the result content into XHTML. (See the [“overview” module](./_lib_overview_.html).)
+ * * Create the package (OPF) file with the right resource and spine entries. (See the [“opf” module](./_lib_opf_.html).)
+ * * Create the OCF file (i.e., the final EPUB instance) containing all the resources collected and created in the previous steps. (See the [“ocf” module](./_lib_ocf_.html).)
  *
 */
 class RespecToEPUB {
@@ -92,11 +93,11 @@ class RespecToEPUB {
                         return null;
                     }
                     else {
-                        return `${key}=${document.config[key]}`;
+                        return `${key}%3D${document.config[key]}`;
                     }
                 })
                     .filter((val) => val !== null);
-                const query_string = config_options.length === 0 ? '' : `?${config_options.join('&')}`;
+                const query_string = config_options.length === 0 ? '' : `%3F${config_options.join('%26')}`;
                 return `${constants.spec_generator}${document.url}${query_string}`;
             }
             else {

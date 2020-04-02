@@ -4,7 +4,7 @@
  *
  * It takes the parameters in a query string, generates and returns an epub to the caller.
  *
- * The query parameters are
+ * The possible query parameters are
  *
  * ```
  * url              The URL for the content
@@ -15,7 +15,7 @@
  * maxTocLevel      Max TOC level
  *```
  *
- * By default, the value of `respec` is `false`. This query entry _must_ be set for the other options to be effective.
+ * By default, the value of `respec` is `false`. However, if one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
  *
  *
  * The module is a wrapper around a standard node.js `http.CreateServer`, and a call to [[create_epub]].
@@ -71,10 +71,11 @@ async function get_epub(query) {
         throw "No URL has been specified";
     }
     else {
+        const respec_args = _.omit(query, 'respec', 'url');
         const document = {
             url: query.url,
-            respec: query.respec === undefined ? false : query.respec === 'true' || query.respec === 'True',
-            config: _.omit(query, 'respec', 'url'),
+            respec: (query.respec !== undefined && (query.respec === 'true' || query.respec === 'false')) || _.keys(respec_args).length != 0,
+            config: respec_args,
         };
         const conversion_process = new conversion.RespecToEPUB(false, false);
         const the_ocf = await conversion_process.create_epub(document);

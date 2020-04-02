@@ -35,7 +35,7 @@ async function cli() {
         .argv;
     const args = {
         url: argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0],
-        respec: argv.r,
+        respec: argv.r || argv.d || argv.s || argv.l || argv.m,
         config: {
             publishDate: argv.d,
             specStatus: argv.s,
