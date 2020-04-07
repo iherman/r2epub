@@ -31,8 +31,8 @@ exports.text_content = [
     exports.media_types.js,
     exports.media_types.es
 ];
-/** Default port number for the server (set to the default HTTP port number, in fact) */
-exports.port_number = '80';
+/** Default port number for the server locally */
+exports.local_port_number = '5000';
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
 exports.spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url=';
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
@@ -40,7 +40,7 @@ exports.fixup_js = 'https://www.w3.org/scripts/TR/2016/fixup.js';
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
 exports.TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
-exports.modified_epub_files = 'https://www.w3.org/People/Ivan/TR_EPUB/';
+exports.modified_epub_files = 'https://iherman.github.io/respec-to-epub/epub_assets/';
 /** Local (relative) URL for styles and logos */
 exports.local_style_files = 'StyleSheets/TR/2016/';
 /** @hidden */

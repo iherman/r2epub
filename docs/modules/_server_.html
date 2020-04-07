@@ -73,7 +73,7 @@
 							<h2>Simple server for EPUB generation</h2>
 						</a>
 					</div>
-					<p>It takes the parameters in a query string, generates and returns an epub to the caller.</p>
+					<p>It takes the parameters in a query string, generates and returns an EPUB 3.2 instance to the caller.</p>
 					<p>The possible query parameters are</p>
 					<pre><code>url              The URL <span class="hljs-keyword">for</span> the content
 respec           Whether the source <span class="hljs-keyword">is</span> <span class="hljs-keyword">in</span> respec (<span class="hljs-keyword">true</span>) <span class="hljs-keyword">or</span> a final HTML (<span class="hljs-keyword">false</span>).
@@ -124,18 +124,13 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/e2deb2f/src/server.ts#L84">server.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7f8a642/src/server.ts#L83">server.ts:83</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Generate the EPUB file. This is a wrapper around <a href="../classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a>, creating the necessary arguments <a href="../interfaces/_lib_conversion_.arguments.html">Arguments</a> structure based on the incoming URL&#39;s query string.</p>
 								</div>
-								<dl class="tsd-comment-tags">
-									<dt>throws</dt>
-									<dd><p>no URL has been specified</p>
-									</dd>
-								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -154,29 +149,20 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 					<a name="serve" class="tsd-anchor"></a>
 					<h3>serve</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">serve<span class="tsd-signature-symbol">(</span>port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">serve<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/e2deb2f/src/server.ts#L119">server.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/iherman/respec-to-epub/blob/7f8a642/src/server.ts#L111">server.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Run a rudimentary Web server calling out to <a href="../classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a> via <a href="_server_.html#get_epub">get_epub</a> to return an EPUB 3.2 instance when invoked.</p>
+									<p>Run a rudimentary Web server calling out to <a href="../classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a> via <a href="_server_.html#get_epub">get_epub</a> to return an EPUB 3.2 instance when invoked. If there is no proper query string a fixed page is displayed.</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> port: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = constants.port_number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>port number</p>
-									</div>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -206,6 +192,9 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_fetch_.html">&quot;lib/fetch&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_lib_home_.html">&quot;lib/home&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_nav_.html">&quot;lib/nav&quot;</a>
