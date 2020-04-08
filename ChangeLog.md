@@ -7,5 +7,5 @@
     * It is still true that the documents are typeset with, for my taste, too narrow bodies, but I am afraid that reading systems take over the control over that. Maybe a chat with some reading system people is warranted for this.
 * The logo and css files, adapted for EPUB usage (e.g., `base.css`, W3C logos, etc) are served [from github](https://iherman.github.io/r2epub/epub_assets/) instead of my page on W3C.
 * Changed the server implementation in such a way that if no URL (or query string) is provided, it displays a static page with some basic information.
-* Added a `Procfile`, which is necessary for a [Heroku](https://heroku.com) deployment of the server.
+* Added a `Procfile`, which is necessary for a [Heroku](https://heroku.com) deployment of the server. The server is now [deployed on hiroku](https://r2epub.herokuapp.com/).
 * Documentation improvements.

@@ -49,13 +49,25 @@ converts the original file via respec, with the `specStatus` value set to `REC`.
 
 By default, the server uses the `http` port number 5000, unless the `PORT` environment variable is set.
 
-## Implementation specificities
+## Installation, usage
 
-The implementation is in Typescript and on top of `node.js`. The project can be downloaded via cloning and can be installed via a standard `npm` processing.
+The implementation is in Typescript and on top of `node.js`. The project can be downloaded via cloning and can be installed via a standard `npm` processing; running
+
+```
+node dist/cli.js
+```
+
+starts the command line interface, while
+
+```
+node dist/server
+```
+
+starts up the server. (The port number used by the server can be determined by setting the `PORT` environmental variable; failing that 5000 is used.) An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL.
 
 The documentation is also available [on-line](https://iherman.github.io/r2epub/).
 
-Note that the on-the-fly conversion via respec is achieved running the original source through the separate `https://labs.w3.org/spec-generator/` service. Alas!, that service may be down, and this package has no control over that…
+Note that the on-the-fly conversion via respec is done by running the original source through the separate `https://labs.w3.org/spec-generator/` service. Alas!, that service may be down, and this package has no control over that…
 
 ---
 

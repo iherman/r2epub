@@ -1,6 +1,6 @@
 {
   "name": "respec-to-epub",
-  "version": "1.0.1dev",
+  "version": "1.0.1",
   "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
   "engines": {
     "node": "12.x"
