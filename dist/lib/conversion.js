@@ -32,7 +32,7 @@ const overview = __importStar(require("./overview"));
  * * Remove the TOC from the TR document (i.e., making it `display:none`), extract that HTML fragment and put it into a separate `nav` file, per EPUB3 specification. (See the [“nav” module](./_lib_nav_.html).)
  * * Create a cover page. (See the [“cover” module](./_lib_cover_.html).)
  * * Extract OPF properties from the original HTML content to be added to spine entries. (See the [“overview” module](./_lib_overview_.html).)
- * * Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and converting the result content into XHTML. (See the [“overview” module](./_lib_overview_.html).)
+ * * Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and convert the result content into XHTML. (See the [“overview” module](./_lib_overview_.html).)
  * * Create the package (OPF) file with the right resource and spine entries. (See the [“opf” module](./_lib_opf_.html).)
  * * Create the OCF file (i.e., the final EPUB instance) containing all the resources collected and created in the previous steps. (See the [“ocf” module](./_lib_ocf_.html).)
  *

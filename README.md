@@ -33,7 +33,7 @@ There is a simple server implemented in [[serve]]: running
 node dist/server
 ```
 
-starts a rudimentary Web server that generate epub instances for URL-s of the sort:
+starts a rudimentary Web server that generate EPUB 3.2 instances for URL-s of the sort:
 
 ```
 https://epub.example.org?url=https://www.example.org/doc.html
@@ -47,13 +47,7 @@ https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specSt
 
 converts the original file via respec, with the `specStatus` value set to `REC`. If one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
 
-By default, the server uses the standard `http` port number 80. A port number can be added on the command line as follows:
-
-```txt
-node dist/server 9000
-```
-
-to start the server on the port 9000.
+By default, the server uses the `http` port number 5000, unless the `PORT` environment variable is set.
 
 ## Implementation specificities
 

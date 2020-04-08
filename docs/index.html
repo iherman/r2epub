@@ -91,12 +91,10 @@
 				</a>
 				<p>There is a simple server implemented in <a href="modules/_server_.html#serve">serve</a>: running</p>
 				<pre><code class="language-txt">node dist/server</code></pre>
-				<p>starts a rudimentary Web server that generate epub instances for URL-s of the sort:</p>
+				<p>starts a rudimentary Web server that generate EPUB 3.2 instances for URL-s of the sort:</p>
 				<pre><code><span class="hljs-symbol">https:</span>//epub.example<span class="hljs-meta">.org</span>?url=https://www.example<span class="hljs-meta">.org</span>/doc.html</code></pre><p>This would create and return the EPUB 3.2 instance corresponding to <code>https://www.example.org/doc.html</code>. Query parameters for <code>respec</code>, <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, and <code>maxTocLevel</code> can be added, just like for the command line. I.e.,</p>
 				<pre><code><span class="hljs-symbol">https:</span>//epub.example<span class="hljs-meta">.org</span>?url=https://www.example<span class="hljs-meta">.org</span>/doc.html&amp;respec=true&amp;specStatus=REC</code></pre><p>converts the original file via respec, with the <code>specStatus</code> value set to <code>REC</code>. If one of <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, or <code>maxTocLevel</code> are set, <code>respec=true</code> is implied (i.e., it is not necessary to set it explicitly).</p>
-				<p>By default, the server uses the standard <code>http</code> port number 80. A port number can be added on the command line as follows:</p>
-				<pre><code class="language-txt">node dist/server 9000</code></pre>
-				<p>to start the server on the port 9000.</p>
+				<p>By default, the server uses the <code>http</code> port number 5000, unless the <code>PORT</code> environment variable is set.</p>
 				<a href="#implementation-specificities" id="implementation-specificities" style="color: inherit; text-decoration: none;">
 					<h2>Implementation specificities</h2>
 				</a>
@@ -133,6 +131,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_fetch_.html">&quot;lib/fetch&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_home_.html">&quot;lib/home&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
