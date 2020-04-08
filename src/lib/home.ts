@@ -71,7 +71,7 @@ export const homepage :string = `<!doctype html>
 
     </main>
     <footer style='font-size:80%; border-top: thin solid black;'>
-        <p>This server runs the <a href='https://github.com/iherman/respec-to-epub/'>respec-to-epub</a> package, implemented by <a href='https://www.ivan-herman.net/professional'>Ivan Herman</a>.</p>
+        <p>This server runs the <a href='https://github.com/iherman/r2epub/'>r2epub</a> package, implemented by <a href='https://www.ivan-herman.net/professional'>Ivan Herman</a>.</p>
     </footer>
 </body>
 </html>

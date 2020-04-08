@@ -53,7 +53,7 @@ By default, the server uses the `http` port number 5000, unless the `PORT` envir
 
 The implementation is in Typescript and on top of `node.js`. The project can be downloaded via cloning and can be installed via a standard `npm` processing.
 
-The documentation is also available [on-line](https://iherman.github.io/respec-to-epub/).
+The documentation is also available [on-line](https://iherman.github.io/r2epub/).
 
 Note that the on-the-fly conversion via respec is achieved running the original source through the separate `https://labs.w3.org/spec-generator/` service. Alas!, that service may be down, and this package has no control over that…
 

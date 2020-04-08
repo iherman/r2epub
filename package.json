@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iherman/respec-to-epub.git"
+    "url": "git+https://github.com/iherman/r2epub.git"
   },
   "keywords": [
     "respec",
@@ -24,9 +24,9 @@
   "author": "Ivan Herman",
   "license": "W3C-20150513",
   "bugs": {
-    "url": "https://github.com/iherman/respec-to-epub/issues"
+    "url": "https://github.com/iherman/r2epub/issues"
   },
-  "homepage": "https://github.com/iherman/respec-to-epub#readme",
+  "homepage": "https://github.com/iherman/r2epub#readme",
   "dependencies": {
     "@types/jszip": "^3.1.7",
     "@types/underscore": "^1.9.4",
