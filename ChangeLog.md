@@ -2,6 +2,8 @@
 
 ## Version 1.0.2
 
+* Reorganized the documentation folder organization, allowing the creation of other content besides the code documentation
+
 
 ## Version 1.0.1
 

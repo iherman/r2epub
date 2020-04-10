@@ -5,7 +5,7 @@
   "engines": {
     "node": "12.x"
   },
-  "main" : "dist/server.js",
+  "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
     "dist": "tsc",

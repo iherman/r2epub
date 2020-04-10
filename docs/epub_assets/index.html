@@ -9,19 +9,19 @@
         <h1>CSS and SVG files adapted for EPUB usage</h1>
 
         <p>
-            The files in this directory are not, strictly speaking, part of the package documentation; they are here to be properly
-            served via <code>https://iherman.github.io</code>. These files are the (slightly) modified versions of the original W3C files, adapted for EPUB:
+            The files in this directory are the (slightly) modified versions of some original W3C files, adapted for EPUB:
         </p>
         <dl>
             <dt><code>base.css</code></dt>
             <dd>
                 A modified version of the W3C <a href='https://www.w3.org/StyleSheets/TR/2016/base.css'><code>base.css</code></a> file, with all references to the TOC removed, text margins changed, and some page control statements added.
             </dd>
-            <dt>A collection of SVG files (vertical bars on the starting page, logo files)</dt>
+            <dt>A collection of SVG files (vertical bars on the starting page, logo files, etc.)</dt>
             <dd>
                 XML files in an EPUB file are not supposed to use XML entities; however, the original versions of these SVG files refer to the SVG DTD which, on its turn, use XML modularization, i.e., lots of XML entities. The SVG files in this collection are identical to the original ones, except that the DTD references are removed.<br/>
                 Strictly speaking this is not necessary insofar as EPUB readers can usually handle these SVG files, but <code>epubcheck</code> does complain about this. Note that there is an open discussion in the epubcheck project whether such entities should not be allowed in DTD-s which are usually ignored by reading systems anyway...
             </dd>
         </dl>
+        <p>When generating an EPUB content <code>r2epub</code> uses these files (instead of the original equivalents).</p>
     </body>
 </html>

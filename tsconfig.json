@@ -28,11 +28,12 @@
         "dist/**/*"
     ],
     "typedocOptions" : {
-        "out" : "docs",
-        "disableOutputCheck": true,
+        "out" : "docs/typedoc",
+        "disableOutputCheck": false,
         "hideGenerator": true,
         "listInvalidSymbolLinks": true,
         "ignoreCompilerErrors": true,
-        "name" : "Converting HTML documents produced by Respec into EPUB 3.2"
+        "gitRemote": "origin",
+        "name" : "r2epub — Converting HTML documents produced by Respec into EPUB 3.2"
     }
 }

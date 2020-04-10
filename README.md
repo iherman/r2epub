@@ -65,7 +65,7 @@ node dist/server
 
 starts up the server. (The port number used by the server can be determined by setting the `PORT` environmental variable; failing that 5000 is used.) An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL.
 
-The documentation is also available [on-line](https://iherman.github.io/r2epub/).
+The documentation is also available [on-line](https://iherman.github.io/r2epub/typedoc/).
 
 Note that the on-the-fly conversion via respec is done by running the original source through the separate `https://labs.w3.org/spec-generator/` service. Alas!, that service may be down, and this package has no control over that…
 
