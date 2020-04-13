@@ -2,7 +2,12 @@
 
 ## Version 1.0.2
 
-* Reorganized the documentation folder organization, allowing the creation of other content besides the code documentation
+* Reorganized the documentation folder organization, allowing the creation of other content besides the code documentation (used for a browser version, for example)
+* Removed the `URL` type (was just an alias to `string`) in `fetch.ts`: it turns out the URL is a global name in Typescript and browsers, and is not a good practice to shadow such name...
+* Set up a browserify structure:
+    * a separate `browser.ts` top level module
+    * combination of `tsc` and `browserify` to produce an `r2epub.js` in `docs/assets/js`; this is the javascript file to be in included for client-side conversion
+    * `package.json` contains a separate script entry to produce the browser version
 
 
 ## Version 1.0.1
