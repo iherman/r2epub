@@ -1,7 +1,9 @@
 /**
+ * ## Service home page
+ *
  * The stable Web page, displayed by the server if there is no query string. It just displays some basic information about the usage of a server.
  *
- * (It is a single string with the HTML content, with a pattern to replaced with the host URL with.)
+ * (It is a single string with the HTML content, with a pattern: this is replaced by the host URL.)
  *
  * @packageDocumentation
  */

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
+        <!-- <link rel='stylesheet' href='https://www.w3.org/StyleSheets/TR/2016/base.css'/> -->
+        <script type='text/javascript' src='./assets/js/r2epub.js'></script>
+    </head>
+    <body>
+        <header>
+            <h1 nine wide column>r2epub — Converting HTML documents produced by Respec into EPUB 3.2</h1>
+        </header>
+        <main>
+            <form id="main_form">
+                <div>
+                    <div>
+                        <fieldset id="main_arguments">
+                            <legend>Main arguments:</legend>
+                            <div>
+                                <label for="url">Document URL:</label>
+                                <div>
+                                    <input name="url" id="url" size="75" type="text" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="respec">Go through a respec processor?</label>
+                                <select id="respec" name="respec" size="1">
+                                    <option selected="selected" value="false">No</option>
+                                    <option value="true">Yes</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <fieldset id="respec_arguments">
+                            <legend>Respec arguments:</legend>
+                            <div>
+                                <div>
+                                    <div>
+                                        <label for="publishDate">Publication Date:</label>
+                                        <input name="publishDate" id="publishDate" size="77" type="date">
+                                    </div>
+                                    <div>
+                                        <label for="specStatus">Specification Type:</label>
+                                        <select id="specStatus" name="specStatus" size="1">
+                                            <option selected="selected" value="null">As set</option>
+                                            <option value="false">base</option>
+                                            <option value="REC">REC</option>
+                                            <option value="WD">WD</option>
+                                            <option value="CR">CR</option>
+                                            <option value="PR">PR</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="addSectionLinks">Add Section Links:</label>
+                                        <select id="addSectionLinks" name="addSectionLinks" size="1">
+                                            <option selected="selected" value="null">As set</option>
+                                            <option value="false">No</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="maxTocLevel">Maximum Toc Level:</label>
+                                        <input name="maxTocLevel" id="maxTocLevel" size="10" type="number" min="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset id="actions">
+                            <legend>Actions</legend>
+                            <input type="submit" value="Convert" id="submit" name="submit">
+                            <input type="reset" value="Reset" id="reset" name="reset">
+                        </fieldset>
+                    </div>
+                </div>
+            </form>
+        </main>
+        <footer style="border-top: 1pt solid black !important; font-size: 80%">
+            <p>Copyright © 2020 <a href='https://github.com/iherman'>@iherman</a>.</p>
+        </footer>
+    </body>
+</html>

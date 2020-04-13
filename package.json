@@ -7,8 +7,8 @@
   },
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "dist": "tsc",
+    "build": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js",
+    "dist": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
     "run": "node dist/cli.js",
     "serve": "node dist/server.js",
     "docs": "typedoc src/"
@@ -49,9 +49,11 @@
     "@types/valid-url": "^1.0.2",
     "@types/xmlserializer": "^0.6.0",
     "@types/yargs": "^15.0.4",
+    "browserify": "^16.5.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
+    "terser": "^4.6.11",
     "typedoc": "^0.16.11",
     "typedoc-plugin-nojekyll": "^1.0.1",
     "typescript": "^3.8.3"
