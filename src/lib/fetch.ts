@@ -5,8 +5,6 @@
  *
  * @packageDocumentation
  */
-export type URL = string;
-
 import * as node_fetch from 'node-fetch';
 import * as urlHandler from 'url';
 import * as validUrl   from 'valid-url';
@@ -31,7 +29,7 @@ import * as constants  from './constants';
 * @returns  - the URL itself (which might be slightly improved by the valid-url method) or `null` if this is, in fact, not a URL
 * @throws  if `address` pretends to be a URL, but it is not acceptable for some reasons.
 */
-const check_Web_url = (address :URL) :URL => {
+const check_Web_url = (address :string) :string => {
     const parsed = urlHandler.parse(address);
     if (parsed.protocol === null) {
         // This is not a URL, should be used as a file name
@@ -87,7 +85,7 @@ const my_fetch: ((arg :string) => Promise<any>) = (process !== undefined) ? node
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
-export async function fetch_resource(resource_url :URL, force_text :boolean = false) :Promise<any> {
+export async function fetch_resource(resource_url :string, force_text :boolean = false) :Promise<any> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -137,7 +135,7 @@ export async function fetch_resource(resource_url :URL, force_text :boolean = fa
  * @returns - the media type
  * @async
  */
-export async function fetch_type(resource_url :URL) :Promise<string> {
+export async function fetch_type(resource_url :string) :Promise<string> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -172,7 +170,7 @@ export async function fetch_type(resource_url :URL) :Promise<string> {
  * @return - DOM object for the parsed HTML
  * @throws Error if something goes wrong with fetch or DOM Parsing
  */
-export async function fetch_html(html_url :URL) :Promise<jsdom.JSDOM> {
+export async function fetch_html(html_url :string) :Promise<jsdom.JSDOM> {
     try {
         const body = await fetch_resource(html_url, true);
         const retval = new jsdom.JSDOM(body, { url: html_url });

@@ -17,8 +17,17 @@ import * as fetch      from './lib/fetch';
  *
  * Collect and pre-process the form parameters
  *
+ * @async
  */
-const submit = () :void => {
+const submit = async () :Promise<any> => {
+    const save_book = (data: Blob, name :string) => {
+        const dataURL = URL.createObjectURL(data);
+        const download = document.getElementById('download') as HTMLAnchorElement;
+        download.href = dataURL;
+        download.download = name;
+        download.click();
+    };
+
     // const the_form :HTMLFormElement = document.getElementById('main_form') as HTMLFormElement;
     const url :HTMLInputElement = document.getElementById('url') as HTMLInputElement;
     const respec :HTMLInputElement = document.getElementById('respec') as HTMLInputElement;
@@ -39,7 +48,12 @@ const submit = () :void => {
                 maxTocLevel     : maxTocLevel.value === '' ? undefined : maxTocLevel.value,
             }
         }
+        // Testing...!
         alert(JSON.stringify(a, null, 4));
+        // Testing the fetch and save mechanism
+        const data = await fetch.fetch_resource('http://localhost:8001/LocalData/icon.jpg');
+        save_book(data, 'namivan.jpg');
+        return;
     }
 }
 

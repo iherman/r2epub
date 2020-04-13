@@ -7,6 +7,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * ## Fetch
+ *
+ * Wrappers around the fetch function.
+ *
+ * @packageDocumentation
+ */
 const node_fetch = __importStar(require("node-fetch"));
 const urlHandler = __importStar(require("url"));
 const validUrl = __importStar(require("valid-url"));

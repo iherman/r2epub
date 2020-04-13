@@ -9,13 +9,29 @@
  *
  * @packageDocumentation
  */
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const fetch = __importStar(require("./lib/fetch"));
 /**
  *
  * Collect and pre-process the form parameters
  *
+ * @async
  */
-const submit = () => {
+const submit = async () => {
+    const save_book = (data, name) => {
+        const dataURL = URL.createObjectURL(data);
+        const download = document.getElementById('download');
+        download.href = dataURL;
+        download.download = name;
+        download.click();
+    };
     // const the_form :HTMLFormElement = document.getElementById('main_form') as HTMLFormElement;
     const url = document.getElementById('url');
     const respec = document.getElementById('respec');
@@ -34,7 +50,12 @@ const submit = () => {
                 maxTocLevel: maxTocLevel.value === '' ? undefined : maxTocLevel.value,
             }
         };
+        // Testing...!
         alert(JSON.stringify(a, null, 4));
+        // Testing the fetch and save mechanism
+        const data = await fetch.fetch_resource('http://localhost:8001/LocalData/icon.jpg');
+        save_book(data, 'namivan.jpg');
+        return;
     }
 };
 window.addEventListener('load', () => {

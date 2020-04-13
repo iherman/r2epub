@@ -30,7 +30,7 @@
   "dependencies": {
     "@types/jszip": "^3.1.7",
     "@types/underscore": "^1.9.4",
-    "jsdom": "^16.2.0",
+    "jsdom": "^16.2.2",
     "jszip": "^3.2.2",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.0",
