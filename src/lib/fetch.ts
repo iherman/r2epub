@@ -119,7 +119,7 @@ export async function fetch_resource(resource_url :string, force_text :boolean =
                     }
                 })
                 .catch((err) => {
-                    reject(new Error(`Problem accessing ${resource_url}: ${err}`));
+                    reject(new Error(`Problem accessing ${final_url}: ${err}`));
                 });
         } catch (err) {
             reject(err);
