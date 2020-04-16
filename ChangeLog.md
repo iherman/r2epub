@@ -3,6 +3,7 @@
 ## Version 1.0.2
 
 * Reorganized the documentation folder organization, allowing the creation of other content besides the code documentation
+* Removed the URL type alias; it could collide with an existing generic type and it was just a simple alias anyway...
 
 
 ## Version 1.0.1
