@@ -83,9 +83,9 @@ async function cli() {
      }
 
     try {
-        const conversion_process  = new conversion.RespecToEPUB(argv.t, argv.p);
-        const the_ocf :ocf.OCF    = await conversion_process.create_epub(args);
-        const content :Buffer     = await the_ocf.get_content();
+        const conversion_process     = new conversion.RespecToEPUB(argv.t, argv.p);
+        const the_ocf :ocf.OCF       = await conversion_process.create_epub(args);
+        const content :Buffer | Blob = await the_ocf.get_content();
 
         fs.writeFileSync(argv.o || the_ocf.name, content);
     } catch(e) {

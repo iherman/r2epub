@@ -10,16 +10,14 @@
  * @packageDocumentation
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { fetch_html, fetch_resource, fetch_type } from './lib/fetch';
-// ================
-// ================
+const fetch_1 = require("./lib/fetch");
 /**
  *
  * Collect and pre-process the form parameters
  *
  * @async
  */
-const submit = async () => {
+const submit = async (event) => {
     const save_book = (data, name) => {
         console.log("saving");
         const dataURL = URL.createObjectURL(data);
@@ -28,6 +26,7 @@ const submit = async () => {
         download.download = name;
         download.click();
     };
+    event.preventDefault();
     try {
         // const the_form :HTMLFormElement = document.getElementById('main_form') as HTMLFormElement;
         const url = document.getElementById('url');
@@ -48,19 +47,20 @@ const submit = async () => {
                 }
             };
             // Testing...!
-            console.error(JSON.stringify(a, null, 4));
-            // alert(JSON.stringify(a,null,4))
-            // Testing the fetch and save mechanism
+            // console.log(JSON.stringify(a, null, 4));
+            console.log(`NAMIVAN: ${process === undefined}, ${process.argv === undefined}`);
+            console.log(JSON.stringify(process, null, 4));
             try {
-                // const data = await fetch_resource('http://localhost:8001/LocalData/icon.jpg');
-                // const data = await lo('http://localhost:8001/LocalData/icon.jpg');
-                const response = await fetch('https://www.ivan-herman.net/index.html');
-                const data = await response.blob();
+                const data = await fetch_1.fetch_resource('http://localhost:8001/LocalData/icon.jpg');
+                console.log(JSON.stringify(data, null, 4));
+                // const response = await fetch('http://localhost:8001/LocalData/icon.jpg');
+                // const data     = await response.blob();
                 console.log('got here');
                 save_book(data, 'namivan.jpg');
+                console.log('got even here!');
             }
             catch (e) {
-                console.log(`Something did not wor with fetch: ${e}`);
+                console.log(`Something did not work with fetch: ${e}`);
             }
             return;
         }

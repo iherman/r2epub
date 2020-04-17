@@ -74,7 +74,7 @@ const check_Web_url = (address :string) :string => {
  *
  * I guess this makes this entry a bit polyfill like:-)
  */
-const my_fetch: ((arg :string) => Promise<any>) = (process !== undefined) ? node_fetch.default : fetch;
+const my_fetch: ((arg :string) => Promise<any>) = constants.is_browser ? fetch : node_fetch.default;
 
 
 /**
@@ -105,11 +105,18 @@ export async function fetch_resource(resource_url :string, force_text :boolean =
                                 if (force_text){
                                     resolve(response.text())
                                 } else {
-                                    // return the body without processing, ie, as a stream
-                                    resolve(response.body)
+                                    // return the body without processing, ie, as a blob or a stream
+                                    if (constants.is_browser) {
+                                        // In a browser, a blob should be returned
+                                        resolve(response.blob())
+                                     } else {
+                                         // In node.js the body is returned as a stream
+                                        resolve(response.body)
+                                   }
                                 }
                             }
                         } else {
+                            console.log("return text by default")
                             // No type information on return, let us hope this is something proper
                             // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
                             resolve(response.text());

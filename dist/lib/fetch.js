@@ -78,7 +78,7 @@ const check_Web_url = (address) => {
  *
  * I guess this makes this entry a bit polyfill like:-)
  */
-const my_fetch = (process !== undefined) ? node_fetch.default : fetch;
+const my_fetch = constants.is_browser ? fetch : node_fetch.default;
 /**
  * Fetch a resource.
  *
@@ -88,6 +88,7 @@ const my_fetch = (process !== undefined) ? node_fetch.default : fetch;
  * @async
  */
 async function fetch_resource(resource_url, force_text = false) {
+    console.log("was asked to fetch a resource");
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -100,8 +101,10 @@ async function fetch_resource(resource_url, force_text = false) {
                     // If the response content type is set (which is usually the case, but not in all cases...)
                     const response_type = response.headers.get('content-type').split(';')[0].trim();
                     if (response_type && response_type !== '') {
+                        console.log(`valid type ${response_type}`);
                         if (constants.text_content.includes(response_type)) {
                             // the simple way, just return text...
+                            console.log(`produce text`);
                             resolve(response.text());
                         }
                         else {
@@ -109,12 +112,21 @@ async function fetch_resource(resource_url, force_text = false) {
                                 resolve(response.text());
                             }
                             else {
+                                console.log(`Choosing return; is it node (${constants.is_browser})`);
                                 // return the body without processing, ie, as a stream
-                                resolve(response.body);
+                                if (constants.is_browser) {
+                                    console.log("return blob");
+                                    resolve(response.blob());
+                                }
+                                else {
+                                    console.log(`return body`);
+                                    resolve(response.body);
+                                }
                             }
                         }
                     }
                     else {
+                        console.log("return text by default");
                         // No type information on return, let us hope this is something proper
                         // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
                         resolve(response.text());

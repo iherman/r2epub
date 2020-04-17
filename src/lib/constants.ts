@@ -5,7 +5,13 @@
  */
 
 /**
- * Various media types that are used in the code.
+ * Flag to decide whether the code runs in a browser or in node.js
+ */
+
+export const is_browser :boolean = (process === undefined || process.title === 'browser');
+
+/**
+ * Various media types used in the code.
  */
 export const media_types = {
     json    : 'application/json',

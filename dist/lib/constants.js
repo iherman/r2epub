@@ -6,7 +6,11 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Various media types that are used in the code.
+ * Flag to decide whether the code runs in a browser or in node.js
+ */
+exports.is_browser = (process === undefined || process.title === 'browser');
+/**
+ * Various media types used in the code.
  */
 exports.media_types = {
     json: 'application/json',
