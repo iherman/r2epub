@@ -11,7 +11,6 @@
 
 import * as ocf        from './lib/ocf';
 import * as conversion from './lib/conversion';
-import { fetch_html, fetch_resource, fetch_type } from './lib/fetch';
 
 
 /**
@@ -21,15 +20,22 @@ import { fetch_html, fetch_resource, fetch_type } from './lib/fetch';
  * @async
  */
 const submit = async (event :Event) :Promise<any> => {
-    const save_book = (data: any, name :string) => {
-        console.log("saving")
-        const dataURL = URL.createObjectURL(data);
+    /**
+     * The special trick to save a content, using an invisible `<a>` element. I found
+     * this trick somewhere on the Web...
+     *
+     * @param data
+     * @param name
+     */
+    const save_book = (data: Blob, name :string) => {
+        const dataURL  = URL.createObjectURL(data);
         const download = document.getElementById('download') as HTMLAnchorElement;
-        download.href = dataURL;
+        download.href  = dataURL;
         download.download = name;
         download.click();
     };
 
+    // This is to allow for async to work properly and avoid reloading the page
     event.preventDefault();
 
     try {
@@ -43,7 +49,7 @@ const submit = async (event :Event) :Promise<any> => {
 
 
         if (!(url.value === null || url.value === '')) {
-            const a :conversion.Arguments  = {
+            const args :conversion.Arguments  = {
                 url    : url.value,
                 respec : respec.value === 'true',
                 config : {
@@ -53,32 +59,25 @@ const submit = async (event :Event) :Promise<any> => {
                     maxTocLevel     : maxTocLevel.value === '' ? undefined : maxTocLevel.value,
                 }
             }
-            // Testing...!
-            // console.log(JSON.stringify(a, null, 4));
-            console.log(`NAMIVAN: ${process === undefined}, ${process.argv === undefined}`);
-            console.log(JSON.stringify(process, null, 4));
-
+            console.log(`Call arguments:  ${JSON.stringify(args, null, 4)}`);
 
             try {
-                const data = await fetch_resource('http://localhost:8001/LocalData/icon.jpg');
-
-                console.log(JSON.stringify(data, null, 4));
-
-                // const response = await fetch('http://localhost:8001/LocalData/icon.jpg');
-                // const data     = await response.blob();
-
+                const conversion_process = new conversion.RespecToEPUB(false, false);
+                const the_ocf :ocf.OCF   = await conversion_process.create_epub(args);
+                const content :Blob      = await the_ocf.get_content() as Blob;
 
                 console.log('got here')
-                save_book(data, 'namivan.jpg');
+                save_book(content, the_ocf.name);
                 console.log('got even here!')
             } catch(e) {
-                console.log(`Something did not work with fetch: ${e}`);
+                console.log(`EPUB Generation Error: ${e}`);
             }
-            return;
+        } else {
+            alert(`No or empty URL value`);
         }
     } catch(e) {
-        console.log(e)
-        alert(`Exception raised... ${e}`);
+        console.log(`Form interetation Error... ${e}`);
+        alert(`Form interetation Error... ${e}`);
     }
 }
 

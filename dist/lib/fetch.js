@@ -88,7 +88,6 @@ const my_fetch = constants.is_browser ? fetch : node_fetch.default;
  * @async
  */
 async function fetch_resource(resource_url, force_text = false) {
-    console.log("was asked to fetch a resource");
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -101,10 +100,8 @@ async function fetch_resource(resource_url, force_text = false) {
                     // If the response content type is set (which is usually the case, but not in all cases...)
                     const response_type = response.headers.get('content-type').split(';')[0].trim();
                     if (response_type && response_type !== '') {
-                        console.log(`valid type ${response_type}`);
                         if (constants.text_content.includes(response_type)) {
                             // the simple way, just return text...
-                            console.log(`produce text`);
                             resolve(response.text());
                         }
                         else {
@@ -112,14 +109,13 @@ async function fetch_resource(resource_url, force_text = false) {
                                 resolve(response.text());
                             }
                             else {
-                                console.log(`Choosing return; is it node (${constants.is_browser})`);
-                                // return the body without processing, ie, as a stream
+                                // return the body without processing, ie, as a blob or a stream
                                 if (constants.is_browser) {
-                                    console.log("return blob");
+                                    // In a browser, a blob should be returned
                                     resolve(response.blob());
                                 }
                                 else {
-                                    console.log(`return body`);
+                                    // In node.js the body is returned as a stream
                                     resolve(response.body);
                                 }
                             }

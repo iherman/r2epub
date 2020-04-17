@@ -9,8 +9,15 @@
  *
  * @packageDocumentation
  */
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch_1 = require("./lib/fetch");
+const conversion = __importStar(require("./lib/conversion"));
 /**
  *
  * Collect and pre-process the form parameters
@@ -18,14 +25,21 @@ const fetch_1 = require("./lib/fetch");
  * @async
  */
 const submit = async (event) => {
+    /**
+     * The special trick to save a content, using an invisible `<a>` element. I found
+     * this trick somewhere on the Web...
+     *
+     * @param data
+     * @param name
+     */
     const save_book = (data, name) => {
-        console.log("saving");
         const dataURL = URL.createObjectURL(data);
         const download = document.getElementById('download');
         download.href = dataURL;
         download.download = name;
         download.click();
     };
+    // This is to allow for async to work properly and avoid reloading the page
     event.preventDefault();
     try {
         // const the_form :HTMLFormElement = document.getElementById('main_form') as HTMLFormElement;
@@ -36,7 +50,7 @@ const submit = async (event) => {
         const addSectionLinks = document.getElementById('addSectionLinks');
         const maxTocLevel = document.getElementById('maxTocLevel');
         if (!(url.value === null || url.value === '')) {
-            const a = {
+            const args = {
                 url: url.value,
                 respec: respec.value === 'true',
                 config: {
@@ -46,28 +60,26 @@ const submit = async (event) => {
                     maxTocLevel: maxTocLevel.value === '' ? undefined : maxTocLevel.value,
                 }
             };
-            // Testing...!
-            // console.log(JSON.stringify(a, null, 4));
-            console.log(`NAMIVAN: ${process === undefined}, ${process.argv === undefined}`);
-            console.log(JSON.stringify(process, null, 4));
+            console.log(`Call arguments:  ${JSON.stringify(args, null, 4)}`);
             try {
-                const data = await fetch_1.fetch_resource('http://localhost:8001/LocalData/icon.jpg');
-                console.log(JSON.stringify(data, null, 4));
-                // const response = await fetch('http://localhost:8001/LocalData/icon.jpg');
-                // const data     = await response.blob();
+                const conversion_process = new conversion.RespecToEPUB(false, false);
+                const the_ocf = await conversion_process.create_epub(args);
+                const content = await the_ocf.get_content();
                 console.log('got here');
-                save_book(data, 'namivan.jpg');
+                save_book(content, the_ocf.name);
                 console.log('got even here!');
             }
             catch (e) {
-                console.log(`Something did not work with fetch: ${e}`);
+                console.log(`EPUB Generation Error: ${e}`);
             }
-            return;
+        }
+        else {
+            alert(`No or empty URL value`);
         }
     }
     catch (e) {
-        console.log(e);
-        alert(`Exception raised... ${e}`);
+        console.log(`Form interetation Error... ${e}`);
+        alert(`Form interetation Error... ${e}`);
     }
 };
 window.addEventListener('load', () => {
