@@ -33,7 +33,7 @@ There is a simple server implemented in [[serve]]: running
 node dist/server
 ```
 
-starts a rudimentary Web server that generate EPUB 3.2 instances for URL-s of the sort:
+starts a simple Web server that generate EPUB 3.2 instances for URL-s of the sort:
 
 ```
 https://epub.example.org?url=https://www.example.org/doc.html
@@ -48,6 +48,12 @@ https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specSt
 converts the original file via respec, with the `specStatus` value set to `REC`. If one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
 
 By default, the server uses the `http` port number 5000, unless the `PORT` environment variable is set.
+
+The server has been deployed on the cloud, using [heroku](https://r2epub.herokuapp.com/).
+
+### Client-side processing
+
+The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries can be used to trigger the necessary event handler: [[submit]]. The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/server.html).
 
 ## Installation, usage
 

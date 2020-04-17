@@ -40,7 +40,9 @@ exports.local_port_number = '5000';
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
 exports.spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url=';
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
-exports.fixup_js = 'https://www.w3.org/scripts/TR/2016/fixup.js';
+exports.fixup_js = 'https://iherman.github.io/r2epub/epub_assets/fixup.js';
+// export const fixup_js             :string  = 'https://www.w3.org/scripts/TR/2016/fixup.js';
+// If the CORS are set on the W3C site, this may be reversed...
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
 exports.TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */

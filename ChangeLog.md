@@ -12,11 +12,12 @@
 * Removed the `URL` type (was just an alias to `string`) in `fetch.ts`: it turns out the URL is a global name in Typescript and browsers, and is not a good practice to shadow such name...
 * Changes for “browserify”:
     * a separate `browser.ts` top level module
-    * combination of `tsc` and `browserify` to produce an `r2epub.js` in `docs/assets/js`; this is the javascript file to be in included for client-side conversion
+    * combination of `tsc` and `browserify` to produce `r2epub.js` and `r2epub.min.js` in `docs/assets/js`; this is the javascript file to be in included for client-side conversion
     * `package.json` contains a separate script entry to produce the browser version
     * the flag to decide whether the environment is a browser or node.js has been updated
     * the ocf module makes the choice whether it returns a blob (for a browser) or a Buffer (for node)
     * the fetch resource function makes a choice whether it returns a non-textual output as a blob (for a browser) or as a stream (for node)
+* A separate `src/browser.ts` has been added containing an event handler that can be used from a browser. A `docs/convert.html` has also been added with a simple HTML interface using the browserified script.
 
 
 ## Version 1.0.1

@@ -88,12 +88,16 @@ export function create_cover_page(global :Global) :ResourceRef[] {
         {
             media_type   : 'image/png',
             relative_url : 'Icons/w3c_main.png',
-            absolute_url : 'https://www.w3.org/Icons/w3c_main.png'
+            // absolute_url : 'https://www.w3.org/Icons/w3c_main.png'
+            // If the CORS are set on the W3C site, this may be reversed...
+            absolute_url : `${constants.modified_epub_files}w3c_main.png`
         },
         {
             media_type   : 'text/css',
             relative_url : 'StyleSheets/base.css',
-            absolute_url : 'https://www.w3.org/StyleSheets/base.css'
+            // absolute_url : 'https://www.w3.org/StyleSheets/base.css'
+            // If the CORS are set on the W3C site, this may be reversed...
+            absolute_url : `${constants.modified_epub_files}base_simple.css`
         }
     ]
 

@@ -15,14 +15,19 @@ import * as conversion from './lib/conversion';
 
 /**
  *
- * Collect and pre-process the form parameters
+ * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming form data.
+ * The result is saved on the local disc, using the short name of the document.
+ *
+ * The method is set as an even handler for a submit button. The `event` argument is only used to prevent the default behavior of the button (i.e., to reload the page).
+ *
+ * @param event - Event object as forwarded to an HTML event handler.
  *
  * @async
  */
 const submit = async (event :Event) :Promise<any> => {
     /**
-     * The special trick to save a content, using an invisible `<a>` element. I found
-     * this trick somewhere on the Web...
+     * The special trick to save a content, using an invisible `<a>` element, its 'download' attribute and a dataURL for the blob to be stored.
+     * I found this trick somewhere on the Web...
      *
      * @param data
      * @param name
@@ -65,10 +70,7 @@ const submit = async (event :Event) :Promise<any> => {
                 const conversion_process = new conversion.RespecToEPUB(false, false);
                 const the_ocf :ocf.OCF   = await conversion_process.create_epub(args);
                 const content :Blob      = await the_ocf.get_content() as Blob;
-
-                console.log('got here')
                 save_book(content, the_ocf.name);
-                console.log('got even here!')
             } catch(e) {
                 console.log(`EPUB Generation Error: ${e}`);
             }
