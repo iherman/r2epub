@@ -21,6 +21,11 @@
                 XML files in an EPUB file are not supposed to use XML entities; however, the original versions of these SVG files refer to the SVG DTD which, on its turn, use XML modularization, i.e., lots of XML entities. The SVG files in this collection are identical to the original ones, except that the DTD references are removed.<br/>
                 Strictly speaking this is not necessary insofar as EPUB readers can usually handle these SVG files, but <code>epubcheck</code> does complain about this. Note that there is an open discussion in the epubcheck project whether such entities should not be allowed in DTD-s which are usually ignored by reading systems anyway...
             </dd>
+            <dt>Some other logo and css files (<code>UD-watermark.png</code>, <code>w3c_main.png</code>, etc.</dt>
+            <dd>
+                These files are exact copies of their W3C original; however, their CORS headers are not set and,
+                as a consequence, they cannot be fetched from a browser. Github.io sets these flags properly…
+            </dd>
         </dl>
         <p>When generating an EPUB content <code>r2epub</code> uses these files (instead of the original equivalents).</p>
     </body>
