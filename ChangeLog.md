@@ -2,12 +2,21 @@
 
 ## Version 1.0.2
 
+### (Main) New feature
+
+* Code embeddable into a browser.
+
+### Detailed list of changes
+
 * Reorganized the documentation folder organization, allowing the creation of other content besides the code documentation (used for a browser version, for example)
 * Removed the `URL` type (was just an alias to `string`) in `fetch.ts`: it turns out the URL is a global name in Typescript and browsers, and is not a good practice to shadow such name...
-* Set up a browserify structure:
+* Changes for “browserify”:
     * a separate `browser.ts` top level module
     * combination of `tsc` and `browserify` to produce an `r2epub.js` in `docs/assets/js`; this is the javascript file to be in included for client-side conversion
     * `package.json` contains a separate script entry to produce the browser version
+    * the flag to decide whether the environment is a browser or node.js has been updated
+    * the ocf module makes the choice whether it returns a blob (for a browser) or a Buffer (for node)
+    * the fetch resource function makes a choice whether it returns a non-textual output as a blob (for a browser) or as a stream (for node)
 
 
 ## Version 1.0.1
