@@ -65,12 +65,13 @@ const submit = async (event) => {
                     maxTocLevel: maxTocLevel.value === '' ? undefined : maxTocLevel.value,
                 }
             };
-            console.log(`Call arguments:  ${JSON.stringify(args, null, 4)}`);
+            // console.log(`Call arguments:  ${JSON.stringify(args, null, 4)}`);
             try {
                 const conversion_process = new conversion.RespecToEPUB(false, false);
                 const the_ocf = await conversion_process.create_epub(args);
                 const content = await the_ocf.get_content();
                 save_book(content, the_ocf.name);
+                alert(`“${the_ocf.name}” has been generated.`);
             }
             catch (e) {
                 console.log(`EPUB Generation Error: ${e}`);

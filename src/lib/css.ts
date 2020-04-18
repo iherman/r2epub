@@ -229,8 +229,6 @@ export function extract_css(global: Global): ResourceRef[] {
                     relative_url : `${constants.local_style_files}logos/${css_extras.logo_name}`,
                     media_type   : media_type,
                     absolute_url : `${orig_logo_url}${css_extras.logo_name}`
-                    // If the CORS are set on the W3C site, this may be reversed...
-                    // absolute_url : `${constants.modified_epub_files}${css_extras.logo_name}`
                 })
             }
 
@@ -240,8 +238,6 @@ export function extract_css(global: Global): ResourceRef[] {
                     relative_url : `${constants.local_style_files}logos/UD-watermark.png`,
                     media_type   : constants.media_types.png,
                     absolute_url : `${constants.TR_logo_files}UD-watermark.png`
-                    // If the CORS are set on the W3C site, this may be reversed...
-                    /// absolute_url : `${constants.modified_epub_files}UD-watermark.png`
                 })
             }
 
