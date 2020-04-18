@@ -75,9 +75,11 @@ The documentation is also available [on-line](https://iherman.github.io/r2epub/t
 
 Note that the on-the-fly conversion via respec is done by running the original source through the separate `https://labs.w3.org/spec-generator/` service. Alas!, that service may be down, and this package has no control over that…
 
+Copyright © 2020 [@iherman](https://github.com/iherman).
+
 ---
 
-Several years ago I have already made a similar program called [Respec2EPUB](https://github.com/iherman/respec2epub). That version was written in Python 2;
+<span style='font-size:80%'>Several years ago I have already made a similar program called [Respec2EPUB](https://github.com/iherman/respec2epub). That version was written in Python 2;
 alas!, with the demise of Python 2 in favor of Python 3, it will become unusable soon. (E.g., latest Debian releases do not
-even install Python 2 any more.) Instead of fighting through the 2->3 conversion, I decided to re-write the program, making it a bit
-simpler along the way.
+even install Python 2 any more.) Instead of fighting through the 2->3 conversion, I decided to re-write the program, making it way
+simpler along the way (due to the stabilization of the W3C TR styles). The result also passes the latest release of <a href='https://github.com/w3c/epubcheck'>epubcheck</a>.</span>
