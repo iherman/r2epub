@@ -93,7 +93,7 @@ html {
  * no watermark, simple background template
  */
 const specStatus_simple = [
-    'ED', 'WD', 'CR', 'PR', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
+    'ED', 'WD', 'CR', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
 ]
 
 /** Interface for special cases, ie, when the `specStatus` value does not provide all information… */
