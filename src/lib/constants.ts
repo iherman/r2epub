@@ -47,9 +47,7 @@ export const local_port_number :string = '5000';
 export const spec_generator       :string = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
-export const fixup_js             :string  = 'https://iherman.github.io/r2epub/epub_assets/fixup.js';
-// export const fixup_js             :string  = 'https://www.w3.org/scripts/TR/2016/fixup.js';
-// If the CORS are set on the W3C site, this may be reversed...
+export const fixup_js             :string  = 'https://www.w3.org/scripts/TR/2016/fixup.js';
 
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
 export const TR_logo_files        :string = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
