@@ -14,29 +14,29 @@ export const is_browser :boolean = (process === undefined || process.title === '
  * Various media types used in the code.
  */
 export const media_types = {
+    css     : 'text/css',
+    epub    : 'application/epub+zip',
+    es      : 'text/ecmascript',
+    html    : 'text/html',
+    js      : 'text/javascript',
     json    : 'application/json',
     jsonld  : 'application/ld+json',
-    html    : 'text/html',
-    xhtml   : 'application/xhtml+xml',
-    css     : 'text/css',
-    svg     : 'image/svg+xml',
-    js      : 'text/javascript',
-    es      : 'text/ecmascript',
     png     : 'image/png',
-    epub    : 'application/epub+zip'
+    svg     : 'image/svg+xml',
+    xhtml   : 'application/xhtml+xml',
  };
 
 
 /** These media types refer to textual content, no reason to bother about streaming when fetching them... */
 export const text_content :string[] = [
+    media_types.css,
+    media_types.es,
+    media_types.html,
+    media_types.js,
     media_types.json,
-    media_types.jsonld ,
-    media_types.html ,
-    media_types.xhtml ,
-    media_types.css ,
-    media_types.svg ,
-    media_types.js ,
-    media_types.es
+    media_types.jsonld,
+    media_types.svg,
+    media_types.xhtml,
 ];
 
 
@@ -63,29 +63,28 @@ const allow_methods :string[] = ['GET', 'HEAD'];
 
 /** @hidden */
 const allow_headers :string[] = [
-    'Range',
-    'Content-Type',
-    'Origin',
-    'X-Requested-With',
     'Accept',
     'Accept-Language',
-    'Content-Language'
+    'Content-Language',
+    'Content-Type',
+    'Origin',
+    'Range',
+    'X-Requested-With',
 ];
 
 /** @hidden */
 const expose_headers :string[] = [
     'Accept-Ranges',
+    'Cache-Control',
     'Content-Encoding',
-    'Content-Type',
+    'Content-Language',
     'Content-Length',
     'Content-Range',
-    'Content-Language',
-    'Cache-Control',
+    'Content-Type',
     'Expires',
     'Last-Modified',
-    'Pragma'
+    'Pragma',
 ]
-
 
 /**
  * CORS headers, to be added to the server response

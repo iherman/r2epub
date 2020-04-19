@@ -58,14 +58,14 @@ import yargs = require('yargs')
  */
 async function cli() {
     const argv = yargs.options({
-        o: { type: 'string',  alias: 'output',          default: null,  description: 'Output file name. If missing, the short name of the document is used.'},
-        r: { type: 'boolean', alias: 'respec',          default: false, description: 'The source is in respec.'},
-        p: { type: 'boolean', alias: 'package',         default: false, description: '[Debug] Do not generate an EPUB file, just print the package file content.'},
-        t: { type: 'boolean', alias: 'trace',           default: false, description: '[Debug] Print built in trace information.'},
-        d: { type: 'string',  alias: 'publishDate',     default: null,  description: 'Publication date.'},
-        s: { type: 'string',  alias: 'specStatus',      default: null,  description: 'Specification type.'},
-        l: { type: 'string',  alias: 'addSectionLinks', default: null,  description: 'Add section links with "§".'},
-        m: { type: 'number',  alias: 'maxTocLevel',     default: null,  description: 'Max TOC level.'},
+        o: { type: 'string',  alias: 'output',          default: null,  description: 'Output file name. If missing, the short name of the document is used.', },
+        r: { type: 'boolean', alias: 'respec',          default: false, description: 'The source is in respec.', },
+        p: { type: 'boolean', alias: 'package',         default: false, description: '[Debug] Do not generate an EPUB file, just print the package file content.', },
+        t: { type: 'boolean', alias: 'trace',           default: false, description: '[Debug] Print built in trace information.', },
+        d: { type: 'string',  alias: 'publishDate',     default: null,  description: 'Publication date.', },
+        s: { type: 'string',  alias: 'specStatus',      default: null,  description: 'Specification type.', },
+        l: { type: 'string',  alias: 'addSectionLinks', default: null,  description: 'Add section links with "§".', },
+        m: { type: 'number',  alias: 'maxTocLevel',     default: null,  description: 'Max TOC level.', },
     })
     .version()
     .wrap(null)
