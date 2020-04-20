@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>r2epub — Convert HTML/ReSpec into EPUB 3.2</title>
+        <link rel='stylesheet' href='./assets/css/convert.css'/>
+        <script type='text/javascript' src='./assets/js/r2epub.min.js'></script>
+    </head>
+    <body>
+        <header>
+            <h1>r2epub — Convert HTML/ReSpec into EPUB 3.2</h1>
+        </header>
+        <main>
+            <form id="main_form">
+                <p style="visibility: hidden" id='done'>EPUB file generated!!</p>
+                <fieldset id="main_arguments">
+                    <legend>Main arguments:</legend>
+                    <div class='fieldset_grid'>
+                        <label for="url">Document URL</label>
+                        <input name="url" id="url" size="60" type="text" value="http://localhost:8001/TR/vc-data-model/"  required>
+                        <label for="respec">Run ReSpec<sup><a href='#respec'>(?)</a></sup></label>
+                        <select id="respec" name="respec" size="1">
+                            <option selected="selected" value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset id="respec_arguments ">
+                    <legend>ReSpec arguments:</legend>
+                    <div class='fieldset_grid'>
+                        <label for="publishDate">Publication Date <sup><a href='https://github.com/w3c/respec/wiki/publishDate'>(?)</a></sup></label>
+                        <input name="publishDate" id="publishDate" size="77" type="date">
+                        <label for="specStatus">Specification Status <sup><a href='https://github.com/w3c/respec/wiki/specStatus'>(?)</a></sup></label>
+                        <select id="specStatus" name="specStatus" size="1">
+                            <option selected="selected" value="null">As set</option>
+                            <option value="base">base</option>
+                            <option value="MO">MO</option>
+                            <option value="unofficial">unofficial</option>
+                            <option value="ED">ED</option>
+                            <option value="FPWD">FPWD</option>
+                            <option value="WD">WD</option>
+                            <option value="LC">LC</option>
+                            <option value="LD">LD</option>
+                            <option value="LS">LS</option>
+                            <option value="CR">CR</option>
+                            <option value="PR">PR</option>
+                            <option value="PER">PER</option>
+                            <option value="REC">REC</option>
+                            <option value="RSCND">RSCND</option>
+                            <option value="FPWD-NOTE">FPWD-NOTE</option>
+                            <option value="WG-NOTE">WG-NOTE</option>
+                            <option value="BG-DRAFT">BG-DRAFT</option>
+                            <option value="BG-FINAL">BG-FINAL</option>
+                            <option value="CG-DRAFT">CG-DRAFT</option>
+                            <option value="CG-FINAL">CG-FINAL</option>
+                            <option value="CG-FINAL">CG-FINAL</option>
+                            <option value="CG-FINAL">CG-FINAL</option>
+                            <option value="Member-SUBM">Member-SUBM</option>
+                            <option value="draft-finding">draft-finding</option>
+                            <option value="finding">finding</option>
+                        </select>
+                        <label for="addSectionLinks">Add Section Links <sup><a href='https://github.com/w3c/respec/wiki/addSectionLinks'>(?)</a></sup></label>
+                        <select id="addSectionLinks" name="addSectionLinks" size="1">
+                            <option selected="selected" value="null">As set</option>
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                        <label for="maxTocLevel">Maximum Toc Level <sup><a href='https://github.com/w3c/respec/wiki/maxTocLevel'>(?)</a></sup></label>
+                        <input name="maxTocLevel" id="maxTocLevel" size="10" type="number" min="0">
+                    </div>
+                </fieldset>
+
+                <fieldset id="actions">
+                    <legend>Actions</legend>
+                    <input type="submit" value="Convert" id="submit" name="submit">
+                    <input type="reset" value="Reset" id="reset" name="reset">
+                </fieldset>
+                <progress id='progress' style='width: 100%; visibility: hidden'>bar</progress>
+            </form>
+            <!-- This is a hidden element used by the file saving procedure. It must stay hidden. -->
+            <a style='display:none' id='download'>This is a dummy entry for saving the result</a>
+            <section>
+                <h2>What is it?</h2>
+                <p>This is a client-side tool to convert W3C Technical Reports, authored in <a href="https://github.com/w3c/respec/wiki/">ReSpec</a>, to EPUB 3.2</p>
+
+                <p>
+                    The client script takes the parameters through the form above, and generates an EPUB 3.2 instance stored on the local machines. The possible form parameters are:
+                </p>
+
+                <dl>
+                    <dt>“Document URL”</dt>
+                    <dd>The URL for the content. <em>This value is required</em>.</dd>
+
+                    <dt id="respec">“Run ReSpec”</dt>
+                    <dd>Whether the source is in ReSpec (“true”) or a final HTML (“false”). If the former, the source is converted using an <a href='https://www.w3.org/2015/labs/'>online service</a> based on <a href="https://github.com/w3c/spec-generator">Spec Generator</a> into HTML first.</dd>
+
+                    <dt>“Publication Date”</dt>
+                    <dd>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the “<code>respecConfig</code> structure</a> in the source.</dd>
+
+                    <dt>“Specification Status”</dt>
+                    <dd>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+
+                    <dt>“Add Section Links”</dt>
+                    <dd>Add section links with <code>§</code>. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+
+                    <dt>“Maximum Toc Level”</dt>
+                    <dd>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+
+                </dl>
+
+                <p>
+                    By default, the value of “Run ReSpec” is “false”. However, if one of ReSpec arguments is set, then the “true” value is implied (i.e., it is not necessary to set it explicitly).
+                </p>
+
+                <p style='font-size: smaller'>
+                    <i><strong>Warning:</strong></i> this code does not run on Apple’s Safari and on Internet Explorer, neither on the desktop nor on IOS. The reason is beyond my control: the “browserify” tool, used to convert the “node.js” code into a module usable in a browser, includes some general tools to handle the <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt'>BigInt</a> object, which is currently not implemented in those browsers.
+                </p>
+            </section>
+        </main>
+        <footer class='copyright'>
+            <p >This client runs the <a href='https://github.com/iherman/r2epub/'>r2epub</a> script; see the <a href='https://iherman.github.io/r2epub/'>documentation</a> for more details. Copyright © 2020 <a href='https://www.ivan-herman.net/'>Ivan Herman</a>. </p>
+        </footer>
+        </body>
+</html>

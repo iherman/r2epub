@@ -63,7 +63,7 @@ class OCF {
     async get_content() {
         if (this.content === null) {
             this.content = await this.book.generateAsync({
-                type: 'nodebuffer',
+                type: constants.is_browser ? 'blob' : 'nodebuffer',
                 mimeType: constants.media_types.epub,
                 compressionOptions: {
                     level: 9

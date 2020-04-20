@@ -1,18 +1,19 @@
 {
   "name": "respec-to-epub",
-  "version": "1.0.2dev",
+  "version": "1.0.2",
   "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
   "engines": {
     "node": "12.x"
   },
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "dist": "tsc",
-    "run": "node dist/cli.js",
+    "build": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
+    "dist": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
+    "cli": "node dist/cli.js",
     "serve": "node dist/server.js",
-    "docs": "typedoc src/"
+    "createDocs": "typedoc src/"
   },
+  "browser": "dist/browser.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iherman/r2epub.git"
@@ -30,7 +31,7 @@
   "dependencies": {
     "@types/jszip": "^3.1.7",
     "@types/underscore": "^1.9.4",
-    "jsdom": "^16.2.0",
+    "jsdom": "^16.2.2",
     "jszip": "^3.2.2",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.0",
@@ -49,9 +50,11 @@
     "@types/valid-url": "^1.0.2",
     "@types/xmlserializer": "^0.6.0",
     "@types/yargs": "^15.0.4",
+    "browserify": "^16.5.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
+    "terser": "^4.6.11",
     "typedoc": "^0.16.11",
     "typedoc-plugin-nojekyll": "^1.0.1",
     "typescript": "^3.8.3"

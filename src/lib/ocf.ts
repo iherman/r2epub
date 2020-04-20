@@ -37,7 +37,7 @@ const container_xml :string = `<?xml version="1.0"?>
 export class OCF {
     private book    :JSZip;
     name    :string;
-    private content :Buffer = null;
+    private content :Buffer|Blob = null;
 
     /**
      *
@@ -67,16 +67,17 @@ export class OCF {
      *
      * @async
      */
-    async get_content() :Promise<Buffer> {
+    async get_content() :Promise<Buffer|Blob> {
         if (this.content === null) {
+
             this.content = await this.book.generateAsync({
-                type: 'nodebuffer',
+                type:  constants.is_browser ? 'blob' : 'nodebuffer',
                 mimeType: constants.media_types.epub,
                 compressionOptions: {
                     level: 9
                 }
             });
-        }
+       }
         return this.content;
     }
 };

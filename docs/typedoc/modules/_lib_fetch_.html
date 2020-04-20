@@ -80,12 +80,6 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_lib_fetch_.html#url" class="tsd-kind-icon">URL</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
@@ -104,28 +98,15 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="url" class="tsd-anchor"></a>
-					<h3>URL</h3>
-					<div class="tsd-signature tsd-kind-icon">URL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/532abdd/src/lib/fetch.ts#L8">lib/fetch.ts:8</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="my_fetch" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> my_<wbr>fetch</h3>
-					<div class="tsd-signature tsd-kind-icon">my_<wbr>fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = (process !&#x3D;&#x3D; undefined) ? node_fetch.default : fetch</span></div>
+					<div class="tsd-signature tsd-kind-icon">my_<wbr>fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = constants.is_browser ? fetch : node_fetch.default</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/532abdd/src/lib/fetch.ts#L79">lib/fetch.ts:79</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/fetch.ts#L77">lib/fetch.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -167,13 +148,13 @@
 					<a name="check_web_url" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> check_<wbr><wbr>Web_<wbr>url</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">check_<wbr><wbr>Web_<wbr>url<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a></li>
+						<li class="tsd-signature tsd-kind-icon">check_<wbr><wbr>Web_<wbr>url<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/532abdd/src/lib/fetch.ts#L34">lib/fetch.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/fetch.ts#L32">lib/fetch.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,10 +179,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>address: <a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a></h5>
+									<h5>address: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 							<ul>
 								<li>the URL itself (which might be slightly improved by the valid-url method) or <code>null</code> if this is, in fact, not a URL</li>
 							</ul>
@@ -212,13 +193,13 @@
 					<a name="fetch_html" class="tsd-anchor"></a>
 					<h3>fetch_<wbr>html</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">fetch_<wbr>html<span class="tsd-signature-symbol">(</span>html_url<span class="tsd-signature-symbol">: </span><a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch_<wbr>html<span class="tsd-signature-symbol">(</span>html_url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/532abdd/src/lib/fetch.ts#L175">lib/fetch.ts:175</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/fetch.ts#L180">lib/fetch.ts:180</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -236,7 +217,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>html_url: <a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a></h5>
+									<h5>html_url: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -250,13 +231,13 @@
 					<a name="fetch_resource" class="tsd-anchor"></a>
 					<h3>fetch_<wbr>resource</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">fetch_<wbr>resource<span class="tsd-signature-symbol">(</span>resource_url<span class="tsd-signature-symbol">: </span><a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a>, force_text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch_<wbr>resource<span class="tsd-signature-symbol">(</span>resource_url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, force_text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/532abdd/src/lib/fetch.ts#L90">lib/fetch.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/fetch.ts#L88">lib/fetch.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -271,7 +252,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>resource_url: <a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a></h5>
+									<h5>resource_url: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> force_text: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
@@ -291,13 +272,13 @@
 					<a name="fetch_type" class="tsd-anchor"></a>
 					<h3>fetch_<wbr>type</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">fetch_<wbr>type<span class="tsd-signature-symbol">(</span>resource_url<span class="tsd-signature-symbol">: </span><a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch_<wbr>type<span class="tsd-signature-symbol">(</span>resource_url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/532abdd/src/lib/fetch.ts#L140">lib/fetch.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/fetch.ts#L145">lib/fetch.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -312,7 +293,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>resource_url: <a href="_lib_fetch_.html#url" class="tsd-signature-type">URL</a></h5>
+									<h5>resource_url: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -329,6 +310,9 @@
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_browser_.html">&quot;browser&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_cli_.html">&quot;cli&quot;</a>
@@ -373,9 +357,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_lib_fetch_.html#url" class="tsd-kind-icon">URL</a>
-					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_lib_fetch_.html#my_fetch" class="tsd-kind-icon">my_<wbr>fetch</a>
 					</li>

@@ -7,6 +7,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * ## Fetch
+ *
+ * Wrappers around the fetch function.
+ *
+ * @packageDocumentation
+ */
 const node_fetch = __importStar(require("node-fetch"));
 const urlHandler = __importStar(require("url"));
 const validUrl = __importStar(require("valid-url"));
@@ -71,7 +78,7 @@ const check_Web_url = (address) => {
  *
  * I guess this makes this entry a bit polyfill like:-)
  */
-const my_fetch = (process !== undefined) ? node_fetch.default : fetch;
+const my_fetch = constants.is_browser ? fetch : node_fetch.default;
 /**
  * Fetch a resource.
  *
@@ -102,12 +109,20 @@ async function fetch_resource(resource_url, force_text = false) {
                                 resolve(response.text());
                             }
                             else {
-                                // return the body without processing, ie, as a stream
-                                resolve(response.body);
+                                // return the body without processing, ie, as a blob or a stream
+                                if (constants.is_browser) {
+                                    // In a browser, a blob should be returned
+                                    resolve(response.blob());
+                                }
+                                else {
+                                    // In node.js the body is returned as a stream
+                                    resolve(response.body);
+                                }
                             }
                         }
                     }
                     else {
+                        console.log("return text by default");
                         // No type information on return, let us hope this is something proper
                         // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
                         resolve(response.text());
@@ -118,7 +133,7 @@ async function fetch_resource(resource_url, force_text = false) {
                 }
             })
                 .catch((err) => {
-                reject(new Error(`Problem accessing ${resource_url}: ${err}`));
+                reject(new Error(`Problem accessing ${final_url}: ${err}`));
             });
         }
         catch (err) {

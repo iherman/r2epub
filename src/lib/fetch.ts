@@ -5,8 +5,6 @@
  *
  * @packageDocumentation
  */
-export type URL = string;
-
 import * as node_fetch from 'node-fetch';
 import * as urlHandler from 'url';
 import * as validUrl   from 'valid-url';
@@ -31,7 +29,7 @@ import * as constants  from './constants';
 * @returns  - the URL itself (which might be slightly improved by the valid-url method) or `null` if this is, in fact, not a URL
 * @throws  if `address` pretends to be a URL, but it is not acceptable for some reasons.
 */
-const check_Web_url = (address :URL) :URL => {
+const check_Web_url = (address :string) :string => {
     const parsed = urlHandler.parse(address);
     if (parsed.protocol === null) {
         // This is not a URL, should be used as a file name
@@ -76,7 +74,7 @@ const check_Web_url = (address :URL) :URL => {
  *
  * I guess this makes this entry a bit polyfill like:-)
  */
-const my_fetch: ((arg :string) => Promise<any>) = (process !== undefined) ? node_fetch.default : fetch;
+const my_fetch: ((arg :string) => Promise<any>) = constants.is_browser ? fetch : node_fetch.default;
 
 
 /**
@@ -87,7 +85,7 @@ const my_fetch: ((arg :string) => Promise<any>) = (process !== undefined) ? node
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
-export async function fetch_resource(resource_url :URL, force_text :boolean = false) :Promise<any> {
+export async function fetch_resource(resource_url :string, force_text :boolean = false) :Promise<any> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -107,11 +105,18 @@ export async function fetch_resource(resource_url :URL, force_text :boolean = fa
                                 if (force_text){
                                     resolve(response.text())
                                 } else {
-                                    // return the body without processing, ie, as a stream
-                                    resolve(response.body)
+                                    // return the body without processing, ie, as a blob or a stream
+                                    if (constants.is_browser) {
+                                        // In a browser, a blob should be returned
+                                        resolve(response.blob())
+                                     } else {
+                                         // In node.js the body is returned as a stream
+                                        resolve(response.body)
+                                   }
                                 }
                             }
                         } else {
+                            console.log("return text by default")
                             // No type information on return, let us hope this is something proper
                             // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
                             resolve(response.text());
@@ -121,7 +126,7 @@ export async function fetch_resource(resource_url :URL, force_text :boolean = fa
                     }
                 })
                 .catch((err) => {
-                    reject(new Error(`Problem accessing ${resource_url}: ${err}`));
+                    reject(new Error(`Problem accessing ${final_url}: ${err}`));
                 });
         } catch (err) {
             reject(err);
@@ -137,7 +142,7 @@ export async function fetch_resource(resource_url :URL, force_text :boolean = fa
  * @returns - the media type
  * @async
  */
-export async function fetch_type(resource_url :URL) :Promise<string> {
+export async function fetch_type(resource_url :string) :Promise<string> {
     // If there is a problem, an exception is raised
     return new Promise((resolve, reject) => {
         try {
@@ -172,7 +177,7 @@ export async function fetch_type(resource_url :URL) :Promise<string> {
  * @return - DOM object for the parsed HTML
  * @throws Error if something goes wrong with fetch or DOM Parsing
  */
-export async function fetch_html(html_url :URL) :Promise<jsdom.JSDOM> {
+export async function fetch_html(html_url :string) :Promise<jsdom.JSDOM> {
     try {
         const body = await fetch_resource(html_url, true);
         const retval = new jsdom.JSDOM(body, { url: html_url });
