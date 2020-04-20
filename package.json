@@ -13,6 +13,7 @@
     "serve": "node dist/server.js",
     "docs": "typedoc src/"
   },
+  "browser": "dist/browser.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iherman/r2epub.git"

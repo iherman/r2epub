@@ -53,7 +53,7 @@ html {
  * no watermark, simple background template
  */
 const specStatus_simple = [
-    'ED', 'WD', 'CR', 'PR', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
+    'ED', 'WD', 'CR', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
 ];
 /**
  * Mapping from `specStatus` to its relevant description for the cases when a simple, automatic mapping

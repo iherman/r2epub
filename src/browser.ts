@@ -40,8 +40,29 @@ const submit = async (event :Event) :Promise<any> => {
         download.click();
     };
 
+    /**
+     * Turn on, temporarily, the visibility of the 'EPUB file generated!!' text.
+     */
+    const fading_success = () => {
+        done.style.setProperty('visibility', 'visible');
+        setTimeout(() => done.style.setProperty('visibility', 'hidden'), 3000);
+    }
+
+    /**
+     * Just create an artificial delay for debugging purposes...
+     *
+     * @param delay value in milliseconds
+     */
+    // const later = async (delay :number) :Promise<void> => {
+    //     return new Promise((resolve) => {
+    //         setTimeout(resolve, delay);
+    //     });
+    // }
+
     // This is to allow for async to work properly and avoid reloading the page
     event.preventDefault();
+    const done :HTMLElement             = document.getElementById('done');
+    const progress :HTMLProgressElement = document.getElementById('progress') as HTMLProgressElement;
 
     try {
         // const the_form :HTMLFormElement = document.getElementById('main_form') as HTMLFormElement;
@@ -52,8 +73,8 @@ const submit = async (event :Event) :Promise<any> => {
         const addSectionLinks :HTMLInputElement = document.getElementById('addSectionLinks') as HTMLInputElement;
         const maxTocLevel :HTMLInputElement = document.getElementById('maxTocLevel') as HTMLInputElement;
 
-
         if (!(url.value === null || url.value === '')) {
+
             const args :conversion.Arguments  = {
                 url    : url.value,
                 respec : respec.value === 'true',
@@ -67,20 +88,34 @@ const submit = async (event :Event) :Promise<any> => {
             // console.log(`Call arguments:  ${JSON.stringify(args, null, 4)}`);
 
             try {
+
+                // turn on the progress bar at the bottom of the form
+                progress.style.setProperty('visibility', 'visible');
+
+                // Convert the content into a book, and create an EPUB instance as a Blob
                 const conversion_process = new conversion.RespecToEPUB(false, false);
                 const the_ocf :ocf.OCF   = await conversion_process.create_epub(args);
                 const content :Blob      = await the_ocf.get_content() as Blob;
+
+                // Save the Blob in  a file
                 save_book(content, the_ocf.name);
-                alert(`“${the_ocf.name}” has been generated.`)
+
+                // // Remove the query string from the URL bar
+                document.location.search = '';
+
+                // Clean up the user interface and we are done!
+                progress.style.setProperty('visibility', 'hidden');
+                fading_success();
             } catch(e) {
+                progress.style.setProperty('visibility', 'hidden');
                 console.log(`EPUB Generation Error: ${e}`);
             }
         } else {
             alert(`No or empty URL value`);
         }
     } catch(e) {
-        console.log(`Form interetation Error... ${e}`);
-        alert(`Form interetation Error... ${e}`);
+        console.log(`Form interpretation Error... ${e}`);
+        alert(`Form interpretation Error... ${e}`);
     }
 }
 

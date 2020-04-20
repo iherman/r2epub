@@ -2,101 +2,90 @@
 <html>
     <head>
         <meta charset='utf-8'>
-        <title>r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
-        <!-- <link rel='stylesheet' href='https://www.w3.org/StyleSheets/TR/2016/base.css'/> -->
+        <title>r2epub — Convert HTML/ReSpec into EPUB 3.2</title>
+        <link rel='stylesheet' href='./assets/css/convert.css'/>
         <script type='text/javascript' src='./assets/js/r2epub.min.js'></script>
     </head>
     <body>
         <header>
-            <h1 nine wide column>r2epub — Converting HTML documents produced by Respec into EPUB 3.2</h1>
+            <h1>r2epub — Convert HTML/ReSpec into EPUB 3.2</h1>
         </header>
         <main>
             <form id="main_form">
-                <div>
-                    <div>
-                        <fieldset id="main_arguments">
-                            <legend>Main arguments:</legend>
-                            <div>
-                                <label for="url">Document URL:</label>
-                                <div>
-                                    <input name="url" id="url" size="75" type="text" value="http://localhost:8001/TR/vc-data-model/"  required>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="respec">Go through a respec processor?</label>
-                                <select id="respec" name="respec" size="1">
-                                    <option selected="selected" value="false">No</option>
-                                    <option value="true">Yes</option>
-                                </select>
-                            </div>
-                        </fieldset>
-                        <fieldset id="respec_arguments">
-                            <legend>Respec arguments:</legend>
-                            <div>
-                                <div>
-                                    <div>
-                                        <label for="publishDate">Publication Date <a href='https://github.com/w3c/respec/wiki/publishDate'>(?)</a>:</label>
-                                        <input name="publishDate" id="publishDate" size="77" type="date">
-                                    </div>
-                                    <div>
-                                        <label for="specStatus">Specification Type <a href='https://github.com/w3c/respec/wiki/specStatus'>(?)</a>:</label>
-                                        <select id="specStatus" name="specStatus" size="1">
-                                            <option selected="selected" value="null">As set</option>
-                                            <option value="base">base</option>
-                                            <option value="MO">MO</option>
-                                            <option value="unofficial">unofficial</option>
-                                            <option value="ED">ED</option>
-                                            <option value="FPWD">FPWD</option>
-                                            <option value="WD">WD</option>
-                                            <option value="LC">LC</option>
-                                            <option value="LD">LD</option>
-                                            <option value="LS">LS</option>
-                                            <option value="CR">CR</option>
-                                            <option value="PR">PR</option>
-                                            <option value="PER">PER</option>
-                                            <option value="REC">REC</option>
-                                            <option value="RSCND">RSCND</option>
-                                            <option value="FPWD-NOTE">FPWD-NOTE</option>
-                                            <option value="WG-NOTE">WG-NOTE</option>
-                                            <option value="BG-DRAFT">BG-DRAFT</option>
-                                            <option value="BG-FINAL">BG-FINAL</option>
-                                            <option value="CG-DRAFT">CG-DRAFT</option>
-                                            <option value="CG-FINAL">CG-FINAL</option>
-                                            <option value="CG-FINAL">CG-FINAL</option>
-                                            <option value="CG-FINAL">CG-FINAL</option>
-                                            <option value="Member-SUBM">Member-SUBM</option>
-                                            <option value="draft-finding">draft-finding</option>
-                                            <option value="finding">finding</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="addSectionLinks">Add Section Links <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>(?)</a>:</label>
-                                        <select id="addSectionLinks" name="addSectionLinks" size="1">
-                                            <option selected="selected" value="null">As set</option>
-                                            <option value="false">No</option>
-                                            <option value="true">Yes</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="maxTocLevel">Maximum Toc Level <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>(?)</a>:</label>
-                                        <input name="maxTocLevel" id="maxTocLevel" size="10" type="number" min="0">
-                                        <a style='display:none' id='download'>test</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset id="actions">
-                            <legend>Actions</legend>
-                            <input type="submit" value="Convert" id="submit" name="submit">
-                            <input type="reset" value="Reset" id="reset" name="reset">
-                        </fieldset>
+                <p style="visibility: hidden" id='done'>EPUB file generated!!</p>
+                <fieldset id="main_arguments">
+                    <legend>Main arguments:</legend>
+                    <div class='fieldset_grid'>
+                        <label for="url">Document URL</label>
+                        <input name="url" id="url" size="60" type="text" value="http://localhost:8001/TR/vc-data-model/"  required>
+                        <label for="respec">Run ReSpec<sup><a href='#respec'>(?)</a></sup></label>
+                        <select id="respec" name="respec" size="1">
+                            <option selected="selected" value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
                     </div>
-                </div>
+                </fieldset>
+                <fieldset id="respec_arguments ">
+                    <legend>ReSpec arguments:</legend>
+                    <div class='fieldset_grid'>
+                        <label for="publishDate">Publication Date <sup><a href='https://github.com/w3c/respec/wiki/publishDate'>(?)</a></sup></label>
+                        <input name="publishDate" id="publishDate" size="77" type="date">
+                        <label for="specStatus">Specification Type <sup><a href='https://github.com/w3c/respec/wiki/specStatus'>(?)</a></sup></label>
+                        <select id="specStatus" name="specStatus" size="1">
+                            <option selected="selected" value="null">As set</option>
+                            <option value="base">base</option>
+                            <option value="MO">MO</option>
+                            <option value="unofficial">unofficial</option>
+                            <option value="ED">ED</option>
+                            <option value="FPWD">FPWD</option>
+                            <option value="WD">WD</option>
+                            <option value="LC">LC</option>
+                            <option value="LD">LD</option>
+                            <option value="LS">LS</option>
+                            <option value="CR">CR</option>
+                            <option value="PR">PR</option>
+                            <option value="PER">PER</option>
+                            <option value="REC">REC</option>
+                            <option value="RSCND">RSCND</option>
+                            <option value="FPWD-NOTE">FPWD-NOTE</option>
+                            <option value="WG-NOTE">WG-NOTE</option>
+                            <option value="BG-DRAFT">BG-DRAFT</option>
+                            <option value="BG-FINAL">BG-FINAL</option>
+                            <option value="CG-DRAFT">CG-DRAFT</option>
+                            <option value="CG-FINAL">CG-FINAL</option>
+                            <option value="CG-FINAL">CG-FINAL</option>
+                            <option value="CG-FINAL">CG-FINAL</option>
+                            <option value="Member-SUBM">Member-SUBM</option>
+                            <option value="draft-finding">draft-finding</option>
+                            <option value="finding">finding</option>
+                        </select>
+                        <label for="addSectionLinks">Add Section Links <sup><a href='https://github.com/w3c/respec/wiki/addSectionLinks'>(?)</a></sup></label>
+                        <select id="addSectionLinks" name="addSectionLinks" size="1">
+                            <option selected="selected" value="null">As set</option>
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                        <label for="maxTocLevel">Maximum Toc Level <sup><a href='https://github.com/w3c/respec/wiki/maxTocLevel'>(?)</a></sup></label>
+                        <input name="maxTocLevel" id="maxTocLevel" size="10" type="number" min="0">
+                    </div>
+                </fieldset>
+
+                <fieldset id="actions">
+                    <legend>Actions</legend>
+                    <input type="submit" value="Convert" id="submit" name="submit">
+                    <input type="reset" value="Reset" id="reset" name="reset">
+                </fieldset>
+                <progress id='progress' style='width: 100%; visibility: hidden'>nami</progress>
             </form>
+            <!-- This is a dummy element used by the file saving procedure. It must stay hidden. -->
+            <a style='display:none' id='download'>This is a dummy entry for saving the result</a>
+            <section>
+                <h2>Explanation</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur voluptatem incidunt, magni tempore quisquam odit fuga assumenda! Facere, rem, omnis aperiam molestiae cum sapiente natus ut cumque, amet vel necessitatibus.</p>
+            </section>
         </main>
-        <footer style="border-top: 1pt solid black !important; font-size: 80%">
-            <p>Copyright © 2020 <a href='https://github.com/iherman'>@iherman</a>.</p>
+        <footer class='copyright'>
+            <p >Copyright © 2020 <a href='https://github.com/iherman'>@iherman</a>.</p>
         </footer>
     </body>
 </html>
