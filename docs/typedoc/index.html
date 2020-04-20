@@ -76,13 +76,13 @@
 					<h3>Command line interface</h3>
 				</a>
 				<p>There is a simple CLI implemented in <a href="modules/_cli_.html#cli">cli</a> which works as follows:</p>
-				<pre><code class="language-txt">Options:
-  --help                 Show help  [boolean]
+				<pre><code class="language-sh">Options:
+  --<span class="hljs-built_in">help</span>                 Show <span class="hljs-built_in">help</span>  [boolean]
   -o, --output           The name of the output file [string]
-  -r, --respec           The source is in respec  [boolean] [default: false]
+  -r, --respec           The <span class="hljs-built_in">source</span> is <span class="hljs-keyword">in</span> respec  [boolean] [default: <span class="hljs-literal">false</span>]
   -d, --publishDate      Publication date  [string] [default: null]
-  -s, --specStatus       Specification type [string] [default: null]
-  -l, --addSectionLinks  Add section links with &quot;§&quot;  [string] [default: null]
+  -s, --specStatus       Specification <span class="hljs-built_in">type</span> [string] [default: null]
+  -l, --addSectionLinks  Add section links with <span class="hljs-string">"§"</span>  [string] [default: null]
   -m, --maxTocLevel      Max TOC level [number] [default: null]</code></pre>
 				<p>For the <code>-d</code>, <code>-s</code>, <code>-l</code>, or <code>-m</code> flags, see the <a href="https://www.w3.org/respec/">ReSpec manual</a>. If any of those flags is set, <code>-r</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 				<p>In the absence of the <code>-o</code> flag the output will be <code>shortName.epub</code>, where the value of <code>shortName</code> is extracted from the <a href="https://github.com/w3c/respec/wiki/shortName">ReSpec configuration</a>.</p>
@@ -90,25 +90,51 @@
 					<h3>Server interface</h3>
 				</a>
 				<p>There is a simple server implemented in <a href="modules/_server_.html#serve">serve</a>: running</p>
-				<pre><code class="language-txt">node dist/server</code></pre>
+				<pre><code class="language-sh">node dist/server</code></pre>
 				<p>starts a simple Web server that generate EPUB 3.2 instances for URL-s of the sort:</p>
-				<pre><code><span class="hljs-symbol">https:</span>//epub.example<span class="hljs-meta">.org</span>?url=https://www.example<span class="hljs-meta">.org</span>/doc.html</code></pre><p>This would create and return the EPUB 3.2 instance corresponding to <code>https://www.example.org/doc.html</code>. Query parameters for <code>respec</code>, <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, and <code>maxTocLevel</code> can be added, just like for the command line. I.e.,</p>
-				<pre><code><span class="hljs-symbol">https:</span>//epub.example<span class="hljs-meta">.org</span>?url=https://www.example<span class="hljs-meta">.org</span>/doc.html&amp;respec=true&amp;specStatus=REC</code></pre><p>converts the original file via respec, with the <code>specStatus</code> value set to <code>REC</code>. If one of <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, or <code>maxTocLevel</code> are set, <code>respec=true</code> is implied (i.e., it is not necessary to set it explicitly).</p>
+				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/doc.html</code></pre>
+				<p>This would create and return the EPUB 3.2 instance corresponding to <code>https://www.example.org/doc.html</code>. Query parameters for <code>respec</code>, <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, and <code>maxTocLevel</code> can be added, just like for the command line. I.e.,</p>
+				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/doc.html&amp;respec=<span class="hljs-literal">true</span>&amp;specStatus=REC</code></pre>
+				<p>converts the original file via respec, with the <code>specStatus</code> value set to <code>REC</code>. If one of <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, or <code>maxTocLevel</code> are set, <code>respec=true</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 				<p>By default, the server uses the <code>http</code> port number 5000, unless the <code>PORT</code> environment variable is set.</p>
 				<p>The server has been deployed on the cloud, using <a href="https://r2epub.herokuapp.com/">heroku</a>.</p>
 				<a href="#client-side-processing" id="client-side-processing" style="color: inherit; text-decoration: none;">
 					<h3>Client-side processing</h3>
 				</a>
-				<p>The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the <code>url</code>, <code>respec</code>,  <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, and <code>maxTocLevel</code> entries can be used to trigger the necessary event handler: <a href="modules/_browser_.html#submit">submit</a>. The form has been made available through <a href="https://iherman.github.io/r2epub/server.html">an online HTML file</a>.</p>
+				<p>The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the <code>url</code>, <code>respec</code>,  <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, and <code>maxTocLevel</code> entries, can be used to trigger the necessary event handler: <a href="modules/_browser_.html#submit">submit</a>. The form has been made available through <a href="https://iherman.github.io/r2epub/server.html">an online HTML file</a>.</p>
 				<a href="#installation-usage" id="installation-usage" style="color: inherit; text-decoration: none;">
 					<h2>Installation, usage</h2>
 				</a>
-				<p>The implementation is in Typescript and on top of <code>node.js</code>. The project can be downloaded via cloning and can be installed via a standard <code>npm</code> processing; running</p>
-				<pre><code><span class="hljs-keyword">node</span> <span class="hljs-title">dist</span>/cli.js</code></pre><p>starts the command line interface, while</p>
-				<pre><code><span class="hljs-keyword">node</span> <span class="hljs-title">dist</span>/server</code></pre><p>starts up the server. (The port number used by the server can be determined by setting the <code>PORT</code> environmental variable; failing that 5000 is used.) An instance of the server is also deployed <a href="https://r2epub.herokuapp.com/">on the cloud</a> at the <code>https://r2epub.herokuapp.com/</code> URL.</p>
-				<p>The documentation is also available <a href="https://iherman.github.io/r2epub/typedoc/">on-line</a>.</p>
-				<p>Note that the on-the-fly conversion via respec is done by running the original source through the separate <code>https://labs.w3.org/spec-generator/</code> service. Alas!, that service may be down, and this package has no control over that…</p>
-				<p>Copyright © 2020 <a href="https://github.com/iherman">@iherman</a>.</p>
+				<p>The implementation is in Typescript and on top of <code>node.js</code>. The project can be downloaded via cloning and can be installed via a standard <code>npm</code> processing. The documentation is also available <a href="https://iherman.github.io/r2epub/typedoc/">on-line</a>.</p>
+				<p>Note that the on-the-fly conversion via respec is done by running the original source using an <a href='https://www.w3.org/2015/labs/'>online service</a> based on <a href="https://github.com/w3c/spec-generator">Spec Generator</a>. Alas!, that service may be down, and this package has no control over that…</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h3>Installation</h3>
+				</a>
+				<p>The usual <code>npm</code> approach applies:</p>
+				<pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://github.com/iherman/r2epub.git
+<span class="hljs-built_in">cd</span> r2epub
+npm install
+npm run dist</code></pre>
+				<p>The last entry compiles all the typescript code in the javascript and installs the client-side, browserified module.</p>
+				<p>Follow specific instructions based on your needs/interest below:</p>
+				<a href="#command-line" id="command-line" style="color: inherit; text-decoration: none;">
+					<h4>Command Line</h4>
+				</a>
+				<pre><code class="language-sh">node dist/cli.js</code></pre>
+				<p>starts the command line interface.</p>
+				<a href="#server" id="server" style="color: inherit; text-decoration: none;">
+					<h4>Server</h4>
+				</a>
+				<pre><code class="language-sh">node dist/server.js</code></pre>
+				<p>starts up the server. The port number used by the server can be determined by setting the <code>PORT</code> environmental variable; failing that 5000 is used.</p>
+				<p>An instance of the server is also deployed <a href="https://r2epub.herokuapp.com/">on the cloud</a> at the <code>https://r2epub.herokuapp.com/</code> URL.</p>
+				<a href="#browser" id="browser" style="color: inherit; text-decoration: none;">
+					<h4>Browser</h4>
+				</a>
+				<p>The <code>docs/assets/js/r2epub.js</code>  (or <code>docs/assets/js/r2epub.min.js</code>) module must be loaded into the client side. The module relies on specific HTML element <code>@id</code> values to work, see <code>docs/convert.html</code>.</p>
+				<p>The client side is also deployed <a href="https://iherman.github.io/convert.html">on the cloud</a> on github.</p>
+				<hr>
+				<p>Copyright © 2020 <a href="https://www.ivan-herman.net">Ivan Herman</a> (a.k.a. <a href="https://github.com/iherman">@iherman</a>).</p>
 				<hr>
 				<p><span style='font-size:80%'>Several years ago I have already made a similar program called <a href="https://github.com/iherman/respec2epub">Respec2EPUB</a>. That version was written in Python 2;
 						alas!, with the demise of Python 2 in favor of Python 3, it will become unusable soon. (E.g., latest Debian releases do not

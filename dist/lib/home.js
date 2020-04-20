@@ -15,7 +15,7 @@ exports.homepage = `<!doctype html>
 <head>
     <meta charset='utf-8'>
     <title>Service to convert W3C Technical Reports to EPUB 3.2</title>
-    <link rel='stylesheet' href='https://www.w3.org/StyleSheets/TR/2016/base.css' />
+    <link rel='stylesheet' href='https://iherman.github.io/r2epub/assets/css/convert.css' />
 </head>
 
 <body>
@@ -23,7 +23,7 @@ exports.homepage = `<!doctype html>
         <h1>Service to convert W3C Technical Reports to EPUB 3.2</h1>
 
         <p>
-            Service to convert W3C HTML documents, produced by <a href="https://www.w3.org/respec/">ReSpec</a>, to EPUB 3.2.
+            Service to convert W3C Technical Reports, authored in <a href="https://github.com/w3c/respec/wiki/">ReSpec</a>, to EPUB 3.2.
         </p>
 
         <p>
@@ -35,7 +35,7 @@ exports.homepage = `<!doctype html>
             <dd>The URL for the content. <em>This value is required</em>.</dd>
 
             <dt><code>respec</code></dt>
-            <dd>Whether the source is in respec (<code>true</code>) or a final HTML (<code>false</code>).</dd>
+            <dd>Whether the source is in respec (<code>true</code>) or a final HTML (<code>false</code>). If the former, the source is converted using an <a href='https://www.w3.org/2015/labs/'>online service</a> based on <a href="https://github.com/w3c/spec-generator">Spec Generator</a> into HTML first.</dd>
 
             <dt><code>publishDate</code></dt>
             <dd>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
@@ -47,7 +47,7 @@ exports.homepage = `<!doctype html>
             <dd>Add section links with <code>§</code>. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
 
             <dt><code>maxTocLevel</code></dt>
-            <dd>Add section links with <code>§</code>. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+            <dd>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
 
         </dl>
 
@@ -73,7 +73,7 @@ exports.homepage = `<!doctype html>
 
     </main>
     <footer style='font-size:80%; border-top: thin solid black;'>
-        <p>This server runs the <a href='https://github.com/iherman/r2epub/'>r2epub</a> package, implemented by <a href='https://www.ivan-herman.net/professional'>Ivan Herman</a>.</p>
+        <p>This server runs the <a href='https://github.com/iherman/r2epub/'>r2epub</a> script; see the <a href='https://iherman.github.io/r2epub/'>documentation</a> for more details. Copyright © 2020 <a href='https://www.ivan-herman.net/'>Ivan Herman</a>. </p>
     </footer>
 </body>
 </html>

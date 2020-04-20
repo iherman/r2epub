@@ -1,17 +1,17 @@
 {
   "name": "respec-to-epub",
-  "version": "1.0.2dev",
+  "version": "1.0.2",
   "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
   "engines": {
     "node": "12.x"
   },
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js",
+    "build": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
     "dist": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
-    "run": "node dist/cli.js",
+    "cli": "node dist/cli.js",
     "serve": "node dist/server.js",
-    "docs": "typedoc src/"
+    "createDocs": "typedoc src/"
   },
   "browser": "dist/browser.js",
   "repository": {
