@@ -1,17 +1,18 @@
 {
-  "name": "respec-to-epub",
-  "version": "1.0.2",
-  "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
+  "name": "r2epub",
+  "version": "1.0.3dev",
+  "description": "Typescript based conversion of Respec generated HTML files into EPUB 3.2",
   "engines": {
     "node": "12.x"
   },
-  "main": "dist/server.js",
+  "main": "dist/lib/conversion.js",
   "scripts": {
     "build": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
     "dist": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
     "cli": "node dist/cli.js",
     "serve": "node dist/server.js",
-    "createDocs": "typedoc src/"
+    "createDocs": "typedoc src/",
+    "test" : "echo \"No separate test specified\""
   },
   "browser": "dist/browser.js",
   "repository": {
@@ -22,15 +23,13 @@
     "respec",
     "epub"
   ],
-  "author": "Ivan Herman",
+  "author": "Ivan Herman <ivan@ivan-herman.net>",
   "license": "W3C-20150513",
   "bugs": {
     "url": "https://github.com/iherman/r2epub/issues"
   },
-  "homepage": "https://github.com/iherman/r2epub#readme",
+  "homepage": "https://iherman.github.io/r2epub/",
   "dependencies": {
-    "@types/jszip": "^3.1.7",
-    "@types/underscore": "^1.9.4",
     "jsdom": "^16.2.2",
     "jszip": "^3.2.2",
     "minimist": "^1.2.5",
@@ -44,6 +43,8 @@
     "yargs": "^15.3.0"
   },
   "devDependencies": {
+    "@types/jszip": "^3.1.7",
+    "@types/underscore": "^1.9.4",
     "@types/jsdom": "^16.1.0",
     "@types/node": "^13.7.7",
     "@types/node-fetch": "^2.5.5",
