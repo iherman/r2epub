@@ -201,7 +201,7 @@ export class RespecToEPUB {
 
     private global :Global;
 
-    constructor(trace :boolean, print_package: boolean) {
+    constructor(trace :boolean = false, print_package: boolean = false) {
         this.global = {
             trace     : trace,
             package   : print_package,
@@ -552,7 +552,6 @@ export class OCF {
      */
     async get_content() :Promise<Buffer|Blob> {
         if (this.content === null) {
-
             this.content = await this.book.generateAsync({
                 type:  constants.is_browser ? 'blob' : 'nodebuffer',
                 mimeType: constants.media_types.epub,

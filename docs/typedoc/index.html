@@ -114,8 +114,8 @@
 				<pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://github.com/iherman/r2epub.git
 <span class="hljs-built_in">cd</span> r2epub
 npm install
-npm run dist</code></pre>
-				<p>The last entry compiles all the typescript code in the javascript and installs the client-side, browserified module.</p>
+npm run build</code></pre>
+				<p>The last entry compiles all the typescript code in the javascript and only necessary if the programs are used directly.</p>
 				<p>Follow specific instructions based on your needs/interest below:</p>
 				<a href="#command-line" id="command-line" style="color: inherit; text-decoration: none;">
 					<h4>Command Line</h4>
@@ -128,12 +128,43 @@ npm run dist</code></pre>
 				<pre><code class="language-sh">node dist/server.js</code></pre>
 				<p>starts up the server. The port number used by the server can be determined by setting the <code>PORT</code> environmental variable; failing that 5000 is used.</p>
 				<p>An instance of the server is also deployed <a href="https://r2epub.herokuapp.com/">on the cloud</a> at the <code>https://r2epub.herokuapp.com/</code> URL.</p>
-				<a href="#browser" id="browser" style="color: inherit; text-decoration: none;">
-					<h4>Browser</h4>
+				<a href="#using-as-an-api" id="using-as-an-api" style="color: inherit; text-decoration: none;">
+					<h3>Using as an API</h3>
 				</a>
-				<p><em><strong>For some reasons that latest release of <code>browserify</code> does not process the code properly; as a consequence, at this moment, the browser version does not work...</strong></em></p>
-				<p>The <code>docs/assets/js/r2epub.js</code>  (or <code>docs/assets/js/r2epub.min.js</code>) module must be loaded into the client side. The module relies on specific HTML element <code>@id</code> values to work, see <code>docs/convert.html</code>.</p>
-				<p>The client side is also deployed <a href="https://iherman.github.io/convert.html">on the cloud</a> on github.</p>
+				<p>The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> r2epub  <span class="hljs-keyword">from</span> <span class="hljs-string">'./lib/convert'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs      <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
+<span class="hljs-comment">// Create the class encapsulating the conversion functions</span>
+<span class="hljs-keyword">const</span> convert              = <span class="hljs-keyword">new</span> r2epub.RespecToEPUB(argv.t, argv.p);
+<span class="hljs-comment">// The creation itself is asynchronuous, because content has to be fetched over the wire. The</span>
+<span class="hljs-comment">// result is the class instance encapsulating an OCF (zip) content</span>
+<span class="hljs-keyword">const</span> ocf :r2epub.OCF      = <span class="hljs-keyword">await</span> convert.create_epub(args);
+<span class="hljs-comment">// The final zip file is finalized asynchronuously</span>
+<span class="hljs-comment">// When run in node, the result is a Buffer; when in a browser, the result is a Blob</span>
+<span class="hljs-keyword">const</span> content :Buffer|Blob = <span class="hljs-keyword">await</span> ocf.get_content();
+<span class="hljs-comment">// Get the content out to the disk</span>
+fs.writeFileSync(ocf.name, content);</code></pre>
+				<p>The same in Javascript:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> r2epub  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'r2epub'</span>);
+<span class="hljs-keyword">const</span> fs      = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+<span class="hljs-comment">// Create the class encapsulating the conversion functions</span>
+<span class="hljs-keyword">const</span> convert = <span class="hljs-keyword">new</span> r2epub.RespecToEPUB();
+<span class="hljs-comment">// The creation itself is asynchronuous, because content has to be fetched over the wire. The</span>
+<span class="hljs-comment">// result is the class instance encapsulating an OCF (zip) content</span>
+<span class="hljs-keyword">const</span> ocf     = <span class="hljs-keyword">await</span> convert.create_epub(<span class="hljs-string">"http://www.example.org/doc.html"</span>);
+<span class="hljs-comment">// The final zip file is finalized asynchronuously</span>
+<span class="hljs-comment">// When run in node, the result is a Buffer; when in a browser, the result is a Blob</span>
+<span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> ocf.get_content();
+<span class="hljs-comment">// Get the content out to the disk</span>
+fs.writeFileSync(ocf.name, content);</code></pre>
+				<p>See the specification of the <a href="classes/_lib_convert_.respectoepub.html">RespecToEPUB</a> and <a href="classes/_lib_convert_.ocf.html">OCF</a> classes for further details.</p>
+				<!-- #### Browser
+
+_**For some reasons that latest release of `browserify` does not process the code properly; as a consequence, at this moment, the browser version does not work...**_
+
+The `docs/assets/js/r2epub.js`  (or `docs/assets/js/r2epub.min.js`) module must be loaded into the client side. The module relies on specific HTML element `@id` values to work, see `docs/convert.html`.
+
+The client side is also deployed [on the cloud](https://iherman.github.io/convert.html) on github. -->
 				<hr>
 				<p>Copyright © 2020 <a href="https://www.ivan-herman.net">Ivan Herman</a> (a.k.a. <a href="https://github.com/iherman">@iherman</a>).</p>
 				<hr>

@@ -69,10 +69,10 @@ The usual `npm` approach applies:
 git clone https://github.com/iherman/r2epub.git
 cd r2epub
 npm install
-npm run dist
+npm run build
 ```
 
-The last entry compiles all the typescript code in the javascript and installs the client-side, browserified module.
+The last entry compiles all the typescript code in the javascript and only necessary if the programs are used directly.
 
 Follow specific instructions based on your needs/interest below:
 
@@ -94,14 +94,52 @@ starts up the server. The port number used by the server can be determined by se
 
 An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL.
 
+### Using as an API
 
-#### Browser
+The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:
+
+``` js
+import * as r2epub  from './lib/convert';
+import * as fs      from 'fs';
+// Create the class encapsulating the conversion functions
+const convert              = new r2epub.RespecToEPUB(argv.t, argv.p);
+// The creation itself is asynchronuous, because content has to be fetched over the wire. The
+// result is the class instance encapsulating an OCF (zip) content
+const ocf :r2epub.OCF      = await convert.create_epub(args);
+// The final zip file is finalized asynchronuously
+// When run in node, the result is a Buffer; when in a browser, the result is a Blob
+const content :Buffer|Blob = await ocf.get_content();
+// Get the content out to the disk
+fs.writeFileSync(ocf.name, content);
+```
+
+The same in Javascript:
+
+``` js
+const r2epub  = require('r2epub');
+const fs      = require('fs');
+// Create the class encapsulating the conversion functions
+const convert = new r2epub.RespecToEPUB();
+// The creation itself is asynchronuous, because content has to be fetched over the wire. The
+// result is the class instance encapsulating an OCF (zip) content
+const ocf     = await convert.create_epub("http://www.example.org/doc.html");
+// The final zip file is finalized asynchronuously
+// When run in node, the result is a Buffer; when in a browser, the result is a Blob
+const content = await ocf.get_content();
+// Get the content out to the disk
+fs.writeFileSync(ocf.name, content);
+```
+
+See the specification of the [[RespecToEPUB]] and [[OCF]] classes for further details.
+
+
+<!-- #### Browser
 
 _**For some reasons that latest release of `browserify` does not process the code properly; as a consequence, at this moment, the browser version does not work...**_
 
 The `docs/assets/js/r2epub.js`  (or `docs/assets/js/r2epub.min.js`) module must be loaded into the client side. The module relies on specific HTML element `@id` values to work, see `docs/convert.html`.
 
-The client side is also deployed [on the cloud](https://iherman.github.io/convert.html) on github.
+The client side is also deployed [on the cloud](https://iherman.github.io/convert.html) on github. -->
 
 ---
 
