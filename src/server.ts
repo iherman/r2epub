@@ -49,8 +49,7 @@ import http            from 'http';
 import * as urlHandler from 'url';
 import * as _          from 'underscore';
 import * as constants  from './lib/constants';
-import * as conversion from './lib/conversion';
-import * as ocf        from './lib/ocf';
+import * as convert    from './lib/convert';
 import * as home       from './lib/home';
 
 
@@ -83,15 +82,15 @@ interface Query {
 async function get_epub(query :Query) : Promise<Content> {
     const respec_args = _.omit(query, 'respec', 'url');
 
-    const document :conversion.Arguments = {
+    const document :convert.Arguments = {
         url    : query.url as string,
         respec : (query.respec !== undefined && (query.respec === 'true' || query.respec === 'false')) || _.keys(respec_args).length != 0,
         config : respec_args,
     }
 
-    const conversion_process  = new conversion.RespecToEPUB(false, false);
-    const the_ocf :ocf.OCF    = await conversion_process.create_epub(document);
-    const content :Buffer     = await the_ocf.get_content() as Buffer;
+    const conversion_process   = new convert.RespecToEPUB(false, false);
+    const the_ocf :convert.OCF = await conversion_process.create_epub(document);
+    const content :Buffer      = await the_ocf.get_content() as Buffer;
 
     return {
         content : content,

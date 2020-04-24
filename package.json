@@ -5,7 +5,8 @@
   "engines": {
     "node": "12.x"
   },
-  "main": "dist/lib/conversion.js",
+  "main": "dist/lib/convert.js",
+  "types": "src/lib/convert.ts",
   "scripts": {
     "build": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
     "dist": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",

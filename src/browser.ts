@@ -9,8 +9,7 @@
  * @packageDocumentation
  */
 
-import * as ocf        from './lib/ocf';
-import * as conversion from './lib/conversion';
+import * as convert from './lib/convert';
 
 
 /**
@@ -75,7 +74,7 @@ const submit = async (event :Event) :Promise<any> => {
 
         if (!(url.value === null || url.value === '')) {
 
-            const args :conversion.Arguments  = {
+            const args :convert.Arguments  = {
                 url    : url.value,
                 respec : respec.value === 'true',
                 config : {
@@ -93,9 +92,9 @@ const submit = async (event :Event) :Promise<any> => {
                 progress.style.setProperty('visibility', 'visible');
 
                 // Convert the content into a book, and create an EPUB instance as a Blob
-                const conversion_process = new conversion.RespecToEPUB(false, false);
-                const the_ocf :ocf.OCF   = await conversion_process.create_epub(args);
-                const content :Blob      = await the_ocf.get_content() as Blob;
+                const conversion_process   = new convert.RespecToEPUB(false, false);
+                const the_ocf :convert.OCF = await conversion_process.create_epub(args);
+                const content :Blob        = await the_ocf.get_content() as Blob;
 
                 // Save the Blob in  a file
                 save_book(content, the_ocf.name);
@@ -109,6 +108,7 @@ const submit = async (event :Event) :Promise<any> => {
             } catch(e) {
                 progress.style.setProperty('visibility', 'hidden');
                 console.log(`EPUB Generation Error: ${e}`);
+                alert(`EPUB Generation Error: ${e}`);
             }
         } else {
             alert(`No or empty URL value`);

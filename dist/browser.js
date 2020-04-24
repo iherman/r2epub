@@ -17,7 +17,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const conversion = __importStar(require("./lib/conversion"));
+const convert = __importStar(require("./lib/convert"));
 /**
  *
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming form data.
@@ -89,7 +89,7 @@ const submit = async (event) => {
                 // turn on the progress bar at the bottom of the form
                 progress.style.setProperty('visibility', 'visible');
                 // Convert the content into a book, and create an EPUB instance as a Blob
-                const conversion_process = new conversion.RespecToEPUB(false, false);
+                const conversion_process = new convert.RespecToEPUB(false, false);
                 const the_ocf = await conversion_process.create_epub(args);
                 const content = await the_ocf.get_content();
                 // Save the Blob in  a file
@@ -103,6 +103,7 @@ const submit = async (event) => {
             catch (e) {
                 progress.style.setProperty('visibility', 'hidden');
                 console.log(`EPUB Generation Error: ${e}`);
+                alert(`EPUB Generation Error: ${e}`);
             }
         }
         else {

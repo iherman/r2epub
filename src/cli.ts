@@ -41,10 +41,8 @@
  * @packageDocumentation
  */
 /* Main imports */
-import * as ocf        from './lib/ocf';
-import * as conversion from './lib/conversion';
-import * as fs         from 'fs';
-
+import * as convert from './lib/convert';
+import * as fs      from 'fs';
 
 /** @hidden */
 import yargs = require('yargs')
@@ -71,7 +69,7 @@ async function cli() {
     .wrap(null)
     .argv;
 
-    const args :conversion.Arguments = {
+    const args :convert.Arguments = {
         url             : argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0],
         respec          : argv.r || argv.d || argv.s || argv.l || argv.m,
         config          : {
@@ -83,8 +81,8 @@ async function cli() {
      }
 
     try {
-        const conversion_process     = new conversion.RespecToEPUB(argv.t, argv.p);
-        const the_ocf :ocf.OCF       = await conversion_process.create_epub(args);
+        const conversion_process     = new convert.RespecToEPUB(argv.t, argv.p);
+        const the_ocf :convert.OCF   = await conversion_process.create_epub(args);
         const content :Buffer | Blob = await the_ocf.get_content();
 
         fs.writeFileSync(argv.o || the_ocf.name, content);

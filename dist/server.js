@@ -59,7 +59,7 @@ const http_1 = __importDefault(require("http"));
 const urlHandler = __importStar(require("url"));
 const _ = __importStar(require("underscore"));
 const constants = __importStar(require("./lib/constants"));
-const conversion = __importStar(require("./lib/conversion"));
+const convert = __importStar(require("./lib/convert"));
 const home = __importStar(require("./lib/home"));
 /**
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming URL's query string.
@@ -73,7 +73,7 @@ async function get_epub(query) {
         respec: (query.respec !== undefined && (query.respec === 'true' || query.respec === 'false')) || _.keys(respec_args).length != 0,
         config: respec_args,
     };
-    const conversion_process = new conversion.RespecToEPUB(false, false);
+    const conversion_process = new convert.RespecToEPUB(false, false);
     const the_ocf = await conversion_process.create_epub(document);
     const content = await the_ocf.get_content();
     return {

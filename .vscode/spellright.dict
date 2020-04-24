@@ -19,3 +19,8 @@ opendocument
 oebps
 browserified
 heroku
+idref
+itemref
+marc
+edt
+xmlbuilder

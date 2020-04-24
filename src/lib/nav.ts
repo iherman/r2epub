@@ -5,7 +5,7 @@
  *
  * @packageDocumentation
  */
-import { ResourceRef, Global } from './conversion';
+import { ResourceRef, Global } from './convert';
 import * as xhtml              from './xhtml';
 import * as constants          from './constants';
 
