@@ -10,13 +10,13 @@
             <h1>r2epub — Convert HTML/ReSpec into EPUB 3.2</h1>
         </header>
         <main>
-            <form id="main_form" action="http://localhost:5000" method="GET">
+            <form id="main_form" action="https://r2epub.herokuapp.com/" method="GET">
                 <p style="visibility: hidden" id='done'>EPUB file generated!!</p>
                 <fieldset id="main_arguments">
                     <legend>Main arguments:</legend>
                     <div class='fieldset_grid'>
                         <label for="url">Document URL</label>
-                        <input name="url" id="url" size="60" type="text" required value="http://localhost:8001/TR/vc-data-model/">
+                        <input name="url" id="url" size="60" type="text" required value="https://www.w3.org/TR/annotation-model/">
                         <label for="respec">Run ReSpec<sup><a href='#respec'>(?)</a></sup></label>
                         <select id="respec" name="respec" size="1">
                             <option selected="selected" value="false">No</option>
