@@ -18,7 +18,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const convert = __importStar(require("./lib/convert"));
+// const convert = __importStar(require("./lib/convert"));
+const convert = require("./lib/convert");
 /**
  *
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming form data.
@@ -120,5 +121,6 @@ window.addEventListener('load', () => {
     const submit_button = document.getElementById('submit');
     submit_button.addEventListener('click', submit);
 });
+
 
 },{"./lib/convert":1}]},{},[1]);

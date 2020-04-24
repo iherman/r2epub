@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>specStatus_css_mappings | r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
+	<title>Link | r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_css_.html">&quot;lib/css&quot;</a>
+					<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_css_.specstatus_css_mappings.html">specStatus_css_mappings</a>
+					<a href="_lib_opf_.link.html">Link</a>
 				</li>
 			</ul>
-			<h1>Interface specStatus_css_mappings</h1>
+			<h1>Interface Link</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Interface for special cases, ie, when the <code>specStatus</code> value does not provide all information…</p>
+						<p>The &quot;link&quot; element content, as define in the spec.</p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">specStatus_css_mappings</span>
+						<span class="target">Link</span>
 					</li>
 				</ul>
 			</section>
@@ -91,10 +91,12 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_css_.specstatus_css_mappings.html#logo_media_type" class="tsd-kind-icon">logo_<wbr>media_<wbr>type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_css_.specstatus_css_mappings.html#logo_name" class="tsd-kind-icon">logo_<wbr>name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_css_.specstatus_css_mappings.html#special_template" class="tsd-kind-icon">special_<wbr>template</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_css_.specstatus_css_mappings.html#watermark" class="tsd-kind-icon">watermark</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_opf_.link.html#_href" class="tsd-kind-icon">@href</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_opf_.link.html#_id" class="tsd-kind-icon">@id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_opf_.link.html#_media_type" class="tsd-kind-icon">@media-<wbr>type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_opf_.link.html#_properties" class="tsd-kind-icon">@properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_opf_.link.html#_refines" class="tsd-kind-icon">@refines</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_opf_.link.html#_rel" class="tsd-kind-icon">@rel</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,64 +105,64 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="logo_media_type" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> logo_<wbr>media_<wbr>type</h3>
-					<div class="tsd-signature tsd-kind-icon">logo_<wbr>media_<wbr>type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="_href" class="tsd-anchor"></a>
+					<h3>@href</h3>
+					<div class="tsd-signature tsd-kind-icon">@href<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/css.ts#L108">lib/css.ts:108</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/opf.ts#L66">lib/opf.ts:66</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Media type of the logo. Usually SVG, but not always; if missing, <code>image/svg</code> is used.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="logo_name" class="tsd-anchor"></a>
-					<h3>logo_<wbr>name</h3>
-					<div class="tsd-signature tsd-kind-icon">logo_<wbr>name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="_id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @id</h3>
+					<div class="tsd-signature tsd-kind-icon">@id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/css.ts#L105">lib/css.ts:105</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/opf.ts#L67">lib/opf.ts:67</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>&#39;name&#39; (filename) to be used for the logo, e.g., WD, REC, etc.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="special_template" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> special_<wbr>template</h3>
-					<div class="tsd-signature tsd-kind-icon">special_<wbr>template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="_media_type" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @media-<wbr>type</h3>
+					<div class="tsd-signature tsd-kind-icon">@media-<wbr>type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/css.ts#L111">lib/css.ts:111</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/opf.ts#L68">lib/opf.ts:68</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Reference to the CSS template to be used. If missing, the simple background setting template is used.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="watermark" class="tsd-anchor"></a>
-					<h3>watermark</h3>
-					<div class="tsd-signature tsd-kind-icon">watermark<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="_properties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @properties</h3>
+					<div class="tsd-signature tsd-kind-icon">@properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/css.ts#L102">lib/css.ts:102</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/opf.ts#L69">lib/opf.ts:69</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Is there a watermark?</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="_refines" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @refines</h3>
+					<div class="tsd-signature tsd-kind-icon">@refines<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/opf.ts#L70">lib/opf.ts:70</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="_rel" class="tsd-anchor"></a>
+					<h3>@rel</h3>
+					<div class="tsd-signature tsd-kind-icon">@rel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/opf.ts#L65">lib/opf.ts:65</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -185,7 +187,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_css_.html">&quot;lib/css&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -197,7 +199,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -213,38 +215,68 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.creator.html" class="tsd-kind-icon">Creator</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dcidentifier.html" class="tsd-kind-icon">DCIdentifier</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dclang.html" class="tsd-kind-icon">DCLang</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dctitle.html" class="tsd-kind-icon">DCTitle</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_lib_css_.specstatus_css_mappings.html" class="tsd-kind-icon">spec<wbr>Status_<wbr>css_<wbr>mappings</a>
+						<a href="_lib_opf_.link.html" class="tsd-kind-icon">Link</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_lib_css_.specstatus_css_mappings.html#logo_media_type" class="tsd-kind-icon">logo_<wbr>media_<wbr>type</a>
+								<a href="_lib_opf_.link.html#_href" class="tsd-kind-icon">@href</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_lib_css_.specstatus_css_mappings.html#logo_name" class="tsd-kind-icon">logo_<wbr>name</a>
+								<a href="_lib_opf_.link.html#_id" class="tsd-kind-icon">@id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_lib_css_.specstatus_css_mappings.html#special_template" class="tsd-kind-icon">special_<wbr>template</a>
+								<a href="_lib_opf_.link.html#_media_type" class="tsd-kind-icon">@media-<wbr>type</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_lib_css_.specstatus_css_mappings.html#watermark" class="tsd-kind-icon">watermark</a>
+								<a href="_lib_opf_.link.html#_properties" class="tsd-kind-icon">@properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_lib_opf_.link.html#_refines" class="tsd-kind-icon">@refines</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_lib_opf_.link.html#_rel" class="tsd-kind-icon">@rel</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_lib_css_.specstatus_mapping.html" class="tsd-kind-icon">spec<wbr>Status_<wbr>mapping</a>
+						<a href="_lib_opf_.manifest.html" class="tsd-kind-icon">Manifest</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_lib_css_.html#specstatus_simple" class="tsd-kind-icon">spec<wbr>Status_<wbr>simple</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_opf_.manifestitem.html" class="tsd-kind-icon">Manifest<wbr>Item</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_lib_css_.html#extract_css" class="tsd-kind-icon">extract_<wbr>css</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.meta.html" class="tsd-kind-icon">Meta</a>
 					</li>
-					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_lib_css_.html#specstatus_css" class="tsd-kind-icon">spec<wbr>Status_<wbr>css</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.metadata.html" class="tsd-kind-icon">Metadata</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_opf_.package.html" class="tsd-kind-icon">Package</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.packagecontent.html" class="tsd-kind-icon">Package<wbr>Content</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.spine.html" class="tsd-kind-icon">Spine</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.spineitem.html" class="tsd-kind-icon">Spine<wbr>Item</a>
 					</li>
 				</ul>
 			</nav>

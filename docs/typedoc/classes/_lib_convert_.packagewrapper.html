@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
+					<a href="../modules/_lib_convert_.html">&quot;lib/convert&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_opf_.packagewrapper.html">PackageWrapper</a>
+					<a href="_lib_convert_.packagewrapper.html">PackageWrapper</a>
 				</li>
 			</ul>
 			<h1>Class PackageWrapper</h1>
@@ -72,9 +72,19 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Wrapper around the internal representation of a EPUB3 Package document, as defined in the <a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc">EPUB Packages 3.2 Specification</a>.</p>
+						<a href="#the-opf-wrapper" id="the-opf-wrapper" style="color: inherit; text-decoration: none;">
+							<h2>The OPF Wrapper</h2>
+						</a>
 					</div>
-					<p>The types and default values do not reflect all possibilities of Package documents, only those that are relevant for W3C Technical reports.</p>
+					<p>Wrapper around the internal representation of a EPUB3 Package document, as defined in the <a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc">EPUB Packages 3.2 Specification</a></p>
+					<p>The module relies on the <a href="https://oozcitak.github.io/xmlbuilder2/"><code>xmlbuilder2</code> package</a>, which generates an XML file out of a set of JS objects. See the documentation of that library for
+					the details; the short overview is:</p>
+					<ul>
+						<li>JSON names starting with <code>&quot;@&quot;&quot;</code> represent an attribute.</li>
+						<li>JSON name <code>&quot;#&quot;&quot;</code> represent textual content of the element.</li>
+						<li>Otherwise a JSON name refers to an embedded dictionary representing a subelement in XML.</li>
+					</ul>
+					<p>The type hierarchy to represent an OPF file through such objects is defined through <a href="../interfaces/_lib_opf_.package.html">Package</a>. Those types and default values do not reflect all possibilities of Package documents, only those that are relevant for W3C Technical reports.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -92,16 +102,16 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_lib_convert_.packagewrapper.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#add_creators" class="tsd-kind-icon">add_<wbr>creators</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#add_dates" class="tsd-kind-icon">add_<wbr>dates</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#add_manifest_item" class="tsd-kind-icon">add_<wbr>manifest_<wbr>item</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#serialize" class="tsd-kind-icon">serialize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_convert_.packagewrapper.html#add_creators" class="tsd-kind-icon">add_<wbr>creators</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_convert_.packagewrapper.html#add_dates" class="tsd-kind-icon">add_<wbr>dates</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_convert_.packagewrapper.html#add_manifest_item" class="tsd-kind-icon">add_<wbr>manifest_<wbr>item</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_convert_.packagewrapper.html#serialize" class="tsd-kind-icon">serialize</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,13 +123,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Package<wbr>Wrapper<span class="tsd-signature-symbol">(</span>identifier<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_opf_.packagewrapper.html" class="tsd-signature-type">PackageWrapper</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Package<wbr>Wrapper<span class="tsd-signature-symbol">(</span>identifier<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_convert_.packagewrapper.html" class="tsd-signature-type">PackageWrapper</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/opf.ts#L168">lib/opf.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/convert.ts#L615">lib/convert.ts:615</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -143,7 +153,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_lib_opf_.packagewrapper.html" class="tsd-signature-type">PackageWrapper</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_lib_convert_.packagewrapper.html" class="tsd-signature-type">PackageWrapper</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -160,7 +170,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/opf.ts#L251">lib/opf.ts:251</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/convert.ts#L692">lib/convert.ts:692</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -191,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/opf.ts#L272">lib/opf.ts:272</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/convert.ts#L713">lib/convert.ts:713</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,13 +226,13 @@
 					<a name="add_manifest_item" class="tsd-anchor"></a>
 					<h3>add_<wbr>manifest_<wbr>item</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add_<wbr>manifest_<wbr>item<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ManifestItem</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">add_<wbr>manifest_<wbr>item<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_opf_.manifestitem.html" class="tsd-signature-type">ManifestItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/opf.ts#L239">lib/opf.ts:239</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/convert.ts#L680">lib/convert.ts:680</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -233,7 +243,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>item: <span class="tsd-signature-type">ManifestItem</span></h5>
+									<h5>item: <a href="../interfaces/_lib_opf_.manifestitem.html" class="tsd-signature-type">ManifestItem</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>manifest item, as defined in the <a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem">EPUB Packages specification</a></p>
 									</div>
@@ -253,7 +263,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/opf.ts#L288">lib/opf.ts:288</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/convert.ts#L729">lib/convert.ts:729</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -285,8 +295,8 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_lib_convert_.html">&quot;lib/convert&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -304,9 +314,6 @@
 						<a href="../modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_ocf_.html">&quot;lib/ocf&quot;</a>
-					</li>
-					<li class="current tsd-kind-external-module">
 						<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -322,32 +329,56 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_lib_convert_.ocf.html" class="tsd-kind-icon">OCF</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_lib_opf_.packagewrapper.html" class="tsd-kind-icon">Package<wbr>Wrapper</a>
+						<a href="_lib_convert_.packagewrapper.html" class="tsd-kind-icon">Package<wbr>Wrapper</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_lib_opf_.packagewrapper.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_lib_convert_.packagewrapper.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_lib_opf_.packagewrapper.html#add_creators" class="tsd-kind-icon">add_<wbr>creators</a>
+								<a href="_lib_convert_.packagewrapper.html#add_creators" class="tsd-kind-icon">add_<wbr>creators</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_lib_opf_.packagewrapper.html#add_dates" class="tsd-kind-icon">add_<wbr>dates</a>
+								<a href="_lib_convert_.packagewrapper.html#add_dates" class="tsd-kind-icon">add_<wbr>dates</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_lib_opf_.packagewrapper.html#add_manifest_item" class="tsd-kind-icon">add_<wbr>manifest_<wbr>item</a>
+								<a href="_lib_convert_.packagewrapper.html#add_manifest_item" class="tsd-kind-icon">add_<wbr>manifest_<wbr>item</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_lib_opf_.packagewrapper.html#serialize" class="tsd-kind-icon">serialize</a>
+								<a href="_lib_convert_.packagewrapper.html#serialize" class="tsd-kind-icon">serialize</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_lib_convert_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_convert_.arguments.html" class="tsd-kind-icon">Arguments</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_convert_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_convert_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_convert_.global.html" class="tsd-kind-icon">Global</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_opf_.package.html" class="tsd-kind-icon">Package</a>
+						<a href="../interfaces/_lib_convert_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_convert_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_convert_.html#container_xml" class="tsd-kind-icon">container_<wbr>xml</a>
 					</li>
 				</ul>
 			</nav>

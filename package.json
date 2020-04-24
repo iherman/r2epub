@@ -8,12 +8,12 @@
   "main": "dist/lib/convert.js",
   "types": "src/lib/convert.ts",
   "scripts": {
-    "build": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
-    "dist": "tsc ; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
+    "build": "tsc",
+    "dist": "tsc",
     "cli": "node dist/cli.js",
     "serve": "node dist/server.js",
     "createDocs": "typedoc src/",
-    "test" : "echo \"No separate test specified\""
+    "test": "echo \"No separate test specified\""
   },
   "browser": "dist/browser.js",
   "repository": {
@@ -44,15 +44,14 @@
     "yargs": "^15.3.0"
   },
   "devDependencies": {
-    "@types/jszip": "^3.1.7",
-    "@types/underscore": "^1.9.4",
     "@types/jsdom": "^16.1.0",
+    "@types/jszip": "^3.1.7",
     "@types/node": "^13.7.7",
     "@types/node-fetch": "^2.5.5",
+    "@types/underscore": "^1.9.4",
     "@types/valid-url": "^1.0.2",
     "@types/xmlserializer": "^0.6.0",
     "@types/yargs": "^15.0.4",
-    "browserify": "^16.5.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",

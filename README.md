@@ -97,6 +97,8 @@ An instance of the server is also deployed [on the cloud](https://r2epub.herokua
 
 #### Browser
 
+_**For some reasons that latest release of `browserify` does not process the code properly; as a consequence, at this moment, the browser version does not work...**_
+
 The `docs/assets/js/r2epub.js`  (or `docs/assets/js/r2epub.min.js`) module must be loaded into the client side. The module relies on specific HTML element `@id` values to work, see `docs/convert.html`.
 
 The client side is also deployed [on the cloud](https://iherman.github.io/convert.html) on github.

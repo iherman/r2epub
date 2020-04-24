@@ -68,7 +68,7 @@
 					<h1>ReSpec to EPUB</h1>
 				</a>
 				<p>Typescript program to convert W3C documents, produced by <a href="https://github.com/w3c/respec">ReSpec</a>, to EPUB 3.2.</p>
-				<p>If used from another program, the main entry point are the <a href="classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a> and <a href="classes/_lib_conversion_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a> methods in the <a href="modules/_lib_process_.html">“process” module</a>, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.</p>
+				<p>If used from another program, the main entry point are the <a href="classes/_lib_convert_.respectoepub.html#create_epub">create_epub</a> and <a href="classes/_lib_convert_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a> methods in the <a href="modules/_lib_process_.html">“process” module</a>, which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.</p>
 				<a href="#package-usage" id="package-usage" style="color: inherit; text-decoration: none;">
 					<h2>Package usage</h2>
 				</a>
@@ -131,6 +131,7 @@ npm run dist</code></pre>
 				<a href="#browser" id="browser" style="color: inherit; text-decoration: none;">
 					<h4>Browser</h4>
 				</a>
+				<p><em><strong>For some reasons that latest release of <code>browserify</code> does not process the code properly; as a consequence, at this moment, the browser version does not work...</strong></em></p>
 				<p>The <code>docs/assets/js/r2epub.js</code>  (or <code>docs/assets/js/r2epub.min.js</code>) module must be loaded into the client side. The module relies on specific HTML element <code>@id</code> values to work, see <code>docs/convert.html</code>.</p>
 				<p>The client side is also deployed <a href="https://iherman.github.io/convert.html">on the cloud</a> on github.</p>
 				<hr>
@@ -158,7 +159,7 @@ npm run dist</code></pre>
 						<a href="modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
+						<a href="modules/_lib_convert_.html">&quot;lib/convert&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -174,9 +175,6 @@ npm run dist</code></pre>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_ocf_.html">&quot;lib/ocf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_opf_.html">&quot;lib/opf&quot;</a>

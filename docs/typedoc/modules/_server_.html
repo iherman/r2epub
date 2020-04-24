@@ -81,7 +81,7 @@ publishDate      <span class="hljs-keyword">Publication</span> <span class="hljs
 specStatus       Specification <span class="hljs-keyword">type</span>
 addSectionLinks  <span class="hljs-keyword">Add</span> section links <span class="hljs-keyword">with</span> "§"
 maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>By default, the value of <code>respec</code> is <code>false</code>. However, if one of <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, or <code>maxTocLevel</code> are set, <code>respec=true</code> is implied (i.e., it is not necessary to set it explicitly).</p>
-					<p>The module is a wrapper around a standard node.js <code>http.CreateServer</code>, and a call to <a href="../classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a>.</p>
+					<p>The module is a wrapper around a standard node.js <code>http.CreateServer</code>, and a call to <a href="../classes/_lib_convert_.respectoepub.html#create_epub">create_epub</a>.</p>
 					<a href="#usage-examples" id="usage-examples" style="color: inherit; text-decoration: none;">
 						<h3>Usage examples:</h3>
 					</a>
@@ -126,12 +126,12 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/server.ts#L83">server.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/server.ts#L82">server.ts:82</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Generate the EPUB file. This is a wrapper around <a href="../classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a>, creating the necessary arguments <a href="../interfaces/_lib_conversion_.arguments.html">Arguments</a> structure based on the incoming URL&#39;s query string.</p>
+									<p>Generate the EPUB file. This is a wrapper around <a href="../classes/_lib_convert_.respectoepub.html#create_epub">create_epub</a>, creating the necessary arguments <a href="../interfaces/_lib_convert_.arguments.html">Arguments</a> structure based on the incoming URL&#39;s query string.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -157,12 +157,12 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/server.ts#L111">server.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/server.ts#L110">server.ts:110</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Run a rudimentary Web server calling out to <a href="../classes/_lib_conversion_.respectoepub.html#create_epub">create_epub</a> via <a href="_server_.html#get_epub">get_epub</a> to return an EPUB 3.2 instance when invoked. If there is no proper query string a fixed page is displayed.</p>
+									<p>Run a rudimentary Web server calling out to <a href="../classes/_lib_convert_.respectoepub.html#create_epub">create_epub</a> via <a href="_server_.html#get_epub">get_epub</a> to return an EPUB 3.2 instance when invoked. If there is no proper query string a fixed page is displayed.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -187,7 +187,7 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 						<a href="_lib_constants_.html">&quot;lib/constants&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_conversion_.html">&quot;lib/conversion&quot;</a>
+						<a href="_lib_convert_.html">&quot;lib/convert&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -203,9 +203,6 @@ maxTocLevel      Max TOC <span class="hljs-keyword">level</span></code></pre><p>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_nav_.html">&quot;lib/nav&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_lib_ocf_.html">&quot;lib/ocf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_opf_.html">&quot;lib/opf&quot;</a>

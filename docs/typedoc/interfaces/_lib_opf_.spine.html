@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DebugOptions | r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
+	<title>Spine | r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
+					<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_conversion_.debugoptions.html">DebugOptions</a>
+					<a href="_lib_opf_.spine.html">Spine</a>
 				</li>
 			</ul>
-			<h1>Interface DebugOptions</h1>
+			<h1>Interface Spine</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Debug options</p>
+						<p>Representation of the &quot;spine&quot; element.</p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DebugOptions</span>
+						<span class="target">Spine</span>
 					</li>
 				</ul>
 			</section>
@@ -88,47 +88,26 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.debugoptions.html#package" class="tsd-kind-icon">package</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_conversion_.debugoptions.html#trace" class="tsd-kind-icon">trace</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_lib_opf_.spine.html#itemref" class="tsd-kind-icon">itemref</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="package" class="tsd-anchor"></a>
-					<h3>package</h3>
-					<div class="tsd-signature tsd-kind-icon">package<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="itemref" class="tsd-anchor"></a>
+					<h3>itemref</h3>
+					<div class="tsd-signature tsd-kind-icon">itemref<span class="tsd-signature-symbol">:</span> <a href="_lib_opf_.spineitem.html" class="tsd-signature-type">SpineItem</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/conversion.ts#L41">lib/conversion.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/274a1e6/src/lib/opf.ts#L127">lib/opf.ts:127</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Debug option: just print the package file on the console, do not generate and epub file.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="trace" class="tsd-anchor"></a>
-					<h3>trace</h3>
-					<div class="tsd-signature tsd-kind-icon">trace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/344cef2/src/lib/conversion.ts#L46">lib/conversion.ts:46</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Debug option: print built-in trace information.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -147,8 +126,8 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_lib_conversion_.html">&quot;lib/conversion&quot;</a>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_convert_.html">&quot;lib/convert&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
@@ -165,10 +144,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_ocf_.html">&quot;lib/ocf&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -184,38 +160,53 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_lib_conversion_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.creator.html" class="tsd-kind-icon">Creator</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dcidentifier.html" class="tsd-kind-icon">DCIdentifier</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dclang.html" class="tsd-kind-icon">DCLang</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dctitle.html" class="tsd-kind-icon">DCTitle</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.link.html" class="tsd-kind-icon">Link</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.manifest.html" class="tsd-kind-icon">Manifest</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_conversion_.arguments.html" class="tsd-kind-icon">Arguments</a>
+						<a href="_lib_opf_.manifestitem.html" class="tsd-kind-icon">Manifest<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.meta.html" class="tsd-kind-icon">Meta</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.metadata.html" class="tsd-kind-icon">Metadata</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_conversion_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
+						<a href="_lib_opf_.package.html" class="tsd-kind-icon">Package</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.packagecontent.html" class="tsd-kind-icon">Package<wbr>Content</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_conversion_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.spine.html" class="tsd-kind-icon">Spine</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_conversion_.debugoptions.html#package" class="tsd-kind-icon">package</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_conversion_.debugoptions.html#trace" class="tsd-kind-icon">trace</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_lib_opf_.spine.html#itemref" class="tsd-kind-icon">itemref</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_conversion_.global.html" class="tsd-kind-icon">Global</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_lib_conversion_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_conversion_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
+						<a href="_lib_opf_.spineitem.html" class="tsd-kind-icon">Spine<wbr>Item</a>
 					</li>
 				</ul>
 			</nav>
