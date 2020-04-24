@@ -230,7 +230,7 @@ export class RespecToEPUB {
                 // Collect the possible query parameters to control some details of the respec transformation
                 const config_options :string[] = _.keys(document.config)
                     .map( (key :string) :string => {
-                        if (document.config[key] === null) {
+                        if (document.config[key] === null || document.config[key] === '' || document.config[key] === 'null') {
                             return null;
                         } else {
                             return `${key}%3D${document.config[key]}`

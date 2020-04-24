@@ -89,7 +89,6 @@ fs.writeFileSync(ocf.name, content);
 
 See the specification of the [[RespecToEPUB]] and [[OCF]] classes for further details.
 
-
 <!-- ### Client-side processing
 
 The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries, can be used to trigger the necessary event handler: [[submit]]. The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/server.html). -->
@@ -133,7 +132,6 @@ starts up the server. The port number used by the server can be determined by se
 
 An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL.
 
-
 <!-- #### Browser
 
 _**For some reasons that latest release of `browserify` does not process the code properly; as a consequence, at this moment, the browser version does not work...**_
@@ -143,7 +141,6 @@ The `docs/assets/js/r2epub.js`  (or `docs/assets/js/r2epub.min.js`) module must 
 The client side is also deployed [on the cloud](https://iherman.github.io/convert.html) on github. -->
 
 ---
-
 
 Copyright © 2020 [Ivan Herman](https://www.ivan-herman.net) (a.k.a. [@iherman](https://github.com/iherman)).
 

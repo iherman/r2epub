@@ -14,8 +14,6 @@
  * maxTocLevel      Max TOC level
  *```
  *
- * By default, the value of `respec` is `false`. However, if one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
- *
  *
  * The module is a wrapper around a standard node.js `http.CreateServer`, and a call to [[create_epub]].
  *
@@ -71,7 +69,7 @@ interface Content {
  * @hidden
  */
 interface Query {
-    [index :string] :string|string[]
+    [index :string] :string|string[]|boolean
 }
 
 /**
@@ -80,13 +78,19 @@ interface Query {
  * @param query - The query string from the client
  */
 async function get_epub(query :Query) : Promise<Content> {
-    const respec_args = _.omit(query, 'respec', 'url');
+    const respec_args = _.omit(query, 'respec', 'url', 'submit');
+    _.keys(respec_args).forEach((key :string) => {
+        if (respec_args[key] !== undefined && (respec_args[key] === '' || respec_args[key] === 'null')) {
+            delete respec_args[key];
+        }
+    });
 
     const document :convert.Arguments = {
         url    : query.url as string,
-        respec : (query.respec !== undefined && (query.respec === 'true' || query.respec === 'false')) || _.keys(respec_args).length != 0,
+        respec : (query.respec !== undefined && (query.respec === 'true' || query.respec === true)),
         config : respec_args,
     }
+    // console.log(JSON.stringify(document, null, 4))
 
     const conversion_process   = new convert.RespecToEPUB(false, false);
     const the_ocf :convert.OCF = await conversion_process.create_epub(document);
@@ -96,13 +100,11 @@ async function get_epub(query :Query) : Promise<Content> {
         content : content,
         headers : {
             'Content-type'        : constants.media_types.epub,
-            // 'Content-Length'      : content.length,
             'Expires'             : (new Date()).toString(),
             'Content-Disposition' : `attachment; filename=${the_ocf.name}`
         }
     }
-}
-
+ }
 
 /**
  * Run a rudimentary Web server calling out to [[create_epub]] via [[get_epub]] to return an EPUB 3.2 instance when invoked. If there is no proper query string a fixed page is displayed.
