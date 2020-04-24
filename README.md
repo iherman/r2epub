@@ -51,9 +51,48 @@ By default, the server uses the `http` port number 5000, unless the `PORT` envir
 
 The server has been deployed on the cloud, using [heroku](https://r2epub.herokuapp.com/).
 
-### Client-side processing
+### Use as a typescript/node package through an API
 
-The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries, can be used to trigger the necessary event handler: [[submit]]. The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/server.html).
+The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:
+
+``` js
+import * as r2epub  from './lib/convert';
+import * as fs      from 'fs';
+// Create the class encapsulating the conversion functions
+const convert              = new r2epub.RespecToEPUB(argv.t, argv.p);
+// The creation itself is asynchronuous (the content has to be fetched over the wire).
+// The result is the class instance encapsulating an OCF (zip) content
+const ocf :r2epub.OCF      = await convert.create_epub(args);
+// The final zip file is finalized asynchronuously
+// When run in node, the result is a Buffer; when in a browser, the result is a Blob
+const content :Buffer|Blob = await ocf.get_content();
+// Get the content out to the disk
+fs.writeFileSync(ocf.name, content);
+```
+
+The same in Javascript:
+
+``` js
+const r2epub  = require('r2epub');
+const fs      = require('fs');
+// Create the class encapsulating the conversion functions
+const convert = new r2epub.RespecToEPUB();
+// The creation itself is asynchronuous (the content has to be fetched over the wire).
+// The result is the class instance encapsulating an OCF (zip) content
+const ocf     = await convert.create_epub("http://www.example.org/doc.html");
+// The final zip file is finalized asynchronuously
+// When run in node, the result is a Buffer; when in a browser, the result is a Blob
+const content = await ocf.get_content();
+// Get the content out to the disk
+fs.writeFileSync(ocf.name, content);
+```
+
+See the specification of the [[RespecToEPUB]] and [[OCF]] classes for further details.
+
+
+<!-- ### Client-side processing
+
+The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries, can be used to trigger the necessary event handler: [[submit]]. The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/server.html). -->
 
 ## Installation, usage
 
@@ -72,7 +111,7 @@ npm install
 npm run build
 ```
 
-The last entry compiles all the typescript code in the javascript and only necessary if the programs are used directly.
+The last entry compiles all the typescript code in the javascript and is only necessary if the programs are ran directly.
 
 Follow specific instructions based on your needs/interest below:
 
@@ -93,44 +132,6 @@ node dist/server.js
 starts up the server. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that 5000 is used.
 
 An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL.
-
-### Using as an API
-
-The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:
-
-``` js
-import * as r2epub  from './lib/convert';
-import * as fs      from 'fs';
-// Create the class encapsulating the conversion functions
-const convert              = new r2epub.RespecToEPUB(argv.t, argv.p);
-// The creation itself is asynchronuous, because content has to be fetched over the wire. The
-// result is the class instance encapsulating an OCF (zip) content
-const ocf :r2epub.OCF      = await convert.create_epub(args);
-// The final zip file is finalized asynchronuously
-// When run in node, the result is a Buffer; when in a browser, the result is a Blob
-const content :Buffer|Blob = await ocf.get_content();
-// Get the content out to the disk
-fs.writeFileSync(ocf.name, content);
-```
-
-The same in Javascript:
-
-``` js
-const r2epub  = require('r2epub');
-const fs      = require('fs');
-// Create the class encapsulating the conversion functions
-const convert = new r2epub.RespecToEPUB();
-// The creation itself is asynchronuous, because content has to be fetched over the wire. The
-// result is the class instance encapsulating an OCF (zip) content
-const ocf     = await convert.create_epub("http://www.example.org/doc.html");
-// The final zip file is finalized asynchronuously
-// When run in node, the result is a Buffer; when in a browser, the result is a Blob
-const content = await ocf.get_content();
-// Get the content out to the disk
-fs.writeFileSync(ocf.name, content);
-```
-
-See the specification of the [[RespecToEPUB]] and [[OCF]] classes for further details.
 
 
 <!-- #### Browser

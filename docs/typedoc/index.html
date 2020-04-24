@@ -136,8 +136,8 @@ npm run build</code></pre>
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs      <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
 <span class="hljs-comment">// Create the class encapsulating the conversion functions</span>
 <span class="hljs-keyword">const</span> convert              = <span class="hljs-keyword">new</span> r2epub.RespecToEPUB(argv.t, argv.p);
-<span class="hljs-comment">// The creation itself is asynchronuous, because content has to be fetched over the wire. The</span>
-<span class="hljs-comment">// result is the class instance encapsulating an OCF (zip) content</span>
+<span class="hljs-comment">// The creation itself is asynchronuous (the content has to be fetched over the wire).</span>
+<span class="hljs-comment">// The result is the class instance encapsulating an OCF (zip) content</span>
 <span class="hljs-keyword">const</span> ocf :r2epub.OCF      = <span class="hljs-keyword">await</span> convert.create_epub(args);
 <span class="hljs-comment">// The final zip file is finalized asynchronuously</span>
 <span class="hljs-comment">// When run in node, the result is a Buffer; when in a browser, the result is a Blob</span>
@@ -149,8 +149,8 @@ fs.writeFileSync(ocf.name, content);</code></pre>
 <span class="hljs-keyword">const</span> fs      = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 <span class="hljs-comment">// Create the class encapsulating the conversion functions</span>
 <span class="hljs-keyword">const</span> convert = <span class="hljs-keyword">new</span> r2epub.RespecToEPUB();
-<span class="hljs-comment">// The creation itself is asynchronuous, because content has to be fetched over the wire. The</span>
-<span class="hljs-comment">// result is the class instance encapsulating an OCF (zip) content</span>
+<span class="hljs-comment">// The creation itself is asynchronuous (the content has to be fetched over the wire).</span>
+<span class="hljs-comment">// The result is the class instance encapsulating an OCF (zip) content</span>
 <span class="hljs-keyword">const</span> ocf     = <span class="hljs-keyword">await</span> convert.create_epub(<span class="hljs-string">"http://www.example.org/doc.html"</span>);
 <span class="hljs-comment">// The final zip file is finalized asynchronuously</span>
 <span class="hljs-comment">// When run in node, the result is a Buffer; when in a browser, the result is a Blob</span>
