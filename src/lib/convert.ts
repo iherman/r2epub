@@ -14,7 +14,6 @@ import * as jsdom      from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 import * as stream     from 'stream';
-import JSZip           from 'jszip';
 import { convert }     from "xmlbuilder2";
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch';
@@ -24,6 +23,8 @@ import * as css        from './css';
 import * as cover      from './cover';
 import * as nav        from './nav';
 import * as overview   from './overview'
+
+import JSZip = require('jszip');
 
 
 // ========================================================== The main conversion part ============================================ //
