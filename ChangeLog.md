@@ -1,5 +1,26 @@
 # Changes
 
+## Version 1.1.0
+
+### (Main) New Feature:
+
+* Usable as an external module in `node.js`, both using Javascript and Typescript
+
+### Detailed changes:
+
+* Unfortunately, browserify has changed in its latest release, and it does not work any more in this release. Commented that out, should investigate further
+* The package is now ready to be (eventually) uploaded to npm to be used by other node.js and Typescript projects. To do so:
+    * All public interfaces were added to one file, renamed `convert.ts`.  This was the only way I found to properly link from another Typescript file
+    * `package.json` has been modified to include:
+
+        ``` json
+        "main": "dist/lib/convert.js",
+        "types": "src/lib/convert.ts",
+        ```
+
+        to ensure proper linkage from other modules via npm.
+    * The reference to JSZIp had to be changed to `require` even in Typscript. (I am not sure I understand why, but `tsc` worked well for `r2epub` but did not when the same module was linked externally. Oh Well...)
+
 ## Version 1.0.2
 
 ### (Main) New feature
