@@ -519,7 +519,7 @@ const container_xml :string = `<?xml version="1.0"?>
  *
  */
 export class OCF {
-    private book    :JSZip;
+    private _book    :JSZip;
     name    :string;
     private content :Buffer|Blob = null;
 
@@ -528,11 +528,11 @@ export class OCF {
      * @param name the file name of the final package
      */
     constructor(name :string) {
-        this.book = new JSZip();
+        this._book = new JSZip();
         this.name = name;
 
-        this.book.file('mimetype', constants.media_types.epub, {compression: 'STORE'});
-        this.book.file('META-INF/container.xml', container_xml, {compression: 'STORE'})
+        this._book.file('mimetype', constants.media_types.epub, {compression: 'STORE'});
+        this._book.file('META-INF/container.xml', container_xml, {compression: 'STORE'})
     }
 
     /**
@@ -543,17 +543,23 @@ export class OCF {
      * @param path_name - Path name of the file for the content
      */
     append(content :string|stream.Readable, path_name: string): void {
-        this.book.file(path_name, content, {compression: 'DEFLATE'});
+        this._book.file(path_name, content, {compression: 'DEFLATE'});
+    }
+
+    /** This may be temporary once the final format of usage becomes clear... */
+    get book() :JSZip {
+        return this._book;
     }
 
     /**
-     * Return the final content of the book. If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
+     * Return the final content of the book all packed up.
+     * If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
      *
      * @async
      */
     async get_content() :Promise<Buffer|Blob> {
         if (this.content === null) {
-            this.content = await this.book.generateAsync({
+            this.content = await this._book.generateAsync({
                 type:  constants.is_browser ? 'blob' : 'nodebuffer',
                 mimeType: constants.media_types.epub,
                 compressionOptions: {
@@ -565,28 +571,7 @@ export class OCF {
     }
 };
 
-
 // ========================================================== OPF ========================================================= //
-
-/**
- * ## The OPF package
- *
- * Wrapper around the package. The details of the various entries are in the
- * [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
- *
- * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
- * the details; the short overview is:
- *
- * - JSON names starting with `"@""` represent an attribute.
- * - JSON name `"#""` represent textual content of the element.
- * - Otherwise a JSON name refers to an embedded dictionary representing a subelement in XML.
- *
- * The core of the module is in the [[PackageWrapper]] class.
- *
- * @packageDocumentation
- */
-
-
 
 /**
  * ## The OPF Wrapper
@@ -730,4 +715,9 @@ export class PackageWrapper {
         return convert({encoding: "utf-8"}, this.thePackage, {prettyPrint: true}) as string;
     }
 }
+
+// ===================================== some constants are re-exported ============================================ //
+
+export const text_content :string[] = constants.text_content;
+export const media_types  :object   = constants.media_types;
 

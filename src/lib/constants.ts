@@ -41,7 +41,7 @@ export const text_content :string[] = [
 
 
 /** Default port number for the server locally */
-export const local_port_number :string = '5000';
+export const local_port_number    :string = '5000';
 
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
 export const spec_generator       :string = 'https://labs.w3.org/spec-generator/?type=respec&url='

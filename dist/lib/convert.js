@@ -6,13 +6,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const _ = __importStar(require("underscore"));
 const urlHandler = __importStar(require("url"));
-const jszip_1 = __importDefault(require("jszip"));
 const xmlbuilder2_1 = require("xmlbuilder2");
 const fetch_1 = require("./fetch");
 const constants = __importStar(require("./constants"));
@@ -20,6 +16,7 @@ const css = __importStar(require("./css"));
 const cover = __importStar(require("./cover"));
 const nav = __importStar(require("./nav"));
 const overview = __importStar(require("./overview"));
+const JSZip = require("jszip");
 /**
  * ## Main Processing class
  *
@@ -92,7 +89,7 @@ class RespecToEPUB {
                 // Collect the possible query parameters to control some details of the respec transformation
                 const config_options = _.keys(document.config)
                     .map((key) => {
-                    if (document.config[key] === null) {
+                    if (document.config[key] === null || document.config[key] === '' || document.config[key] === 'null') {
                         return null;
                     }
                     else {
@@ -368,10 +365,10 @@ class OCF {
      */
     constructor(name) {
         this.content = null;
-        this.book = new jszip_1.default();
+        this._book = new JSZip();
         this.name = name;
-        this.book.file('mimetype', constants.media_types.epub, { compression: 'STORE' });
-        this.book.file('META-INF/container.xml', container_xml, { compression: 'STORE' });
+        this._book.file('mimetype', constants.media_types.epub, { compression: 'STORE' });
+        this._book.file('META-INF/container.xml', container_xml, { compression: 'STORE' });
     }
     /**
      * Store a compressed content in the OCF file. The input can be a simple text or a Stream
@@ -381,16 +378,21 @@ class OCF {
      * @param path_name - Path name of the file for the content
      */
     append(content, path_name) {
-        this.book.file(path_name, content, { compression: 'DEFLATE' });
+        this._book.file(path_name, content, { compression: 'DEFLATE' });
+    }
+    /** This may be temporary once the final format of usage becomes clear... */
+    get book() {
+        return this._book;
     }
     /**
-     * Return the final content of the book. If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
+     * Return the final content of the book all packed up.
+     * If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
      *
      * @async
      */
     async get_content() {
         if (this.content === null) {
-            this.content = await this.book.generateAsync({
+            this.content = await this._book.generateAsync({
                 type: constants.is_browser ? 'blob' : 'nodebuffer',
                 mimeType: constants.media_types.epub,
                 compressionOptions: {
@@ -404,23 +406,6 @@ class OCF {
 exports.OCF = OCF;
 ;
 // ========================================================== OPF ========================================================= //
-/**
- * ## The OPF package
- *
- * Wrapper around the package. The details of the various entries are in the
- * [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
- *
- * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
- * the details; the short overview is:
- *
- * - JSON names starting with `"@""` represent an attribute.
- * - JSON name `"#""` represent textual content of the element.
- * - Otherwise a JSON name refers to an embedded dictionary representing a subelement in XML.
- *
- * The core of the module is in the [[PackageWrapper]] class.
- *
- * @packageDocumentation
- */
 /**
  * ## The OPF Wrapper
  *
@@ -554,4 +539,7 @@ class PackageWrapper {
     }
 }
 exports.PackageWrapper = PackageWrapper;
+// ===================================== some constants are re-exported ============================================ //
+exports.text_content = constants.text_content;
+exports.media_types = constants.media_types;
 //# sourceMappingURL=convert.js.map

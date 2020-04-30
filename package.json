@@ -1,63 +1,63 @@
 {
-  "name": "r2epub",
-  "version": "1.1.0dev",
-  "description": "Typescript based conversion of Respec generated HTML files into EPUB 3.2",
-  "engines": {
-    "node": "12.x"
-  },
-  "main": "dist/lib/convert.js",
-  "types": "src/lib/convert.ts",
-  "scripts": {
-    "build": "tsc",
-    "dist": "tsc",
-    "cli": "node dist/cli.js",
-    "serve": "node dist/server.js",
-    "createDocs": "typedoc src/",
-    "test": "echo \"No separate test specified\""
-  },
-  "browser": "dist/browser.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iherman/r2epub.git"
-  },
-  "keywords": [
-    "respec",
-    "epub"
-  ],
-  "author": "Ivan Herman <ivan@ivan-herman.net>",
-  "license": "W3C-20150513",
-  "bugs": {
-    "url": "https://github.com/iherman/r2epub/issues"
-  },
-  "homepage": "https://iherman.github.io/r2epub/",
-  "dependencies": {
-    "jsdom": "^16.2.2",
-    "jszip": "^3.2.2",
-    "minimist": "^1.2.5",
-    "node-fetch": "^2.6.0",
-    "parse5": "^5.1.1",
-    "underscore": "^1.9.2",
-    "url": "^0.11.0",
-    "valid-url": "^1.0.9",
-    "xmlbuilder2": "^1.4.3",
-    "xmlserializer": "^0.6.1",
-    "yargs": "^15.3.0"
-  },
-  "devDependencies": {
-    "@types/jsdom": "^16.1.0",
-    "@types/jszip": "^3.1.7",
-    "@types/node": "^13.7.7",
-    "@types/node-fetch": "^2.5.5",
-    "@types/underscore": "^1.9.4",
-    "@types/valid-url": "^1.0.2",
-    "@types/xmlserializer": "^0.6.0",
-    "@types/yargs": "^15.0.4",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.1",
-    "terser": "^4.6.11",
-    "typedoc": "^0.16.11",
-    "typedoc-plugin-nojekyll": "^1.0.1",
-    "typescript": "^3.8.3"
-  }
+    "name": "r2epub",
+    "version": "1.1.0",
+    "description": "Typescript based conversion of Respec generated HTML files into EPUB 3.2",
+    "engines": {
+        "node": "12.x"
+    },
+    "main": "dist/lib/convert.js",
+    "types": "src/lib/convert.ts",
+    "scripts": {
+        "build": "tsc",
+        "dist": "tsc",
+        "cli": "node dist/cli.js",
+        "serve": "node dist/server.js",
+        "createDocs": "typedoc src/",
+        "test": "echo \"No separate test specified\""
+    },
+    "browser": "dist/browser.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iherman/r2epub.git"
+    },
+    "keywords": [
+        "respec",
+        "epub"
+    ],
+    "author": "Ivan Herman <ivan@ivan-herman.net>",
+    "license": "W3C-20150513",
+    "bugs": {
+        "url": "https://github.com/iherman/r2epub/issues"
+    },
+    "homepage": "https://iherman.github.io/r2epub/",
+    "dependencies": {
+        "jsdom": "^16.2.2",
+        "jszip": "^3.2.2",
+        "minimist": "^1.2.5",
+        "node-fetch": "^2.6.0",
+        "parse5": "^5.1.1",
+        "underscore": "^1.9.2",
+        "url": "^0.11.0",
+        "valid-url": "^1.0.9",
+        "xmlbuilder2": "^1.4.3",
+        "xmlserializer": "^0.6.1",
+        "yargs": "^15.3.0"
+    },
+    "devDependencies": {
+        "@types/jsdom": "^16.1.0",
+        "@types/jszip": "^3.1.7",
+        "@types/node": "^13.7.7",
+        "@types/node-fetch": "^2.5.5",
+        "@types/underscore": "^1.9.4",
+        "@types/valid-url": "^1.0.2",
+        "@types/xmlserializer": "^0.6.0",
+        "@types/yargs": "^15.0.4",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-base": "^14.1.0",
+        "eslint-plugin-import": "^2.20.1",
+        "terser": "^4.6.11",
+        "typedoc": "^0.16.11",
+        "typedoc-plugin-nojekyll": "^1.0.1",
+        "typescript": "^3.8.3"
+    }
 }

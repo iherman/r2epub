@@ -15,8 +15,6 @@
  * maxTocLevel      Max TOC level
  *```
  *
- * By default, the value of `respec` is `false`. However, if one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
- *
  *
  * The module is a wrapper around a standard node.js `http.CreateServer`, and a call to [[create_epub]].
  *
@@ -67,12 +65,18 @@ const home = __importStar(require("./lib/home"));
  * @param query - The query string from the client
  */
 async function get_epub(query) {
-    const respec_args = _.omit(query, 'respec', 'url');
+    const respec_args = _.omit(query, 'respec', 'url', 'submit');
+    _.keys(respec_args).forEach((key) => {
+        if (respec_args[key] !== undefined && (respec_args[key] === '' || respec_args[key] === 'null')) {
+            delete respec_args[key];
+        }
+    });
     const document = {
         url: query.url,
-        respec: (query.respec !== undefined && (query.respec === 'true' || query.respec === 'false')) || _.keys(respec_args).length != 0,
+        respec: (query.respec !== undefined && (query.respec === 'true' || query.respec === true)),
         config: respec_args,
     };
+    // console.log(JSON.stringify(document, null, 4))
     const conversion_process = new convert.RespecToEPUB(false, false);
     const the_ocf = await conversion_process.create_epub(document);
     const content = await the_ocf.get_content();
@@ -80,7 +84,6 @@ async function get_epub(query) {
         content: content,
         headers: {
             'Content-type': constants.media_types.epub,
-            // 'Content-Length'      : content.length,
             'Expires': (new Date()).toString(),
             'Content-Disposition': `attachment; filename=${the_ocf.name}`
         }

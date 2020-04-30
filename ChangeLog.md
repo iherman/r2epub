@@ -8,7 +8,8 @@
 
 ### Detailed changes:
 
-* Unfortunately, browserify has changed in its latest release, and it does not work any more in this release. Commented that out, should investigate further
+* Unfortunately, browserify has changed in its latest release, and it does not work any more in this release. Commented that out, should investigate further.
+* Constructor for the `RespecToEPUB` has now default arguments.
 * The package is now ready to be (eventually) uploaded to npm to be used by other node.js and Typescript projects. To do so:
     * All public interfaces were added to one file, renamed `convert.ts`.  This was the only way I found to properly link from another Typescript file
     * `package.json` has been modified to include:
