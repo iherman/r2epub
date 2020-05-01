@@ -10,6 +10,7 @@
  */
 
 import * as convert from './lib/convert';
+import * as ocf from './lib/ocf';
 
 
 /**
@@ -93,7 +94,7 @@ const submit = async (event :Event) :Promise<any> => {
 
                 // Convert the content into a book, and create an EPUB instance as a Blob
                 const conversion_process   = new convert.RespecToEPUB(false, false);
-                const the_ocf :convert.OCF = await conversion_process.create_epub(args);
+                const the_ocf :ocf.OCF = await conversion_process.create_epub(args);
                 const content :Blob        = await the_ocf.get_content() as Blob;
 
                 // Save the Blob in  a file

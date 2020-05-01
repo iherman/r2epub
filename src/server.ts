@@ -48,6 +48,7 @@ import * as urlHandler from 'url';
 import * as _          from 'underscore';
 import * as constants  from './lib/constants';
 import * as convert    from './lib/convert';
+import * as ocf    from './lib/ocf';
 import * as home       from './lib/home';
 
 
@@ -93,7 +94,7 @@ async function get_epub(query :Query) : Promise<Content> {
     // console.log(JSON.stringify(document, null, 4))
 
     const conversion_process   = new convert.RespecToEPUB(false, false);
-    const the_ocf :convert.OCF = await conversion_process.create_epub(document);
+    const the_ocf :ocf.OCF = await conversion_process.create_epub(document);
     const content :Buffer      = await the_ocf.get_content() as Buffer;
 
     return {

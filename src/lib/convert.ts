@@ -13,18 +13,16 @@
 import * as jsdom      from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
-import * as stream     from 'stream';
-import { convert }     from "xmlbuilder2";
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch';
 import * as constants  from './constants';
 import * as opf        from './opf';
+import * as ocf        from './ocf';
 import * as css        from './css';
 import * as cover      from './cover';
 import * as nav        from './nav';
 import * as overview   from './overview'
 
-import JSZip = require('jszip');
 
 
 // ========================================================== The main conversion part ============================================ //
@@ -133,7 +131,7 @@ export interface Global {
     /**
      * The class used for the generation of the EPUB opf file
      */
-    opf_content?  :PackageWrapper
+    opf_content?  :opf.PackageWrapper
 
     /**
      * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[create_epub_from_dom]]
@@ -223,7 +221,7 @@ export class RespecToEPUB {
      * @param document - Reference to the original document; this may have to be transformed by respec on-the-fly.
      * @async
      */
-    async create_epub(document: Arguments) :Promise<OCF> {
+    async create_epub(document: Arguments) :Promise<ocf.OCF> {
         /** Generate the URL used to get the final document DOM */
         const full_url = () => {
             if (document.respec) {
@@ -283,7 +281,7 @@ export class RespecToEPUB {
      * @returns - The zip archive with the epub content, i.e., an OCF instance
      * @async
      */
-    async create_epub_from_dom(url :string, dom :jsdom.JSDOM) :Promise<OCF> {
+    async create_epub_from_dom(url :string, dom :jsdom.JSDOM) :Promise<ocf.OCF> {
         // ------------------------------------------
         // 1. Get hold of the local information
         this.global.dom          = dom;
@@ -307,7 +305,7 @@ export class RespecToEPUB {
             // Create the package content, and populate it with the essential metadata using the configuration
             const title = this.global.html_element.querySelector('title').textContent;
             const identifier = `https://www.w3.org/TR/${this.global.config.shortName}/`;
-            this.global.opf_content = new PackageWrapper(identifier, title);
+            this.global.opf_content = new opf.PackageWrapper(identifier, title);
             this.global.opf_content.add_creators(this.global.config.editors.map((entry: any) => `${entry.name}, ${entry.company}`));
 
             const date = this.global.html_element.querySelector('time.dt-published');
@@ -390,10 +388,10 @@ export class RespecToEPUB {
         // There is a tiny debug branch at this point...
         if (this.global.package) {
             console.log(this.global.opf_content.serialize());
-            return {} as OCF;
+            return {} as ocf.OCF;
         } else {
             // 11. Download all resources into the EPUB file
-            const retval :OCF = await this.generate_epub();
+            const retval :ocf.OCF = await this.generate_epub();
             return retval;
         }
     }
@@ -464,8 +462,8 @@ export class RespecToEPUB {
      *
      * @async
      */
-    private async generate_epub(): Promise<OCF> {
-        const the_book = new OCF(`${this.global.config.shortName}.epub`);
+    private async generate_epub(): Promise<ocf.OCF> {
+        const the_book = new ocf.OCF(`${this.global.config.shortName}.epub`);
 
         // The OCF class adds the fixed file like mime type and such automatically.
         // Add the package to the archives, with a fixed name:
@@ -492,232 +490,3 @@ export class RespecToEPUB {
         return the_book;
     }
 }
-
-
-// ========================================================== OCF ========================================================= //
-
-/**
- * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
- */
-const container_xml :string = `<?xml version="1.0"?>
-<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
-    <rootfiles>
-        <rootfile full-path="package.opf" media-type="application/oebps-package+xml" />
-    </rootfiles>
-</container>
-`
-
-/**
- * ## The class representing the EPUB 3.2 OCF package.
- *
- * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB. The constructor generates and adds the required content files, as described in the [EPUB Specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml), namely:
- *
- * * The `mimetype` file
- * * The `container.xml` file, see the value in [[container_xml]].
- *
- * Both of these files are stored uncompressed.
- *
- */
-export class OCF {
-    private _book    :JSZip;
-    name    :string;
-    private content :Buffer|Blob = null;
-
-    /**
-     *
-     * @param name the file name of the final package
-     */
-    constructor(name :string) {
-        this._book = new JSZip();
-        this.name = name;
-
-        this._book.file('mimetype', constants.media_types.epub, {compression: 'STORE'});
-        this._book.file('META-INF/container.xml', container_xml, {compression: 'STORE'})
-    }
-
-    /**
-     * Store a compressed content in the OCF file. The input can be a simple text or a Stream
-     * (the relevant `archiver` function takes care of disambiguation).
-     *
-     * @param content - Content to be stored
-     * @param path_name - Path name of the file for the content
-     */
-    append(content :string|stream.Readable, path_name: string): void {
-        this._book.file(path_name, content, {compression: 'DEFLATE'});
-    }
-
-    /** This may be temporary once the final format of usage becomes clear... */
-    get book() :JSZip {
-        return this._book;
-    }
-
-    /**
-     * Return the final content of the book all packed up.
-     * If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
-     *
-     * @async
-     */
-    async get_content() :Promise<Buffer|Blob> {
-        if (this.content === null) {
-            this.content = await this._book.generateAsync({
-                type:  constants.is_browser ? 'blob' : 'nodebuffer',
-                mimeType: constants.media_types.epub,
-                compressionOptions: {
-                    level: 9
-                }
-            });
-       }
-        return this.content;
-    }
-};
-
-// ========================================================== OPF ========================================================= //
-
-/**
- * ## The OPF Wrapper
- *
- * Wrapper around the internal representation of a EPUB3 Package document, as defined in the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc)
- *
- * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
- * the details; the short overview is:
- *
- * - JSON names starting with `"@""` represent an attribute.
- * - JSON name `"#""` represent textual content of the element.
- * - Otherwise a JSON name refers to an embedded dictionary representing a subelement in XML.
- *
- * The type hierarchy to represent an OPF file through such objects is defined through [[Package]]. Those types and default values do not reflect all possibilities of Package documents, only those that are relevant for W3C Technical reports.
- *
- */
-export class PackageWrapper {
-    /** The Package document content itself, stored in a JSON object for an easier manipulation
-     * @hidden
-     */
-    private thePackage: opf.Package;
-
-    /** Id generated to the editors for cross reference
-     * @hidden
-     */
-    private id: number = 0;
-
-    /**
-     * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
-     * @param title - Title of the publication
-     */
-    constructor(identifier :string, title :string) {
-        this.thePackage = {
-            package: {
-                "@xmlns" : "http://www.idpf.org/2007/opf",
-                "@xmlns:dc": "http://purl.org/dc/elements/1.1/",
-                "@prefix" : "cc: http://creativecommons.org/ns#",
-                "@unique-identifier" : "pub-id",
-                "@version": "3.0",
-                "@xml:lang": "en-us",
-                metadata: {
-                    "dc:identifier": [{
-                        "#" : identifier,
-                        "@id": "pub-id"
-                    }],
-                    "dc:title": [{
-                        "@id" : "title",
-                        "#" : title
-                    }],
-                    "dc:language": [{
-                        "#": "en-us"
-                    }],
-                    "meta": [{
-                        "@property": "title-type",
-                        "@refines": "#title",
-                        "#": "main"
-                    },{
-                        "@property": "cc:attributionURL",
-                        "#": "https://www.w3.org"
-                    }],
-                    "dc:rights": "https://www.w3.org/Consortium/Legal/2015/doc-license",
-                    "dc:publisher": "World Wide Web Consortium",
-                    "link" : [{
-                        "@href": "https://www.w3.org/Consortium/Legal/2015/doc-license",
-                        "@rel": "cc:license"
-                    }],
-                    "dc:creator": []
-                },
-                manifest : {
-                    "item" : []
-                },
-                spine : {
-                    "itemref" : [
-                        {
-                            "@idref": "start",
-                        },
-                        {
-                            "@idref": "main",
-                        }
-                    ]
-                }
-            }
-        }
-    }
-
-    /**
-     * Add a manifest item, i.e., the reference to a resource that is part of the publication.
-     *
-     * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
-     */
-    add_manifest_item(item :opf.ManifestItem) :void {
-        if (item['@properties'] === undefined) {
-            delete item['@properties'];
-        }
-        this.thePackage.package.manifest.item.push(item);
-    }
-
-    /**
-     * Add a list of creators (authors) to the publication.
-     *
-     * @param creators - list of creators of the publications
-     */
-    add_creators(creators: string[]): void {
-        creators.forEach((creator: string) => {
-            this.thePackage.package.metadata["dc:creator"].push({
-                "@id"   : `creator_id_${this.id}`,
-                "#"     : creator
-            });
-            this.thePackage.package.metadata["meta"].push({
-                "@refines"  :  `#creator_id_${this.id}`,
-                "@property" : "role",
-                "@scheme"   : "marc:relators",
-                "#"         : "edt"
-            });
-            this.id++;
-        });
-    }
-
-    /**
-     * Set the date and the modification date of the publication.
-     *
-     * @param date - modification date and proper date (there is no difference for W3C Documents)
-     */
-    add_dates(date :string): void {
-        this.thePackage.package.metadata.meta.push({
-            "@property": "dcterms:date",
-            "#": `${date}T00:00:00Z`
-        });
-        this.thePackage.package.metadata.meta.push({
-            "@property": "dcterms:modified",
-            "#": `${date}T00:00:00Z`
-        })
-    }
-
-    /**
-     * Serialize the Package document into (pretty printed) XML.
-     *
-     * @returns - Pretty printed XML
-     */
-    serialize(): string {
-        return convert({encoding: "utf-8"}, this.thePackage, {prettyPrint: true}) as string;
-    }
-}
-
-// ===================================== some constants are re-exported ============================================ //
-
-export const text_content :string[] = constants.text_content;
-export const media_types  :object   = constants.media_types;
-
