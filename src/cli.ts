@@ -42,7 +42,7 @@
  */
 /* Main imports */
 import * as convert from './lib/convert';
-import * as ocf from './lib/ocf';
+import * as ocf     from './lib/ocf';
 import * as fs      from 'fs';
 
 /** @hidden */
@@ -83,7 +83,7 @@ async function cli() {
 
     try {
         const conversion_process     = new convert.RespecToEPUB(argv.t, argv.p);
-        const the_ocf :ocf.OCF   = await conversion_process.create_epub(args);
+        const the_ocf :ocf.OCF       = await conversion_process.create_epub(args);
         const content :Buffer | Blob = await the_ocf.get_content();
 
         fs.writeFileSync(argv.o || the_ocf.name, content);
