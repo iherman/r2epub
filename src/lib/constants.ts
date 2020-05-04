@@ -11,9 +11,16 @@
 export const is_browser :boolean = (process === undefined || process.title === 'browser');
 
 /**
+ *
+ */
+export interface MediaType {
+    [propName: string] :string;
+}
+
+/**
  * Various media types used in the code.
  */
-export const media_types = {
+export const media_types :MediaType = {
     css     : 'text/css',
     epub    : 'application/epub+zip',
     es      : 'text/ecmascript',

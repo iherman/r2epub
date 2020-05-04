@@ -109,6 +109,14 @@ class PackageWrapper {
         this.thePackage.package.manifest.item.push(item);
     }
     /**
+     * Add a spine item, i.e., the reference to the resource in the manifest that is a constituent of the spite (i.e., reading order) of the book
+     *
+     * @param idref - the reference that must be added to the spine item
+     */
+    add_spine_item(idref) {
+        this.thePackage.package.spine.itemref.push({ "@idref": idref });
+    }
+    /**
      * Add a list of creators (authors) to the publication.
      *
      * @param creators - list of creators of the publications

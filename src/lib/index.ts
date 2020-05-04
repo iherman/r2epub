@@ -9,11 +9,13 @@ import * as convert    from './convert';
 import * as xhtml      from './xhtml';
 
 
-export type Arguments               = convert.Arguments;
-
-
+export type Arguments = convert.Arguments;
 export class RespecToEPUB   extends convert.RespecToEPUB {};
+
 export class OCF            extends ocf.OCF {};
+
+export type ManifestItem = opf.ManifestItem;
 export class PackageWrapper extends opf.PackageWrapper {};
+
 export const text_content :string[] = constants.text_content;
-export const media_types  :object   = constants.media_types;
+export const media_types  :constants.MediaType  = constants.media_types;
