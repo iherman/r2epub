@@ -105,7 +105,13 @@ The module has also been “browserified” and can be run on the client side, i
 
 ## Installation, usage
 
-The implementation is in Typescript and on top of `node.js`. The project can be downloaded via cloning and can be installed via a standard `npm` processing. The documentation is also available [on-line](https://iherman.github.io/r2epub/typedoc/).
+The implementation is in Typescript and on top of `node.js`. The project can be downloaded via the standard `npm` processing:
+
+```sh
+npm install r2epub
+```
+
+The documentation is also available [on-line](https://iherman.github.io/r2epub/typedoc/).
 
 Note that the on-the-fly conversion via respec is done by running the original source using an <a href='https://www.w3.org/2015/labs/'>online service</a> based on <a href="https://github.com/w3c/spec-generator">Spec Generator</a>. Alas!, that service may be down, and this package has no control over that…
 
