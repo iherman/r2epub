@@ -1,4 +1,11 @@
 "use strict";
+/**
+ * ## Fetch
+ *
+ * Wrappers around the fetch function.
+ *
+ * @packageDocumentation
+ */
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -8,12 +15,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * ## Fetch
- *
- * Wrappers around the fetch function.
- *
- * @packageDocumentation
- */
+*
+*
+*/
 const node_fetch = __importStar(require("node-fetch"));
 const urlHandler = __importStar(require("url"));
 const validUrl = __importStar(require("valid-url"));

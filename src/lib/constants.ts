@@ -1,8 +1,8 @@
 /**
- * `Global constants used at various places.
+ * ## Global constants used at various places.
  *
  * @packageDocumentation
- */
+*/
 
 /**
  * Flag to decide whether the code runs in a browser or in node.js

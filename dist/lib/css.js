@@ -1,4 +1,46 @@
 "use strict";
+/**
+ * ## CSS files
+ *
+ *  Handling CSS mappings is a bit complicated because the W3C setup is not entirely consistent...
+ *
+ * The general, and "usual", case is that the `specStatus` value, i.e., 'REC', 'WD', 'CR', etc,
+ * means that there is a logo used with the name `https://www.w3.org/StyleSheets/TR/2016/logos/{specStatus}.svg`
+ * (this is, usually, the left stripe in the text). Structurally, the HTML links to a style file of the sort
+ * `https://www.w3.org/StyleSheets/TR/2016/W3C-{specStatus}`. These files are all very simple:
+ * import a common `base.css` file and add a setting for the background image using the logo file. All these files
+ * must be copied into the zip file, and the HTML references must be changed to their relative equivalents.
+ *
+ * However… the complication, from EPUB's point of view, is that
+ *
+ * - The logo references in those CSS files are usually absolute URL-s (but not always).
+ * If the original structure was followed, the CSS file should be changed on-the-fly
+ * (when put into the zip file) changing the URL reference. This would involve an extra CSS parsing.
+ * - The structure described above has exceptions. Sometimes there is no such logo (e.g., for the "basic" document,
+ * or the living documents), sometimes logos are shared (e.g., FPWD and WD), i.e., their name cannot simply deduced
+ * from the value of `specStatus` and, in some cases, an extra trick is used to create a watermark using a
+ * separate image file.
+ * - The logo file URL-s rely on content negotiations to choose between SVG and PNG. This does not work for the EPUB content; SVG files are preferred.
+ *
+ * The approach chosen to convert the content to the EPUB file is therefore as follows:
+ *
+ * - The core reference in the HTML file is changed to a (stable) `base.css` file. This file is copied
+ * into the EPUB file from a separate, but fixed, [URI](https://www.w3.org/People/Ivan/TR_EPUB/base.css)]. This is a
+ * modified version of the "real" `base.css` with:
+ *     - the TOC related statements have been removed
+ *     - some page breaking instructions are added
+ *     - the margins/padding of the page is set on a different HTML element, see the [separate “overview” module](./_lib_overview_.html) for further details.
+ * - An extra css file is created, stored in the in the EPUB file and referred to from the resulting HTML file, setting
+ * the right background with a relative URL. This is done by using a simple template, which is imply a copy of the
+ * relevant template on the W3C site.
+ *     - In some cases the template is more complex (e.g., CG or BG documents due to different logo sizes) and may also include a watermark. Luckily, the watermark is always the same file, which simplifies things somewhat.
+ *
+ * The easy (i.e., well structured) cases are assembled in the [[specStatus_simple]] array;
+ * these can be handled automatically. The characteristics of "non-standard" cases
+ * (e.g., BG/CG documents) are described in the [[specStatus_css]] object, based on the [[specStatus_css_mappings]] interface.
+ *
+ * @packageDocumentation
+*/
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};

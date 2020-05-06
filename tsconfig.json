@@ -34,6 +34,8 @@
         "listInvalidSymbolLinks": true,
         "ignoreCompilerErrors": true,
         "gitRemote": "origin",
+        "includeVersion": true,
+        "theme" : "minimal",
         "name" : "r2epub — Converting HTML documents produced by Respec into EPUB 3.2"
     }
 }

@@ -6,11 +6,11 @@ If used from another program, the main entry point are the [[create_epub]] and [
 
 ## Package usage
 
-### Command line interface
+### Command line usage
 
 There is a simple CLI implemented in [[cli]] which works as follows:
 
-``` sh
+```sh
 Options:
   --help                 Show help  [boolean]
   -o, --output           The name of the output file [string]
@@ -25,17 +25,17 @@ For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.
 
 In the absence of the `-o` flag the output will be `shortName.epub`, where the value of `shortName` is extracted from the [ReSpec configuration](https://github.com/w3c/respec/wiki/shortName).
 
-### Server interface
+### Server usage
 
 There is a simple server implemented in [[serve]]: running
 
-``` sh
+```sh
 node dist/server
 ```
 
 starts a simple Web server that generate EPUB 3.2 instances for URL-s of the sort:
 
-``` sh
+```sh
 https://epub.example.org?url=https://www.example.org/doc.html
 ```
 
@@ -56,13 +56,18 @@ The server has been deployed on the cloud, using [heroku](https://r2epub.herokua
 The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:
 
 ``` js
-import * as r2epub  from './lib/convert';
+import * as r2epub  from 'r2epub';
 import * as fs      from 'fs';
 // Create the class encapsulating the conversion functions
-const convert              = new r2epub.RespecToEPUB(argv.t, argv.p);
+const convert              = new r2epub.RespecToEPUB();
 // The creation itself is asynchronuous (the content has to be fetched over the wire).
 // The result is the class instance encapsulating an OCF (zip) content
-const ocf :r2epub.OCF      = await convert.create_epub(args);
+const args :r2epub.Arguments = {
+    url    :"http://www.example.org/doc.html",
+    respec : false,
+    config : {}
+};
+const ocf  :r2epub.OCF       = await convert.create_epub(args);
 // The final zip file is finalized asynchronuously
 // When run in node, the result is a Buffer; when in a browser, the result is a Blob
 const content :Buffer|Blob = await ocf.get_content();
@@ -79,6 +84,11 @@ const fs      = require('fs');
 const convert = new r2epub.RespecToEPUB();
 // The creation itself is asynchronuous (the content has to be fetched over the wire).
 // The result is the class instance encapsulating an OCF (zip) content
+const args = {
+    url    :"http://www.example.org/doc.html",
+    respec : false,
+    config : {}
+};
 const ocf     = await convert.create_epub("http://www.example.org/doc.html");
 // The final zip file is finalized asynchronuously
 // When run in node, the result is a Buffer; when in a browser, the result is a Blob
@@ -110,7 +120,7 @@ npm install
 npm run build
 ```
 
-The last entry compiles all the typescript code in the javascript and is only necessary if the programs are ran directly.
+The last entry compiles all the typescript code into javascript.
 
 Follow specific instructions based on your needs/interest below:
 
@@ -130,7 +140,7 @@ node dist/server.js
 
 starts up the server. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that 5000 is used.
 
-An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL.
+An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL. A [client side interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
 
 <!-- #### Browser
 

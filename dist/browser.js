@@ -7,8 +7,10 @@
  *
  * This script must be converted to Javascript and the browserified to be used in an HTML page.
  *
+ * _**Beware: this module is temporarily out of order; there are some unexplained issues with browserify...**_
+*
  * @packageDocumentation
- */
+*/
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -17,6 +19,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ *
+ *
+ */
 const convert = __importStar(require("./lib/convert"));
 /**
  *

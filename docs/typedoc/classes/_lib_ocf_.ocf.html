@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/convert&quot; | r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
+	<title>OCF | r2epub — Converting HTML documents produced by Respec into EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2377,26 +2377,34 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-class tsd-parent-kind-external-module">
-			<a href="../classes/_lib_convert_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
+		<li class="current tsd-kind-class tsd-parent-kind-external-module">
+			<a href="_lib_ocf_.ocf.html" class="tsd-kind-icon">OCF</a>
+			<ul>
+				<li class=" tsd-kind-constructor tsd-parent-kind-class">
+					<a href="_lib_ocf_.ocf.html#constructor" class="tsd-kind-icon">constructor</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="_lib_ocf_.ocf.html#_book" class="tsd-kind-icon">_book</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="_lib_ocf_.ocf.html#content" class="tsd-kind-icon">content</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="_lib_ocf_.ocf.html#name" class="tsd-kind-icon">name</a>
+				</li>
+				<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+					<a href="_lib_ocf_.ocf.html#book" class="tsd-kind-icon">book</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="_lib_ocf_.ocf.html#append" class="tsd-kind-icon">append</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="_lib_ocf_.ocf.html#get_content" class="tsd-kind-icon">get_<wbr>content</a>
+				</li>
+			</ul>
 		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-			<a href="../interfaces/_lib_convert_.arguments.html" class="tsd-kind-icon">Arguments</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-			<a href="../interfaces/_lib_convert_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-			<a href="../interfaces/_lib_convert_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-			<a href="../interfaces/_lib_convert_.global.html" class="tsd-kind-icon">Global</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-			<a href="../interfaces/_lib_convert_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-			<a href="../interfaces/_lib_convert_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
+		<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+			<a href="../modules/_lib_ocf_.html#container_xml" class="tsd-kind-icon">container_<wbr>xml</a>
 		</li>
 	</ul>
 </nav>
@@ -2405,44 +2413,215 @@ img {
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<a href="#main-entry-points" id="main-entry-points" style="color: inherit; text-decoration: none;">
-						<h2>Main entry points</h2>
+					<a href="#the-class-representing-the-epub-32-ocf-package" id="the-class-representing-the-epub-32-ocf-package" style="color: inherit; text-decoration: none;">
+						<h2>The class representing the EPUB 3.2 OCF package.</h2>
 					</a>
 				</div>
-				<p>This module contains the main external entry points for the EPUB conversion. These are:</p>
+				<p>Simple wrapper around the <a href="https://stuk.github.io/jszip/">JSZip</a> package to create an OCF specific packaging for EPUB. The constructor generates and adds the required content files, as described in the <a href="https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml">EPUB Specification</a>, namely:</p>
 				<ul>
-					<li>Main processing steps for the creation of EPUB files: the <a href="../classes/_lib_convert_.respectoepub.html">RespecToEPUB</a> class;</li>
-					<li>A representation of the EPUB OCF instances (i.e., of the ZIP file for the final content): the <a href="../classes/_lib_ocf_.ocf.html">OCF</a> class;</li>
-					<li>A representation of the EPUB “package”, i.e., the XML file providing the main manifest of the EPUB file: the <a href="../classes/_lib_opf_.packagewrapper.html">PackageWrapper</a> class.</li>
+					<li>The <code>mimetype</code> file</li>
+					<li>The <code>container.xml</code> file, see the value in <a href="../modules/_lib_ocf_.html#container_xml">container_xml</a>.</li>
 				</ul>
-				<dl class="tsd-comment-tags">
-					<dt>packagedocumentation</dt>
-					<dd></dd>
-				</dl>
+				<p>Both of these files are stored uncompressed.</p>
 			</div>
+		</section>
+		<section class="tsd-panel tsd-hierarchy">
+			<h3>Hierarchy</h3>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">OCF</span>
+					<ul class="tsd-hierarchy">
+						<li>
+							<a href="_lib_index_.ocf.html" class="tsd-signature-type">OCF</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Classes</h3>
+						<h3>Constructors</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_lib_convert_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a></li>
+							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
-						<h3>Interfaces</h3>
+						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_lib_convert_.arguments.html" class="tsd-kind-icon">Arguments</a></li>
-							<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_lib_convert_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a></li>
-							<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_lib_convert_.debugoptions.html" class="tsd-kind-icon">Debug<wbr>Options</a></li>
-							<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_lib_convert_.global.html" class="tsd-kind-icon">Global</a></li>
-							<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_lib_convert_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a></li>
-							<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_lib_convert_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_ocf_.ocf.html#_book" class="tsd-kind-icon">_book</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_ocf_.ocf.html#content" class="tsd-kind-icon">content</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#name" class="tsd-kind-icon">name</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Accessors</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#book" class="tsd-kind-icon">book</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Methods</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#append" class="tsd-kind-icon">append</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_ocf_.ocf.html#get_content" class="tsd-kind-icon">get_<wbr>content</a></li>
 						</ul>
 					</section>
 				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Constructors</h2>
+			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<a name="constructor" class="tsd-anchor"></a>
+				<h3>constructor</h3>
+				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">new OCF<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_ocf_.ocf.html" class="tsd-signature-type">OCF</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/06a108e/src/lib/ocf.ts#L47">lib/ocf.ts:47</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>name: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>the file name of the final package</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_lib_ocf_.ocf.html" class="tsd-signature-type">OCF</a></h4>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<a name="_book" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> _book</h3>
+				<div class="tsd-signature tsd-kind-icon">_book<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSZip</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/iherman/r2epub/blob/06a108e/src/lib/ocf.ts#L45">lib/ocf.ts:45</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<a name="content" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> content</h3>
+				<div class="tsd-signature tsd-kind-icon">content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Blob</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/iherman/r2epub/blob/06a108e/src/lib/ocf.ts#L47">lib/ocf.ts:47</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="name" class="tsd-anchor"></a>
+				<h3>name</h3>
+				<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/iherman/r2epub/blob/06a108e/src/lib/ocf.ts#L46">lib/ocf.ts:46</a></li>
+					</ul>
+				</aside>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Accessors</h2>
+			<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+				<a name="book" class="tsd-anchor"></a>
+				<h3>book</h3>
+				<div class="tsd-signature tsd-kind-icon">book<span class="tsd-signature-symbol">:</span> </div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/iherman/r2epub/blob/06a108e/src/lib/ocf.ts#L73">lib/ocf.ts:73</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This may be temporary once the final format of usage becomes clear...</p>
+					</div>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="append" class="tsd-anchor"></a>
+				<h3>append</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">append<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">stream.Readable</span>, path_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/06a108e/src/lib/ocf.ts#L68">lib/ocf.ts:68</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Store a compressed content in the OCF file. The input can be a simple text or a Stream
+								(the relevant <code>archiver</code> function takes care of disambiguation).</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>content: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">stream.Readable</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Content to be stored</p>
+								</div>
+							</li>
+							<li>
+								<h5>path_name: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Path name of the file for the content</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="get_content" class="tsd-anchor"></a>
+				<h3>get_<wbr>content</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get_<wbr>content<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Blob</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/06a108e/src/lib/ocf.ts#L83">lib/ocf.ts:83</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return the final content of the book all packed up.
+								If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>async</dt>
+								<dd></dd>
+							</dl>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Blob</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
 			</section>
 		</section>
 		<footer>

@@ -1,4 +1,13 @@
 "use strict";
+/**
+ * ## OCF Package
+ *
+ * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB.
+ *
+ * The core of the module is in the [[OCF]] class.
+ *
+ * @packageDocumentation
+ */
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -7,6 +16,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ *
+ */
 const constants = __importStar(require("./constants"));
 const JSZip = require("jszip");
 /**

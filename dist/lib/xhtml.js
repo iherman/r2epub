@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * ## XHTML conversion from HTML5
  *
@@ -11,6 +10,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @packageDocumentation
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+*
+*
+*/
 const parse5_1 = require("parse5");
 const xmlserializer_1 = require("xmlserializer");
 /**

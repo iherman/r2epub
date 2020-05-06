@@ -1,4 +1,11 @@
 "use strict";
+/**
+ * ## Externally accessible entries
+ *
+ * r2epub can be used as a library module both for TypeScript and for Javascript. The external entities are listed below; see their respective documentations for further information.
+ *
+ * @packageDocumentation
+*/
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -7,6 +14,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ *
+ *
+ */
 const constants = __importStar(require("./constants"));
 const opf = __importStar(require("./opf"));
 const ocf = __importStar(require("./ocf"));

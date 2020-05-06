@@ -1,3 +1,18 @@
+/**
+ * ## OCF Package
+ *
+ * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB.
+ *
+ * The core of the module is in the [[OCF]] class.
+ *
+ * @packageDocumentation
+ */
+
+/**
+ *
+ */
+
+
 import * as constants  from './constants';
 import * as stream from 'stream';
 import JSZip = require('jszip');

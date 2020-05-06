@@ -1,4 +1,11 @@
 "use strict";
+/**
+ * ## Navigation File
+ *
+ * Creation of the navigation file combining a template with the TOC fragment retrieved from the content DOM.
+ *
+ * @packageDocumentation
+ */
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};

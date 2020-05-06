@@ -6,12 +6,18 @@
  *
  * This script must be converted to Javascript and the browserified to be used in an HTML page.
  *
+ * _**Beware: this module is temporarily out of order; there are some unexplained issues with browserify...**_
+*
  * @packageDocumentation
+*/
+
+/**
+ *
+ *
  */
 
 import * as convert from './lib/convert';
 import * as ocf from './lib/ocf';
-
 
 /**
  *

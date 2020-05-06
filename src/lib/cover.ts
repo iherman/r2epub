@@ -5,6 +5,12 @@
  *
  * @packageDocumentation
  */
+
+ /**
+ *
+ *
+ */
+
 import { ResourceRef, Global } from './convert';
 import * as constants          from './constants';
 

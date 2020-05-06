@@ -11,6 +11,12 @@
  *
  * @packageDocumentation
 */
+
+/**
+ *
+ *
+ */
+
 import * as urlHandler from 'url';
 import { ResourceRef, Global } from './convert';
 import * as xhtml              from './xhtml';

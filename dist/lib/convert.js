@@ -1,4 +1,16 @@
 "use strict";
+/**
+ * ## Main entry points
+ *
+ * This module contains the main external entry points for the EPUB conversion. These are:
+ *
+ * * Main processing steps for the creation of EPUB files: the [[RespecToEPUB]] class;
+ * * A representation of the EPUB OCF instances (i.e., of the ZIP file for the final content): the [[OCF]] class;
+ * * A representation of the EPUB “package”, i.e., the XML file providing the main manifest of the EPUB file: the [[PackageWrapper]] class.
+ *
+ *
+ * @packageDocumentation
+*/
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
