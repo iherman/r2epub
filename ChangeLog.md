@@ -4,7 +4,7 @@
 
 ### (Main) New Feature
 
-
+* The code is again embeddable in the browser.
 
 ### Detailed (important) changes
 

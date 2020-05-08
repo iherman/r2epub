@@ -51,6 +51,11 @@ By default, the server uses the `http` port number 5000, unless the `PORT` envir
 
 The server has been deployed on the cloud, using [heroku](https://r2epub.herokuapp.com/).
 
+### Client-side processing
+
+The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries, can be used to trigger the necessary event handler: [[submit]]. The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/client.html).
+
+
 ### Use as a typescript/node package through an API
 
 The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:
@@ -98,10 +103,6 @@ fs.writeFileSync(ocf.name, content);
 ```
 
 See the specification of the [[RespecToEPUB]] and [[OCF]] classes for further details.
-
-<!-- ### Client-side processing
-
-The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries, can be used to trigger the necessary event handler: [[submit]]. The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/server.html). -->
 
 ## Installation, usage
 

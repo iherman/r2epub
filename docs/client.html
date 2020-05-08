@@ -93,24 +93,20 @@
                     <dd>Whether the source is in ReSpec (“true”) or a final HTML (“false”). If the former, the source is converted using an <a href='https://www.w3.org/2015/labs/'>online service</a> based on <a href="https://github.com/w3c/spec-generator">Spec Generator</a> into HTML first.</dd>
 
                     <dt>“Publication Date”</dt>
-                    <dd>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the “<code>respecConfig</code> structure</a> in the source.</dd>
+                    <dd>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                     <dt>“Specification Status”</dt>
-                    <dd>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+                    <dd>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                     <dt>“Add Section Links”</dt>
-                    <dd>Add section links with <code>§</code>. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+                    <dd>Add section links with a <code>§</code> character. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                     <dt>“Maximum Toc Level”</dt>
-                    <dd>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+                    <dd>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                 </dl>
 
-                <p>
-                    By default, the value of “Run ReSpec” is “false”. However, if one of ReSpec arguments is set, then the “true” value is implied (i.e., it is not necessary to set it explicitly).
-                </p>
-
-                <p style='font-size: smaller'>
+                 <p style='font-size: smaller'>
                     <i><strong>Warning:</strong></i> this code does not run on Apple’s Safari and on Internet Explorer, neither on the desktop nor on IOS. The reason is beyond my control: the “browserify” tool, used to convert the “node.js” code into a module usable in a browser, includes some general tools to handle the <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt'>BigInt</a> object, which is currently not implemented in those browsers.
                 </p>
             </section>
