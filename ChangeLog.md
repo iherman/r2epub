@@ -1,12 +1,22 @@
 # Changes
 
+## Version 1.1.1
+
+### (Main) New Feature
+
+
+
+### Detailed (important) changes
+
+* Some option values in the client files were duplicated
+
 ## Version 1.1.0
 
-### (Main) New Feature:
+### (Main) New Feature
 
 * Usable as an external module in `node.js`, both using Javascript and Typescript.
 
-### Detailed (important) changes:
+### Detailed (important) changes
 
 * _**Unfortunately, browserify has changed in its latest release, and it does not work any more in this release.**_ Commented that out for a while, should investigate further.
 * Constructor for the `RespecToEPUB` has now default arguments.
