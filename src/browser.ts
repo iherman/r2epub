@@ -54,24 +54,12 @@ const submit = async (event :Event) :Promise<any> => {
         setTimeout(() => done.style.setProperty('visibility', 'hidden'), 3000);
     }
 
-    /**
-     * Just create an artificial delay for debugging purposes...
-     *
-     * @param delay value in milliseconds
-     */
-    // const later = async (delay :number) :Promise<void> => {
-    //     return new Promise((resolve) => {
-    //         setTimeout(resolve, delay);
-    //     });
-    // }
-
     // This is to allow for async to work properly and avoid reloading the page
     event.preventDefault();
     const done :HTMLElement             = document.getElementById('done');
     const progress :HTMLProgressElement = document.getElementById('progress') as HTMLProgressElement;
 
     try {
-        // const the_form :HTMLFormElement = document.getElementById('main_form') as HTMLFormElement;
         const url :HTMLInputElement = document.getElementById('url') as HTMLInputElement;
         const respec :HTMLInputElement = document.getElementById('respec') as HTMLInputElement;
         const publishDate :HTMLInputElement = document.getElementById('publishDate') as HTMLInputElement;
@@ -91,7 +79,6 @@ const submit = async (event :Event) :Promise<any> => {
                     maxTocLevel     : maxTocLevel.value === '' ? undefined : maxTocLevel.value,
                 }
             }
-            // console.log(`Call arguments:  ${JSON.stringify(args, null, 4)}`);
 
             try {
 
@@ -100,7 +87,7 @@ const submit = async (event :Event) :Promise<any> => {
 
                 // Convert the content into a book, and create an EPUB instance as a Blob
                 const conversion_process   = new convert.RespecToEPUB(false, false);
-                const the_ocf :ocf.OCF = await conversion_process.create_epub(args);
+                const the_ocf :ocf.OCF     = await conversion_process.create_epub(args);
                 const content :Blob        = await the_ocf.get_content() as Blob;
 
                 // Save the Blob in  a file
