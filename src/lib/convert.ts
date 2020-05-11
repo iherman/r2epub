@@ -190,7 +190,7 @@ export class RespecToEPUB {
      * - `object` elements
      *
      */
-    private resource_references :LocalLinks[] = [
+    resource_references :LocalLinks[] = [
         {
             query : 'img, script, audio, video, source',
             attr  : 'src'
