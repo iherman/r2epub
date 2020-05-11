@@ -13,11 +13,10 @@
 */
 
 /**
- *
+ * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
  *
  */
-
-const service :string = 'https://r2epub.herokuapp.com/';
+const default_service :string = 'https://r2epub.herokuapp.com/';
 // const service :string = 'http://localhost:5000/';
 
 interface ReturnedData {
@@ -62,12 +61,13 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
 }
 
 
-
 /**
  *
  * Generate the EPUB file via a service.
  *
  * The method is set as an even handler for a submit button. The `event` argument is only used to prevent the default behavior of the button (i.e., to avoid reloading the page).
+ *
+ * By default, the service to be used is `https://r2epub.herokuapp.com/`, unless `data-r2epubservice` attribute is set to a different URL on the form element.
  *
  * @param event - Event object as forwarded to an HTML event handler.
  *
@@ -103,12 +103,15 @@ const submit = async (event :Event) :Promise<any> => {
     const progress :HTMLProgressElement = document.getElementById('progress') as HTMLProgressElement;
 
     try {
-        const url :HTMLInputElement = document.getElementById('url') as HTMLInputElement;
-        const respec :HTMLInputElement = document.getElementById('respec') as HTMLInputElement;
-        const publishDate :HTMLInputElement = document.getElementById('publishDate') as HTMLInputElement;
-        const specStatus :HTMLInputElement = document.getElementById('specStatus') as HTMLInputElement;
+        const form :HTMLElement                 = document.getElementById('main_form');
+        const url :HTMLInputElement             = document.getElementById('url') as HTMLInputElement;
+        const respec :HTMLInputElement          = document.getElementById('respec') as HTMLInputElement;
+        const publishDate :HTMLInputElement     = document.getElementById('publishDate') as HTMLInputElement;
+        const specStatus :HTMLInputElement      = document.getElementById('specStatus') as HTMLInputElement;
         const addSectionLinks :HTMLInputElement = document.getElementById('addSectionLinks') as HTMLInputElement;
-        const maxTocLevel :HTMLInputElement = document.getElementById('maxTocLevel') as HTMLInputElement;
+        const maxTocLevel :HTMLInputElement     = document.getElementById('maxTocLevel') as HTMLInputElement;
+
+        const service =  form.dataset.r2epubservice || default_service;
 
         if (!(url.value === null || url.value === '')) {
             const query :string[] = [

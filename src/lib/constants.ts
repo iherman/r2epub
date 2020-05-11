@@ -82,15 +82,12 @@ const allow_headers :string[] = [
 /** @hidden */
 const expose_headers :string[] = [
     'Accept-Ranges',
-    'Cache-Control',
     'Content-Encoding',
     'Content-Language',
     'Content-Length',
-    'Content-Range',
     'Content-Type',
     'Expires',
     'Last-Modified',
-    'Pragma',
     'Content-Disposition'
 ]
 

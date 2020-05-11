@@ -49,10 +49,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 /**
- *
+ * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
  *
  */
-var service = 'https://r2epub.herokuapp.com/';
+var default_service = 'https://r2epub.herokuapp.com/';
 /**
  * Get the service to perform the conversion.
  *
@@ -94,17 +94,18 @@ function fetch_book(resource_url) {
 }
 /**
  *
- * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming form data.
- * The result is saved on the local disc, using the short name of the document.
+ * Generate the EPUB file via a service.
  *
  * The method is set as an even handler for a submit button. The `event` argument is only used to prevent the default behavior of the button (i.e., to avoid reloading the page).
+ *
+ * By default, the service to be used is `https://r2epub.herokuapp.com/`, unless `data-r2epubservice` attribute is set to a different URL on the form element.
  *
  * @param event - Event object as forwarded to an HTML event handler.
  *
  * @async
  */
 var submit = function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var save_book, fading_success, done, progress, url, respec, publishDate, specStatus, addSectionLinks, maxTocLevel, query, service_url, returned, e_1, e_2;
+    var save_book, fading_success, done, progress, form, url, respec, publishDate, specStatus, addSectionLinks, maxTocLevel, service, query, service_url, returned, e_1, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -126,12 +127,14 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 8, , 9]);
+                form = document.getElementById('main_form');
                 url = document.getElementById('url');
                 respec = document.getElementById('respec');
                 publishDate = document.getElementById('publishDate');
                 specStatus = document.getElementById('specStatus');
                 addSectionLinks = document.getElementById('addSectionLinks');
                 maxTocLevel = document.getElementById('maxTocLevel');
+                service = form.dataset.r2epubservice || default_service;
                 if (!!(url.value === null || url.value === '')) return [3 /*break*/, 6];
                 query = [
                     "url=" + url.value,
@@ -158,11 +161,6 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 return [4 /*yield*/, fetch_book(service_url)];
             case 3:
                 returned = _a.sent();
-                // // Fetch on service_url!!!!
-                // const conversion_process   = new convert.RespecToEPUB(false, false);
-                // const the_ocf :ocf.OCF     = await conversion_process.create_epub(args);
-                // const content :Blob        = await the_ocf.get_content() as Blob;
-                // Save the Blob in  a file
                 save_book(returned.content, returned.file_name);
                 // Remove the query string from the URL bar
                 document.location.search = '';

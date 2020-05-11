@@ -9,6 +9,7 @@
 ### Detailed (important) changes
 
 * Some option values in the client files were duplicated
+* Created a server interface script to give some visual feedback to the user
 
 ## Version 1.1.0
 
