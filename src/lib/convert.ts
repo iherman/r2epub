@@ -420,7 +420,26 @@ export class RespecToEPUB {
         const target_urls = _.chain(this.resource_references)
             // extract the possible references
             .map((ref :LocalLinks) => {
-                const candidates = Array.from(this.global.html_element.querySelectorAll(ref.query));
+                let candidates :HTMLElement[] = Array.from(this.global.html_element.querySelectorAll(ref.query));
+                // Some entries may have to be filtered out:
+                // if the 'rel' is set to 'alternate', that is a sign that it is the same content
+                // in, say, PDF or even EPUB; these should be filtered out, replacing the reference by an
+                // absolute one
+                // In rare cases the file also refers to yet another HTML file, primarily diff files. Those are
+                // notoriously HTML invalid (accepted by W3C) and would be very complex to turn them into valid XHTML.
+                // They rarely happen, so it is simply turned into an absolute URL...
+                candidates = candidates.filter((element :HTMLElement) :boolean => {
+                    if (element.tagName === 'A' && element.hasAttribute('href')) {
+                        if ((element.hasAttribute('rel') && element.getAttribute('rel') === 'alternate') ||
+                            (element.getAttribute('href').endsWith('.html') === true)) {
+                            // Set the relative URL to an absolute one
+                            element.setAttribute('href', urlHandler.resolve(this.global.document_url, element.getAttribute('href')));
+                            // Remove the item from the list of references to be dealt with
+                            return false;
+                        }
+                    }
+                    return true;
+                })
                 return candidates.map((element) => element.getAttribute(ref.attr));
             })
             // create one single array of the result (instead of an array or arrays)
