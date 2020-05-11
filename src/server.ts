@@ -53,7 +53,7 @@ import * as urlHandler from 'url';
 import * as _          from 'underscore';
 import * as constants  from './lib/constants';
 import * as convert    from './lib/convert';
-import * as ocf    from './lib/ocf';
+import * as ocf        from './lib/ocf';
 import * as home       from './lib/home';
 
 
@@ -96,17 +96,22 @@ async function get_epub(query :Query) : Promise<Content> {
         respec : (query.respec !== undefined && (query.respec === 'true' || query.respec === true)),
         config : respec_args,
     }
-    // console.log(JSON.stringify(document, null, 4))
 
     const conversion_process   = new convert.RespecToEPUB(false, false);
-    const the_ocf :ocf.OCF = await conversion_process.create_epub(document);
+    const the_ocf :ocf.OCF     = await conversion_process.create_epub(document);
     const content :Buffer      = await the_ocf.get_content() as Buffer;
+
+    const now :string = (new Date()).toString();
 
     return {
         content : content,
         headers : {
             'Content-type'        : constants.media_types.epub,
-            'Expires'             : (new Date()).toString(),
+            'Expires'             : now,
+            'Last-Modified'       : now,
+            'Content-Length'      : content.length,
+            'Accept-Ranges'       : 'none',
+            'Content-Language'    : 'en-US',
             'Content-Disposition' : `attachment; filename=${the_ocf.name}`
         }
     }
