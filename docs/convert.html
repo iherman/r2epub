@@ -4,6 +4,7 @@
         <meta charset='utf-8'>
         <title>r2epub — Convert HTML/ReSpec into EPUB 3.2</title>
         <link rel='stylesheet' href='./assets/css/convert.css'/>
+        <script type='text/javascript' src='./assets/js/server_interface.js'></script>
     </head>
     <body>
         <header>
@@ -11,7 +12,7 @@
         </header>
         <main>
             <p>This form transforms the document into EPUB 3.2 through a call to a conversion server on <a href="https://www.herokuapp.com">Heroku</a>. If you prefer to perform this conversion via a client-side script, please go to the relevant <a href="client.html">version</a>.</p>
-            <form id="main_form" action="https://r2epub.herokuapp.com/" method="GET">
+            <form id="main_form">
                 <p style="visibility: hidden" id='done'>EPUB file generated!!</p>
                 <fieldset id="main_arguments">
                     <legend>Main arguments:</legend>

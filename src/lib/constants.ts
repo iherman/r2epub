@@ -91,6 +91,7 @@ const expose_headers :string[] = [
     'Expires',
     'Last-Modified',
     'Pragma',
+    'Content-Disposition'
 ]
 
 /**
