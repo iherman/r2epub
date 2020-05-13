@@ -44,7 +44,8 @@ exports.fixup_js = 'https://www.w3.org/scripts/TR/2016/fixup.js';
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
 exports.TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
-exports.modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/';
+// export const modified_epub_files  :string = 'https://iherman.github.io/r2epub/epub_assets/';
+exports.modified_epub_files = 'https://www.ivan-herman.net/r2epub/';
 /** Local (relative) URL for styles and logos */
 exports.local_style_files = 'StyleSheets/TR/2016/';
 /** @hidden */
@@ -62,15 +63,13 @@ const allow_headers = [
 /** @hidden */
 const expose_headers = [
     'Accept-Ranges',
-    'Cache-Control',
     'Content-Encoding',
     'Content-Language',
     'Content-Length',
-    'Content-Range',
     'Content-Type',
     'Expires',
     'Last-Modified',
-    'Pragma',
+    'Content-Disposition'
 ];
 /**
  * CORS headers, to be added to the server response
