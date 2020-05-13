@@ -60,7 +60,8 @@ export const fixup_js             :string  = 'https://www.w3.org/scripts/TR/2016
 export const TR_logo_files        :string = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
 
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
-export const modified_epub_files  :string = 'https://iherman.github.io/r2epub/epub_assets/';
+// export const modified_epub_files  :string = 'https://iherman.github.io/r2epub/epub_assets/';
+export const modified_epub_files  :string = 'https://www.ivan-herman.net/r2epub/';
 
 /** Local (relative) URL for styles and logos */
 export const local_style_files    :string = 'StyleSheets/TR/2016/';
