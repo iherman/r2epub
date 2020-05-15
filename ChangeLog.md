@@ -4,13 +4,15 @@
 
 ### (Main) New Feature
 
-* The code is again embeddable in the browser.
+* The code is again embeddable in the browser. (Browserify has re-started working as if by magic...)
+* There is now a "partner" project, called [rs2epub](https://github.com/iherman/rs2epub/) and built on top of r2epub, to build EPUB 3.2 out of a _collection_ of ReSpec documents. It was a good test for this release…
 
 ### Detailed (important) changes
 
 * Some option values in the client files were in duplicate (removed)
 * Created a server interface script to give some visual feedback to the user when converting via a Web interface using the remove service
 * By default, the server now listens to the default HTTP Port (ie, 80). The `PORT` environment variable can be used when starting the server to use a different value
+* Localhost, as a URL host name, is disallowed, except for the client version or if an explicit `R2EPUB_LOCAL` environmental variable is set. (Better avoid security issues, mainly for the server version.)
 
 ## Version 1.1.0
 
@@ -32,7 +34,7 @@
         ```
 
         to ensure proper linkage from other modules via npm.
-    * The reference to JSZIp had to be changed to `require` even in Typscript. (I am not sure I understand why, but `tsc` worked well for `r2epub` but did not when the same module was linked externally. Oh Well...)
+    * The reference to JSZIp had to be changed to `require` even in Typescript. (I am not sure I understand why, but `tsc` worked well for `r2epub` but did not when the same module was linked externally. Oh Well...)
 * The `docs/convert.html` is now a simple HTML form that connects to the server as deployed on heroku.
 
 ## Version 1.0.2
