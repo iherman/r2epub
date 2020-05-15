@@ -47,7 +47,7 @@ https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specSt
 
 converts the original file via respec, with the `specStatus` value set to `REC`. If one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
 
-By default, the server uses the `http` port number 5000, unless the `PORT` environment variable is set.
+By default, the server uses the `http` port number 80 (i.e., the default HTTP port), unless the `PORT` environment variable is set.
 
 The server has been deployed on the cloud, using [heroku](https://r2epub.herokuapp.com/).
 

@@ -8,8 +8,9 @@
 
 ### Detailed (important) changes
 
-* Some option values in the client files were duplicated
-* Created a server interface script to give some visual feedback to the user
+* Some option values in the client files were in duplicate (removed)
+* Created a server interface script to give some visual feedback to the user when converting via a Web interface using the remove service
+* By default, the server now listens to the default HTTP Port (ie, 80). The `PORT` environment variable can be used when starting the server to use a different value
 
 ## Version 1.1.0
 
