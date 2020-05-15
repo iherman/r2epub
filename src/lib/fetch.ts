@@ -31,6 +31,7 @@ import * as constants  from './constants';
 * 1. Check whether the protocol is http(s). Other protocols are not accepted (actually rejected by fetch, too);
 * 2. Run the URL through a valid-url check, which looks at the validity of the URL in terms of characters used, for example;
 * 3. Check that the port (if specified) is in the allowed range, i.e., > 1024;
+* 4. Check whether the host name is not `localhost` (or equivalents, see [[invalid_host_names]]); this is not allowed, unless the code runs in a client or the environment variable `R2EPUB_LOCAL` is set.
 *
 * @param address
 * @returns  - the URL itself (which might be slightly improved by the valid-url method) or `null` if this is, in fact, not a URL
@@ -40,18 +41,18 @@ const check_Web_url = (address :string) :string => {
     const parsed = urlHandler.parse(address);
     if (parsed.protocol === null) {
         // This is not a URL, should be used as a file name
-        throw new Error(`"${address}": Invalid URL: no protocol`);
+        throw `Invalid URL: no protocol`;
     }
 
     // Check whether we use the right protocol
     if (['http:', 'https:'].includes(parsed.protocol) === false) {
-       throw new Error(`"${address}": URL is not dereferencable`);
+       throw `URL is not http or https`;
     }
 
     // Run through the URL validator
     const retval = validUrl.isWebUri(address);
     if (retval === undefined) {
-        throw new Error(`"${address}": the URL isn't valid`);
+        throw `The URL isn't valid`;
     }
 
     // Check the port
@@ -59,12 +60,22 @@ const check_Web_url = (address :string) :string => {
         try {
             const portNumber = Number(parsed.port);
             if (portNumber <= 1024) {
-                throw new Error(`"${address}": Unsafe port number used in URL (${parsed.port})`);
+                throw `Unsafe port number used in URL (${parsed.port})`;
             }
         } catch(e) {
-            throw new Error(`"${address}": Invalid port number used in URL (${parsed.port})`);
+            throw `Invalid port number used in URL (${parsed.port})`;
         }
     }
+
+    // Check whether the URL is on an invalid host (mostly localhost). If the code is running in the browser, or
+    // there is an explicit setting to allow localhost then it is fine otherwise localhost
+    // should be refused.
+    if ( !(constants.is_browser || process.env.R2EPUB_LOCAL) ) {
+        if (constants.invalid_host_names.includes(parsed.hostname)) {
+            throw `Invalid host used in URL (${parsed.hostname})`;
+        }
+    }
+
     // If we got this far, this is a proper URL, ready to be used.
     return retval;
 }
