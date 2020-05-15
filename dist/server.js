@@ -80,15 +80,19 @@ async function get_epub(query) {
         respec: (query.respec !== undefined && (query.respec === 'true' || query.respec === true)),
         config: respec_args,
     };
-    // console.log(JSON.stringify(document, null, 4))
     const conversion_process = new convert.RespecToEPUB(false, false);
     const the_ocf = await conversion_process.create_epub(document);
     const content = await the_ocf.get_content();
+    const now = (new Date()).toString();
     return {
         content: content,
         headers: {
             'Content-type': constants.media_types.epub,
-            'Expires': (new Date()).toString(),
+            'Expires': now,
+            'Last-Modified': now,
+            'Content-Length': content.length,
+            'Accept-Ranges': 'none',
+            'Content-Language': 'en-US',
             'Content-Disposition': `attachment; filename=${the_ocf.name}`
         }
     };

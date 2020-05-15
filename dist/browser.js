@@ -57,22 +57,11 @@ const submit = async (event) => {
         done.style.setProperty('visibility', 'visible');
         setTimeout(() => done.style.setProperty('visibility', 'hidden'), 3000);
     };
-    /**
-     * Just create an artificial delay for debugging purposes...
-     *
-     * @param delay value in milliseconds
-     */
-    // const later = async (delay :number) :Promise<void> => {
-    //     return new Promise((resolve) => {
-    //         setTimeout(resolve, delay);
-    //     });
-    // }
     // This is to allow for async to work properly and avoid reloading the page
     event.preventDefault();
     const done = document.getElementById('done');
     const progress = document.getElementById('progress');
     try {
-        // const the_form :HTMLFormElement = document.getElementById('main_form') as HTMLFormElement;
         const url = document.getElementById('url');
         const respec = document.getElementById('respec');
         const publishDate = document.getElementById('publishDate');
@@ -90,7 +79,6 @@ const submit = async (event) => {
                     maxTocLevel: maxTocLevel.value === '' ? undefined : maxTocLevel.value,
                 }
             };
-            // console.log(`Call arguments:  ${JSON.stringify(args, null, 4)}`);
             try {
                 // turn on the progress bar at the bottom of the form
                 progress.style.setProperty('visibility', 'visible');

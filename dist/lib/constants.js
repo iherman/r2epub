@@ -35,8 +35,20 @@ exports.text_content = [
     exports.media_types.svg,
     exports.media_types.xhtml,
 ];
-/** Default port number for the server locally */
-exports.local_port_number = '5000';
+/**
+ * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.
+ * This is important for server deployment.
+ */
+exports.invalid_host_names = [
+    '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
+    '172.16.1.2', '172.31.4.5', '192.168.0.1', '192.168.254.5',
+    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
+];
+/** Default port number for the server locally.
+ * Set to the default HTTP port number; the environment variable `PORT` may,
+ * however, overwrite this for a server.
+ */
+exports.local_port_number = '80';
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
 exports.spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url=';
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
@@ -44,7 +56,8 @@ exports.fixup_js = 'https://www.w3.org/scripts/TR/2016/fixup.js';
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
 exports.TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
-exports.modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/';
+// export const modified_epub_files  :string = 'https://iherman.github.io/r2epub/epub_assets/';
+exports.modified_epub_files = 'https://www.ivan-herman.net/r2epub/';
 /** Local (relative) URL for styles and logos */
 exports.local_style_files = 'StyleSheets/TR/2016/';
 /** @hidden */
@@ -62,15 +75,13 @@ const allow_headers = [
 /** @hidden */
 const expose_headers = [
     'Accept-Ranges',
-    'Cache-Control',
     'Content-Encoding',
     'Content-Language',
     'Content-Length',
-    'Content-Range',
     'Content-Type',
     'Expires',
     'Last-Modified',
-    'Pragma',
+    'Content-Disposition'
 ];
 /**
  * CORS headers, to be added to the server response

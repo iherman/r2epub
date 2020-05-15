@@ -9,10 +9,10 @@
     "types": "src/lib/index.ts",
     "scripts": {
         "build": "tsc",
-        "dist": "tsc",
+        "dist": "tsc; typedoc src/; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
         "cli": "node dist/cli.js",
         "serve": "node dist/server.js",
-        "createDocs": "typedoc src/",
+        "docs": "typedoc src/",
         "test": "echo \"No separate test specified\""
     },
     "browser": "dist/browser.js",
