@@ -46,6 +46,15 @@ export const text_content :string[] = [
     media_types.xhtml,
 ];
 
+/**
+ * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.
+ * This is important for server deployment.
+ */
+export const invalid_host_names :string[] = [
+    '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
+    '172.16.1.2', '172.31.4.5', '192.168.0.1', '192.168.254.5',
+    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
+]
 
 /** Default port number for the server locally.
  * Set to the default HTTP port number; the environment variable `PORT` may,

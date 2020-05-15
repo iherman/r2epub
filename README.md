@@ -11,7 +11,9 @@ If used from another program, the main entry point are the [[create_epub]] and [
 There is a simple CLI implemented in [[cli]] which works as follows:
 
 ```sh
-Options:
+cli [options] URL
+
+Options are:
   --help                 Show help  [boolean]
   -o, --output           The name of the output file [string]
   -r, --respec           The source is in respec  [boolean] [default: false]
@@ -25,15 +27,11 @@ For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.
 
 In the absence of the `-o` flag the output will be `shortName.epub`, where the value of `shortName` is extracted from the [ReSpec configuration](https://github.com/w3c/respec/wiki/shortName).
 
-### Server usage
+By default, no URL-s on `localhost` are considered as safe and are rejected, unless the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is).
 
-There is a simple server implemented in [[serve]]: running
+### Run a service via HTTP
 
-```sh
-node dist/server
-```
-
-starts a simple Web server that generate EPUB 3.2 instances for URL-s of the sort:
+There is a simple server implemented in [[serve]]: running that simple Web server generate EPUB 3.2 instances for URL-s of the sort:
 
 ```sh
 https://epub.example.org?url=https://www.example.org/doc.html
@@ -47,7 +45,7 @@ https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specSt
 
 converts the original file via respec, with the `specStatus` value set to `REC`. If one of `publishDate`, `specStatus`, `addSectionLinks`, or `maxTocLevel` are set, `respec=true` is implied (i.e., it is not necessary to set it explicitly).
 
-By default, the server uses the `http` port number 80 (i.e., the default HTTP port), unless the `PORT` environment variable is set.
+By default, the server uses the `http` port number 80 (i.e., the default HTTP port), unless the `PORT` environment variable is set. Also, by default, no URL-s on `localhost` are accepted, unless the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is) for the server process.
 
 The server has been deployed on the cloud, using [heroku](https://r2epub.herokuapp.com/).
 
@@ -65,7 +63,7 @@ import * as r2epub  from 'r2epub';
 import * as fs      from 'fs';
 // Create the class encapsulating the conversion functions
 const convert              = new r2epub.RespecToEPUB();
-// The creation itself is asynchronuous (the content has to be fetched over the wire).
+// The creation itself is asynchronous (the content has to be fetched over the wire).
 // The result is the class instance encapsulating an OCF (zip) content
 const args :r2epub.Arguments = {
     url    :"http://www.example.org/doc.html",
@@ -87,7 +85,7 @@ const r2epub  = require('r2epub');
 const fs      = require('fs');
 // Create the class encapsulating the conversion functions
 const convert = new r2epub.RespecToEPUB();
-// The creation itself is asynchronuous (the content has to be fetched over the wire).
+// The creation itself is asynchronous (the content has to be fetched over the wire).
 // The result is the class instance encapsulating an OCF (zip) content
 const args = {
     url    :"http://www.example.org/doc.html",
@@ -95,7 +93,7 @@ const args = {
     config : {}
 };
 const ocf     = await convert.create_epub("http://www.example.org/doc.html");
-// The final zip file is finalized asynchronuously
+// The final zip file is finalized asynchronously
 // When run in node, the result is a Buffer; when in a browser, the result is a Blob
 const content = await ocf.get_content();
 // Get the content out to the disk
@@ -106,7 +104,7 @@ See the specification of the [[RespecToEPUB]] and [[OCF]] classes for further de
 
 ## Installation, usage
 
-The implementation is in Typescript and on top of `node.js`. The project can be downloaded via the standard `npm` processing:
+The implementation is in Typescript and on top of `node.js`. The project can be downloaded via `npm`:
 
 ```sh
 npm install r2epub
@@ -124,10 +122,15 @@ The usual `npm` approach applies:
 git clone https://github.com/iherman/r2epub.git
 cd r2epub
 npm install
+```
+
+The repository contains both the typescript code (in the `src`) directory as well as the transformed javascript code (in the `dist`) directory. If, for some reasons, the latter is not in the repository or is not up to date, the
+
+``` sh
 npm run build
 ```
 
-The last entry compiles all the typescript code into javascript.
+command will take care of that.
 
 Follow specific instructions based on your needs/interest below:
 
@@ -145,17 +148,9 @@ starts the command line interface.
 node dist/server.js
 ```
 
-starts up the server. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that 5000 is used.
+starts up the server. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that the default (i.e., 80) is used.
 
 An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL. A [client side interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
-
-<!-- #### Browser
-
-_**For some reasons that latest release of `browserify` does not process the code properly; as a consequence, at this moment, the browser version does not work...**_
-
-The `docs/assets/js/r2epub.js`  (or `docs/assets/js/r2epub.min.js`) module must be loaded into the client side. The module relies on specific HTML element `@id` values to work, see `docs/convert.html`.
-
-The client side is also deployed [on the cloud](https://iherman.github.io/convert.html) on github. -->
 
 ---
 

@@ -35,8 +35,20 @@ exports.text_content = [
     exports.media_types.svg,
     exports.media_types.xhtml,
 ];
-/** Default port number for the server locally */
-exports.local_port_number = '5000';
+/**
+ * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.
+ * This is important for server deployment.
+ */
+exports.invalid_host_names = [
+    '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
+    '172.16.1.2', '172.31.4.5', '192.168.0.1', '192.168.254.5',
+    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
+];
+/** Default port number for the server locally.
+ * Set to the default HTTP port number; the environment variable `PORT` may,
+ * however, overwrite this for a server.
+ */
+exports.local_port_number = '80';
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
 exports.spec_generator = 'https://labs.w3.org/spec-generator/?type=respec&url=';
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
