@@ -2,13 +2,13 @@
 
 Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2.
 
-If used from another program, the main entry point are the [[create_epub]] and [[create_epub_from_dom]] methods in the [“process” module](modules/_lib_process_.html), which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
+If used from another program, the main entry point are the [create_epub](https://iherman.github.io/r2epub/typedoc/classes/_lib_convert_.respectoepub.html#create_epub) and [create_epub_from_dom](https://iherman.github.io/r2epub/typedoc/classes/_lib_convert_.respectoepub.html#create_epub_from_dom) methods in the [“process” module](modules/_lib_process_.html), which create the EPUB 3.2 file by submitting a URL and some flags, or the URL and a DOM instance, respectively.
 
 ## Package usage
 
 ### Command line usage
 
-There is a simple CLI implemented in [[cli]] which works as follows:
+There is a simple CLI implemented in [cli](https://iherman.github.io/r2epub/typedoc/modules/_cli_.html#cli) which works as follows:
 
 ```sh
 cli [options] URL
@@ -31,7 +31,7 @@ By default, no URL-s on `localhost` are considered as safe and are rejected, unl
 
 ### Run a service via HTTP
 
-There is a simple server implemented in [[serve]]: running that simple Web server generate EPUB 3.2 instances for URL-s of the sort:
+There is a simple server implemented in [serve](https://iherman.github.io/r2epub/typedoc/modules/_server_.html#serve): running that simple Web server generate EPUB 3.2 instances for URL-s of the sort:
 
 ```sh
 https://epub.example.org?url=https://www.example.org/doc.html
@@ -51,7 +51,7 @@ The server has been deployed on the cloud, using [heroku](https://r2epub.herokua
 
 ### Client-side processing
 
-The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries, can be used to trigger the necessary event handler: [[submit]]. The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/client.html).
+The module has also been “browserified” and can be run on the client side, i.e., within a browser. A simple form, using the `url`, `respec`,  `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel` entries, can be used to trigger the necessary event handler: [submit](https://iherman.github.io/r2epub/typedoc/modules/_browser_.html#submit). The form has been made available through [an online HTML file](https://iherman.github.io/r2epub/client.html).
 
 
 ### Use as a typescript/node package through an API
@@ -100,7 +100,7 @@ const content = await ocf.get_content();
 fs.writeFileSync(ocf.name, content);
 ```
 
-See the specification of the [[RespecToEPUB]] and [[OCF]] classes for further details.
+See the specification of the [RespecToEPUB](https://iherman.github.io/r2epub/typedoc/classes/_lib_convert_.respectoepub.html) and [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) classes for further details.
 
 ## Installation, usage
 
@@ -155,10 +155,3 @@ An instance of the server is also deployed [on the cloud](https://r2epub.herokua
 ---
 
 Copyright © 2020 [Ivan Herman](https://www.ivan-herman.net) (a.k.a. [@iherman](https://github.com/iherman)).
-
----
-
-<span style='font-size:80%'>Several years ago I have already made a similar program called [Respec2EPUB](https://github.com/iherman/respec2epub). That version was written in Python 2;
-alas!, with the demise of Python 2 in favor of Python 3, it will become unusable soon. (E.g., latest Debian releases do not
-even install Python 2 any more.) Instead of fighting through the 2->3 conversion, I decided to re-write the program, making it way
-simpler along the way (due to the stabilization of the W3C TR styles). The result also passes the latest release of <a href='https://github.com/w3c/epubcheck'>epubcheck</a>.</span>
