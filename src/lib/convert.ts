@@ -424,14 +424,26 @@ export class RespecToEPUB {
                 // Some entries may have to be filtered out:
                 // if the 'rel' is set to 'alternate', that is a sign that it is the same content
                 // in, say, PDF or even EPUB; these should be filtered out, replacing the reference by an
-                // absolute one
+                // absolute one.
                 // In rare cases the file also refers to yet another HTML file, primarily diff files. Those are
                 // notoriously HTML invalid (accepted by W3C) and would be very complex to turn them into valid XHTML.
                 // They rarely happen, so it is simply turned into an absolute URL...
+                // In general, the model is to have one HTML file and the script is not prepared to do recursive conversion to XHTML and all that jazz.
                 candidates = candidates.filter((element :HTMLElement) :boolean => {
                     if (element.tagName === 'A' && element.hasAttribute('href')) {
-                        if ((element.hasAttribute('rel') && element.getAttribute('rel') === 'alternate') ||
-                            (element.getAttribute('href').endsWith('.html') === true)) {
+                        if (element.hasAttribute('rel') && element.getAttribute('rel') === 'alternate') {
+                            // A very special case is when the alternate refers to the epub file itself, which is the one being generated...
+                            // In that case the self-referencing should be removed altogether otherwise epubcheck complains
+                            if (element.getAttribute('href').endsWith('.epub') === true) {
+                                // the href attribute should simply be removed, that will avoid self referencing
+                                element.removeAttribute('href');
+                            } else {
+                                // Set the relative URL to an absolute one
+                                element.setAttribute('href', urlHandler.resolve(this.global.document_url, element.getAttribute('href')));
+                            }
+                            // Remove the item from the list of references to be dealt with
+                            return false;
+                        } else if (element.getAttribute('href').endsWith('.html') === true) {
                             // Set the relative URL to an absolute one
                             element.setAttribute('href', urlHandler.resolve(this.global.document_url, element.getAttribute('href')));
                             // Remove the item from the list of references to be dealt with
