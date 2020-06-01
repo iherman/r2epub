@@ -104,19 +104,32 @@ class PackageWrapper {
      *
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
-    add_manifest_item(item) {
+    add_manifest_item(item, add_spine_item = false) {
         if (item['@properties'] === undefined) {
             delete item['@properties'];
         }
         this.thePackage.package.manifest.item.push(item);
+        if (add_spine_item) {
+            this.thePackage.package.spine.itemref.push({
+                '@idref': item['@id'],
+                '@linear': 'no'
+            });
+        }
     }
     /**
      * Add a spine item, i.e., the reference to the resource in the manifest that is a constituent of the spite (i.e., reading order) of the book
      *
      * @param idref - the reference that must be added to the spine item
+     * @param linear - if the 'linear = no' flag should be added
      */
-    add_spine_item(idref) {
-        this.thePackage.package.spine.itemref.push({ "@idref": idref });
+    add_spine_item(idref, add_linear = false) {
+        const item = {
+            '@idref': idref
+        };
+        if (add_linear) {
+            item['@linear'] = 'no';
+        }
+        this.thePackage.package.spine.itemref.push(item);
     }
     /**
      * Add a list of creators (authors) to the publication.
