@@ -105,7 +105,7 @@ export interface ManifestItem {
     "@id"             :string,
     "@media-type"     :string,
     "@properties"?    :string,
-    "@media-overlay"? :string
+    "@media-overlay"? :string,
 }
 
 /**
@@ -121,7 +121,7 @@ interface Manifest {
 interface SpineItem {
     "@idref"       :string,
     "@id"?         :string,
-    "@linear"?     :boolean,
+    "@linear"?     :string,
     "@properties"? :string
 }
 
@@ -247,20 +247,34 @@ export class PackageWrapper {
      *
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
-    add_manifest_item(item :ManifestItem) :void {
+    add_manifest_item(item :ManifestItem, add_spine_item :boolean = false) :void {
         if (item['@properties'] === undefined) {
             delete item['@properties'];
         }
         this.thePackage.package.manifest.item.push(item);
+        if (add_spine_item) {
+            this.thePackage.package.spine.itemref.push({
+                '@idref'  : item['@id'],
+                '@linear' : 'no'
+            })
+        }
     }
 
     /**
      * Add a spine item, i.e., the reference to the resource in the manifest that is a constituent of the spite (i.e., reading order) of the book
      *
      * @param idref - the reference that must be added to the spine item
+     * @param linear - if the 'linear = no' flag should be added
      */
-    add_spine_item(idref :string) :void {
-        this.thePackage.package.spine.itemref.push({"@idref" : idref});
+    add_spine_item(idref :string, add_linear :boolean = false) :void {
+        const item :SpineItem = {
+            '@idref' : idref
+        };
+        if (add_linear) {
+            item['@linear'] = 'no';
+        }
+
+        this.thePackage.package.spine.itemref.push(item);
     }
 
     /**

@@ -91,9 +91,11 @@ async function cli() {
     try {
         const conversion_process     = new convert.RespecToEPUB(argv.t, argv.p);
         const the_ocf :ocf.OCF       = await conversion_process.create_epub(args);
-        const content :Buffer | Blob = await the_ocf.get_content();
-
-        fs.writeFileSync(argv.o || the_ocf.name, content);
+        // In case of some debug settings no ocf is really generated...
+        if (the_ocf.get_content) {
+            const content :Buffer | Blob = await the_ocf.get_content();
+            fs.writeFileSync(argv.o || the_ocf.name, content);
+        }
     } catch(e) {
         console.error(`EPUB Generation error: "${e}"`);
     }

@@ -1,5 +1,18 @@
 # Changes
 
+## Version 1.1.2
+
+## Detailed (important) changes
+
+* The document may have a reference to the EPUB version (if explicitly listed as an alternate format for the document). This may lead to a self-referencing loop; that reference is now removed from the target
+* Per EPUB 3.2 spec an `a` element, when referring to a local file, can only do that if:
+    1. the resource is explicitly listed in the `spine` of the OPF element with a `linear='no'` attribute set
+    2. the content is a valid content type, i.e., currently XHTML or SVG. While that is fine for SVG, referring to an HTML content like that may lead to problems, because that should also be in XHTML (i.e., it would involve a conversion) and the same rule applies to that content as well, i.e., the script should be prepared to handle HTML files recursively.
+
+    Case (2) is rarely occurring, though, mainly for HTML. It may occur, however, for other types of content, like images, data files, etc. What has been implemented now is:
+    * an SVG resource, explicitly linked to via a `a` element, is also added to the spine with `linear='no'` set
+    * for all other resources linked to via a `a` element the reference is exchanged against an absolute URL pointing at the resource in the original place (or the `TR` space on W3C if the document itself is on localhost)
+
 ## Version 1.1.1
 
 ### (Main) New Feature

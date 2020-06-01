@@ -105,6 +105,9 @@ export interface ResourceRef {
 
     /** Extra properties, defined by the package specification, to be added to the entry */
     properties?    :string
+
+    /** Flag whether the resource reference should also be added to the spite with a 'linear=no' attribute */
+    add_to_spine?  :boolean
 }
 
 
@@ -206,6 +209,8 @@ export class RespecToEPUB {
     ]
 
     private global :Global;
+
+    private global_url :string;
 
     constructor(trace :boolean = false, print_package: boolean = false) {
         this.global = {
@@ -311,8 +316,8 @@ export class RespecToEPUB {
         {
             // Create the package content, and populate it with the essential metadata using the configuration
             const title = this.global.html_element.querySelector('title').textContent;
-            const identifier = `https://www.w3.org/TR/${this.global.config.shortName}/`;
-            this.global.opf_content = new opf.PackageWrapper(identifier, title);
+            this.global_url = `https://www.w3.org/TR/${this.global.config.shortName}/`;
+            this.global.opf_content = new opf.PackageWrapper(this.global_url, title);
             this.global.opf_content.add_creators(this.global.config.editors.map((entry: any) => `${entry.name}, ${entry.company}`));
 
             const date = this.global.html_element.querySelector('time.dt-published');
@@ -386,7 +391,7 @@ export class RespecToEPUB {
                         "@media-type" : resource.media_type,
                         "@id"         : resource.id || `res_id${res_id_num}`,
                         "@properties" : resource.properties
-                    });
+                    }, resource.add_to_spine || false);
                     res_id_num++;
                 }
             })
@@ -414,44 +419,67 @@ export class RespecToEPUB {
      * @async
      */
     private async get_extra_resources(): Promise<ResourceRef[]> {
+        interface ToSpine {
+            [ref: string] :boolean;
+        }
+        const to_spine :ToSpine = {};
+
+        // Set the global URL used to 'globalize' links stemming from a <a> element, if necessary.
+        let global_url :string;
+        const parsed_document_url = urlHandler.parse(this.global.document_url);
+        // Check whether the document url is on localhost or other, invalid host name
+        if (constants.invalid_host_names.includes(parsed_document_url.hostname)) {
+            // check if the global url is there, using a fallback if not
+            global_url = this.global_url || this.global.document_url;
+        } else {
+            // If not a localhost then the invocation URL should prevail
+            global_url = this.global.document_url;
+        }
+
         // Collect the set of resources from relative links in the source
         // The 'resource_references' array gives the pair of CSS query and attribute names to consider as
         // local resources. Those are collected in one array.
         const target_urls = _.chain(this.resource_references)
             // extract the possible references
+            // Note that the map below generated an array of arrays; separate for images, objects, <a> elements, etc
             .map((ref :LocalLinks) => {
+                // Get all the link type elements from the the HTML source.
                 let candidates :HTMLElement[] = Array.from(this.global.html_element.querySelectorAll(ref.query));
-                // Some entries may have to be filtered out:
-                // if the 'rel' is set to 'alternate', that is a sign that it is the same content
-                // in, say, PDF or even EPUB; these should be filtered out, replacing the reference by an
-                // absolute one.
-                // In rare cases the file also refers to yet another HTML file, primarily diff files. Those are
-                // notoriously HTML invalid (accepted by W3C) and would be very complex to turn them into valid XHTML.
-                // They rarely happen, so it is simply turned into an absolute URL...
-                // In general, the model is to have one HTML file and the script is not prepared to do recursive conversion to XHTML and all that jazz.
                 candidates = candidates.filter((element :HTMLElement) :boolean => {
                     if (element.tagName === 'A' && element.hasAttribute('href')) {
-                        if (element.hasAttribute('rel') && element.getAttribute('rel') === 'alternate') {
-                            // A very special case is when the alternate refers to the epub file itself, which is the one being generated...
-                            // In that case the self-referencing should be removed altogether otherwise epubcheck complains
-                            if (element.getAttribute('href').endsWith('.epub') === true) {
-                                // the href attribute should simply be removed, that will avoid self referencing
+                        // Due to the constraints in EPUB 3, management of the 'a' values with relative URL-s deserve special attention
+                        // In general, the rule is that such entries should also be added to the spine element; if not yet there then
+                        // with a linear='no' attribute set. However, that works for types that are valid content documents, ie, HTML or SVG.
+                        // Furthermore, HTML files should be converted to XHTML and checked for the same issues...
+                        // There is also a special case, whereby the reference refers to its own alternate epub file; to avoid recursive setting, this link is simple removed
+                        // Pragmatically, and based on the practice with real-life TR documents, we do here the following
+                        // 1. if the relative URL refers to an SVG content, the content is added to the spine with linear=false
+                        // 2. for all other cases the relative URL is turned into absolute.
+                        const href = element.getAttribute('href');
+                        const parsed = urlHandler.parse(href);
+                        // 1. check whether this is a relative URL:
+                        if (parsed.protocol === null && parsed.path !== null) {
+                            // check if this refers to an alternate epub
+                            if (element.getAttribute('rel') === 'alternate' && href.endsWith('.epub')) {
+                                // this refers to an alternate epub
                                 element.removeAttribute('href');
+                                return false;
+                            } else if (href.endsWith('.svg') || href.endsWith('.svgz')) {
+                                to_spine[href] = true;
+                                return true;
                             } else {
-                                // Set the relative URL to an absolute one
-                                element.setAttribute('href', urlHandler.resolve(this.global.document_url, element.getAttribute('href')));
+                                // turn the reference to an absolute URL, which means it can be removed from further processing
+                                element.setAttribute('href', urlHandler.resolve(global_url, href));
+                                return false;
                             }
-                            // Remove the item from the list of references to be dealt with
-                            return false;
-                        } else if (element.getAttribute('href').endsWith('.html') === true) {
-                            // Set the relative URL to an absolute one
-                            element.setAttribute('href', urlHandler.resolve(this.global.document_url, element.getAttribute('href')));
-                            // Remove the item from the list of references to be dealt with
-                            return false;
+                        } else {
+                            // for the time being, we keep this URL, let the next steps in the chain take care of them
+                            return true;
                         }
+                    } else {
+                        return true;
                     }
-                    return true;
-                })
+                });
                 return candidates.map((element) => element.getAttribute(ref.attr));
             })
             // create one single array of the result (instead of an array or arrays)
@@ -471,13 +499,13 @@ export class RespecToEPUB {
                 const parsed = urlHandler.parse(ref);
                 parsed.hash = null;
                 return urlHandler.format(parsed);
-
             })
             .value();
 
         // Ensure that the list is duplicate free
         // (Why couldn't I put this into the chain???)
         const relative_urls = _.uniq(target_urls);
+
         const absolute_urls = relative_urls.map((ref :string) :string => urlHandler.resolve(this.global.document_url, ref));
         if (this.global.trace) console.log(`getting the resources' content types via a set of fetches`);
         const media_types   = await Promise.all(absolute_urls.map((url) => fetch_type(url)));
@@ -487,6 +515,7 @@ export class RespecToEPUB {
                 relative_url : entry[0],
                 media_type   : entry[1],
                 absolute_url : entry[2],
+                add_to_spine : to_spine[entry[0]] || false,
             }
         });
     }
