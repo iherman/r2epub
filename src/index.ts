@@ -3,6 +3,8 @@
  *
  * r2epub can be used as a library module both for TypeScript and for Javascript. The external entities are listed below; see their respective documentations for further information.
  *
+ * The top level functional entry point to the package is [[convert]].
+ *
  * @packageDocumentation
 */
 
@@ -76,7 +78,7 @@ export interface Arguments {
 export async function convert(document: Arguments, t :boolean = false, p :boolean = false) :Promise<OCF> {
     // At the minimum, the URL part of the Arguments should exist, better check this
     if (document.url) {
-        // If the URL refers to a JSON file, this is the configuration file for a full collection.
+        // If the URL refers to a JSON file, it is the configuration file for a full collection.
         let the_ocf :ocf.OCF;
         const media_type :string = await fetch.fetch_type(document.url);
         if (media_type === constants.media_types.json) {
