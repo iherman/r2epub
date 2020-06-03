@@ -13,6 +13,7 @@
         "cli": "node dist/cli.js",
         "serve": "node dist/server.js",
         "docs": "typedoc src/",
+        "heroku" : "git push heroku master",
         "test": "echo \"No separate test specified\""
     },
     "browser": "dist/browser.js",
