@@ -48,8 +48,7 @@
 
 
 /* Main imports */
-import * as convert from './lib/convert';
-import * as ocf     from './lib/ocf';
+import * as r2epub  from './index';
 import * as fs      from 'fs';
 
 /** @hidden */
@@ -77,10 +76,10 @@ async function cli() {
     .wrap(null)
     .argv;
 
-    const args :convert.Arguments = {
-        url             : argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0],
-        respec          : argv.r || argv.d || argv.s || argv.l || argv.m,
-        config          : {
+    const args :r2epub.Arguments = {
+        url    : argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0],
+        respec : argv.r || argv.d || argv.s || argv.l || argv.m,
+        config : {
             publishDate     : argv.d,
             specStatus      : argv.s,
             addSectionLinks : argv.l,
@@ -89,8 +88,7 @@ async function cli() {
      }
 
     try {
-        const conversion_process     = new convert.RespecToEPUB(argv.t, argv.p);
-        const the_ocf :ocf.OCF       = await conversion_process.create_epub(args);
+        const the_ocf :r2epub.OCF = await r2epub.convert(args, argv.t, argv.p)
         // In case of some debug settings no ocf is really generated...
         if (the_ocf.get_content) {
             const content :Buffer | Blob = await the_ocf.get_content();

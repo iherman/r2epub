@@ -1,0 +1,15 @@
+{
+    "title": "Verifiable Credentials",
+    "name": "vc",
+    "chapters": [
+        {
+            "url": "http://localhost:8001/TR/vc-data-model/"
+        },
+        {
+            "url": "http://localhost:8001/TR/vc-use-cases/",
+            "respec": false,
+            "config": {
+            }
+        }
+    ]
+}

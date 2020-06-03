@@ -1,0 +1,18 @@
+{
+    "title": "JSON LD 1.1",
+    "name": "jsonld1.1",
+    "chapters": [
+        {
+            "url": "http://localhost:8001/TR/json-ld/"
+        },
+        {
+            "url": "http://localhost:8001/TR/json-ld-api/"
+        },
+        {
+            "url": "http://localhost:8001/TR/json-ld-framing/"
+        },
+        {
+            "url": "http://localhost:8001/TR/json-ld-streaming/"
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+/**
+ * ## Main Entry point
+ *
+ * This is the core entry point for the module. See [[convert_to_epub]] for further details.
+ *
+ * @packageDocumentation
+ */
+
+
+ /**
+  *
+  */
+
+import { Arguments }    from '../index';
+import {PackageWrapper} from '../lib/opf';
+import * as ocf         from '../lib/ocf';
+import * as rConvert    from '../lib/convert';
+import * as fetch       from '../lib/fetch';
+import { Chapter }      from './chapter';
+import * as nav         from './nav';
+import * as opf         from './opf';
+import * as cover       from './cover';
+import * as args        from './args';
+import * as _           from 'underscore';
+
+/**
+ * Type definition for the book data the user has to provide. It is, essentially, the Typescript equivalent of the JSON configuration file's [[schema]].
+ */
+export interface CollectionConfiguration {
+    /** Title of the publication. */
+    title     :string;
+    /** "Short" name, used as an identifier and as the base name for the final EPUB file. */
+    name      :string;
+    /** Chapter description: url, whether respec should be used, and possible respec arguments. See the [r2epub Argument objects](https://iherman.github.io/r2epub/typedoc/interfaces/_lib_convert_.arguments.html). */
+    chapters  :Arguments[];
+}
+
+/**
+ * Internal representation of a book.
+ */
+export interface Collection {
+    /** Title of the publication. */
+    title      :string;
+    /** "Short" name, used as an identifier and as the base name for the final EPUB file. */
+    name       :string;
+    /** List of editors: it is a concatenation of the editors of the individual chapters, with duplicate names removed. */
+    editors?   :string[];
+    /** Date of publication: the most recent date among the constituent chapter. */
+    date?      :string,
+    /** The [ocf.OCF instance](https://iherman.github.io/r2epub/typedoc/modules/_lib_ocf_.html) of the target book. */
+    ocf        :ocf.OCF;
+    /** Representations of the individual chapters. */
+    chapters   :Chapter[];
+}
+
+/**
+ * Creation of the real book data. The method runs [r2epub](https://iherman.github.io/r2epub/typedoc/index.html) on all chapters, creates the relevant [[Chapter]] instances, and retrieves some book level data to be used in subsequent steps.
+ *
+ * @async
+ * @param book_data - user supplied configuration data
+ * @returns the [[Book]] structure with all [[Chapter]] entries properly initialized.
+ */
+const generate_book_data = async (book_data: CollectionConfiguration) :Promise<Collection> => {
+    // Just to make things more readable, I take the steps separately instead of putting directly into the return value...
+    // 1. An array of chapters is created from the argument data
+    // 2. Each chapter is initialized. Initialization is async, ie, each of these steps create a Promise.
+    //    Note that the first chapter is signalled so that the common files (logo, css for cover page, etc) are also transferred to the final book, but only once.
+    const promises :Promise<Chapter>[] = book_data.chapters.map((chapter_data :Arguments, index :number) :Promise<Chapter> => (new Chapter(chapter_data, index === 0)).initialize());
+
+    // 3. Sync at this point by waiting for all Promises to resolve, yielding the list of chapters.
+    const chapters :Chapter[] = await Promise.all(promises);
+
+    // 4. Collect all the editors, it will be used later...
+    const editors  :string[]  =  _.flatten(chapters.map((chapter :Chapter) :string[] => chapter.editors));
+
+    // 5. Collect the date, it will be used later...
+    //    The maximal value of all constituent dates is used
+    const dates :string[] = chapters.map((chapter :Chapter) :string => chapter.date);
+    const date  :string   = dates.reduce((accumulator, currentValue) => accumulator>currentValue ? accumulator : currentValue);
+
+    // Yep, we got the book skeleton
+    return {
+        title    : book_data.title,
+        name     : book_data.name,
+        editors  : _.unique(editors),
+        date     : date,
+        ocf      : new ocf.OCF(`${book_data.name}.epub`),
+        chapters : chapters
+    }
+}
+
+/**
+ * Creation of an [OCF instance](https://iherman.github.io/r2epub/typedoc/modules/_lib_ocf_.html) for the final book.
+ *
+ * The main processing steps are:
+ *
+ * 1. Convert the user JSON configuration to the internal data structure (see [[get_book_configuration]]) and collect the data for the output target (see [[generate_book_data]]);
+ * 2. Create (and store in the target’s OCF) the package file (see [[create_opf]]);
+ * 3. Create (and store in the target’s OCF) the cover page (see [[create_cover_page]]);
+ * 4. Create (and store in the target’s OCF) the navigation file for the whole book (see [[create_nav_page]]);
+ * 5. Collect, from each [[Chapter]] the real content from the chapter’s OCF and copy it to the target’s OCF (with modified file path values).
+ *
+ * @async
+ * @param config_url - the user supplied data, i.e., the result of JSON parsing of the input argument
+ * @param trace whether tracing is set (for debugging)
+ * @param print_package whether the package stops at the creation of an EPUB content and displays the content of the OPF file itself (for debugging)
+ * @returns a Promise holding the final [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) content.
+ */
+export async function create_epub(config_url: string, trace :boolean = false, print_package: boolean = false) :Promise<ocf.OCF> {
+    const data :any = await fetch.fetch_json(config_url);
+
+    // check, via a JSON schema, the validity of the input and create the right arguments
+    const book_data :CollectionConfiguration = args.get_book_configuration(data);
+
+    // Note that the checks done via the JSON Schema makes it sure that there is at least one chapter
+    if (book_data.chapters.length === 1) {
+        // There is only one chapter, in which case it is unnecessary to go through the extra processing.
+        // Just fall back on r2epub directly
+        const the_ocf = await (new rConvert.RespecToEPUB(trace, print_package)).create_epub(book_data.chapters[0]);
+        the_ocf.name = `${book_data.name}.epub`;
+        return the_ocf;
+    } else {
+        // generate the skeleton of the book
+        const the_book :Collection = await generate_book_data(book_data);
+
+        // Create the OPF file, the cover and nav pages, and store each of them in the book at
+        // well specified places
+        const the_opf :string = opf.create_opf(the_book);
+        if (print_package) {
+            console.log(the_opf);
+            return {} as ocf.OCF;
+        } else {
+            the_book.ocf.append(the_opf                          , 'package.opf');
+            the_book.ocf.append(cover.create_cover_page(the_book), 'cover.xhtml');
+            the_book.ocf.append(nav.create_nav_page(the_book)    , 'nav.xhtml');
+
+            // Store the data in the final zip file
+            the_book.chapters.forEach((chapter :Chapter) :void => {
+                chapter.store_manifest_items(the_book);
+            });
+            return the_book.ocf;
+        }
+    }
+}
+
+

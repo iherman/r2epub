@@ -1,0 +1,19 @@
+{
+    "title": "Publication Manifest and Audiobooks",
+    "name": "audiobooks",
+    "chapters": [
+        {
+            "url": "http://localhost:8001/TR/pub-manifest/"
+        },
+        {
+            "url": "http://localhost:8001/TR/audiobooks/",
+            "respec": false,
+            "config": {}
+        },
+        {
+            "url": "http://localhost:8001/TR/lpf/",
+            "respec": false,
+            "config": {}
+        }
+    ]
+}

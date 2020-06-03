@@ -22,6 +22,7 @@ import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch';
+import {Arguments}     from '../index';
 import * as constants  from './constants';
 import * as opf        from './opf';
 import * as ocf        from './ocf';
@@ -31,58 +32,7 @@ import * as nav        from './nav';
 import * as overview   from './overview'
 
 
-
 // ========================================================== The main conversion part ============================================ //
-
-/**
- * Config options, to be used as part of the input arguments in [[Arguments]] to overwrite the `config` options of ReSpec.
- * (See [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide).)
- *
- * Note that the interface definition does not restrict the possible values; however, not
- * all values are usable by overwriting the original values on-the-fly. The CLI for the package (see [[cli]]) defines a few useful values.
- */
-export interface ConfigOptions {
-    [x :string] :string
-}
-
-/**
- * Debug options
- */
-export interface DebugOptions {
-      /**
-     * Debug option: just print the package file on the console, do not generate and epub file.
-     */
-    package :boolean,
-
-    /**
-     * Debug option: print built-in trace information.
-     */
-    trace :boolean,
-}
-
-/**
- * CLI arguments used by the [[create_epub]] entry function.
- *
- * The original content file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
- * before further processing. If that is the case (see [[Arguments.respec]]), it is also possible to set some of the ReSpec configuration options,
- * overwriting the values set in the `config` entry of the original file (see [[Arguments.config]]). See the
- * [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details of the values.
- *
- */
-export interface Arguments {
-    /** The URL of the relevant HTML file. */
-    url     :string,
-
-    /**
-     * Is the source in ReSpec?
-     */
-    respec  :boolean,
-
-    /**
-     * Collection of respec config options, to be used with the spec generator (if applicable).
-     */
-    config  :ConfigOptions
-}
 
 /**
  * Interface for the resources that, eventually, should be added to the EPUB file
@@ -218,7 +168,7 @@ export class RespecToEPUB {
             package   : print_package,
             resources : []
         }
-     }
+    }
 
     /**
      * Create an EPUB 3.2, ie, an OCF file from the original content
