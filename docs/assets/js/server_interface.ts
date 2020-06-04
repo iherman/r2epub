@@ -32,7 +32,6 @@ interface ReturnedData {
  * @returns the final content as well as the local name of the EPUB instance
  */
 async function fetch_book(resource_url :string) :Promise<ReturnedData> {
-    // If there is a problem, an exception is raised
     let fname :string;
     return new Promise((resolve, reject) => {
         try {
@@ -133,7 +132,6 @@ const submit = async (event :Event) :Promise<any> => {
             }
             const service_url = `${service}?${query.join('&')}`;
             try {
-
                 // turn on the progress bar at the bottom of the form
                 progress.style.setProperty('visibility', 'visible');
 

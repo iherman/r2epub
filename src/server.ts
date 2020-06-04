@@ -51,14 +51,14 @@
 import http            from 'http';
 import * as urlHandler from 'url';
 import * as _          from 'underscore';
+import * as r2epub     from './index';
 import * as constants  from './lib/constants';
-import * as convert    from './lib/convert';
 import * as ocf        from './lib/ocf';
 import * as home       from './lib/home';
 
 
 /**
- * Return value of [[get_epub]], to be handled by the server;
+ * Return type of [[get_epub]] (to be handled by the server);
  */
 interface Content {
     /**
@@ -91,14 +91,13 @@ async function get_epub(query :Query) : Promise<Content> {
         }
     });
 
-    const document :convert.Arguments = {
-        url    : query.url as string,
+    const url :string = query.url as string;
+    const options :r2epub.Options = {
         respec : (query.respec !== undefined && (query.respec === 'true' || query.respec === true)),
         config : respec_args,
     }
 
-    const conversion_process   = new convert.RespecToEPUB(false, false);
-    const the_ocf :ocf.OCF     = await conversion_process.create_epub(document);
+    const the_ocf :ocf.OCF     = await r2epub.convert(url, options)
     const content :Buffer      = await the_ocf.get_content() as Buffer;
 
     const now :string = (new Date()).toString();
@@ -117,8 +116,10 @@ async function get_epub(query :Query) : Promise<Content> {
     }
  }
 
+
 /**
- * Run a rudimentary Web server calling out to [[create_epub]] via [[get_epub]] to return an EPUB 3.2 instance when invoked. If there is no proper query string a fixed page is displayed.
+ * Run a rudimentary Web server calling out to [[covert]] via [[get_epub]] to return an EPUB 3.2 instance when invoked.
+ * If there is no proper query string a fixed page is displayed.
  */
 async function serve() {
     const port :string = process.env.PORT || constants.local_port_number;
