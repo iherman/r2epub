@@ -11,12 +11,12 @@
   *
   */
 
-import { Arguments }  from '../index';
+import { Options }    from '../index';
 import * as ocf       from '../lib/ocf';
 import * as constants from '../lib/constants';
 import * as rConvert  from '../lib/convert';
-import * as xmldom    from 'xmldom';
 import * as cConvert  from './convert';
+import * as xmldom    from 'xmldom';
 import * as _         from 'underscore';
 import JSZip = require('jszip');
 
@@ -64,8 +64,9 @@ const never_transfer :string[] = [
  * Wrapper around a single chapter. The main action is in the [[initialize]] method, which collects all the data and extracts additional data that are necessary elsewhere.
  */
 export class Chapter {
-    private _first_chapter          :boolean = false
-    private _arguments              :Arguments;
+    private _first_chapter          :boolean = false;
+    private _url                    :string;
+    private _options                :Options;
     private _ocf                    :ocf.OCF;
     private _container              :JSZip;
     private _manifest               :ManifestItem[] = [];
@@ -82,8 +83,12 @@ export class Chapter {
      * @param args - arguments needed by r2epub to create the chapter’s OCF.
      * @param first - whether this is the first chapter in the book. Necessary, for example, to transfer the items listed in [[transfer_once]] for a book.
      */
-    constructor(args :Arguments, first :boolean = false) {
-        this._arguments     = args;
+    constructor(args :cConvert.ChapterConfiguration, first :boolean = false) {
+        this._url = args.url;
+        this._options = {
+            respec : args.respec,
+            config : args.config
+        }
         this._first_chapter = first;
     }
 
@@ -106,7 +111,7 @@ export class Chapter {
      */
     async initialize() :Promise<Chapter> {
         // First and foremost: create the OCF container
-        this._ocf          = await (new rConvert.RespecToEPUB()).create_epub(this._arguments);
+        this._ocf          = await (new rConvert.RespecToEPUB()).create_epub(this._url, this._options);
         this._container    = this._ocf.book;
         // remove the `.epub` suffix for the name
         this._chapter_name = this._ocf.name.slice(0,-5);
@@ -258,7 +263,7 @@ export class Chapter {
      */
     get date() :string {
         if (this._ocf === undefined) {
-            throw `Chapter '${this._arguments.url}' has not been initialized`
+            throw `Chapter '${this._url}' has not been initialized`
         }
         return this._date
     }
@@ -268,7 +273,7 @@ export class Chapter {
      */
     get editors() :string[] {
         if (this._ocf === undefined) {
-            throw `Chapter '${this._arguments.url}' has not been initialized`
+            throw `Chapter '${this._url}' has not been initialized`
         }
         return this._editors;
     }
@@ -278,7 +283,7 @@ export class Chapter {
      */
     get nav() :string {
         if (this._ocf === undefined) {
-            throw `Chapter '${this._arguments.url}' has not been initialized`
+            throw `Chapter '${this._url}' has not been initialized`
         }
         return this._nav;
     }
@@ -288,7 +293,7 @@ export class Chapter {
      */
     get name()  :string {
         if (this._ocf === undefined) {
-            throw `Chapter '${this._arguments.url}' has not been initialized`
+            throw `Chapter '${this._url}' has not been initialized`
         }
         return this._chapter_name;
     }
@@ -298,7 +303,7 @@ export class Chapter {
      */
     get opf_items() :OPFManifestItem[] {
         if (this._ocf === undefined) {
-            throw `Chapter '${this._arguments.url}' has not been initialized`
+            throw `Chapter '${this._url}' has not been initialized`
         }
         return this._manifest.map((item :ManifestItem) :OPFManifestItem => {
             return {
@@ -329,7 +334,7 @@ export class Chapter {
      */
     get title() :string {
         if (this._ocf === undefined) {
-            throw `Chapter '${this._arguments.url}' has not been initialized`
+            throw `Chapter '${this._url}' has not been initialized`
         }
         return this._title;
     }

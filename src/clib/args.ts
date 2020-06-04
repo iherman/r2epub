@@ -9,7 +9,6 @@
  *
  */
 import Ajv           from 'ajv';
-import { Arguments } from '../index';
 import * as cConvert from './convert';
 
 /**
@@ -112,14 +111,13 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
     if (!valid) {
         throw `Argument validity error: \n${JSON.stringify(validator.errors,null,4)}`
     } else {
-        const chapters :Arguments[] = data.chapters.map( (chapter :any) :Arguments => {
+        const chapters :cConvert.ChapterConfiguration[] = data.chapters.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};
             if (chapter.config !== undefined) {
-                if (chapter.config.specStatus !== undefined)      config.specStatus = chapter.config.specStatus;
-                // If we cannot get ajv to properly check the date format, an extra check should come here...
-                if (chapter.config.publishDate !== undefined)     config.publishDate = chapter.config.publishDate;
+                if (chapter.config.specStatus !== undefined)      config.specStatus      = chapter.config.specStatus;
+                if (chapter.config.publishDate !== undefined)     config.publishDate     = chapter.config.publishDate;
                 if (chapter.config.addSectionLinks !== undefined) config.addSectionLinks = `${chapter.config.addSectionLinks}`;
-                if (chapter.config.maxTocLevel !== undefined)     config.maxTocLevel = `${chapter.config.maxTocLevel}`;
+                if (chapter.config.maxTocLevel !== undefined)     config.maxTocLevel     = `${chapter.config.maxTocLevel}`;
             }
 
             return {
@@ -130,8 +128,8 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
         });
 
         return {
-            title : data.title,
-            name  : data.name,
+            title    : data.title,
+            name     : data.name,
             chapters : chapters
         };
     }

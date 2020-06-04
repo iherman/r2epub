@@ -11,7 +11,7 @@
   *
   */
 
-import { Arguments }    from '../index';
+import { Options }      from '../index';
 import {PackageWrapper} from '../lib/opf';
 import * as ocf         from '../lib/ocf';
 import * as rConvert    from '../lib/convert';
@@ -24,7 +24,17 @@ import * as args        from './args';
 import * as _           from 'underscore';
 
 /**
- * Type definition for the book data the user has to provide. It is, essentially, the Typescript equivalent of the JSON configuration file's [[schema]].
+ * Arguments used by the internal conversion functions; just combining the possible options with the URL for a more compact handling.
+ *
+ */
+export interface ChapterConfiguration extends Options {
+    /** The URL of the relevant HTML or JSON file. If the latter, the JSON file must be a configuration file for a full Collection, and the other fields are ignored. */
+    url :string,
+}
+
+
+/**
+ * Type definition for the collection data the user has to provide. It is, essentially, the Typescript equivalent of the JSON configuration file's [[schema]].
  */
 export interface CollectionConfiguration {
     /** Title of the publication. */
@@ -32,11 +42,11 @@ export interface CollectionConfiguration {
     /** "Short" name, used as an identifier and as the base name for the final EPUB file. */
     name      :string;
     /** Chapter description: url, whether respec should be used, and possible respec arguments. See the [r2epub Argument objects](https://iherman.github.io/r2epub/typedoc/interfaces/_lib_convert_.arguments.html). */
-    chapters  :Arguments[];
+    chapters  :ChapterConfiguration[];
 }
 
 /**
- * Internal representation of a book.
+ * Internal representation of a collection.
  */
 export interface Collection {
     /** Title of the publication. */
@@ -65,7 +75,7 @@ const generate_book_data = async (book_data: CollectionConfiguration) :Promise<C
     // 1. An array of chapters is created from the argument data
     // 2. Each chapter is initialized. Initialization is async, ie, each of these steps create a Promise.
     //    Note that the first chapter is signalled so that the common files (logo, css for cover page, etc) are also transferred to the final book, but only once.
-    const promises :Promise<Chapter>[] = book_data.chapters.map((chapter_data :Arguments, index :number) :Promise<Chapter> => (new Chapter(chapter_data, index === 0)).initialize());
+    const promises :Promise<Chapter>[] = book_data.chapters.map((chapter_data :ChapterConfiguration, index :number) :Promise<Chapter> => (new Chapter(chapter_data, index === 0)).initialize());
 
     // 3. Sync at this point by waiting for all Promises to resolve, yielding the list of chapters.
     const chapters :Chapter[] = await Promise.all(promises);
@@ -112,34 +122,25 @@ export async function create_epub(config_url: string, trace :boolean = false, pr
     // check, via a JSON schema, the validity of the input and create the right arguments
     const book_data :CollectionConfiguration = args.get_book_configuration(data);
 
-    // Note that the checks done via the JSON Schema makes it sure that there is at least one chapter
-    if (book_data.chapters.length === 1) {
-        // There is only one chapter, in which case it is unnecessary to go through the extra processing.
-        // Just fall back on r2epub directly
-        const the_ocf = await (new rConvert.RespecToEPUB(trace, print_package)).create_epub(book_data.chapters[0]);
-        the_ocf.name = `${book_data.name}.epub`;
-        return the_ocf;
+    // generate the skeleton of the book
+    const the_book :Collection = await generate_book_data(book_data);
+
+    // Create the OPF file, the cover and nav pages, and store each of them in the book at
+    // well specified places
+    const the_opf :string = opf.create_opf(the_book);
+    if (print_package) {
+        console.log(the_opf);
+        return {} as ocf.OCF;
     } else {
-        // generate the skeleton of the book
-        const the_book :Collection = await generate_book_data(book_data);
+        the_book.ocf.append(the_opf                          , 'package.opf');
+        the_book.ocf.append(cover.create_cover_page(the_book), 'cover.xhtml');
+        the_book.ocf.append(nav.create_nav_page(the_book)    , 'nav.xhtml');
 
-        // Create the OPF file, the cover and nav pages, and store each of them in the book at
-        // well specified places
-        const the_opf :string = opf.create_opf(the_book);
-        if (print_package) {
-            console.log(the_opf);
-            return {} as ocf.OCF;
-        } else {
-            the_book.ocf.append(the_opf                          , 'package.opf');
-            the_book.ocf.append(cover.create_cover_page(the_book), 'cover.xhtml');
-            the_book.ocf.append(nav.create_nav_page(the_book)    , 'nav.xhtml');
-
-            // Store the data in the final zip file
-            the_book.chapters.forEach((chapter :Chapter) :void => {
-                chapter.store_manifest_items(the_book);
-            });
-            return the_book.ocf;
-        }
+        // Store the data in the final zip file
+        the_book.chapters.forEach((chapter :Chapter) :void => {
+            chapter.store_manifest_items(the_book);
+        });
+        return the_book.ocf;
     }
 }
 

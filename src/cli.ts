@@ -1,6 +1,6 @@
 #! /usr/local/bin/node
 /**
- * ## CLI to the ReSpec to EPUB 3.2 conversion.
+ * ## CLI to the ReSpec to EPUB 3.2 conversion. This may be the conversion of a single HTML file (possibly pre-processed through ReSpec) or a collection of several HTML files.
  *
  * The usage of the entry point is:
  *
@@ -17,7 +17,7 @@
  *
  * For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). If any of those flags is set, `-r` is implied (i.e., it is not necessary to set it explicitly).
  *
- * This function is a wrapper around [[create_epub]].
+ * This function is a wrapper around [[convert]].
  *
  * ### Usage examples:
  *
@@ -36,6 +36,38 @@
  *
  * ``` sh
  * node cli.js -r --specStatus REC https://www.example.org/index.html`
+ * ```
+ *
+ * Convert the documents listed in the JSON configuration file to generate a collection of several documents:
+ *
+ * ``` sh
+ * node cli.js https://www.example.org/collection.json`
+ * ```
+ *
+ * where the collection may be something like:
+ *
+ * ```json
+ * {
+ *   "title": "Specification for Underwater Basket Weaving",
+ *   "name": "weaving",
+ *   "chapters": [
+ *        {
+ *           "url": "https://www.example.org/first.html"
+ *        },
+ *       {
+ *            "url": "https://www.example.org/second.html",
+ *           "respec": false,
+ *           "config": {}
+ *       },
+ *       {
+ *           "url": "https://www.example.org/third.html",
+ *           "respec": true,
+ *           "config": {
+ *               "maxTocLevel" : 3
+ *           }
+ *       }
+ *   ]
+ * }
  * ```
  *
  * @packageDocumentation
@@ -76,9 +108,9 @@ async function cli() {
     .wrap(null)
     .argv;
 
-    const args :r2epub.Arguments = {
-        url    : argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0],
-        respec : argv.r || argv.d || argv.s || argv.l || argv.m,
+    const url =  argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0];
+    const options :r2epub.Options = {
+        respec :  argv.r ? argv.r :  ((argv.d || argv.s || argv.l || argv.m) ? true : false),
         config : {
             publishDate     : argv.d,
             specStatus      : argv.s,
@@ -88,7 +120,7 @@ async function cli() {
      }
 
     try {
-        const the_ocf :r2epub.OCF = await r2epub.convert(args, argv.t, argv.p)
+        const the_ocf :r2epub.OCF = await r2epub.convert(url, options, argv.t, argv.p)
         // In case of some debug settings no ocf is really generated...
         if (the_ocf.get_content) {
             const content :Buffer | Blob = await the_ocf.get_content();
