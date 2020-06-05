@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_convert_.html">&quot;lib/convert&quot;</a>
+					<a href="../modules/_index_.html">&quot;index&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_convert_.respectoepub.html">RespecToEPUB</a>
+					<a href="_index_.respectoepub.html">RespecToEPUB</a>
 				</li>
 			</ul>
 			<h1>Class RespecToEPUB</h1>
@@ -70,35 +70,19 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#main-processing-class" id="main-processing-class" style="color: inherit; text-decoration: none;">
-							<h2>Main Processing class</h2>
-						</a>
+						<p>Convenience class, to export the internal <a href="_lib_convert_.respectoepub.html">RespecToEPUB</a> class for the package as a whole.
+						(This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using <a href="_lib_convert_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a>. In general, <a href="../modules/_index_.html#convert">convert</a> should be used)</p>
 					</div>
-					<p>Main processing steps for the creation of EPUB files. See the <a href="_lib_convert_.respectoepub.html#create_epub">create_epub</a> and <a href="_lib_convert_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a> entry points for the details.</p>
-					<p>On a high level, the task of creating the EPUB file consists of:</p>
-					<ul>
-						<li>Collect all the dependent resources like images, scripts, css files, audio, video, etc, that are &quot;part&quot; of the specification. In practical terms that means all resources with a relative URL should be collected.</li>
-						<li>Set the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in <code>https://www.w3.org/StyleSheet/TR/2016/*</code>;
-						these style files, and the related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. (See the <a href="./_lib_css_.html">“css” module</a>.)</li>
-						<li>Follow similar actions for some system wide javascript files (although, at this moment, it is a single JS file that must be taken care of).</li>
-						<li>Extract the various metadata items (title, editors, dates, etc.) for the package file.</li>
-						<li>Remove the TOC from the TR document (i.e., making it <code>display:none</code>), extract that HTML fragment and put it into a separate <code>nav</code> file, per EPUB3 specification. (See the <a href="./_lib_nav_.html">“nav” module</a>.)</li>
-						<li>Create a cover page. (See the <a href="./_lib_cover_.html">“cover” module</a>.)</li>
-						<li>Extract OPF properties from the original HTML content to be added to spine entries. (See the <a href="./_lib_overview_.html">“overview” module</a>.)</li>
-						<li>Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and convert the result content into XHTML. (See the <a href="./_lib_overview_.html">“overview” module</a>.)</li>
-						<li>Create the package (OPF) file with the right resource and spine entries. (See the <a href="./_lib_opf_.html">“opf” module</a>.)</li>
-						<li>Create the OCF file (i.e., the final EPUB instance) containing all the resources collected and created in the previous steps. (See the <a href="./_lib_ocf_.html">“ocf” module</a>.)</li>
-					</ul>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">RespecToEPUB</span>
+						<a href="_lib_convert_.respectoepub.html" class="tsd-signature-type">RespecToEPUB</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="_index_.respectoepub.html" class="tsd-signature-type">RespecToEPUB</a>
+								<span class="target">RespecToEPUB</span>
 							</li>
 						</ul>
 					</li>
@@ -108,39 +92,40 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_lib_convert_.respectoepub.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="_index_.respectoepub.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_lib_convert_.respectoepub.html#resource_references" class="tsd-kind-icon">resource_<wbr>references</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_index_.respectoepub.html#resource_references" class="tsd-kind-icon">resource_<wbr>references</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_convert_.respectoepub.html#create_epub" class="tsd-kind-icon">create_<wbr>epub</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_convert_.respectoepub.html#create_epub_from_dom" class="tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_index_.respectoepub.html#create_epub" class="tsd-kind-icon">create_<wbr>epub</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_index_.respectoepub.html#create_epub_from_dom" class="tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Respec<wbr>ToEPUB<span class="tsd-signature-symbol">(</span>trace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, print_package<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_lib_convert_.respectoepub.html" class="tsd-signature-type">RespecToEPUB</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Respec<wbr>ToEPUB<span class="tsd-signature-symbol">(</span>trace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, print_package<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.respectoepub.html" class="tsd-signature-type">RespecToEPUB</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_convert_.respectoepub.html">RespecToEPUB</a>.<a href="_lib_convert_.respectoepub.html#constructor">constructor</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/lib/convert.ts#L163">lib/convert.ts:163</a></li>
 								</ul>
@@ -154,18 +139,19 @@
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> print_package: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_lib_convert_.respectoepub.html" class="tsd-signature-type">RespecToEPUB</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_index_.respectoepub.html" class="tsd-signature-type">RespecToEPUB</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="resource_references" class="tsd-anchor"></a>
 					<h3>resource_<wbr>references</h3>
 					<div class="tsd-signature tsd-kind-icon">resource_<wbr>references<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_convert_.locallinks.html" class="tsd-signature-type">LocalLinks</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{query : &#x27;img, script, audio, video, source&#x27;,attr  : &#x27;src&#x27;},{query : &#x27;a, link[rel&#x3D;&quot;stylesheet&quot;]&#x27;,attr  : &#x27;href&#x27;},{query : &#x27;object&#x27;,attr  : &#x27;data&#x27;}]</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_lib_convert_.respectoepub.html">RespecToEPUB</a>.<a href="_lib_convert_.respectoepub.html#resource_references">resource_references</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/lib/convert.ts#L146">lib/convert.ts:146</a></li>
 						</ul>
@@ -183,17 +169,18 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="create_epub" class="tsd-anchor"></a>
 					<h3>create_<wbr>epub</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">create_<wbr>epub<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.options.html" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_ocf_.ocf.html" class="tsd-signature-type">OCF</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_convert_.respectoepub.html">RespecToEPUB</a>.<a href="_lib_convert_.respectoepub.html#create_epub">create_epub</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/lib/convert.ts#L186">lib/convert.ts:186</a></li>
 								</ul>
@@ -202,10 +189,10 @@
 								<div class="lead">
 									<p>Create an EPUB 3.2, ie, an OCF file from the original content</p>
 								</div>
-								<p>This function is a wrapper around <a href="_lib_convert_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a>:</p>
+								<p>This function is a wrapper around <a href="_index_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a>:</p>
 								<ol>
 									<li>Creates the DOM, which means, possibly, the original content is ran through the respec processor (if necessary).</li>
-									<li>Calls <a href="_lib_convert_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a> to generate the OCF content.</li>
+									<li>Calls <a href="_index_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a> to generate the OCF content.</li>
 									<li>&quot;Finalizes&quot; the OCF content, i.e., dump everything to a file.</li>
 								</ol>
 								<dl class="tsd-comment-tags">
@@ -229,15 +216,16 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="create_epub_from_dom" class="tsd-anchor"></a>
 					<h3>create_<wbr>epub_<wbr>from_<wbr>dom</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, dom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_ocf_.ocf.html" class="tsd-signature-type">OCF</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_convert_.respectoepub.html">RespecToEPUB</a>.<a href="_lib_convert_.respectoepub.html#create_epub_from_dom">create_epub_from_dom</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/lib/convert.ts#L246">lib/convert.ts:246</a></li>
 								</ul>
@@ -249,7 +237,7 @@
 								<ol>
 									<li>Gather all the global information (<a href="../interfaces/_lib_convert_.global.html">Global</a>).</li>
 									<li>Add the basic metadata (authors, dates) to the opf file.</li>
-									<li>Collect all the resources (see <a href="_lib_convert_.respectoepub.html#resource_references">resource_references</a>); the relative urls and the media types are
+									<li>Collect all the resources (see <a href="_index_.respectoepub.html#resource_references">resource_references</a>); the relative urls and the media types are
 									collected in a global structure, to be added to the EPUB file and the opf file later.</li>
 									<li>Add the reference to a W3C logo.</li>
 									<li>Add the reference to the generic fixup script.</li>
@@ -319,13 +307,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_clib_opf_.html">&quot;clib/opf&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_convert_.html">&quot;lib/convert&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -362,35 +350,38 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_index_.ocf.html" class="tsd-kind-icon">OCF</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_lib_convert_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
+						<a href="_index_.respectoepub.html" class="tsd-kind-icon">Respec<wbr>ToEPUB</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_lib_convert_.respectoepub.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+								<a href="_index_.respectoepub.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_lib_convert_.respectoepub.html#resource_references" class="tsd-kind-icon">resource_<wbr>references</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_index_.respectoepub.html#resource_references" class="tsd-kind-icon">resource_<wbr>references</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_lib_convert_.respectoepub.html#create_epub" class="tsd-kind-icon">create_<wbr>epub</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_index_.respectoepub.html#create_epub" class="tsd-kind-icon">create_<wbr>epub</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_lib_convert_.respectoepub.html#create_epub_from_dom" class="tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_index_.respectoepub.html#create_epub_from_dom" class="tsd-kind-icon">create_<wbr>epub_<wbr>from_<wbr>dom</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_convert_.global.html" class="tsd-kind-icon">Global</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../interfaces/_lib_convert_.locallinks.html" class="tsd-kind-icon">Local<wbr>Links</a>
+						<a href="../interfaces/_index_.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_convert_.resourceref.html" class="tsd-kind-icon">Resource<wbr>Ref</a>
+						<a href="../interfaces/_index_.options.html" class="tsd-kind-icon">Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#convert" class="tsd-kind-icon">convert</a>
 					</li>
 				</ul>
 			</nav>

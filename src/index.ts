@@ -1,7 +1,7 @@
 /**
  * ## Externally accessible entries
  *
- * r2epub can be used as a library module both for TypeScript and for Javascript. The external entities are listed below; see their respective documentations for further information.
+ * r2epub can be used as a library module both to TypeScript and to Javascript. The externally visible entities are listed below; see their respective documentations for further information.
  *
  * The top level functional entry point to the package is [[convert]].
  *
@@ -22,19 +22,19 @@ import * as _          from 'underscore';
 
 
 /**
- * Convenience class, to export the [[rConvert.RespecToEPUB]] class for the package as a whole.
- * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [[rConvert.RespecToEPUB.create_epub_from_dom]]. In general, [[convert]] should be used)
+ * Convenience class, to export the internal [RespecToEPUB](_lib_convert_.respectoepub.html) class for the package as a whole.
+ * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)
  */
 export class RespecToEPUB  extends rConvert.RespecToEPUB {};
 
 /**
- * Convenience class, to export the [[ocf.OCF]] class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
+ * Convenience class to export the internal [OCF](_lib_ocf_.ocf.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
  */
 export class OCF extends ocf.OCF {};
 
 
 /**
- * Config options, to be used as part of the input arguments in [[Arguments]] to overwrite the `config` options of ReSpec. See [[Options]] for details.
+ * Config options, to be used as part of the arguments in [[Options]] to overwrite the `config` options of ReSpec.
  */
 interface ConfigOptions {
     [x :string] :string
@@ -43,7 +43,7 @@ interface ConfigOptions {
 /**
  * Options provided by the user if and when the source has to be pre-processed via ReSpec.
  *
- * The original content file has to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * The original content file has to be pre-processed via the W3C [spec generator service](https://labs.w3.org/spec-generator/)
  * before further processing to convert the ReSpec source first. If that is the case (see [[Options.respec]]), it is also possible to set some of the ReSpec configuration options,
  * overwriting the values set in the `config` entry of the original file. The possible ReSpec options to be set are `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
  * See the [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details.

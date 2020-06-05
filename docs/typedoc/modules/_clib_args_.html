@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/xhtml&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
+	<title>&quot;clib/args&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+					<a href="_clib_args_.html">&quot;clib/args&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;lib/xhtml&quot;</h1>
+			<h1>External module &quot;clib/args&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -67,61 +67,101 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#xhtml-conversion-from-html5" id="xhtml-conversion-from-html5" style="color: inherit; text-decoration: none;">
-							<h2>XHTML conversion from HTML5</h2>
+						<a href="#collection-configuration" id="collection-configuration" style="color: inherit; text-decoration: none;">
+							<h2>Collection Configuration</h2>
 						</a>
 					</div>
-					<p>Convert an HTML5 content (in text or a DOM) into bona fide XHTML5.</p>
-					<p>It seems that the XHTML serialization of <a href="https://www.npmjs.com/package/jsdom"><code>jsdom</code></a> (used elsewhere in this library) may not be flawless. This module contains a workaround for the problems originally published in:</p>
-					<p><a href="https://www.npmjs.com/package/xmlserializer">https://www.npmjs.com/package/xmlserializer</a></p>
+					<p>The JSON Collection Configuration file is defined as follows:</p>
+					<pre><code class="language-json">{
+   &quot;title&quot;    : &quot;Title of the collection&quot;,
+   &quot;name&quot;     : &quot;Used as the base file name of the final document&quot;,
+   &quot;comment&quot;  : &quot;Comment on the collection configuration&quot;,
+   &quot;chapters&quot; : [{
+       &quot;url&quot;    : &quot;URL of the first chapter&quot;
+       &quot;respec&quot; : &quot;whether the document must be pre-processed by ReSpec [boolean]&quot;,
+       &quot;config&quot; : {
+           &quot;publishDate     : &quot;[iso date format]&quot;,
+           &quot;specStatus      : &quot;...&quot;,
+           &quot;addSectionLinks : &quot;[boolean]&quot;,
+           &quot;maxTocLevel     : &quot;[number]&quot;
+       }
+   },{
+       ...
+   }]
+}</code></pre>
+					<p>For the meaning of the configuration options, see the <a href="https://www.w3.org/respec/">ReSpec manual</a>. The &quot;title&quot;, &quot;name&quot;, &quot;chapters&quot;, and &quot;url&quot; fields are required, all others are optional. The value of &quot;comment&quot; is ignored by the module.</p>
+					<p>The JSON collection configuration file is checked against a JSON <a href="_clib_args_.html#schema">schema</a> in <a href="_clib_args_.html#get_book_configuration">get_book_configuration</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_clib_args_.html#schema" class="tsd-kind-icon">schema</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_clib_args_.html#get_book_configuration" class="tsd-kind-icon">get_<wbr>book_<wbr>configuration</a></li>
 							</ul>
 						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="schema" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> schema</h3>
+					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;{&quot;$schema&quot;    : &quot;http://json-schema.org/draft-07/schema#&quot;,&quot;$id&quot;        : &quot;https://github.com/iherman/rs2epub/r2epub.schema.json&quot;,&quot;title&quot;      : &quot;Argument structure for rs2epub&quot;,&quot;type&quot;       : &quot;object&quot;,&quot;properties&quot; : {&quot;title&quot; : {&quot;type&quot; : &quot;string&quot;},&quot;name&quot; : {&quot;type&quot; : &quot;string&quot;},&quot;comment&quot; : {&quot;type&quot; : &quot;string&quot;},&quot;chapters&quot; : {&quot;type&quot;  : &quot;array&quot;,&quot;items&quot; : {&quot;type&quot; : &quot;object&quot;,&quot;properties&quot;: {&quot;url&quot; : {&quot;type&quot; : &quot;string&quot;,&quot;format&quot;: &quot;uri&quot;},&quot;respec&quot; : {&quot;type&quot; : &quot;boolean&quot;},&quot;config&quot; : {&quot;type&quot; : &quot;object&quot;,&quot;properties&quot; : {&quot;specStatus&quot; : {&quot;type&quot; : &quot;string&quot;,&quot;enum&quot; : [&quot;base&quot;,&quot;MO&quot;,&quot;unofficial&quot;,&quot;ED&quot;,&quot;FPWD&quot;,&quot;WD&quot;,&quot;LC&quot;,&quot;LD&quot;,&quot;LS&quot;,&quot;CR&quot;,&quot;PR&quot;,&quot;PER&quot;,&quot;REC&quot;,&quot;RSCND&quot;,&quot;FPWD-NOTE&quot;,&quot;WG-NOTE&quot;,&quot;BG-DRAFT&quot;,&quot;BG-FINAL&quot;,&quot;CG-DRAFT&quot;,&quot;CG-FINAL&quot;,&quot;Member-SUBM&quot;,&quot;draft-finding&quot;,&quot;finding&quot;]},&quot;publishDate&quot; : {&quot;type&quot; : &quot;string&quot;,&quot;format&quot; : &quot;date&quot;},&quot;addSectionLinks&quot; : {&quot;type&quot; : &quot;boolean&quot;},&quot;maxTocLevel&quot; : {&quot;type&quot; : &quot;integer&quot;,&quot;minimum&quot;: 0}},&quot;additionalProperties&quot;: false}},&quot;additionalProperties&quot;: false,&quot;required&quot;: [&quot;url&quot;]},&quot;uniqueItems&quot;: true,&quot;minItems&quot;: 1}},&quot;additionalProperties&quot;: false,&quot;required&quot;: [&quot;title&quot;, &quot;name&quot;, &quot;chapters&quot;]}&#x60;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/clib/args.ts#L42">clib/args.ts:42</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>JSON Schema (version 07) for the JSON Collection Configuration file.</p>
+						</div>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="convert" class="tsd-anchor"></a>
-					<h3>convert</h3>
+					<a name="get_book_configuration" class="tsd-anchor"></a>
+					<h3>get_<wbr>book_<wbr>configuration</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">convert<span class="tsd-signature-symbol">(</span>html<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">get_<wbr>book_<wbr>configuration<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_clib_convert_.collectionconfiguration.html" class="tsd-signature-type">CollectionConfiguration</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/lib/xhtml.ts#L29">lib/xhtml.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/clib/args.ts#L135">clib/args.ts:135</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Convert an HTML5 content (in text or as a DOM) into XHTML5.</p>
+									<p>Validates the input JSON configuration using the JSON <a href="_clib_args_.html#schema">schema</a>, and converts the result to the internal data structure.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>schema validation error</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>html: <span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the original content</p>
-									</div>
+									<h5>data: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<ul>
-								<li>Same content serialized as XHTML</li>
-							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_clib_convert_.collectionconfiguration.html" class="tsd-signature-type">CollectionConfiguration</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -136,7 +176,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_cli_.html">&quot;cli&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_clib_args_.html">&quot;clib/args&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -187,7 +227,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -197,8 +237,11 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_clib_args_.html#schema" class="tsd-kind-icon">schema</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a>
+						<a href="_clib_args_.html#get_book_configuration" class="tsd-kind-icon">get_<wbr>book_<wbr>configuration</a>
 					</li>
 				</ul>
 			</nav>

@@ -1,7 +1,7 @@
 /**
- * ## Navigation page
+ * ## Collection Navigation page
  *
- * Creation of a navigation page. See [[create_nav_page]] for details
+ * Creation of a collection navigation page. See [[create_nav_page]] for details
  *
  * @packageDocumentation
  */

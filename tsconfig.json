@@ -37,7 +37,6 @@
         "includeVersion": true,
         "excludeExternals": true,
         "excludePrivate" : true,
-        "theme" : "minimal",
-        "name" : "r2epub — Converting HTML documents produced by Respec into EPUB 3.2"
+        "name" : "r2epub — Converting HTML/ReSpec documents to EPUB 3.2"
     }
 }

@@ -55,7 +55,7 @@
  *           "url": "https://www.example.org/first.html"
  *        },
  *       {
- *            "url": "https://www.example.org/second.html",
+ *           "url": "https://www.example.org/second.html",
  *           "respec": false,
  *           "config": {}
  *       },

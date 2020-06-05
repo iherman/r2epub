@@ -1,6 +1,31 @@
 /**
- * ## Handling the input argument. See [[get_book_configuration]] for the details.
+ * ## Collection Configuration
  *
+ * The JSON Collection Configuration file is defined as follows:
+ *
+ * ``` json
+ * {
+ *    "title"    : "Title of the collection",
+ *    "name"     : "Used as the base file name of the final document",
+ *    "comment"  : "Comment on the collection configuration",
+ *    "chapters" : [{
+ *        "url"    : "URL of the first chapter"
+ *        "respec" : "whether the document must be pre-processed by ReSpec [boolean]",
+ *        "config" : {
+ *            "publishDate     : "[iso date format]",
+ *            "specStatus      : "...",
+ *            "addSectionLinks : "[boolean]",
+ *            "maxTocLevel     : "[number]"
+ *        }
+ *    },{
+ *        ...
+ *    }]
+ * }
+ * ```
+ *
+ * For the meaning of the configuration options, see the [ReSpec manual](https://www.w3.org/respec/). The "title", "name", "chapters", and "url" fields are required, all others are optional. The value of "comment" is ignored by the module.
+ *
+ * The JSON collection configuration file is checked against a JSON [[schema]] in [[get_book_configuration]].
  *
  * @packageDocumentation
  */
@@ -12,7 +37,7 @@ import Ajv           from 'ajv';
 import * as cConvert from './convert';
 
 /**
- * JSON Schema (version 07) for the input argument, ie, the JSON Configuration file.
+ * JSON Schema (version 07) for the JSON Collection Configuration file.
  */
 const schema :string =
 `{
@@ -27,7 +52,7 @@ const schema :string =
         "name" : {
             "type" : "string"
         },
-        "description" : {
+        "comment" : {
             "type" : "string"
         },
         "chapters" : {
@@ -102,7 +127,7 @@ const schema :string =
 }`
 
 /**
- * Validate the input JSON configuration using the JSON [[schema]], and convert the result to the internal data structure.
+ * Validates the input JSON configuration using the JSON [[schema]], and converts the result to the internal data structure.
  *
  * @param data
  * @throws schema validation error
@@ -112,7 +137,7 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
     const validator = ajv.compile(JSON.parse(schema));
     const valid = validator(data);
     if (!valid) {
-        throw `Argument validity error: \n${JSON.stringify(validator.errors,null,4)}`
+        throw `Collection configuration validity error: \n${JSON.stringify(validator.errors,null,4)}`
     } else {
         const chapters :cConvert.ChapterConfiguration[] = data.chapters.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};

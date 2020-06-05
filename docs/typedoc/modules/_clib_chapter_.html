@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/xhtml&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
+	<title>&quot;clib/chapter&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+					<a href="_clib_chapter_.html">&quot;clib/chapter&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;lib/xhtml&quot;</h1>
+			<h1>External module &quot;clib/chapter&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -67,13 +67,11 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#xhtml-conversion-from-html5" id="xhtml-conversion-from-html5" style="color: inherit; text-decoration: none;">
-							<h2>XHTML conversion from HTML5</h2>
+						<a href="#representation-of-a-single-chapter" id="representation-of-a-single-chapter" style="color: inherit; text-decoration: none;">
+							<h2>Representation of a single chapter.</h2>
 						</a>
 					</div>
-					<p>Convert an HTML5 content (in text or a DOM) into bona fide XHTML5.</p>
-					<p>It seems that the XHTML serialization of <a href="https://www.npmjs.com/package/jsdom"><code>jsdom</code></a> (used elsewhere in this library) may not be flawless. This module contains a workaround for the problems originally published in:</p>
-					<p><a href="https://www.npmjs.com/package/xmlserializer">https://www.npmjs.com/package/xmlserializer</a></p>
+					<p>See <a href="../classes/_clib_chapter_.chapter.html">Chapter</a> for the details.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -81,49 +79,70 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Functions</h3>
+							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_clib_chapter_.chapter.html" class="tsd-kind-icon">Chapter</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_clib_chapter_.manifestitem.html" class="tsd-kind-icon">Manifest<wbr>Item</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_clib_chapter_.opfmanifestitem.html" class="tsd-kind-icon">OPFManifest<wbr>Item</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_clib_chapter_.html#jszip" class="tsd-kind-icon">JSZip</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_clib_chapter_.html#never_transfer" class="tsd-kind-icon">never_<wbr>transfer</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_clib_chapter_.html#transfer_once" class="tsd-kind-icon">transfer_<wbr>once</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="convert" class="tsd-anchor"></a>
-					<h3>convert</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">convert<span class="tsd-signature-symbol">(</span>html<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/lib/xhtml.ts#L29">lib/xhtml.ts:29</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Convert an HTML5 content (in text or as a DOM) into XHTML5.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>html: <span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the original content</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<ul>
-								<li>Same content serialized as XHTML</li>
-							</ul>
-						</li>
-					</ul>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="jszip" class="tsd-anchor"></a>
+					<h3>JSZip</h3>
+					<div class="tsd-signature tsd-kind-icon">JSZip<span class="tsd-signature-symbol">:</span> <a href="_lib_ocf_.html#jszip" class="tsd-signature-type">JSZip</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/clib/chapter.ts#L21">clib/chapter.ts:21</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="never_transfer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> never_<wbr>transfer</h3>
+					<div class="tsd-signature tsd-kind-icon">never_<wbr>transfer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;mimetype&#x27;,&#x27;META-INF/container.xml&#x27;,&#x27;package.opf&#x27;,&#x27;nav.xhtml&#x27;,&#x27;cover.xhtml&#x27;,]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/clib/chapter.ts#L55">clib/chapter.ts:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>These resources are present in the chapter&#39;s OCF, but should be regenerated from scratch for the final book. This means that this particular resource should not be transferred.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="transfer_once" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> transfer_<wbr>once</h3>
+					<div class="tsd-signature tsd-kind-icon">transfer_<wbr>once<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;StyleSheets/base.css&#x27;,&#x27;Icons/w3c_main.png&#x27;,]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/clib/chapter.ts#L47">clib/chapter.ts:47</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>These are common items for all individual book generated by r2epub, and used by the cover page. This must be transferred to the final book, but only once.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -139,7 +158,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_clib_args_.html">&quot;clib/args&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_clib_chapter_.html">&quot;clib/chapter&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -187,7 +206,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -197,8 +216,23 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_clib_chapter_.chapter.html" class="tsd-kind-icon">Chapter</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../interfaces/_clib_chapter_.manifestitem.html" class="tsd-kind-icon">Manifest<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_clib_chapter_.opfmanifestitem.html" class="tsd-kind-icon">OPFManifest<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_clib_chapter_.html#jszip" class="tsd-kind-icon">JSZip</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_clib_chapter_.html#never_transfer" class="tsd-kind-icon">never_<wbr>transfer</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_clib_chapter_.html#transfer_once" class="tsd-kind-icon">transfer_<wbr>once</a>
 					</li>
 				</ul>
 			</nav>

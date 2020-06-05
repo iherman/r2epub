@@ -79,7 +79,7 @@ interface Query {
 }
 
 /**
- * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming URL's query string.
+ * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Options]] structure based on the incoming URL's query string.
  *
  * @async
  * @param query - The query string from the client

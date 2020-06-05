@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/xhtml&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
+	<title>&quot;clib/opf&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+					<a href="_clib_opf_.html">&quot;clib/opf&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;lib/xhtml&quot;</h1>
+			<h1>External module &quot;clib/opf&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -67,13 +67,11 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#xhtml-conversion-from-html5" id="xhtml-conversion-from-html5" style="color: inherit; text-decoration: none;">
-							<h2>XHTML conversion from HTML5</h2>
+						<a href="#collection-opf-file" id="collection-opf-file" style="color: inherit; text-decoration: none;">
+							<h2>Collection OPF file</h2>
 						</a>
 					</div>
-					<p>Convert an HTML5 content (in text or a DOM) into bona fide XHTML5.</p>
-					<p>It seems that the XHTML serialization of <a href="https://www.npmjs.com/package/jsdom"><code>jsdom</code></a> (used elsewhere in this library) may not be flawless. This module contains a workaround for the problems originally published in:</p>
-					<p><a href="https://www.npmjs.com/package/xmlserializer">https://www.npmjs.com/package/xmlserializer</a></p>
+					<p>Creation of the Package file for a collection, per the <a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc">EPUB Packages 3.2 Specification</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -83,7 +81,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_clib_opf_.html#create_opf" class="tsd-kind-icon">create_<wbr>opf</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,35 +90,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="convert" class="tsd-anchor"></a>
-					<h3>convert</h3>
+					<a name="create_opf" class="tsd-anchor"></a>
+					<h3>create_<wbr>opf</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">convert<span class="tsd-signature-symbol">(</span>html<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">create_<wbr>opf<span class="tsd-signature-symbol">(</span>book<span class="tsd-signature-symbol">: </span><a href="../interfaces/_clib_convert_.collection.html" class="tsd-signature-type">Collection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/lib/xhtml.ts#L29">lib/xhtml.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/72fd9fa/src/clib/opf.ts#L35">clib/opf.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Convert an HTML5 content (in text or as a DOM) into XHTML5.</p>
+									<p>Creation of the of the Package file for a collection, per the <a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc">EPUB Packages 3.2 Specification</a>. See also <a href="https://iherman.github.io/r2epub/typedoc/classes/_lib_opf_.packagewrapper.html">the <code>PackageWrapper</code> documentation</a>.</p>
 								</div>
+								<p>The method</p>
+								<ol>
+									<li>Stores the stable files like cover and nav in the package;</li>
+									<li>Collects the dates and editors from the book and adds that to the package;</li>
+									<li>Collects the manifest item data for each package and adds it to the new package;</li>
+									<li>Adds the manifest items and the linear spine items.</li>
+									<li>Adds the non-linear spine items.</li>
+								</ol>
+								<p>Note that the internal structure of the final book, reflected in the modified manifest items, means putting each chapter into its own subdirectory, named after the chapter’s short name.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>html: <span class="tsd-signature-type">JSDOM</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5>book: <a href="../interfaces/_clib_convert_.collection.html" class="tsd-signature-type">Collection</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the original content</p>
+										<p>the final book data</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 							<ul>
-								<li>Same content serialized as XHTML</li>
+								<li>the Package file in textual format</li>
 							</ul>
 						</li>
 					</ul>
@@ -151,7 +158,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_clib_nav_.html">&quot;clib/nav&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_clib_opf_.html">&quot;clib/opf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -187,7 +194,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -198,7 +205,7 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_lib_xhtml_.html#convert" class="tsd-kind-icon">convert</a>
+						<a href="_clib_opf_.html#create_opf" class="tsd-kind-icon">create_<wbr>opf</a>
 					</li>
 				</ul>
 			</nav>

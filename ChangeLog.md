@@ -7,7 +7,7 @@ _I have completely ditched the client side version. Browserify with typescript s
 ### (Main) New Features
 
 * _The client side version (ie, code embedded in the browser) has been ditched. Browserify with typescript seems to be overly erratic, and simply does not link entries that out to be linked and there is no visible reason why..._
-* The separate library on “collections”, i.e., the possibility to bind several documents into one EPUB, has been incorporated into r2epub
+* The separate library on “collections”, i.e., the possibility to bind several documents into one EPUB, has been incorporated into r2epub.
 
 ## Version 1.1.2
 
