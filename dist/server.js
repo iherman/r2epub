@@ -60,12 +60,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = __importDefault(require("http"));
 const urlHandler = __importStar(require("url"));
 const _ = __importStar(require("underscore"));
+const r2epub = __importStar(require("./index"));
 const constants = __importStar(require("./lib/constants"));
-const convert = __importStar(require("./lib/convert"));
 const home = __importStar(require("./lib/home"));
 /**
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming URL's query string.
  *
+ * @async
  * @param query - The query string from the client
  */
 async function get_epub(query) {
@@ -75,13 +76,12 @@ async function get_epub(query) {
             delete respec_args[key];
         }
     });
-    const document = {
-        url: query.url,
+    const url = query.url;
+    const options = {
         respec: (query.respec !== undefined && (query.respec === 'true' || query.respec === true)),
         config: respec_args,
     };
-    const conversion_process = new convert.RespecToEPUB(false, false);
-    const the_ocf = await conversion_process.create_epub(document);
+    const the_ocf = await r2epub.convert(url, options);
     const content = await the_ocf.get_content();
     const now = (new Date()).toString();
     return {
@@ -98,7 +98,10 @@ async function get_epub(query) {
     };
 }
 /**
- * Run a rudimentary Web server calling out to [[create_epub]] via [[get_epub]] to return an EPUB 3.2 instance when invoked. If there is no proper query string a fixed page is displayed.
+ * Run a rudimentary Web server calling out to [[convert]] via [[get_epub]] to return an EPUB 3.2 instance when invoked.
+ * If there is no proper query string a fixed page is displayed.
+ *
+ * @async
  */
 async function serve() {
     const port = process.env.PORT || constants.local_port_number;

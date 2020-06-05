@@ -1,8 +1,17 @@
 # Changes
 
+## Version 1.2.0
+
+_I have completely ditched the client side version. Browserify with typescript seems to be overly erratic, and simply does not link entries that out to be linked and there is no visible reason why..._
+
+### (Main) New Features
+
+* _The client side version (ie, code embedded in the browser) has been ditched. Browserify with typescript seems to be overly erratic, and simply does not link entries that out to be linked and there is no visible reason why..._
+* The separate library on “collections”, i.e., the possibility to bind several documents into one EPUB, has been incorporated into r2epub
+
 ## Version 1.1.2
 
-## Detailed (important) changes
+### Detailed (important) changes
 
 * The document may have a reference to the EPUB version (if explicitly listed as an alternate format for the document). This may lead to a self-referencing loop; that reference is now removed from the target
 * Per EPUB 3.2 spec an `a` element, when referring to a local file, can only do that if:

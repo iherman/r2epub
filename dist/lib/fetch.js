@@ -209,4 +209,24 @@ async function fetch_html(html_url) {
     }
 }
 exports.fetch_html = fetch_html;
+/**
+ * Fetch an JSON file via [[fetch_resource]] and parse the result into an object.
+ *
+ * @async
+ * @param json_url
+ * @return - DOM object for the parsed HTML
+ * @throws Error if something goes wrong with fetch or DOM Parsing
+ */
+async function fetch_json(json_url) {
+    // Note that if this was used in a browser only, there are shortcuts in the fetch function for this, but that is not the case for
+    // node-fetch. :-(
+    try {
+        const body = await fetch_resource(json_url, true);
+        return JSON.parse(body);
+    }
+    catch (err) {
+        throw new Error(`JSON parsing error in ${json_url}: ${err}`);
+    }
+}
+exports.fetch_json = fetch_json;
 //# sourceMappingURL=fetch.js.map

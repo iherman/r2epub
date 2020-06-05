@@ -1,18 +1,37 @@
 {
     "title": "JSON LD 1.1",
-    "name": "jsonld1.1",
+    "name": "jsonld11",
+    "description": "This is just for testing purposes. The final version should not modify the dates; preferably, it should rely on the final publication, without ReSpec preprocessing",
     "chapters": [
         {
-            "url": "http://localhost:8001/TR/json-ld/"
+            "url": "https://w3c.github.io/json-ld-syntax/",
+            "respec" : true,
+            "config" : {
+                "specStatus"      : "REC",
+                "publishDate"     : "2020-06-15",
+                "addSectionLinks" : false
+            }
         },
         {
-            "url": "http://localhost:8001/TR/json-ld-api/"
+            "url": "https://w3c.github.io/json-ld-api/",
+            "respec" : true,
+            "config" : {
+                "specStatus"      : "REC",
+                "publishDate"     : "2020-06-15",
+                "addSectionLinks" : false
+            }
         },
         {
-            "url": "http://localhost:8001/TR/json-ld-framing/"
+            "url": "https://w3c.github.io/json-ld-framing/",
+            "respec" : true,
+            "config" : {
+                "specStatus"      : "REC",
+                "publishDate"     : "2020-06-15",
+                "addSectionLinks" : false
+            }
         },
         {
-            "url": "http://localhost:8001/TR/json-ld-streaming/"
+            "url": "https://www.w3.org/TR/json-ld11-streaming/"
         }
     ]
 }

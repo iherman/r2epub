@@ -17,7 +17,6 @@
  *
  */
 const default_service :string = 'https://r2epub.herokuapp.com/';
-// const service :string = 'http://localhost:5000/';
 
 interface ReturnedData {
     file_name :string,

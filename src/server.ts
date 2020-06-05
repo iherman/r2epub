@@ -81,6 +81,7 @@ interface Query {
 /**
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming URL's query string.
  *
+ * @async
  * @param query - The query string from the client
  */
 async function get_epub(query :Query) : Promise<Content> {
@@ -118,8 +119,10 @@ async function get_epub(query :Query) : Promise<Content> {
 
 
 /**
- * Run a rudimentary Web server calling out to [[covert]] via [[get_epub]] to return an EPUB 3.2 instance when invoked.
+ * Run a rudimentary Web server calling out to [[convert]] via [[get_epub]] to return an EPUB 3.2 instance when invoked.
  * If there is no proper query string a fixed page is displayed.
+ *
+ * @async
  */
 async function serve() {
     const port :string = process.env.PORT || constants.local_port_number;

@@ -27,6 +27,9 @@ const schema :string =
         "name" : {
             "type" : "string"
         },
+        "description" : {
+            "type" : "string"
+        },
         "chapters" : {
             "type"  : "array",
             "items" : {

@@ -8,12 +8,12 @@
     "main": "dist/index.js",
     "types": "src/index.ts",
     "scripts": {
+        "dist": "tsc; typedoc src/",
         "build": "tsc",
-        "dist": "tsc; typedoc src/; browserify dist/browser.js > docs/assets/js/r2epub.js; terser docs/assets/js/r2epub.js > docs/assets/js/r2epub.min.js",
-        "cli": "node dist/cli.js",
-        "serve": "node dist/server.js",
         "docs": "typedoc src/",
         "heroku": "git push heroku master",
+        "cli": "node dist/cli.js",
+        "server": "node dist/server.js",
         "test": "echo \"No separate test specified\""
     },
     "browser": "dist/browser.js",
