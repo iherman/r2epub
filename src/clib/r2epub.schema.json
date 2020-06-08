@@ -1,6 +1,6 @@
 {
     "$schema"    : "http://json-schema.org/draft-07/schema#",
-    "$id"        : "https://github.com/iherman/rs2epub/r2epub.schema.json",
+    "$id"        : "https://github.com/iherman/r2epub/src/clib/r2epub.schema.json",
     "title"      : "Argument structure for rs2epub",
     "type"       : "object",
     "properties" : {

@@ -14,6 +14,7 @@ exports.is_browser = (process === undefined || process.title === 'browser');
  */
 exports.media_types = {
     css: 'text/css',
+    text: 'text/plain',
     epub: 'application/epub+zip',
     es: 'text/ecmascript',
     html: 'text/html',
@@ -27,6 +28,7 @@ exports.media_types = {
 /** These media types refer to textual content, no reason to bother about streaming when fetching them... */
 exports.text_content = [
     exports.media_types.css,
+    exports.media_types.text,
     exports.media_types.es,
     exports.media_types.html,
     exports.media_types.js,

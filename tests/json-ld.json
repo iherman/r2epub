@@ -1,7 +1,7 @@
 {
     "title": "JSON LD 1.1",
     "name": "jsonld11_test",
-    "description": "This is just for testing purposes. The final version should not modify the dates; preferably, it should rely on the final publication, without ReSpec preprocessing",
+    "comment": "This is just for testing purposes to shake the whole system....",
     "chapters": [
         {
             "url": "https://w3c.github.io/json-ld-syntax/",

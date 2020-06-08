@@ -1,6 +1,7 @@
 {
     "title": "JSON LD 1.1",
     "name": "jsonld1.1",
+    "comment": "two different schema errors should be reported!",
     "invalid_term": "some invalid term added, just to test the error messaging",
     "chapters": [
     ]

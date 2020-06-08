@@ -38,12 +38,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  */
 const ajv_1 = __importDefault(require("ajv"));
-/**
- * JSON Schema (version 07) for the JSON Collection Configuration file.
- */
-const schema = `{
+const r2epub_schema_json_1 = __importDefault(require("./r2epub.schema.json"));
+const conf_schema_llll = JSON.parse(`
+{
     "$schema"    : "http://json-schema.org/draft-07/schema#",
-    "$id"        : "https://github.com/iherman/rs2epub/r2epub.schema.json",
+    "$id"        : "https://github.com/iherman/r2epub/src/clib/r2epub.schema.json",
     "title"      : "Argument structure for rs2epub",
     "type"       : "object",
     "properties" : {
@@ -125,21 +124,22 @@ const schema = `{
     "required": [
         "title", "name", "chapters"
     ]
-}`;
+}
+`);
 /**
- * Validates the input JSON configuration using the JSON [[schema]], and converts the result to the internal data structure.
+ * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
  *
  * @param data
- * @throws schema validation error
+ * @throws invalid schema, or schema validation error on the data
  */
 function get_book_configuration(data) {
     const ajv = new ajv_1.default({
         "allErrors": true,
     });
-    const validator = ajv.compile(JSON.parse(schema));
+    const validator = ajv.compile(r2epub_schema_json_1.default);
     const valid = validator(data);
     if (!valid) {
-        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors, null, 4)}\nValidation schema: ${schema}`;
+        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors, null, 4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`;
     }
     else {
         const chapters = data.chapters.map((chapter) => {

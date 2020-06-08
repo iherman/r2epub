@@ -42,7 +42,7 @@ import conf_schema from './r2epub.schema.json';
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
  *
  * @param data
- * @throws schema validation error
+ * @throws invalid schema, or schema validation error on the data
  */
 export function get_book_configuration(data :any) :cConvert.CollectionConfiguration {
     const ajv = new Ajv({

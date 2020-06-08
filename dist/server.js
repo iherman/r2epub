@@ -107,9 +107,11 @@ async function serve() {
     const port = process.env.PORT || constants.local_port_number;
     http_1.default.createServer(async (request, response) => {
         const error = (code, e) => {
-            response.writeHead(code, {
-                'Content-type': 'text/plain'
-            });
+            const error_headers = {
+                'Content-type': constants.media_types.text,
+                'Content-Language': 'en-US'
+            };
+            response.writeHead(code, _.extend(error_headers, constants.CORS_headers));
             response.write(e);
         };
         try {
@@ -132,7 +134,7 @@ async function serve() {
             }
         }
         catch (e) {
-            error(500, `${e.toString()}`);
+            error(200, `EPUB Generation error: ${e.toString()}`);
         }
         finally {
             response.end();

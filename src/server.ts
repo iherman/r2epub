@@ -128,9 +128,14 @@ async function serve() {
     const port :string = process.env.PORT || constants.local_port_number;
     http.createServer(async (request :http.IncomingMessage, response :http.ServerResponse) => {
         const error = (code :number, e :string) => {
-            response.writeHead(code, {
-                'Content-type' : 'text/plain'
-            });
+            const error_headers = {
+                'Content-type'     : constants.media_types.text,
+                'Content-Language' : 'en-US'
+            };
+            response.writeHead(code, _.extend(
+                error_headers,
+                constants.CORS_headers
+            ));
             response.write(e);
         }
         try {
@@ -157,7 +162,7 @@ async function serve() {
                 error(501, `Invalid HTTP request method: ${request.method}`);
             }
         } catch(e) {
-            error(500, `${e.toString()}`);
+            error(200, `EPUB Generation error: ${e.toString()}`);
         } finally {
             response.end();
         }
