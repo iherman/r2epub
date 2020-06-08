@@ -14,7 +14,7 @@
         "heroku": "git push heroku master",
         "cli": "node dist/cli.js",
         "server": "node dist/server.js",
-        "test": "echo \"No separate test specified\""
+        "cli_test": "ts-node src/cli.ts http://localhost:8001/LocalData/github/Tools/r2epub/tests/config_err.json"
     },
     "browser": "dist/browser.js",
     "repository": {

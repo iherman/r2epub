@@ -3,15 +3,15 @@
     "name": "audiobooks",
     "chapters": [
         {
-            "url": "http://localhost:8001/TR/pub-manifest/"
+            "url": "https://www.w3.org/TR/pub-manifest/"
         },
         {
-            "url": "http://localhost:8001/TR/audiobooks/",
+            "url": "https://www.w3.org/TR/audiobooks/",
             "respec": false,
             "config": {}
         },
         {
-            "url": "http://localhost:8001/TR/lpf/",
+            "url": "https://www.w3.org/TR/lpf/",
             "respec": false,
             "config": {}
         }

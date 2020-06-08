@@ -157,7 +157,7 @@ async function serve() {
                 error(501, `Invalid HTTP request method: ${request.method}`);
             }
         } catch(e) {
-            error(500, `Error during EPUB generation: ${e.toString()}`);
+            error(500, `${e.toString()}`);
         } finally {
             response.end();
         }

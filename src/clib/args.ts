@@ -133,11 +133,13 @@ const schema :string =
  * @throws schema validation error
  */
 export function get_book_configuration(data :any) :cConvert.CollectionConfiguration {
-    const ajv = new Ajv();
+    const ajv = new Ajv({
+        "allErrors" : true,
+    });
     const validator = ajv.compile(JSON.parse(schema));
     const valid = validator(data);
     if (!valid) {
-        throw `Collection configuration validity error: \n${JSON.stringify(validator.errors,null,4)}`
+        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: ${schema}`
     } else {
         const chapters :cConvert.ChapterConfiguration[] = data.chapters.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};

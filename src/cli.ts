@@ -127,7 +127,7 @@ async function cli() {
             fs.writeFileSync(argv.o || the_ocf.name, content);
         }
     } catch(e) {
-        console.error(`EPUB Generation error: "${e}"`);
+        console.error(`${e}`);
     }
 }
 
