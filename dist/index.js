@@ -2,7 +2,7 @@
 /**
  * ## Externally accessible entries
  *
- * r2epub can be used as a library module both for TypeScript and for Javascript. The external entities are listed below; see their respective documentations for further information.
+ * r2epub can be used as a library module both to TypeScript and to Javascript. The externally visible entities are listed below; see their respective documentations for further information.
  *
  * The top level functional entry point to the package is [[convert]].
  *
@@ -27,15 +27,15 @@ const cConvert = __importStar(require("./clib/convert"));
 const fetch = __importStar(require("./lib/fetch"));
 const _ = __importStar(require("underscore"));
 /**
- * Convenience class, to export the [[rConvert.RespecToEPUB]] class for the package as a whole.
- * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [[rConvert.RespecToEPUB.create_epub_from_dom]]. In general, [[convert]] should be used)
+ * Convenience class, to export the internal [RespecToEPUB](_lib_convert_.respectoepub.html) class for the package as a whole.
+ * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)
  */
 class RespecToEPUB extends rConvert.RespecToEPUB {
 }
 exports.RespecToEPUB = RespecToEPUB;
 ;
 /**
- * Convenience class, to export the [[ocf.OCF]] class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
+ * Convenience class to export the internal [OCF](_lib_ocf_.ocf.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
  */
 class OCF extends ocf.OCF {
 }

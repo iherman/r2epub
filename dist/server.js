@@ -64,7 +64,7 @@ const r2epub = __importStar(require("./index"));
 const constants = __importStar(require("./lib/constants"));
 const home = __importStar(require("./lib/home"));
 /**
- * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming URL's query string.
+ * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Options]] structure based on the incoming URL's query string.
  *
  * @async
  * @param query - The query string from the client
@@ -132,7 +132,7 @@ async function serve() {
             }
         }
         catch (e) {
-            error(500, `Error during EPUB generation: ${e.toString()}`);
+            error(500, `${e.toString()}`);
         }
         finally {
             response.end();

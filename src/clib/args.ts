@@ -36,98 +36,10 @@
 import Ajv           from 'ajv';
 import * as cConvert from './convert';
 
-/**
- * JSON Schema (version 07) for the JSON Collection Configuration file.
- */
-const schema :string =
-`{
-    "$schema"    : "http://json-schema.org/draft-07/schema#",
-    "$id"        : "https://github.com/iherman/rs2epub/r2epub.schema.json",
-    "title"      : "Argument structure for rs2epub",
-    "type"       : "object",
-    "properties" : {
-        "title" : {
-            "type" : "string"
-        },
-        "name" : {
-            "type" : "string"
-        },
-        "comment" : {
-            "type" : "string"
-        },
-        "chapters" : {
-            "type"  : "array",
-            "items" : {
-                "type" : "object",
-                "properties": {
-                    "url" : {
-                        "type" : "string",
-                        "format": "uri"
-                    },
-                    "respec" : {
-                        "type" : "boolean"
-                    },
-                    "config" : {
-                        "type" : "object",
-                        "properties" : {
-                            "specStatus" : {
-                                "type" : "string",
-                                "enum" : [
-                                    "base",
-                                    "MO",
-                                    "unofficial",
-                                    "ED",
-                                    "FPWD",
-                                    "WD",
-                                    "LC",
-                                    "LD",
-                                    "LS",
-                                    "CR",
-                                    "PR",
-                                    "PER",
-                                    "REC",
-                                    "RSCND",
-                                    "FPWD-NOTE",
-                                    "WG-NOTE",
-                                    "BG-DRAFT",
-                                    "BG-FINAL",
-                                    "CG-DRAFT",
-                                    "CG-FINAL",
-                                    "Member-SUBM",
-                                    "draft-finding",
-                                    "finding"
-                                ]
-                            },
-                            "publishDate" : {
-                                "type" : "string",
-                                "format" : "date"
-                            },
-                            "addSectionLinks" : {
-                                "type" : "boolean"
-                            },
-                            "maxTocLevel" : {
-                                "type" : "integer",
-                                "minimum": 0
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                },
-                "additionalProperties": false,
-                "required": ["url"]
-            },
-            "uniqueItems": true,
-            "minItems": 1
-        }
-    },
-    "additionalProperties": false,
-    "required": [
-        "title", "name", "chapters"
-    ]
-}`
+import conf_schema from './r2epub.schema.json';
 
 /**
- * Validates the input JSON configuration using the JSON [[schema]], and converts the result to the internal data structure.
+ * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
  *
  * @param data
  * @throws schema validation error
@@ -136,10 +48,10 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
     const ajv = new Ajv({
         "allErrors" : true,
     });
-    const validator = ajv.compile(JSON.parse(schema));
+    const validator = ajv.compile(conf_schema);
     const valid = validator(data);
     if (!valid) {
-        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: ${schema}`
+        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
     } else {
         const chapters :cConvert.ChapterConfiguration[] = data.chapters.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};

@@ -1,8 +1,8 @@
 "use strict";
 /**
- * ## OPF file
+ * ## Collection OPF file
  *
- * Creation of the Package file, per the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
+ * Creation of the Package file for a collection, per the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
  *
  * @packageDocumentation
  */

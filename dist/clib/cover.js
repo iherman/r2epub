@@ -1,8 +1,8 @@
 "use strict";
 /**
- * ## Cover page
+ * ## Collection cover page
  *
- * Creation of a cover page. See [[create_cover_page]] for the details.
+ * Creation of a cover page for a collection. See [[create_cover_page]] for the details.
  *
  * @packageDocumentation
  */
