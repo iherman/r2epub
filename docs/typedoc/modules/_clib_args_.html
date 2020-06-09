@@ -90,43 +90,19 @@
    }]
 }</code></pre>
 					<p>For the meaning of the configuration options, see the <a href="https://www.w3.org/respec/">ReSpec manual</a>. The &quot;title&quot;, &quot;name&quot;, &quot;chapters&quot;, and &quot;url&quot; fields are required, all others are optional. The value of &quot;comment&quot; is ignored by the module.</p>
-					<p>The JSON collection configuration file is checked against a JSON <a href="_clib_args_.html#schema">schema</a> in <a href="_clib_args_.html#get_book_configuration">get_book_configuration</a>.</p>
+					<p>The JSON collection configuration file is checked against the JSON <a href="https://github.com/iherman/src/clib/r2epub.schema.json">schema</a> in the <a href="_clib_args_.html#get_book_configuration">get_book_configuration</a> function.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_clib_args_.html#schema" class="tsd-kind-icon">schema</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_clib_args_.html#get_book_configuration" class="tsd-kind-icon">get_<wbr>book_<wbr>configuration</a></li>
 							</ul>
 						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="schema" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> schema</h3>
-					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;{&quot;$schema&quot;    : &quot;http://json-schema.org/draft-07/schema#&quot;,&quot;$id&quot;        : &quot;https://github.com/iherman/rs2epub/r2epub.schema.json&quot;,&quot;title&quot;      : &quot;Argument structure for rs2epub&quot;,&quot;type&quot;       : &quot;object&quot;,&quot;properties&quot; : {&quot;title&quot; : {&quot;type&quot; : &quot;string&quot;},&quot;name&quot; : {&quot;type&quot; : &quot;string&quot;},&quot;comment&quot; : {&quot;type&quot; : &quot;string&quot;},&quot;chapters&quot; : {&quot;type&quot;  : &quot;array&quot;,&quot;items&quot; : {&quot;type&quot; : &quot;object&quot;,&quot;properties&quot;: {&quot;url&quot; : {&quot;type&quot; : &quot;string&quot;,&quot;format&quot;: &quot;uri&quot;},&quot;respec&quot; : {&quot;type&quot; : &quot;boolean&quot;},&quot;config&quot; : {&quot;type&quot; : &quot;object&quot;,&quot;properties&quot; : {&quot;specStatus&quot; : {&quot;type&quot; : &quot;string&quot;,&quot;enum&quot; : [&quot;base&quot;,&quot;MO&quot;,&quot;unofficial&quot;,&quot;ED&quot;,&quot;FPWD&quot;,&quot;WD&quot;,&quot;LC&quot;,&quot;LD&quot;,&quot;LS&quot;,&quot;CR&quot;,&quot;PR&quot;,&quot;PER&quot;,&quot;REC&quot;,&quot;RSCND&quot;,&quot;FPWD-NOTE&quot;,&quot;WG-NOTE&quot;,&quot;BG-DRAFT&quot;,&quot;BG-FINAL&quot;,&quot;CG-DRAFT&quot;,&quot;CG-FINAL&quot;,&quot;Member-SUBM&quot;,&quot;draft-finding&quot;,&quot;finding&quot;]},&quot;publishDate&quot; : {&quot;type&quot; : &quot;string&quot;,&quot;format&quot; : &quot;date&quot;},&quot;addSectionLinks&quot; : {&quot;type&quot; : &quot;boolean&quot;},&quot;maxTocLevel&quot; : {&quot;type&quot; : &quot;integer&quot;,&quot;minimum&quot;: 0}},&quot;additionalProperties&quot;: false}},&quot;additionalProperties&quot;: false,&quot;required&quot;: [&quot;url&quot;]},&quot;uniqueItems&quot;: true,&quot;minItems&quot;: 1}},&quot;additionalProperties&quot;: false,&quot;required&quot;: [&quot;title&quot;, &quot;name&quot;, &quot;chapters&quot;]}&#x60;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/b15d3af/src/clib/args.ts#L44">clib/args.ts:44</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>JSON Schema (version 07) for the JSON Collection Configuration file.</p>
-						</div>
 					</div>
 				</section>
 			</section>
@@ -142,16 +118,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/b15d3af/src/clib/args.ts#L137">clib/args.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/c0a95c7/src/clib/args.ts#L46">clib/args.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Validates the input JSON configuration using the JSON <a href="_clib_args_.html#schema">schema</a>, and converts the result to the internal data structure.</p>
+									<p>Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>schema validation error</p>
+									<dd><p>invalid schema, or schema validation error on the data</p>
 									</dd>
 								</dl>
 							</div>
@@ -237,9 +213,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_clib_args_.html#schema" class="tsd-kind-icon">schema</a>
-					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_clib_args_.html#get_book_configuration" class="tsd-kind-icon">get_<wbr>book_<wbr>configuration</a>
 					</li>

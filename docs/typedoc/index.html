@@ -99,19 +99,18 @@ Options are:
 				<a href="#run-a-service-via-http" id="run-a-service-via-http" style="color: inherit; text-decoration: none;">
 					<h3>Run a service via HTTP</h3>
 				</a>
-				<p>There is a simple server implemented in the <a href="https://iherman.github.io/r2epub/typedoc/modules/_server_.html#serve">serve</a> module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on for URL-s of the sort:</p>
+				<p>There is a simple server implemented in the <a href="https://iherman.github.io/r2epub/typedoc/modules/_server_.html">serve</a> module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on for URL-s of the sort:</p>
 				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/doc.html</code></pre>
 				<p>This would create and return the EPUB 3.2 instance corresponding to <code>https://www.example.org/doc.html</code>. Query parameters for <code>respec</code>, <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, and <code>maxTocLevel</code> can be added, just like for the command line. I.e.,</p>
 				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/doc.html&amp;respec=<span class="hljs-literal">true</span>&amp;specStatus=REC</code></pre>
 				<p>converts the original file via respec, with the <code>specStatus</code> value set to <code>REC</code>. If one of <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, or <code>maxTocLevel</code> are set, <code>respec=true</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/collection.json</code></pre>
-				<p>generates a collection, described by the configuration file.</p>
-				<p>By default, the server uses the <code>http</code> port number 80 (i.e., the default HTTP port), unless the <code>PORT</code> environment variable is set when starting the server. Also, by default, no URL-s on <code>localhost</code> are accepted, unless the environment variable <code>R2EPUB_LOCAL</code> is explicitly set (the value of the variable is not relevant, only the setting is) for the server process.</p>
-				<p>The server has been deployed on the cloud, using <a href="https://r2epub.herokuapp.com/">heroku</a>.</p>
+				<p>generates a collection, described by the configuration file. (See the <a href="https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html">separate module</a> for more details on the configuration file.)</p>
+				<p>The server has been deployed on the cloud at <a href="https://r2epub.herokuapp.com/">heroku</a> using the <code>https://r2epub.herokuapp.com/</code> URL. A <a href="https://iherman.github.io/r2epub/convert.html">client side interface</a> to drive this server is also available.</p>
 				<a href="#use-as-a-typescriptnode-package-through-an-api" id="use-as-a-typescriptnode-package-through-an-api" style="color: inherit; text-decoration: none;">
 					<h3>Use as a typescript/node package through an API</h3>
 				</a>
-				<p>The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:</p>
+				<p>The program can also be used from another Typescript or Javascript program. In Typescript, the simplest access is through:</p>
 				<pre><code class="language-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> r2epub  <span class="hljs-keyword">from</span> <span class="hljs-string">'r2epub'</span>;
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs      <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
 <span class="hljs-comment">// The creation itself is asynchronous (the content has to be fetched over the wire).</span>
@@ -140,13 +139,11 @@ fs.writeFileSync(ocf.name, content);</code></pre>
 <span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> ocf.get_content();
 <span class="hljs-comment">// Get the content out to the disk</span>
 fs.writeFileSync(ocf.name, content);</code></pre>
-				<p>See the specification of the <a href="https://iherman.github.io/r2epub/typedoc/modules/_index_.html#convert">convert</a> and <a href="https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html">OCF</a> classes for further details.</p>
+				<p>See the specification of the <a href="https://iherman.github.io/r2epub/typedoc/modules/_index_.html#convert">convert</a> function and the <a href="https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html">OCF</a> class for further details.</p>
 				<a href="#installation-usage" id="installation-usage" style="color: inherit; text-decoration: none;">
 					<h2>Installation, usage</h2>
 				</a>
-				<p>The implementation is in Typescript and on top of <code>node.js</code>. The project can be downloaded via <code>npm</code>:</p>
-				<pre><code class="language-sh">npm install r2epub</code></pre>
-				<p>The documentation is also available <a href="https://iherman.github.io/r2epub/typedoc/">on-line</a>.</p>
+				<p>The implementation is in Typescript and on top of <code>node.js</code>.  The documentation is also available <a href="https://iherman.github.io/r2epub/typedoc/">on-line</a>.</p>
 				<p>Note that the on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator</a>. Alas!, that service may be down, and this package has no control over that…</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h3>Installation</h3>
@@ -155,10 +152,18 @@ fs.writeFileSync(ocf.name, content);</code></pre>
 				<pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://github.com/iherman/r2epub.git
 <span class="hljs-built_in">cd</span> r2epub
 npm install</code></pre>
+				<p>or simply use</p>
+				<pre><code class="language-sh">npm install r2epub</code></pre>
+				<p>to get to the latest, published version.</p>
 				<p>The repository contains both the typescript code (in the <code>src</code> directory) as well as the transformed javascript code (in the <code>dist</code> directory). If, for some reasons, the latter is not in the repository or is not up to date, the</p>
 				<pre><code class="language-sh">npm run build</code></pre>
-				<p>command takes care of that.</p>
-				<p>Follow specific instructions based on your needs/interest below:</p>
+				<p>command takes care of that. The documentation can also be generated locally through the</p>
+				<pre><code class="language-sh">npm run docs</code></pre>
+				<p>command.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h3>Usage</h3>
+				</a>
+				<p>Once installed locally, follow specific instructions based on your needs/interest below:</p>
 				<a href="#command-line" id="command-line" style="color: inherit; text-decoration: none;">
 					<h4>Command Line</h4>
 				</a>
@@ -168,8 +173,7 @@ npm install</code></pre>
 					<h4>Server</h4>
 				</a>
 				<pre><code class="language-sh">node dist/server.js</code></pre>
-				<p>starts up the server. The port number used by the server can be determined by setting the <code>PORT</code> environmental variable; failing that the default (i.e., 80) is used.</p>
-				<p>An instance of the server is also deployed <a href="https://r2epub.herokuapp.com/">on the cloud</a> at the <code>https://r2epub.herokuapp.com/</code> URL. A <a href="https://iherman.github.io/r2epub/convert.html">client side interface</a> to drive this server is also available.</p>
+				<p>starts up the server locally. The port number used by the server can be determined by setting the <code>PORT</code> environmental variable; failing that the default (i.e., 80) is used. By default, no URL-s on <code>localhost</code> are accepted, unless the environment variable <code>R2EPUB_LOCAL</code> is explicitly set (the value of the variable is not relevant, only the setting is) for the server process (this is useful for local, testing purposes).</p>
 				<hr>
 				<p>Copyright © 2020 <a href="https://www.ivan-herman.net">Ivan Herman</a> (a.k.a. <a href="https://github.com/iherman">@iherman</a>).</p>
 			</div>

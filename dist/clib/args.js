@@ -26,7 +26,7 @@
  *
  * For the meaning of the configuration options, see the [ReSpec manual](https://www.w3.org/respec/). The "title", "name", "chapters", and "url" fields are required, all others are optional. The value of "comment" is ignored by the module.
  *
- * The JSON collection configuration file is checked against a JSON [[schema]] in [[get_book_configuration]].
+ * The JSON collection configuration file is checked against the JSON [schema](https://github.com/iherman/src/clib/r2epub.schema.json) in the [[get_book_configuration]] function.
  *
  * @packageDocumentation
  */
@@ -39,93 +39,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const ajv_1 = __importDefault(require("ajv"));
 const r2epub_schema_json_1 = __importDefault(require("./r2epub.schema.json"));
-const conf_schema_llll = JSON.parse(`
-{
-    "$schema"    : "http://json-schema.org/draft-07/schema#",
-    "$id"        : "https://github.com/iherman/r2epub/src/clib/r2epub.schema.json",
-    "title"      : "Argument structure for rs2epub",
-    "type"       : "object",
-    "properties" : {
-        "title" : {
-            "type" : "string"
-        },
-        "name" : {
-            "type" : "string"
-        },
-        "comment" : {
-            "type" : "string"
-        },
-        "chapters" : {
-            "type"  : "array",
-            "items" : {
-                "type" : "object",
-                "properties": {
-                    "url" : {
-                        "type" : "string",
-                        "format": "uri"
-                    },
-                    "respec" : {
-                        "type" : "boolean"
-                    },
-                    "config" : {
-                        "type" : "object",
-                        "properties" : {
-                            "specStatus" : {
-                                "type" : "string",
-                                "enum" : [
-                                    "base",
-                                    "MO",
-                                    "unofficial",
-                                    "ED",
-                                    "FPWD",
-                                    "WD",
-                                    "LC",
-                                    "LD",
-                                    "LS",
-                                    "CR",
-                                    "PR",
-                                    "PER",
-                                    "REC",
-                                    "RSCND",
-                                    "FPWD-NOTE",
-                                    "WG-NOTE",
-                                    "BG-DRAFT",
-                                    "BG-FINAL",
-                                    "CG-DRAFT",
-                                    "CG-FINAL",
-                                    "Member-SUBM",
-                                    "draft-finding",
-                                    "finding"
-                                ]
-                            },
-                            "publishDate" : {
-                                "type" : "string",
-                                "format" : "date"
-                            },
-                            "addSectionLinks" : {
-                                "type" : "boolean"
-                            },
-                            "maxTocLevel" : {
-                                "type" : "integer",
-                                "minimum": 0
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                },
-                "additionalProperties": false,
-                "required": ["url"]
-            },
-            "uniqueItems": true,
-            "minItems": 1
-        }
-    },
-    "additionalProperties": false,
-    "required": [
-        "title", "name", "chapters"
-    ]
-}
-`);
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
  *

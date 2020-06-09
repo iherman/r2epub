@@ -1,6 +1,6 @@
 {
     "title": "Verifiable Credentials",
-    "name": "vc",
+    "name": "verifiable_credentials",
     "comment": "No ReSpec preprocessing involved",
     "chapters": [
         {

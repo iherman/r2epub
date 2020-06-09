@@ -39,7 +39,7 @@ By default, no URL-s on `localhost` are considered as safe and are therefore rej
 
 ### Run a service via HTTP
 
-There is a simple server implemented in the [serve](https://iherman.github.io/r2epub/typedoc/modules/_server_.html#serve) module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on for URL-s of the sort:
+There is a simple server implemented in the [serve](https://iherman.github.io/r2epub/typedoc/modules/_server_.html) module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on for URL-s of the sort:
 
 ```sh
 https://epub.example.org?url=https://www.example.org/doc.html
@@ -57,15 +57,13 @@ converts the original file via respec, with the `specStatus` value set to `REC`.
 https://epub.example.org?url=https://www.example.org/collection.json
 ```
 
-generates a collection, described by the configuration file.
+generates a collection, described by the configuration file. (See the [separate module](https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html) for more details on the configuration file.)
 
-By default, the server uses the `http` port number 80 (i.e., the default HTTP port), unless the `PORT` environment variable is set when starting the server. Also, by default, no URL-s on `localhost` are accepted, unless the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is) for the server process.
-
-The server has been deployed on the cloud, using [heroku](https://r2epub.herokuapp.com/).
+The server has been deployed on the cloud at [heroku](https://r2epub.herokuapp.com/) using the `https://r2epub.herokuapp.com/` URL. A [client side interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
 
 ### Use as a typescript/node package through an API
 
-The program can also be used from another Typescript or Javascript program. In Typescript, this simplest access is through:
+The program can also be used from another Typescript or Javascript program. In Typescript, the simplest access is through:
 
 ``` js
 import * as r2epub  from 'r2epub';
@@ -102,17 +100,11 @@ const content = await ocf.get_content();
 fs.writeFileSync(ocf.name, content);
 ```
 
-See the specification of the [convert](https://iherman.github.io/r2epub/typedoc/modules/_index_.html#convert) and [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) classes for further details.
+See the specification of the [convert](https://iherman.github.io/r2epub/typedoc/modules/_index_.html#convert) function and the [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) class for further details.
 
 ## Installation, usage
 
-The implementation is in Typescript and on top of `node.js`. The project can be downloaded via `npm`:
-
-```sh
-npm install r2epub
-```
-
-The documentation is also available [on-line](https://iherman.github.io/r2epub/typedoc/).
+The implementation is in Typescript and on top of `node.js`.  The documentation is also available [on-line](https://iherman.github.io/r2epub/typedoc/).
 
 Note that the on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator</a>. Alas!, that service may be down, and this package has no control over that…
 
@@ -126,15 +118,31 @@ cd r2epub
 npm install
 ```
 
+or simply use
+
+``` sh
+npm install r2epub
+```
+
+to get to the latest, published version.
+
 The repository contains both the typescript code (in the `src` directory) as well as the transformed javascript code (in the `dist` directory). If, for some reasons, the latter is not in the repository or is not up to date, the
 
 ``` sh
 npm run build
 ```
 
-command takes care of that.
+command takes care of that. The documentation can also be generated locally through the
 
-Follow specific instructions based on your needs/interest below:
+``` sh
+npm run docs
+```
+
+command.
+
+### Usage
+
+Once installed locally, follow specific instructions based on your needs/interest below:
 
 #### Command Line
 
@@ -150,9 +158,7 @@ starts the command line interface.
 node dist/server.js
 ```
 
-starts up the server. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that the default (i.e., 80) is used.
-
-An instance of the server is also deployed [on the cloud](https://r2epub.herokuapp.com/) at the `https://r2epub.herokuapp.com/` URL. A [client side interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
+starts up the server locally. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that the default (i.e., 80) is used. By default, no URL-s on `localhost` are accepted, unless the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is) for the server process (this is useful for local, testing purposes).
 
 ---
 

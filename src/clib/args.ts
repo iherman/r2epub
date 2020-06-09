@@ -25,7 +25,7 @@
  *
  * For the meaning of the configuration options, see the [ReSpec manual](https://www.w3.org/respec/). The "title", "name", "chapters", and "url" fields are required, all others are optional. The value of "comment" is ignored by the module.
  *
- * The JSON collection configuration file is checked against a JSON [[schema]] in [[get_book_configuration]].
+ * The JSON collection configuration file is checked against the JSON [schema](https://github.com/iherman/src/clib/r2epub.schema.json) in the [[get_book_configuration]] function.
  *
  * @packageDocumentation
  */
@@ -35,8 +35,7 @@
  */
 import Ajv           from 'ajv';
 import * as cConvert from './convert';
-
-import conf_schema from './r2epub.schema.json';
+import conf_schema   from './r2epub.schema.json';
 
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.

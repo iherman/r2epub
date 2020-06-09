@@ -134,7 +134,7 @@ async function serve() {
             }
         }
         catch (e) {
-            error(200, `EPUB Generation error: ${e.toString()}`);
+            error(400, `EPUB Generation error: ${e.toString()}`);
         }
         finally {
             response.end();
