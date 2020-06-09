@@ -40,14 +40,18 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
         try {
             window.fetch(resource_url)
                 .then((response) => {
+                    content_type = response.headers.get('Content-type');
                     if (response.ok) {
-                        content_type = response.headers.get('Content-type');
-                        if (content_type === epub_content_type) {
-                            fname = response.headers.get('Content-Disposition').split(';')[1].split('=')[1]
-                        }
+                        fname = response.headers.get('Content-Disposition').split(';')[1].split('=')[1]
                         return response.blob()
                     } else {
-                        reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                        if (response.status === 400) {
+                            // this is a "controlled" bad response meaning that an error message was sent by the r2epub software
+                            return response.blob();
+                        } else {
+                            // Something else happened...
+                            reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                        }
                     }
                 })
                 .then((content => {
