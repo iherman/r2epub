@@ -53,6 +53,7 @@
         "@types/node-fetch": "^2.5.5",
         "@types/underscore": "^1.9.4",
         "@types/valid-url": "^1.0.2",
+        "@types/xmldom": "^0.1.29",
         "@types/xmlserializer": "^0.6.0",
         "@types/yargs": "^15.0.4",
         "eslint": "^6.8.0",
