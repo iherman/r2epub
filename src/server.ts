@@ -51,14 +51,14 @@
 import http            from 'http';
 import * as urlHandler from 'url';
 import * as _          from 'underscore';
+import * as r2epub     from './index';
 import * as constants  from './lib/constants';
-import * as convert    from './lib/convert';
 import * as ocf        from './lib/ocf';
 import * as home       from './lib/home';
 
 
 /**
- * Return value of [[get_epub]], to be handled by the server;
+ * Return type of [[get_epub]] (to be handled by the server);
  */
 interface Content {
     /**
@@ -79,8 +79,9 @@ interface Query {
 }
 
 /**
- * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Arguments]] structure based on the incoming URL's query string.
+ * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Options]] structure based on the incoming URL's query string.
  *
+ * @async
  * @param query - The query string from the client
  */
 async function get_epub(query :Query) : Promise<Content> {
@@ -91,14 +92,13 @@ async function get_epub(query :Query) : Promise<Content> {
         }
     });
 
-    const document :convert.Arguments = {
-        url    : query.url as string,
+    const url :string = query.url as string;
+    const options :r2epub.Options = {
         respec : (query.respec !== undefined && (query.respec === 'true' || query.respec === true)),
         config : respec_args,
     }
 
-    const conversion_process   = new convert.RespecToEPUB(false, false);
-    const the_ocf :ocf.OCF     = await conversion_process.create_epub(document);
+    const the_ocf :ocf.OCF     = await r2epub.convert(url, options)
     const content :Buffer      = await the_ocf.get_content() as Buffer;
 
     const now :string = (new Date()).toString();
@@ -117,16 +117,25 @@ async function get_epub(query :Query) : Promise<Content> {
     }
  }
 
+
 /**
- * Run a rudimentary Web server calling out to [[create_epub]] via [[get_epub]] to return an EPUB 3.2 instance when invoked. If there is no proper query string a fixed page is displayed.
+ * Run a rudimentary Web server calling out to [[convert]] via [[get_epub]] to return an EPUB 3.2 instance when invoked.
+ * If there is no proper query string a fixed page is displayed.
+ *
+ * @async
  */
 async function serve() {
     const port :string = process.env.PORT || constants.local_port_number;
     http.createServer(async (request :http.IncomingMessage, response :http.ServerResponse) => {
         const error = (code :number, e :string) => {
-            response.writeHead(code, {
-                'Content-type' : 'text/plain'
-            });
+            const error_headers = {
+                'Content-type'     : constants.media_types.text,
+                'Content-Language' : 'en-US'
+            };
+            response.writeHead(code, _.extend(
+                error_headers,
+                constants.CORS_headers
+            ));
             response.write(e);
         }
         try {
@@ -153,7 +162,7 @@ async function serve() {
                 error(501, `Invalid HTTP request method: ${request.method}`);
             }
         } catch(e) {
-            error(500, `Error during EPUB generation: ${e.toString()}`);
+            error(400, `EPUB Generation error: ${e.toString()}`);
         } finally {
             response.end();
         }

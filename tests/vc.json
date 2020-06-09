@@ -1,0 +1,15 @@
+{
+    "title": "Verifiable Credentials",
+    "name": "verifiable_credentials",
+    "comment": "No ReSpec preprocessing involved",
+    "chapters": [
+        {
+            "url": "https://www.w3.org/TR/vc-data-model/"
+        },
+        {
+            "url": "http://www.w3.org/TR/vc-use-cases/",
+            "respec": false,
+            "config": {}
+        }
+    ]
+}

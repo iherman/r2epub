@@ -53,6 +53,7 @@ var _this = this;
  *
  */
 var default_service = 'https://r2epub.herokuapp.com/';
+var epub_content_type = 'application/epub+zip';
 /**
  * Get the service to perform the conversion.
  *
@@ -62,27 +63,36 @@ var default_service = 'https://r2epub.herokuapp.com/';
  */
 function fetch_book(resource_url) {
     return __awaiter(this, void 0, void 0, function () {
-        var fname;
+        var fname, content_type;
         return __generator(this, function (_a) {
             return [2 /*return*/, new Promise(function (resolve, reject) {
                     try {
                         window.fetch(resource_url)
                             .then(function (response) {
+                            content_type = response.headers.get('Content-type');
                             if (response.ok) {
                                 fname = response.headers.get('Content-Disposition').split(';')[1].split('=')[1];
                                 return response.blob();
                             }
                             else {
-                                reject(new Error("HTTP response " + response.status + ": " + response.statusText + " on " + resource_url));
+                                if (response.status === 400) {
+                                    // this is a "controlled" bad response meaning that an error message was sent by the r2epub software
+                                    return response.blob();
+                                }
+                                else {
+                                    // Something else happened...
+                                    reject(new Error("HTTP response " + response.status + ": " + response.statusText + " on " + resource_url));
+                                }
                             }
                         })
                             .then((function (content) {
                             resolve({
+                                content_type: content_type,
                                 file_name: fname,
                                 content: content
                             });
                         }))["catch"](function (err) {
-                            reject(new Error("Problem accessing " + resource_url + ": " + err));
+                            reject(new Error("Problem accessing: " + err));
                         });
                     }
                     catch (err) {
@@ -105,7 +115,7 @@ function fetch_book(resource_url) {
  * @async
  */
 var submit = function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var save_book, fading_success, done, progress, form, url, respec, publishDate, specStatus, addSectionLinks, maxTocLevel, service, query, service_url, returned, e_1, e_2;
+    var save_book, fading_success, done, progress, form, url, respec, publishDate, specStatus, addSectionLinks, maxTocLevel, service, query, service_url, returned, message, e_1, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -126,7 +136,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 progress = document.getElementById('progress');
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 8, , 9]);
+                _a.trys.push([1, 11, , 12]);
                 form = document.getElementById('main_form');
                 url = document.getElementById('url');
                 respec = document.getElementById('respec');
@@ -135,7 +145,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 addSectionLinks = document.getElementById('addSectionLinks');
                 maxTocLevel = document.getElementById('maxTocLevel');
                 service = form.dataset.r2epubservice || default_service;
-                if (!!(url.value === null || url.value === '')) return [3 /*break*/, 6];
+                if (!!(url.value === null || url.value === '')) return [3 /*break*/, 9];
                 query = [
                     "url=" + url.value,
                     "respec=" + (respec.value === 'true')
@@ -155,34 +165,43 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 service_url = service + "?" + query.join('&');
                 _a.label = 2;
             case 2:
-                _a.trys.push([2, 4, , 5]);
+                _a.trys.push([2, 7, , 8]);
                 // turn on the progress bar at the bottom of the form
                 progress.style.setProperty('visibility', 'visible');
                 return [4 /*yield*/, fetch_book(service_url)];
             case 3:
                 returned = _a.sent();
+                if (!(returned.content_type === epub_content_type)) return [3 /*break*/, 4];
                 save_book(returned.content, returned.file_name);
+                return [3 /*break*/, 6];
+            case 4: return [4 /*yield*/, returned.content.text()];
+            case 5:
+                message = _a.sent();
+                alert(message);
+                _a.label = 6;
+            case 6:
                 // Remove the query string from the URL bar
                 document.location.search = '';
                 // Clean up the user interface and we are done!
                 progress.style.setProperty('visibility', 'hidden');
-                fading_success();
-                return [3 /*break*/, 5];
-            case 4:
+                if (returned.content_type === epub_content_type)
+                    fading_success();
+                return [3 /*break*/, 8];
+            case 7:
                 e_1 = _a.sent();
                 progress.style.setProperty('visibility', 'hidden');
-                alert("EPUB Generation Error: " + e_1);
-                return [3 /*break*/, 5];
-            case 5: return [3 /*break*/, 7];
-            case 6:
+                alert("" + e_1);
+                return [3 /*break*/, 8];
+            case 8: return [3 /*break*/, 10];
+            case 9:
                 alert("No or empty URL value");
-                _a.label = 7;
-            case 7: return [3 /*break*/, 9];
-            case 8:
+                _a.label = 10;
+            case 10: return [3 /*break*/, 12];
+            case 11:
                 e_2 = _a.sent();
-                alert("Form interpretation Error... " + e_2);
-                return [3 /*break*/, 9];
-            case 9: return [2 /*return*/];
+                alert("Form interpretation Error: " + e_2);
+                return [3 /*break*/, 12];
+            case 12: return [2 /*return*/];
         }
     });
 }); };

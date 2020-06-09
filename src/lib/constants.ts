@@ -22,6 +22,7 @@ export interface MediaType {
  */
 export const media_types :MediaType = {
     css     : 'text/css',
+    text    : 'text/plain',
     epub    : 'application/epub+zip',
     es      : 'text/ecmascript',
     html    : 'text/html',
@@ -37,6 +38,7 @@ export const media_types :MediaType = {
 /** These media types refer to textual content, no reason to bother about streaming when fetching them... */
 export const text_content :string[] = [
     media_types.css,
+    media_types.text,
     media_types.es,
     media_types.html,
     media_types.js,

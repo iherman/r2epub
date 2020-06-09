@@ -1,0 +1,10 @@
+{
+    "title": "JSON LD 1.1",
+    "name": "jsonld1.1",
+    "comment": "running a single document should be fine",
+    "chapters": [
+        {
+            "url": "https://www.w3.org/TR/json-ld/"
+        }
+    ]
+}

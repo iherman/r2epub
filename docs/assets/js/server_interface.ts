@@ -17,11 +17,13 @@
  *
  */
 const default_service :string = 'https://r2epub.herokuapp.com/';
-// const service :string = 'http://localhost:5000/';
+
+const epub_content_type = 'application/epub+zip';
 
 interface ReturnedData {
-    file_name :string,
-    content   :Blob
+    content_type :string,
+    file_name    :string,
+    content      :Blob
 }
 
 /**
@@ -32,27 +34,35 @@ interface ReturnedData {
  * @returns the final content as well as the local name of the EPUB instance
  */
 async function fetch_book(resource_url :string) :Promise<ReturnedData> {
-    // If there is a problem, an exception is raised
-    let fname :string;
+    let fname        :string;
+    let content_type :string;
     return new Promise((resolve, reject) => {
         try {
             window.fetch(resource_url)
                 .then((response) => {
+                    content_type = response.headers.get('Content-type');
                     if (response.ok) {
                         fname = response.headers.get('Content-Disposition').split(';')[1].split('=')[1]
                         return response.blob()
                     } else {
-                        reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                        if (response.status === 400) {
+                            // this is a "controlled" bad response meaning that an error message was sent by the r2epub software
+                            return response.blob();
+                        } else {
+                            // Something else happened...
+                            reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                        }
                     }
                 })
                 .then((content => {
                     resolve({
-                        file_name : fname,
-                        content   : content
+                        content_type : content_type,
+                        file_name    : fname,
+                        content      : content
                     });
                 }))
                 .catch((err) => {
-                    reject(new Error(`Problem accessing ${resource_url}: ${err}`));
+                    reject(new Error(`Problem accessing: ${err}`));
                 });
         } catch (err) {
             reject(err);
@@ -133,30 +143,34 @@ const submit = async (event :Event) :Promise<any> => {
             }
             const service_url = `${service}?${query.join('&')}`;
             try {
-
                 // turn on the progress bar at the bottom of the form
                 progress.style.setProperty('visibility', 'visible');
 
                 // const content = await (await window.fetch(service_url)).blob();
                 const returned :ReturnedData = await fetch_book(service_url);
 
-                save_book(returned.content, returned.file_name);
+                if (returned.content_type === epub_content_type) {
+                    save_book(returned.content, returned.file_name);
+                 } else {
+                    const message = await returned.content.text();
+                    alert(message);
+                }
 
                 // Remove the query string from the URL bar
                 document.location.search = '';
 
                 // Clean up the user interface and we are done!
                 progress.style.setProperty('visibility', 'hidden');
-                fading_success();
-            } catch(e) {
+                if (returned.content_type === epub_content_type) fading_success();
+           } catch(e) {
                 progress.style.setProperty('visibility', 'hidden');
-                alert(`EPUB Generation Error: ${e}`);
+                alert(`${e}`);
             }
         } else {
             alert(`No or empty URL value`);
         }
     } catch(e) {
-        alert(`Form interpretation Error... ${e}`);
+        alert(`Form interpretation Error: ${e}`);
     }
 }
 

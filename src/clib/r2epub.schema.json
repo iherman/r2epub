@@ -1,0 +1,85 @@
+{
+    "$schema"    : "http://json-schema.org/draft-07/schema#",
+    "$id"        : "https://github.com/iherman/r2epub/src/clib/r2epub.schema.json",
+    "title"      : "Argument structure for rs2epub",
+    "type"       : "object",
+    "properties" : {
+        "title" : {
+            "type" : "string"
+        },
+        "name" : {
+            "type" : "string"
+        },
+        "comment" : {
+            "type" : "string"
+        },
+        "chapters" : {
+            "type"  : "array",
+            "items" : {
+                "type" : "object",
+                "properties": {
+                    "url" : {
+                        "type" : "string",
+                        "format": "uri"
+                    },
+                    "respec" : {
+                        "type" : "boolean"
+                    },
+                    "config" : {
+                        "type" : "object",
+                        "properties" : {
+                            "specStatus" : {
+                                "type" : "string",
+                                "enum" : [
+                                    "base",
+                                    "MO",
+                                    "unofficial",
+                                    "ED",
+                                    "FPWD",
+                                    "WD",
+                                    "LC",
+                                    "LD",
+                                    "LS",
+                                    "CR",
+                                    "PR",
+                                    "PER",
+                                    "REC",
+                                    "RSCND",
+                                    "FPWD-NOTE",
+                                    "WG-NOTE",
+                                    "BG-DRAFT",
+                                    "BG-FINAL",
+                                    "CG-DRAFT",
+                                    "CG-FINAL",
+                                    "Member-SUBM",
+                                    "draft-finding",
+                                    "finding"
+                                ]
+                            },
+                            "publishDate" : {
+                                "type" : "string",
+                                "format" : "date"
+                            },
+                            "addSectionLinks" : {
+                                "type" : "boolean"
+                            },
+                            "maxTocLevel" : {
+                                "type" : "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "additionalProperties": false,
+                "required": ["url"]
+            },
+            "uniqueItems": true,
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "title", "name", "chapters"
+    ]
+}

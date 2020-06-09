@@ -1,10 +1,19 @@
 # Changes
 
+## Version 1.2.0
+
+_The client side version has been definitely ditched. It looks like `browserify` with typescript is overly erratic, and sometimes does not link entries that out to be linked and there is no visible reason why..._
+
+### (Main) New Features
+
+* The client side version (ie, code embedded in the browser) has been ditched.
+* There is now a separate functionality on “collections”, i.e., the possibility to bind several documents into one EPUB. This means one can generate an EPUB 3.2 document that comprises several W3C documents. E.g., one can create a JSON-LD 1.1 EPUB 3.2 that includes the JSON-LD 1.1 Syntax, JSON-LD 1.1 API, JSON-LD 1.1 Framing, and Streaming JSON-LD specifications.
+
 ## Version 1.1.2
 
-## Detailed (important) changes
+### Detailed (important) changes
 
-* The document may have a reference to the EPUB version (if explicitly listed as an alternate format for the document). This may lead to a self-referencing loop; that reference is now removed from the target
+* A document may have a reference to its own EPUB version (if explicitly listed as an alternate format for the document). This may lead to a self-referencing loop; that reference is now removed from the target
 * Per EPUB 3.2 spec an `a` element, when referring to a local file, can only do that if:
     1. the resource is explicitly listed in the `spine` of the OPF element with a `linear='no'` attribute set
     2. the content is a valid content type, i.e., currently XHTML or SVG. While that is fine for SVG, referring to an HTML content like that may lead to problems, because that should also be in XHTML (i.e., it would involve a conversion) and the same rule applies to that content as well, i.e., the script should be prepared to handle HTML files recursively.

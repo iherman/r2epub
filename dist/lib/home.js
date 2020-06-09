@@ -26,33 +26,30 @@ exports.homepage = `<!doctype html>
     <main>
         <h1>Service to convert W3C Technical Reports to EPUB 3.2</h1>
 
-        <p>
-            Service to convert W3C Technical Reports, authored in <a href="https://github.com/w3c/respec/wiki/">ReSpec</a>, to EPUB 3.2.
-        </p>
+        <p>This is an interface an on-line service to convert W3C Technical Reports, authored in <a href="https://github.com/w3c/respec/wiki/">ReSpec</a>, to EPUB 3.2</p>
 
         <p>
-            The server takes the parameters in a query string, generates and returns an EPUB 3.2 instance to the caller. The possible query parameters are:
+            The service receives the parameters through the form above, and generates an EPUB 3.2 instance stored on the local machine. The possible form parameters are:
         </p>
 
         <dl>
-            <dt><code>url</code></dt>
-            <dd>The URL for the content. <em>This value is required</em>.</dd>
+            <dt id='url'><code>url</code></dt>
+            <dd>The URL for the either the (HTML) content <em>or</em> for the <a href='https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html'>(JSON) configuration file</a> for a collection of documents. In the second case all other parameter values are ignored. <em>This value is required</em>.</dd>
 
-            <dt><code>respec</code></dt>
-            <dd>Whether the source is in respec (<code>true</code>) or a final HTML (<code>false</code>). If the former, the source is converted using an <a href='https://www.w3.org/2015/labs/'>online service</a> based on <a href="https://github.com/w3c/spec-generator">Spec Generator</a> into HTML first.</dd>
+            <dt id='respec'><code>respec</code></dt>
+            <dd>Whether the source has to be pre-processed by ReSpec (“true”) or is a final HTML (“false”). If the former, the source is converted using <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator</a> into HTML first.</dd>
 
-            <dt><code>publishDate</code></dt>
-            <dd>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+            <dt id='pdate'><code>publishDate</code></dt>
+            <dd><sup>(☨)</sup>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
-            <dt><code>specStatus</code></dt>
-            <dd>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+            <dt id="status"><code>specStatus</code></dt>
+            <dd>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
-            <dt><code>addSectionLinks</code></dt>
-            <dd>Add section links with <code>§</code>. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
+            <dt id='seclink'><code>addSectionLinks</code></dt>
+            <dd>Add section links with a <code>§</code> character. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
-            <dt><code>maxTocLevel</code></dt>
-            <dd>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the <code>respecConfig</code> structure</a> in the source.</dd>
-
+            <dt id='toclevel'><code>maxTocLevel</code></dt>
+            <dd>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
         </dl>
 
         <p>
@@ -74,6 +71,10 @@ exports.homepage = `<!doctype html>
         <p>Convert the HTML <em>ReSpec source</em> to an EPUB 3.2 file, setting its spec status to REC. The source is converted on-the-fly by respec, overwriting the <code>specStatus</code> entry in the configuration to <code>REC</code>:</p>
 
         <pre>%%%SERVER%%%?url=https://www.example.org/doc.html&respec=true&specStatus=REC</pre>
+
+        <p>Generates a collection of HTML documents to an EPUB 3.2 file, described by a <a href='https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html'>(JSON) configuration file</a>:</p>
+
+        <pre>%%%SERVER%%%?url=https://www.example.org/collection.json</pre>
 
     </main>
     <footer style='font-size:80%; border-top: thin solid black;'>

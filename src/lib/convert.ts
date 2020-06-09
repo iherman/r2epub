@@ -22,6 +22,7 @@ import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch';
+import {Options}       from '../index';
 import * as constants  from './constants';
 import * as opf        from './opf';
 import * as ocf        from './ocf';
@@ -31,58 +32,7 @@ import * as nav        from './nav';
 import * as overview   from './overview'
 
 
-
 // ========================================================== The main conversion part ============================================ //
-
-/**
- * Config options, to be used as part of the input arguments in [[Arguments]] to overwrite the `config` options of ReSpec.
- * (See [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide).)
- *
- * Note that the interface definition does not restrict the possible values; however, not
- * all values are usable by overwriting the original values on-the-fly. The CLI for the package (see [[cli]]) defines a few useful values.
- */
-export interface ConfigOptions {
-    [x :string] :string
-}
-
-/**
- * Debug options
- */
-export interface DebugOptions {
-      /**
-     * Debug option: just print the package file on the console, do not generate and epub file.
-     */
-    package :boolean,
-
-    /**
-     * Debug option: print built-in trace information.
-     */
-    trace :boolean,
-}
-
-/**
- * CLI arguments used by the [[create_epub]] entry function.
- *
- * The original content file may have to be run through the W3C [spec generator service](https://labs.w3.org/spec-generator/)
- * before further processing. If that is the case (see [[Arguments.respec]]), it is also possible to set some of the ReSpec configuration options,
- * overwriting the values set in the `config` entry of the original file (see [[Arguments.config]]). See the
- * [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details of the values.
- *
- */
-export interface Arguments {
-    /** The URL of the relevant HTML file. */
-    url     :string,
-
-    /**
-     * Is the source in ReSpec?
-     */
-    respec  :boolean,
-
-    /**
-     * Collection of respec config options, to be used with the spec generator (if applicable).
-     */
-    config  :ConfigOptions
-}
 
 /**
  * Interface for the resources that, eventually, should be added to the EPUB file
@@ -218,7 +168,7 @@ export class RespecToEPUB {
             package   : print_package,
             resources : []
         }
-     }
+    }
 
     /**
      * Create an EPUB 3.2, ie, an OCF file from the original content
@@ -230,39 +180,39 @@ export class RespecToEPUB {
      * 3. "Finalizes" the OCF content, i.e., dump everything to a file.
      *
      *
-     * @param document - Reference to the original document; this may have to be transformed by respec on-the-fly.
+     * @param options - Reference to the original document; this may have to be transformed by respec on-the-fly.
      * @async
      */
-    async create_epub(document: Arguments) :Promise<ocf.OCF> {
+    async create_epub(url: string, options: Options) :Promise<ocf.OCF> {
         /** Generate the URL used to get the final document DOM */
         const full_url = () => {
-            if (document.respec) {
+            if (options.respec) {
                 // Yep, the content has to go through the respec transformation service
                 // Collect the possible query parameters to control some details of the respec transformation
-                const config_options :string[] = _.keys(document.config)
+                const config_options :string[] = _.keys(options.config)
                     .map( (key :string) :string => {
-                        if (document.config[key] === null || document.config[key] === '' || document.config[key] === 'null') {
+                        if (options.config[key] === null || options.config[key] === '' || options.config[key] === 'null') {
                             return null;
                         } else {
-                            return `${key}%3D${document.config[key]}`
+                            return `${key}%3D${options.config[key]}`
                         }
                     })
                     .filter((val) => val !== null);
                 const query_string = config_options.length === 0 ? '' : `%3F${config_options.join('%26')}`;
-                return `${constants.spec_generator}${document.url}${query_string}`
+                return `${constants.spec_generator}${url}${query_string}`
            } else {
-                return document.url;
+                return url;
             }
         }
 
-        if (this.global.trace) console.log(`Input arguments: ${JSON.stringify(document)}`);
+        if (this.global.trace) console.log(`Input arguments: ${url}, ${JSON.stringify(options)}`);
 
         // Fetch the real content (with a possible respec transformation) as a DOM tree for further processing
         const fetch_url = full_url();
         if (this.global.trace) console.log(`URL for the spec to be fetched: ${fetch_url}`);
         const dom :jsdom.JSDOM = await fetch_html(fetch_url);
 
-        return await this.create_epub_from_dom(document.url, dom);
+        return await this.create_epub_from_dom(url, dom);
     }
 
 

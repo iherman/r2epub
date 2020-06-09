@@ -1,0 +1,19 @@
+{
+    "title": "Publication Manifest and Audiobooks",
+    "name": "audiobooks",
+    "chapters": [
+        {
+            "url": "https://www.w3.org/TR/pub-manifest/"
+        },
+        {
+            "url": "https://www.w3.org/TR/audiobooks/",
+            "respec": false,
+            "config": {}
+        },
+        {
+            "url": "https://www.w3.org/TR/lpf/",
+            "respec": false,
+            "config": {}
+        }
+    ]
+}

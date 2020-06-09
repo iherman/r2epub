@@ -8,18 +8,18 @@
     </head>
     <body>
         <header>
-            <h1>r2epub — Convert HTML/ReSpec into EPUB 3.2 (on-line service version)</h1>
+            <h1>r2epub — Convert HTML/ReSpec into EPUB 3.2</h1>
         </header>
         <main>
-            <p>This form transforms the document into EPUB 3.2 through a call to a conversion server on <a href="https://www.herokuapp.com/">Heroku</a>. If you prefer to perform this conversion via a client-side script, please go to the relevant <a href="client.html">version</a>.</p>
+            <p>This form transforms the document into EPUB 3.2 through a call to a conversion server on <a href="https://www.herokuapp.com/">Heroku</a>.</p>
             <form id="main_form" data-r2epubservice='https://www.herokuapp.com/'>
-                <p style="visibility: hidden" id='done'>EPUB file generated!!</p>
+                    <p style="visibility: hidden" id='done'>EPUB file generated!!</p>
                 <fieldset id="main_arguments">
                     <legend>Main arguments:</legend>
                     <div class='fieldset_grid'>
-                        <label for="url">Document URL</label>
-                        <input name="url" id="url" size="60" type="text" required value="https://www.w3.org/TR/annotation-model/">
-                        <label for="respec">Run ReSpec<sup><a href='#respec'>(?)</a></sup></label>
+                        <label for="url">URL<sup><a href='#url'>(*)</a></sup></label>
+                        <input name="url" id="url" size="60" type="text" required>
+                        <label for="respec">Run ReSpec?<sup><a href='#respec'>(**)</a></sup></label>
                         <select id="respec" name="respec" size="1">
                             <option selected="selected" value="false">No</option>
                             <option value="true">Yes</option>
@@ -29,9 +29,9 @@
                 <fieldset id="respec_arguments ">
                     <legend>ReSpec arguments:</legend>
                     <div class='fieldset_grid'>
-                        <label for="publishDate">Publication Date <sup><a href='https://github.com/w3c/respec/wiki/publishDate'>(?)</a></sup></label>
+                        <label for="publishDate">Publication Date <sup><a href='#pdate'>(☨)</a></sup></label>
                         <input name="publishDate" id="publishDate" size="77" type="date">
-                        <label for="specStatus">Specification Status <sup><a href='https://github.com/w3c/respec/wiki/specStatus'>(?)</a></sup></label>
+                        <label for="specStatus">Specification Status <sup><a href='#status'>(§)</a></sup></label>
                         <select id="specStatus" name="specStatus" size="1">
                             <option selected="selected" value="null">As set</option>
                             <option value="base">base</option>
@@ -58,13 +58,13 @@
                             <option value="draft-finding">draft-finding</option>
                             <option value="finding">finding</option>
                         </select>
-                        <label for="addSectionLinks">Add Section Links <sup><a href='https://github.com/w3c/respec/wiki/addSectionLinks'>(?)</a></sup></label>
+                        <label for="addSectionLinks">Add Section Links <sup><a href='#seclink'>(♰)</a></sup></label>
                         <select id="addSectionLinks" name="addSectionLinks" size="1">
                             <option selected="selected" value="null">As set</option>
                             <option value="false">No</option>
                             <option value="true">Yes</option>
                         </select>
-                        <label for="maxTocLevel">Maximum Toc Level <sup><a href='https://github.com/w3c/respec/wiki/maxTocLevel'>(?)</a></sup></label>
+                        <label for="maxTocLevel">Maximum Toc Level <sup><a href='#toclevel'>(⨢)</a></sup></label>
                         <input name="maxTocLevel" id="maxTocLevel" size="10" type="number" min="0">
                     </div>
                 </fieldset>
@@ -87,28 +87,25 @@
                 </p>
 
                 <dl>
-                    <dt>“Document URL”</dt>
-                    <dd>The URL for the content. <em>This value is required</em>.</dd>
+                    <dt id='url'>“URL”</dt>
+                    <dd><sup>(*)</sup>The URL for the either the (HTML) content <em>or</em> for the <a href='./typedoc/modules/_clib_args_.html'>(JSON) configuration file</a> for a collection of documents. In the second case all other parameter values are ignored. <em>This value is required</em>.</dd>
 
-                    <dt id="respec">“Run ReSpec”</dt>
-                    <dd>Whether the source is in ReSpec (“true”) or a final HTML (“false”). If the former, the source is converted using an <a href='https://www.w3.org/2015/labs/'>online service</a> based on <a href="https://github.com/w3c/spec-generator">Spec Generator</a> into HTML first.</dd>
+                    <dt id='respec'>“Run ReSpec”</dt>
+                    <dd><sup>(**)</sup>Whether the source has to be pre-processed by ReSpec (“true”) or is a final HTML (“false”). If the former, the source is converted using <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator</a> into HTML first.</dd>
 
-                    <dt>“Publication Date”</dt>
-                    <dd>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dt id='pdate'>“Publication Date”</dt>
+                    <dd><sup>(☨)</sup>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
-                    <dt>“Specification Status”</dt>
-                    <dd>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dt id="status">“Specification Status”</dt>
+                    <dd><sup>(§)</sup>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
-                    <dt>“Add Section Links”</dt>
-                    <dd>Add section links with a <code>§</code> character. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dt id='seclink'>“Add Section Links”</dt>
+                    <dd><sup>(♰)</sup>Add section links with a <code>§</code> character. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
-                    <dt>“Maximum Toc Level”</dt>
-                    <dd>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dt id='toclevel'>“Maximum Toc Level”</dt>
+                    <dd><sup>(⨢)</sup>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
                 </dl>
-                <p>
-                    (Note: the service URL can be changed by changing the value of the <code>data-r2epubservice</code> attribute on the HTML Form element in the source.)
-                </p>
-            </section>
+             </section>
         </main>
         <footer class='copyright'>
             <p >This client runs the <a href='https://github.com/iherman/r2epub/'>r2epub</a> script; see the <a href='https://iherman.github.io/r2epub/'>documentation</a> for more details. Copyright © 2020 <a href='https://www.ivan-herman.net/'>Ivan Herman</a>. </p>
