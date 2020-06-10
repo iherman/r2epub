@@ -16,7 +16,7 @@
  * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
  *
  */
-const default_service :string = 'http://r2epub.herokuapp.com/';
+const default_service :string = 'https://r2epub.herokuapp.com/';
 
 const epub_content_type = 'application/epub+zip';
 
