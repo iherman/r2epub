@@ -27,6 +27,8 @@
  *
  * The JSON collection configuration file is checked against the JSON [schema](https://github.com/iherman/src/clib/r2epub.schema.json) in the [[get_book_configuration]] function.
  *
+ * See also some [example collection configurations files](https://iherman.github.io/r2epub/collections/).
+ *
  * @packageDocumentation
  */
 

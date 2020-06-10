@@ -46,7 +46,7 @@ export interface ChapterConfiguration extends Options {
 
 
 /**
- * Type definition for the collection data the user has to provide. It is, essentially, the Typescript equivalent of the JSON configuration file's [[schema]].
+ * Type definition for the collection data the user has to provide. It is, essentially, the Typescript equivalent of the JSON configuration file's [schema](https://github.com/iherman/src/clib/r2epub.schema.json).
  */
 export interface CollectionConfiguration {
     /** Title of the publication. */

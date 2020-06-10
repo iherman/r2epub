@@ -70,6 +70,8 @@
  * }
  * ```
  *
+ * See also some [example collection configurations files](https://iherman.github.io/r2epub/collections/).
+ *
  * @packageDocumentation
  */
 
@@ -105,6 +107,7 @@ async function cli() {
         m: { type: 'number',  alias: 'maxTocLevel',     default: null,  description: 'Max TOC level.', },
     })
     .version()
+    .usage('$0 [options] url', 'Convert either a single ReSpec based document, or a collections of documents, into EPUB 3.2. \nThe \'url\' parameter either points at the HTML document or the JSON collection configuration file.')
     .wrap(null)
     .argv;
 
