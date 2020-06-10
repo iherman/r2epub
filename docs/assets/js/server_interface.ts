@@ -16,7 +16,7 @@
  * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
  *
  */
-const default_service :string = 'https://r2epub.herokuapp.com/';
+const default_service :string = 'http://r2epub.herokuapp.com/';
 
 const epub_content_type = 'application/epub+zip';
 
@@ -38,7 +38,7 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
     let content_type :string;
     return new Promise((resolve, reject) => {
         try {
-            window.fetch(resource_url)
+            window.fetch(resource_url, {mode: 'cors'})
                 .then((response) => {
                     content_type = response.headers.get('Content-type');
                     if (response.ok) {
@@ -77,7 +77,7 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
  *
  * The method is set as an even handler for a submit button. The `event` argument is only used to prevent the default behavior of the button (i.e., to avoid reloading the page).
  *
- * By default, the service to be used is `https://r2epub.herokuapp.com/`, unless `data-r2epubservice` attribute is set to a different URL on the form element.
+ * By default, the service to be used is `http://r2epub.herokuapp.com/`, unless `data-r2epubservice` attribute is set to a different URL on the form element.
  *
  * @param event - Event object as forwarded to an HTML event handler.
  *
