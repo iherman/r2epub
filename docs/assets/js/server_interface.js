@@ -52,7 +52,7 @@ var _this = this;
  * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
  *
  */
-var default_service = 'http://r2epub.herokuapp.com/';
+var default_service = 'https://r2epub.herokuapp.com/';
 var epub_content_type = 'application/epub+zip';
 /**
  * Get the service to perform the conversion.
