@@ -226,6 +226,9 @@ export class PackageWrapper {
                         "@property" : "schema:accessMode",
                         '#': "textual"
                     },{
+                        "@property" : "schema:accessModeSufficient",
+                        '#': "textual"
+                    },{
                         "@property" : "schema:accessibilitySummary",
                         '#': "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only."
                     }],
