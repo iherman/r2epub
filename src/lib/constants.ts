@@ -48,6 +48,15 @@ export const text_content :string[] = [
     media_types.xhtml,
 ];
 
+/** Document types that are supposed to be WCAG A level due to the W3C publication check. */
+export const wcag_checked :string[] = [
+    'REC',
+    'WG-NOTE',
+    'IG-NOTE',
+    'NOTE',
+    'finding'
+]
+
 /**
  * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.
  * This is important for server deployment.
@@ -107,7 +116,7 @@ const expose_headers :string[] = [
 ]
 
 /**
- * CORS headers, to be added to the server response
+ * CORS headers to be added to the server response
  */
 export const CORS_headers = {
     'Access-Control-Allow-Origin'   : '*',
