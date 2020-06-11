@@ -74,6 +74,18 @@ class PackageWrapper {
                         }, {
                             "@property": "cc:attributionURL",
                             "#": "https://www.w3.org"
+                        }, {
+                            "@property": "schema:accessibilityFeature",
+                            '#': "tableOfContents"
+                        }, {
+                            "@property": "schema:accessibilityHazard",
+                            '#': "none"
+                        }, {
+                            "@property": "schema:accessMode",
+                            '#': "textual"
+                        }, {
+                            "@property": "schema:accessibilitySummary",
+                            '#': "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only."
                         }],
                     "dc:rights": "https://www.w3.org/Consortium/Legal/2015/doc-license",
                     "dc:publisher": "World Wide Web Consortium",
@@ -115,6 +127,16 @@ class PackageWrapper {
                 '@linear': 'no'
             });
         }
+    }
+    /**
+     * Add an A11y link to WCAG A, to specify that the document conforms to this level
+     *
+     */
+    add_wcag_link() {
+        this.thePackage.package.metadata["link"].push({
+            "@rel": 'dcterms:conformsTo',
+            '@href': 'http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a'
+        });
     }
     /**
      * Add a spine item, i.e., the reference to the resource in the manifest that is a constituent of the spite (i.e., reading order) of the book

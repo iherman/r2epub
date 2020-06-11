@@ -233,7 +233,10 @@ class RespecToEPUB {
         // ------------------------------------------
         // 10. Finalize the package file
         {
-            // Populate the global package with the resource item
+            // Add the WCAG conformance, if applicable
+            if (constants.wcag_checked.includes(this.global.config.specStatus))
+                this.global.opf_content.add_wcag_link();
+            // Populate the global package with the resource items
             let res_id_num = 1;
             this.global.resources.forEach((resource) => {
                 if (resource.relative_url) {

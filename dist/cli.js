@@ -111,7 +111,6 @@ async function cli() {
         m: { type: 'number', alias: 'maxTocLevel', default: null, description: 'Max TOC level.', },
     })
         .version()
-        .usage('$0 [options] url', 'Convert either a single ReSpec based document, or a collections of documents, into EPUB 3.2. \nThe \'url\' parameter either points at the HTML document or the JSON collection configuration file.')
         .wrap(null)
         .argv;
     const url = argv._.length === 0 ? 'http://localhost:8001/TR/vc-data-model/' : argv._[0];

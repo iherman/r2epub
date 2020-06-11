@@ -48,6 +48,7 @@ class Chapter {
         this._manifest = [];
         this._editors = [];
         this._non_linear_spine_items = [];
+        this._wcag_conforms = false;
         this._url = args.url;
         this._options = {
             respec: args.respec,
@@ -138,6 +139,16 @@ class Chapter {
             // The (artificial) time portion is removed to avoid being duplicated
             if (meta.hasAttribute('property') && meta.getAttribute('property') === 'dcterms:date') {
                 this._date = meta.textContent.split('T')[0];
+                break;
+            }
+        }
+        // ---------------------------------------------------------------------------------------
+        // See if the chapter is wcag conforms
+        const link_elements = package_dom.getElementsByTagName('link');
+        for (let i = 0; i < link_elements.length; i++) {
+            const rel = link_elements[i].getAttribute('rel');
+            if (rel === 'dcterms:conformsTo') {
+                this._wcag_conforms = true;
                 break;
             }
         }
@@ -275,6 +286,12 @@ class Chapter {
      */
     get first_chapter() {
         return this._first_chapter;
+    }
+    /**
+     * Conforms to WCAG Level A
+     */
+    get wcag_conforms() {
+        return this._wcag_conforms;
     }
 }
 exports.Chapter = Chapter;

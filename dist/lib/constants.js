@@ -37,6 +37,14 @@ exports.text_content = [
     exports.media_types.svg,
     exports.media_types.xhtml,
 ];
+/** Document types that are supposed to be WCAG A level due to the W3C publication check. */
+exports.wcag_checked = [
+    'REC',
+    'WG-NOTE',
+    'IG-NOTE',
+    'NOTE',
+    'finding'
+];
 /**
  * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.
  * This is important for server deployment.
@@ -86,7 +94,7 @@ const expose_headers = [
     'Content-Disposition'
 ];
 /**
- * CORS headers, to be added to the server response
+ * CORS headers to be added to the server response
  */
 exports.CORS_headers = {
     'Access-Control-Allow-Origin': '*',
