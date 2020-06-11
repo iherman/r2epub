@@ -8,6 +8,7 @@ _The client side version has been definitely ditched. It looks like `browserify`
 
 * The client side version (ie, code embedded in the browser) has been ditched.
 * There is now a separate functionality on “collections”, i.e., the possibility to bind several documents into one EPUB. This means one can generate an EPUB 3.2 document that comprises several W3C documents. E.g., one can create a JSON-LD 1.1 EPUB 3.2 that includes the JSON-LD 1.1 Syntax, JSON-LD 1.1 API, JSON-LD 1.1 Framing, and Streaming JSON-LD specifications.
+* The generated EPUB is now conforms with the EPUB A11y requirements: contains the A11y metadata. Note that it is set to be conform to WCAG Level A if all content is either a Rec or a WG/IG Note (i.e., the document is supposed to have been checked with the W3C pubrules' checker)
 
 ## Version 1.1.2
 

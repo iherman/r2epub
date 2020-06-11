@@ -21,7 +21,7 @@
  *
  */
 
-import { convert }     from "xmlbuilder2";
+import { convert }   from "xmlbuilder2";
 
 // These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.2 package. See that document for details.
 /**
@@ -216,6 +216,18 @@ export class PackageWrapper {
                     },{
                         "@property": "cc:attributionURL",
                         "#": "https://www.w3.org"
+                    },{
+                        "@property" : "schema:accessibilityFeature",
+                        '#': "tableOfContents"
+                    },{
+                        "@property" : "schema:accessibilityHazard",
+                        '#': "none"
+                    },{
+                        "@property" : "schema:accessMode",
+                        '#': "textual"
+                    },{
+                        "@property" : "schema:accessibilitySummary",
+                        '#': "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only."
                     }],
                     "dc:rights": "https://www.w3.org/Consortium/Legal/2015/doc-license",
                     "dc:publisher": "World Wide Web Consortium",
@@ -258,6 +270,17 @@ export class PackageWrapper {
                 '@linear' : 'no'
             })
         }
+    }
+
+    /**
+     * Add an A11y link to WCAG A, to specify that the document conforms to this level
+     *
+     */
+    add_wcag_link() :void {
+        this.thePackage.package.metadata["link"].push({
+            "@rel" : 'dcterms:conformsTo',
+            '@href' : 'http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a'
+        })
     }
 
     /**

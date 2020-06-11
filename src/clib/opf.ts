@@ -25,7 +25,8 @@ import { Chapter, OPFManifestItem } from './chapter';
  * 2. Collects the dates and editors from the book and adds that to the package;
  * 3. Collects the manifest item data for each package and adds it to the new package;
  * 4. Adds the manifest items and the linear spine items.
- * 4. Adds the non-linear spine items.
+ * 5. Adds the non-linear spine items.
+ * 6. Sets the wcag conformance if all chapters are conform
  *
  * Note that the internal structure of the final book, reflected in the modified manifest items, means putting each chapter into its own subdirectory, named after the chapter’s short name.
  *
@@ -93,6 +94,10 @@ export function create_opf(book :cConvert.Collection) :string {
             the_opf.add_spine_item(`${chapter.name}_${itemref}`, true);
         })
     })
+
+    // 6. the wcag conformance information must be gathered
+    const conformance :boolean = book.chapters.reduce((previous :boolean, current :Chapter) :boolean => previous && current.wcag_conforms, true);
+    if (conformance) the_opf.add_wcag_link();
 
     return the_opf.serialize();
 }
