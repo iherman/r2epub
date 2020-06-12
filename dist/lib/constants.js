@@ -5,6 +5,7 @@
  * @packageDocumentation
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CORS_headers = exports.local_style_files = exports.modified_epub_files = exports.TR_logo_files = exports.fixup_js = exports.spec_generator = exports.local_port_number = exports.invalid_host_names = exports.wcag_checked = exports.text_content = exports.media_types = exports.is_browser = void 0;
 /**
  * Flag to decide whether the code runs in a browser or in node.js
  */

@@ -7,6 +7,7 @@
  * @packageDocumentation
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.create_cover_page = void 0;
 /**
  * @hidden
  */
