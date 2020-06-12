@@ -33,6 +33,7 @@
     "homepage": "https://iherman.github.io/r2epub/",
     "dependencies": {
         "ajv": "^6.12.2",
+        "commander": "^5.1.0",
         "jsdom": "^16.2.2",
         "jszip": "^3.2.2",
         "minimist": "^1.2.5",
@@ -43,10 +44,10 @@
         "valid-url": "^1.0.9",
         "xmlbuilder2": "^1.4.3",
         "xmldom": "^0.3.0",
-        "xmlserializer": "^0.6.1",
-        "yargs": "^15.3.0"
+        "xmlserializer": "^0.6.1"
     },
     "devDependencies": {
+        "@types/commander": "^2.12.2",
         "@types/jsdom": "^16.2.1",
         "@types/jszip": "^3.1.7",
         "@types/node": "^13.7.7",
@@ -55,7 +56,6 @@
         "@types/valid-url": "^1.0.2",
         "@types/xmldom": "^0.1.29",
         "@types/xmlserializer": "^0.6.0",
-        "@types/yargs": "^15.0.4",
         "eslint": "^6.8.0",
         "eslint-config-airbnb-base": "^14.1.0",
         "eslint-plugin-import": "^2.20.1",

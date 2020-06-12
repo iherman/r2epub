@@ -82,16 +82,19 @@
 					<h3>Command line usage</h3>
 				</a>
 				<p>There is a simple <a href="https://iherman.github.io/r2epub/typedoc/modules/_cli_.html#cli">cli</a>, which works as follows:</p>
-				<pre><code class="language-sh">cli [options] URL
+				<pre><code class="language-sh">Usage: r2epub [options] [url]
 
-Options are:
-  --<span class="hljs-built_in">help</span>                 Show <span class="hljs-built_in">help</span>  [boolean]
-  -o, --output           The name of the output file [string]
-  -r, --respec           The <span class="hljs-built_in">source</span> is <span class="hljs-keyword">in</span> ReSpec [boolean] [default: <span class="hljs-literal">false</span>]
-  -d, --publishDate      Publication date  [string] [default: null]
-  -s, --specStatus       Specification <span class="hljs-built_in">type</span> [string] [default: null]
-  -l, --addSectionLinks  Add section links with <span class="hljs-string">"§"</span>  [string] [default: null]
-  -m, --maxTocLevel      Max TOC level [number] [default: null]</code></pre>
+Convert the file or collection configuration at [url] to EPUB 3.2
+
+Options:
+  -V, --version               output the version number
+  -o, --output &lt;fname&gt;        output file name. If missing, the short name of the document is used
+  -r, --respec                the <span class="hljs-built_in">source</span> must be pre-processed by ReSpec (default: <span class="hljs-literal">false</span>)
+  -s, --specStatus &lt;<span class="hljs-built_in">type</span>&gt;     specification <span class="hljs-built_in">type</span>
+  -d, --publishDate &lt;date&gt;    publication date
+  -l, --addSectionLinks       add section links with <span class="hljs-string">"§"</span>.
+  -m, --maxTocLevel &lt;number&gt;  maximum TOC level
+  -h, --<span class="hljs-built_in">help</span>                  display <span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">command</span></code></pre>
 				<p>The URL may refer to either a single HTML source, or a JSON file serving as a “collection configuration file”. See the <a href="https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html">collection configuration format</a> for the details.</p>
 				<p>For details on the <code>-d</code>, <code>-s</code>, <code>-l</code>, or <code>-m</code> flags, see the <a href="https://www.w3.org/respec/">ReSpec manual</a>. If any of those flags is set, <code>-r</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 				<p>In the absence of the <code>-o</code> flag the output will be <code>shortName.epub</code>, where the value of <code>shortName</code> is extracted from the <a href="https://github.com/w3c/respec/wiki/shortName">ReSpec configuration</a>.</p>
@@ -185,9 +188,6 @@ npm install</code></pre>
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_cli_.html">&quot;cli&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_clib_args_.html">&quot;clib/args&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -240,6 +240,9 @@ npm install</code></pre>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_r2epub_.html">&quot;r2epub&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_server_.html">&quot;server&quot;</a>

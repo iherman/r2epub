@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;cli&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
+	<title>&quot;r2epub&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_cli_.html">&quot;cli&quot;</a>
+					<a href="_r2epub_.html">&quot;r2epub&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;cli&quot;</h1>
+			<h1>External module &quot;r2epub&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -72,26 +72,33 @@
 						</a>
 					</div>
 					<p>The usage of the entry point is:</p>
-					<pre><code>Options:
- --help                 Show help  [<span class="hljs-built_in">boolean</span>]
- -r, --respec           The source is <span class="hljs-keyword">in</span> respec [<span class="hljs-built_in">boolean</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">false</span>]
- -d, --publishDate      Publication date [<span class="hljs-built_in">string</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]
- -s, --specStatus       Specification <span class="hljs-keyword">type</span> [<span class="hljs-built_in">string</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]
- -l, --addSectionLinks  Add section links <span class="hljs-keyword">with</span> <span class="hljs-string">"§"</span> [<span class="hljs-built_in">string</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]
- -m, --maxTocLevel      Max TOC level [<span class="hljs-built_in">number</span>] [<span class="hljs-keyword">default</span>: <span class="hljs-literal">null</span>]
- --version              Show version <span class="hljs-built_in">number</span>  [<span class="hljs-built_in">boolean</span>]</code></pre><p>For the <code>-d</code>, <code>-s</code>, <code>-l</code>, or <code>-m</code> flags, see the <a href="https://www.w3.org/respec/">ReSpec manual</a>. If any of those flags is set, <code>-r</code> is implied (i.e., it is not necessary to set it explicitly).</p>
+					<pre><code><span class="hljs-attribute">Usage</span>: r2epub [options] [url]
+
+<span class="vim">Convert the <span class="hljs-keyword">file</span> <span class="hljs-built_in">or</span> collection configuration at [url] <span class="hljs-keyword">to</span> EPUB <span class="hljs-number">3.2</span>
+
+Option<span class="hljs-variable">s:</span>
+-V, --<span class="hljs-keyword">version</span>               output the <span class="hljs-keyword">version</span> <span class="hljs-keyword">number</span>
+-<span class="hljs-keyword">o</span>, --output <span class="hljs-symbol">&lt;fname&gt;</span>        output <span class="hljs-keyword">file</span> name. If missing, the short name of the document <span class="hljs-keyword">is</span> used
+-r, --respec                the <span class="hljs-keyword">source</span> must <span class="hljs-keyword">be</span> <span class="hljs-keyword">pre</span>-processed by ReSpec (defaul<span class="hljs-variable">t:</span> false)
+-s, --specStatus <span class="hljs-symbol">&lt;type&gt;</span>     specification <span class="hljs-built_in">type</span>
+-d, --publishDate <span class="hljs-symbol">&lt;date&gt;</span>    publication date
+-<span class="hljs-keyword">l</span>, --addSectionLinks       <span class="hljs-built_in">add</span> section links with <span class="hljs-string">"§"</span>.
+-<span class="hljs-keyword">m</span>, --maxTocLevel <span class="hljs-symbol">&lt;number&gt;</span>  maximum TOC level
+-<span class="hljs-keyword">p</span>, --package               [<span class="hljs-keyword">debug</span> option] <span class="hljs-keyword">do</span> not generate <span class="hljs-keyword">an</span> EPUB <span class="hljs-keyword">file</span>, just <span class="hljs-keyword">print</span> the package <span class="hljs-keyword">file</span> content. (defaul<span class="hljs-variable">t:</span> false)
+-t, --trace                 [<span class="hljs-keyword">debug</span> option] <span class="hljs-keyword">print</span> built in trace information <span class="hljs-keyword">while</span> processing. (defaul<span class="hljs-variable">t:</span> false)
+-h, --<span class="hljs-keyword">help</span>                  <span class="hljs-keyword">display</span> <span class="hljs-keyword">help</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">command</span></span></code></pre><p>For the <code>-d</code>, <code>-s</code>, <code>-l</code>, or <code>-m</code> flags, see the <a href="https://www.w3.org/respec/">ReSpec manual</a>. If any of those flags is set, <code>-r</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 					<p>This function is a wrapper around <a href="_lib_xhtml_.html#convert">convert</a>.</p>
 					<a href="#usage-examples" id="usage-examples" style="color: inherit; text-decoration: none;">
 						<h3>Usage examples:</h3>
 					</a>
 					<p>Convert the HTML file (as generated by ReSpec) to an EPUB 3.2 file. The generated publication&#39;s name is <code>short-name.epub</code>, where <code>short-name</code> is set in the ReSpec configuration:</p>
-					<pre><code class="language-sh">node cli.js https://www.example.org/doc.html`</code></pre>
+					<pre><code class="language-sh">node r2epub.js https://www.example.org/doc.html`</code></pre>
 					<p>Convert the HTML <em>ReSpec source</em> to an EPUB 3.2 file. The source is converted on-the-fly by respec:</p>
-					<pre><code class="language-sh">node cli.js -r https://www.example.org/index.html`</code></pre>
+					<pre><code class="language-sh">node r2epub.js -r https://www.example.org/index.html`</code></pre>
 					<p>Convert the HTML <em>ReSpec source</em> to an EPUB 3.2 file, setting its spec status to REC. The source is converted on-the-fly by respec, overwriting the <code>specStatus</code> entry in the configuration to <code>REC</code>:</p>
-					<pre><code class="language-sh">node cli.js -r --specStatus REC https://www.example.org/index.html`</code></pre>
+					<pre><code class="language-sh">node r2epub.js -r --specStatus REC https://www.example.org/index.html`</code></pre>
 					<p>Convert the documents listed in the JSON configuration file to generate a collection of several documents:</p>
-					<pre><code class="language-sh">node cli.js https://www.example.org/collection.json`</code></pre>
+					<pre><code class="language-sh">node r2epub.js https://www.example.org/collection.json`</code></pre>
 					<p>where the collection may be something like:</p>
 					<pre><code class="language-json">{
   <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Specification for Underwater Basket Weaving"</span>,
@@ -122,12 +129,31 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_r2epub_.html#program" class="tsd-kind-icon">program</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_cli_.html#cli" class="tsd-kind-icon">cli</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_r2epub_.html#cli" class="tsd-kind-icon">cli</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="program" class="tsd-anchor"></a>
+					<h3>program</h3>
+					<div class="tsd-signature tsd-kind-icon">program<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in r2epub.ts:98</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
@@ -142,7 +168,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/95f42e9/src/cli.ts#L98">cli.ts:98</a></li>
+									<li>Defined in r2epub.ts:111</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -166,9 +192,6 @@
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="_cli_.html">&quot;cli&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_clib_args_.html">&quot;clib/args&quot;</a>
@@ -224,6 +247,9 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="_r2epub_.html">&quot;r2epub&quot;</a>
+					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_server_.html">&quot;server&quot;</a>
 					</li>
@@ -231,8 +257,11 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_r2epub_.html#program" class="tsd-kind-icon">program</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_cli_.html#cli" class="tsd-kind-icon">cli</a>
+						<a href="_r2epub_.html#cli" class="tsd-kind-icon">cli</a>
 					</li>
 				</ul>
 			</nav>
