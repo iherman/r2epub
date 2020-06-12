@@ -48,6 +48,34 @@ export const text_content :string[] = [
     media_types.xhtml,
 ];
 
+/** Valid Spec Status values */
+export const spec_status_values :string[] = [
+    'base',
+    'MO',
+    'unofficial',
+    'ED',
+    'FPWD',
+    'WD',
+    'LC',
+    'LD',
+    'LS',
+    'CR',
+    'PR',
+    'PER',
+    'REC',
+    'RSCND',
+    'FPWD-NOTE',
+    'NOTE',
+    'WG-NOTE',
+    'BG-DRAFT',
+    'BG-FINAL',
+    'CG-DRAFT',
+    'CG-FINAL',
+    'Member-SUBM',
+    'draft-finding',
+    'finding',
+];
+
 /** Document types that are supposed to be WCAG A level due to the W3C publication check. */
 export const wcag_checked :string[] = [
     'REC',
@@ -55,7 +83,7 @@ export const wcag_checked :string[] = [
     'IG-NOTE',
     'NOTE',
     'finding'
-]
+];
 
 /**
  * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.

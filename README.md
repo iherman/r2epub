@@ -17,17 +17,20 @@ The conversion can:
 There is a simple [cli](https://iherman.github.io/r2epub/typedoc/modules/_cli_.html#cli), which works as follows:
 
 ```sh
-cli [options] URL
+Usage: r2epub [options] [url]
 
-Options are:
-  --help                 Show help  [boolean]
-  -o, --output           The name of the output file [string]
-  -r, --respec           The source is in ReSpec [boolean] [default: false]
-  -d, --publishDate      Publication date  [string] [default: null]
-  -s, --specStatus       Specification type [string] [default: null]
-  -l, --addSectionLinks  Add section links with "§"  [string] [default: null]
-  -m, --maxTocLevel      Max TOC level [number] [default: null]
-```
+Convert the file or collection configuration at [url] to EPUB 3.2
+
+Options:
+  -V, --version               output the version number
+  -o, --output <fname>        output file name. If missing, the short name of the document is used
+  -r, --respec                the source must be pre-processed by ReSpec (default: false)
+  -s, --specStatus <type>     specification type
+  -d, --publishDate <date>    publication date
+  -l, --addSectionLinks       add section links with "§".
+  -m, --maxTocLevel <number>  maximum TOC level
+  -h, --help                  display help for command
+  ```
 
 The URL may refer to either a single HTML source, or a JSON file serving as a “collection configuration file”. See the [collection configuration format](https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html) for the details.
 
