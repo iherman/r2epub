@@ -62,6 +62,6 @@
         "terser": "^4.6.11",
         "typedoc": "^0.16.11",
         "typedoc-plugin-nojekyll": "^1.0.1",
-        "typescript": "^3.8.3"
+        "typescript": "^3.9.5"
     }
 }
