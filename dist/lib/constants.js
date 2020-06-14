@@ -5,7 +5,7 @@
  * @packageDocumentation
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CORS_headers = exports.local_style_files = exports.modified_epub_files = exports.TR_logo_files = exports.fixup_js = exports.spec_generator = exports.local_port_number = exports.invalid_host_names = exports.wcag_checked = exports.spec_status_values = exports.text_content = exports.media_types = exports.is_browser = void 0;
+exports.CORS_headers = exports.local_style_files = exports.modified_epub_files = exports.TR_logo_files = exports.fixup_js = exports.spec_generator = exports.local_port_number = exports.acceptable_url_endings = exports.invalid_host_names = exports.wcag_checked = exports.spec_status_values = exports.text_content = exports.media_types = exports.is_browser = void 0;
 /**
  * Flag to decide whether the code runs in a browser or in node.js
  */
@@ -81,6 +81,15 @@ exports.invalid_host_names = [
     '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
     '172.16.1.2', '172.31.4.5', '192.168.0.1', '192.168.254.5',
     'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
+];
+/**
+ * Acceptable endings for document URL-s. We try to avoid cases when the relative URL calculations go wrong
+ */
+exports.acceptable_url_endings = [
+    '/',
+    '.html',
+    '.xhtml',
+    '.json'
 ];
 /** Default port number for the server locally.
  * Set to the default HTTP port number; the environment variable `PORT` may,

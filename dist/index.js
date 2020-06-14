@@ -39,6 +39,7 @@ const rConvert = __importStar(require("./lib/convert"));
 const cConvert = __importStar(require("./clib/convert"));
 const fetch = __importStar(require("./lib/fetch"));
 const _ = __importStar(require("underscore"));
+const urlHandler = __importStar(require("url"));
 /**
  * Convenience class, to export the internal [RespecToEPUB](_lib_convert_.respectoepub.html) class for the package as a whole.
  * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)
@@ -82,16 +83,28 @@ async function convert(url, options = {}, t = false, p = false) {
     };
     // At the minimum, the URL part of the Arguments should exist, better check this
     if (url) {
-        // If the URL refers to a JSON file, it is the configuration file for a full collection.
-        let the_ocf;
-        const media_type = await fetch.fetch_type(url);
-        if (media_type === constants.media_types.json) {
-            the_ocf = await cConvert.create_epub(url, t, p);
+        // Basic sanity check on the URL; secure that it is proper for relative URL-s
+        const url_path = urlHandler.parse(url).path;
+        const proper_ending = constants.acceptable_url_endings.map((ending) => url_path.endsWith(ending)).includes(true);
+        if (proper_ending) {
+            let the_ocf;
+            const media_type = await fetch.fetch_type(url);
+            if (media_type === constants.media_types.json) {
+                // If the URL refers to a JSON file, it is the configuration file for a full collection.
+                the_ocf = await cConvert.create_epub(url, t, p);
+            }
+            else if (media_type === constants.media_types.html || media_type === constants.media_types.xhtml) {
+                // Just a sanity check that the return type is indeed HTML
+                the_ocf = await (new rConvert.RespecToEPUB(t, p)).create_epub(url, fill_default_options(options));
+            }
+            else {
+                throw "The URL should refer to an (X)HTML or a JSON content";
+            }
+            return the_ocf;
         }
         else {
-            the_ocf = await (new rConvert.RespecToEPUB(t, p)).create_epub(url, fill_default_options(options));
+            throw "The URL must end with '.(x)html', '.json', or the '/' character";
         }
-        return the_ocf;
     }
     else {
         throw "No URL has been provided for the conversion";
