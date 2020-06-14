@@ -19,6 +19,7 @@ import * as rConvert   from './lib/convert';
 import * as cConvert   from './clib/convert';
 import * as fetch      from './lib/fetch';
 import * as _          from 'underscore';
+import * as urlHandler from 'url';
 
 
 /**
@@ -90,15 +91,25 @@ export async function convert(url: string, options: Options = {}, t :boolean = f
 
     // At the minimum, the URL part of the Arguments should exist, better check this
     if (url) {
-        // If the URL refers to a JSON file, it is the configuration file for a full collection.
-        let the_ocf :ocf.OCF;
-        const media_type :string = await fetch.fetch_type(url);
-        if (media_type === constants.media_types.json) {
-            the_ocf = await cConvert.create_epub(url, t, p);
+        // Basic sanity check on the URL; secure that it is proper for relative URL-s
+        const url_path = urlHandler.parse(url).path;
+        const proper_ending :boolean = constants.acceptable_url_endings.map((ending :string) :boolean => url_path.endsWith(ending)).includes(true);
+        if (proper_ending) {
+            let the_ocf :ocf.OCF;
+            const media_type :string = await fetch.fetch_type(url);
+            if (media_type === constants.media_types.json) {
+                // If the URL refers to a JSON file, it is the configuration file for a full collection.
+                the_ocf = await cConvert.create_epub(url, t, p);
+            } else if (media_type === constants.media_types.html || media_type === constants.media_types.xhtml) {
+                // Just a sanity check that the return type is indeed HTML
+                the_ocf = await (new rConvert.RespecToEPUB(t, p)).create_epub(url, fill_default_options(options));
+            } else {
+                throw "The URL should refer to an (X)HTML or a JSON content"
+            }
+            return the_ocf;
         } else {
-            the_ocf = await (new rConvert.RespecToEPUB(t, p)).create_epub(url, fill_default_options(options));
+            throw "The URL must end with '.(x)html', '.json', or the '/' character";
         }
-        return the_ocf;
     } else {
         throw "No URL has been provided for the conversion";
     }

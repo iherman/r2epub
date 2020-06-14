@@ -95,6 +95,17 @@ export const invalid_host_names :string[] = [
     'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
 ]
 
+/**
+ * Acceptable endings for document URL-s. We try to avoid cases when the relative URL calculations go wrong
+ */
+export const acceptable_url_endings :string[] = [
+    '/',
+    '.html',
+    '.xhtml',
+    '.json'
+]
+
+
 /** Default port number for the server locally.
  * Set to the default HTTP port number; the environment variable `PORT` may,
  * however, overwrite this for a server.
