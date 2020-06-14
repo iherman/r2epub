@@ -12,6 +12,7 @@
         "docs": "typedoc src/",
         "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts); typedoc src/",
         "heroku": "git push heroku master",
+        "origin": "git push origin master",
         "push": "git push origin master; git push heroku master",
         "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js",
