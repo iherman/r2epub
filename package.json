@@ -8,13 +8,14 @@
     "main": "dist/index.js",
     "types": "src/index.ts",
     "scripts": {
-        "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts); typedoc src/",
         "build": "tsc",
         "docs": "typedoc src/",
+        "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts); typedoc src/",
         "heroku": "git push heroku master",
-        "cli": "node dist/cli.js",
+        "push": "git push origin master; git push heroku master",
+        "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js",
-        "cli_test": "ts-node src/cli.ts http://localhost:8001/LocalData/github/Tools/r2epub/tests/config_err.json"
+        "cli_test": "ts-node src/cli.ts http://iherman.github.io/r2epub/collections/config_err.json"
     },
     "browser": "dist/browser.js",
     "repository": {
