@@ -1,18 +1,18 @@
 {
     "title": "JSON-LD 1.1 — A JSON-based Serialization for Linked Data",
-    "name": "jsonld1.1",
+    "name": "jsonld",
     "chapters": [
         {
-            "url": "https://www.w3.org/TR/json-ld11/"
+            "url": "https://www.w3.org/TR/2020/REC-json-ld11-20200716/"
         },
         {
-            "url": "https://www.w3.org/TR/json-ld11-api/"
+            "url": "https://www.w3.org/TR/2020/REC-json-ld11-api-20200716/"
         },
         {
-            "url": "https://www.w3.org/TR/json-ld11-framing/"
+            "url": "https://www.w3.org/TR/2020/REC-json-ld11-framing-20200716/"
         },
         {
-            "url": "https://www.w3.org/TR/json-ld11-streaming/"
+            "url": "https://www.w3.org/TR/2020/NOTE-json-ld11-streaming-20200507/"
         }
     ]
 }
