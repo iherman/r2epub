@@ -114,7 +114,9 @@ function create_cover_page(global) {
             absolute_url: 'https://www.w3.org/StyleSheets/base.css'
         }
     ];
-    const get_editors = () => global.config.editors.map((entry) => `${entry.name}, ${entry.company}`).join('; ');
+    const get_editors = () => global.config.editors
+        .map((entry) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`)
+        .join('; ');
     const title = global.html_element.querySelector('title').textContent;
     const date = global.html_element.querySelector('time.dt-published');
     const final_cover = cover

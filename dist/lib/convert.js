@@ -190,7 +190,7 @@ class RespecToEPUB {
             const title = this.global.html_element.querySelector('title').textContent;
             this.global_url = `https://www.w3.org/TR/${this.global.config.shortName}/`;
             this.global.opf_content = new opf.PackageWrapper(this.global_url, title);
-            this.global.opf_content.add_creators(this.global.config.editors.map((entry) => `${entry.name}, ${entry.company}`));
+            this.global.opf_content.add_creators(this.global.config.editors.map((entry) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`));
             const date = this.global.html_element.querySelector('time.dt-published');
             this.global.opf_content.add_dates(date.getAttribute('datetime'));
             if (this.global.trace)

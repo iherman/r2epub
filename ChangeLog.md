@@ -1,5 +1,11 @@
 # Changes
 
+## Version 1.2.1
+
+### Detailed (important) changes
+
+* Bug fix: if the editor does not provide an affiliation, `undefined` was put into the result. It ignores this field now.
+
 ## Version 1.2.0
 
 _The client side version has been definitely ditched. It looks like `browserify` with typescript is overly erratic, and sometimes does not link entries that out to be linked and there is no visible reason why..._
