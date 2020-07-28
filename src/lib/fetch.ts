@@ -17,6 +17,7 @@ import * as urlHandler from 'url';
 import * as validUrl   from 'valid-url';
 import * as jsdom      from 'jsdom';
 import * as constants  from './constants';
+import * as fs         from 'fs';
 
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
@@ -98,58 +99,74 @@ const my_fetch: ((arg :string) => Promise<any>) = constants.is_browser ? fetch :
 /**
  * Fetch a resource.
  *
+ * Usually this function fetches the resource on the Web.
+ *
+ * There is one exception: some W3C files (e.g., SVG logos) have been modified for EPUB use. These files are also available on the Web (see [[constants.modified_epub_files]]) but
+ * if the local environment variable `R2EPUB_MODIFIED_EPUB_FILES` is set, the files will be picked up from that directory via direct, local file system access. This may speed up and, mainly,
+ * avoid some fetch errors that unfortunately occur.
+ *
  * @param resource_url
  * @param force_text - whether the resource should be returned as text in case no content type is set by the server
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
 export async function fetch_resource(resource_url :string, force_text :boolean = false) :Promise<any> {
-    // If there is a problem, an exception is raised
-    return new Promise((resolve, reject) => {
-        try {
-            // This is a real URL, whose content must be accessed via HTTP(S)
-            // An exception is raised if the URL has security/sanity issues.
-            const final_url = check_Web_url(resource_url);
-            my_fetch(final_url)
-                .then((response) => {
-                    if (response.ok) {
-                        // If the response content type is set (which is usually the case, but not in all cases...)
-                        const response_type = response.headers.get('content-type').split(';')[0].trim();
-                        if (response_type && response_type !== '') {
-                            if  (constants.text_content.includes(response_type)) {
-                                // the simple way, just return text...
-                                resolve(response.text())
-                            } else {
-                                if (force_text){
+    if (constants.is_browser === false && process.env.R2EPUB_MODIFIED_EPUB_FILES && resource_url.startsWith(constants.modified_epub_files)) {
+        const filename = resource_url.replace(constants.modified_epub_files, process.env.R2EPUB_MODIFIED_EPUB_FILES);
+        if (filename.endsWith('.png') && force_text === false) {
+            // This is an image; it must be returned as a buffer
+            return fs.promises.readFile(filename);
+        } else {
+            return fs.promises.readFile(filename, 'utf-8');
+        }
+    } else {
+        // If there is a problem, an exception is raised
+        return new Promise((resolve, reject) => {
+            try {
+                // This is a real URL, whose content must be accessed via HTTP(S)
+                // An exception is raised if the URL has security/sanity issues.
+                const final_url = check_Web_url(resource_url);
+                my_fetch(final_url)
+                    .then((response) => {
+                        if (response.ok) {
+                            // If the response content type is set (which is usually the case, but not in all cases...)
+                            const response_type = response.headers.get('content-type').split(';')[0].trim();
+                            if (response_type && response_type !== '') {
+                                if  (constants.text_content.includes(response_type)) {
+                                    // the simple way, just return text...
                                     resolve(response.text())
                                 } else {
-                                    // return the body without processing, ie, as a blob or a stream
-                                    if (constants.is_browser) {
-                                        // In a browser, a blob should be returned
-                                        resolve(response.blob())
-                                     } else {
-                                         // In node.js the body is returned as a stream
-                                        resolve(response.body)
-                                   }
+                                    if (force_text){
+                                        resolve(response.text())
+                                    } else {
+                                        // return the body without processing, ie, as a blob or a stream
+                                        if (constants.is_browser) {
+                                            // In a browser, a blob should be returned
+                                            resolve(response.blob())
+                                        } else {
+                                            // In node.js the body is returned as a stream
+                                            resolve(response.body)
+                                        }
+                                    }
                                 }
+                            } else {
+                                console.log("return text by default")
+                                // No type information on return, let us hope this is something proper
+                                // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
+                                resolve(response.text());
                             }
                         } else {
-                            console.log("return text by default")
-                            // No type information on return, let us hope this is something proper
-                            // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
-                            resolve(response.text());
+                            reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
                         }
-                    } else {
-                        reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
-                    }
-                })
-                .catch((err) => {
-                    reject(new Error(`Problem accessing ${final_url}: ${err}`));
-                });
-        } catch (err) {
-            reject(err);
-        }
-    });
+                    })
+                    .catch((err) => {
+                        reject(new Error(`Problem accessing ${final_url}: ${err}`));
+                    });
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
 }
 
 

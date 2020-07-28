@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <svg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' version='1.1' overflow='visible' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 25 380' enable-background='new 0 0 25 380'>
   <g shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality'>
-    <g id='Background'>
+
+    <g id='Background' class='watermark'>
     </g>
     <g id='Guides'>
     </g>

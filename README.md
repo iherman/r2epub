@@ -161,7 +161,9 @@ starts the command line interface.
 node dist/server.js
 ```
 
-starts up the server locally. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that the default (i.e., 80) is used. By default, no URL-s on `localhost` are accepted, unless the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is) for the server process (this is useful for local, testing purposes).
+starts up the server locally.
+
+The port number used by the server can be determined by setting the `R2EPUB_PORT` environmental variable; failing that the default (i.e., 80) is used. By default, no URL-s on `localhost` are accepted, unless the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is) for the server process (this is useful for local, testing purposes). For security reasons this variable should not be set for deployed servers.
 
 ---
 
