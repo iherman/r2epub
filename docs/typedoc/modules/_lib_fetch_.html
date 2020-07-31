@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/fetch&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
+	<title>&quot;lib/fetch&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.1</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</a>
+					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -105,7 +105,7 @@
 					<div class="tsd-signature tsd-kind-icon">my_<wbr>fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = constants.is_browser ? fetch : node_fetch.default</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/38ce8a7/src/lib/fetch.ts#L95">lib/fetch.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/d32db40/src/lib/fetch.ts#L96">lib/fetch.ts:96</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -153,7 +153,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/38ce8a7/src/lib/fetch.ts#L40">lib/fetch.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/d32db40/src/lib/fetch.ts#L41">lib/fetch.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/38ce8a7/src/lib/fetch.ts#L198">lib/fetch.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/d32db40/src/lib/fetch.ts#L217">lib/fetch.ts:217</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -237,7 +237,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/38ce8a7/src/lib/fetch.ts#L216">lib/fetch.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/d32db40/src/lib/fetch.ts#L235">lib/fetch.ts:235</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -275,13 +275,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/38ce8a7/src/lib/fetch.ts#L106">lib/fetch.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/d32db40/src/lib/fetch.ts#L115">lib/fetch.ts:115</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Fetch a resource.</p>
 								</div>
+								<p>&quot;Fetch&quot; means fetching the resource on the Web. There is one exception, though: some W3C files (e.g., SVG logos) have been modified for EPUB use.
+									These files are also available on the Web (see <a href="https://iherman.github.io/r2epub/typedoc/modules/_lib_constants_.html#modified_epub_files"><code>modified_epub_files</code></a>) but if the local environment variable <code>R2EPUB_MODIFIED_EPUB_FILES</code> is set,
+									then the value is considered to be the name of a local directory, and the files are picked up from that directory via direct, local file system access.
+								This may speed up and, mainly, avoid some fetch errors that unfortunately occur.</p>
+								<p>(I am not sure why those errors occur, mainly when collections are created. I <em>suspect</em> this may be related to an almost simultaneous access to the same files more or less
+								in parallel via an async call to a Promise array, and the servers may not be properly set up for that.)</p>
 								<dl class="tsd-comment-tags">
 									<dt>async</dt>
 									<dd></dd>
@@ -316,7 +322,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/38ce8a7/src/lib/fetch.ts#L163">lib/fetch.ts:163</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/d32db40/src/lib/fetch.ts#L182">lib/fetch.ts:182</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

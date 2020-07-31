@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</title>
+	<title>r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.1</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</a>
+					<a href="index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.0</h1>
+			<h1>r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.1</h1>
 		</div>
 	</div>
 </header>
@@ -98,7 +98,6 @@ Options:
 				<p>The URL may refer to either a single HTML source, or a JSON file serving as a “collection configuration file”. See the <a href="https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html">collection configuration format</a> for the details.</p>
 				<p>For details on the <code>-d</code>, <code>-s</code>, <code>-l</code>, or <code>-m</code> flags, see the <a href="https://www.w3.org/respec/">ReSpec manual</a>. If any of those flags is set, <code>-r</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 				<p>In the absence of the <code>-o</code> flag the output will be <code>shortName.epub</code>, where the value of <code>shortName</code> is extracted from the <a href="https://github.com/w3c/respec/wiki/shortName">ReSpec configuration</a>.</p>
-				<p>By default, no URL-s on <code>localhost</code> are considered as safe and are therefore rejected, <em>unless</em> the environment variable <code>R2EPUB_LOCAL</code> is explicitly set (the value of the variable is not relevant, only the setting is).</p>
 				<a href="#run-a-service-via-http" id="run-a-service-via-http" style="color: inherit; text-decoration: none;">
 					<h3>Run a service via HTTP</h3>
 				</a>
@@ -163,6 +162,18 @@ npm install</code></pre>
 				<p>command takes care of that. The documentation can also be generated locally through the</p>
 				<pre><code class="language-sh">npm run docs</code></pre>
 				<p>command.</p>
+				<a href="#environment-variables" id="environment-variables" style="color: inherit; text-decoration: none;">
+					<h4>Environment variables</h4>
+				</a>
+				<ul>
+					<li><p><strong><code>PORT</code> or <code>R2EPUB_PORT</code>:</strong> the port number used by the server; failing these the default (i.e., 80) is used. (<code>PORT</code> takes precedence over <code>R2EPUB_PORT</code>.)</p>
+					</li>
+					<li><p><strong><code>R2EPUB_LOCAL</code>:</strong> By default, no URL-s on <code>localhost</code> are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.</p>
+					</li>
+					<li><p><strong><code>R2EPUB_MODIFIED_EPUB_FILES</code>:</strong> A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, <code>https://www.ivan-herman.net/r2epub/</code> is used as a base URL for those files (but can also be set explicitly in a <a href="https://iherman.github.io/r2epub/typedoc/modules/_lib_constants_.html">separate module</a> at installation). However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (Typically, the value points at <code>docs/epub_assets/</code> in the local clone of the distribution.)</p>
+						<p>  (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this type of setup.)</p>
+					</li>
+				</ul>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h3>Usage</h3>
 				</a>
@@ -172,11 +183,12 @@ npm install</code></pre>
 				</a>
 				<pre><code class="language-sh">node dist/cli.js</code></pre>
 				<p>starts the command line interface.</p>
+				<p>By default, no URL-s on <code>localhost</code> are considered as safe and are therefore rejected, <em>unless</em> the environment variable <code>R2EPUB_LOCAL</code> is explicitly set (the value of the variable is not relevant, only the setting is).</p>
 				<a href="#server" id="server" style="color: inherit; text-decoration: none;">
 					<h4>Server</h4>
 				</a>
 				<pre><code class="language-sh">node dist/server.js</code></pre>
-				<p>starts up the server locally. The port number used by the server can be determined by setting the <code>PORT</code> environmental variable; failing that the default (i.e., 80) is used. By default, no URL-s on <code>localhost</code> are accepted, unless the environment variable <code>R2EPUB_LOCAL</code> is explicitly set (the value of the variable is not relevant, only the setting is) for the server process (this is useful for local, testing purposes).</p>
+				<p>starts up the server locally.</p>
 				<hr>
 				<p>Copyright © 2020 <a href="https://www.ivan-herman.net">Ivan Herman</a> (a.k.a. <a href="https://github.com/iherman">@iherman</a>).</p>
 			</div>
