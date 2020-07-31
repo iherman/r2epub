@@ -109,11 +109,13 @@ const my_fetch = constants.is_browser ? fetch : node_fetch.default;
 /**
  * Fetch a resource.
  *
- * Usually this function fetches the resource on the Web.
+ * "Fetch" means fetching the resource on the Web. There is one exception, though: some W3C files (e.g., SVG logos) have been modified for EPUB use.
+ * These files are also available on the Web (see [[constants.modified_epub_files]]) but if the local environment variable `R2EPUB_MODIFIED_EPUB_FILES` is set,
+ * then the value is considered to be the name of a local directory, and the files are picked up from that directory via direct, local file system access.
+ * This may speed up and, mainly, avoid some fetch errors that unfortunately occur.
  *
- * There is one exception: some W3C files (e.g., SVG logos) have been modified for EPUB use. These files are also available on the Web (see [[constants.modified_epub_files]]) but
- * if the local environment variable `R2EPUB_MODIFIED_EPUB_FILES` is set, the files will be picked up from that directory via direct, local file system access. This may speed up and, mainly,
- * avoid some fetch errors that unfortunately occur.
+ * (I am not sure why those errors occur, mainly when collections are created. I _suspect_ this may be related to an almost simultaneous access to the same files more or less
+ * in parallel via an async call to a Promise array, and the servers may not be properly set up for that.)
  *
  * @param resource_url
  * @param force_text - whether the resource should be returned as text in case no content type is set by the server
