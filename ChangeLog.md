@@ -1,5 +1,11 @@
 # Changes
 
+## Version 1.2.2
+
+### Detailed (important) changes
+
+* The extra W3C files (logos, typically) can also be picked up from the local file system.
+
 ## Version 1.2.1
 
 ### Detailed (important) changes
