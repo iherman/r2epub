@@ -125,7 +125,7 @@ async function get_epub(query :Query) : Promise<Content> {
  * @async
  */
 async function serve() {
-    const port :string = process.env.PORT || constants.local_port_number;
+    const port :string = process.env.PORT || process.env.R2EPUB_PORT || constants.local_port_number;
     console.log(`r2epub server starting on port ${port}`);
     http.createServer(async (request :http.IncomingMessage, response :http.ServerResponse) => {
         const error = (code :number, e :string) => {

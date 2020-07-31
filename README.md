@@ -38,8 +38,6 @@ For details on the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](http
 
 In the absence of the `-o` flag the output will be `shortName.epub`, where the value of `shortName` is extracted from the [ReSpec configuration](https://github.com/w3c/respec/wiki/shortName).
 
-By default, no URL-s on `localhost` are considered as safe and are therefore rejected, _unless_ the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is).
-
 ### Run a service via HTTP
 
 There is a simple server implemented in the [serve](https://iherman.github.io/r2epub/typedoc/modules/_server_.html) module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on for URL-s of the sort:
@@ -143,6 +141,15 @@ npm run docs
 
 command.
 
+#### Environment variables
+
+* **`PORT` or `R2EPUB_PORT`:** the port number used by the server; failing these the default (i.e., 80) is used. (`PORT` takes precedence over `R2EPUB_PORT`.)
+* **`R2EPUB_LOCAL`:** By default, no URL-s on `localhost` are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.
+* **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.ivan-herman.net/r2epub/` is used as a base URL for those files (but can also be set explicitly in a [separate module](https://iherman.github.io/r2epub/typedoc/modules/_lib_constants_.html) at installation). However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (Typically, the value points at `docs/epub_assets/` in the local clone of the distribution.)
+
+    (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this type of setup.)
+
+
 ### Usage
 
 Once installed locally, follow specific instructions based on your needs/interest below:
@@ -155,13 +162,15 @@ node dist/cli.js
 
 starts the command line interface.
 
+By default, no URL-s on `localhost` are considered as safe and are therefore rejected, _unless_ the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is).
+
 #### Server
 
 ``` sh
 node dist/server.js
 ```
 
-starts up the server locally. The port number used by the server can be determined by setting the `PORT` environmental variable; failing that the default (i.e., 80) is used. By default, no URL-s on `localhost` are accepted, unless the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is) for the server process (this is useful for local, testing purposes).
+starts up the server locally.
 
 ---
 
