@@ -208,7 +208,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 _a.label = 6;
             case 6:
                 // Remove the query string from the URL bar
-                document.location.search = '';
+                // document.location.search = '';
                 // Clean up the user interface and we are done!
                 progress.style.setProperty('visibility', 'hidden');
                 if (returned.content_type === epub_content_type)
