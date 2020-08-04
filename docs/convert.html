@@ -11,8 +11,8 @@
             <h1>r2epub — Convert HTML/ReSpec into EPUB 3.2</h1>
         </header>
         <main>
-            <p>This form transforms the document into EPUB 3.2 through a call to a conversion server on <a href="https://www.herokuapp.com/">Heroku</a> at the “<code>https://r2epub.herokuapp.com</code>” URI.</p>
-            <form id="main_form" data-r2epubservice='https://r2epub.herokuapp.com'>
+            <p>This form transforms the document into EPUB 3.2 through a call to a conversion server.</p>
+            <form id="main_form">
                     <p style="visibility: hidden" id='done'>EPUB file generated!!</p>
                 <fieldset id="main_arguments">
                     <legend>Main arguments:</legend>
@@ -77,7 +77,20 @@
                 </fieldset>
                 <progress id='progress' style='width: 100%; visibility: hidden'>bar</progress>
             </form>
-            <!-- This is a hidden element used by the file saving procedure. It must stay hidden. -->
+            <fieldset id="service">
+                <legend>Choose conversion server:</legend>
+                <div class='fieldset_grid'>
+                    <label for="serverChoice">Server URL<sup><a href='#serverinfo'>(⨯)</a></sup></label>
+                    <select name="serverChoice" id="serverChoice" size="1">
+                        <option value="https://labs.w3.org/r2epub/" selected="selected">https://labs.w3.org/r2epub</option>
+                        <option value="https://r2epub.herokuapp.com">https://r2epub.herokuapp.com</option>
+                        <option value="http://localhost">http://localhost</option>
+                    </select>
+                    <label for="portNumber">Port (for localhost)</label>
+                    <input name="portNumber" id="portNumber" type="number" value="80">
+                </div>
+            </fieldset>
+        <!-- This is a hidden element used by the file saving procedure. It must stay hidden. -->
             <a style='display:none' id='download'>This is a dummy entry for saving the result</a>
             <section>
                 <h2>What is it?</h2>
@@ -105,6 +118,10 @@
 
                     <dt id='toclevel'>“Maximum Toc Level”</dt>
                     <dd><sup>(⨢)</sup>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+
+                    <dt id='serverinfo'>Server URL</dt>
+                    <dd><sup>(⨯)</sup>The server has been installed at different places; it can also be run locally by installing the package. See the <a href='https://iherman.github.io/r2epub/'>documentation</a> for more details.</dd>
+
                 </dl>
              </section>
         </main>

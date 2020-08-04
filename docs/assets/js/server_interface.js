@@ -54,6 +54,31 @@ var _this = this;
  */
 var default_service = 'https://r2epub.herokuapp.com/';
 var epub_content_type = 'application/epub+zip';
+var storage_key = 'r2epub';
+/**
+ * Get the locally stored storage data and init the form accordingly
+ */
+function retrieve_server_data() {
+    var stored_server_data = localStorage.getItem(storage_key);
+    if (stored_server_data) {
+        var server_data = JSON.parse(stored_server_data);
+        var server = document.getElementById('serverChoice');
+        var port = document.getElementById('portNumber');
+        server.value = server_data.url;
+        port.value = server_data.port;
+    }
+}
+/**
+ *
+ * @param resource_url
+ */
+function store_server_data(url, port) {
+    var server_data = {
+        url: url,
+        port: port
+    };
+    localStorage.setItem(storage_key, JSON.stringify(server_data));
+}
 /**
  * Get the service to perform the conversion.
  *
@@ -115,7 +140,7 @@ function fetch_book(resource_url) {
  * @async
  */
 var submit = function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var save_book, fading_success, done, progress, form, url, respec, publishDate, specStatus, addSectionLinks, maxTocLevel, service, query, service_url, returned, message, e_1, e_2;
+    var save_book, fading_success, done, progress, url, respec, publishDate, specStatus, addSectionLinks, maxTocLevel, server, port, service, query, service_url, returned, message, e_1, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -137,15 +162,16 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 11, , 12]);
-                form = document.getElementById('main_form');
                 url = document.getElementById('url');
                 respec = document.getElementById('respec');
                 publishDate = document.getElementById('publishDate');
                 specStatus = document.getElementById('specStatus');
                 addSectionLinks = document.getElementById('addSectionLinks');
                 maxTocLevel = document.getElementById('maxTocLevel');
-                service = form.dataset.r2epubservice || default_service;
+                server = document.getElementById('serverChoice');
+                port = document.getElementById('portNumber');
                 if (!!(url.value === null || url.value === '')) return [3 /*break*/, 9];
+                service = (server.value.startsWith('http://localhost')) ? server.value + ":" + port.value : server.value;
                 query = [
                     "url=" + url.value,
                     "respec=" + (respec.value === 'true')
@@ -162,6 +188,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 if (maxTocLevel.value !== '') {
                     query.push("maxTocLevel=" + maxTocLevel.value);
                 }
+                store_server_data(server.value, port.value);
                 service_url = service + "?" + query.join('&');
                 _a.label = 2;
             case 2:
@@ -206,6 +233,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
     });
 }); };
 window.addEventListener('load', function () {
+    retrieve_server_data();
     var submit_button = document.getElementById('submit');
     submit_button.addEventListener('click', submit);
 });

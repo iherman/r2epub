@@ -26,6 +26,41 @@ interface ReturnedData {
     content      :Blob
 }
 
+interface ServerData {
+    url  :string;
+    port :string;
+}
+
+const storage_key :string = 'r2epub';
+
+/**
+ * Get the locally stored storage data and init the form accordingly
+ */
+function retrieve_server_data() {
+    const stored_server_data  = localStorage.getItem(storage_key);
+    if (stored_server_data) {
+        const server_data               = JSON.parse(stored_server_data) as ServerData;
+        const server :HTMLInputElement  = document.getElementById('serverChoice') as HTMLInputElement;
+        const port :HTMLInputElement    = document.getElementById('portNumber') as HTMLInputElement;
+        server.value = server_data.url;
+        port.value   = server_data.port;
+    }
+}
+
+/**
+ *
+ * @param resource_url
+ */
+function store_server_data(url: string, port: string) {
+    const server_data :ServerData = {
+        url : url,
+        port : port
+    }
+    localStorage.setItem(storage_key, JSON.stringify(server_data));
+}
+
+
+
 /**
  * Get the service to perform the conversion.
  *
@@ -113,17 +148,19 @@ const submit = async (event :Event) :Promise<any> => {
     const progress :HTMLProgressElement = document.getElementById('progress') as HTMLProgressElement;
 
     try {
-        const form :HTMLElement                 = document.getElementById('main_form');
+        // const form :HTMLElement                 = document.getElementById('main_form');
         const url :HTMLInputElement             = document.getElementById('url') as HTMLInputElement;
         const respec :HTMLInputElement          = document.getElementById('respec') as HTMLInputElement;
         const publishDate :HTMLInputElement     = document.getElementById('publishDate') as HTMLInputElement;
         const specStatus :HTMLInputElement      = document.getElementById('specStatus') as HTMLInputElement;
         const addSectionLinks :HTMLInputElement = document.getElementById('addSectionLinks') as HTMLInputElement;
         const maxTocLevel :HTMLInputElement     = document.getElementById('maxTocLevel') as HTMLInputElement;
-
-        const service =  form.dataset.r2epubservice || default_service;
+        const server :HTMLInputElement          = document.getElementById('serverChoice') as HTMLInputElement;
+        const port :HTMLInputElement            = document.getElementById('portNumber') as HTMLInputElement
 
         if (!(url.value === null || url.value === '')) {
+            const service = (server.value.startsWith('http://localhost')) ? `${server.value}:${port.value}` : server.value;
+
             const query :string[] = [
                 `url=${url.value}`,
                 `respec=${respec.value === 'true'}`
@@ -141,6 +178,9 @@ const submit = async (event :Event) :Promise<any> => {
             if (maxTocLevel.value !== '') {
                 query.push(`maxTocLevel=${maxTocLevel.value}`);
             }
+
+            store_server_data(server.value, port.value);
+
             const service_url = `${service}?${query.join('&')}`;
             try {
                 // turn on the progress bar at the bottom of the form
@@ -151,18 +191,18 @@ const submit = async (event :Event) :Promise<any> => {
 
                 if (returned.content_type === epub_content_type) {
                     save_book(returned.content, returned.file_name);
-                 } else {
+                } else {
                     const message = await returned.content.text();
                     alert(message);
                 }
 
                 // Remove the query string from the URL bar
-                document.location.search = '';
+                // document.location.search = '';
 
                 // Clean up the user interface and we are done!
                 progress.style.setProperty('visibility', 'hidden');
                 if (returned.content_type === epub_content_type) fading_success();
-           } catch(e) {
+            } catch(e) {
                 progress.style.setProperty('visibility', 'hidden');
                 alert(`${e}`);
             }
@@ -175,6 +215,7 @@ const submit = async (event :Event) :Promise<any> => {
 }
 
 window.addEventListener('load', () => {
+    retrieve_server_data();
     const submit_button = document.getElementById('submit');
     submit_button.addEventListener('click', submit);
 });
