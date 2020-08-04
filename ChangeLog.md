@@ -5,6 +5,7 @@
 ### Detailed (important) changes
 
 * The extra W3C files (logos, typically) can also be picked up from the local file system.
+* The Web interface has changed: it now offers a choice among the deployed servers and also `localhost`
 
 ## Version 1.2.1
 
