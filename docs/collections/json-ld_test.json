@@ -1,8 +1,8 @@
 {
-    "title": "JSON LD 1.1",
-    "name": "jsonld11_test",
+    "name": "JSON LD 1.1",
+    "id": "jsonld11_test",
     "comment": "This is just for testing purposes to shake the whole system....",
-    "chapters": [
+    "readingOrder": [
         {
             "url": "https://w3c.github.io/json-ld-syntax/",
             "respec" : true,

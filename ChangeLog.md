@@ -1,5 +1,10 @@
 # Changes
 
+## Version 1.2.3
+
+* The collection configuration file format gets closer to the publication manifest
+* Minor bug (and stricter epubcheck): the alternate reference to an EPUB file was flagged due to a missing (ie, removed) `href` attribute. The `<a>` element has been removed altogether.
+
 ## Version 1.2.2
 
 ### Detailed (important) changes

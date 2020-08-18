@@ -59,7 +59,7 @@ const generate_book_data = async (book_data) => {
     // 1. An array of chapters is created from the argument data
     // 2. Each chapter is initialized. Initialization is async, ie, each of these steps create a Promise.
     //    Note that the first chapter is signalled so that the common files (logo, css for cover page, etc) are also transferred to the final book, but only once.
-    const promises = book_data.chapters.map((chapter_data, index) => (new chapter_1.Chapter(chapter_data, index === 0)).initialize());
+    const promises = book_data.readingOrder.map((chapter_data, index) => (new chapter_1.Chapter(chapter_data, index === 0)).initialize());
     // 3. Sync at this point by waiting for all Promises to resolve, yielding the list of chapters.
     const chapters = await Promise.all(promises);
     // 4. Collect all the editors, it will be used later...
@@ -70,11 +70,11 @@ const generate_book_data = async (book_data) => {
     const date = dates.reduce((accumulator, currentValue) => accumulator > currentValue ? accumulator : currentValue);
     // Yep, we got the book skeleton
     return {
-        title: book_data.title,
-        name: book_data.name,
+        title: book_data.name,
+        name: book_data.id,
         editors: _.unique(editors),
         date: date,
-        ocf: new ocf.OCF(`${book_data.name}.epub`),
+        ocf: new ocf.OCF(`${book_data.id}.epub`),
         chapters: chapters
     };
 };

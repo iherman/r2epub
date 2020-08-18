@@ -4,16 +4,16 @@
     "title": "Argument structure for rs2epub",
     "type": "object",
     "properties": {
-        "title": {
+        "name": {
             "type": "string"
         },
-        "name": {
+        "id": {
             "type": "string"
         },
         "comment": {
             "type": "string"
         },
-        "chapters": {
+        "readingOrder": {
             "type": "array",
             "items": {
                 "type": "object",
@@ -80,6 +80,6 @@
     },
     "additionalProperties": false,
     "required": [
-        "title", "name", "chapters"
+        "name", "id", "readingOrder"
     ]
 }

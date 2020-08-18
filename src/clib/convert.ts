@@ -50,11 +50,11 @@ export interface ChapterConfiguration extends Options {
  */
 export interface CollectionConfiguration {
     /** Title of the publication. */
-    title     :string;
+    name         :string;
     /** "Short" name, used as an identifier and as the base name for the final EPUB file. */
-    name      :string;
+    id           :string;
     /** Chapter description: url, whether respec should be used, and possible respec arguments. See the [[Options]] for some further details). */
-    chapters  :ChapterConfiguration[];
+    readingOrder :ChapterConfiguration[];
 }
 
 /**
@@ -87,7 +87,7 @@ const generate_book_data = async (book_data: CollectionConfiguration) :Promise<C
     // 1. An array of chapters is created from the argument data
     // 2. Each chapter is initialized. Initialization is async, ie, each of these steps create a Promise.
     //    Note that the first chapter is signalled so that the common files (logo, css for cover page, etc) are also transferred to the final book, but only once.
-    const promises :Promise<Chapter>[] = book_data.chapters.map((chapter_data :ChapterConfiguration, index :number) :Promise<Chapter> => (new Chapter(chapter_data, index === 0)).initialize());
+    const promises :Promise<Chapter>[] = book_data.readingOrder.map((chapter_data :ChapterConfiguration, index :number) :Promise<Chapter> => (new Chapter(chapter_data, index === 0)).initialize());
 
     // 3. Sync at this point by waiting for all Promises to resolve, yielding the list of chapters.
     const chapters :Chapter[] = await Promise.all(promises);
@@ -102,11 +102,11 @@ const generate_book_data = async (book_data: CollectionConfiguration) :Promise<C
 
     // Yep, we got the book skeleton
     return {
-        title    : book_data.title,
-        name     : book_data.name,
+        title    : book_data.name,
+        name     : book_data.id,
         editors  : _.unique(editors),
         date     : date,
-        ocf      : new ocf.OCF(`${book_data.name}.epub`),
+        ocf      : new ocf.OCF(`${book_data.id}.epub`),
         chapters : chapters
     }
 }

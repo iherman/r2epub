@@ -1,8 +1,8 @@
 {
-    "title": "Verifiable Credentials",
-    "name": "verifiable_credentials",
+    "name": "Verifiable Credentials",
+    "id": "verifiable_credentials",
     "comment": "No ReSpec preprocessing involved",
-    "chapters": [
+    "readingOrder": [
         {
             "url": "https://www.w3.org/TR/vc-data-model/"
         },

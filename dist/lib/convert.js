@@ -324,6 +324,8 @@ class RespecToEPUB {
                         if (element.getAttribute('rel') === 'alternate' && href.endsWith('.epub')) {
                             // this refers to an alternate epub
                             element.removeAttribute('href');
+                            const text_content = element.textContent;
+                            element.replaceWith(text_content);
                             return false;
                         }
                         else if (href.endsWith('.svg') || href.endsWith('.svgz')) {

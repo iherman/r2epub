@@ -5,10 +5,10 @@
  *
  * ``` json
  * {
- *    "title"    : "Title of the collection",
- *    "name"     : "Used as the base file name of the final document",
- *    "comment"  : "Comment on the collection configuration",
- *    "chapters" : [{
+ *    "name"         : "Title of the collection",
+ *    "id"           : "Used as the base file name of the final document",
+ *    "comment"      : "Comment on the collection configuration",
+ *    "readingOrder" : [{
  *        "url"    : "URL of the first chapter"
  *        "respec" : "whether the document must be pre-processed by ReSpec [boolean]",
  *        "config" : {
@@ -23,7 +23,7 @@
  * }
  * ```
  *
- * For the meaning of the configuration options, see the [ReSpec manual](https://www.w3.org/respec/). The "title", "name", "chapters", and "url" fields are required, all others are optional. The value of "comment" is ignored by the module.
+ * For the meaning of the configuration options, see the [ReSpec manual](https://www.w3.org/respec/). The "name", "id", "readingOrder", and "url" fields are required, all others are optional. The value of "comment" is ignored by the module.
  *
  * The JSON collection configuration file is checked against the JSON [schema](https://github.com/iherman/src/clib/r2epub.schema.json) in the [[get_book_configuration]] function.
  *
@@ -54,7 +54,7 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
     if (!valid) {
         throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
     } else {
-        const chapters :cConvert.ChapterConfiguration[] = data.chapters.map((chapter :any) :cConvert.ChapterConfiguration => {
+        const chapters :cConvert.ChapterConfiguration[] = data.readingOrder.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};
             if (chapter.config !== undefined) {
                 if (chapter.config.specStatus !== undefined)      config.specStatus      = chapter.config.specStatus;
@@ -71,9 +71,9 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
         });
 
         return {
-            title    : data.title,
-            name     : data.name,
-            chapters : chapters
+            name         : data.name,
+            id           : data.id,
+            readingOrder : chapters
         };
     }
 }

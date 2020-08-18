@@ -1,8 +1,8 @@
 {
-    "title": "JSON LD 1.1",
-    "name": "jsonld1.1",
+    "name": "JSON LD 1.1",
+    "id": "jsonld1.1",
     "comment": "running a single document should be fine",
-    "chapters": [
+    "readingOrder": [
         {
             "url": "https://www.w3.org/TR/json-ld/"
         }
