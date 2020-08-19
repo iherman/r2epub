@@ -200,7 +200,7 @@ export class RespecToEPUB {
                     .filter((val) => val !== null);
                 const query_string = config_options.length === 0 ? '' : `%3F${config_options.join('%26')}`;
                 return `${constants.spec_generator}${url}${query_string}`
-           } else {
+            } else {
                 return url;
             }
         }
