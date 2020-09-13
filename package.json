@@ -39,7 +39,7 @@
         "jsdom": "^16.2.2",
         "jszip": "^3.2.2",
         "minimist": "^1.2.5",
-        "node-fetch": "^2.6.0",
+        "node-fetch": "^2.6.1",
         "parse5": "^5.1.1",
         "underscore": "^1.10.2",
         "url": "^0.11.0",
