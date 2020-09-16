@@ -1,6 +1,6 @@
 {
     "name": "r2epub",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3.2",
     "engines": {
         "node": "12.x"
@@ -15,8 +15,7 @@
         "origin": "git push origin master",
         "push": "git push origin master; git push heroku master",
         "r2epub": "node dist/r2epub.js",
-        "server": "node dist/server.js",
-        "cli_test": "ts-node src/cli.ts http://iherman.github.io/r2epub/collections/config_err.json"
+        "server": "node dist/server.js"
     },
     "browser": "dist/browser.js",
     "repository": {
