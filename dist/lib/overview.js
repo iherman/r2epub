@@ -7,7 +7,7 @@
  * 1. The package entry for `Overview.xhtml` may contain a `properties` attribute; see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab) for further details.
  * 2. Due to the rigidity of the iBook reader, the DOM tree has to change: all children of the `<body>` should be encapsulated into a top level block
  * element (we use `<div role="main">`). This is because iBook imposes a zero padding on the body element, and that cannot be controlled by the user;
- * the introduction of the top level block element allows for suitable CSS adjustments in the [common css file](https://www.w3.org/People/Ivan/TR_EPUB/base.css).
+ * the introduction of the top level block element allows for suitable CSS adjustments in the [common css file](https://www.ivan-herman.net/r2epub/base.css).
  *
  *
  * @packageDocumentation
@@ -27,7 +27,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };

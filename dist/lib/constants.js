@@ -5,7 +5,7 @@
  * @packageDocumentation
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CORS_headers = exports.local_style_files = exports.modified_epub_files = exports.TR_logo_files = exports.fixup_js = exports.spec_generator = exports.local_port_number = exports.acceptable_url_endings = exports.invalid_host_names = exports.wcag_checked = exports.spec_status_values = exports.text_content = exports.media_types = exports.is_browser = void 0;
+exports.tr_epub_css = exports.CORS_headers = exports.local_style_files = exports.modified_epub_files = exports.TR_logo_files = exports.fixup_js = exports.spec_generator = exports.local_port_number = exports.acceptable_url_endings = exports.invalid_host_names = exports.wcag_checked = exports.spec_status_values = exports.text_content = exports.media_types = exports.is_browser = void 0;
 /**
  * Flag to decide whether the code runs in a browser or in node.js
  */
@@ -50,6 +50,7 @@ exports.spec_status_values = [
     'LD',
     'LS',
     'CR',
+    'CRD',
     'PR',
     'PER',
     'REC',
@@ -139,4 +140,87 @@ exports.CORS_headers = {
     'Access-Control-Allow-Headers': allow_headers.join(','),
     'Access-Control-Expose-Headers': expose_headers.join(',')
 };
+/**
+ * Extra CSS file for EPUB content; mainly used to adapt and, possibly, to compensate the effects of the
+ * main CSS file. The features are
+ *
+ * 1. Due to the problems with Apple Books, the target DOM is modified by adding an extra `div` element, which carries the padding statements. Books does not understand a padding and margin on the body element, hence this addition...
+ * 2. A number of page break control added to header elements, definition lists, or figure elements (even if, at this time, not many reading systems really honer these...)
+ * 3. The outdated warning boxes are stuck to the bottom, instead coming up with interaction
+ * 4. The table of content, as generated into the file, is removed (via a `display` attribute); its content is put into a separate navigation file used by the reading system.
+ */
+exports.tr_epub_css = `
+div[role~="main"] {
+    margin: 0 auto;                              /* center text within page                     */
+    max-width: none;
+    padding: 1.6em 1.5em 2em 50px;               /* assume 16px font size for downlevel clients */
+    padding: 1.6em 1.5em 2em calc(26px + 1.5em); /* leave space for status flag     */
+}
+
+body {
+    max-width: auto !important;
+}
+
+h2 {
+    page-break-before: always;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+}
+
+div.head h2 {
+    page-break-before: auto;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+}
+
+figure {
+    page-break-inside: avoid;
+}
+
+h3, h4, h5 {
+    page-break-after: avoid;
+}
+
+dl dt {
+    page-break-after: avoid;
+}
+
+dl dd {
+    page-break-before: avoid;
+}
+
+div.example, div.note, pre.idl, .warning, table.parameters, table.exceptions {
+    page-break-inside: avoid;
+}
+
+p {
+    orphans: 4;
+    widows: 2;
+}
+
+.outdated-warning {
+    position: absolute;
+    border-style: solid;
+    border-color: red;
+}
+
+.outdated-warning input {
+    display: none;
+}
+
+p.copyright,
+p.copyright small { font-size: small; }
+
+#toc-nav, #toc-toggle-inline {
+    display:none !important;
+}
+
+#back-to-top, .toc-toggle {
+    display: none !important;
+}
+
+nav#toc {
+    display: none
+}
+`;
 //# sourceMappingURL=constants.js.map

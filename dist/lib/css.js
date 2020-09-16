@@ -56,7 +56,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -108,7 +108,7 @@ html {
  * no watermark, simple background template
  */
 const specStatus_simple = [
-    'ED', 'WD', 'CR', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
+    'ED', 'WD', 'CR', 'CRD', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
 ];
 /**
  * Mapping from `specStatus` to its relevant description for the cases when a simple, automatic mapping
@@ -185,6 +185,14 @@ function extract_css(global) {
         });
         // The html content should be modified to refer to the base directly
         the_link.setAttribute('href', `${constants.local_style_files}base.css`);
+        // An extra CSS file must be added to the mix, to take care of the EPUB specificities
+        retval.push({
+            relative_url: `${constants.local_style_files}tr_epub.css`,
+            media_type: constants.media_types.css,
+            text_content: constants.tr_epub_css
+        });
+        // Adding the reference to the epub specific css file into the dom
+        the_link.insertAdjacentHTML('afterend', `<link rel="stylesheet" href="${constants.local_style_files}tr_epub.css">`);
         // Here comes the extra complication: depending on the respec spec status type, extra actions may have to be
         // taken...
         let css_extras = specStatus_css[global.config.specStatus.toUpperCase()];
