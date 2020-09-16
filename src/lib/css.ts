@@ -100,7 +100,7 @@ html {
  * no watermark, simple background template
  */
 const specStatus_simple = [
-    'ED', 'WD', 'CR', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
+    'ED', 'WD', 'CR', 'CRD', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
 ]
 
 /** Interface for special cases, ie, when the `specStatus` value does not provide all information… */
@@ -209,9 +209,20 @@ export function extract_css(global: Global): ResourceRef[] {
         // The html content should be modified to refer to the base directly
         the_link.setAttribute('href', `${constants.local_style_files}base.css`);
 
+
+        // An extra CSS file must be added to the mix, to take care of the EPUB specificities
+        retval.push({
+            relative_url : `${constants.local_style_files}tr_epub.css`,
+            media_type   : constants.media_types.css,
+            text_content : constants.tr_epub_css
+        })
+
+        // Adding the reference to the epub specific css file into the dom
+        the_link.insertAdjacentHTML('afterend', `<link rel="stylesheet" href="${constants.local_style_files}tr_epub.css">`)
+
+
         // Here comes the extra complication: depending on the respec spec status type, extra actions may have to be
         // taken...
-
         let css_extras :specStatus_css_mappings = specStatus_css[global.config.specStatus.toUpperCase()];
 
         if (css_extras === undefined && specStatus_simple.includes(global.config.specStatus)) {

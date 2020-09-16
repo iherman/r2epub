@@ -1,5 +1,13 @@
 # Changes
 
+## Version 1.2.4
+
+### Detailed (important) changes
+
+* Adaptation to the W3C Process 2020 changes:
+    * Adding new document status (`CRD`), including the relevant logos
+    * The core W3C `base.css` has been updated; instead of modifying this file again a separate CSS file has been added with the epub specific features (the downside is that a large and complex portion of the `base.css` file, related to the TOC, is present and executed run-time, but, oh well...)
+
 ## Version 1.2.3
 
 * The collection configuration file format gets closer to the publication manifest

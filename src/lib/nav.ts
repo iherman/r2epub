@@ -56,7 +56,7 @@ const nav :string = `<?xml version="1.0"?>
 export function create_nav_file(global :Global) :ResourceRef[] {
     const retval :ResourceRef[] = [];
 
-    // extract the toc part from the HTMl
+    // extract the toc part from the HTML
     const title  = global.html_element.querySelector('title').textContent;
     const toc_ol = global.html_element.querySelector('nav#toc');
     if (toc_ol === null) {
