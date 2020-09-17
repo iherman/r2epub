@@ -157,7 +157,7 @@ Once installed locally, follow specific instructions based on your needs/interes
 #### Command Line
 
 ``` sh
-node dist/cli.js
+node dist/r2epub.js
 ```
 
 starts the command line interface.
