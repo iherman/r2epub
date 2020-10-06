@@ -1,5 +1,7 @@
 # ReSpec to EPUB
 
+[![Join the chat at https://gitter.im/iherman/r2epub](https://badges.gitter.im/iherman/r2epub.svg)](https://gitter.im/iherman/r2epub?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2.
 
 ## Single documents vs. Collections
