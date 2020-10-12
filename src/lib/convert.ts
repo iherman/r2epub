@@ -302,17 +302,25 @@ export class RespecToEPUB {
         // ------------------------------------------
         // 5. Add the reference to the generic fixup script. I am not sure it is really necessary
         // but it may not harm...
+        // {
+        //     const fixup_element = this.global.html_element.querySelector(`script[src="${constants.fixup_js}"]`);
+        //     if (fixup_element !== null) {
+        //         const relative_url = 'scripts/TR/2016/fixup.js';
+        //         fixup_element.setAttribute('src', relative_url);
+        //         this.global.resources.push({
+        //             relative_url : relative_url,
+        //             media_type   : constants.media_types.js,
+        //             absolute_url : constants.fixup_js
+        //         })
+        //     }
+        // }
+
+        // 5. Remove the generic fixup script. Its role is (1) to set the warning popup for the outdated specs and (2) set
+        // the width of the display to, possibly, put the TOC onto the sidebar. Both are unnecessary and, actually,
+        // (2) is problematic because it forces a narrow display of the text that we do not want.
         {
             const fixup_element = this.global.html_element.querySelector(`script[src="${constants.fixup_js}"]`);
-            if (fixup_element !== null) {
-                const relative_url = 'scripts/TR/2016/fixup.js';
-                fixup_element.setAttribute('src', relative_url);
-                this.global.resources.push({
-                    relative_url : relative_url,
-                    media_type   : constants.media_types.js,
-                    absolute_url : constants.fixup_js
-                })
-            }
+            fixup_element.remove();
         }
 
         // ------------------------------------------

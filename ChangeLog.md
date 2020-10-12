@@ -1,5 +1,13 @@
 # Changes
 
+## Version 1.2.5
+
+* Made changes to ensure the content used the full width of the available viewport. This means
+  * Removing the `fixup.js` script from the result (this script toogles the class on the `body` element to put the TOC incline or aside, depending on the width of the screen)
+  * Putting a stable `toc-inline` class to the body element.
+
+    These changes ensure that the `base.css` style does not reduce the displayable width for the main content
+
 ## Version 1.2.4
 
 ### Detailed (important) changes

@@ -183,7 +183,7 @@ div[role~="main"] {
 }
 
 body {
-    max-width: auto !important;
+    max-width: 100% !important;
 }
 
 h2 {

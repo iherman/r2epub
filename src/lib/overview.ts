@@ -33,7 +33,8 @@ import * as constants          from './constants';
  * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage.
  * - [remote-resources](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): there are remote resources, typically video, audio, or images.
  *
- * The function also modifies the DOM tree by introducing a `<main>` element right as a child of `body`
+ * The function also modifies the DOM tree by introducing a `<main>` element right as a child of `body`, and adding the fixed `toc-inline` class to ensure that the
+ * body occupies the whole width of the viewport.
  *
  * @param global
  * @return - a single element array with the resource definition of the `Overview.xhtml` entry
@@ -50,7 +51,7 @@ export function  generate_overview_item(global: Global): ResourceRef[] {
     }
 
     {
-        // 2a. are there active scripts. Care should be taken that a <script> element may be a data block, that does not count!
+        // 2a. are there active scripts. Care should be taken that a <script> element may be a data block, that does not count.
         const scripts = Array.from(global.html_element.querySelectorAll('script'));
         const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
             if (element.hasAttribute('type')) {
@@ -106,6 +107,8 @@ export function  generate_overview_item(global: Global): ResourceRef[] {
     }
     body.append(main_element);
 
+    // Add a fixed class to the body element to ensure that the full display is used
+    body.classList.add('toc-inline');
 
     return [{
         media_type   : constants.media_types.xhtml,
