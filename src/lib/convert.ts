@@ -27,9 +27,10 @@ import * as constants  from './constants';
 import * as opf        from './opf';
 import * as ocf        from './ocf';
 import * as css        from './css';
-import * as cover      from './cover';
+import * as title_page from './title';
+import * as cover_page from './cover';
 import * as nav        from './nav';
-import * as overview   from './overview'
+import * as overview   from './overview';
 
 
 // ========================================================== The main conversion part ============================================ //
@@ -56,7 +57,7 @@ export interface ResourceRef {
     /** Extra properties, defined by the package specification, to be added to the entry */
     properties?    :string
 
-    /** Flag whether the resource reference should also be added to the spite with a 'linear=no' attribute */
+    /** Flag whether the resource reference should also be added to the spine with a 'linear=no' attribute */
     add_to_spine?  :boolean
 }
 
@@ -300,21 +301,6 @@ export class RespecToEPUB {
         }
 
         // ------------------------------------------
-        // 5. Add the reference to the generic fixup script. I am not sure it is really necessary
-        // but it may not harm...
-        // {
-        //     const fixup_element = this.global.html_element.querySelector(`script[src="${constants.fixup_js}"]`);
-        //     if (fixup_element !== null) {
-        //         const relative_url = 'scripts/TR/2016/fixup.js';
-        //         fixup_element.setAttribute('src', relative_url);
-        //         this.global.resources.push({
-        //             relative_url : relative_url,
-        //             media_type   : constants.media_types.js,
-        //             absolute_url : constants.fixup_js
-        //         })
-        //     }
-        // }
-
         // 5. Remove the generic fixup script. Its role is (1) to set the warning popup for the outdated specs and (2) set
         // the width of the display to, possibly, put the TOC onto the sidebar. Both are unnecessary and, actually,
         // (2) is problematic because it forces a narrow display of the text that we do not want.
@@ -328,19 +314,23 @@ export class RespecToEPUB {
         this.global.resources = [...this.global.resources, ...css.extract_css(this.global)]
 
         // ------------------------------------------
-        // 7. Create a cover file
-        this.global.resources = [...cover.create_cover_page(this.global), ...this.global.resources, ];
+        // 7. Create a title page
+        this.global.resources = [...title_page.create_title_page(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 8. Create a nav file
+        // 8. Create the cover image
+        this.global.resources = [...cover_page.create_cover_image(this.global), ...this.global.resources];
+
+        // ------------------------------------------
+        // 9. Create a nav file
         this.global.resources = [...nav.create_nav_file(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 9. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
+        // 10. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
         this.global.resources = [...overview.generate_overview_item(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 10. Finalize the package file
+        // 11. Finalize the package file
         {
             // Add the WCAG conformance, if applicable
             if (constants.wcag_checked.includes(this.global.config.specStatus)) this.global.opf_content.add_wcag_link();

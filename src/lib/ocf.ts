@@ -76,7 +76,7 @@ export class OCF {
 
     /**
      * Return the final content of the book all packed up.
-     * If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
+     * If not yet done, the content is generated using the relevant `jszip` function, packaging all content that has been added.
      *
      * @async
      */

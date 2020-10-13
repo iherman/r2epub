@@ -246,7 +246,7 @@ export class PackageWrapper {
                 spine : {
                     "itemref" : [
                         {
-                            "@idref": "start",
+                            "@idref": "title_page",
                         },
                         {
                             "@idref": "main",
