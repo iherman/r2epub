@@ -13,20 +13,21 @@
 
 import { ResourceRef, Global } from './convert';
 import * as constants          from './constants';
+import * as utils              from './utils';
 
 
 /**
  * The SVG template to be used for the cover image.
  * @hidden
  */
-const cover = `
+export const cover_svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 595 842">
     <desc>
         Cover page for the EPUB file. It consists of three items: (1) the title of the publication, (2) the denomination of the W3C Technical Report type (Note, Draft, Recommendation, etc.) and (3) the Large logo of W3C. The three items are stacked vertically and horizontally centered, with the Title on the top the logo in the bottom and the type in the middle.
     </desc>
     <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" y="200" width="100%" height="100%">
         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: center; justify-content: center">
-            <div style="display: inline-block; font-size: 42px; font-family: sans-serif; color: #005A9C; line-height: 1.2; font-weight: bold; font-style: italic; white-space: nowrap; text-align: center">
+            <div style="display: inline-block; font-size: 40px; font-family: sans-serif; color: #005A9C; line-height: 1.2; font-weight: bold; font-style: italic; white-space: nowrap; text-align: center">
                 %%%TITLE%%%
             </div>
         </div>
@@ -34,7 +35,7 @@ const cover = `
     <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" y="400" width="100%" height="100%">
         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: center; justify-content: center">
             <div style="display: inline-block; font-size: 20px; font-family: sans-serif; color: #005A9C; line-height: 1.3; font-weight: bold; white-space: nowrap; text-align: center; ">
-                W3C %%%SUBTITLE%%%<br/>%%%DATE%%%
+                %%%SUBTITLE%%%
             </div>
         </div>
     </foreignObject>
@@ -80,37 +81,11 @@ const cover = `
 </svg>
 `
 
-function slice_text(inp: string): string {
-    const LIMIT = 30;
-    const slice_text_array = (words: string[]): string[] => {
-        let final: string[] = [];
-        let current_length  = 0;
-        while(true) {
-            if (words.length === 0) {
-                return final;
-            } else if(current_length + words[0].length < LIMIT) {
-                current_length += words[0].length + 1;
-                final.push(`${words.shift()} `);
-            } else {
-                final.push(`${final.pop().trim()}<br/>`)
-                return [...final, ...slice_text_array(words)]
-            }
-        }
-    }
-
-    if (inp.length < LIMIT) {
-        return inp;
-    } else {
-        const words = inp.split(' ');
-        return slice_text_array(words).join('');
-    }
-}
-
 /**
- * Create the cover page: it is an XHTML file with title, editors, copyright information, and a disclaimer whereby the EPUB version of the document is not authoritative.
+ * Create the cover image: it is an SVG file with title and date.
  *
  * @param global
- * @returns - resources for a cover page, as well as long W3C logo (appearing on the cover page) and a relevant css file.
+ * @returns - resources for containing a single SVG file.
  */
 export function create_cover_image(global :Global) :ResourceRef[] {
 
@@ -118,10 +93,9 @@ export function create_cover_image(global :Global) :ResourceRef[] {
     const date:     string = global.html_element.querySelector('time.dt-published').textContent;
     const subtitle: string = global.config.generatedSubtitle.replace(date, '').trim();
 
-    const final_cover = cover
-        .replace('%%%TITLE%%%', slice_text(title))
-        .replace('%%%SUBTITLE%%%', subtitle)
-        .replace('%%%DATE%%%', date);
+    const final_cover = cover_svg
+        .replace('%%%TITLE%%%', utils.slice_text(title))
+        .replace('%%%SUBTITLE%%%', `W3C ${subtitle}<br/>${date}`);
 
     return [{
         media_type   : constants.media_types.svg,

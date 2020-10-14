@@ -21,7 +21,7 @@ import { Chapter, OPFManifestItem } from './chapter';
  *
  * The method
  *
- * 1. Stores the stable files like cover and nav in the package;
+ * 1. Stores the stable files like title and nav in the package;
  * 2. Collects the dates and editors from the book and adds that to the package;
  * 3. Collects the manifest item data for each package and adds it to the new package;
  * 4. Adds the manifest items and the linear spine items.
@@ -45,11 +45,17 @@ export function create_opf(book :cConvert.Collection) :string {
     // 2. Set the date of this book
     the_opf.add_dates(book.date);
 
-    // 3. add the fix values to the manifest, namely the cover and the navigation file
+    // 3. add the fix values to the manifest, namely the title, cover, and the navigation file
     the_opf.add_manifest_item({
-        "@href"       : "cover.xhtml",
-        "@id"         : "start",
+        "@href"       : "title.xhtml",
+        "@id"         : "title_page",
         "@media-type" : constants.media_types.xhtml
+    });
+    the_opf.add_manifest_item({
+        "@href"       : "cover_image.svg",
+        "@id"         : "cover",
+        "@media-type" : constants.media_types.svg,
+        "@properties" : "cover-image"
     });
     the_opf.add_manifest_item({
         "@href"       : "nav.xhtml",
@@ -64,7 +70,9 @@ export function create_opf(book :cConvert.Collection) :string {
         // unique ID-s must be added to the items themselves
         chapter.opf_items.forEach((item :OPFManifestItem)  :void => {
             let id :string;
-            // See if this is one of the main content items, ie, Overview.xhtml
+            // The cover images should not be considered, those are unused on the collection level
+            if (item.properties === 'cover-image') return;
+            // See if this is one of the main content items, i.e., Overview.xhtml
             if (item.href.endsWith('Overview.xhtml')) {
                 // Yep, this is a main item.
                 // The very first has a special id; this is due to the fact that, in the

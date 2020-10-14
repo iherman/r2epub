@@ -127,7 +127,8 @@ interface LocalLinks {
  * * Follow similar actions for some system wide javascript files (although, at this moment, it is a single JS file that must be taken care of).
  * * Extract the various metadata items (title, editors, dates, etc.) for the package file.
  * * Remove the TOC from the TR document (i.e., making it `display:none`), extract that HTML fragment and put it into a separate `nav` file, per EPUB3 specification. (See the [“nav” module](./_lib_nav_.html).)
- * * Create a cover page. (See the [“cover” module](./_lib_cover_.html).)
+ * * Create a title page. (See the [title module](./_lib_title_.html).)
+ * * Create a cover image. (See the [cover module](./_lib_cover_.html).)
  * * Extract OPF properties from the original HTML content to be added to spine entries. (See the [“overview” module](./_lib_overview_.html).)
  * * Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and convert the result content into XHTML. (See the [“overview” module](./_lib_overview_.html).)
  * * Create the package (OPF) file with the right resource and spine entries. (See the [“opf” module](./_lib_opf_.html).)
@@ -227,11 +228,12 @@ export class RespecToEPUB {
      * 4. Add the reference to a W3C logo.
      * 5. Add the reference to the generic fixup script.
      * 6. Add some of the global W3C CSS files, and auxiliary image files.
-     * 7. Create a cover file.
-     * 8. Create a nav file.
-     * 9. Main resource (i.e., Overview.xhtml) entry, with relevant properties.
-     * 10. Finalize the package file based on the collected resources in [[Global.resources]].
-     * 11. Download all resources into the EPUB file.
+     * 7. Create a title page.
+     * 8. Create a cover image.
+     * 9. Create a nav file.
+     * 10. Main resource (i.e., Overview.xhtml) entry, with relevant properties.
+     * 11. Finalize the package file based on the collected resources in [[Global.resources]].
+     * 12. Download all resources into the EPUB file.
      *
      *
      * All the resource entries are first collected in the in a [[Global.resources]] array, to be then added to the

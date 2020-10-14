@@ -263,7 +263,7 @@ export class PackageWrapper {
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
     add_manifest_item(item :ManifestItem, add_spine_item :boolean = false) :void {
-        if (item['@properties'] === undefined) {
+        if (item['@properties'] === undefined || item['@properties'] === '') {
             delete item['@properties'];
         }
         this.thePackage.package.manifest.item.push(item);
