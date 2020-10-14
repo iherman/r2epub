@@ -80,6 +80,32 @@ const cover = `
 </svg>
 `
 
+function slice_text(inp: string): string {
+    const LIMIT = 30;
+    const slice_text_array = (words: string[]): string[] => {
+        let final: string[] = [];
+        let current_length  = 0;
+        while(true) {
+            if (words.length === 0) {
+                return final;
+            } else if(current_length + words[0].length < LIMIT) {
+                current_length += words[0].length + 1;
+                final.push(`${words.shift()} `);
+            } else {
+                final.push(`${final.pop().trim()}<br/>`)
+                return [...final, ...slice_text_array(words)]
+            }
+        }
+    }
+
+    if (inp.length < LIMIT) {
+        return inp;
+    } else {
+        const words = inp.split(' ');
+        return slice_text_array(words).join('');
+    }
+}
+
 /**
  * Create the cover page: it is an XHTML file with title, editors, copyright information, and a disclaimer whereby the EPUB version of the document is not authoritative.
  *
@@ -93,7 +119,7 @@ export function create_cover_image(global :Global) :ResourceRef[] {
     const subtitle: string = global.config.generatedSubtitle.replace(date, '').trim();
 
     const final_cover = cover
-        .replace('%%%TITLE%%%', title)
+        .replace('%%%TITLE%%%', slice_text(title))
         .replace('%%%SUBTITLE%%%', subtitle)
         .replace('%%%DATE%%%', date);
 
