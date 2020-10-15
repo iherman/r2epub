@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RespecToEPUB | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.4</title>
+	<title>RespecToEPUB | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.5</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.4</a>
+					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.5</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -83,7 +83,8 @@
 						<li>Follow similar actions for some system wide javascript files (although, at this moment, it is a single JS file that must be taken care of).</li>
 						<li>Extract the various metadata items (title, editors, dates, etc.) for the package file.</li>
 						<li>Remove the TOC from the TR document (i.e., making it <code>display:none</code>), extract that HTML fragment and put it into a separate <code>nav</code> file, per EPUB3 specification. (See the <a href="./_lib_nav_.html">“nav” module</a>.)</li>
-						<li>Create a cover page. (See the <a href="./_lib_cover_.html">“cover” module</a>.)</li>
+						<li>Create a title page. (See the <a href="./_lib_title_.html">title module</a>.)</li>
+						<li>Create a cover image. (See the <a href="./_lib_cover_.html">cover module</a>.)</li>
 						<li>Extract OPF properties from the original HTML content to be added to spine entries. (See the <a href="./_lib_overview_.html">“overview” module</a>.)</li>
 						<li>Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and convert the result content into XHTML. (See the <a href="./_lib_overview_.html">“overview” module</a>.)</li>
 						<li>Create the package (OPF) file with the right resource and spine entries. (See the <a href="./_lib_opf_.html">“opf” module</a>.)</li>
@@ -142,7 +143,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/e84176b/src/lib/convert.ts#L163">lib/convert.ts:163</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/convert.ts#L165">lib/convert.ts:165</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -167,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">resource_<wbr>references<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_lib_convert_.locallinks.html" class="tsd-signature-type">LocalLinks</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{query : &#x27;img, script, audio, video, source&#x27;,attr  : &#x27;src&#x27;},{query : &#x27;a, link[rel&#x3D;&quot;stylesheet&quot;]&#x27;,attr  : &#x27;href&#x27;},{query : &#x27;object&#x27;,attr  : &#x27;data&#x27;}]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/e84176b/src/lib/convert.ts#L146">lib/convert.ts:146</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/convert.ts#L148">lib/convert.ts:148</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -195,7 +196,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/e84176b/src/lib/convert.ts#L186">lib/convert.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/convert.ts#L188">lib/convert.ts:188</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -239,7 +240,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/e84176b/src/lib/convert.ts#L246">lib/convert.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/convert.ts#L249">lib/convert.ts:249</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -254,7 +255,8 @@
 									<li>Add the reference to a W3C logo.</li>
 									<li>Add the reference to the generic fixup script.</li>
 									<li>Add some of the global W3C CSS files, and auxiliary image files.</li>
-									<li>Create a cover file.</li>
+									<li>Create a title page.</li>
+									<li>Create a cover image.</li>
 									<li>Create a nav file.</li>
 									<li>Main resource (i.e., Overview.xhtml) entry, with relevant properties.</li>
 									<li>Finalize the package file based on the collected resources in <a href="../interfaces/_lib_convert_.global.html#resources">Global.resources</a>.</li>
@@ -317,6 +319,9 @@
 						<a href="../modules/_clib_opf_.html">&quot;clib/opf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_clib_title_.html">&quot;clib/title&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -348,6 +353,12 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_overview_.html">&quot;lib/overview&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_title_.html">&quot;lib/title&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_utils_.html">&quot;lib/utils&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>

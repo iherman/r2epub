@@ -27,7 +27,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -51,7 +51,8 @@ const constants = __importStar(require("./constants"));
  * - [svg](https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg): there is explicit svg usage.
  * - [remote-resources](https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources): there are remote resources, typically video, audio, or images.
  *
- * The function also modifies the DOM tree by introducing a `<main>` element right as a child of `body`
+ * The function also modifies the DOM tree by introducing a `<main>` element right as a child of `body`, and adding the fixed `toc-inline` class to ensure that the
+ * body occupies the whole width of the viewport.
  *
  * @param global
  * @return - a single element array with the resource definition of the `Overview.xhtml` entry
@@ -64,7 +65,7 @@ function generate_overview_item(global) {
         properties.push('mathml');
     }
     {
-        // 2a. are there active scripts. Care should be taken that a <script> element may be a data block, that does not count!
+        // 2a. are there active scripts. Care should be taken that a <script> element may be a data block, that does not count.
         const scripts = Array.from(global.html_element.querySelectorAll('script'));
         const is_there_script = scripts.find((element) => {
             if (element.hasAttribute('type')) {
@@ -118,6 +119,8 @@ function generate_overview_item(global) {
         body.removeChild(body.firstChild);
     }
     body.append(main_element);
+    // Add a fixed class to the body element to ensure that the full display is used
+    body.classList.add('toc-inline');
     return [{
             media_type: constants.media_types.xhtml,
             id: 'main',

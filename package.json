@@ -17,7 +17,6 @@
         "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js"
     },
-    "browser": "dist/browser.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/iherman/r2epub.git"
@@ -55,7 +54,7 @@
         "@types/node-fetch": "^2.5.5",
         "@types/underscore": "^1.9.4",
         "@types/valid-url": "^1.0.2",
-        "@types/xmldom": "^0.1.29",
+        "@types/xmldom": "^0.1.30",
         "@types/xmlserializer": "^0.6.0",
         "eslint": "^6.8.0",
         "eslint-config-airbnb-base": "^14.1.0",

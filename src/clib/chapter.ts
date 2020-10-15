@@ -57,7 +57,8 @@ const never_transfer :string[] = [
     'META-INF/container.xml',
     'package.opf',
     'nav.xhtml',
-    'cover.xhtml',
+    'title.xhtml',
+    'cover_image.svg'
 ];
 
 /**

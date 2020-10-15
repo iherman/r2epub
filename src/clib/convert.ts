@@ -31,6 +31,7 @@ import * as fetch       from '../lib/fetch';
 import { Chapter }      from './chapter';
 import * as nav         from './nav';
 import * as opf         from './opf';
+import * as title       from './title';
 import * as cover       from './cover';
 import * as args        from './args';
 import * as _           from 'underscore';
@@ -118,7 +119,7 @@ const generate_book_data = async (book_data: CollectionConfiguration) :Promise<C
  *
  * 1. Convert the user JSON configuration to the internal data structure (see [[get_book_configuration]]) and collect the data for the output target (see [[generate_book_data]]);
  * 2. Create (and store in the target’s OCF) the package file (see [[create_opf]]);
- * 3. Create (and store in the target’s OCF) the cover page (see [create_cover_page](../modules/_clib_cover_.html#create_cover_page));
+ * 3. Create (and store in the target’s OCF) the title page (see [create_title_page](../modules/_clib_title_.html#create_title_page));
  * 4. Create (and store in the target’s OCF) the navigation file for the whole book (see [[create_nav_page]]);
  * 5. Collect, from each [[Chapter]] the real content from the chapter’s OCF and copy it to the target’s OCF (with modified file path values).
  *
@@ -137,16 +138,17 @@ export async function create_epub(config_url: string, trace :boolean = false, pr
     // generate the skeleton of the book
     const the_book :Collection = await generate_book_data(book_data);
 
-    // Create the OPF file, the cover and nav pages, and store each of them in the book at
+    // Create the OPF file, the title and nav pages, and store each of them in the book at
     // well specified places
     const the_opf :string = opf.create_opf(the_book);
     if (print_package) {
         console.log(the_opf);
         return {} as ocf.OCF;
     } else {
-        the_book.ocf.append(the_opf                          , 'package.opf');
-        the_book.ocf.append(cover.create_cover_page(the_book), 'cover.xhtml');
-        the_book.ocf.append(nav.create_nav_page(the_book)    , 'nav.xhtml');
+        the_book.ocf.append(the_opf                          ,  'package.opf');
+        the_book.ocf.append(title.create_title_page(the_book),  'title.xhtml');
+        the_book.ocf.append(cover.create_cover_image(the_book), 'cover_image.svg');
+        the_book.ocf.append(nav.create_nav_page(the_book)    ,  'nav.xhtml');
 
         // Store the data in the final zip file
         the_book.chapters.forEach((chapter :Chapter) :void => {

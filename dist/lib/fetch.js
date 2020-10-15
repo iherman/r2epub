@@ -21,7 +21,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -84,7 +84,7 @@ const check_Web_url = (address) => {
         }
     }
     // Check whether the URL is on an invalid host (mostly localhost). If the code is running in the browser, or
-    // there is an explicit setting to allow localhost then it is fine otherwise localhost
+    // there is an explicit setting to allow localhost, then it is fine otherwise localhost
     // should be refused.
     if (!(constants.is_browser || process.env.R2EPUB_LOCAL)) {
         if (constants.invalid_host_names.includes(parsed.hostname)) {
@@ -110,7 +110,8 @@ const my_fetch = constants.is_browser ? fetch : node_fetch.default;
  * Fetch a resource.
  *
  * "Fetch" means fetching the resource on the Web. There is one exception, though: some W3C files (e.g., SVG logos) have been modified for EPUB use.
- * These files are also available on the Web (see [`modified_epub_files`](https://iherman.github.io/r2epub/typedoc/modules/_lib_constants_.html#modified_epub_files)) but if the local environment variable `R2EPUB_MODIFIED_EPUB_FILES` is set,
+ * These files are also available on the Web (see [`modified_epub_files`](https://iherman.github.io/r2epub/typedoc/modules/_lib_constants_.html#modified_epub_files)) but
+ * if the local environment variable `R2EPUB_MODIFIED_EPUB_FILES` is set,
  * then the value is considered to be the name of a local directory, and the files are picked up from that directory via direct, local file system access.
  * This may speed up and, mainly, avoid some fetch errors that unfortunately occur.
  *

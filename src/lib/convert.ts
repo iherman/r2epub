@@ -27,9 +27,10 @@ import * as constants  from './constants';
 import * as opf        from './opf';
 import * as ocf        from './ocf';
 import * as css        from './css';
-import * as cover      from './cover';
+import * as title_page from './title';
+import * as cover_page from './cover';
 import * as nav        from './nav';
-import * as overview   from './overview'
+import * as overview   from './overview';
 
 
 // ========================================================== The main conversion part ============================================ //
@@ -56,7 +57,7 @@ export interface ResourceRef {
     /** Extra properties, defined by the package specification, to be added to the entry */
     properties?    :string
 
-    /** Flag whether the resource reference should also be added to the spite with a 'linear=no' attribute */
+    /** Flag whether the resource reference should also be added to the spine with a 'linear=no' attribute */
     add_to_spine?  :boolean
 }
 
@@ -126,7 +127,8 @@ interface LocalLinks {
  * * Follow similar actions for some system wide javascript files (although, at this moment, it is a single JS file that must be taken care of).
  * * Extract the various metadata items (title, editors, dates, etc.) for the package file.
  * * Remove the TOC from the TR document (i.e., making it `display:none`), extract that HTML fragment and put it into a separate `nav` file, per EPUB3 specification. (See the [“nav” module](./_lib_nav_.html).)
- * * Create a cover page. (See the [“cover” module](./_lib_cover_.html).)
+ * * Create a title page. (See the [title module](./_lib_title_.html).)
+ * * Create a cover image. (See the [cover module](./_lib_cover_.html).)
  * * Extract OPF properties from the original HTML content to be added to spine entries. (See the [“overview” module](./_lib_overview_.html).)
  * * Modify the DOM tree to abide to some specificities of reading systems (like Apple’s Books) and convert the result content into XHTML. (See the [“overview” module](./_lib_overview_.html).)
  * * Create the package (OPF) file with the right resource and spine entries. (See the [“opf” module](./_lib_opf_.html).)
@@ -226,11 +228,12 @@ export class RespecToEPUB {
      * 4. Add the reference to a W3C logo.
      * 5. Add the reference to the generic fixup script.
      * 6. Add some of the global W3C CSS files, and auxiliary image files.
-     * 7. Create a cover file.
-     * 8. Create a nav file.
-     * 9. Main resource (i.e., Overview.xhtml) entry, with relevant properties.
-     * 10. Finalize the package file based on the collected resources in [[Global.resources]].
-     * 11. Download all resources into the EPUB file.
+     * 7. Create a title page.
+     * 8. Create a cover image.
+     * 9. Create a nav file.
+     * 10. Main resource (i.e., Overview.xhtml) entry, with relevant properties.
+     * 11. Finalize the package file based on the collected resources in [[Global.resources]].
+     * 12. Download all resources into the EPUB file.
      *
      *
      * All the resource entries are first collected in the in a [[Global.resources]] array, to be then added to the
@@ -300,21 +303,6 @@ export class RespecToEPUB {
         }
 
         // ------------------------------------------
-        // 5. Add the reference to the generic fixup script. I am not sure it is really necessary
-        // but it may not harm...
-        // {
-        //     const fixup_element = this.global.html_element.querySelector(`script[src="${constants.fixup_js}"]`);
-        //     if (fixup_element !== null) {
-        //         const relative_url = 'scripts/TR/2016/fixup.js';
-        //         fixup_element.setAttribute('src', relative_url);
-        //         this.global.resources.push({
-        //             relative_url : relative_url,
-        //             media_type   : constants.media_types.js,
-        //             absolute_url : constants.fixup_js
-        //         })
-        //     }
-        // }
-
         // 5. Remove the generic fixup script. Its role is (1) to set the warning popup for the outdated specs and (2) set
         // the width of the display to, possibly, put the TOC onto the sidebar. Both are unnecessary and, actually,
         // (2) is problematic because it forces a narrow display of the text that we do not want.
@@ -328,19 +316,23 @@ export class RespecToEPUB {
         this.global.resources = [...this.global.resources, ...css.extract_css(this.global)]
 
         // ------------------------------------------
-        // 7. Create a cover file
-        this.global.resources = [...cover.create_cover_page(this.global), ...this.global.resources, ];
+        // 7. Create a title page
+        this.global.resources = [...title_page.create_title_page(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 8. Create a nav file
+        // 8. Create the cover image
+        this.global.resources = [...cover_page.create_cover_image(this.global), ...this.global.resources];
+
+        // ------------------------------------------
+        // 9. Create a nav file
         this.global.resources = [...nav.create_nav_file(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 9. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
+        // 10. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
         this.global.resources = [...overview.generate_overview_item(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 10. Finalize the package file
+        // 11. Finalize the package file
         {
             // Add the WCAG conformance, if applicable
             if (constants.wcag_checked.includes(this.global.config.specStatus)) this.global.opf_content.add_wcag_link();

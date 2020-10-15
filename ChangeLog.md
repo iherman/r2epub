@@ -3,10 +3,12 @@
 ## Version 1.2.5
 
 * Made changes to ensure the content used the full width of the available viewport. This means
-  * Removing the `fixup.js` script from the result (this script toogles the class on the `body` element to put the TOC incline or aside, depending on the width of the screen)
-  * Putting a stable `toc-inline` class to the body element.
+  * removing the `fixup.js` script from the result (this script toogles the class on the `body` element to put the TOC incline or aside, depending on the width of the screen);
+  * putting a stable `toc-inline` class to the body element.
 
-    These changes ensure that the `base.css` style does not reduce the displayable width for the main content
+   These changes ensure that the `base.css` style does not reduce the displayable width for the main content. (Alas!, some reading systems narrow down the display area regardless. I cannot control that...)
+* Generate a cover image in the form of an SVG file
+  * Caveat: although some attempts is made to break the title line into possibly several lines to avoid being too large for that page, that part is an ugly hack. Alas!, SVG2’s feature of automatically putting a text in a rectangle does not seem to be implemented...
 
 ## Version 1.2.4
 

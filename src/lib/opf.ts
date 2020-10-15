@@ -22,6 +22,7 @@
  */
 
 import { convert }   from "xmlbuilder2";
+import * as utils    from "./utils";
 
 // These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.2 package. See that document for details.
 /**
@@ -204,7 +205,7 @@ export class PackageWrapper {
                     }],
                     "dc:title": [{
                         "@id" : "title",
-                        "#" : title
+                        "#" : utils.de_xml(title)
                     }],
                     "dc:language": [{
                         "#": "en-us"
@@ -246,7 +247,7 @@ export class PackageWrapper {
                 spine : {
                     "itemref" : [
                         {
-                            "@idref": "start",
+                            "@idref": "title_page",
                         },
                         {
                             "@idref": "main",
@@ -263,7 +264,7 @@ export class PackageWrapper {
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
     add_manifest_item(item :ManifestItem, add_spine_item :boolean = false) :void {
-        if (item['@properties'] === undefined) {
+        if (item['@properties'] === undefined || item['@properties'] === '') {
             delete item['@properties'];
         }
         this.thePackage.package.manifest.item.push(item);
