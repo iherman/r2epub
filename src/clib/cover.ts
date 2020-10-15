@@ -1,7 +1,7 @@
 /**
  * ## Collection cover image
  *
- * Creation of a title page for a collection. See [[create_title_page]] for the details.
+ * Creation of a cover image for a collection. See [[create_cover_image]] for the details.
  *
  * @packageDocumentation
  */
@@ -12,10 +12,7 @@ import { cover_svg } from '../lib/cover';
 
 
 /**
- * Create the HTML content for a title page.
- *
- * The title originates from the JSON configuration; the editors and the date are collected from the chapters.
- *
+ * Create the cover image: it is an SVG file with title (as defined in the JSON configuration), date, and a W3C Logo.
  *
  * @param book - the full book data
  * @returns a text representation of the cover svg file.

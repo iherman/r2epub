@@ -16,6 +16,25 @@
  *
  * @packageDocumentation
  */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PackageWrapper = void 0;
 /**
@@ -23,6 +42,7 @@ exports.PackageWrapper = void 0;
  *
  */
 const xmlbuilder2_1 = require("xmlbuilder2");
+const utils = __importStar(require("./utils"));
 /**
  * ## The OPF Wrapper
  *
@@ -63,7 +83,7 @@ class PackageWrapper {
                         }],
                     "dc:title": [{
                             "@id": "title",
-                            "#": title
+                            "#": utils.de_xml(title)
                         }],
                     "dc:language": [{
                             "#": "en-us"
@@ -105,7 +125,7 @@ class PackageWrapper {
                 spine: {
                     "itemref": [
                         {
-                            "@idref": "start",
+                            "@idref": "title_page",
                         },
                         {
                             "@idref": "main",
@@ -121,7 +141,7 @@ class PackageWrapper {
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
     add_manifest_item(item, add_spine_item = false) {
-        if (item['@properties'] === undefined) {
+        if (item['@properties'] === undefined || item['@properties'] === '') {
             delete item['@properties'];
         }
         this.thePackage.package.manifest.item.push(item);

@@ -82,7 +82,7 @@ export const cover_svg = `<?xml version="1.0" encoding="UTF-8"?>
 `
 
 /**
- * Create the cover image: it is an SVG file with title and date.
+ * Create the cover image: it is an SVG file with title, the type of the document, date, and a W3C Logo.
  *
  * @param global
  * @returns - resources for containing a single SVG file.

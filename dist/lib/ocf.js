@@ -23,7 +23,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -83,7 +83,7 @@ class OCF {
     }
     /**
      * Return the final content of the book all packed up.
-     * If not yet done, the content is generated using the relevant jszip function, packaging all content that has been added.
+     * If not yet done, the content is generated using the relevant `jszip` function, packaging all content that has been added.
      *
      * @async
      */

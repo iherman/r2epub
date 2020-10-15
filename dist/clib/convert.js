@@ -33,7 +33,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -44,6 +44,7 @@ const fetch = __importStar(require("../lib/fetch"));
 const chapter_1 = require("./chapter");
 const nav = __importStar(require("./nav"));
 const opf = __importStar(require("./opf"));
+const title = __importStar(require("./title"));
 const cover = __importStar(require("./cover"));
 const args = __importStar(require("./args"));
 const _ = __importStar(require("underscore"));
@@ -85,7 +86,7 @@ const generate_book_data = async (book_data) => {
  *
  * 1. Convert the user JSON configuration to the internal data structure (see [[get_book_configuration]]) and collect the data for the output target (see [[generate_book_data]]);
  * 2. Create (and store in the target’s OCF) the package file (see [[create_opf]]);
- * 3. Create (and store in the target’s OCF) the cover page (see [create_cover_page](../modules/_clib_cover_.html#create_cover_page));
+ * 3. Create (and store in the target’s OCF) the title page (see [create_title_page](../modules/_clib_title_.html#create_title_page));
  * 4. Create (and store in the target’s OCF) the navigation file for the whole book (see [[create_nav_page]]);
  * 5. Collect, from each [[Chapter]] the real content from the chapter’s OCF and copy it to the target’s OCF (with modified file path values).
  *
@@ -101,7 +102,7 @@ async function create_epub(config_url, trace = false, print_package = false) {
     const book_data = args.get_book_configuration(data);
     // generate the skeleton of the book
     const the_book = await generate_book_data(book_data);
-    // Create the OPF file, the cover and nav pages, and store each of them in the book at
+    // Create the OPF file, the title and nav pages, and store each of them in the book at
     // well specified places
     const the_opf = opf.create_opf(the_book);
     if (print_package) {
@@ -110,7 +111,8 @@ async function create_epub(config_url, trace = false, print_package = false) {
     }
     else {
         the_book.ocf.append(the_opf, 'package.opf');
-        the_book.ocf.append(cover.create_cover_page(the_book), 'cover.xhtml');
+        the_book.ocf.append(title.create_title_page(the_book), 'title.xhtml');
+        the_book.ocf.append(cover.create_cover_image(the_book), 'cover_image.svg');
         the_book.ocf.append(nav.create_nav_page(the_book), 'nav.xhtml');
         // Store the data in the final zip file
         the_book.chapters.forEach((chapter) => {

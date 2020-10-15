@@ -22,6 +22,7 @@
  */
 
 import { convert }   from "xmlbuilder2";
+import * as utils    from "./utils";
 
 // These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.2 package. See that document for details.
 /**
@@ -204,7 +205,7 @@ export class PackageWrapper {
                     }],
                     "dc:title": [{
                         "@id" : "title",
-                        "#" : title
+                        "#" : utils.de_xml(title)
                     }],
                     "dc:language": [{
                         "#": "en-us"

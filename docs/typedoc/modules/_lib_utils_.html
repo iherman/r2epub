@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;clib/nav&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.5</title>
+	<title>&quot;lib/utils&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.5</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_clib_nav_.html">&quot;clib/nav&quot;</a>
+					<a href="_lib_utils_.html">&quot;lib/utils&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;clib/nav&quot;</h1>
+			<h1>External module &quot;lib/utils&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -67,11 +67,10 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#collection-navigation-page" id="collection-navigation-page" style="color: inherit; text-decoration: none;">
-							<h2>Collection Navigation page</h2>
+						<a href="#some-common-utilities" id="some-common-utilities" style="color: inherit; text-decoration: none;">
+							<h2>Some common utilities</h2>
 						</a>
 					</div>
-					<p>Creation of a collection navigation page. See <a href="_clib_nav_.html#create_nav_page">create_nav_page</a> for details</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -81,7 +80,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_clib_nav_.html#create_nav_page" class="tsd-kind-icon">create_<wbr>nav_<wbr>page</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_utils_.html#date_to_string" class="tsd-kind-icon">date_<wbr>to_<wbr>string</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_utils_.html#de_xml" class="tsd-kind-icon">de_<wbr>xml</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_utils_.html#slice_text" class="tsd-kind-icon">slice_<wbr>text</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,39 +91,101 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="create_nav_page" class="tsd-anchor"></a>
-					<h3>create_<wbr>nav_<wbr>page</h3>
+					<a name="date_to_string" class="tsd-anchor"></a>
+					<h3>date_<wbr>to_<wbr>string</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">create_<wbr>nav_<wbr>page<span class="tsd-signature-symbol">(</span>book<span class="tsd-signature-symbol">: </span><a href="../interfaces/_clib_convert_.collection.html" class="tsd-signature-type">Collection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">date_<wbr>to_<wbr>string<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/clib/nav.ts#L61">clib/nav.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/utils.ts#L89">lib/utils.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create the HTML navigation page.</p>
+									<p>Convert an ISO formatted date to a more readable format.</p>
 								</div>
-								<p>The function gathers the real content of the chapters’ navigation pages, extracts real TOC portions and puts together all of them as one
-								large TOC structure. The result is added to a textual HTML template.</p>
-								<p>Note that the links to the real content must be modified on the fly, because the original chapters are all put into a separate subdirectory.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>book: <a href="../interfaces/_clib_convert_.collection.html" class="tsd-signature-type">Collection</a></h5>
+									<h5>date: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the full book data</p>
+										<p>date is ISO format</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<ul>
-								<li>a text representation of the nav xhtml file.</li>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="de_xml" class="tsd-anchor"></a>
+					<h3>de_<wbr>xml</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">de_<wbr>xml<span class="tsd-signature-symbol">(</span>inp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/utils.ts#L53">lib/utils.ts:53</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove any XML/HTML tags from the input; <code>&lt;br/&gt;</code> tags are replaced by space and all other tags are removed.</p>
+								</div>
+								<p>Used when the title may include XML tags but the metadata item should not...</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>inp: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>input string</p>
+									</div>
+								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>input string free of XML tags</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="slice_text" class="tsd-anchor"></a>
+					<h3>slice_<wbr>text</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">slice_<wbr>text<span class="tsd-signature-symbol">(</span>inp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/utils.ts#L19">lib/utils.ts:19</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>“Slice” a long text into lines separated by the (HTML) <code>&lt;br/&gt;</code> tag. Used as a rudimentary tool
+									when adding the title lines to an SVG content.</p>
+								</div>
+								<p>Note that if the incoming string <em>includes</em> the <code>&lt;br/&gt;</code> tag already, the function returns the text unchanged. This allows the end-user
+								to control the input, if required.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>inp: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Input text</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>“sliced” text</p>
 						</li>
 					</ul>
 				</section>
@@ -146,7 +209,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_clib_cover_.html">&quot;clib/cover&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_clib_nav_.html">&quot;clib/nav&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -191,7 +254,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_lib_title_.html">&quot;lib/title&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_lib_utils_.html">&quot;lib/utils&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -208,7 +271,13 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_clib_nav_.html#create_nav_page" class="tsd-kind-icon">create_<wbr>nav_<wbr>page</a>
+						<a href="_lib_utils_.html#date_to_string" class="tsd-kind-icon">date_<wbr>to_<wbr>string</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_lib_utils_.html#de_xml" class="tsd-kind-icon">de_<wbr>xml</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_lib_utils_.html#slice_text" class="tsd-kind-icon">slice_<wbr>text</a>
 					</li>
 				</ul>
 			</nav>

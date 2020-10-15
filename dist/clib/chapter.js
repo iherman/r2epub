@@ -21,7 +21,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -45,7 +45,8 @@ const never_transfer = [
     'META-INF/container.xml',
     'package.opf',
     'nav.xhtml',
-    'cover.xhtml',
+    'title.xhtml',
+    'cover_image.svg'
 ];
 /**
  * Wrapper around a single chapter. The main action is in the [[initialize]] method, which collects all the data and extracts additional data that are necessary elsewhere.
