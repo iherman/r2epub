@@ -13,6 +13,7 @@
 
 import * as jsdom    from 'jsdom';
 import * as cConvert from './convert';
+import * as utils    from '../lib/utils';
 import { Chapter }   from './chapter';
 
 
@@ -69,5 +70,5 @@ export function create_nav_page(book :cConvert.Collection) :string {
     }
 
     const full_nav :string = book.chapters.map(get_nav_text).join('\n');
-    return nav.replace('%%%Title%%%', book.title).replace('%%%TOC%%%',full_nav);
+    return nav.replace('%%%Title%%%', utils.de_xml(book.title)).replace('%%%TOC%%%',full_nav);
  }

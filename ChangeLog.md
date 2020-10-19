@@ -4,6 +4,7 @@
 
 * The ToC nav element is removed from the processed `Overview.xhtml` file. It was simply non-displayed via a CSS statement before, but older Reading Systems did not understand that, and displayed the whole lot as part of the content. This is unnecessary and disturbing to the reader…
 * For each "book", ie, collection of parts, the `collection` elements are also added to the final OPF file to collect the original TR documents (although the nav files are not there). This is more for possible testing purposes, it does not have a use right now…
+* Took care of a bug that generated possible XML tags into titles
 
 ## Version 1.2.5
 
