@@ -76,6 +76,11 @@ export function create_nav_file(global :Global) :ResourceRef[] {
         .replace('%%%Title%%%', title)
         .replace('%%%TOC%%%', toc_ol.innerHTML.replace(/href="#/g,'href="Overview.xhtml#'));
 
+    // Remove the toc element from the Overview.xhtml altogether. Although it would be enough
+    // to rely on CSS to make this element non-displayed, it seems that there are some
+    // older reading systems that do not implement that...
+    toc_ol.remove();
+
     retval.push({
         media_type   : constants.media_types.xhtml,
         relative_url : 'nav.xhtml',
