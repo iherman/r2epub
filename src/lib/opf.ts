@@ -65,10 +65,11 @@ interface Meta {
 }
 
 /**
- * The "link" element content, as define in the spec.
+ * The "link" element content, as define in the spec. `@rel` is optional, because it is also used for OPF collections, and
+ * `@rel` is indeed optional in that context.
  */
-interface Link {
-    "@rel"         :string,
+export interface Link {
+    "@rel"?         :string,
     "@href"        :string,
     "@id"?         :string,
     "@media-type"? :string,
@@ -86,7 +87,7 @@ interface Creator {
 }
 
 /**
- * The minimal metadata, used by the TR documents
+ * The minimal metadata, used by the TR documents.
  */
 interface Metadata {
     "dc:identifier"    :DCIdentifier[],
@@ -134,6 +135,24 @@ interface Spine {
 }
 
 /**
+ * The minimal metadata, used in collections
+ */
+export interface CollectionMetadata {
+    "dc:identifier"    :string,
+    "dc:title"         :string,
+    "dc:language"      :string,
+}
+
+/**
+ * Representations of the "collections" element
+ */
+export interface Collection {
+    "@role"     :string,
+    "metadata"? :CollectionMetadata,
+    "link"      :Link[]
+}
+
+/**
  * Encoding of the XML structure of the package file, as defined in the EPUB specification, in JSON.
  */
 interface PackageContent {
@@ -147,7 +166,8 @@ interface PackageContent {
     "@xml:lang"?         :string,
     "metadata"           :Metadata,
     "manifest"           :Manifest,
-    "spine"              :Spine
+    "spine"              :Spine,
+    "collection"?        :Collection[]
 }
 
 /**
@@ -309,7 +329,7 @@ export class PackageWrapper {
      *
      * @param creators - list of creators of the publications
      */
-    add_creators(creators: string[]): void {
+    add_creators(creators :string[]): void {
         creators.forEach((creator: string) => {
             this.thePackage.package.metadata["dc:creator"].push({
                 "@id"   : `creator_id_${this.id}`,
@@ -323,6 +343,20 @@ export class PackageWrapper {
             });
             this.id++;
         });
+    }
+
+    /**
+     * Add a new OPF collection. This is used when the final EPUB is itself a collection of parts; each collection in the
+     * OPF sense collects the constituents of a specific part.
+     *
+     * @param new_collection a new collection to be added to the package document.
+     */
+    add_collection(new_collection :Collection): void {
+        if (this.thePackage.package.collection === undefined) {
+            this.thePackage.package.collection = [new_collection];
+        } else {
+            this.thePackage.package.collection.push(new_collection);
+        }
     }
 
     /**
@@ -340,6 +374,8 @@ export class PackageWrapper {
             "#": `${date}T00:00:00Z`
         })
     }
+
+
 
     /**
      * Serialize the Package document into (pretty printed) XML.

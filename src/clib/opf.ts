@@ -11,10 +11,10 @@
   *
   */
 
-import * as opf                     from '../lib/opf';
-import * as constants               from '../lib/constants';
-import * as cConvert                from './convert';
-import { Chapter, OPFManifestItem } from './chapter';
+import * as opf                                    from '../lib/opf';
+import * as constants                              from '../lib/constants';
+import * as cConvert                               from './convert';
+import { Chapter, OPFManifestItem, transfer_once } from './chapter';
 
 /**
  * Creation of the of the Package file for a collection, per the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc). See also [the `PackageWrapper` documentation](https://iherman.github.io/r2epub/typedoc/classes/_lib_opf_.packagewrapper.html).
@@ -24,7 +24,7 @@ import { Chapter, OPFManifestItem } from './chapter';
  * 1. Stores the stable files like title and nav in the package;
  * 2. Collects the dates and editors from the book and adds that to the package;
  * 3. Collects the manifest item data for each package and adds it to the new package;
- * 4. Adds the manifest items and the linear spine items.
+ * 4. Adds the manifest items, the linear spine items, and the collections.
  * 5. Adds the non-linear spine items.
  * 6. Sets the wcag conformance if all chapters are conform
  *
@@ -68,6 +68,15 @@ export function create_opf(book :cConvert.Collection) :string {
     // The 'overview' files are added to the spine on the fly
     book.chapters.forEach((chapter :Chapter) :void => {
         // unique ID-s must be added to the items themselves
+        const new_collection :opf.Collection = {
+            "@role"    : "https://www.w3.org/TR/",
+            "metadata" : {
+                "dc:identifier"  : chapter.identifier,
+                "dc:title"       : chapter.title,
+                "dc:language"    : "en-US"
+            },
+            "link"     : []
+        };
         chapter.opf_items.forEach((item :OPFManifestItem)  :void => {
             let id :string;
             // The cover images should not be considered, those are unused on the collection level
@@ -93,7 +102,9 @@ export function create_opf(book :cConvert.Collection) :string {
                 "@media-type" : item.media_type,
                 "@properties" : item.properties
             });
-        })
+            if (!transfer_once.includes(item.href)) new_collection.link.push({"@href" : item.href});
+        });
+        the_opf.add_collection(new_collection);
     });
 
     // 5. the extra spine data must be collected from the chapters and added to the opf file
