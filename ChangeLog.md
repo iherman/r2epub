@@ -1,5 +1,9 @@
 # Changes
 
+## Version 1.2.6
+
+* The ToC nav element is removed from the processed `Overview.xhtml` file. It was simply non-displayed via a CSS statement before, but older Reading Systems did not understand that, and displayed the whole lot as part of the content. This is unnecessary and disturbing to the reader…
+
 ## Version 1.2.5
 
 * Made changes to ensure the content used the full width of the available viewport. This means
