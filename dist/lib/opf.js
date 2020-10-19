@@ -198,6 +198,20 @@ class PackageWrapper {
         });
     }
     /**
+     * Add a new OPF collection. This is used when the final EPUB is itself a collection of parts; each collection in the
+     * OPF sense collects the constituents of a specific part.
+     *
+     * @param new_collection a new collection to be added to the package document.
+     */
+    add_collection(new_collection) {
+        if (this.thePackage.package.collection === undefined) {
+            this.thePackage.package.collection = [new_collection];
+        }
+        else {
+            this.thePackage.package.collection.push(new_collection);
+        }
+    }
+    /**
      * Set the date and the modification date of the publication.
      *
      * @param date - modification date and proper date (there is no difference for W3C Documents)

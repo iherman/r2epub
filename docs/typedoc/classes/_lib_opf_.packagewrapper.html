@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PackageWrapper | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.5</title>
+	<title>PackageWrapper | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.6</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.5</a>
+					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.6</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -106,6 +106,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#add_collection" class="tsd-kind-icon">add_<wbr>collection</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#add_creators" class="tsd-kind-icon">add_<wbr>creators</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#add_dates" class="tsd-kind-icon">add_<wbr>dates</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_opf_.packagewrapper.html#add_manifest_item" class="tsd-kind-icon">add_<wbr>manifest_<wbr>item</a></li>
@@ -129,7 +130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/opf.ts#L186">lib/opf.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L206">lib/opf.ts:206</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -161,6 +162,38 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="add_collection" class="tsd-anchor"></a>
+					<h3>add_<wbr>collection</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add_<wbr>collection<span class="tsd-signature-symbol">(</span>new_collection<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_opf_.collection.html" class="tsd-signature-type">Collection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L354">lib/opf.ts:354</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add a new OPF collection. This is used when the final EPUB is itself a collection of parts; each collection in the
+									OPF sense collects the constituents of a specific part.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>new_collection: <a href="../interfaces/_lib_opf_.collection.html" class="tsd-signature-type">Collection</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>a new collection to be added to the package document.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="add_creators" class="tsd-anchor"></a>
 					<h3>add_<wbr>creators</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -170,7 +203,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/opf.ts#L312">lib/opf.ts:312</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L332">lib/opf.ts:332</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -201,7 +234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/opf.ts#L333">lib/opf.ts:333</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L367">lib/opf.ts:367</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -232,7 +265,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/opf.ts#L266">lib/opf.ts:266</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L286">lib/opf.ts:286</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -266,7 +299,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/opf.ts#L296">lib/opf.ts:296</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L316">lib/opf.ts:316</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -300,7 +333,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/opf.ts#L283">lib/opf.ts:283</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L303">lib/opf.ts:303</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -322,7 +355,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/4a9f2e2/src/lib/opf.ts#L349">lib/opf.ts:349</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L385">lib/opf.ts:385</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -427,6 +460,9 @@
 								<a href="_lib_opf_.packagewrapper.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_lib_opf_.packagewrapper.html#add_collection" class="tsd-kind-icon">add_<wbr>collection</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_opf_.packagewrapper.html#add_creators" class="tsd-kind-icon">add_<wbr>creators</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -448,6 +484,12 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_opf_.collection.html" class="tsd-kind-icon">Collection</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_opf_.collectionmetadata.html" class="tsd-kind-icon">Collection<wbr>Metadata</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="../interfaces/_lib_opf_.creator.html" class="tsd-kind-icon">Creator</a>
 					</li>
@@ -460,7 +502,7 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="../interfaces/_lib_opf_.dctitle.html" class="tsd-kind-icon">DCTitle</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_lib_opf_.link.html" class="tsd-kind-icon">Link</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">

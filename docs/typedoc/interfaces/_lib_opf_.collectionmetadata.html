@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/overview&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.6</title>
+	<title>CollectionMetadata | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.6</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_lib_overview_.html">&quot;lib/overview&quot;</a>
+					<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
+				</li>
+				<li>
+					<a href="_lib_opf_.collectionmetadata.html">CollectionMetadata</a>
 				</li>
 			</ul>
-			<h1>External module &quot;lib/overview&quot;</h1>
+			<h1>Interface CollectionMetadata</h1>
 		</div>
 	</div>
 </header>
@@ -67,74 +70,64 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#generate-the-codeoverviewxhtmlcode-entry" id="generate-the-codeoverviewxhtmlcode-entry" style="color: inherit; text-decoration: none;">
-							<h2>Generate the <code>Overview.xhtml</code> entry</h2>
-						</a>
+						<p>The minimal metadata, used in collections</p>
 					</div>
-					<p>Generation involves two different steps:</p>
-					<ol>
-						<li>The package entry for <code>Overview.xhtml</code> may contain a <code>properties</code> attribute; see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a> for further details.</li>
-						<li>Due to the rigidity of the iBook reader, the DOM tree has to change: all children of the <code>&lt;body&gt;</code> should be encapsulated into a top level block
-							element (we use <code>&lt;div role=&quot;main&quot;&gt;</code>). This is because iBook imposes a zero padding on the body element, and that cannot be controlled by the user;
-						the introduction of the top level block element allows for suitable CSS adjustments in the <a href="https://www.ivan-herman.net/r2epub/base.css">common css file</a>.</li>
-					</ol>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">CollectionMetadata</span>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Functions</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_overview_.html#generate_overview_item" class="tsd-kind-icon">generate_<wbr>overview_<wbr>item</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_opf_.collectionmetadata.html#dc_identifier" class="tsd-kind-icon">dc:identifier</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_opf_.collectionmetadata.html#dc_language" class="tsd-kind-icon">dc:language</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_opf_.collectionmetadata.html#dc_title" class="tsd-kind-icon">dc:title</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="generate_overview_item" class="tsd-anchor"></a>
-					<h3>generate_<wbr>overview_<wbr>item</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">generate_<wbr>overview_<wbr>item<span class="tsd-signature-symbol">(</span>global<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_convert_.global.html" class="tsd-signature-type">Global</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_convert_.resourceref.html" class="tsd-signature-type">ResourceRef</a><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/overview.ts#L42">lib/overview.ts:42</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Generate the resource entry for the <code>Overview.xhtml</code> item into the package; that includes setting the various manifest item
-									properties (see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a>).</p>
-								</div>
-								<p>The following properties are set, if applicable:</p>
-								<ul>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml">mathml</a>: there is an explicit usage of mathml.</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted">scripted</a>: there are active scripts.</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg">svg</a>: there is explicit svg usage.</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources">remote-resources</a>: there are remote resources, typically video, audio, or images.</li>
-								</ul>
-								<p>The function also modifies the DOM tree by introducing a <code>&lt;main&gt;</code> element right as a child of <code>body</code>, and adding the fixed <code>toc-inline</code> class to ensure that the
-								body occupies the whole width of the viewport.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>global: <a href="../interfaces/_lib_convert_.global.html" class="tsd-signature-type">Global</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_lib_convert_.resourceref.html" class="tsd-signature-type">ResourceRef</a><span class="tsd-signature-symbol">[]</span></h4>
-							<ul>
-								<li>a single element array with the resource definition of the <code>Overview.xhtml</code> entry</li>
-							</ul>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="dc_identifier" class="tsd-anchor"></a>
+					<h3>dc:identifier</h3>
+					<div class="tsd-signature tsd-kind-icon">dc:identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L141">lib/opf.ts:141</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="dc_language" class="tsd-anchor"></a>
+					<h3>dc:language</h3>
+					<div class="tsd-signature tsd-kind-icon">dc:language<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L143">lib/opf.ts:143</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="dc_title" class="tsd-anchor"></a>
+					<h3>dc:title</h3>
+					<div class="tsd-signature tsd-kind-icon">dc:title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/1bada90/src/lib/opf.ts#L142">lib/opf.ts:142</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -145,80 +138,140 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_clib_args_.html">&quot;clib/args&quot;</a>
+						<a href="../modules/_clib_args_.html">&quot;clib/args&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_clib_chapter_.html">&quot;clib/chapter&quot;</a>
+						<a href="../modules/_clib_chapter_.html">&quot;clib/chapter&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_clib_convert_.html">&quot;clib/convert&quot;</a>
+						<a href="../modules/_clib_convert_.html">&quot;clib/convert&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_clib_cover_.html">&quot;clib/cover&quot;</a>
+						<a href="../modules/_clib_cover_.html">&quot;clib/cover&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_clib_nav_.html">&quot;clib/nav&quot;</a>
+						<a href="../modules/_clib_nav_.html">&quot;clib/nav&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_clib_opf_.html">&quot;clib/opf&quot;</a>
+						<a href="../modules/_clib_opf_.html">&quot;clib/opf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_clib_title_.html">&quot;clib/title&quot;</a>
+						<a href="../modules/_clib_title_.html">&quot;clib/title&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_index_.html">&quot;index&quot;</a>
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_constants_.html">&quot;lib/constants&quot;</a>
+						<a href="../modules/_lib_constants_.html">&quot;lib/constants&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_convert_.html">&quot;lib/convert&quot;</a>
+						<a href="../modules/_lib_convert_.html">&quot;lib/convert&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_cover_.html">&quot;lib/cover&quot;</a>
+						<a href="../modules/_lib_cover_.html">&quot;lib/cover&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_css_.html">&quot;lib/css&quot;</a>
+						<a href="../modules/_lib_css_.html">&quot;lib/css&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_fetch_.html">&quot;lib/fetch&quot;</a>
+						<a href="../modules/_lib_fetch_.html">&quot;lib/fetch&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_home_.html">&quot;lib/home&quot;</a>
+						<a href="../modules/_lib_home_.html">&quot;lib/home&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_nav_.html">&quot;lib/nav&quot;</a>
+						<a href="../modules/_lib_nav_.html">&quot;lib/nav&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_ocf_.html">&quot;lib/ocf&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_lib_opf_.html">&quot;lib/opf&quot;</a>
+						<a href="../modules/_lib_ocf_.html">&quot;lib/ocf&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_lib_overview_.html">&quot;lib/overview&quot;</a>
+						<a href="../modules/_lib_opf_.html">&quot;lib/opf&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_title_.html">&quot;lib/title&quot;</a>
+						<a href="../modules/_lib_overview_.html">&quot;lib/overview&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_utils_.html">&quot;lib/utils&quot;</a>
+						<a href="../modules/_lib_title_.html">&quot;lib/title&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
+						<a href="../modules/_lib_utils_.html">&quot;lib/utils&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_r2epub_.html">&quot;r2epub&quot;</a>
+						<a href="../modules/_lib_xhtml_.html">&quot;lib/xhtml&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_server_.html">&quot;server&quot;</a>
+						<a href="../modules/_r2epub_.html">&quot;r2epub&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_server_.html">&quot;server&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_lib_overview_.html#generate_overview_item" class="tsd-kind-icon">generate_<wbr>overview_<wbr>item</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_lib_opf_.packagewrapper.html" class="tsd-kind-icon">Package<wbr>Wrapper</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_opf_.collection.html" class="tsd-kind-icon">Collection</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_opf_.collectionmetadata.html" class="tsd-kind-icon">Collection<wbr>Metadata</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_opf_.collectionmetadata.html#dc_identifier" class="tsd-kind-icon">dc:identifier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_opf_.collectionmetadata.html#dc_language" class="tsd-kind-icon">dc:language</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_opf_.collectionmetadata.html#dc_title" class="tsd-kind-icon">dc:title</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.creator.html" class="tsd-kind-icon">Creator</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dcidentifier.html" class="tsd-kind-icon">DCIdentifier</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dclang.html" class="tsd-kind-icon">DCLang</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.dctitle.html" class="tsd-kind-icon">DCTitle</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_opf_.link.html" class="tsd-kind-icon">Link</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.manifest.html" class="tsd-kind-icon">Manifest</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_opf_.manifestitem.html" class="tsd-kind-icon">Manifest<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.meta.html" class="tsd-kind-icon">Meta</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.metadata.html" class="tsd-kind-icon">Metadata</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_opf_.package.html" class="tsd-kind-icon">Package</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.packagecontent.html" class="tsd-kind-icon">Package<wbr>Content</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.spine.html" class="tsd-kind-icon">Spine</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_lib_opf_.spineitem.html" class="tsd-kind-icon">Spine<wbr>Item</a>
 					</li>
 				</ul>
 			</nav>

@@ -110,8 +110,8 @@ const title_page = `<?xml version="1.0" encoding="utf-8"?>
  */
 function create_title_page(book) {
     return title_page
-        .replace('%%%TITLE1%%%', book.title)
-        .replace('%%%TITLE2%%%', book.title)
+        .replace('%%%TITLE1%%%', utils.de_xml(book.title))
+        .replace('%%%TITLE2%%%', utils.de_xml(book.title))
         .replace('%%%EDITORS%%%', book.editors.join('; '))
         .replace('%%%%ISODATE%%%%', book.date)
         .replace('%%%DATE%%%', utils.date_to_string(book.date));

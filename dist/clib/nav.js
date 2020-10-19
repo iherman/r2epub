@@ -31,6 +31,7 @@ exports.create_nav_page = void 0;
  *
  */
 const jsdom = __importStar(require("jsdom"));
+const utils = __importStar(require("../lib/utils"));
 /**
  * Template of the XHTML file
  *
@@ -81,7 +82,7 @@ function create_nav_page(book) {
         return `<li><a href="${chapter.chapter_name}/Overview.xhtml">${chapter.title}</a><ol>${html_final}</ol></li>`;
     };
     const full_nav = book.chapters.map(get_nav_text).join('\n');
-    return nav.replace('%%%Title%%%', book.title).replace('%%%TOC%%%', full_nav);
+    return nav.replace('%%%Title%%%', utils.de_xml(book.title)).replace('%%%TOC%%%', full_nav);
 }
 exports.create_nav_page = create_nav_page;
 //# sourceMappingURL=nav.js.map
