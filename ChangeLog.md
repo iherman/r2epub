@@ -1,5 +1,10 @@
 # Changes
 
+## Version 1.2.7
+
+* New metadata entries are generated into the package file: `dc:subject` (relying on ACM classification terms) and adding an 'svg' property for XHTML files referring to svg files via images, objects, or iframes.
+* Change the id of the ToC `<nav>` element to avoid clashes with the W3C CSS files. Have also added the ARIA `doc-toc` role.
+
 ## Version 1.2.6
 
 * The ToC nav element is removed from the processed `Overview.xhtml` file. It was simply non-displayed via a CSS statement before, but older Reading Systems did not understand that, and displayed the whole lot as part of the content. This is unnecessary and disturbing to the reader…

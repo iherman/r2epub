@@ -241,11 +241,11 @@ export class PackageWrapper {
                         "@property": "title-type",
                         "@refines": "#title",
                         "#": "main"
-                    },{
-                        "@property": "identifier-type",
-                        "@refines": "#pub-id",
-                        "@scheme" : "https://www.w3.org/TR/xmlschema-2/",
-                        "#": "anyURI"
+                    // },{
+                    //     "@property": "identifier-type",
+                    //     "@refines": "#pub-id",
+                    //     "@scheme" : "xsd:anyURI",
+                    //     "#": "anyURI"
                     },{
                         "@property": "cc:attributionURL",
                         "#": "https://www.w3.org"

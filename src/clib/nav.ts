@@ -37,7 +37,7 @@ const nav :string = `<?xml version="1.0"?>
         </style>
     </head>
     <body>
-        <nav epub:type="toc" id="toc">
+        <nav epub:type="toc" id="navigation" role="doc-toc">
         <h2 class="introductory" id="table-of-contents">Table of Contents</h2>
         <ol>
 %%%TOC%%%
