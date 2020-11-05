@@ -298,6 +298,9 @@ export class PackageWrapper {
                             "@idref": "title_page",
                         },
                         {
+                            "@idref": "nav",
+                        },
+                        {
                             "@idref": "main",
                         }
                     ]
