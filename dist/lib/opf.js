@@ -88,6 +88,13 @@ class PackageWrapper {
                     "dc:language": [{
                             "#": "en-us"
                         }],
+                    "dc:subject": [{
+                            "@id": "acm1",
+                            "#": "Information systems~World Wide Web"
+                        }, {
+                            "@id": "acm2",
+                            "#": "General and reference~Computing standards, RFCs and guidelines"
+                        }],
                     "meta": [{
                             "@property": "title-type",
                             "@refines": "#title",
@@ -95,6 +102,22 @@ class PackageWrapper {
                         }, {
                             "@property": "cc:attributionURL",
                             "#": "https://www.w3.org"
+                        }, {
+                            "@property": "authority",
+                            "@refines": "#acm1",
+                            "#": "https://dl.acm.org/ccs"
+                        }, {
+                            "@property": "term",
+                            "@refines": "#acm1",
+                            "#": "10002951.10003260"
+                        }, {
+                            "@property": "authority",
+                            "@refines": "#acm2",
+                            "#": "https://dl.acm.org/ccs"
+                        }, {
+                            "@property": "term",
+                            "@refines": "#acm2",
+                            "#": "10002944.10011122.10003459"
                         }, {
                             "@property": "schema:accessibilityFeature",
                             '#': "tableOfContents"
@@ -126,6 +149,9 @@ class PackageWrapper {
                     "itemref": [
                         {
                             "@idref": "title_page",
+                        },
+                        {
+                            "@idref": "nav",
                         },
                         {
                             "@idref": "main",
@@ -224,6 +250,10 @@ class PackageWrapper {
         this.thePackage.package.metadata.meta.push({
             "@property": "dcterms:modified",
             "#": `${date}T00:00:00Z`
+        });
+        this.thePackage.package.metadata.meta.push({
+            "@property": "dcterms:dateCopyrighted",
+            "#": `${date.split('-')[0]}`
         });
     }
     /**

@@ -41,19 +41,69 @@ const nav = `<?xml version="1.0"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
     <head>
         <title>
-            %%%Title%%% — Contents
+            %%%Title%%% — Table of Contents
         </title>
         <link rel="stylesheet" type="text/css" href="StyleSheets/base.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
-        ol {
-            list-style-type: none;
-        }
+                :root {
+                    --color: #707070;
+                }
+                body {
+                    counter-reset: example figure issue;
+
+                    /* Layout */
+                    max-width: 50em;
+                    margin: 0 auto;
+                    padding: 1.6em 1.5em 2em 50px;
+                    padding: 1.6em 1.5em 2em calc(26px + 1.5em);
+
+                    /* Typography */
+                    line-height: 1.5;
+                    font-family: sans-serif;
+                    widows: 2;
+                    orphans: 2;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+
+                    /* Colors */
+                    color: var(--color);
+                    background: white top left fixed no-repeat;
+                    background-color: white;
+                    background-size: 25px auto;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: var(--color) !important;
+                }
+
+                h2.introductory {
+                    text-align: center;
+                }
+
+                ol {
+                    list-style-type: none;
+                }
+
+
+                ol > li > ol > li > ol > li > ol >li > ol {
+                    display: none;
+                }
+
+                .part-title {
+                    display: block;
+                    font-size: 130%;
+                    font-weight: bold;
+                    font-style: italic;
+                    text-align: center;
+                    margin-top: 2em;
+            }
         </style>
     </head>
     <body>
-        <nav epub:type="toc" id="toc">
-        <h2 class="introductory" id="table-of-contents">Table of Contents</h2>
+        <nav epub:type="toc" id="navigation" role="doc-toc">
+        <h2 class="introductory" id="table-of-contents">%%%Title2%%% — Table of Contents</h2>
         <ol>
 %%%TOC%%%
         </ol>
@@ -76,13 +126,14 @@ function create_nav_page(book) {
     const get_nav_text = (chapter) => {
         // Get the nav file from the chapter
         const dom = new jsdom.JSDOM(chapter.nav);
-        let html = dom.window.document.documentElement.querySelector('nav#toc > ol').innerHTML;
+        let html = dom.window.document.documentElement.querySelector('nav#navigation > ol').innerHTML;
         // the link elements must be changed to refer to the relevant subdirectory!
         let html_final = html.replace(/"Overview.xhtml/g, `"${chapter.chapter_name}/Overview.xhtml`);
-        return `<li><a href="${chapter.chapter_name}/Overview.xhtml">${chapter.title}</a><ol>${html_final}</ol></li>`;
+        return `<li class="part-title-li"><a class="part-title" href="${chapter.chapter_name}/Overview.xhtml">${chapter.title}</a><ol>${html_final}</ol></li>`;
     };
     const full_nav = book.chapters.map(get_nav_text).join('\n');
-    return nav.replace('%%%Title%%%', utils.de_xml(book.title)).replace('%%%TOC%%%', full_nav);
+    const title = utils.de_xml(book.title);
+    return nav.replace('%%%Title%%%', title).replace('%%%Title2%%%', title).replace('%%%TOC%%%', full_nav);
 }
 exports.create_nav_page = create_nav_page;
 //# sourceMappingURL=nav.js.map

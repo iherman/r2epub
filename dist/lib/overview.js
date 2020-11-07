@@ -86,13 +86,31 @@ function generate_overview_item(global) {
             }
         }
     }
-    // 3. explicit svg usage
+    // 3. svg usage
     if (global.html_element.querySelector('svg') !== null) {
         properties.push('svg');
     }
+    else {
+        // look for possible svg image or picture references
+        const sources = Array.from(global.html_element.querySelectorAll('img, source, object, iframe'));
+        const is_there_svg_usage = sources.find((element) => {
+            if (element.hasAttribute('src')) {
+                return element.getAttribute('src').endsWith('.svg');
+            }
+            else if (element.hasAttribute('type')) {
+                return element.getAttribute('type') === 'image/svg+xml';
+            }
+            else {
+                return false;
+            }
+        });
+        if (is_there_svg_usage) {
+            properties.push('svg');
+        }
+    }
     // 4. external resources
     {
-        const sources = Array.from(global.html_element.querySelectorAll('video, audio, img, source'));
+        const sources = Array.from(global.html_element.querySelectorAll('video, audio, img, source, iframe'));
         const is_there_external_resources = sources.find((element) => {
             if (element.hasAttribute('src')) {
                 const parsed = urlHandler.parse(element.getAttribute('src'));
