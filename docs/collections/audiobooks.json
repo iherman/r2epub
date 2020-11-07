@@ -1,6 +1,6 @@
 {
-    "name": "Audiobooks",
-    "id": "audiobooks",
+    "name": "Publication Manifests, Audiobooks",
+    "id": "manifest_audiobooks",
     "readingOrder": [
         {
             "url": "https://www.w3.org/TR/pub-manifest/"
