@@ -8,6 +8,7 @@
     "main": "dist/index.js",
     "types": "src/index.ts",
     "scripts": {
+        "lint": "eslint . --ext .ts",
         "build": "tsc",
         "docs": "typedoc src/",
         "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts)",
@@ -16,7 +17,7 @@
         "push": "git push origin master; git push heroku master",
         "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js",
-        "local-test" : "ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/audiobooks_local.json"
+        "local-test": "ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/audiobooks_local.json"
     },
     "repository": {
         "type": "git",
@@ -57,11 +58,11 @@
         "@types/valid-url": "^1.0.2",
         "@types/xmldom": "^0.1.30",
         "@types/xmlserializer": "^0.6.0",
-        "eslint": "^6.8.0",
-        "eslint-config-airbnb-base": "^14.1.0",
-        "eslint-plugin-import": "^2.20.1",
+        "@typescript-eslint/eslint-plugin": "^4.6.1",
+        "@typescript-eslint/parser": "^4.6.1",
+        "eslint": "^7.13.0",
         "terser": "^4.6.11",
-        "typedoc": "^0.16.11",
+        "typedoc": "^0.19.2",
         "typedoc-plugin-nojekyll": "^1.0.1",
         "typescript": "^3.9.5"
     }

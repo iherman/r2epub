@@ -95,10 +95,11 @@ import * as constants from './lib/constants';
 import * as fs        from 'fs';
 
 /** @hidden */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { program } = require('commander');
 
 /** @hidden */
-const ERROR :string = 'ERROR';
+const ERROR  = 'ERROR';
 
 
 /**
@@ -110,12 +111,13 @@ const ERROR :string = 'ERROR';
  */
 async function cli() {
     program
-        .version('1.2.2')
+        .version('1.2.7')
         .name('r2epub')
         .usage('[options] [url]')
         .description('Convert the file or collection configuration at [url] to EPUB 3.2')
         .option('-o, --output <fname>', 'output file name. If missing, the short name of the document is used')
         .option('-r, --respec', 'the source must be pre-processed by ReSpec', false)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-s, --specStatus <type>', 'specification type', (value :string, dummy :any) :string => {
             if (constants.spec_status_values.includes(value)) {
                 return value;
@@ -126,6 +128,7 @@ async function cli() {
         })
         .option('-d, --publishDate <date>', 'publication date')
         .option('-l, --addSectionLinks', 'add section links with "§".')
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-m, --maxTocLevel <number>', 'maximum TOC level', (value :string, dummy :any) :string => {
             const n_value = Number(value);
             if (_.isNaN(n_value) || n_value < 0) {

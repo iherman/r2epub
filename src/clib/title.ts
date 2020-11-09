@@ -14,14 +14,6 @@ import * as cConvert from './convert';
 import * as utils    from '../lib/utils';
 
 /**
- * @hidden
- */
-const months :string[] = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-];
-
-/**
  * The template to be used for the title page.
  * @hidden
  */

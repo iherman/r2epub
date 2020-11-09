@@ -19,7 +19,7 @@ import * as xmldom from 'xmldom';
 export function slice_text(inp: string): string {
     const LIMIT = 30;
     const slice_text_array = (words: string[]): string[] => {
-        let final: string[] = [];
+        const final: string[] = [];
         let current_length  = 0;
         while(true) {
             if (words.length === 0) {
@@ -59,9 +59,10 @@ export function de_xml(inp: string): string {
             }
             const option = {
                 locator: {},
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 errorHandler: (level: string, msg: any): any => { return; }
             }
-            let dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
+            const dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
             return dom.childNodes[0].textContent;
         } catch(e) {
             // just silently return the original for any issue

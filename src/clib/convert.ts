@@ -24,9 +24,7 @@
   */
 
 import { Options }      from '../index';
-import {PackageWrapper} from '../lib/opf';
 import * as ocf         from '../lib/ocf';
-import * as rConvert    from '../lib/convert';
 import * as fetch       from '../lib/fetch';
 import { Chapter }      from './chapter';
 import * as nav         from './nav';
@@ -125,11 +123,10 @@ const generate_book_data = async (book_data: CollectionConfiguration) :Promise<C
  *
  * @async
  * @param config_url - the user supplied data, i.e., the result of JSON parsing of the input argument
- * @param trace whether tracing is set (for debugging)
  * @param print_package whether the package stops at the creation of an EPUB content and displays the content of the OPF file itself (for debugging)
  * @returns a Promise holding the final [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) content.
  */
-export async function create_epub(config_url: string, trace :boolean = false, print_package: boolean = false) :Promise<ocf.OCF> {
+export async function create_epub(config_url: string, print_package = false) :Promise<ocf.OCF> {
     const data :any = await fetch.fetch_json(config_url);
 
     // check, via a JSON schema, the validity of the input and create the right arguments
@@ -145,10 +142,10 @@ export async function create_epub(config_url: string, trace :boolean = false, pr
         console.log(the_opf);
         return {} as ocf.OCF;
     } else {
-        the_book.ocf.append(the_opf                          ,  'package.opf');
-        the_book.ocf.append(title.create_title_page(the_book),  'title.xhtml');
+        the_book.ocf.append(the_opf                           , 'package.opf');
+        the_book.ocf.append(title.create_title_page(the_book) , 'title.xhtml');
         the_book.ocf.append(cover.create_cover_image(the_book), 'cover_image.svg');
-        the_book.ocf.append(nav.create_nav_page(the_book)    ,  'nav.xhtml');
+        the_book.ocf.append(nav.create_nav_page(the_book)     , 'nav.xhtml');
 
         // Store the data in the final zip file
         the_book.chapters.forEach((chapter :Chapter) :void => {

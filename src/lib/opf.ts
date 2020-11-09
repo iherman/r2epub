@@ -203,7 +203,7 @@ export class PackageWrapper {
     /** Id generated to the editors for cross reference
      * @hidden
      */
-    private id: number = 0;
+    private id = 0;
 
     /**
      * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
@@ -309,7 +309,7 @@ export class PackageWrapper {
      *
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
-    add_manifest_item(item :ManifestItem, add_spine_item :boolean = false) :void {
+    add_manifest_item(item :ManifestItem, add_spine_item  = false) :void {
         if (item['@properties'] === undefined || item['@properties'] === '') {
             delete item['@properties'];
         }
@@ -339,7 +339,7 @@ export class PackageWrapper {
      * @param idref - the reference that must be added to the spine item
      * @param linear - if the 'linear = no' flag should be added
      */
-    add_spine_item(idref :string, add_linear :boolean = false) :void {
+    add_spine_item(idref :string, add_linear  = false) :void {
         const item :SpineItem = {
             '@idref' : idref
         };

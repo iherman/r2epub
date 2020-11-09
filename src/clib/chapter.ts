@@ -17,7 +17,6 @@ import * as constants from '../lib/constants';
 import * as rConvert  from '../lib/convert';
 import * as cConvert  from './convert';
 import * as xmldom    from 'xmldom';
-import * as _         from 'underscore';
 import JSZip = require('jszip');
 
 /**
@@ -65,7 +64,7 @@ const never_transfer :string[] = [
  * Wrapper around a single chapter. The main action is in the [[initialize]] method, which collects all the data and extracts additional data that are necessary elsewhere.
  */
 export class Chapter {
-    private _first_chapter          :boolean = false;
+    private _first_chapter           = false;
     private _url                    :string;
     private _options                :Options;
     private _ocf                    :ocf.OCF;
@@ -78,7 +77,7 @@ export class Chapter {
     private _nav                    :string;
     private _date                   :string;
     private _non_linear_spine_items :string[] = [];
-    private _wcag_conforms          :boolean = false;
+    private _wcag_conforms           = false;
 
 
     /**
@@ -86,7 +85,7 @@ export class Chapter {
      * @param args - arguments needed to create the chapter’s OCF.
      * @param first - whether this is the first chapter in the book. Necessary, for example, to transfer the items listed in [[transfer_once]] for a book.
      */
-    constructor(args :cConvert.ChapterConfiguration, first :boolean = false) {
+    constructor(args :cConvert.ChapterConfiguration, first  = false) {
         this._url = args.url;
         this._options = {
             respec : args.respec,
@@ -158,7 +157,7 @@ export class Chapter {
                     promise         : promise,
                 })
             }
-        };
+        }
 
         // Note that, until now, the Promises have been created but not yet (necessarily) completed; a wait on all promises is necessary to move on
         const contents :any[] = await Promise.all(this._manifest.map((item) => item.promise));

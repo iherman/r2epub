@@ -22,7 +22,7 @@ import JSZip = require('jszip');
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
  */
-const container_xml :string = `<?xml version="1.0"?>
+const container_xml  = `<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
     <rootfiles>
         <rootfile full-path="package.opf" media-type="application/oebps-package+xml" />
@@ -92,4 +92,4 @@ export class OCF {
        }
         return this.content;
     }
-};
+}

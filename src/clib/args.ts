@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * ## Collection Configuration
  *
@@ -45,12 +46,13 @@ import conf_schema   from './r2epub.schema.json';
  * @param data
  * @throws invalid schema, or schema validation error on the data
  */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function get_book_configuration(data :any) :cConvert.CollectionConfiguration {
     const ajv = new Ajv({
         "allErrors" : true,
     });
     const validator = ajv.compile(conf_schema);
-    const valid = validator(data);
+    const valid     = validator(data);
     if (!valid) {
         throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
     } else {

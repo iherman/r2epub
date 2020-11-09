@@ -11,70 +11,17 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'airbnb-base'
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
-    rules: {
-        "indent": [
-            "error",
-            4,
-            {
-                "SwitchCase": 1,
-                "CallExpression": {
-                    "arguments": "first"
-                }
-            }
-        ],
-        "no-multi-spaces": [
+    "rules" : {
+        "no-console" : 0, // set it to 0 if it is o.k. to have console.log
+        "@typescript-eslint/no-explicit-any" : 0,
+        "no-constant-condition": [
             "error",
             {
-                "exceptions": {
-                    "VariableDeclarator": true
-                }
+                "checkLoops" : false
             }
         ],
-        "camelcase": false,
-        "strict": false,
-        "no-else-return": false,
-        "max-len": [
-            "error",
-            {
-                "code": 150
-            }
-        ],
-        "key-spacing": [
-            "error",
-            {
-                "align": {
-                    "beforeColon": true,
-                    "afterColon": true,
-                    "true": "colon"
-                }
-            }
-        ],
-        "comma-dangle": [
-            "error",
-            "never"
-        ],
-        "arrow-parens": [
-            "error",
-            "always"
-        ],
-        "no-plusplus": [
-            "error",
-            {
-                "allowForLoopAfterthoughts": true
-            }
-        ],
-        "no-param-reassign": [
-            "error",
-            {
-                "props": false
-            }
-        ],
-        "prefer-destructuring": false,
-        "consistent-return": false,
-        "no-eval": "error",
-        "no-implied-eval": "error"
     }
 };

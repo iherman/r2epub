@@ -12,12 +12,6 @@
  * @packageDocumentation
 */
 
-/**
- * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
- *
- */
-const default_service :string = 'https://r2epub.herokuapp.com/';
-
 const epub_content_type = 'application/epub+zip';
 
 interface ReturnedData {
@@ -31,7 +25,7 @@ interface ServerData {
     port :string;
 }
 
-const storage_key :string = 'r2epub';
+const storage_key  = 'r2epub';
 
 /**
  * Get the locally stored storage data and init the form accordingly
@@ -58,7 +52,6 @@ function store_server_data(url: string, port: string) {
     }
     localStorage.setItem(storage_key, JSON.stringify(server_data));
 }
-
 
 
 /**
@@ -118,6 +111,7 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
  *
  * @async
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const submit = async (event :Event) :Promise<any> => {
     /**
      * The special trick to save a content, using an invisible `<a>` element, its 'download' attribute and a dataURL for the blob to be stored.

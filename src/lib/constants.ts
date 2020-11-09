@@ -111,23 +111,23 @@ export const acceptable_url_endings :string[] = [
  * Set to the default HTTP port number; the environment variable `PORT` may,
  * however, overwrite this for a server.
  */
-export const local_port_number    :string = '80';
+export const local_port_number     = '80';
 
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
-export const spec_generator       :string = 'https://labs.w3.org/spec-generator/?type=respec&url='
+export const spec_generator        = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
-export const fixup_js             :string  = 'https://www.w3.org/scripts/TR/2016/fixup.js';
+export const fixup_js               = 'https://www.w3.org/scripts/TR/2016/fixup.js';
 
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
-export const TR_logo_files        :string = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
+export const TR_logo_files         = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
 
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
 // export const modified_epub_files  :string = 'https://iherman.github.io/r2epub/epub_assets/';
-export const modified_epub_files  :string = 'https://www.ivan-herman.net/r2epub/';
+export const modified_epub_files   = 'https://www.ivan-herman.net/r2epub/';
 
 /** Local (relative) URL for styles and logos */
-export const local_style_files    :string = 'StyleSheets/TR/2016/';
+export const local_style_files     = 'StyleSheets/TR/2016/';
 
 /** @hidden */
 const allow_methods :string[] = ['GET', 'HEAD'];

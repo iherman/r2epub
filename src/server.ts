@@ -68,6 +68,7 @@ interface Content {
     /**
      * Additional HTTP Response headers, to accompany the full response. (File name, dates, etc.).
      */
+    // eslint-disable-next-line @typescript-eslint/ban-types
     headers :object;
 }
 

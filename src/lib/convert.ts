@@ -164,7 +164,7 @@ export class RespecToEPUB {
 
     private global_url :string;
 
-    constructor(trace :boolean = false, print_package: boolean = false) {
+    constructor(trace  = false, print_package = false) {
         this.global = {
             trace     : trace,
             package   : print_package,

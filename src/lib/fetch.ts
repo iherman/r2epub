@@ -113,7 +113,7 @@ const my_fetch: ((arg :string) => Promise<any>) = constants.is_browser ? fetch :
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
-export async function fetch_resource(resource_url :string, force_text :boolean = false) :Promise<any> {
+export async function fetch_resource(resource_url :string, force_text  = false) :Promise<any> {
     if (constants.is_browser === false && process.env.R2EPUB_MODIFIED_EPUB_FILES && resource_url.startsWith(constants.modified_epub_files)) {
         const filename = resource_url.replace(constants.modified_epub_files, process.env.R2EPUB_MODIFIED_EPUB_FILES);
         if (filename.endsWith('.png') && force_text === false) {
