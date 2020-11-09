@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
- /**
+/**
  *
  *
  */
@@ -104,8 +104,8 @@ export function create_title_page(global :Global) :ResourceRef[] {
     ]
 
     const get_editors = () :string => global.config.editors
-                            .map((entry: any) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`)
-                            .join('; ');
+        .map((entry: any) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`)
+        .join('; ');
 
     const title = global.html_element.querySelector('title').textContent;
     const date = global.html_element.querySelector('time.dt-published');

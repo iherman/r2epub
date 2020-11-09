@@ -42,7 +42,7 @@
  * @packageDocumentation
  */
 
- /**
+/**
  *
  *
  */
@@ -116,7 +116,7 @@ async function get_epub(query :Query) : Promise<Content> {
             'Content-Disposition' : `attachment; filename=${the_ocf.name}`
         }
     }
- }
+}
 
 
 /**

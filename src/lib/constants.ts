@@ -32,7 +32,7 @@ export const media_types :MediaType = {
     png     : 'image/png',
     svg     : 'image/svg+xml',
     xhtml   : 'application/xhtml+xml',
- };
+};
 
 
 /** These media types refer to textual content, no reason to bother about streaming when fetching them... */

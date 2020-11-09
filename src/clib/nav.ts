@@ -8,9 +8,9 @@
  */
 
 
- /**
-  *
-  */
+/**
+ *
+ */
 
 import * as jsdom    from 'jsdom';
 import * as cConvert from './convert';
@@ -123,4 +123,4 @@ export function create_nav_page(book :cConvert.Collection) :string {
     const full_nav :string = book.chapters.map(get_nav_text).join('\n');
     const title = utils.de_xml(book.title);
     return nav.replace('%%%Title%%%', title).replace('%%%Title2%%%', title).replace('%%%TOC%%%', full_nav);
- }
+}

@@ -6,10 +6,9 @@
  * @packageDocumentation
  */
 
-
- /**
-  *
-  */
+/**
+ *
+ */
 
 import * as opf                                    from '../lib/opf';
 import * as constants                              from '../lib/constants';
@@ -40,7 +39,7 @@ export function create_opf(book :cConvert.Collection) :string {
     const the_opf :opf.PackageWrapper = new opf.PackageWrapper(`urn:w3c:tr:${book.name}`, book.title);
 
     // 1. editors should be collected from the chapters; this was done when initializing the book
-     the_opf.add_creators(book.editors);
+    the_opf.add_creators(book.editors);
 
     // 2. Set the date of this book
     the_opf.add_dates(book.date);
@@ -77,7 +76,7 @@ export function create_opf(book :cConvert.Collection) :string {
             },
             "link"     : []
         };
-        chapter.opf_items.forEach((item :OPFManifestItem)  :void => {
+        chapter.opf_items.forEach((item :OPFManifestItem) :void => {
             let id :string;
             // The cover images should not be considered, those are unused on the collection level
             if (item.properties === 'cover-image') return;

@@ -7,9 +7,9 @@
  */
 
 
- /**
-  *
-  */
+/**
+ *
+ */
 
 import { Options }    from '../index';
 import * as ocf       from '../lib/ocf';
@@ -23,9 +23,9 @@ import JSZip = require('jszip');
  * Data needed for the creation of the package file for single constituent manifest item in the chapter (i.e., an individual file stored in the zip file).
  */
 export interface OPFManifestItem {
-    href        :string,
-    media_type  :string,
-    id          :string,
+    href :string,
+    media_type :string,
+    id :string,
     properties? :string
 }
 
@@ -33,11 +33,11 @@ export interface OPFManifestItem {
  * All the data necessary for the management of a single manifest item, beyond the basic.
  */
 interface ManifestItem extends OPFManifestItem {
-    promise         :Promise<any>;
-    text_content    :boolean;
+    promise :Promise<any>;
+    text_content :boolean;
     // The only reason this is optional is because the content is filled later and otherwise
     // typescript complains...
-    content?        :any;
+    content? :any;
 }
 
 /**
@@ -64,20 +64,20 @@ const never_transfer :string[] = [
  * Wrapper around a single chapter. The main action is in the [[initialize]] method, which collects all the data and extracts additional data that are necessary elsewhere.
  */
 export class Chapter {
-    private _first_chapter           = false;
-    private _url                    :string;
-    private _options                :Options;
-    private _ocf                    :ocf.OCF;
-    private _container              :JSZip;
-    private _manifest               :ManifestItem[] = [];
-    private _chapter_name           :string;
-    private _title                  :string;
-    private _identifier             :string;
-    private _editors                :string[] = [];
-    private _nav                    :string;
-    private _date                   :string;
+    private _first_chapter = false;
+    private _url :string;
+    private _options :Options;
+    private _ocf :ocf.OCF;
+    private _container :JSZip;
+    private _manifest :ManifestItem[] = [];
+    private _chapter_name :string;
+    private _title :string;
+    private _identifier :string;
+    private _editors :string[] = [];
+    private _nav :string;
+    private _date :string;
     private _non_linear_spine_items :string[] = [];
-    private _wcag_conforms           = false;
+    private _wcag_conforms = false;
 
 
     /**
@@ -85,7 +85,7 @@ export class Chapter {
      * @param args - arguments needed to create the chapter’s OCF.
      * @param first - whether this is the first chapter in the book. Necessary, for example, to transfer the items listed in [[transfer_once]] for a book.
      */
-    constructor(args :cConvert.ChapterConfiguration, first  = false) {
+    constructor(args :cConvert.ChapterConfiguration, first = false) {
         this._url = args.url;
         this._options = {
             respec : args.respec,
@@ -113,8 +113,8 @@ export class Chapter {
      */
     async initialize() :Promise<Chapter> {
         // First and foremost: create the OCF container
-        this._ocf          = await (new rConvert.RespecToEPUB()).create_epub(this._url, this._options);
-        this._container    = this._ocf.book;
+        this._ocf = await (new rConvert.RespecToEPUB()).create_epub(this._url, this._options);
+        this._container = this._ocf.book;
         // remove the `.epub` suffix for the name
         this._chapter_name = this._ocf.name.slice(0,-5);
 
@@ -217,7 +217,7 @@ export class Chapter {
 
         // ---------------------------------------------------------------------------------------
         // Get the navigation file's content
-        this._nav      = await this._container.file('nav.xhtml').async('text');
+        this._nav = await this._container.file('nav.xhtml').async('text');
 
         // ---------------------------------------------------------------------------------------
         return this;
@@ -259,8 +259,8 @@ export class Chapter {
         const target_ocf :ocf.OCF = target.ocf;
         interface Option {
             compression :string,
-            binary?     :boolean,
-            base64?     :boolean
+            binary? :boolean,
+            base64? :boolean
         }
         this._manifest.forEach((item :ManifestItem) :void => {
             const option :Option = {compression: 'DEFLATE'};
@@ -270,9 +270,11 @@ export class Chapter {
             }
             // store the value; note that the name is expanded to store the files in the separate folder for that chapter
             // Note the the Overview.xhtml file needs a special treatment...
-            target_ocf.book.file(this.set_name(item.href),
-                                 item.href === 'Overview.xhtml' ? this.handle_cross_references(item.content, target) : item.content,
-                                 option);
+            target_ocf.book.file(
+                this.set_name(item.href),
+                item.href === 'Overview.xhtml' ? this.handle_cross_references(item.content, target) : item.content,
+                option
+            );
         });
     }
 
@@ -309,7 +311,7 @@ export class Chapter {
     /**
      * The chapter’s name as a string.
      */
-    get name()  :string {
+    get name() :string {
         if (this._ocf === undefined) {
             throw `Chapter '${this._url}' has not been initialized`
         }

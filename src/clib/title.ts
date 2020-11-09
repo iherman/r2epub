@@ -6,9 +6,9 @@
  * @packageDocumentation
  */
 
- /**
-  *
-  */
+/**
+ *
+ */
 
 import * as cConvert from './convert';
 import * as utils    from '../lib/utils';

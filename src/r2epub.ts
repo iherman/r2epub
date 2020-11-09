@@ -82,7 +82,7 @@
  * @packageDocumentation
  */
 
- /**
+/**
  *
  *
  */
@@ -150,6 +150,7 @@ async function cli() {
         const url = program.args[0];
 
         const options :r2epub.Options = {
+            // eslint-disable-next-line max-len
             respec :  program.respec || ((program.specStatus || program.publishDate || program.addSectionLinks || program.maxTocLevel) ? true : false),
             config : {
                 publishDate     : program.publishDate,

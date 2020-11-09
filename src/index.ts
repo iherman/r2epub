@@ -26,7 +26,7 @@ import * as urlHandler from 'url';
  * Convenience class, to export the internal [RespecToEPUB](_lib_convert_.respectoepub.html) class for the package as a whole.
  * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)
  */
-export class RespecToEPUB  extends rConvert.RespecToEPUB {}
+export class RespecToEPUB extends rConvert.RespecToEPUB {}
 
 /**
  * Convenience class to export the internal [OCF](_lib_ocf_.ocf.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
@@ -54,7 +54,7 @@ export interface Options {
     /**
      * Is the source in ReSpec?
      */
-    respec?  :boolean,
+    respec? :boolean,
     /**
      * Collection of respec config options, to be used with the spec generator (if applicable).
      */
@@ -71,7 +71,7 @@ export interface Options {
  * @param t whether tracing is set (for debugging)
  * @param p whether the package stops at the creation of an EPUB content and displays the content of the OPF file itself (for debugging)
  */
-export async function convert(url: string, options: Options = {}, t  = false, p  = false) :Promise<OCF> {
+export async function convert(url: string, options: Options = {}, t = false, p = false) :Promise<OCF> {
     /*
      * Return an [[Options]] instance with all defaults filled in.
      *

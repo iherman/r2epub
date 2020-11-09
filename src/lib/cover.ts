@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
- /**
+/**
  *
  *
  */
@@ -89,8 +89,8 @@ export const cover_svg = `<?xml version="1.0" encoding="UTF-8"?>
  */
 export function create_cover_image(global :Global) :ResourceRef[] {
 
-    const title:    string = global.html_element.querySelector('title').textContent;
-    const date:     string = global.html_element.querySelector('time.dt-published').textContent;
+    const title :string = global.html_element.querySelector('title').textContent;
+    const date :string = global.html_element.querySelector('time.dt-published').textContent;
     const subtitle: string = global.config.generatedSubtitle.replace(date, '').trim();
 
     const final_cover = cover_svg

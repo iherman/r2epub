@@ -59,10 +59,10 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
         const chapters :cConvert.ChapterConfiguration[] = data.readingOrder.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};
             if (chapter.config !== undefined) {
-                if (chapter.config.specStatus !== undefined)      config.specStatus      = chapter.config.specStatus;
-                if (chapter.config.publishDate !== undefined)     config.publishDate     = chapter.config.publishDate;
+                if (chapter.config.specStatus !== undefined) config.specStatus = chapter.config.specStatus;
+                if (chapter.config.publishDate !== undefined) config.publishDate = chapter.config.publishDate;
                 if (chapter.config.addSectionLinks !== undefined) config.addSectionLinks = `${chapter.config.addSectionLinks}`;
-                if (chapter.config.maxTocLevel !== undefined)     config.maxTocLevel     = `${chapter.config.maxTocLevel}`;
+                if (chapter.config.maxTocLevel !== undefined) config.maxTocLevel = `${chapter.config.maxTocLevel}`;
             }
 
             return {

@@ -106,13 +106,13 @@ const specStatus_simple = [
 /** Interface for special cases, ie, when the `specStatus` value does not provide all information… */
 interface specStatus_css_mappings {
     /** Is there a watermark? */
-    watermark         :boolean,
+    watermark :boolean,
 
     /** 'name' (filename) to be used for the logo, e.g., WD, REC, etc. */
-    logo_name         :string,
+    logo_name :string,
 
     /** Media type of the logo. Usually SVG, but not always; if missing, `image/svg` is used. */
-    logo_media_type?  :string,
+    logo_media_type? :string,
 
     /** Reference to the CSS template to be used. If missing, the simple background setting template is used. */
     special_template? :string

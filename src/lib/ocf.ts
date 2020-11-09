@@ -42,8 +42,8 @@ const container_xml  = `<?xml version="1.0"?>
  *
  */
 export class OCF {
-    private _book    :JSZip;
-    name    :string;
+    private _book :JSZip;
+    name :string;
     private content :Buffer|Blob = null;
 
     /**
@@ -89,7 +89,7 @@ export class OCF {
                     level: 9
                 }
             });
-       }
+        }
         return this.content;
     }
 }

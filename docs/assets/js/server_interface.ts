@@ -16,12 +16,12 @@ const epub_content_type = 'application/epub+zip';
 
 interface ReturnedData {
     content_type :string,
-    file_name    :string,
-    content      :Blob
+    file_name :string,
+    content :Blob
 }
 
 interface ServerData {
-    url  :string;
+    url :string;
     port :string;
 }
 
@@ -37,7 +37,7 @@ function retrieve_server_data() {
         const server :HTMLInputElement  = document.getElementById('serverChoice') as HTMLInputElement;
         const port :HTMLInputElement    = document.getElementById('portNumber') as HTMLInputElement;
         server.value = server_data.url;
-        port.value   = server_data.port;
+        port.value = server_data.port;
     }
 }
 
@@ -62,7 +62,7 @@ function store_server_data(url: string, port: string) {
  * @returns the final content as well as the local name of the EPUB instance
  */
 async function fetch_book(resource_url :string) :Promise<ReturnedData> {
-    let fname        :string;
+    let fname :string;
     let content_type :string;
     return new Promise((resolve, reject) => {
         try {
@@ -123,7 +123,7 @@ const submit = async (event :Event) :Promise<any> => {
     const save_book = (data: Blob, name :string) => {
         const dataURL  = URL.createObjectURL(data);
         const download = document.getElementById('download') as HTMLAnchorElement;
-        download.href  = dataURL;
+        download.href = dataURL;
         download.download = name;
         download.click();
     };

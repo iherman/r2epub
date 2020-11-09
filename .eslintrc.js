@@ -23,5 +23,31 @@ module.exports = {
                 "checkLoops" : false
             }
         ],
+        "indent" : [
+            "error", 4
+        ],
+        "no-multi-spaces": [
+            "error",
+            {
+                "exceptions": {
+                    "VariableDeclarator": true,
+                    "ImportDeclaration" : true
+                }
+            }
+        ],
+        "no-else-return": 0,
+        "max-len": [
+            "error",
+            {
+                "code": 150,
+                "ignoreComments" : true,
+                "ignoreUrls" : true,
+                "ignoreStrings" : true,
+                "ignoreTemplateLiterals" : true,
+                "ignoreRegExpLiterals" : true
+            }
+        ],
+
+
     }
 };

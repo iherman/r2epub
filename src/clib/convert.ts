@@ -19,9 +19,9 @@
  */
 
 
- /**
-  *
-  */
+/**
+ *
+ */
 
 import { Options }      from '../index';
 import * as ocf         from '../lib/ocf';
@@ -49,9 +49,9 @@ export interface ChapterConfiguration extends Options {
  */
 export interface CollectionConfiguration {
     /** Title of the publication. */
-    name         :string;
+    name :string;
     /** "Short" name, used as an identifier and as the base name for the final EPUB file. */
-    id           :string;
+    id :string;
     /** Chapter description: url, whether respec should be used, and possible respec arguments. See the [[Options]] for some further details). */
     readingOrder :ChapterConfiguration[];
 }
@@ -61,17 +61,17 @@ export interface CollectionConfiguration {
  */
 export interface Collection {
     /** Title of the publication. */
-    title      :string;
+    title :string;
     /** "Short" name, used as an identifier and as the base name for the final EPUB file. */
-    name       :string;
+    name :string;
     /** List of editors: it is a concatenation of the editors of the individual chapters, with duplicate names removed. */
-    editors?   :string[];
+    editors? :string[];
     /** Date of publication: the most recent date among the constituent chapter. */
-    date?      :string,
+    date? :string,
     /** The [OCF instance](https://iherman.github.io/r2epub/typedoc/modules/_lib_ocf_.html) of the target book. */
-    ocf        :ocf.OCF;
+    ocf :ocf.OCF;
     /** Representations of the individual chapters. */
-    chapters   :Chapter[];
+    chapters :Chapter[];
 }
 
 /**
@@ -81,23 +81,25 @@ export interface Collection {
  * @param book_data - user supplied configuration data
  * @returns the [[Collection]] structure with all [[Chapter]] entries properly initialized.
  */
-const generate_book_data = async (book_data: CollectionConfiguration) :Promise<Collection> => {
+const generate_book_data = async (book_data :CollectionConfiguration) :Promise<Collection> => {
     // Just to make things more readable, I take the steps separately instead of putting directly into the return value...
     // 1. An array of chapters is created from the argument data
     // 2. Each chapter is initialized. Initialization is async, ie, each of these steps create a Promise.
     //    Note that the first chapter is signalled so that the common files (logo, css for cover page, etc) are also transferred to the final book, but only once.
-    const promises :Promise<Chapter>[] = book_data.readingOrder.map((chapter_data :ChapterConfiguration, index :number) :Promise<Chapter> => (new Chapter(chapter_data, index === 0)).initialize());
+    const promises :Promise<Chapter>[] = book_data.readingOrder.map((chapter_data :ChapterConfiguration, index :number) :Promise<Chapter> =>
+        (new Chapter(chapter_data, index === 0)).initialize()
+    );
 
     // 3. Sync at this point by waiting for all Promises to resolve, yielding the list of chapters.
     const chapters :Chapter[] = await Promise.all(promises);
 
     // 4. Collect all the editors, it will be used later...
-    const editors  :string[]  =  _.flatten(chapters.map((chapter :Chapter) :string[] => chapter.editors));
+    const editors :string[]  =  _.flatten(chapters.map((chapter :Chapter) :string[] => chapter.editors));
 
     // 5. Collect the date, it will be used later...
     //    The maximal value of all constituent dates is used
     const dates :string[] = chapters.map((chapter :Chapter) :string => chapter.date);
-    const date  :string   = dates.reduce((accumulator, currentValue) => accumulator>currentValue ? accumulator : currentValue);
+    const date :string   = dates.reduce((accumulator, currentValue) => accumulator>currentValue ? accumulator : currentValue);
 
     // Yep, we got the book skeleton
     return {
@@ -126,7 +128,7 @@ const generate_book_data = async (book_data: CollectionConfiguration) :Promise<C
  * @param print_package whether the package stops at the creation of an EPUB content and displays the content of the OPF file itself (for debugging)
  * @returns a Promise holding the final [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) content.
  */
-export async function create_epub(config_url: string, print_package = false) :Promise<ocf.OCF> {
+export async function create_epub(config_url :string, print_package = false) :Promise<ocf.OCF> {
     const data :any = await fetch.fetch_json(config_url);
 
     // check, via a JSON schema, the validity of the input and create the right arguments
@@ -142,10 +144,10 @@ export async function create_epub(config_url: string, print_package = false) :Pr
         console.log(the_opf);
         return {} as ocf.OCF;
     } else {
-        the_book.ocf.append(the_opf                           , 'package.opf');
+        the_book.ocf.append(the_opf , 'package.opf');
         the_book.ocf.append(title.create_title_page(the_book) , 'title.xhtml');
         the_book.ocf.append(cover.create_cover_image(the_book), 'cover_image.svg');
-        the_book.ocf.append(nav.create_nav_page(the_book)     , 'nav.xhtml');
+        the_book.ocf.append(nav.create_nav_page(the_book) , 'nav.xhtml');
 
         // Store the data in the final zip file
         the_book.chapters.forEach((chapter :Chapter) :void => {

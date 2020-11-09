@@ -39,7 +39,7 @@ import * as constants          from './constants';
  * @param global
  * @return - a single element array with the resource definition of the `Overview.xhtml` entry
  */
-export function  generate_overview_item(global: Global): ResourceRef[] {
+export function generate_overview_item(global: Global): ResourceRef[] {
 
     const properties :string[] = [];
 
