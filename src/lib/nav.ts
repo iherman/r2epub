@@ -29,6 +29,7 @@ const nav :string = `<?xml version="1.0"?>
             %%%Title%%% — Contents
         </title>
         <link rel="stylesheet" type="text/css" href="StyleSheets/base.css" />
+        <link rel="stylesheet" type="text/css" href="StyleSheets/TR/2016/base.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
         ol {
@@ -37,7 +38,7 @@ const nav :string = `<?xml version="1.0"?>
         </style>
     </head>
     <body>
-        <nav epub:type="toc" id="toc">
+        <nav epub:type="toc" id="navigation" role="doc-toc">
 %%%TOC%%%
         </nav>
      </body>
