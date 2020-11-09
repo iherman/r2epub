@@ -10,7 +10,7 @@
     "scripts": {
         "build": "tsc",
         "docs": "typedoc src/",
-        "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts); typedoc src/",
+        "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts)",
         "heroku": "git push heroku master",
         "origin": "git push origin master",
         "push": "git push origin master; git push heroku master",

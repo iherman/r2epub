@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/fetch&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.7</title>
+	<title>&quot;lib/fetch&quot; | r2epub — Converting HTML/ReSpec documents to EPUB 3.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2 - v1.2.7</a>
+					<a href="../index.html" class="title">r2epub — Converting HTML/ReSpec documents to EPUB 3.2</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -102,10 +102,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="my_fetch" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> my_<wbr>fetch</h3>
-					<div class="tsd-signature tsd-kind-icon">my_<wbr>fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = constants.is_browser ? fetch : node_fetch.default</span></div>
+					<div class="tsd-signature tsd-kind-icon">my_<wbr>fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;constants.is_browser ? fetch : node_fetch.default</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/6a8479a/src/lib/fetch.ts#L96">lib/fetch.ts:96</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/fetch.ts#L96">lib/fetch.ts:96</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -153,7 +153,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/6a8479a/src/lib/fetch.ts#L41">lib/fetch.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/fetch.ts#L41">lib/fetch.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -170,11 +170,6 @@
 									<li>Check that the port (if specified) is in the allowed range, i.e., &gt; 1024;</li>
 									<li>Check whether the host name is not <code>localhost</code> (or equivalents, see <a href="_lib_constants_.html#invalid_host_names">invalid_host_names</a>); this is not allowed, unless the code runs in a client or the environment variable <code>R2EPUB_LOCAL</code> is set.</li>
 								</ol>
-								<dl class="tsd-comment-tags">
-									<dt>throws</dt>
-									<dd><p>if <code>address</code> pretends to be a URL, but it is not acceptable for some reasons.</p>
-									</dd>
-								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -199,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/6a8479a/src/lib/fetch.ts#L218">lib/fetch.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/fetch.ts#L218">lib/fetch.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -237,7 +232,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/6a8479a/src/lib/fetch.ts#L236">lib/fetch.ts:236</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/fetch.ts#L236">lib/fetch.ts:236</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -275,7 +270,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/6a8479a/src/lib/fetch.ts#L116">lib/fetch.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/fetch.ts#L116">lib/fetch.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -300,7 +295,7 @@
 									<h5>resource_url: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> force_text: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> force_text: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>whether the resource should be returned as text in case no content type is set by the server</p>
 									</div>
@@ -323,7 +318,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/6a8479a/src/lib/fetch.ts#L183">lib/fetch.ts:183</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/fetch.ts#L183">lib/fetch.ts:183</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
