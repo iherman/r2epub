@@ -66,7 +66,6 @@ module.exports = {
             "always-multiline",
             {
                 "functions" : "never",
-
             }
         ],
         "arrow-parens" : [
@@ -89,5 +88,33 @@ module.exports = {
         "consistent-return": 2,
         "no-eval": 2,
         "no-implied-eval": 2,
+
+        "array-callback-return": 2,
+
+        "eqeqeq": [
+            "error",
+            "smart"
+        ],
+
+        "no-label-var": 2,
+        "no-shadow": 2,
+        "func-name-matching": 2,
+
+        "keyword-spacing" : [
+            "error",
+            {
+                "before" : true,
+                "after" : true
+            }
+        ],
+
+        "max-lines-per-function": [
+            1,
+            {
+                "max": 80,
+                "skipBlankLines": true,
+                "skipComments": true,
+            }
+        ]
     }
 };

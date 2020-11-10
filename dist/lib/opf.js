@@ -63,6 +63,7 @@ class PackageWrapper {
      * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
      * @param title - Title of the publication
      */
+    // eslint-disable-next-line max-lines-per-function
     constructor(identifier, title) {
         /** Id generated to the editors for cross reference
          * @hidden

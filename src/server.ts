@@ -136,7 +136,7 @@ async function serve() {
             };
             response.writeHead(code, _.extend(
                 error_headers,
-                constants.CORS_headers
+                constants.CORS_headers,
             ));
             response.write(e);
         }
@@ -149,21 +149,21 @@ async function serve() {
                     // fall back on the fixed home page
                     response.writeHead(200, _.extend(
                         { 'Content-type': 'text/html' },
-                        constants.CORS_headers
+                        constants.CORS_headers,
                     ));
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));
                 } else {
                     const the_book :Content = await get_epub(query);
                     response.writeHead(200, _.extend(
                         the_book.headers,
-                        constants.CORS_headers
+                        constants.CORS_headers,
                     ));
                     response.write(the_book.content);
                 }
             } else {
                 error(501, `Invalid HTTP request method: ${request.method}`);
             }
-        } catch(e) {
+        } catch (e) {
             error(400, `EPUB Generation error: ${e.toString()}`);
         } finally {
             response.end();

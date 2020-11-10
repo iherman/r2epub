@@ -209,6 +209,7 @@ export class PackageWrapper {
      * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
      * @param title - Title of the publication
      */
+    // eslint-disable-next-line max-lines-per-function
     constructor(identifier :string, title :string) {
         this.thePackage = {
             package : {

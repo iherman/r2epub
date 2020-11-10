@@ -76,7 +76,7 @@ export async function convert(url: string, options: Options = {}, t = false, p =
      * Return an [[Options]] instance with all defaults filled in.
      *
      */
-    const fill_default_options = (options: Options) :Options => {
+    const fill_default_options = (opts: Options) :Options => {
         const defaultConfig :ConfigOptions = {
             publishDate     : null,
             specStatus      : null,
@@ -84,8 +84,8 @@ export async function convert(url: string, options: Options = {}, t = false, p =
             maxTocLevel     : null,
         }
         return {
-            respec : options.respec === undefined || options.respec === null ? false : options.respec,
-            config : _.defaults(options.config, defaultConfig),
+            respec : opts.respec === undefined || opts.respec === null ? false : opts.respec,
+            config : _.defaults(opts.config, defaultConfig),
         };
     };
 

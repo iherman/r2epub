@@ -63,7 +63,7 @@ const check_Web_url = (address :string) :string => {
             if (portNumber <= 1024) {
                 throw `Unsafe port number used in URL (${parsed.port})`;
             }
-        } catch(e) {
+        } catch (e) {
             throw `Invalid port number used in URL (${parsed.port})`;
         }
     }

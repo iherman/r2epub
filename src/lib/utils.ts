@@ -21,10 +21,10 @@ export function slice_text(inp: string): string {
     const slice_text_array = (words: string[]): string[] => {
         const final: string[] = [];
         let current_length  = 0;
-        while(true) {
+        while (true) {
             if (words.length === 0) {
                 return final;
-            } else if(current_length + words[0].length < LIMIT) {
+            } else if (current_length + words[0].length < LIMIT) {
                 current_length += words[0].length + 1;
                 final.push(`${words.shift()} `);
             } else {
@@ -64,7 +64,7 @@ export function de_xml(inp: string): string {
             }
             const dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
             return dom.childNodes[0].textContent;
-        } catch(e) {
+        } catch (e) {
             // just silently return the original for any issue
             return inp;
         }

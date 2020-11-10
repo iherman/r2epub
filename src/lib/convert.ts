@@ -256,7 +256,7 @@ export class RespecToEPUB {
         {
             // Get hold of the configuration information
             const initial_config_element = this.global.html_element.querySelector("script#initialUserConfig") as HTMLScriptElement;
-            if( initial_config_element === null ) {
+            if ( initial_config_element === null ) {
                 throw "User config is not available"
             } else {
                 this.global.config = JSON.parse(initial_config_element.textContent);

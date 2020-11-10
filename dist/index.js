@@ -67,7 +67,7 @@ async function convert(url, options = {}, t = false, p = false) {
      * Return an [[Options]] instance with all defaults filled in.
      *
      */
-    const fill_default_options = (options) => {
+    const fill_default_options = (opts) => {
         const defaultConfig = {
             publishDate: null,
             specStatus: null,
@@ -75,8 +75,8 @@ async function convert(url, options = {}, t = false, p = false) {
             maxTocLevel: null,
         };
         return {
-            respec: options.respec === undefined || options.respec === null ? false : options.respec,
-            config: _.defaults(options.config, defaultConfig),
+            respec: opts.respec === undefined || opts.respec === null ? false : opts.respec,
+            config: _.defaults(opts.config, defaultConfig),
         };
     };
     // At the minimum, the URL part of the Arguments should exist, better check this

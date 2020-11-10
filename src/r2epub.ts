@@ -172,7 +172,7 @@ async function cli() {
                 const content :Buffer | Blob = await the_ocf.get_content();
                 fs.writeFileSync(program.output || the_ocf.name, content);
             }
-        } catch(e) {
+        } catch (e) {
             console.error(`r2epub error: ${e}`);
         }
     }

@@ -197,14 +197,14 @@ const submit = async (event :Event) :Promise<any> => {
                 // Clean up the user interface and we are done!
                 progress.style.setProperty('visibility', 'hidden');
                 if (returned.content_type === epub_content_type) fading_success();
-            } catch(e) {
+            } catch (e) {
                 progress.style.setProperty('visibility', 'hidden');
                 alert(`${e}`);
             }
         } else {
             alert(`No or empty URL value`);
         }
-    } catch(e) {
+    } catch (e) {
         alert(`Form interpretation Error: ${e}`);
     }
 }
