@@ -94,13 +94,13 @@ export function create_title_page(global :Global) :ResourceRef[] {
         {
             media_type   : 'image/png',
             relative_url : 'Icons/w3c_main.png',
-            absolute_url : 'https://www.w3.org/Icons/w3c_main.png'
+            absolute_url : 'https://www.w3.org/Icons/w3c_main.png',
         },
         {
             media_type   : 'text/css',
             relative_url : 'StyleSheets/base.css',
-            absolute_url : 'https://www.w3.org/StyleSheets/base.css'
-        }
+            absolute_url : 'https://www.w3.org/StyleSheets/base.css',
+        },
     ]
 
     const get_editors = () :string => global.config.editors
@@ -123,7 +123,7 @@ export function create_title_page(global :Global) :ResourceRef[] {
         media_type   : constants.media_types.xhtml,
         relative_url : 'title.xhtml',
         id           : 'title_page',
-        text_content : final_title_page
+        text_content : final_title_page,
     })
 
     return retval.reverse();

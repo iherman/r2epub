@@ -57,7 +57,7 @@ const never_transfer :string[] = [
     'package.opf',
     'nav.xhtml',
     'title.xhtml',
-    'cover_image.svg'
+    'cover_image.svg',
 ];
 
 /**
@@ -89,7 +89,7 @@ export class Chapter {
         this._url = args.url;
         this._options = {
             respec : args.respec,
-            config : args.config
+            config : args.config,
         }
         this._first_chapter = first;
     }
@@ -149,12 +149,12 @@ export class Chapter {
 
                 // Create the relevant [[ManifestItem]]
                 this._manifest.push({
-                    href            : file_name,
-                    media_type      : media_type,
-                    id              : id,
-                    properties      : properties,
-                    text_content    : textual,
-                    promise         : promise,
+                    href         : file_name,
+                    media_type   : media_type,
+                    id           : id,
+                    properties   : properties,
+                    text_content : textual,
+                    promise      : promise,
                 })
             }
         }
@@ -330,7 +330,7 @@ export class Chapter {
                 href       : this.set_name(item.href),
                 media_type : item.media_type,
                 properties : item.properties,
-                id         : item.id
+                id         : item.id,
             }
         });
     }

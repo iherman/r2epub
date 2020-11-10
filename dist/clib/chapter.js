@@ -21,7 +21,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -46,7 +46,7 @@ const never_transfer = [
     'package.opf',
     'nav.xhtml',
     'title.xhtml',
-    'cover_image.svg'
+    'cover_image.svg',
 ];
 /**
  * Wrapper around a single chapter. The main action is in the [[initialize]] method, which collects all the data and extracts additional data that are necessary elsewhere.
@@ -66,7 +66,7 @@ class Chapter {
         this._url = args.url;
         this._options = {
             respec: args.respec,
-            config: args.config
+            config: args.config,
         };
         this._first_chapter = first;
     }
@@ -130,7 +130,6 @@ class Chapter {
                 });
             }
         }
-        ;
         // Note that, until now, the Promises have been created but not yet (necessarily) completed; a wait on all promises is necessary to move on
         const contents = await Promise.all(this._manifest.map((item) => item.promise));
         // Push the content back to the manifest array. It is in a format that jszip understands for subsequent storage
@@ -274,7 +273,7 @@ class Chapter {
                 href: this.set_name(item.href),
                 media_type: item.media_type,
                 properties: item.properties,
-                id: item.id
+                id: item.id,
             };
         });
     }

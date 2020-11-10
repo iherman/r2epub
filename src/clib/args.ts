@@ -68,14 +68,14 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
             return {
                 url    : chapter.url,
                 respec : (chapter.respec === undefined) ? false : chapter.respec,
-                config : config
+                config : config,
             }
         });
 
         return {
             name         : data.name,
             id           : data.id,
-            readingOrder : chapters
+            readingOrder : chapters,
         };
     }
 }

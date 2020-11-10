@@ -56,7 +56,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -108,7 +108,7 @@ html {
  * no watermark, simple background template
  */
 const specStatus_simple = [
-    'ED', 'WD', 'CR', 'CRD', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
+    'ED', 'WD', 'CR', 'CRD', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD',
 ];
 /**
  * Mapping from `specStatus` to its relevant description for the cases when a simple, automatic mapping
@@ -124,7 +124,7 @@ const specStatus_css = {
         watermark: true,
         logo_name: 'UD.png',
         logo_media_type: constants.media_types.png,
-        special_template: undefined_template
+        special_template: undefined_template,
     },
     'FPWD': {
         watermark: false,
@@ -146,7 +146,7 @@ const specStatus_css = {
         watermark: true,
         logo_name: null,
         logo_media_type: constants.media_types.png,
-        special_template: cg_draft_template
+        special_template: cg_draft_template,
     },
 };
 /* ---------------------------------------------- Main entry point ----------------------------------------- */
@@ -181,7 +181,7 @@ function extract_css(global) {
         retval.push({
             relative_url: `${constants.local_style_files}base.css`,
             media_type: constants.media_types.css,
-            absolute_url: `${constants.modified_epub_files}base.css`
+            absolute_url: `${constants.modified_epub_files}base.css`,
         });
         // The html content should be modified to refer to the base directly
         the_link.setAttribute('href', `${constants.local_style_files}base.css`);
@@ -189,7 +189,7 @@ function extract_css(global) {
         retval.push({
             relative_url: `${constants.local_style_files}tr_epub.css`,
             media_type: constants.media_types.css,
-            text_content: constants.tr_epub_css
+            text_content: constants.tr_epub_css,
         });
         // Adding the reference to the epub specific css file into the dom
         the_link.insertAdjacentHTML('afterend', `<link rel="stylesheet" href="${constants.local_style_files}tr_epub.css">`);
@@ -200,7 +200,7 @@ function extract_css(global) {
             // This is a 'standard' case, with a regular structure:
             css_extras = {
                 watermark: false,
-                logo_name: `${global.config.specStatus}.svg`
+                logo_name: `${global.config.specStatus}.svg`,
             };
         }
         if (css_extras !== undefined) {
@@ -214,7 +214,7 @@ function extract_css(global) {
                 retval.push({
                     relative_url: `${constants.local_style_files}logos/${css_extras.logo_name}`,
                     media_type: media_type,
-                    absolute_url: `${orig_logo_url}${css_extras.logo_name}`
+                    absolute_url: `${orig_logo_url}${css_extras.logo_name}`,
                 });
             }
             if (css_extras.watermark) {
@@ -222,14 +222,14 @@ function extract_css(global) {
                 retval.push({
                     relative_url: `${constants.local_style_files}logos/UD-watermark.png`,
                     media_type: constants.media_types.png,
-                    absolute_url: `${constants.TR_logo_files}UD-watermark.png`
+                    absolute_url: `${constants.TR_logo_files}UD-watermark.png`,
                 });
             }
             // The extra epub CSS reference has to be added to the html source and to the return values
             retval.push({
                 relative_url: `${constants.local_style_files}epub.css`,
                 media_type: constants.media_types.css,
-                text_content: template
+                text_content: template,
             });
             const new_css_link = global.html_element.ownerDocument.createElement('link');
             new_css_link.setAttribute('href', `${constants.local_style_files}epub.css`);

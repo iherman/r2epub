@@ -58,9 +58,9 @@ export function de_xml(inp: string): string {
                 return txt.replace(/<br[ ]*\/>/gi, ' ');
             }
             const option = {
-                locator: {},
+                locator      : {},
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                errorHandler: (level: string, msg: any): any => { return; }
+                errorHandler : (level: string, msg: any): any => { return; },
             }
             const dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
             return dom.childNodes[0].textContent;
@@ -79,7 +79,7 @@ export function de_xml(inp: string): string {
  */
 const months :string[] = [
     'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'July', 'August', 'September', 'October', 'November', 'December',
 ];
 
 /**

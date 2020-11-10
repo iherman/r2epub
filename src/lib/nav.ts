@@ -87,7 +87,7 @@ export function create_nav_file(global :Global) :ResourceRef[] {
         relative_url : 'nav.xhtml',
         id           : 'nav',
         properties   : 'nav',
-        text_content : xhtml.convert(final_nav)
+        text_content : xhtml.convert(final_nav),
     })
 
     return retval;

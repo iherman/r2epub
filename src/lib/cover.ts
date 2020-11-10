@@ -102,6 +102,6 @@ export function create_cover_image(global :Global) :ResourceRef[] {
         relative_url : 'cover_image.svg',
         id           : 'cover',
         text_content : final_cover,
-        properties   : 'cover-image'
+        properties   : 'cover-image',
     }];
 }

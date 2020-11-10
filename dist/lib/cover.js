@@ -21,7 +21,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -111,7 +111,7 @@ function create_cover_image(global) {
             relative_url: 'cover_image.svg',
             id: 'cover',
             text_content: final_cover,
-            properties: 'cover-image'
+            properties: 'cover-image',
         }];
 }
 exports.create_cover_image = create_cover_image;

@@ -21,17 +21,17 @@ export interface MediaType {
  * Various media types used in the code.
  */
 export const media_types :MediaType = {
-    css     : 'text/css',
-    text    : 'text/plain',
-    epub    : 'application/epub+zip',
-    es      : 'text/ecmascript',
-    html    : 'text/html',
-    js      : 'text/javascript',
-    json    : 'application/json',
-    jsonld  : 'application/ld+json',
-    png     : 'image/png',
-    svg     : 'image/svg+xml',
-    xhtml   : 'application/xhtml+xml',
+    css    : 'text/css',
+    text   : 'text/plain',
+    epub   : 'application/epub+zip',
+    es     : 'text/ecmascript',
+    html   : 'text/html',
+    js     : 'text/javascript',
+    json   : 'application/json',
+    jsonld : 'application/ld+json',
+    png    : 'image/png',
+    svg    : 'image/svg+xml',
+    xhtml  : 'application/xhtml+xml',
 };
 
 
@@ -83,7 +83,7 @@ export const wcag_checked :string[] = [
     'WG-NOTE',
     'IG-NOTE',
     'NOTE',
-    'finding'
+    'finding',
 ];
 
 /**
@@ -93,7 +93,7 @@ export const wcag_checked :string[] = [
 export const invalid_host_names :string[] = [
     '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
     '172.16.1.2', '172.31.4.5', '192.168.0.1', '192.168.254.5',
-    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
+    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost',
 ]
 
 /**
@@ -103,7 +103,7 @@ export const acceptable_url_endings :string[] = [
     '/',
     '.html',
     '.xhtml',
-    '.json'
+    '.json',
 ]
 
 
@@ -152,7 +152,7 @@ const expose_headers :string[] = [
     'Content-Type',
     'Expires',
     'Last-Modified',
-    'Content-Disposition'
+    'Content-Disposition',
 ]
 
 /**
@@ -162,7 +162,7 @@ export const CORS_headers = {
     'Access-Control-Allow-Origin'   : '*',
     'Access-Control-Allow-Methods'  : allow_methods.join(','),
     'Access-Control-Allow-Headers'  : allow_headers.join(','),
-    'Access-Control-Expose-Headers' : expose_headers.join(',')
+    'Access-Control-Expose-Headers' : expose_headers.join(','),
 }
 
 /**

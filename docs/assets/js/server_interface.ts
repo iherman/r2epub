@@ -47,8 +47,8 @@ function retrieve_server_data() {
  */
 function store_server_data(url: string, port: string) {
     const server_data :ServerData = {
-        url : url,
-        port : port
+        url  : url,
+        port : port,
     }
     localStorage.setItem(storage_key, JSON.stringify(server_data));
 }
@@ -67,6 +67,7 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
     return new Promise((resolve, reject) => {
         try {
             window.fetch(resource_url, {mode: 'cors'})
+                // eslint-disable-next-line consistent-return
                 .then((response) => {
                     content_type = response.headers.get('Content-type');
                     if (response.ok) {
@@ -82,13 +83,13 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
                         }
                     }
                 })
-                .then((content => {
+                .then((content) => {
                     resolve({
                         content_type : content_type,
                         file_name    : fname,
-                        content      : content
+                        content      : content,
                     });
-                }))
+                })
                 .catch((err) => {
                     reject(new Error(`Problem accessing: ${err}`));
                 });
@@ -157,7 +158,7 @@ const submit = async (event :Event) :Promise<any> => {
 
             const query :string[] = [
                 `url=${url.value}`,
-                `respec=${respec.value === 'true'}`
+                `respec=${respec.value === 'true'}`,
             ];
 
             if (publishDate.value !== '') {

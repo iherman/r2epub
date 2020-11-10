@@ -148,16 +148,16 @@ export class RespecToEPUB {
     resource_references :LocalLinks[] = [
         {
             query : 'img, script, audio, video, source',
-            attr  : 'src'
+            attr  : 'src',
         },
         {
             query : 'a, link[rel="stylesheet"]',
-            attr  : 'href'
+            attr  : 'href',
         },
         {
             query : 'object',
-            attr  : 'data'
-        }
+            attr  : 'data',
+        },
     ]
 
     private global :Global;
@@ -168,7 +168,7 @@ export class RespecToEPUB {
         this.global = {
             trace     : trace,
             package   : print_package,
-            resources : []
+            resources : [],
         }
     }
 
@@ -297,7 +297,7 @@ export class RespecToEPUB {
                 this.global.resources.push({
                     relative_url : relative_url,
                     media_type   : constants.media_types.svg,
-                    absolute_url : `${constants.modified_epub_files}W3C_logo.svg`
+                    absolute_url : `${constants.modified_epub_files}W3C_logo.svg`,
                 })
             }
         }
@@ -345,9 +345,9 @@ export class RespecToEPUB {
                         "@href"       : resource.relative_url,
                         "@media-type" : resource.media_type,
                         "@id"         : resource.id || `res_id${res_id_num}`,
-                        "@properties" : resource.properties
+                        "@properties" : resource.properties,
                     }, resource.add_to_spine || false);
-                    res_id_num++;
+                    res_id_num += 1;
                 }
             })
         }

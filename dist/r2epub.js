@@ -97,21 +97,22 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
-*
-*
-*/
+ *
+ *
+ */
 /* Main imports */
 const r2epub = __importStar(require("./index"));
 const _ = __importStar(require("underscore"));
 const constants = __importStar(require("./lib/constants"));
 const fs = __importStar(require("fs"));
 /** @hidden */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { program } = require('commander');
 /** @hidden */
 const ERROR = 'ERROR';
@@ -124,12 +125,13 @@ const ERROR = 'ERROR';
  */
 async function cli() {
     program
-        .version('1.2.2')
+        .version('1.2.7')
         .name('r2epub')
         .usage('[options] [url]')
         .description('Convert the file or collection configuration at [url] to EPUB 3.2')
         .option('-o, --output <fname>', 'output file name. If missing, the short name of the document is used')
         .option('-r, --respec', 'the source must be pre-processed by ReSpec', false)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-s, --specStatus <type>', 'specification type', (value, dummy) => {
         if (constants.spec_status_values.includes(value)) {
             return value;
@@ -141,6 +143,7 @@ async function cli() {
     })
         .option('-d, --publishDate <date>', 'publication date')
         .option('-l, --addSectionLinks', 'add section links with "§".')
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-m, --maxTocLevel <number>', 'maximum TOC level', (value, dummy) => {
         const n_value = Number(value);
         if (_.isNaN(n_value) || n_value < 0) {
@@ -161,13 +164,14 @@ async function cli() {
     else {
         const url = program.args[0];
         const options = {
+            // eslint-disable-next-line max-len
             respec: program.respec || ((program.specStatus || program.publishDate || program.addSectionLinks || program.maxTocLevel) ? true : false),
             config: {
                 publishDate: program.publishDate,
                 specStatus: program.specStatus === ERROR ? undefined : program.specStatus,
                 addSectionLinks: program.addSectionLinks ? "true" : undefined,
                 maxTocLevel: program.maxTocLevel === ERROR ? undefined : program.maxTocLevel,
-            }
+            },
         };
         // console.log(`URL: ${url}`);
         // console.log(`Options: ${JSON.stringify(options, null, 4)}`);

@@ -47,7 +47,47 @@ module.exports = {
                 "ignoreRegExpLiterals" : true
             }
         ],
+        "key-spacing" : [
+            "error",
+            {
+                "align" : {
+                    "beforeColon" : true,
+                    "afterColon"  : true,
+                    "on" : "colon"
+                },
+                "multiLine" : {
+                    "beforeColon" : true,
+                    "afterColon"  : true
+                }
+            }
+        ],
+        "comma-dangle" : [
+            "error",
+            "always-multiline",
+            {
+                "functions" : "never",
 
-
+            }
+        ],
+        "arrow-parens" : [
+            "error",
+            "always"
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ],
+        "no-param-reassign" : [
+            "error",
+            {
+                "props" : false
+            }
+        ],
+        "prefer-destructuring": 0,
+        "consistent-return": 2,
+        "no-eval": 2,
+        "no-implied-eval": 2,
     }
 };

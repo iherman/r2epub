@@ -130,7 +130,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
         id           : 'main',
         relative_url : 'Overview.xhtml',
         text_content : xhtml.convert(global.dom),
-        properties   : properties.join(' ')
+        properties   : properties.join(' '),
     }]
 }
 

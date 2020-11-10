@@ -81,11 +81,11 @@ export async function convert(url: string, options: Options = {}, t = false, p =
             publishDate     : null,
             specStatus      : null,
             addSectionLinks : null,
-            maxTocLevel     : null
+            maxTocLevel     : null,
         }
         return {
             respec : options.respec === undefined || options.respec === null ? false : options.respec,
-            config : _.defaults(options.config, defaultConfig)
+            config : _.defaults(options.config, defaultConfig),
         };
     };
 

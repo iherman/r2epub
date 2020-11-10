@@ -23,7 +23,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -47,14 +47,12 @@ const urlHandler = __importStar(require("url"));
 class RespecToEPUB extends rConvert.RespecToEPUB {
 }
 exports.RespecToEPUB = RespecToEPUB;
-;
 /**
  * Convenience class to export the internal [OCF](_lib_ocf_.ocf.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
  */
 class OCF extends ocf.OCF {
 }
 exports.OCF = OCF;
-;
 /**
  * The top level entry in the package: convert a single Respec file, or a collection thereof, into an EPUB document.
  *
@@ -74,11 +72,11 @@ async function convert(url, options = {}, t = false, p = false) {
             publishDate: null,
             specStatus: null,
             addSectionLinks: null,
-            maxTocLevel: null
+            maxTocLevel: null,
         };
         return {
             respec: options.respec === undefined || options.respec === null ? false : options.respec,
-            config: _.defaults(options.config, defaultConfig)
+            config: _.defaults(options.config, defaultConfig),
         };
     };
     // At the minimum, the URL part of the Arguments should exist, better check this
@@ -91,7 +89,7 @@ async function convert(url, options = {}, t = false, p = false) {
             const media_type = await fetch.fetch_type(url);
             if (media_type === constants.media_types.json) {
                 // If the URL refers to a JSON file, it is the configuration file for a full collection.
-                the_ocf = await cConvert.create_epub(url, t, p);
+                the_ocf = await cConvert.create_epub(url, p);
             }
             else if (media_type === constants.media_types.html || media_type === constants.media_types.xhtml) {
                 // Just a sanity check that the return type is indeed HTML

@@ -83,11 +83,11 @@ export class OCF {
     async get_content() :Promise<Buffer|Blob> {
         if (this.content === null) {
             this.content = await this._book.generateAsync({
-                type:  constants.is_browser ? 'blob' : 'nodebuffer',
-                mimeType: constants.media_types.epub,
-                compressionOptions: {
-                    level: 9
-                }
+                type               : constants.is_browser ? 'blob' : 'nodebuffer',
+                mimeType           : constants.media_types.epub,
+                compressionOptions : {
+                    level : 9,
+                },
             });
         }
         return this.content;

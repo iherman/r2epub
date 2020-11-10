@@ -113,8 +113,8 @@ async function get_epub(query :Query) : Promise<Content> {
             'Content-Length'      : content.length,
             'Accept-Ranges'       : 'none',
             'Content-Language'    : 'en-US',
-            'Content-Disposition' : `attachment; filename=${the_ocf.name}`
-        }
+            'Content-Disposition' : `attachment; filename=${the_ocf.name}`,
+        },
     }
 }
 
@@ -132,7 +132,7 @@ async function serve() {
         const error = (code :number, e :string) => {
             const error_headers = {
                 'Content-type'     : constants.media_types.text,
-                'Content-Language' : 'en-US'
+                'Content-Language' : 'en-US',
             };
             response.writeHead(code, _.extend(
                 error_headers,
@@ -148,7 +148,7 @@ async function serve() {
                 if (query === null || query.url === undefined) {
                     // fall back on the fixed home page
                     response.writeHead(200, _.extend(
-                        { 'Content-type' : 'text/html'},
+                        { 'Content-type': 'text/html' },
                         constants.CORS_headers
                     ));
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));

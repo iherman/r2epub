@@ -151,13 +151,13 @@ async function cli() {
 
         const options :r2epub.Options = {
             // eslint-disable-next-line max-len
-            respec :  program.respec || ((program.specStatus || program.publishDate || program.addSectionLinks || program.maxTocLevel) ? true : false),
+            respec : program.respec || ((program.specStatus || program.publishDate || program.addSectionLinks || program.maxTocLevel) ? true : false),
             config : {
                 publishDate     : program.publishDate,
                 specStatus      : program.specStatus === ERROR ? undefined : program.specStatus,
                 addSectionLinks : program.addSectionLinks ? "true" : undefined,
                 maxTocLevel     : program.maxTocLevel === ERROR ? undefined : program.maxTocLevel,
-            }
+            },
         }
 
         // console.log(`URL: ${url}`);

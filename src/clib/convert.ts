@@ -108,7 +108,7 @@ const generate_book_data = async (book_data :CollectionConfiguration) :Promise<C
         editors  : _.unique(editors),
         date     : date,
         ocf      : new ocf.OCF(`${book_data.id}.epub`),
-        chapters : chapters
+        chapters : chapters,
     }
 }
 
