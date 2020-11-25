@@ -21,18 +21,18 @@ export interface MediaType {
  * Various media types used in the code.
  */
 export const media_types :MediaType = {
-    css     : 'text/css',
-    text    : 'text/plain',
-    epub    : 'application/epub+zip',
-    es      : 'text/ecmascript',
-    html    : 'text/html',
-    js      : 'text/javascript',
-    json    : 'application/json',
-    jsonld  : 'application/ld+json',
-    png     : 'image/png',
-    svg     : 'image/svg+xml',
-    xhtml   : 'application/xhtml+xml',
- };
+    css    : 'text/css',
+    text   : 'text/plain',
+    epub   : 'application/epub+zip',
+    es     : 'text/ecmascript',
+    html   : 'text/html',
+    js     : 'text/javascript',
+    json   : 'application/json',
+    jsonld : 'application/ld+json',
+    png    : 'image/png',
+    svg    : 'image/svg+xml',
+    xhtml  : 'application/xhtml+xml',
+};
 
 
 /** These media types refer to textual content, no reason to bother about streaming when fetching them... */
@@ -83,7 +83,7 @@ export const wcag_checked :string[] = [
     'WG-NOTE',
     'IG-NOTE',
     'NOTE',
-    'finding'
+    'finding',
 ];
 
 /**
@@ -93,7 +93,7 @@ export const wcag_checked :string[] = [
 export const invalid_host_names :string[] = [
     '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
     '172.16.1.2', '172.31.4.5', '192.168.0.1', '192.168.254.5',
-    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
+    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost',
 ]
 
 /**
@@ -103,7 +103,7 @@ export const acceptable_url_endings :string[] = [
     '/',
     '.html',
     '.xhtml',
-    '.json'
+    '.json',
 ]
 
 
@@ -111,23 +111,23 @@ export const acceptable_url_endings :string[] = [
  * Set to the default HTTP port number; the environment variable `PORT` may,
  * however, overwrite this for a server.
  */
-export const local_port_number    :string = '80';
+export const local_port_number     = '80';
 
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
-export const spec_generator       :string = 'https://labs.w3.org/spec-generator/?type=respec&url='
+export const spec_generator        = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
-export const fixup_js             :string  = 'https://www.w3.org/scripts/TR/2016/fixup.js';
+export const fixup_js               = 'https://www.w3.org/scripts/TR/2016/fixup.js';
 
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
-export const TR_logo_files        :string = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
+export const TR_logo_files         = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
 
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
 // export const modified_epub_files  :string = 'https://iherman.github.io/r2epub/epub_assets/';
-export const modified_epub_files  :string = 'https://www.ivan-herman.net/r2epub/';
+export const modified_epub_files   = 'https://www.ivan-herman.net/r2epub/';
 
 /** Local (relative) URL for styles and logos */
-export const local_style_files    :string = 'StyleSheets/TR/2016/';
+export const local_style_files     = 'StyleSheets/TR/2016/';
 
 /** @hidden */
 const allow_methods :string[] = ['GET', 'HEAD'];
@@ -152,7 +152,7 @@ const expose_headers :string[] = [
     'Content-Type',
     'Expires',
     'Last-Modified',
-    'Content-Disposition'
+    'Content-Disposition',
 ]
 
 /**
@@ -162,7 +162,7 @@ export const CORS_headers = {
     'Access-Control-Allow-Origin'   : '*',
     'Access-Control-Allow-Methods'  : allow_methods.join(','),
     'Access-Control-Allow-Headers'  : allow_headers.join(','),
-    'Access-Control-Expose-Headers' : expose_headers.join(',')
+    'Access-Control-Expose-Headers' : expose_headers.join(','),
 }
 
 /**

@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable no-irregular-whitespace */
 /**
  * ## Service home page
  *
@@ -11,9 +12,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.homepage = void 0;
 /**
-*
-*
-*/
+ *
+ *
+ */
 /** @hidden */
 exports.homepage = `<!doctype html>
 <html>

@@ -26,12 +26,12 @@ import * as urlHandler from 'url';
  * Convenience class, to export the internal [RespecToEPUB](_lib_convert_.respectoepub.html) class for the package as a whole.
  * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)
  */
-export class RespecToEPUB  extends rConvert.RespecToEPUB {};
+export class RespecToEPUB extends rConvert.RespecToEPUB {}
 
 /**
  * Convenience class to export the internal [OCF](_lib_ocf_.ocf.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
  */
-export class OCF extends ocf.OCF {};
+export class OCF extends ocf.OCF {}
 
 
 /**
@@ -54,7 +54,7 @@ export interface Options {
     /**
      * Is the source in ReSpec?
      */
-    respec?  :boolean,
+    respec? :boolean,
     /**
      * Collection of respec config options, to be used with the spec generator (if applicable).
      */
@@ -71,21 +71,21 @@ export interface Options {
  * @param t whether tracing is set (for debugging)
  * @param p whether the package stops at the creation of an EPUB content and displays the content of the OPF file itself (for debugging)
  */
-export async function convert(url: string, options: Options = {}, t :boolean = false, p :boolean = false) :Promise<OCF> {
+export async function convert(url: string, options: Options = {}, t = false, p = false) :Promise<OCF> {
     /*
      * Return an [[Options]] instance with all defaults filled in.
      *
      */
-    const fill_default_options = (options: Options) :Options => {
+    const fill_default_options = (opts: Options) :Options => {
         const defaultConfig :ConfigOptions = {
             publishDate     : null,
             specStatus      : null,
             addSectionLinks : null,
-            maxTocLevel     : null
+            maxTocLevel     : null,
         }
         return {
-            respec : options.respec === undefined || options.respec === null ? false : options.respec,
-            config : _.defaults(options.config, defaultConfig)
+            respec : opts.respec === undefined || opts.respec === null ? false : opts.respec,
+            config : _.defaults(opts.config, defaultConfig),
         };
     };
 
@@ -99,7 +99,7 @@ export async function convert(url: string, options: Options = {}, t :boolean = f
             const media_type :string = await fetch.fetch_type(url);
             if (media_type === constants.media_types.json) {
                 // If the URL refers to a JSON file, it is the configuration file for a full collection.
-                the_ocf = await cConvert.create_epub(url, t, p);
+                the_ocf = await cConvert.create_epub(url, p);
             } else if (media_type === constants.media_types.html || media_type === constants.media_types.xhtml) {
                 // Just a sanity check that the return type is indeed HTML
                 the_ocf = await (new rConvert.RespecToEPUB(t, p)).create_epub(url, fill_default_options(options));

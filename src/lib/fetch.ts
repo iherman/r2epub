@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
- /**
+/**
  *
  *
  */
@@ -47,7 +47,7 @@ const check_Web_url = (address :string) :string => {
 
     // Check whether we use the right protocol
     if (['http:', 'https:'].includes(parsed.protocol) === false) {
-       throw `URL is not http or https`;
+        throw `URL is not http or https`;
     }
 
     // Run through the URL validator
@@ -63,7 +63,7 @@ const check_Web_url = (address :string) :string => {
             if (portNumber <= 1024) {
                 throw `Unsafe port number used in URL (${parsed.port})`;
             }
-        } catch(e) {
+        } catch (e) {
             throw `Invalid port number used in URL (${parsed.port})`;
         }
     }
@@ -113,7 +113,7 @@ const my_fetch: ((arg :string) => Promise<any>) = constants.is_browser ? fetch :
  * @returns - resource; either a simple text, or a Stream
  * @async
  */
-export async function fetch_resource(resource_url :string, force_text :boolean = false) :Promise<any> {
+export async function fetch_resource(resource_url :string, force_text = false) :Promise<any> {
     if (constants.is_browser === false && process.env.R2EPUB_MODIFIED_EPUB_FILES && resource_url.startsWith(constants.modified_epub_files)) {
         const filename = resource_url.replace(constants.modified_epub_files, process.env.R2EPUB_MODIFIED_EPUB_FILES);
         if (filename.endsWith('.png') && force_text === false) {
@@ -135,7 +135,7 @@ export async function fetch_resource(resource_url :string, force_text :boolean =
                             // If the response content type is set (which is usually the case, but not in all cases...)
                             const response_type = response.headers.get('content-type').split(';')[0].trim();
                             if (response_type && response_type !== '') {
-                                if  (constants.text_content.includes(response_type)) {
+                                if (constants.text_content.includes(response_type)) {
                                     // the simple way, just return text...
                                     resolve(response.text())
                                 } else {

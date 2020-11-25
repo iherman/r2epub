@@ -21,7 +21,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -63,19 +63,19 @@ function create_opf(book) {
     the_opf.add_manifest_item({
         "@href": "title.xhtml",
         "@id": "title_page",
-        "@media-type": constants.media_types.xhtml
+        "@media-type": constants.media_types.xhtml,
     });
     the_opf.add_manifest_item({
         "@href": "cover_image.svg",
         "@id": "cover",
         "@media-type": constants.media_types.svg,
-        "@properties": "cover-image"
+        "@properties": "cover-image",
     });
     the_opf.add_manifest_item({
         "@href": "nav.xhtml",
         "@id": "nav",
         "@media-type": constants.media_types.xhtml,
-        "@properties": "nav"
+        "@properties": "nav",
     });
     // 4. the manifest data must be collected from the chapters and added to the opf file.
     // The 'overview' files are added to the spine on the fly
@@ -86,9 +86,9 @@ function create_opf(book) {
             "metadata": {
                 "dc:identifier": chapter.identifier,
                 "dc:title": chapter.title,
-                "dc:language": "en-US"
+                "dc:language": "en-US",
             },
-            "link": []
+            "link": [],
         };
         chapter.opf_items.forEach((item) => {
             let id;
@@ -116,7 +116,7 @@ function create_opf(book) {
                 "@href": item.href,
                 "@id": id,
                 "@media-type": item.media_type,
-                "@properties": item.properties
+                "@properties": item.properties,
             });
             if (!chapter_1.transfer_once.includes(item.href))
                 new_collection.link.push({ "@href": item.href });

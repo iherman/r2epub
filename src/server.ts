@@ -42,7 +42,7 @@
  * @packageDocumentation
  */
 
- /**
+/**
  *
  *
  */
@@ -68,6 +68,7 @@ interface Content {
     /**
      * Additional HTTP Response headers, to accompany the full response. (File name, dates, etc.).
      */
+    // eslint-disable-next-line @typescript-eslint/ban-types
     headers :object;
 }
 
@@ -112,10 +113,10 @@ async function get_epub(query :Query) : Promise<Content> {
             'Content-Length'      : content.length,
             'Accept-Ranges'       : 'none',
             'Content-Language'    : 'en-US',
-            'Content-Disposition' : `attachment; filename=${the_ocf.name}`
-        }
+            'Content-Disposition' : `attachment; filename=${the_ocf.name}`,
+        },
     }
- }
+}
 
 
 /**
@@ -131,11 +132,11 @@ async function serve() {
         const error = (code :number, e :string) => {
             const error_headers = {
                 'Content-type'     : constants.media_types.text,
-                'Content-Language' : 'en-US'
+                'Content-Language' : 'en-US',
             };
             response.writeHead(code, _.extend(
                 error_headers,
-                constants.CORS_headers
+                constants.CORS_headers,
             ));
             response.write(e);
         }
@@ -147,22 +148,22 @@ async function serve() {
                 if (query === null || query.url === undefined) {
                     // fall back on the fixed home page
                     response.writeHead(200, _.extend(
-                        { 'Content-type' : 'text/html'},
-                        constants.CORS_headers
+                        { 'Content-type': 'text/html' },
+                        constants.CORS_headers,
                     ));
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));
                 } else {
                     const the_book :Content = await get_epub(query);
                     response.writeHead(200, _.extend(
                         the_book.headers,
-                        constants.CORS_headers
+                        constants.CORS_headers,
                     ));
                     response.write(the_book.content);
                 }
             } else {
                 error(501, `Invalid HTTP request method: ${request.method}`);
             }
-        } catch(e) {
+        } catch (e) {
             error(400, `EPUB Generation error: ${e.toString()}`);
         } finally {
             response.end();

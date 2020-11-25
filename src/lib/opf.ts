@@ -30,17 +30,17 @@ import * as utils    from "./utils";
  */
 interface DCIdentifier {
     "@id"? :string,
-    "#"    :string
+    "#" :string
 }
 
 /**
  *
  */
 interface DCTitle {
-    "@id"?       :string,
-    "@dir"?      :string,
+    "@id"? :string,
+    "@dir"? :string,
     "@xml:lang"? :string,
-    "#"          :string
+    "#" :string
 }
 
 /**
@@ -48,20 +48,20 @@ interface DCTitle {
  */
 interface DCLang {
     "@id"? :string,
-    "#"    :string
+    "#" :string
 }
 
 /**
  * The "meta" element content, as defined in the spec.
  */
 interface Meta {
-    "@property"  :string
-    "@id"?       :string,
-    "@dir"?      :string,
-    "@refines"?  :string,
-    "@scheme"?   :string,
+    "@property" :string
+    "@id"? :string,
+    "@dir"? :string,
+    "@refines"? :string,
+    "@scheme"? :string,
     "@xml:lang"? :string,
-    "#"?         :string
+    "#"? :string
 }
 
 /**
@@ -69,33 +69,33 @@ interface Meta {
  * `@rel` is indeed optional in that context.
  */
 export interface Link {
-    "@rel"?         :string,
-    "@href"        :string,
-    "@id"?         :string,
+    "@rel"? :string,
+    "@href" :string,
+    "@id"? :string,
     "@media-type"? :string,
     "@properties"? :string,
-    "@refines"?    :string,
+    "@refines"? :string,
 }
 
 /**
  *
  */
 interface Creator {
-    "@id"?   :string,
+    "@id"? :string,
     "@role"? :string,
-    "#"      :string
+    "#" :string
 }
 
 /**
  * The minimal metadata, used by the TR documents.
  */
 interface Metadata {
-    "dc:identifier"    :DCIdentifier[],
-    "dc:title"         :DCTitle[],
-    "dc:language"      :DCLang[],
-    "meta"             :Meta[],
-    "link"?            :Link[],
-    "dc:creator"?      :Creator[],
+    "dc:identifier" :DCIdentifier[],
+    "dc:title" :DCTitle[],
+    "dc:language" :DCLang[],
+    "meta" :Meta[],
+    "link"? :Link[],
+    "dc:creator"? :Creator[],
     [propName: string] :any;
 }
 
@@ -103,10 +103,10 @@ interface Metadata {
  *
  */
 export interface ManifestItem {
-    "@href"           :string,
-    "@id"             :string,
-    "@media-type"     :string,
-    "@properties"?    :string,
+    "@href" :string,
+    "@id" :string,
+    "@media-type" :string,
+    "@properties"? :string,
     "@media-overlay"? :string,
 }
 
@@ -121,9 +121,9 @@ interface Manifest {
  * A single spine item
  */
 interface SpineItem {
-    "@idref"       :string,
-    "@id"?         :string,
-    "@linear"?     :string,
+    "@idref" :string,
+    "@id"? :string,
+    "@linear"? :string,
     "@properties"? :string
 }
 
@@ -138,36 +138,36 @@ interface Spine {
  * The minimal metadata, used in collections
  */
 export interface CollectionMetadata {
-    "dc:identifier"    :string,
-    "dc:title"         :string,
-    "dc:language"      :string,
+    "dc:identifier" :string,
+    "dc:title" :string,
+    "dc:language" :string,
 }
 
 /**
  * Representations of the "collections" element
  */
 export interface Collection {
-    "@role"     :string,
+    "@role" :string,
     "metadata"? :CollectionMetadata,
-    "link"      :Link[]
+    "link" :Link[]
 }
 
 /**
  * Encoding of the XML structure of the package file, as defined in the EPUB specification, in JSON.
  */
 interface PackageContent {
-    "@xmlns"             :string,
+    "@xmlns" :string,
     "@unique-identifier" :string,
-    "@version"           :string,
-    "@xmlns:dc"          :string,
-    "@prefix"?           :string,
-    "@dir"?              :string,
-    "@id"?               :string,
-    "@xml:lang"?         :string,
-    "metadata"           :Metadata,
-    "manifest"           :Manifest,
-    "spine"              :Spine,
-    "collection"?        :Collection[]
+    "@version" :string,
+    "@xmlns:dc" :string,
+    "@prefix"? :string,
+    "@dir"? :string,
+    "@id"? :string,
+    "@xml:lang"? :string,
+    "metadata" :Metadata,
+    "manifest" :Manifest,
+    "spine" :Spine,
+    "collection"? :Collection[]
 }
 
 /**
@@ -203,104 +203,105 @@ export class PackageWrapper {
     /** Id generated to the editors for cross reference
      * @hidden
      */
-    private id: number = 0;
+    private id = 0;
 
     /**
      * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
      * @param title - Title of the publication
      */
+    // eslint-disable-next-line max-lines-per-function
     constructor(identifier :string, title :string) {
         this.thePackage = {
-            package: {
-                "@xmlns" : "http://www.idpf.org/2007/opf",
-                "@xmlns:dc": "http://purl.org/dc/elements/1.1/",
-                "@prefix" : "cc: http://creativecommons.org/ns#",
+            package : {
+                "@xmlns"             : "http://www.idpf.org/2007/opf",
+                "@xmlns:dc"          : "http://purl.org/dc/elements/1.1/",
+                "@prefix"            : "cc: http://creativecommons.org/ns#",
                 "@unique-identifier" : "pub-id",
-                "@version": "3.0",
-                "@xml:lang": "en-us",
-                metadata: {
-                    "dc:identifier": [{
-                        "#" : identifier,
-                        "@id": "pub-id"
+                "@version"           : "3.0",
+                "@xml:lang"          : "en-us",
+                metadata             : {
+                    "dc:identifier" : [{
+                        "#"   : identifier,
+                        "@id" : "pub-id",
                     }],
-                    "dc:title": [{
+                    "dc:title" : [{
                         "@id" : "title",
-                        "#" : utils.de_xml(title)
+                        "#"   : utils.de_xml(title),
                     }],
-                    "dc:language": [{
-                        "#": "en-us"
+                    "dc:language" : [{
+                        "#" : "en-us",
                     }],
-                    "dc:subject": [{
+                    "dc:subject" : [{
                         "@id" : "acm1",
-                        "#" : "Information systems~World Wide Web"
+                        "#"   : "Information systems~World Wide Web",
                     },{
                         "@id" : "acm2",
-                        "#" : "General and reference~Computing standards, RFCs and guidelines"
+                        "#"   : "General and reference~Computing standards, RFCs and guidelines",
                     }],
-                    "meta": [{
-                        "@property": "title-type",
-                        "@refines": "#title",
-                        "#": "main"
+                    "meta" : [{
+                        "@property" : "title-type",
+                        "@refines"  : "#title",
+                        "#"         : "main",
                     },{
-                        "@property": "cc:attributionURL",
-                        "#": "https://www.w3.org"
+                        "@property" : "cc:attributionURL",
+                        "#"         : "https://www.w3.org",
                     },{
-                        "@property": "authority",
-                        "@refines": "#acm1",
-                        "#" : "https://dl.acm.org/ccs"
+                        "@property" : "authority",
+                        "@refines"  : "#acm1",
+                        "#"         : "https://dl.acm.org/ccs",
                     },{
-                        "@property": "term",
-                        "@refines": "#acm1",
-                        "#" : "10002951.10003260"
+                        "@property" : "term",
+                        "@refines"  : "#acm1",
+                        "#"         : "10002951.10003260",
                     },{
-                        "@property": "authority",
-                        "@refines": "#acm2",
-                        "#" : "https://dl.acm.org/ccs"
+                        "@property" : "authority",
+                        "@refines"  : "#acm2",
+                        "#"         : "https://dl.acm.org/ccs",
                     },{
-                        "@property": "term",
-                        "@refines": "#acm2",
-                        "#" : "10002944.10011122.10003459"
+                        "@property" : "term",
+                        "@refines"  : "#acm2",
+                        "#"         : "10002944.10011122.10003459",
                     },{
                         "@property" : "schema:accessibilityFeature",
-                        '#': "tableOfContents"
+                        '#'         : "tableOfContents",
                     },{
                         "@property" : "schema:accessibilityHazard",
-                        '#': "none"
+                        '#'         : "none",
                     },{
                         "@property" : "schema:accessMode",
-                        '#': "textual"
+                        '#'         : "textual",
                     },{
                         "@property" : "schema:accessModeSufficient",
-                        '#': "textual"
+                        '#'         : "textual",
                     },{
                         "@property" : "schema:accessibilitySummary",
-                        '#': "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only."
+                        '#'         : "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only.",
                     }],
-                    "dc:rights": "https://www.w3.org/Consortium/Legal/2015/doc-license",
-                    "dc:publisher": "World Wide Web Consortium",
-                    "link" : [{
-                        "@href": "https://www.w3.org/Consortium/Legal/2015/doc-license",
-                        "@rel": "cc:license"
+                    "dc:rights"    : "https://www.w3.org/Consortium/Legal/2015/doc-license",
+                    "dc:publisher" : "World Wide Web Consortium",
+                    "link"         : [{
+                        "@href" : "https://www.w3.org/Consortium/Legal/2015/doc-license",
+                        "@rel"  : "cc:license",
                     }],
-                    "dc:creator": []
+                    "dc:creator" : [],
                 },
                 manifest : {
-                    "item" : []
+                    "item" : [],
                 },
                 spine : {
                     "itemref" : [
                         {
-                            "@idref": "title_page",
+                            "@idref" : "title_page",
                         },
                         {
-                            "@idref": "nav",
+                            "@idref" : "nav",
                         },
                         {
-                            "@idref": "main",
-                        }
-                    ]
-                }
-            }
+                            "@idref" : "main",
+                        },
+                    ],
+                },
+            },
         }
     }
 
@@ -309,7 +310,7 @@ export class PackageWrapper {
      *
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
      */
-    add_manifest_item(item :ManifestItem, add_spine_item :boolean = false) :void {
+    add_manifest_item(item :ManifestItem, add_spine_item = false) :void {
         if (item['@properties'] === undefined || item['@properties'] === '') {
             delete item['@properties'];
         }
@@ -317,7 +318,7 @@ export class PackageWrapper {
         if (add_spine_item) {
             this.thePackage.package.spine.itemref.push({
                 '@idref'  : item['@id'],
-                '@linear' : 'no'
+                '@linear' : 'no',
             })
         }
     }
@@ -328,8 +329,8 @@ export class PackageWrapper {
      */
     add_wcag_link() :void {
         this.thePackage.package.metadata["link"].push({
-            "@rel" : 'dcterms:conformsTo',
-            '@href' : 'http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a'
+            "@rel"  : 'dcterms:conformsTo',
+            '@href' : 'http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a',
         })
     }
 
@@ -339,9 +340,9 @@ export class PackageWrapper {
      * @param idref - the reference that must be added to the spine item
      * @param linear - if the 'linear = no' flag should be added
      */
-    add_spine_item(idref :string, add_linear :boolean = false) :void {
+    add_spine_item(idref :string, add_linear = false) :void {
         const item :SpineItem = {
-            '@idref' : idref
+            '@idref' : idref,
         };
         if (add_linear) {
             item['@linear'] = 'no';
@@ -357,16 +358,16 @@ export class PackageWrapper {
     add_creators(creators :string[]): void {
         creators.forEach((creator: string) => {
             this.thePackage.package.metadata["dc:creator"].push({
-                "@id"   : `creator_id_${this.id}`,
-                "#"     : creator
+                "@id" : `creator_id_${this.id}`,
+                "#"   : creator,
             });
             this.thePackage.package.metadata["meta"].push({
-                "@refines"  :  `#creator_id_${this.id}`,
+                "@refines"  : `#creator_id_${this.id}`,
                 "@property" : "role",
                 "@scheme"   : "marc:relators",
-                "#"         : "edt"
+                "#"         : "edt",
             });
-            this.id++;
+            this.id += 1;
         });
     }
 
@@ -391,16 +392,16 @@ export class PackageWrapper {
      */
     add_dates(date :string): void {
         this.thePackage.package.metadata.meta.push({
-            "@property": "dcterms:date",
-            "#": `${date}T00:00:00Z`
+            "@property" : "dcterms:date",
+            "#"         : `${date}T00:00:00Z`,
         });
         this.thePackage.package.metadata.meta.push({
-            "@property": "dcterms:modified",
-            "#": `${date}T00:00:00Z`
+            "@property" : "dcterms:modified",
+            "#"         : `${date}T00:00:00Z`,
         });
         this.thePackage.package.metadata.meta.push({
-            "@property": "dcterms:dateCopyrighted",
-            "#": `${date.split('-')[0]}`
+            "@property" : "dcterms:dateCopyrighted",
+            "#"         : `${date.split('-')[0]}`,
         })
     }
 

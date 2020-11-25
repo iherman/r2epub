@@ -57,7 +57,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -66,9 +66,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
-*
-*
-*/
+ *
+ *
+ */
 const http_1 = __importDefault(require("http"));
 const urlHandler = __importStar(require("url"));
 const _ = __importStar(require("underscore"));
@@ -105,8 +105,8 @@ async function get_epub(query) {
             'Content-Length': content.length,
             'Accept-Ranges': 'none',
             'Content-Language': 'en-US',
-            'Content-Disposition': `attachment; filename=${the_ocf.name}`
-        }
+            'Content-Disposition': `attachment; filename=${the_ocf.name}`,
+        },
     };
 }
 /**
@@ -122,7 +122,7 @@ async function serve() {
         const error = (code, e) => {
             const error_headers = {
                 'Content-type': constants.media_types.text,
-                'Content-Language': 'en-US'
+                'Content-Language': 'en-US',
             };
             response.writeHead(code, _.extend(error_headers, constants.CORS_headers));
             response.write(e);

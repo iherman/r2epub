@@ -6,10 +6,9 @@
  * @packageDocumentation
  */
 
-
- /**
-  *
-  */
+/**
+ *
+ */
 
 import * as opf                                    from '../lib/opf';
 import * as constants                              from '../lib/constants';
@@ -40,7 +39,7 @@ export function create_opf(book :cConvert.Collection) :string {
     const the_opf :opf.PackageWrapper = new opf.PackageWrapper(`urn:w3c:tr:${book.name}`, book.title);
 
     // 1. editors should be collected from the chapters; this was done when initializing the book
-     the_opf.add_creators(book.editors);
+    the_opf.add_creators(book.editors);
 
     // 2. Set the date of this book
     the_opf.add_dates(book.date);
@@ -49,19 +48,19 @@ export function create_opf(book :cConvert.Collection) :string {
     the_opf.add_manifest_item({
         "@href"       : "title.xhtml",
         "@id"         : "title_page",
-        "@media-type" : constants.media_types.xhtml
+        "@media-type" : constants.media_types.xhtml,
     });
     the_opf.add_manifest_item({
         "@href"       : "cover_image.svg",
         "@id"         : "cover",
         "@media-type" : constants.media_types.svg,
-        "@properties" : "cover-image"
+        "@properties" : "cover-image",
     });
     the_opf.add_manifest_item({
         "@href"       : "nav.xhtml",
         "@id"         : "nav",
         "@media-type" : constants.media_types.xhtml,
-        "@properties" : "nav"
+        "@properties" : "nav",
     })
 
     // 4. the manifest data must be collected from the chapters and added to the opf file.
@@ -71,13 +70,13 @@ export function create_opf(book :cConvert.Collection) :string {
         const new_collection :opf.Collection = {
             "@role"    : "https://www.w3.org/TR/",
             "metadata" : {
-                "dc:identifier"  : chapter.identifier,
-                "dc:title"       : chapter.title,
-                "dc:language"    : "en-US"
+                "dc:identifier" : chapter.identifier,
+                "dc:title"      : chapter.title,
+                "dc:language"   : "en-US",
             },
-            "link"     : []
+            "link" : [],
         };
-        chapter.opf_items.forEach((item :OPFManifestItem)  :void => {
+        chapter.opf_items.forEach((item :OPFManifestItem) :void => {
             let id :string;
             // The cover images should not be considered, those are unused on the collection level
             if (item.properties === 'cover-image') return;
@@ -100,9 +99,9 @@ export function create_opf(book :cConvert.Collection) :string {
                 "@href"       : item.href,
                 "@id"         : id,
                 "@media-type" : item.media_type,
-                "@properties" : item.properties
+                "@properties" : item.properties,
             });
-            if (!transfer_once.includes(item.href)) new_collection.link.push({"@href" : item.href});
+            if (!transfer_once.includes(item.href)) new_collection.link.push({"@href": item.href});
         });
         the_opf.add_collection(new_collection);
     });

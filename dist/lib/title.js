@@ -21,7 +21,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -106,13 +106,13 @@ function create_title_page(global) {
         {
             media_type: 'image/png',
             relative_url: 'Icons/w3c_main.png',
-            absolute_url: 'https://www.w3.org/Icons/w3c_main.png'
+            absolute_url: 'https://www.w3.org/Icons/w3c_main.png',
         },
         {
             media_type: 'text/css',
             relative_url: 'StyleSheets/base.css',
-            absolute_url: 'https://www.w3.org/StyleSheets/base.css'
-        }
+            absolute_url: 'https://www.w3.org/StyleSheets/base.css',
+        },
     ];
     const get_editors = () => global.config.editors
         .map((entry) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`)
@@ -131,7 +131,7 @@ function create_title_page(global) {
         media_type: constants.media_types.xhtml,
         relative_url: 'title.xhtml',
         id: 'title_page',
-        text_content: final_title_page
+        text_content: final_title_page,
     });
     return retval.reverse();
 }

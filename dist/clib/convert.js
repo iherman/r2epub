@@ -33,7 +33,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -76,7 +76,7 @@ const generate_book_data = async (book_data) => {
         editors: _.unique(editors),
         date: date,
         ocf: new ocf.OCF(`${book_data.id}.epub`),
-        chapters: chapters
+        chapters: chapters,
     };
 };
 /**
@@ -92,11 +92,10 @@ const generate_book_data = async (book_data) => {
  *
  * @async
  * @param config_url - the user supplied data, i.e., the result of JSON parsing of the input argument
- * @param trace whether tracing is set (for debugging)
  * @param print_package whether the package stops at the creation of an EPUB content and displays the content of the OPF file itself (for debugging)
  * @returns a Promise holding the final [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) content.
  */
-async function create_epub(config_url, trace = false, print_package = false) {
+async function create_epub(config_url, print_package = false) {
     const data = await fetch.fetch_json(config_url);
     // check, via a JSON schema, the validity of the input and create the right arguments
     const book_data = args.get_book_configuration(data);

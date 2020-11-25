@@ -100,19 +100,19 @@ html {
  * no watermark, simple background template
  */
 const specStatus_simple = [
-    'ED', 'WD', 'CR', 'CRD', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD'
+    'ED', 'WD', 'CR', 'CRD', 'PR', 'LD', 'LS', 'PER', 'REC', 'RSCND', 'OBSL', 'SPSD',
 ]
 
 /** Interface for special cases, ie, when the `specStatus` value does not provide all information… */
 interface specStatus_css_mappings {
     /** Is there a watermark? */
-    watermark         :boolean,
+    watermark :boolean,
 
     /** 'name' (filename) to be used for the logo, e.g., WD, REC, etc. */
-    logo_name         :string,
+    logo_name :string,
 
     /** Media type of the logo. Usually SVG, but not always; if missing, `image/svg` is used. */
-    logo_media_type?  :string,
+    logo_media_type? :string,
 
     /** Reference to the CSS template to be used. If missing, the simple background setting template is used. */
     special_template? :string
@@ -137,34 +137,34 @@ const specStatus_css :specStatus_mapping = {
         watermark        : true,
         logo_name        : 'UD.png',
         logo_media_type  : constants.media_types.png,
-        special_template : undefined_template
+        special_template : undefined_template,
     },
 
     'FPWD' : {
-        watermark       : false,
-        logo_name       : 'WD.svg',
+        watermark : false,
+        logo_name : 'WD.svg',
     },
 
     'LC' : {
-        watermark       : false,
-        logo_name       : 'WD.svg',
+        watermark : false,
+        logo_name : 'WD.svg',
     },
 
     'FPWD-NOTE' : {
-        watermark       : false,
-        logo_name       : 'WG-Note.svg',
+        watermark : false,
+        logo_name : 'WG-Note.svg',
     },
 
     'WG-NOTE' : {
-        watermark       : false,
-        logo_name       : 'WG-Note.svg',
+        watermark : false,
+        logo_name : 'WG-Note.svg',
     },
 
     'CG-DRAFT' : {
         watermark        : true,
         logo_name        : null,
         logo_media_type  : constants.media_types.png,
-        special_template : cg_draft_template
+        special_template : cg_draft_template,
     },
 }
 
@@ -203,7 +203,7 @@ export function extract_css(global: Global): ResourceRef[] {
         retval.push({
             relative_url : `${constants.local_style_files}base.css`,
             media_type   : constants.media_types.css,
-            absolute_url : `${constants.modified_epub_files}base.css`
+            absolute_url : `${constants.modified_epub_files}base.css`,
         })
 
         // The html content should be modified to refer to the base directly
@@ -214,7 +214,7 @@ export function extract_css(global: Global): ResourceRef[] {
         retval.push({
             relative_url : `${constants.local_style_files}tr_epub.css`,
             media_type   : constants.media_types.css,
-            text_content : constants.tr_epub_css
+            text_content : constants.tr_epub_css,
         })
 
         // Adding the reference to the epub specific css file into the dom
@@ -229,7 +229,7 @@ export function extract_css(global: Global): ResourceRef[] {
             // This is a 'standard' case, with a regular structure:
             css_extras = {
                 watermark : false,
-                logo_name : `${global.config.specStatus}.svg`
+                logo_name : `${global.config.specStatus}.svg`,
             }
         }
 
@@ -246,7 +246,7 @@ export function extract_css(global: Global): ResourceRef[] {
                 retval.push({
                     relative_url : `${constants.local_style_files}logos/${css_extras.logo_name}`,
                     media_type   : media_type,
-                    absolute_url : `${orig_logo_url}${css_extras.logo_name}`
+                    absolute_url : `${orig_logo_url}${css_extras.logo_name}`,
                 })
             }
 
@@ -255,7 +255,7 @@ export function extract_css(global: Global): ResourceRef[] {
                 retval.push({
                     relative_url : `${constants.local_style_files}logos/UD-watermark.png`,
                     media_type   : constants.media_types.png,
-                    absolute_url : `${constants.TR_logo_files}UD-watermark.png`
+                    absolute_url : `${constants.TR_logo_files}UD-watermark.png`,
                 })
             }
 
@@ -263,7 +263,7 @@ export function extract_css(global: Global): ResourceRef[] {
             retval.push({
                 relative_url : `${constants.local_style_files}epub.css`,
                 media_type   : constants.media_types.css,
-                text_content : template
+                text_content : template,
             });
 
             const new_css_link = global.html_element.ownerDocument.createElement('link');

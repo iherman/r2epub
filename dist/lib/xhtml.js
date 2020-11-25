@@ -13,9 +13,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.convert = void 0;
 /**
-*
-*
-*/
+ *
+ *
+ */
 const parse5_1 = require("parse5");
 const xmlserializer_1 = require("xmlserializer");
 /**

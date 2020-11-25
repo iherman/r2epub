@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable no-irregular-whitespace */
 /**
  * ## Collection Navigation page
  *
@@ -21,7 +22,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -126,9 +127,9 @@ function create_nav_page(book) {
     const get_nav_text = (chapter) => {
         // Get the nav file from the chapter
         const dom = new jsdom.JSDOM(chapter.nav);
-        let html = dom.window.document.documentElement.querySelector('nav#navigation > ol').innerHTML;
+        const html = dom.window.document.documentElement.querySelector('nav#navigation > ol').innerHTML;
         // the link elements must be changed to refer to the relevant subdirectory!
-        let html_final = html.replace(/"Overview.xhtml/g, `"${chapter.chapter_name}/Overview.xhtml`);
+        const html_final = html.replace(/"Overview.xhtml/g, `"${chapter.chapter_name}/Overview.xhtml`);
         return `<li class="part-title-li"><a class="part-title" href="${chapter.chapter_name}/Overview.xhtml">${chapter.title}</a><ol>${html_final}</ol></li>`;
     };
     const full_nav = book.chapters.map(get_nav_text).join('\n');

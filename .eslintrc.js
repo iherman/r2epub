@@ -11,52 +11,64 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'airbnb-base'
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
-    rules: {
-        "indent": [
+    "rules" : {
+        "no-console" : 0, // set it to 0 if it is o.k. to have console.log
+        "@typescript-eslint/no-explicit-any" : 0,
+        "no-constant-condition": [
             "error",
-            4,
             {
-                "SwitchCase": 1,
-                "CallExpression": {
-                    "arguments": "first"
-                }
+                "checkLoops" : false
             }
+        ],
+        "indent" : [
+            "error", 4
         ],
         "no-multi-spaces": [
             "error",
             {
                 "exceptions": {
-                    "VariableDeclarator": true
+                    "VariableDeclarator": true,
+                    "ImportDeclaration" : true
                 }
             }
         ],
-        "camelcase": false,
-        "strict": false,
-        "no-else-return": false,
+        "no-else-return": 0,
         "max-len": [
             "error",
             {
-                "code": 150
+                "code": 150,
+                "ignoreComments" : true,
+                "ignoreUrls" : true,
+                "ignoreStrings" : true,
+                "ignoreTemplateLiterals" : true,
+                "ignoreRegExpLiterals" : true
             }
         ],
-        "key-spacing": [
+        "key-spacing" : [
             "error",
             {
-                "align": {
-                    "beforeColon": true,
-                    "afterColon": true,
-                    "true": "colon"
+                "align" : {
+                    "beforeColon" : true,
+                    "afterColon"  : true,
+                    "on" : "colon"
+                },
+                "multiLine" : {
+                    "beforeColon" : true,
+                    "afterColon"  : true
                 }
             }
         ],
-        "comma-dangle": [
+        "comma-dangle" : [
             "error",
-            "never"
+            "always-multiline",
+            {
+                "functions" : "never",
+            }
         ],
-        "arrow-parens": [
+        "arrow-parens" : [
             "error",
             "always"
         ],
@@ -66,15 +78,43 @@ module.exports = {
                 "allowForLoopAfterthoughts": true
             }
         ],
-        "no-param-reassign": [
+        "no-param-reassign" : [
             "error",
             {
-                "props": false
+                "props" : false
             }
         ],
-        "prefer-destructuring": false,
-        "consistent-return": false,
-        "no-eval": "error",
-        "no-implied-eval": "error"
+        "prefer-destructuring": 0,
+        "consistent-return": 2,
+        "no-eval": 2,
+        "no-implied-eval": 2,
+
+        "array-callback-return": 2,
+
+        "eqeqeq": [
+            "error",
+            "smart"
+        ],
+
+        "no-label-var": 2,
+        "no-shadow": 2,
+        "func-name-matching": 2,
+
+        "keyword-spacing" : [
+            "error",
+            {
+                "before" : true,
+                "after" : true
+            }
+        ],
+
+        "max-lines-per-function": [
+            1,
+            {
+                "max": 80,
+                "skipBlankLines": true,
+                "skipComments": true,
+            }
+        ]
     }
 };

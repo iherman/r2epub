@@ -26,7 +26,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -78,21 +78,21 @@ class RespecToEPUB {
         this.resource_references = [
             {
                 query: 'img, script, audio, video, source',
-                attr: 'src'
+                attr: 'src',
             },
             {
                 query: 'a, link[rel="stylesheet"]',
-                attr: 'href'
+                attr: 'href',
             },
             {
                 query: 'object',
-                attr: 'data'
-            }
+                attr: 'data',
+            },
         ];
         this.global = {
             trace: trace,
             package: print_package,
-            resources: []
+            resources: [],
         };
     }
     /**
@@ -215,7 +215,7 @@ class RespecToEPUB {
                 this.global.resources.push({
                     relative_url: relative_url,
                     media_type: constants.media_types.svg,
-                    absolute_url: `${constants.modified_epub_files}W3C_logo.svg`
+                    absolute_url: `${constants.modified_epub_files}W3C_logo.svg`,
                 });
             }
         }
@@ -256,9 +256,9 @@ class RespecToEPUB {
                         "@href": resource.relative_url,
                         "@media-type": resource.media_type,
                         "@id": resource.id || `res_id${res_id_num}`,
-                        "@properties": resource.properties
+                        "@properties": resource.properties,
                     }, resource.add_to_spine || false);
-                    res_id_num++;
+                    res_id_num += 1;
                 }
             });
         }

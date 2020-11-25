@@ -19,12 +19,12 @@ import * as xmldom from 'xmldom';
 export function slice_text(inp: string): string {
     const LIMIT = 30;
     const slice_text_array = (words: string[]): string[] => {
-        let final: string[] = [];
+        const final: string[] = [];
         let current_length  = 0;
-        while(true) {
+        while (true) {
             if (words.length === 0) {
                 return final;
-            } else if(current_length + words[0].length < LIMIT) {
+            } else if (current_length + words[0].length < LIMIT) {
                 current_length += words[0].length + 1;
                 final.push(`${words.shift()} `);
             } else {
@@ -58,12 +58,13 @@ export function de_xml(inp: string): string {
                 return txt.replace(/<br[ ]*\/>/gi, ' ');
             }
             const option = {
-                locator: {},
-                errorHandler: (level: string, msg: any): any => { return; }
+                locator      : {},
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                errorHandler : (level: string, msg: any): any => { return; },
             }
-            let dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
+            const dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
             return dom.childNodes[0].textContent;
-        } catch(e) {
+        } catch (e) {
             // just silently return the original for any issue
             return inp;
         }
@@ -78,7 +79,7 @@ export function de_xml(inp: string): string {
  */
 const months :string[] = [
     'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'July', 'August', 'September', 'October', 'November', 'December',
 ];
 
 /**

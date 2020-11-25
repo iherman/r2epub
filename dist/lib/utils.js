@@ -19,7 +19,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -39,7 +39,7 @@ const xmldom = __importStar(require("xmldom"));
 function slice_text(inp) {
     const LIMIT = 30;
     const slice_text_array = (words) => {
-        let final = [];
+        const final = [];
         let current_length = 0;
         while (true) {
             if (words.length === 0) {
@@ -81,9 +81,10 @@ function de_xml(inp) {
             };
             const option = {
                 locator: {},
-                errorHandler: (level, msg) => { return; }
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                errorHandler: (level, msg) => { return; },
             };
-            let dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
+            const dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
             return dom.childNodes[0].textContent;
         }
         catch (e) {
@@ -101,7 +102,7 @@ exports.de_xml = de_xml;
  */
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'July', 'August', 'September', 'October', 'November', 'December',
 ];
 /**
  * Convert an ISO formatted date to a more readable format.

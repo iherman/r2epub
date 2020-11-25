@@ -31,7 +31,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -63,6 +63,7 @@ class PackageWrapper {
      * @param identifier - Canonical identifier of the publication, used in the `dc:identifier` metadata entry
      * @param title - Title of the publication
      */
+    // eslint-disable-next-line max-lines-per-function
     constructor(identifier, title) {
         /** Id generated to the editors for cross reference
          * @hidden
@@ -79,71 +80,71 @@ class PackageWrapper {
                 metadata: {
                     "dc:identifier": [{
                             "#": identifier,
-                            "@id": "pub-id"
+                            "@id": "pub-id",
                         }],
                     "dc:title": [{
                             "@id": "title",
-                            "#": utils.de_xml(title)
+                            "#": utils.de_xml(title),
                         }],
                     "dc:language": [{
-                            "#": "en-us"
+                            "#": "en-us",
                         }],
                     "dc:subject": [{
                             "@id": "acm1",
-                            "#": "Information systems~World Wide Web"
+                            "#": "Information systems~World Wide Web",
                         }, {
                             "@id": "acm2",
-                            "#": "General and reference~Computing standards, RFCs and guidelines"
+                            "#": "General and reference~Computing standards, RFCs and guidelines",
                         }],
                     "meta": [{
                             "@property": "title-type",
                             "@refines": "#title",
-                            "#": "main"
+                            "#": "main",
                         }, {
                             "@property": "cc:attributionURL",
-                            "#": "https://www.w3.org"
+                            "#": "https://www.w3.org",
                         }, {
                             "@property": "authority",
                             "@refines": "#acm1",
-                            "#": "https://dl.acm.org/ccs"
+                            "#": "https://dl.acm.org/ccs",
                         }, {
                             "@property": "term",
                             "@refines": "#acm1",
-                            "#": "10002951.10003260"
+                            "#": "10002951.10003260",
                         }, {
                             "@property": "authority",
                             "@refines": "#acm2",
-                            "#": "https://dl.acm.org/ccs"
+                            "#": "https://dl.acm.org/ccs",
                         }, {
                             "@property": "term",
                             "@refines": "#acm2",
-                            "#": "10002944.10011122.10003459"
+                            "#": "10002944.10011122.10003459",
                         }, {
                             "@property": "schema:accessibilityFeature",
-                            '#': "tableOfContents"
+                            '#': "tableOfContents",
                         }, {
                             "@property": "schema:accessibilityHazard",
-                            '#': "none"
+                            '#': "none",
                         }, {
                             "@property": "schema:accessMode",
-                            '#': "textual"
+                            '#': "textual",
                         }, {
                             "@property": "schema:accessModeSufficient",
-                            '#': "textual"
+                            '#': "textual",
                         }, {
                             "@property": "schema:accessibilitySummary",
-                            '#': "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only."
+                            '#': "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only.",
                         }],
                     "dc:rights": "https://www.w3.org/Consortium/Legal/2015/doc-license",
                     "dc:publisher": "World Wide Web Consortium",
                     "link": [{
                             "@href": "https://www.w3.org/Consortium/Legal/2015/doc-license",
-                            "@rel": "cc:license"
+                            "@rel": "cc:license",
                         }],
-                    "dc:creator": []
+                    "dc:creator": [],
                 },
                 manifest: {
-                    "item": []
+                    "item": [],
                 },
                 spine: {
                     "itemref": [
@@ -155,10 +156,10 @@ class PackageWrapper {
                         },
                         {
                             "@idref": "main",
-                        }
-                    ]
-                }
-            }
+                        },
+                    ],
+                },
+            },
         };
     }
     /**
@@ -174,7 +175,7 @@ class PackageWrapper {
         if (add_spine_item) {
             this.thePackage.package.spine.itemref.push({
                 '@idref': item['@id'],
-                '@linear': 'no'
+                '@linear': 'no',
             });
         }
     }
@@ -185,7 +186,7 @@ class PackageWrapper {
     add_wcag_link() {
         this.thePackage.package.metadata["link"].push({
             "@rel": 'dcterms:conformsTo',
-            '@href': 'http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a'
+            '@href': 'http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a',
         });
     }
     /**
@@ -196,7 +197,7 @@ class PackageWrapper {
      */
     add_spine_item(idref, add_linear = false) {
         const item = {
-            '@idref': idref
+            '@idref': idref,
         };
         if (add_linear) {
             item['@linear'] = 'no';
@@ -212,15 +213,15 @@ class PackageWrapper {
         creators.forEach((creator) => {
             this.thePackage.package.metadata["dc:creator"].push({
                 "@id": `creator_id_${this.id}`,
-                "#": creator
+                "#": creator,
             });
             this.thePackage.package.metadata["meta"].push({
                 "@refines": `#creator_id_${this.id}`,
                 "@property": "role",
                 "@scheme": "marc:relators",
-                "#": "edt"
+                "#": "edt",
             });
-            this.id++;
+            this.id += 1;
         });
     }
     /**
@@ -245,15 +246,15 @@ class PackageWrapper {
     add_dates(date) {
         this.thePackage.package.metadata.meta.push({
             "@property": "dcterms:date",
-            "#": `${date}T00:00:00Z`
+            "#": `${date}T00:00:00Z`,
         });
         this.thePackage.package.metadata.meta.push({
             "@property": "dcterms:modified",
-            "#": `${date}T00:00:00Z`
+            "#": `${date}T00:00:00Z`,
         });
         this.thePackage.package.metadata.meta.push({
             "@property": "dcterms:dateCopyrighted",
-            "#": `${date.split('-')[0]}`
+            "#": `${date.split('-')[0]}`,
         });
     }
     /**

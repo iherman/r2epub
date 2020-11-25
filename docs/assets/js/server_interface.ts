@@ -12,26 +12,20 @@
  * @packageDocumentation
 */
 
-/**
- * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
- *
- */
-const default_service :string = 'https://r2epub.herokuapp.com/';
-
 const epub_content_type = 'application/epub+zip';
 
 interface ReturnedData {
     content_type :string,
-    file_name    :string,
-    content      :Blob
+    file_name :string,
+    content :Blob
 }
 
 interface ServerData {
-    url  :string;
+    url :string;
     port :string;
 }
 
-const storage_key :string = 'r2epub';
+const storage_key  = 'r2epub';
 
 /**
  * Get the locally stored storage data and init the form accordingly
@@ -43,7 +37,7 @@ function retrieve_server_data() {
         const server :HTMLInputElement  = document.getElementById('serverChoice') as HTMLInputElement;
         const port :HTMLInputElement    = document.getElementById('portNumber') as HTMLInputElement;
         server.value = server_data.url;
-        port.value   = server_data.port;
+        port.value = server_data.port;
     }
 }
 
@@ -53,12 +47,11 @@ function retrieve_server_data() {
  */
 function store_server_data(url: string, port: string) {
     const server_data :ServerData = {
-        url : url,
-        port : port
+        url  : url,
+        port : port,
     }
     localStorage.setItem(storage_key, JSON.stringify(server_data));
 }
-
 
 
 /**
@@ -69,11 +62,12 @@ function store_server_data(url: string, port: string) {
  * @returns the final content as well as the local name of the EPUB instance
  */
 async function fetch_book(resource_url :string) :Promise<ReturnedData> {
-    let fname        :string;
+    let fname :string;
     let content_type :string;
     return new Promise((resolve, reject) => {
         try {
             window.fetch(resource_url, {mode: 'cors'})
+                // eslint-disable-next-line consistent-return
                 .then((response) => {
                     content_type = response.headers.get('Content-type');
                     if (response.ok) {
@@ -89,13 +83,13 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
                         }
                     }
                 })
-                .then((content => {
+                .then((content) => {
                     resolve({
                         content_type : content_type,
                         file_name    : fname,
-                        content      : content
+                        content      : content,
                     });
-                }))
+                })
                 .catch((err) => {
                     reject(new Error(`Problem accessing: ${err}`));
                 });
@@ -118,6 +112,7 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
  *
  * @async
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const submit = async (event :Event) :Promise<any> => {
     /**
      * The special trick to save a content, using an invisible `<a>` element, its 'download' attribute and a dataURL for the blob to be stored.
@@ -129,7 +124,7 @@ const submit = async (event :Event) :Promise<any> => {
     const save_book = (data: Blob, name :string) => {
         const dataURL  = URL.createObjectURL(data);
         const download = document.getElementById('download') as HTMLAnchorElement;
-        download.href  = dataURL;
+        download.href = dataURL;
         download.download = name;
         download.click();
     };
@@ -163,7 +158,7 @@ const submit = async (event :Event) :Promise<any> => {
 
             const query :string[] = [
                 `url=${url.value}`,
-                `respec=${respec.value === 'true'}`
+                `respec=${respec.value === 'true'}`,
             ];
 
             if (publishDate.value !== '') {
@@ -202,14 +197,14 @@ const submit = async (event :Event) :Promise<any> => {
                 // Clean up the user interface and we are done!
                 progress.style.setProperty('visibility', 'hidden');
                 if (returned.content_type === epub_content_type) fading_success();
-            } catch(e) {
+            } catch (e) {
                 progress.style.setProperty('visibility', 'hidden');
                 alert(`${e}`);
             }
         } else {
             alert(`No or empty URL value`);
         }
-    } catch(e) {
+    } catch (e) {
         alert(`Form interpretation Error: ${e}`);
     }
 }

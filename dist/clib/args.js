@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * ## Collection Configuration
  *
@@ -48,6 +49,7 @@ const r2epub_schema_json_1 = __importDefault(require("./r2epub.schema.json"));
  * @param data
  * @throws invalid schema, or schema validation error on the data
  */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function get_book_configuration(data) {
     const ajv = new ajv_1.default({
         "allErrors": true,
@@ -73,13 +75,13 @@ function get_book_configuration(data) {
             return {
                 url: chapter.url,
                 respec: (chapter.respec === undefined) ? false : chapter.respec,
-                config: config
+                config: config,
             };
         });
         return {
             name: data.name,
             id: data.id,
-            readingOrder: chapters
+            readingOrder: chapters,
         };
     }
 }

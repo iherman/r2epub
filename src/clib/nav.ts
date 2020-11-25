@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 /**
  * ## Collection Navigation page
  *
@@ -7,9 +8,9 @@
  */
 
 
- /**
-  *
-  */
+/**
+ *
+ */
 
 import * as jsdom    from 'jsdom';
 import * as cConvert from './convert';
@@ -22,7 +23,7 @@ import { Chapter }   from './chapter';
  *
  * @hidden
  */
-const nav :string = `<?xml version="1.0"?>
+const nav  = `<?xml version="1.0"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
     <head>
         <title>
@@ -113,13 +114,13 @@ export function create_nav_page(book :cConvert.Collection) :string {
     const get_nav_text = (chapter :Chapter) :string => {
         // Get the nav file from the chapter
         const dom  = new jsdom.JSDOM(chapter.nav);
-        let html = dom.window.document.documentElement.querySelector('nav#navigation > ol').innerHTML;
+        const html = dom.window.document.documentElement.querySelector('nav#navigation > ol').innerHTML;
         // the link elements must be changed to refer to the relevant subdirectory!
-        let html_final = html.replace(/"Overview.xhtml/g, `"${chapter.chapter_name}/Overview.xhtml`)
+        const html_final = html.replace(/"Overview.xhtml/g, `"${chapter.chapter_name}/Overview.xhtml`)
         return `<li class="part-title-li"><a class="part-title" href="${chapter.chapter_name}/Overview.xhtml">${chapter.title}</a><ol>${html_final}</ol></li>`;
     }
 
     const full_nav :string = book.chapters.map(get_nav_text).join('\n');
     const title = utils.de_xml(book.title);
     return nav.replace('%%%Title%%%', title).replace('%%%Title2%%%', title).replace('%%%TOC%%%', full_nav);
- }
+}

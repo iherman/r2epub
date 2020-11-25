@@ -72,7 +72,7 @@ exports.wcag_checked = [
     'WG-NOTE',
     'IG-NOTE',
     'NOTE',
-    'finding'
+    'finding',
 ];
 /**
  * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.
@@ -81,7 +81,7 @@ exports.wcag_checked = [
 exports.invalid_host_names = [
     '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
     '172.16.1.2', '172.31.4.5', '192.168.0.1', '192.168.254.5',
-    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost'
+    'fe80::1', 'fe80:ffff::ffff', 'localhost', 'ip6-localhost',
 ];
 /**
  * Acceptable endings for document URL-s. We try to avoid cases when the relative URL calculations go wrong
@@ -90,7 +90,7 @@ exports.acceptable_url_endings = [
     '/',
     '.html',
     '.xhtml',
-    '.json'
+    '.json',
 ];
 /** Default port number for the server locally.
  * Set to the default HTTP port number; the environment variable `PORT` may,
@@ -129,7 +129,7 @@ const expose_headers = [
     'Content-Type',
     'Expires',
     'Last-Modified',
-    'Content-Disposition'
+    'Content-Disposition',
 ];
 /**
  * CORS headers to be added to the server response
@@ -138,7 +138,7 @@ exports.CORS_headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': allow_methods.join(','),
     'Access-Control-Allow-Headers': allow_headers.join(','),
-    'Access-Control-Expose-Headers': expose_headers.join(',')
+    'Access-Control-Expose-Headers': expose_headers.join(','),
 };
 /**
  * Extra CSS file for EPUB content; mainly used to adapt and, possibly, to compensate the effects of the

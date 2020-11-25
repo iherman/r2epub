@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 /**
  * ## Service home page
  *
@@ -8,14 +9,14 @@
  * @packageDocumentation
  */
 
- /**
+/**
  *
  *
  */
 
 
 /** @hidden */
-export const homepage :string = `<!doctype html>
+export const homepage  = `<!doctype html>
 <html>
 <head>
     <meta charset='utf-8'>

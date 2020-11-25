@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * ## Collection Configuration
  *
@@ -45,35 +46,36 @@ import conf_schema   from './r2epub.schema.json';
  * @param data
  * @throws invalid schema, or schema validation error on the data
  */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function get_book_configuration(data :any) :cConvert.CollectionConfiguration {
     const ajv = new Ajv({
         "allErrors" : true,
     });
     const validator = ajv.compile(conf_schema);
-    const valid = validator(data);
+    const valid     = validator(data);
     if (!valid) {
         throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
     } else {
         const chapters :cConvert.ChapterConfiguration[] = data.readingOrder.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};
             if (chapter.config !== undefined) {
-                if (chapter.config.specStatus !== undefined)      config.specStatus      = chapter.config.specStatus;
-                if (chapter.config.publishDate !== undefined)     config.publishDate     = chapter.config.publishDate;
+                if (chapter.config.specStatus !== undefined) config.specStatus = chapter.config.specStatus;
+                if (chapter.config.publishDate !== undefined) config.publishDate = chapter.config.publishDate;
                 if (chapter.config.addSectionLinks !== undefined) config.addSectionLinks = `${chapter.config.addSectionLinks}`;
-                if (chapter.config.maxTocLevel !== undefined)     config.maxTocLevel     = `${chapter.config.maxTocLevel}`;
+                if (chapter.config.maxTocLevel !== undefined) config.maxTocLevel = `${chapter.config.maxTocLevel}`;
             }
 
             return {
                 url    : chapter.url,
                 respec : (chapter.respec === undefined) ? false : chapter.respec,
-                config : config
+                config : config,
             }
         });
 
         return {
             name         : data.name,
             id           : data.id,
-            readingOrder : chapters
+            readingOrder : chapters,
         };
     }
 }

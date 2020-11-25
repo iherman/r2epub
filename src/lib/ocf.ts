@@ -22,7 +22,7 @@ import JSZip = require('jszip');
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
  */
-const container_xml :string = `<?xml version="1.0"?>
+const container_xml  = `<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
     <rootfiles>
         <rootfile full-path="package.opf" media-type="application/oebps-package+xml" />
@@ -42,8 +42,8 @@ const container_xml :string = `<?xml version="1.0"?>
  *
  */
 export class OCF {
-    private _book    :JSZip;
-    name    :string;
+    private _book :JSZip;
+    name :string;
     private content :Buffer|Blob = null;
 
     /**
@@ -83,13 +83,13 @@ export class OCF {
     async get_content() :Promise<Buffer|Blob> {
         if (this.content === null) {
             this.content = await this._book.generateAsync({
-                type:  constants.is_browser ? 'blob' : 'nodebuffer',
-                mimeType: constants.media_types.epub,
-                compressionOptions: {
-                    level: 9
-                }
+                type               : constants.is_browser ? 'blob' : 'nodebuffer',
+                mimeType           : constants.media_types.epub,
+                compressionOptions : {
+                    level : 9,
+                },
             });
-       }
+        }
         return this.content;
     }
-};
+}
