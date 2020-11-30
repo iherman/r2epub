@@ -1,21 +1,26 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "target": "ES2017",
-        "lib": ["es7", "dom"],
-        "noImplicitAny": true,
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "outDir": "dist",
+        "allowJs": true,
+        "alwaysStrict": true,
         "baseUrl": ".",
+        "esModuleInterop": true,
+        "lib": ["ES2019", "dom"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmitHelpers": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": false,
+        "outDir": "dist",
         "paths": {
             "*": [
                 "node_modules/*",
                 "src/types/*"
             ]
-        }
+        },
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "target": "ES2019",
     },
     "typesRoots": [
         "./typings",
@@ -29,15 +34,21 @@
         "dist/**/*"
     ],
     "typedocOptions" : {
-        "out" : "docs/typedoc",
-        "disableOutputCheck": false,
-        "hideGenerator": true,
-        "listInvalidSymbolLinks": true,
-        "ignoreCompilerErrors": true,
-        "gitRemote": "origin",
-        "includeVersion": true,
+        "mode": "module",
+        "includeDeclarations": true,
         "excludeExternals": true,
         "excludePrivate" : true,
+        "excludeProtected" : false,
+        "stripInternal" : true,
+        "ignoreCompilerErrors": true,
+        "out" : "docs/typedoc",
+        "theme": "default",
+        "includeVersion": true,
+        "categorizeByGroup": true,
+        "gitRemote": "origin",
+        "hideGenerator": true,
+        "disableOutputCheck": false,
+        "listInvalidSymbolLinks": true,
         "name" : "r2epub — Converting HTML/ReSpec documents to EPUB 3.2"
     }
 }
