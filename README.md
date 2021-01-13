@@ -40,7 +40,7 @@ In the absence of the `-o` flag the output will be `shortName.epub`, where the v
 
 ### Run a service via HTTP
 
-There is a simple server implemented in the [serve](https://iherman.github.io/r2epub/typedoc/modules/_server_.html) module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on for URL-s of the sort:
+There is a simple server implemented in the [serve](https://iherman.github.io/r2epub/typedoc/modules/_server_.html) module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on URL-s of the sort:
 
 ```sh
 https://epub.example.org?url=https://www.example.org/doc.html
@@ -60,7 +60,7 @@ https://epub.example.org?url=https://www.example.org/collection.json
 
 generates a collection, described by the configuration file. (See the [separate module](https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html) for more details on the configuration file.)
 
-The server has been deployed on the cloud at [heroku](https://r2epub.herokuapp.com/) using the `https://r2epub.herokuapp.com/` URL. A [client side interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
+The server has been deployed on the cloud at [heroku](https://r2epub.herokuapp.com/) using the `https://r2epub.herokuapp.com/` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
 
 ### Use as a typescript/node package through an API
 
