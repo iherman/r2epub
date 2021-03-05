@@ -47,12 +47,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  *
  */
-const http_1 = __importDefault(require("http"));
-const urlHandler = __importStar(require("url"));
-const _ = __importStar(require("underscore"));
-const r2epub = __importStar(require("./index"));
-const constants = __importStar(require("./lib/constants"));
-const home = __importStar(require("./lib/home"));
+const http = require("http");
+const urlHandler = require("url");
+const _ = require("underscore");
+const r2epub = require("./index");
+const constants = require("./lib/constants");
+const home = require("./lib/home");
 /**
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Options]] structure based on the incoming URL's query string.
  *
@@ -96,7 +96,7 @@ async function get_epub(query) {
 async function serve() {
     const port = process.env.PORT || process.env.R2EPUB_PORT || constants.local_port_number;
     console.log(`r2epub server starting on port ${port}`);
-    http_1.default.createServer(async (request, response) => {
+    http.createServer(async (request, response) => {
         const error = (code, e) => {
             const error_headers = {
                 'Content-type': constants.media_types.text,

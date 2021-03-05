@@ -8,8 +8,8 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_cover_image = exports.cover_svg = void 0;
-const constants = __importStar(require("./constants"));
-const utils = __importStar(require("./utils"));
+const constants = require("./constants");
+const utils = require("./utils");
 /**
  * The SVG template to be used for the cover image.
  * @hidden

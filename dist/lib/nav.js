@@ -8,8 +8,8 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_nav_file = void 0;
-const xhtml = __importStar(require("./xhtml"));
-const constants = __importStar(require("./constants"));
+const xhtml = require("./xhtml");
+const constants = require("./constants");
 /**
  * Template of the XHTML file
  *

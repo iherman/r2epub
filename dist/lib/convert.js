@@ -13,17 +13,17 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RespecToEPUB = void 0;
-const _ = __importStar(require("underscore"));
-const urlHandler = __importStar(require("url"));
+const _ = require("underscore");
+const urlHandler = require("url");
 const fetch_1 = require("./fetch");
-const constants = __importStar(require("./constants"));
-const opf = __importStar(require("./opf"));
-const ocf = __importStar(require("./ocf"));
-const css = __importStar(require("./css"));
-const title_page = __importStar(require("./title"));
-const cover_page = __importStar(require("./cover"));
-const nav = __importStar(require("./nav"));
-const overview = __importStar(require("./overview"));
+const constants = require("./constants");
+const opf = require("./opf");
+const ocf = require("./ocf");
+const css = require("./css");
+const title_page = require("./title");
+const cover_page = require("./cover");
+const nav = require("./nav");
+const overview = require("./overview");
 /**
  * ## Main Processing class
  *

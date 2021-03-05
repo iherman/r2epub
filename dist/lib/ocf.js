@@ -13,7 +13,7 @@ exports.OCF = void 0;
 /**
  *
  */
-const constants = __importStar(require("./constants"));
+const constants = require("./constants");
 const JSZip = require("jszip");
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level

@@ -48,11 +48,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-/**
- * Default conversion service URL. Unless the user has set the `data-r2epubservice` attribute on the form element to a different URL, this service is used.
- *
- */
-var default_service = 'https://r2epub.herokuapp.com/';
 var epub_content_type = 'application/epub+zip';
 var storage_key = 'r2epub';
 /**
@@ -93,6 +88,7 @@ function fetch_book(resource_url) {
             return [2 /*return*/, new Promise(function (resolve, reject) {
                     try {
                         window.fetch(resource_url, { mode: 'cors' })
+                            // eslint-disable-next-line consistent-return
                             .then(function (response) {
                             content_type = response.headers.get('Content-type');
                             if (response.ok) {
@@ -110,13 +106,13 @@ function fetch_book(resource_url) {
                                 }
                             }
                         })
-                            .then((function (content) {
+                            .then(function (content) {
                             resolve({
                                 content_type: content_type,
                                 file_name: fname,
                                 content: content
                             });
-                        }))["catch"](function (err) {
+                        })["catch"](function (err) {
                             reject(new Error("Problem accessing: " + err));
                         });
                     }
@@ -139,6 +135,7 @@ function fetch_book(resource_url) {
  *
  * @async
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 var submit = function (event) { return __awaiter(_this, void 0, void 0, function () {
     var save_book, fading_success, done, progress, url, respec, publishDate, specStatus, addSectionLinks, maxTocLevel, server, port, service, query, service_url, returned, message, e_1, e_2;
     return __generator(this, function (_a) {
@@ -174,7 +171,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 service = (server.value.startsWith('http://localhost')) ? server.value + ":" + port.value : server.value;
                 query = [
                     "url=" + url.value,
-                    "respec=" + (respec.value === 'true')
+                    "respec=" + (respec.value === 'true'),
                 ];
                 if (publishDate.value !== '') {
                     query.push("publishDate=" + publishDate.value);

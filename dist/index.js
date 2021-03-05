@@ -14,13 +14,13 @@ exports.convert = exports.OCF = exports.RespecToEPUB = void 0;
  *
  *
  */
-const constants = __importStar(require("./lib/constants"));
-const ocf = __importStar(require("./lib/ocf"));
-const rConvert = __importStar(require("./lib/convert"));
-const cConvert = __importStar(require("./clib/convert"));
-const fetch = __importStar(require("./lib/fetch"));
-const _ = __importStar(require("underscore"));
-const urlHandler = __importStar(require("url"));
+const constants = require("./lib/constants");
+const ocf = require("./lib/ocf");
+const rConvert = require("./lib/convert");
+const cConvert = require("./clib/convert");
+const fetch = require("./lib/fetch");
+const _ = require("underscore");
+const urlHandler = require("url");
 /**
  * Convenience class, to export the internal [RespecToEPUB](_lib_convert_.respectoepub.html) class for the package as a whole.
  * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)

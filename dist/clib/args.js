@@ -35,11 +35,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.get_book_configuration = void 0;
-/**
- *
- */
-const ajv_1 = __importDefault(require("ajv"));
-const r2epub_schema_json_1 = __importDefault(require("./r2epub.schema.json"));
+// import conf_schema   from './r2epub.schema.json';
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
  *
@@ -48,39 +44,38 @@ const r2epub_schema_json_1 = __importDefault(require("./r2epub.schema.json"));
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function get_book_configuration(data) {
-    const ajv = new ajv_1.default({
-        "allErrors": true,
-    });
-    const validator = ajv.compile(r2epub_schema_json_1.default);
-    const valid = validator(data);
-    if (!valid) {
-        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors, null, 4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`;
-    }
-    else {
-        const chapters = data.readingOrder.map((chapter) => {
-            const config = {};
-            if (chapter.config !== undefined) {
-                if (chapter.config.specStatus !== undefined)
-                    config.specStatus = chapter.config.specStatus;
-                if (chapter.config.publishDate !== undefined)
-                    config.publishDate = chapter.config.publishDate;
-                if (chapter.config.addSectionLinks !== undefined)
-                    config.addSectionLinks = `${chapter.config.addSectionLinks}`;
-                if (chapter.config.maxTocLevel !== undefined)
-                    config.maxTocLevel = `${chapter.config.maxTocLevel}`;
-            }
-            return {
-                url: chapter.url,
-                respec: (chapter.respec === undefined) ? false : chapter.respec,
-                config: config,
-            };
-        });
+    // const ajv = new Ajv({
+    //     "allErrors" : true,
+    // });
+    // const validator = ajv.compile(conf_schema);
+    // const valid     = validator(data);
+    // if (!valid) {
+    //     throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
+    // } else {
+    const chapters = data.readingOrder.map((chapter) => {
+        const config = {};
+        if (chapter.config !== undefined) {
+            if (chapter.config.specStatus !== undefined)
+                config.specStatus = chapter.config.specStatus;
+            if (chapter.config.publishDate !== undefined)
+                config.publishDate = chapter.config.publishDate;
+            if (chapter.config.addSectionLinks !== undefined)
+                config.addSectionLinks = `${chapter.config.addSectionLinks}`;
+            if (chapter.config.maxTocLevel !== undefined)
+                config.maxTocLevel = `${chapter.config.maxTocLevel}`;
+        }
         return {
-            name: data.name,
-            id: data.id,
-            readingOrder: chapters,
+            url: chapter.url,
+            respec: (chapter.respec === undefined) ? false : chapter.respec,
+            config: config,
         };
-    }
+    });
+    return {
+        name: data.name,
+        id: data.id,
+        readingOrder: chapters,
+    };
+    //    }
 }
 exports.get_book_configuration = get_book_configuration;
 //# sourceMappingURL=args.js.map

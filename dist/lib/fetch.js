@@ -12,12 +12,12 @@ exports.fetch_json = exports.fetch_html = exports.fetch_type = exports.fetch_res
  *
  *
  */
-const node_fetch = __importStar(require("node-fetch"));
-const urlHandler = __importStar(require("url"));
-const validUrl = __importStar(require("valid-url"));
-const jsdom = __importStar(require("jsdom"));
-const constants = __importStar(require("./constants"));
-const fs = __importStar(require("fs"));
+const node_fetch = require("node-fetch");
+const urlHandler = require("url");
+const validUrl = require("valid-url");
+const jsdom = require("jsdom");
+const constants = require("./constants");
+const fs = require("fs");
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
 *

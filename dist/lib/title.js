@@ -8,7 +8,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_title_page = void 0;
-const constants = __importStar(require("./constants"));
+const constants = require("./constants");
 /**
  * The template to be used for the title page.
  * @hidden

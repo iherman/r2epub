@@ -8,7 +8,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_cover_image = void 0;
-const utils = __importStar(require("../lib/utils"));
+const utils = require("../lib/utils");
 const cover_1 = require("../lib/cover");
 /**
  * Create the cover image: it is an SVG file with title (as defined in the JSON configuration), date, and a W3C Logo.

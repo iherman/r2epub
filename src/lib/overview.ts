@@ -48,6 +48,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
     // 1. Mathml usage
     if (global.html_element.querySelector('mathml') !== null) {
         properties.push('mathml');
+        global.opf_content.add_a11y_feature(['MathML']);
     }
 
     {
@@ -104,6 +105,15 @@ export function generate_overview_item(global: Global): ResourceRef[] {
         })
         if (is_there_external_resources) {
             properties.push('remote-resources');
+        }
+    }
+
+    // 5. See if there are images and trust respec and the a11y review that those will be assigned with long descriptions
+    // and captions... based on that, adding accessibility feature metadata
+    {
+        const images = Array.from(global.html_element.querySelectorAll('img'));
+        if (images.length > 0) {
+            global.opf_content.add_a11y_feature(['captions','longDescription']);
         }
     }
 

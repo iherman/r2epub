@@ -48,7 +48,7 @@
  */
 
 
-import http            from 'http';
+import * as http       from 'http';
 import * as urlHandler from 'url';
 import * as _          from 'underscore';
 import * as r2epub     from './index';

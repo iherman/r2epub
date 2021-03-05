@@ -6,7 +6,7 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.date_to_string = exports.de_xml = exports.slice_text = void 0;
-const xmldom = __importStar(require("xmldom"));
+const xmldom = require("xmldom");
 /**
  * “Slice” a long text into lines separated by the (HTML) `<br/>` tag. Used as a rudimentary tool
  * when adding the title lines to an SVG content.

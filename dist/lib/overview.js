@@ -18,9 +18,9 @@ exports.generate_overview_item = void 0;
  *
  *
  */
-const urlHandler = __importStar(require("url"));
-const xhtml = __importStar(require("./xhtml"));
-const constants = __importStar(require("./constants"));
+const urlHandler = require("url");
+const xhtml = require("./xhtml");
+const constants = require("./constants");
 /**
  * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
  * properties (see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab)).
@@ -44,6 +44,7 @@ function generate_overview_item(global) {
     // 1. Mathml usage
     if (global.html_element.querySelector('mathml') !== null) {
         properties.push('mathml');
+        global.opf_content.add_a11y_feature(['MathML']);
     }
     {
         // 2a. are there active scripts. Care should be taken that a <script> element may be a data block, that does not count.
@@ -103,6 +104,14 @@ function generate_overview_item(global) {
         });
         if (is_there_external_resources) {
             properties.push('remote-resources');
+        }
+    }
+    // 5. See if there are images and trust respec and the a11y review that those will be assigned with long descriptions
+    // and captions... based on that, adding accessibility feature metadata
+    {
+        const images = Array.from(global.html_element.querySelectorAll('img'));
+        if (images.length > 0) {
+            global.opf_content.add_a11y_feature(['captions', 'longDescription']);
         }
     }
     //------------------ Modify the DOM

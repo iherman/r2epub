@@ -265,6 +265,9 @@ export class PackageWrapper {
                         "@property" : "schema:accessibilityFeature",
                         '#'         : "tableOfContents",
                     },{
+                        "@property" : "schema:accessibilityFeature",
+                        '#'         : "readingOrder",
+                    },{
                         "@property" : "schema:accessibilityHazard",
                         '#'         : "none",
                     },{
@@ -276,6 +279,9 @@ export class PackageWrapper {
                     },{
                         "@property" : "schema:accessibilitySummary",
                         '#'         : "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only.",
+                    },{
+                        '@property' : "a11:certifiedBy",
+                        '#'         : "World Wide Web Consortium",
                     }],
                     "dc:rights"    : "https://www.w3.org/Consortium/Legal/2015/doc-license",
                     "dc:publisher" : "World Wide Web Consortium",
@@ -403,6 +409,20 @@ export class PackageWrapper {
             "@property" : "dcterms:dateCopyrighted",
             "#"         : `${date.split('-')[0]}`,
         })
+    }
+
+    /**
+     * Add accessibility feature strings to the metadata
+     *
+     * @param features list of feature strings
+     */
+    add_a11y_feature(features: string[]): void {
+        for (const feature of features) {
+            this.thePackage.package.metadata.meta.push({
+                "@property" : "schema:accessibilityFeature",
+                "#"         : `${feature}`,
+            })
+        }
     }
 
     /**

@@ -20,15 +20,15 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_epub = void 0;
-const ocf = __importStar(require("../lib/ocf"));
-const fetch = __importStar(require("../lib/fetch"));
+const ocf = require("../lib/ocf");
+const fetch = require("../lib/fetch");
 const chapter_1 = require("./chapter");
-const nav = __importStar(require("./nav"));
-const opf = __importStar(require("./opf"));
-const title = __importStar(require("./title"));
-const cover = __importStar(require("./cover"));
-const args = __importStar(require("./args"));
-const _ = __importStar(require("underscore"));
+const nav = require("./nav");
+const opf = require("./opf");
+const title = require("./title");
+const cover = require("./cover");
+const args = require("./args");
+const _ = require("underscore");
 /**
  * Creation of the real book data. The method runs a [conversion for a single document](../classes/_lib_convert_.respectoepub.html#create_epub) on all chapters, creates the relevant [[Chapter]] instances, and retrieves some book level data to be used in subsequent steps.
  *

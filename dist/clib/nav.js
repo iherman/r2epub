@@ -12,8 +12,8 @@ exports.create_nav_page = void 0;
 /**
  *
  */
-const jsdom = __importStar(require("jsdom"));
-const utils = __importStar(require("../lib/utils"));
+const jsdom = require("jsdom");
+const utils = require("../lib/utils");
 /**
  * Template of the XHTML file
  *

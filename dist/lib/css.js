@@ -43,8 +43,8 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.extract_css = void 0;
-const urlHandler = __importStar(require("url"));
-const constants = __importStar(require("./constants"));
+const urlHandler = require("url");
+const constants = require("./constants");
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
 /**
  * The basic background css template

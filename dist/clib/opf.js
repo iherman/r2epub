@@ -11,8 +11,8 @@ exports.create_opf = void 0;
 /**
  *
  */
-const opf = __importStar(require("../lib/opf"));
-const constants = __importStar(require("../lib/constants"));
+const opf = require("../lib/opf");
+const constants = require("../lib/constants");
 const chapter_1 = require("./chapter");
 /**
  * Creation of the of the Package file for a collection, per the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc). See also [the `PackageWrapper` documentation](https://iherman.github.io/r2epub/typedoc/classes/_lib_opf_.packagewrapper.html).

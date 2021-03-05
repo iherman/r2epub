@@ -88,10 +88,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  */
 /* Main imports */
-const r2epub = __importStar(require("./index"));
-const _ = __importStar(require("underscore"));
-const constants = __importStar(require("./lib/constants"));
-const fs = __importStar(require("fs"));
+const r2epub = require("./index");
+const _ = require("underscore");
+const constants = require("./lib/constants");
+const fs = require("fs");
 /** @hidden */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { program } = require('commander');

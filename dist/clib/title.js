@@ -8,7 +8,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_title_page = void 0;
-const utils = __importStar(require("../lib/utils"));
+const utils = require("../lib/utils");
 /**
  * The template to be used for the title page.
  * @hidden
