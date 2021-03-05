@@ -36,8 +36,9 @@
 /**
  *
  */
-// import Ajv           from 'ajv';
 import * as cConvert from './convert';
+import * as myAjv    from './js/myAjv';
+
 // import conf_schema   from './r2epub.schema.json';
 
 /**
@@ -53,9 +54,12 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
     // });
     // const validator = ajv.compile(conf_schema);
     // const valid     = validator(data);
-    // if (!valid) {
-    //     throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
-    // } else {
+    const my_ajv = new myAjv.MyAjv();
+    const valid = my_ajv.validate(data);
+
+    if (!valid) {
+        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(my_ajv.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
+    } else {
         const chapters :cConvert.ChapterConfiguration[] = data.readingOrder.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};
             if (chapter.config !== undefined) {
@@ -77,5 +81,5 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
             id           : data.id,
             readingOrder : chapters,
         };
-//    }
+    }
 }
