@@ -101,14 +101,14 @@ Options:
 				<a href="#run-a-service-via-http" id="run-a-service-via-http" style="color: inherit; text-decoration: none;">
 					<h3>Run a service via HTTP</h3>
 				</a>
-				<p>There is a simple server implemented in the <a href="https://iherman.github.io/r2epub/typedoc/modules/_server_.html">serve</a> module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on for URL-s of the sort:</p>
+				<p>There is a simple server implemented in the <a href="https://iherman.github.io/r2epub/typedoc/modules/_server_.html">serve</a> module: querying that Web server generates EPUB 3.2 instances. The API for the service is based on URL-s of the sort:</p>
 				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/doc.html</code></pre>
 				<p>This would create and return the EPUB 3.2 instance corresponding to <code>https://www.example.org/doc.html</code>. Query parameters for <code>respec</code>, <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, and <code>maxTocLevel</code> can be added, just like for the command line. I.e.,</p>
 				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/doc.html&amp;respec=<span class="hljs-literal">true</span>&amp;specStatus=REC</code></pre>
 				<p>converts the original file via respec, with the <code>specStatus</code> value set to <code>REC</code>. If one of <code>publishDate</code>, <code>specStatus</code>, <code>addSectionLinks</code>, or <code>maxTocLevel</code> are set, <code>respec=true</code> is implied (i.e., it is not necessary to set it explicitly).</p>
 				<pre><code class="language-sh">https://epub.example.org?url=https://www.example.org/collection.json</code></pre>
 				<p>generates a collection, described by the configuration file. (See the <a href="https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html">separate module</a> for more details on the configuration file.)</p>
-				<p>The server has been deployed on the cloud at <a href="https://r2epub.herokuapp.com/">heroku</a> using the <code>https://r2epub.herokuapp.com/</code> URL. A <a href="https://iherman.github.io/r2epub/convert.html">client side interface</a> to drive this server is also available.</p>
+				<p>The server has been deployed on the cloud at <a href="https://r2epub.herokuapp.com/">heroku</a> using the <code>https://r2epub.herokuapp.com/</code> URL. A <a href="https://iherman.github.io/r2epub/convert.html">browser interface</a> to drive this server is also available.</p>
 				<a href="#use-as-a-typescriptnode-package-through-an-api" id="use-as-a-typescriptnode-package-through-an-api" style="color: inherit; text-decoration: none;">
 					<h3>Use as a typescript/node package through an API</h3>
 				</a>
@@ -210,6 +210,12 @@ npm install</code></pre>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_clib_cover_.html">&quot;clib/cover&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_clib_js_myajv_.html">&quot;clib/js/my<wbr>Ajv&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_clib_js_myajv_d_.html">&quot;clib/js/my<wbr>Ajv.d&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_clib_nav_.html">&quot;clib/nav&quot;</a>

@@ -88,6 +88,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_constants_.html#tr_logo_files" class="tsd-kind-icon">TR_<wbr>logo_<wbr>files</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_constants_.html#acceptable_url_endings" class="tsd-kind-icon">acceptable_<wbr>url_<wbr>endings</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_constants_.html#entity_codes" class="tsd-kind-icon">entity_<wbr>codes</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_constants_.html#fixup_js" class="tsd-kind-icon">fixup_<wbr>js</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_constants_.html#invalid_host_names" class="tsd-kind-icon">invalid_<wbr>host_<wbr>names</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_constants_.html#is_browser" class="tsd-kind-icon">is_<wbr>browser</a></li>
@@ -116,10 +117,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="tr_logo_files" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> TR_<wbr>logo_<wbr>files</h3>
-					<div class="tsd-signature tsd-kind-icon">TR_<wbr>logo_<wbr>files<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.w3.org/StyleSheets/TR/2016/logos/&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">TR_<wbr>logo_<wbr>files<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"https://www.w3.org/StyleSheets/TR/2016/logos/"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.w3.org/StyleSheets/TR/2016/logos/&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L123">lib/constants.ts:123</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L148">src/lib/constants.ts:148</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -131,10 +132,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="acceptable_url_endings" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> acceptable_<wbr>url_<wbr>endings</h3>
-					<div class="tsd-signature tsd-kind-icon">acceptable_<wbr>url_<wbr>endings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;/&#x27;,&#x27;.html&#x27;,&#x27;.xhtml&#x27;,&#x27;.json&#x27;]</span></div>
+					<div class="tsd-signature tsd-kind-icon">acceptable_<wbr>url_<wbr>endings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;/&#x27;,&#x27;.html&#x27;,&#x27;.xhtml&#x27;,&#x27;.json&#x27;,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L102">lib/constants.ts:102</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L102">src/lib/constants.ts:102</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -144,12 +145,30 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
-					<a name="fixup_js" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> fixup_<wbr>js</h3>
-					<div class="tsd-signature tsd-kind-icon">fixup_<wbr>js<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.w3.org/scripts/TR/2016/fixup.js&quot;</span></div>
+					<a name="entity_codes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> entity_<wbr>codes</h3>
+					<div class="tsd-signature tsd-kind-icon">entity_<wbr>codes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[[&#x27;&amp;nbsp;&#x27;, &#x27;&amp;#160;&#x27;],[&#x27;&amp;lt;&#x27;,    &#x27;&amp;#60;&#x27;],[&#x27;&amp;gt;&#x27;,    &#x27;&amp;#62;&#x27;],[&#x27;&amp;quot;&#x27;,  &#x27;&amp;#34;&#x27;],[&#x27;&amp;apos;&#x27;,  &#x27;&amp;#39;&#x27;],[&#x27;&amp;reg;&#x27;,   &#x27;&amp;#174;&#x27;],[&#x27;&amp;pound;&#x27;, &#x27;&amp;#163;&#x27;],[&#x27;&amp;yen;&#x27;,   &#x27;&amp;#165;&#x27;],[&#x27;&amp;euro;&#x27;,  &#x27;&amp;#8364;&#x27;],[&#x27;&amp;cent;&#x27;,  &#x27;&amp;#162;&#x27;],[&#x27;&amp;mdash;&#x27;, &#x27;&amp;#8212;&#x27;],[&#x27;&amp;ndash;&#x27;, &#x27;&amp;#8211;&#x27;],[&#x27;&amp;emsp;&#x27;,  &#x27;&amp;#8195;&#x27;],[&#x27;&amp;ensp;&#x27;,  &#x27;&amp;#8194;&#x27;],[&#x27;&amp;thinsp;&#x27;,&#x27;&amp;#8201;&#x27;],]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L120">lib/constants.ts:120</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L116">src/lib/constants.ts:116</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Entity/code pairs: the XHTML conversion is supposed to remove the XML entities (if used) to their
+							code alternatives.</p>
+						</div>
+						<p>The table is not exhaustive, of course, but contains the most frequently used characters
+						in specifications.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="fixup_js" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> fixup_<wbr>js</h3>
+					<div class="tsd-signature tsd-kind-icon">fixup_<wbr>js<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"https://www.w3.org/scripts/TR/2016/fixup.js"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.w3.org/scripts/TR/2016/fixup.js&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L145">src/lib/constants.ts:145</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -161,10 +180,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="invalid_host_names" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> invalid_<wbr>host_<wbr>names</h3>
-					<div class="tsd-signature tsd-kind-icon">invalid_<wbr>host_<wbr>names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;127.0.0.1&#x27;, &#x27;127.254.1.2&#x27;, &#x27;10.1.2.3&#x27;, &#x27;10.254.4.5&#x27;,&#x27;172.16.1.2&#x27;, &#x27;172.31.4.5&#x27;, &#x27;192.168.0.1&#x27;, &#x27;192.168.254.5&#x27;,&#x27;fe80::1&#x27;, &#x27;fe80:ffff::ffff&#x27;, &#x27;localhost&#x27;, &#x27;ip6-localhost&#x27;]</span></div>
+					<div class="tsd-signature tsd-kind-icon">invalid_<wbr>host_<wbr>names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;127.0.0.1&#x27;, &#x27;127.254.1.2&#x27;, &#x27;10.1.2.3&#x27;, &#x27;10.254.4.5&#x27;,&#x27;172.16.1.2&#x27;, &#x27;172.31.4.5&#x27;, &#x27;192.168.0.1&#x27;, &#x27;192.168.254.5&#x27;,&#x27;fe80::1&#x27;, &#x27;fe80:ffff::ffff&#x27;, &#x27;localhost&#x27;, &#x27;ip6-localhost&#x27;,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L93">lib/constants.ts:93</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L93">src/lib/constants.ts:93</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -180,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">is_<wbr>browser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;(process &#x3D;&#x3D;&#x3D; undefined || process.title &#x3D;&#x3D;&#x3D; &#x27;browser&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L11">lib/constants.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L11">src/lib/constants.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -192,10 +211,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="local_port_number" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> local_<wbr>port_<wbr>number</h3>
-					<div class="tsd-signature tsd-kind-icon">local_<wbr>port_<wbr>number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;80&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">local_<wbr>port_<wbr>number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"80"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;80&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L114">lib/constants.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L139">src/lib/constants.ts:139</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -209,10 +228,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="local_style_files" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> local_<wbr>style_<wbr>files</h3>
-					<div class="tsd-signature tsd-kind-icon">local_<wbr>style_<wbr>files<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;StyleSheets/TR/2016/&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">local_<wbr>style_<wbr>files<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"StyleSheets/TR/2016/"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;StyleSheets/TR/2016/&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L130">lib/constants.ts:130</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L155">src/lib/constants.ts:155</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -224,10 +243,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="modified_epub_files" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> modified_<wbr>epub_<wbr>files</h3>
-					<div class="tsd-signature tsd-kind-icon">modified_<wbr>epub_<wbr>files<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.ivan-herman.net/r2epub/&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">modified_<wbr>epub_<wbr>files<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"https://www.ivan-herman.net/r2epub/"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.ivan-herman.net/r2epub/&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L127">lib/constants.ts:127</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L152">src/lib/constants.ts:152</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -239,10 +258,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="spec_generator" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> spec_<wbr>generator</h3>
-					<div class="tsd-signature tsd-kind-icon">spec_<wbr>generator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://labs.w3.org/spec-generator/?type&#x3D;respec&amp;url&#x3D;&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">spec_<wbr>generator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"https://labs.w3.org/spec-generator/?type&#x3D;respec&amp;url&#x3D;"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://labs.w3.org/spec-generator/?type&#x3D;respec&amp;url&#x3D;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L117">lib/constants.ts:117</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L142">src/lib/constants.ts:142</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -257,7 +276,7 @@
 					<div class="tsd-signature tsd-kind-icon">spec_<wbr>status_<wbr>values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;base&#x27;,&#x27;MO&#x27;,&#x27;unofficial&#x27;,&#x27;ED&#x27;,&#x27;FPWD&#x27;,&#x27;WD&#x27;,&#x27;LC&#x27;,&#x27;LD&#x27;,&#x27;LS&#x27;,&#x27;CR&#x27;,&#x27;CRD&#x27;,&#x27;PR&#x27;,&#x27;PER&#x27;,&#x27;REC&#x27;,&#x27;RSCND&#x27;,&#x27;FPWD-NOTE&#x27;,&#x27;NOTE&#x27;,&#x27;WG-NOTE&#x27;,&#x27;BG-DRAFT&#x27;,&#x27;BG-FINAL&#x27;,&#x27;CG-DRAFT&#x27;,&#x27;CG-FINAL&#x27;,&#x27;Member-SUBM&#x27;,&#x27;draft-finding&#x27;,&#x27;finding&#x27;,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L52">lib/constants.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L52">src/lib/constants.ts:52</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -272,7 +291,7 @@
 					<div class="tsd-signature tsd-kind-icon">text_<wbr>content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[media_types.css,media_types.text,media_types.es,media_types.html,media_types.js,media_types.json,media_types.jsonld,media_types.svg,media_types.xhtml,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L39">lib/constants.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L39">src/lib/constants.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -287,7 +306,7 @@
 					<div class="tsd-signature tsd-kind-icon">tr_<wbr>epub_<wbr>css<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"div[role~&#x3D;&quot;main&quot;] {margin: 0 auto;                              /* center text within page                     */max-width: none;padding: 1.6em 1.5em 2em 50px;               /* assume 16px font size for downlevel clients */padding: 1.6em 1.5em 2em calc(26px + 1.5em); /* leave space for status flag     */}body {max-width: 100% !important;}h2 {page-break-before: always;page-break-inside: avoid;page-break-after: avoid;}div.head h2 {page-break-before: auto;page-break-inside: avoid;page-break-after: avoid;}figure {page-break-inside: avoid;}h3, h4, h5 {page-break-after: avoid;}dl dt {page-break-after: avoid;}dl dd {page-break-before: avoid;}div.example, div.note, pre.idl, .warning, table.parameters, table.exceptions {page-break-inside: avoid;}p {orphans: 4;widows: 2;}.outdated-warning {position: absolute;border-style: solid;border-color: red;}.outdated-warning input {display: none;}p.copyright,p.copyright small { font-size: small; }#toc-nav, #toc-toggle-inline {display:none !important;}#back-to-top, .toc-toggle {display: none !important;}nav#toc {display: none}"</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;div[role~&#x3D;&quot;main&quot;] {margin: 0 auto;                              /* center text within page                     */max-width: none;padding: 1.6em 1.5em 2em 50px;               /* assume 16px font size for downlevel clients */padding: 1.6em 1.5em 2em calc(26px + 1.5em); /* leave space for status flag     */}body {max-width: 100% !important;}h2 {page-break-before: always;page-break-inside: avoid;page-break-after: avoid;}div.head h2 {page-break-before: auto;page-break-inside: avoid;page-break-after: avoid;}figure {page-break-inside: avoid;}h3, h4, h5 {page-break-after: avoid;}dl dt {page-break-after: avoid;}dl dd {page-break-before: avoid;}div.example, div.note, pre.idl, .warning, table.parameters, table.exceptions {page-break-inside: avoid;}p {orphans: 4;widows: 2;}.outdated-warning {position: absolute;border-style: solid;border-color: red;}.outdated-warning input {display: none;}p.copyright,p.copyright small { font-size: small; }#toc-nav, #toc-toggle-inline {display:none !important;}#back-to-top, .toc-toggle {display: none !important;}nav#toc {display: none}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L177">lib/constants.ts:177</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L202">src/lib/constants.ts:202</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -306,10 +325,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="wcag_checked" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> wcag_<wbr>checked</h3>
-					<div class="tsd-signature tsd-kind-icon">wcag_<wbr>checked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;REC&#x27;,&#x27;WG-NOTE&#x27;,&#x27;IG-NOTE&#x27;,&#x27;NOTE&#x27;,&#x27;finding&#x27;]</span></div>
+					<div class="tsd-signature tsd-kind-icon">wcag_<wbr>checked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;REC&#x27;,&#x27;WG-NOTE&#x27;,&#x27;IG-NOTE&#x27;,&#x27;NOTE&#x27;,&#x27;finding&#x27;,]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L81">lib/constants.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L81">src/lib/constants.ts:81</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -327,7 +346,7 @@
 					<div class="tsd-signature tsd-kind-icon">CORS_<wbr>headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L161">lib/constants.ts:161</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L186">src/lib/constants.ts:186</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -341,7 +360,7 @@
 						<div class="tsd-signature tsd-kind-icon">Access-<wbr><wbr>Control-<wbr><wbr>Allow-<wbr><wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;allow_headers.join(&#x27;,&#x27;)</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L164">lib/constants.ts:164</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L189">src/lib/constants.ts:189</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -351,7 +370,7 @@
 						<div class="tsd-signature tsd-kind-icon">Access-<wbr><wbr>Control-<wbr><wbr>Allow-<wbr><wbr>Methods<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;allow_methods.join(&#x27;,&#x27;)</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L163">lib/constants.ts:163</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L188">src/lib/constants.ts:188</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -361,7 +380,7 @@
 						<div class="tsd-signature tsd-kind-icon">Access-<wbr><wbr>Control-<wbr><wbr>Allow-<wbr><wbr>Origin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;*&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L162">lib/constants.ts:162</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L187">src/lib/constants.ts:187</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -371,7 +390,7 @@
 						<div class="tsd-signature tsd-kind-icon">Access-<wbr><wbr>Control-<wbr><wbr>Expose-<wbr><wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;expose_headers.join(&#x27;,&#x27;)</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L165">lib/constants.ts:165</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L190">src/lib/constants.ts:190</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -382,7 +401,7 @@
 					<div class="tsd-signature tsd-kind-icon">media_<wbr>types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L23">lib/constants.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L23">src/lib/constants.ts:23</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -396,7 +415,7 @@
 						<div class="tsd-signature tsd-kind-icon">css<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;text/css&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L24">lib/constants.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L24">src/lib/constants.ts:24</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -406,7 +425,7 @@
 						<div class="tsd-signature tsd-kind-icon">epub<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;application/epub+zip&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L26">lib/constants.ts:26</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L26">src/lib/constants.ts:26</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -416,7 +435,7 @@
 						<div class="tsd-signature tsd-kind-icon">es<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;text/ecmascript&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L27">lib/constants.ts:27</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L27">src/lib/constants.ts:27</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -426,7 +445,7 @@
 						<div class="tsd-signature tsd-kind-icon">html<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;text/html&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L28">lib/constants.ts:28</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L28">src/lib/constants.ts:28</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -436,7 +455,7 @@
 						<div class="tsd-signature tsd-kind-icon">js<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;text/javascript&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L29">lib/constants.ts:29</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L29">src/lib/constants.ts:29</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -446,7 +465,7 @@
 						<div class="tsd-signature tsd-kind-icon">json<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;application/json&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L30">lib/constants.ts:30</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L30">src/lib/constants.ts:30</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -456,7 +475,7 @@
 						<div class="tsd-signature tsd-kind-icon">jsonld<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;application/ld+json&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L31">lib/constants.ts:31</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L31">src/lib/constants.ts:31</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -466,7 +485,7 @@
 						<div class="tsd-signature tsd-kind-icon">png<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;image/png&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L32">lib/constants.ts:32</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L32">src/lib/constants.ts:32</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -476,7 +495,7 @@
 						<div class="tsd-signature tsd-kind-icon">svg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;image/svg+xml&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L33">lib/constants.ts:33</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L33">src/lib/constants.ts:33</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -486,7 +505,7 @@
 						<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;text/plain&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L25">lib/constants.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L25">src/lib/constants.ts:25</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -496,7 +515,7 @@
 						<div class="tsd-signature tsd-kind-icon">xhtml<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;application/xhtml+xml&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/7af4d65/src/lib/constants.ts#L34">lib/constants.ts:34</a></li>
+								<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3009067/src/lib/constants.ts#L34">src/lib/constants.ts:34</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -520,6 +539,12 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_clib_cover_.html">&quot;clib/cover&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_clib_js_myajv_.html">&quot;clib/js/my<wbr>Ajv&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_clib_js_myajv_d_.html">&quot;clib/js/my<wbr>Ajv.d&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_clib_nav_.html">&quot;clib/nav&quot;</a>
@@ -590,6 +615,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="_lib_constants_.html#acceptable_url_endings" class="tsd-kind-icon">acceptable_<wbr>url_<wbr>endings</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_lib_constants_.html#entity_codes" class="tsd-kind-icon">entity_<wbr>codes</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="_lib_constants_.html#fixup_js" class="tsd-kind-icon">fixup_<wbr>js</a>
