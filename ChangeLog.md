@@ -1,5 +1,11 @@
 # Changes
 
+## Version 1.2.8
+
+* Added some additional EPUB A11y metadata to the generated package file
+* For some reasons the Ajv interface to TypeScript did not work well any more. I decided to create my own very small definition file to a simple interface to Ajv. Meaning that Ajv is accessed via Javascript and not Typescript. Hacky, but works...
+
+
 ## Version 1.2.7
 
 * New metadata entries are generated into the package file: `dc:subject` (relying on ACM classification terms) and adding an 'svg' property for XHTML files referring to svg files via images, objects, or iframes.
