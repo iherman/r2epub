@@ -5,7 +5,7 @@
  * @packageDocumentation
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tr_epub_css = exports.CORS_headers = exports.local_style_files = exports.modified_epub_files = exports.TR_logo_files = exports.fixup_js = exports.spec_generator = exports.local_port_number = exports.acceptable_url_endings = exports.invalid_host_names = exports.wcag_checked = exports.spec_status_values = exports.text_content = exports.media_types = exports.is_browser = void 0;
+exports.tr_epub_css = exports.CORS_headers = exports.local_style_files = exports.modified_epub_files = exports.TR_logo_files = exports.fixup_js = exports.spec_generator = exports.local_port_number = exports.entity_codes = exports.acceptable_url_endings = exports.invalid_host_names = exports.wcag_checked = exports.spec_status_values = exports.text_content = exports.media_types = exports.is_browser = void 0;
 /**
  * Flag to decide whether the code runs in a browser or in node.js
  */
@@ -92,7 +92,32 @@ exports.acceptable_url_endings = [
     '.xhtml',
     '.json',
 ];
-/** Default port number for the server locally.
+/**
+ * Entity/code pairs: the XHTML conversion is supposed to remove the XML entities (if used) to their
+ * code alternatives.
+ *
+ * The table is not exhaustive, of course, but contains the most frequently used characters
+ * in specifications.
+ */
+exports.entity_codes = [
+    ['&nbsp;', '&#160;'],
+    ['&lt;', '&#60;'],
+    ['&gt;', '&#62;'],
+    ['&quot;', '&#34;'],
+    ['&apos;', '&#39;'],
+    ['&reg;', '&#174;'],
+    ['&pound;', '&#163;'],
+    ['&yen;', '&#165;'],
+    ['&euro;', '&#8364;'],
+    ['&cent;', '&#162;'],
+    ['&mdash;', '&#8212;'],
+    ['&ndash;', '&#8211;'],
+    ['&emsp;', '&#8195;'],
+    ['&ensp;', '&#8194;'],
+    ['&thinsp;', '&#8201;'],
+];
+/**
+ * Default port number for the server locally.
  * Set to the default HTTP port number; the environment variable `PORT` may,
  * however, overwrite this for a server.
  */

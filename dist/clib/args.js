@@ -35,7 +35,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.get_book_configuration = void 0;
-// import conf_schema   from './r2epub.schema.json';
+const myAjv = require("./js/myAjv");
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
  *
@@ -49,33 +49,36 @@ function get_book_configuration(data) {
     // });
     // const validator = ajv.compile(conf_schema);
     // const valid     = validator(data);
-    // if (!valid) {
-    //     throw `Schema validation error on the collection configuration file: \n${JSON.stringify(validator.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
-    // } else {
-    const chapters = data.readingOrder.map((chapter) => {
-        const config = {};
-        if (chapter.config !== undefined) {
-            if (chapter.config.specStatus !== undefined)
-                config.specStatus = chapter.config.specStatus;
-            if (chapter.config.publishDate !== undefined)
-                config.publishDate = chapter.config.publishDate;
-            if (chapter.config.addSectionLinks !== undefined)
-                config.addSectionLinks = `${chapter.config.addSectionLinks}`;
-            if (chapter.config.maxTocLevel !== undefined)
-                config.maxTocLevel = `${chapter.config.maxTocLevel}`;
-        }
+    const my_ajv = new myAjv.MyAjv();
+    const valid = my_ajv.validate(data);
+    if (!valid) {
+        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(my_ajv.errors, null, 4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`;
+    }
+    else {
+        const chapters = data.readingOrder.map((chapter) => {
+            const config = {};
+            if (chapter.config !== undefined) {
+                if (chapter.config.specStatus !== undefined)
+                    config.specStatus = chapter.config.specStatus;
+                if (chapter.config.publishDate !== undefined)
+                    config.publishDate = chapter.config.publishDate;
+                if (chapter.config.addSectionLinks !== undefined)
+                    config.addSectionLinks = `${chapter.config.addSectionLinks}`;
+                if (chapter.config.maxTocLevel !== undefined)
+                    config.maxTocLevel = `${chapter.config.maxTocLevel}`;
+            }
+            return {
+                url: chapter.url,
+                respec: (chapter.respec === undefined) ? false : chapter.respec,
+                config: config,
+            };
+        });
         return {
-            url: chapter.url,
-            respec: (chapter.respec === undefined) ? false : chapter.respec,
-            config: config,
+            name: data.name,
+            id: data.id,
+            readingOrder: chapters,
         };
-    });
-    return {
-        name: data.name,
-        id: data.id,
-        readingOrder: chapters,
-    };
-    //    }
+    }
 }
 exports.get_book_configuration = get_book_configuration;
 //# sourceMappingURL=args.js.map

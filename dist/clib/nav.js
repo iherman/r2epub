@@ -115,7 +115,8 @@ function create_nav_page(book) {
     };
     const full_nav = book.chapters.map(get_nav_text).join('\n');
     const title = utils.de_xml(book.title);
-    return nav.replace('%%%Title%%%', title).replace('%%%Title2%%%', title).replace('%%%TOC%%%', full_nav);
+    const return_value = nav.replace('%%%Title%%%', title).replace('%%%Title2%%%', title).replace('%%%TOC%%%', full_nav);
+    return utils.remove_entities(return_value);
 }
 exports.create_nav_page = create_nav_page;
 //# sourceMappingURL=nav.js.map
