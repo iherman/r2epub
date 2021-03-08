@@ -13,8 +13,7 @@
         "docs": "typedoc src/",
         "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts)",
         "heroku": "git push heroku master",
-        "origin": "git push origin master",
-        "push": "git push origin master; git push heroku master",
+        "origin": "git push origin main",
         "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js",
         "local-test": "ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/audiobooks_local.json"
