@@ -39,8 +39,6 @@
 import * as cConvert from './convert';
 import * as myAjv    from './js/myAjv';
 
-// import conf_schema   from './r2epub.schema.json';
-
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
  *
