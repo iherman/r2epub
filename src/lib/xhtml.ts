@@ -18,6 +18,8 @@
 import { parse }             from 'parse5';
 import { serializeToString } from 'xmlserializer';
 import * as jsdom            from 'jsdom';
+import { remove_entities }   from './utils';
+
 
 
 /**
@@ -36,9 +38,17 @@ export function convert(html: jsdom.JSDOM | string): string {
         return '<!DOCTYPE html>' + serializeToString(parse(html_text))
     }
 
-    if (typeof html === "string") {
-        return convert_text(html);
-    } else {
-        return convert_text(html.serialize());
-    }
+    const return_value = (typeof html === "string") ? convert_text(html) : convert_text(html.serialize());
+    return remove_entities(return_value);
+
+    // // Last touch: the result should not include xml entities but only code numbers.
+    // // The xhtml conversion should filter them out, but but it does not :-(
+    // for (const conversion of constants.entity_codes) {
+    //     const [entity, code] = conversion;
+    //     // This should be a return_value.replaceAll(entity,code), but that function is not
+    //     // implemented in node version 14.*
+    //     return_value = return_value.split(entity).join(code);
+    // }
+
+    // return return_value;
 }

@@ -106,8 +106,33 @@ export const acceptable_url_endings :string[] = [
     '.json',
 ]
 
+/**
+ * Entity/code pairs: the XHTML conversion is supposed to remove the XML entities (if used) to their
+ * code alternatives.
+ *
+ * The table is not exhaustive, of course, but contains the most frequently used characters
+ * in specifications.
+ */
+export const entity_codes :string[][] = [
+    ['&nbsp;', '&#160;'],
+    ['&lt;',    '&#60;'],
+    ['&gt;',    '&#62;'],
+    ['&quot;',  '&#34;'],
+    ['&apos;',  '&#39;'],
+    ['&reg;',   '&#174;'],
+    ['&pound;', '&#163;'],
+    ['&yen;',   '&#165;'],
+    ['&euro;',  '&#8364;'],
+    ['&cent;',  '&#162;'],
+    ['&mdash;', '&#8212;'],
+    ['&ndash;', '&#8211;'],
+    ['&emsp;',  '&#8195;'],
+    ['&ensp;',  '&#8194;'],
+    ['&thinsp;','&#8201;'],
+]
 
-/** Default port number for the server locally.
+/**
+ * Default port number for the server locally.
  * Set to the default HTTP port number; the environment variable `PORT` may,
  * however, overwrite this for a server.
  */
