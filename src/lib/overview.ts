@@ -65,7 +65,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
         if (is_there_script) {
             properties.push('scripted');
         } else {
-            // 2a. check if there is a form element, that also sets a 'scripted' tag
+            // 2b. check if there is a form element, that also sets a 'scripted' tag
             if (global.html_element.querySelector('form') !== null) {
                 properties.push('scripted');
             }

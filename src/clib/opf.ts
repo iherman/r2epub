@@ -106,7 +106,7 @@ export function create_opf(book :cConvert.Collection) :string {
         the_opf.add_collection(new_collection);
     });
 
-    // 5. the extra spine data must be collected from the chapters and added to the opf file
+    // 5. the extra (non-linear) spine data must be collected from the chapters and added to the opf file (to the end of the spine)
     book.chapters.forEach((chapter :Chapter) :void => {
         chapter.non_linear_spine_items.forEach((itemref :string) :void => {
             the_opf.add_spine_item(`${chapter.name}_${itemref}`, true);

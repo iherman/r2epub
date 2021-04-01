@@ -315,6 +315,7 @@ export class PackageWrapper {
      * Add a manifest item, i.e., the reference to a resource that is part of the publication.
      *
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
+     * @add_spine_item - whether the item must be added to the spine, too (with a `linear=no` attribute value)
      */
     add_manifest_item(item :ManifestItem, add_spine_item = false) :void {
         if (item['@properties'] === undefined || item['@properties'] === '') {
