@@ -65,6 +65,8 @@ export const spec_status_values :string[] = [
     'PER',
     'REC',
     'RSCND',
+    'STMT',
+    'DNOTE',
     'FPWD-NOTE',
     'NOTE',
     'WG-NOTE',
@@ -74,6 +76,7 @@ export const spec_status_values :string[] = [
     'CG-FINAL',
     'Member-SUBM',
     'draft-finding',
+    'editor-draft-finding',
     'finding',
 ];
 
@@ -142,17 +145,38 @@ export const local_port_number     = '80';
 export const spec_generator        = 'https://labs.w3.org/spec-generator/?type=respec&url='
 
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
-export const fixup_js               = 'https://www.w3.org/scripts/TR/2016/fixup.js';
+export let fixup_js :string;
+
+export const process_2021_date      = '2021-11-02';
 
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
-export const TR_logo_files         = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
+export let TR_logo_files :string;
 
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
-// export const modified_epub_files  :string = 'https://iherman.github.io/r2epub/epub_assets/';
-export const modified_epub_files   = 'https://www.ivan-herman.net/r2epub/';
+export let modified_epub_files :string;
 
 /** Local (relative) URL for styles and logos */
-export const local_style_files     = 'StyleSheets/TR/2016/';
+export let local_style_files :string;
+
+/** @hidden */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export function finalize_style_constants(config: any): number {
+    if (config.publishDate >= process_2021_date) {
+        fixup_js = 'https://www.w3.org/scripts/TR/2021/fixup.js'
+        TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2021/logos/';
+        modified_epub_files = 'https://www.ivan-herman.net/r2epub/2021/';
+        // modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/2021/';
+        local_style_files = 'StyleSheets/TR/2021/';
+        return 2021;
+    } else {
+        fixup_js = 'https://www.w3.org/scripts/TR/2016/fixup.js'
+        TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
+        modified_epub_files = 'https://www.ivan-herman.net/r2epub/2016/';
+        // modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/2016/';
+        local_style_files = 'StyleSheets/TR/2016/';
+        return 2016;
+    }
+}
 
 /** @hidden */
 const allow_methods :string[] = ['GET', 'HEAD'];

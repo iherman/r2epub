@@ -1,0 +1,10 @@
+{
+    "name" : "EPUB 3.3 Overview",
+    "id" : "epub33",
+    "readingOrder" : [
+        {
+            "url": "https://www.w3.org/TR/epub-overview-33/",
+            "respec": false
+        }
+    ]
+}

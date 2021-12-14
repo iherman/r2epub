@@ -24,7 +24,7 @@
  * The approach chosen to convert the content to the EPUB file is therefore as follows:
  *
  * - The core reference in the HTML file is changed to a (stable) `base.css` file. This file is copied
- * into the EPUB file from a separate, but fixed, [URI](https://www.w3.org/People/Ivan/TR_EPUB/base.css)]. This is a
+ * into the EPUB file from a separate, but fixed, [URI](https://www.ivan-herman.net/r2epub/base.css)]. This is a
  * modified version of the "real" `base.css` with:
  *     - the TOC related statements have been removed
  *     - some page breaking instructions are added

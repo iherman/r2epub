@@ -80,6 +80,11 @@ export interface Global {
     config? :any,
 
     /**
+     * Process version used to generate this file. The possible values are 2016 and 2021
+    */
+    process_version? :number,
+
+    /**
      * [Debug] Whether trace information should be printed to the console
      */
     trace? :boolean
@@ -260,6 +265,7 @@ export class RespecToEPUB {
                 throw "User config is not available"
             } else {
                 this.global.config = JSON.parse(initial_config_element.textContent);
+                this.global.process_version = constants.finalize_style_constants(this.global.config);
             }
             if (this.global.trace) console.log(`global config set`);
         }
@@ -272,7 +278,7 @@ export class RespecToEPUB {
             this.global_url = `https://www.w3.org/TR/${this.global.config.shortName}/`;
             this.global.opf_content = new opf.PackageWrapper(this.global_url, title);
             this.global.opf_content.add_creators(
-                this.global.config.editors.map((entry: any) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`)
+                this.global.config.editors.map((entry: any) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`),
             );
 
             const date = this.global.html_element.querySelector('time.dt-published');
