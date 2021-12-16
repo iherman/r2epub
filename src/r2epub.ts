@@ -91,7 +91,7 @@
 /* Main imports */
 import * as r2epub    from './index';
 import * as _         from 'underscore';
-import * as constants from './lib/constants';
+import * as common    from './lib/common';
 import * as fs        from 'fs';
 
 /** @hidden */
@@ -119,7 +119,7 @@ async function cli() {
         .option('-r, --respec', 'the source must be pre-processed by ReSpec', false)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-s, --specStatus <type>', 'specification type', (value :string, dummy :any) :string => {
-            if (constants.spec_status_values.includes(value)) {
+            if (common.spec_status_values.includes(value)) {
                 return value;
             } else {
                 console.error(`r2epub warning: invalid spec status value (${value}); ignored`);

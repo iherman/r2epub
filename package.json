@@ -16,7 +16,8 @@
         "origin": "git push origin main",
         "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js",
-        "local-test": "ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/audiobooks_local.json"
+        "local-test-book": "ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/audiobooks_local.json",
+        "local-test-document": "ts-node src/r2epub.ts -t http://localhost:8001/TR/2021/NOTE-epub-overview-33-20211208/Overview.html"
     },
     "repository": {
         "type": "git",

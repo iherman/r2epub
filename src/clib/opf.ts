@@ -11,7 +11,7 @@
  */
 
 import * as opf                                    from '../lib/opf';
-import * as constants                              from '../lib/constants';
+import * as common                                 from '../lib/common';
 import * as cConvert                               from './convert';
 import { Chapter, OPFManifestItem, transfer_once } from './chapter';
 
@@ -48,18 +48,18 @@ export function create_opf(book :cConvert.Collection) :string {
     the_opf.add_manifest_item({
         "@href"       : "title.xhtml",
         "@id"         : "title_page",
-        "@media-type" : constants.media_types.xhtml,
+        "@media-type" : common.media_types.xhtml,
     });
     the_opf.add_manifest_item({
         "@href"       : "cover_image.svg",
         "@id"         : "cover",
-        "@media-type" : constants.media_types.svg,
+        "@media-type" : common.media_types.svg,
         "@properties" : "cover-image",
     });
     the_opf.add_manifest_item({
         "@href"       : "nav.xhtml",
         "@id"         : "nav",
-        "@media-type" : constants.media_types.xhtml,
+        "@media-type" : common.media_types.xhtml,
         "@properties" : "nav",
     })
 

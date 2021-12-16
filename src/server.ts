@@ -52,7 +52,7 @@ import * as http       from 'http';
 import * as urlHandler from 'url';
 import * as _          from 'underscore';
 import * as r2epub     from './index';
-import * as constants  from './lib/constants';
+import * as common     from './lib/common';
 import * as ocf        from './lib/ocf';
 import * as home       from './lib/home';
 
@@ -107,7 +107,7 @@ async function get_epub(query :Query) : Promise<Content> {
     return {
         content : content,
         headers : {
-            'Content-type'        : constants.media_types.epub,
+            'Content-type'        : common.media_types.epub,
             'Expires'             : now,
             'Last-Modified'       : now,
             'Content-Length'      : content.length,
@@ -126,17 +126,17 @@ async function get_epub(query :Query) : Promise<Content> {
  * @async
  */
 async function serve() {
-    const port :string = process.env.PORT || process.env.R2EPUB_PORT || constants.local_port_number;
+    const port :string = process.env.PORT || process.env.R2EPUB_PORT || common.local_port_number;
     console.log(`r2epub server starting on port ${port}`);
     http.createServer(async (request :http.IncomingMessage, response :http.ServerResponse) => {
         const error = (code :number, e :string) => {
             const error_headers = {
-                'Content-type'     : constants.media_types.text,
+                'Content-type'     : common.media_types.text,
                 'Content-Language' : 'en-US',
             };
             response.writeHead(code, _.extend(
                 error_headers,
-                constants.CORS_headers,
+                common.CORS_headers,
             ));
             response.write(e);
         }
@@ -149,14 +149,14 @@ async function serve() {
                     // fall back on the fixed home page
                     response.writeHead(200, _.extend(
                         { 'Content-type': 'text/html' },
-                        constants.CORS_headers,
+                        common.CORS_headers,
                     ));
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));
                 } else {
                     const the_book :Content = await get_epub(query);
                     response.writeHead(200, _.extend(
                         the_book.headers,
-                        constants.CORS_headers,
+                        common.CORS_headers,
                     ));
                     response.write(the_book.content);
                 }

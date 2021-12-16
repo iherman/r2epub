@@ -280,7 +280,7 @@ export class PackageWrapper {
                         "@property" : "schema:accessibilitySummary",
                         '#'         : "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only.",
                     },{
-                        '@property' : "a11:certifiedBy",
+                        '@property' : "a11y:certifiedBy",
                         '#'         : "World Wide Web Consortium",
                     }],
                     "dc:rights"    : "https://www.w3.org/Consortium/Legal/2015/doc-license",

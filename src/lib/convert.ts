@@ -23,10 +23,11 @@ import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch';
 import {Options}       from '../index';
-import * as constants  from './constants';
+import * as common     from './common';
 import * as opf        from './opf';
 import * as ocf        from './ocf';
-import * as css        from './css';
+import * as css2016    from './css2016';
+import * as css2021    from './css2021';
 import * as title_page from './title';
 import * as cover_page from './cover';
 import * as nav        from './nav';
@@ -206,7 +207,7 @@ export class RespecToEPUB {
                     })
                     .filter((val) => val !== null);
                 const query_string = config_options.length === 0 ? '' : `%3F${config_options.join('%26')}`;
-                return `${constants.spec_generator}${url}${query_string}`
+                return `${common.spec_generator}${url}${query_string}`
             } else {
                 return url;
             }
@@ -265,7 +266,7 @@ export class RespecToEPUB {
                 throw "User config is not available"
             } else {
                 this.global.config = JSON.parse(initial_config_element.textContent);
-                this.global.process_version = constants.finalize_style_constants(this.global.config);
+                common.finalize_style_constants(this.global.config);
             }
             if (this.global.trace) console.log(`global config set`);
         }
@@ -295,15 +296,17 @@ export class RespecToEPUB {
         {
             const logo_element = this.global.html_element.querySelector('img[alt="W3C"]');
             if (logo_element !== null) {
-                const relative_url =  `${constants.local_style_files}logos/W3C.svg`;
+                const relative_url =  `${common.local_style_files}logos/W3C.svg`;
                 logo_element.setAttribute('src', relative_url);
                 // There is an ugly story here. The SVG version of the logo, as stored on the W3C site, includes a reference
-                // the very complex SVG DTD, and epubcheck does not like it (EPUB v. 3 does not like it, I guess). So
+                // the very complex SVG DTD, and epubcheck does not like it (EPUB v. 3 does not like it). So
                 // I created a version of the logo without it and stored it at a fix URL...
+                // Note that EPUB 3.3 solved this issue, and so does epubcheck's version for EPUB 3.3. But,
+                // for now, I leave things as is.
                 this.global.resources.push({
                     relative_url : relative_url,
-                    media_type   : constants.media_types.svg,
-                    absolute_url : `${constants.modified_epub_files}W3C_logo.svg`,
+                    media_type   : common.media_types.svg,
+                    absolute_url : `${common.modified_epub_files}W3C_logo.svg`,
                 })
             }
         }
@@ -313,13 +316,22 @@ export class RespecToEPUB {
         // the width of the display to, possibly, put the TOC onto the sidebar. Both are unnecessary and, actually,
         // (2) is problematic because it forces a narrow display of the text that we do not want.
         {
-            const fixup_element = this.global.html_element.querySelector(`script[src="${constants.fixup_js}"]`);
+            const fixup_element = this.global.html_element.querySelector(`script[src="${common.fixup_js}"]`);
             fixup_element.remove();
         }
 
         // ------------------------------------------
         // 6. Add some of the global W3C CSS files, and auxiliary image files
-        this.global.resources = [...this.global.resources, ...css.extract_css(this.global)]
+        // (Using a switch because, I'm afraid, there will be more changes in the future...)
+        switch (common.process_version) {
+        case 2016:
+            this.global.resources = [...this.global.resources, ...css2016.extract_css(this.global)];
+            break;
+        case 2021:
+        default:
+            this.global.resources = [...this.global.resources, ...css2021.extract_css(this.global)];
+            break;
+        }
 
         // ------------------------------------------
         // 7. Create a title page
@@ -341,7 +353,7 @@ export class RespecToEPUB {
         // 11. Finalize the package file
         {
             // Add the WCAG conformance, if applicable
-            if (constants.wcag_checked.includes(this.global.config.specStatus)) this.global.opf_content.add_wcag_link();
+            if (common.wcag_checked.includes(this.global.config.specStatus)) this.global.opf_content.add_wcag_link();
 
             // Populate the global package with the resource items
             let res_id_num = 1;
@@ -389,7 +401,7 @@ export class RespecToEPUB {
         let global_url :string;
         const parsed_document_url = urlHandler.parse(this.global.document_url);
         // Check whether the document url is on localhost or other, invalid host name
-        if (constants.invalid_host_names.includes(parsed_document_url.hostname)) {
+        if (common.invalid_host_names.includes(parsed_document_url.hostname)) {
             // check if the global url is there, using a fallback if not
             global_url = this.global_url || this.global.document_url;
         } else {
@@ -512,7 +524,7 @@ export class RespecToEPUB {
             const file_names = to_be_fetched.map((resource :ResourceRef): string => resource.relative_url);
             const urls       = to_be_fetched.map((resource :ResourceRef): string => resource.absolute_url);
 
-            if (this.global.trace) console.log(`fetch the external resources`);
+            if (this.global.trace) console.log(`fetch the external resources (${urls})`);
             const contents   = await Promise.all(urls.map((url: string): Promise<any> => fetch_resource(url)));
             if (this.global.trace) console.log(`append external resources to the epub file`);
             _.zip(contents, file_names).forEach((arg: [any,string]) :void => the_book.append(arg[0], arg[1]));

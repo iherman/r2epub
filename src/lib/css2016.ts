@@ -1,5 +1,5 @@
 /**
- * ## CSS files
+ * ## CSS files (for the 2016 version of the Process)
  *
  *  Handling CSS mappings is a bit complicated because the W3C setup is not entirely consistent...
  *
@@ -49,7 +49,7 @@
 
 import { ResourceRef, Global }  from './convert';
 import * as urlHandler          from 'url';
-import * as constants           from './constants';
+import * as common              from './common';
 
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
 
@@ -136,7 +136,7 @@ const specStatus_css :specStatus_mapping = {
     'UNOFFICIAL' : {
         watermark        : true,
         logo_name        : 'UD.png',
-        logo_media_type  : constants.media_types.png,
+        logo_media_type  : common.media_types.png,
         special_template : undefined_template,
     },
 
@@ -163,7 +163,7 @@ const specStatus_css :specStatus_mapping = {
     'CG-DRAFT' : {
         watermark        : true,
         logo_name        : null,
-        logo_media_type  : constants.media_types.png,
+        logo_media_type  : common.media_types.png,
         special_template : cg_draft_template,
     },
 }
@@ -201,24 +201,24 @@ export function extract_css(global: Global): ResourceRef[] {
     if (the_link !== undefined) {
         // 'base' CSS file, to be added
         retval.push({
-            relative_url : `${constants.local_style_files}base.css`,
-            media_type   : constants.media_types.css,
-            absolute_url : `${constants.modified_epub_files}base.css`,
+            relative_url : `${common.local_style_files}base.css`,
+            media_type   : common.media_types.css,
+            absolute_url : `${common.modified_epub_files}base.css`,
         })
 
         // The html content should be modified to refer to the base directly
-        the_link.setAttribute('href', `${constants.local_style_files}base.css`);
+        the_link.setAttribute('href', `${common.local_style_files}base.css`);
 
 
         // An extra CSS file must be added to the mix, to take care of the EPUB specificities
         retval.push({
-            relative_url : `${constants.local_style_files}tr_epub.css`,
-            media_type   : constants.media_types.css,
-            text_content : constants.tr_epub_css,
+            relative_url : `${common.local_style_files}tr_epub.css`,
+            media_type   : common.media_types.css,
+            text_content : common.tr_epub_css,
         })
 
         // Adding the reference to the epub specific css file into the dom
-        the_link.insertAdjacentHTML('afterend', `<link rel="stylesheet" href="${constants.local_style_files}tr_epub.css">`)
+        the_link.insertAdjacentHTML('afterend', `<link rel="stylesheet" href="${common.local_style_files}tr_epub.css">`)
 
 
         // Here comes the extra complication: depending on the respec spec status type, extra actions may have to be
@@ -241,10 +241,10 @@ export function extract_css(global: Global): ResourceRef[] {
                 template = template.replace('%%%LOGO%%%', css_extras.logo_name);
 
                 // Before we forget, add the logo file to the resources!
-                const media_type    = css_extras.logo_media_type || constants.media_types.svg;
-                const orig_logo_url = media_type === constants.media_types.svg ? constants.modified_epub_files : constants.TR_logo_files;
+                const media_type    = css_extras.logo_media_type || common.media_types.svg;
+                const orig_logo_url = media_type === common.media_types.svg ? common.modified_epub_files : common.TR_logo_files;
                 retval.push({
-                    relative_url : `${constants.local_style_files}logos/${css_extras.logo_name}`,
+                    relative_url : `${common.local_style_files}logos/${css_extras.logo_name}`,
                     media_type   : media_type,
                     absolute_url : `${orig_logo_url}${css_extras.logo_name}`,
                 })
@@ -253,21 +253,21 @@ export function extract_css(global: Global): ResourceRef[] {
             if (css_extras.watermark) {
                 // Add the watermark file to the resources!
                 retval.push({
-                    relative_url : `${constants.local_style_files}logos/UD-watermark.png`,
-                    media_type   : constants.media_types.png,
-                    absolute_url : `${constants.TR_logo_files}UD-watermark.png`,
+                    relative_url : `${common.local_style_files}logos/UD-watermark.png`,
+                    media_type   : common.media_types.png,
+                    absolute_url : `${common.TR_logo_files}UD-watermark.png`,
                 })
             }
 
             // The extra epub CSS reference has to be added to the html source and to the return values
             retval.push({
-                relative_url : `${constants.local_style_files}epub.css`,
-                media_type   : constants.media_types.css,
+                relative_url : `${common.local_style_files}epub.css`,
+                media_type   : common.media_types.css,
                 text_content : template,
             });
 
             const new_css_link = global.html_element.ownerDocument.createElement('link');
-            new_css_link.setAttribute('href', `${constants.local_style_files}epub.css`);
+            new_css_link.setAttribute('href', `${common.local_style_files}epub.css`);
             new_css_link.setAttribute('rel', 'stylesheet');
             the_link.parentElement.append(new_css_link);
         }

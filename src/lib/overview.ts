@@ -20,7 +20,7 @@
 import * as urlHandler from 'url';
 import { ResourceRef, Global } from './convert';
 import * as xhtml              from './xhtml';
-import * as constants          from './constants';
+import * as common             from './common';
 
 /**
  * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
@@ -57,7 +57,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
         const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
             if (element.hasAttribute('type')) {
                 const type = element.getAttribute('type');
-                return ['application/javascript', 'application/ecmascript', constants.media_types.js, constants.media_types.es].includes(type);
+                return ['application/javascript', 'application/ecmascript', common.media_types.js, common.media_types.es].includes(type);
             } else {
                 return true;
             }
@@ -136,7 +136,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
     body.classList.add('toc-inline');
 
     return [{
-        media_type   : constants.media_types.xhtml,
+        media_type   : common.media_types.xhtml,
         id           : 'main',
         relative_url : 'Overview.xhtml',
         text_content : xhtml.convert(global.dom),

@@ -13,7 +13,7 @@
  */
 
 
-import * as constants  from './constants';
+import * as common from './common';
 import * as stream from 'stream';
 import JSZip = require('jszip');
 
@@ -54,7 +54,7 @@ export class OCF {
         this._book = new JSZip();
         this.name = name;
 
-        this._book.file('mimetype', constants.media_types.epub, {compression: 'STORE'});
+        this._book.file('mimetype', common.media_types.epub, {compression: 'STORE'});
         this._book.file('META-INF/container.xml', container_xml, {compression: 'STORE'})
     }
 
@@ -83,8 +83,8 @@ export class OCF {
     async get_content() :Promise<Buffer|Blob> {
         if (this.content === null) {
             this.content = await this._book.generateAsync({
-                type               : constants.is_browser ? 'blob' : 'nodebuffer',
-                mimeType           : constants.media_types.epub,
+                type               : common.is_browser ? 'blob' : 'nodebuffer',
+                mimeType           : common.media_types.epub,
                 compressionOptions : {
                     level : 9,
                 },

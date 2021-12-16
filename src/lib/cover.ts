@@ -12,7 +12,7 @@
  */
 
 import { ResourceRef, Global } from './convert';
-import * as constants          from './constants';
+import * as common             from './common';
 import * as utils              from './utils';
 
 
@@ -98,7 +98,7 @@ export function create_cover_image(global :Global) :ResourceRef[] {
         .replace('%%%SUBTITLE%%%', `W3C ${subtitle}<br/>${date}`);
 
     return [{
-        media_type   : constants.media_types.svg,
+        media_type   : common.media_types.svg,
         relative_url : 'cover_image.svg',
         id           : 'cover',
         text_content : final_cover,

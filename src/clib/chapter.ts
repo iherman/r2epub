@@ -13,7 +13,7 @@
 
 import { Options }    from '../index';
 import * as ocf       from '../lib/ocf';
-import * as constants from '../lib/constants';
+import * as common    from '../lib/common';
 import * as rConvert  from '../lib/convert';
 import * as cConvert  from './convert';
 import * as xmldom    from 'xmldom';
@@ -144,7 +144,7 @@ export class Chapter {
                 const id         = item.getAttribute('id');
 
                 // This list in r2epub lists those media types that can be transferred as texts
-                const textual = constants.text_content.includes(media_type);
+                const textual = common.text_content.includes(media_type);
                 const promise = this._container.file(file_name).async(textual ? 'text' : 'base64');
 
                 // Create the relevant [[ManifestItem]]

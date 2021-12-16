@@ -14,7 +14,7 @@
 
 import { ResourceRef, Global } from './convert';
 import * as xhtml              from './xhtml';
-import * as constants          from './constants';
+import * as common             from './common';
 
 
 /**
@@ -29,7 +29,7 @@ const nav  = `<?xml version="1.0"?>
             %%%Title%%% — Contents
         </title>
         <link rel="stylesheet" type="text/css" href="StyleSheets/base.css" />
-        <link rel="stylesheet" type="text/css" href="StyleSheets/TR/2016/base.css" />
+        <link rel="stylesheet" type="text/css" href="StyleSheets/TR/%%%process%%%/base.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
         ol {
@@ -75,6 +75,7 @@ export function create_nav_file(global :Global) :ResourceRef[] {
 
     const final_nav = nav
         .replace('%%%Title%%%', title)
+        .replace('%%%process%%%',`${common.process_version}`)
         .replace('%%%TOC%%%', toc_ol.innerHTML.replace(/href="#/g,'href="Overview.xhtml#'));
 
     // Remove the toc element from the Overview.xhtml altogether. Although it would be enough
@@ -83,7 +84,7 @@ export function create_nav_file(global :Global) :ResourceRef[] {
     toc_ol.remove();
 
     retval.push({
-        media_type   : constants.media_types.xhtml,
+        media_type   : common.media_types.xhtml,
         relative_url : 'nav.xhtml',
         id           : 'nav',
         properties   : 'nav',

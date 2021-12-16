@@ -12,7 +12,7 @@
  */
 
 import { ResourceRef, Global } from './convert';
-import * as constants          from './constants';
+import * as common             from './common';
 
 
 /**
@@ -120,7 +120,7 @@ export function create_title_page(global :Global) :ResourceRef[] {
         .replace('%%%DATE%%%', date.textContent);
 
     retval.push({
-        media_type   : constants.media_types.xhtml,
+        media_type   : common.media_types.xhtml,
         relative_url : 'title.xhtml',
         id           : 'title_page',
         text_content : final_title_page,
