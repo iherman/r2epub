@@ -24,7 +24,11 @@ module.exports = {
             }
         ],
         "indent" : [
-            "error", 4
+            "error",
+            4,
+            {
+                "SwitchCase" : 1
+            }
         ],
         "no-multi-spaces": [
             "error",

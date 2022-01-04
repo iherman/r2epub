@@ -152,6 +152,9 @@ export const process_2021_date      = '2021-11-02';
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
 export let TR_logo_files :string;
 
+/** Base URL for the official W3C css files (only the non-SVG ones are used directly). */
+export let TR_css_files :string;
+
 /** Base URL for the W3C files (like `base.css`, logos in SVG format) modified for EPUB. */
 export let modified_epub_files :string;
 
@@ -169,12 +172,14 @@ export function finalize_style_constants(config :any) :void {
         fixup_js = 'https://www.w3.org/scripts/TR/2021/fixup.js'
         TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2021/logos/';
         modified_epub_files = 'https://www.ivan-herman.net/r2epub/2021/';
+        TR_css_files = 'https://www.w3.org/StyleSheets/TR/2021/';
         local_style_files = 'StyleSheets/TR/2021/';
         // modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/2021/';
     } else {
         process_version = 2016;
         fixup_js = 'https://www.w3.org/scripts/TR/2016/fixup.js'
         TR_logo_files = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
+        TR_css_files = 'https://www.w3.org/StyleSheets/TR/2016/';
         modified_epub_files = 'https://www.ivan-herman.net/r2epub/2016/';
         local_style_files = 'StyleSheets/TR/2016/';
         // modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/2016/';
@@ -227,6 +232,14 @@ export const CORS_headers = {
  * 4. The table of content, as generated into the file, is removed (via a `display` attribute); its content is put into a separate navigation file used by the reading system.
  */
 export const tr_epub_css = `
+body {
+    /* Layout */
+    max-width: 50em;                             /* limit line length to 50em for readability   */
+    margin: 0 auto !important;                   /* center text within page, space for footers  */
+    padding: 1.6em 1.5em 2em 50px;               /* assume 16px font size for downlevel clients */
+    padding: 1.6em 1.5em 2em calc(26px + 1.5em); /* leave space for status flag   */
+}
+
 div[role~="main"] {
     margin: 0 auto;                              /* center text within page                     */
     max-width: none;
