@@ -73,16 +73,10 @@ export function extract_css(global: Global): ResourceRef[] {
     const the_link :Element = css_link_element();
 
     if (the_link !== undefined) {
-        // retval.push({
-        //     relative_url : `${common.local_style_files}base.css`,
-        //     media_type   : common.media_types.css,
-        //     absolute_url : `${common.modified_epub_files}base.css`,
-        // });
-
         retval.push({
             relative_url : `${common.local_style_files}base.css`,
             media_type   : common.media_types.css,
-            absolute_url : `${common.TR_css_files}base.css`,
+            absolute_url : `${common.modified_epub_files}base.css`,
         });
 
         const css_link :string = the_link.getAttribute('href');
@@ -93,32 +87,35 @@ export function extract_css(global: Global): ResourceRef[] {
 
         // In most cases some extra material has to be retrieved: logo files, background files...
         if (!['base', 'unofficial','Member-SUBM','Team-SUBM'].includes(base_name)) {
-            if (['cg-draft', 'W3C-UD'].includes(base_name)) {
-                // The original css file also include absolute URLs, so a modified version is used;
-                // Aso, a watermark is also added
-                // The css file must be retrieved
+            if (['cg-draft','bg-final','bg-draft','cg-final','W3C-UD'].includes(base_name)) {
+                // The original css file may include absolute URLs and the logo setup
+                // seems to be problematic for RS-s, so a modified version is used;
+                // I.e., the css file must be retrieved from the modified versions:
                 retval.push({
                     relative_url : `${common.local_style_files}${base_name}.css`,
                     media_type   : common.media_types.css,
                     absolute_url : `${common.modified_epub_files}${base_name}.css`,
                 })
-                retval.push({
-                    relative_url : `${common.local_style_files}logos/UD-watermark.png`,
-                    media_type   : common.media_types.png,
-                    absolute_url : `${common.modified_epub_files}UD-watermark.png`,
-                })
-                // Getting to the logo; the CG draft logo is in png...
-                if (base_name === 'cg-draft') {
+
+                if (['cg-draft', 'WG-UD'].includes(base_name)) {
                     retval.push({
-                        relative_url : `${common.local_style_files}logos/back-${base_name}.png`,
+                        relative_url : `${common.local_style_files}logos/UD-watermark.png`,
                         media_type   : common.media_types.png,
-                        absolute_url : `${common.modified_epub_files}back-${base_name}.png`,
+                        absolute_url : `${common.TR_logo_files}UD-watermark.png`,
                     })
-                } else {
+                }
+                // Getting the logo; the WG-UD is svg, the others are in png...
+                if (base_name === 'WG-UD') {
                     retval.push({
                         relative_url : `${common.local_style_files}logos/${logo_name}.svg`,
                         media_type   : common.media_types.svg,
                         absolute_url : `${common.TR_logo_files}${logo_name}.svg`,
+                    })
+                } else {
+                    retval.push({
+                        relative_url : `${common.local_style_files}logos/back-${base_name}.png`,
+                        media_type   : common.media_types.png,
+                        absolute_url : `${common.TR_logo_files}back-${base_name}.png`,
                     })
                 }
             } else {
@@ -128,21 +125,12 @@ export function extract_css(global: Global): ResourceRef[] {
                     media_type   : common.media_types.css,
                     absolute_url : `${css_link}.css`,
                 })
-                if (['bg-final','bg-draft','cg-final'].includes(base_name)) {
-                    // In some cases the logo is a png file
-                    retval.push({
-                        relative_url : `${common.local_style_files}logos/back-${base_name}.png`,
-                        media_type   : common.media_types.png,
-                        absolute_url : `${common.TR_logo_files}back-${base_name}.png`,
-                    })
-                } else {
-                    // the logo is a bona fide SVG file
-                    retval.push({
-                        relative_url : `${common.local_style_files}logos/${logo_name}.svg`,
-                        media_type   : common.media_types.svg,
-                        absolute_url : `${common.TR_logo_files}${logo_name}.svg`,
-                    })
-                }
+                // the logo is a bona fide SVG file
+                retval.push({
+                    relative_url : `${common.local_style_files}logos/${logo_name}.svg`,
+                    media_type   : common.media_types.svg,
+                    absolute_url : `${common.TR_logo_files}${logo_name}.svg`,
+                })
             }
         }
 

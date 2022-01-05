@@ -1,25 +1,19 @@
 @import url('base.css');
 
-body {
-    background-repeat: no-repeat, repeat-x;
-    background-size: auto;
-    background-image: none, url(logos/UD-watermark.png);
-}
 body::before {
-    content: url('logos/back-cg-draft.png');
+    content: url('logos/back-cg-final.png');
     float: left;
     /* margin: -1.6em 0 0 calc(-26px - 1.5em); */
 }
 
-/*
-@media (min-width: 40em) {
+/* @media (min-width: 40em) {
     body::before {
         content: none;
     }
     body {
-        background-image: url('logos/back-cg-draft.png'),
-                          url('logos/UD-watermark.png');
-        background-image: url('logos/back-cg-draft.png');
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-image: url('logos/back-cg-final.png');
         padding-left: 160px;
     }
 } */
@@ -28,12 +22,12 @@ body::before {
     body:not(.toc-inline) #toc {
         padding-top: 160px;
         background-attachment: local;
-    }
+    };
 }
 
-@media screen {
+@media screen and (min-width: 40em) {
     body.toc-sidebar #toc {
         padding-top: 160px;
         background-attachment: local;
-    }
+    };
 }
