@@ -22,12 +22,12 @@ body::before {
     body:not(.toc-inline) #toc {
         padding-top: 160px;
         background-attachment: local;
-    };
+    }
 }
 
 @media screen and (min-width: 40em) {
     body.toc-sidebar #toc {
         padding-top: 160px;
         background-attachment: local;
-    };
+    }
 }

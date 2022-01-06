@@ -147,6 +147,11 @@ export const spec_generator        = 'https://labs.w3.org/spec-generator/?type=r
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
 export let fixup_js :string;
 
+/** Generic ICON directory on the W3C site */
+export const W3C_icons = 'https://www.w3.org/Icons/';
+
+export const local_icons = 'Icons/';
+
 export const process_2021_date      = '2021-11-02';
 
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */

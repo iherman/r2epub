@@ -81,13 +81,18 @@ export function extract_css(global: Global): ResourceRef[] {
 
         const css_link :string = the_link.getAttribute('href');
         const base_name :string = css_link.split('/').pop();
-        const logo_name :string = base_name.split('-').pop();
 
-        the_link.setAttribute('href', `${common.local_style_files}${base_name}.css`);
-
-        // In most cases some extra material has to be retrieved: logo files, background files...
-        if (!['base', 'unofficial','Member-SUBM','Team-SUBM'].includes(base_name)) {
-            if (['cg-draft','bg-final','bg-draft','cg-final','W3C-UD'].includes(base_name)) {
+        // In most cases some extra materials have to be retrieved: logo files, background files...
+        // This is signalled by the fact that the included css file reflects the specStatus value in respec
+        // In some cases this is not the case, e.g., TAG findings, member submissions...; in all those coses
+        // the 'base.css' file is the only one used
+        if (base_name === 'base.css') {
+            the_link.setAttribute('href', `${common.local_style_files}${base_name}`);
+        } else {
+            // Remove the 'W3C-' string to get the logo name; that is the pattern used in the official style files
+            const logo_name :string = base_name.split('-').pop();
+            the_link.setAttribute('href', `${common.local_style_files}${base_name}.css`);
+            if (['cg-draft','bg-final','bg-draft','cg-final','W3C-UD', 'unofficial','W3C-Member-SUBM'].includes(base_name)) {
                 // The original css file may include absolute URLs and the logo setup
                 // seems to be problematic for RS-s, so a modified version is used;
                 // I.e., the css file must be retrieved from the modified versions:
@@ -97,21 +102,15 @@ export function extract_css(global: Global): ResourceRef[] {
                     absolute_url : `${common.modified_epub_files}${base_name}.css`,
                 })
 
-                if (['cg-draft', 'WG-UD'].includes(base_name)) {
+                if (['cg-draft', 'W3C-UD','unofficial'].includes(base_name)) {
                     retval.push({
                         relative_url : `${common.local_style_files}logos/UD-watermark.png`,
                         media_type   : common.media_types.png,
                         absolute_url : `${common.TR_logo_files}UD-watermark.png`,
                     })
                 }
-                // Getting the logo; the WG-UD is svg, the others are in png...
-                if (base_name === 'WG-UD') {
-                    retval.push({
-                        relative_url : `${common.local_style_files}logos/${logo_name}.svg`,
-                        media_type   : common.media_types.svg,
-                        absolute_url : `${common.TR_logo_files}${logo_name}.svg`,
-                    })
-                } else {
+                // Getting the logo in PNG format for those documents that have one referred to from their css files...
+                if (['cg-draft','bg-final','bg-draft','cg-final'].includes(base_name)) {
                     retval.push({
                         relative_url : `${common.local_style_files}logos/back-${base_name}.png`,
                         media_type   : common.media_types.png,
@@ -119,13 +118,16 @@ export function extract_css(global: Global): ResourceRef[] {
                     })
                 }
             } else {
+                // This is the simple, and general, case!
+                //
                 // The css file must be retrieved from the W3C site
                 retval.push({
                     relative_url : `${common.local_style_files}${base_name}.css`,
                     media_type   : common.media_types.css,
                     absolute_url : `${css_link}.css`,
                 })
-                // the logo is a bona fide SVG file
+
+                // Get the 'logo', ie, the vertical stripe on the left
                 retval.push({
                     relative_url : `${common.local_style_files}logos/${logo_name}.svg`,
                     media_type   : common.media_types.svg,

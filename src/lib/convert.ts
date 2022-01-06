@@ -322,6 +322,21 @@ export class RespecToEPUB {
                 })
             }
         }
+        // 4.bis Add reference to the Member submission logo, if applicable
+        {
+            const logo_element = this.global.html_element.querySelector('img[alt="W3C Member Submission"]');
+            if (logo_element !== null) {
+                // This is set by respec and must be removed, otherwise the RS will not display the logo properly
+                logo_element.removeAttribute('crossorigin');
+                const relative_url =  `${common.local_icons}member_subm-v.svg`;
+                logo_element.setAttribute('src', relative_url);
+                this.global.resources.push({
+                    relative_url : relative_url,
+                    media_type   : common.media_types.svg,
+                    absolute_url : `${common.modified_epub_files}member_subm-v.svg`,
+                })
+            }
+        }
 
         // ------------------------------------------
         // 5. Remove the generic fixup script. Its role is (1) to set the warning popup for the outdated specs and (2) set
