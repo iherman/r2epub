@@ -19,11 +19,23 @@
             "respec": false
         },
         {
+            "url": "https://www.w3.org/TR/epub-tts-10/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-ssv-11/",
+            "respec": false
+        },
+        {
             "url": "https://www.w3.org/TR/epub-a11y-11/",
             "respec": false
         },
         {
             "url": "https://www.w3.org/TR/epub-a11y-tech-11/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-a11y-eaa-mapping/",
             "respec": false
         }
     ]
