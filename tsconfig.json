@@ -34,20 +34,16 @@
         "dist/**/*"
     ],
     "typedocOptions" : {
-        "includeDeclarations": true,
         "excludeExternals": true,
         "excludePrivate" : true,
         "excludeProtected" : false,
-        "stripInternal" : true,
-        "ignoreCompilerErrors": true,
         "out" : "docs/typedoc",
         "theme": "default",
         "includeVersion": true,
         "categorizeByGroup": true,
         "gitRemote": "origin",
         "hideGenerator": true,
-        "disableOutputCheck": false,
         "listInvalidSymbolLinks": true,
-        "name" : "r2epub — Converting HTML/ReSpec documents to EPUB 3.2"
+        "name" : "r2epub — Converting HTML/ReSpec documents to EPUB 3.3"
     }
 }
