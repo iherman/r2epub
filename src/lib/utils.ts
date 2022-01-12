@@ -5,6 +5,11 @@
 */
 
 import * as xmldom from 'xmldom';
+import * as jsdom  from 'jsdom';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const serialize = require("w3c-xmlserializer");
+
 
 /**
  * “Slice” a long text into lines separated by the (HTML) `<br/>` tag. Used as a rudimentary tool
@@ -130,4 +135,24 @@ export function remove_entities(inp: string): string {
         return_value = return_value.split(entity).join(code);
     }
     return return_value;
+}
+
+
+/**
+ * Convert an HTML5 content (in text or as a DOM) into XHTML5.
+ *
+ * @param dom - the original content
+ * @returns - Same content serialized as XHTML, with entities removed
+ */
+export function to_xhtml(dom: jsdom.JSDOM | string): string {
+    if (typeof dom === "string" ) {
+        return remove_entities(dom);
+    } else {
+        const element = dom.window.document.documentElement;
+
+        // This is necessary; the imported serializer method does not check whether the namespace is already there or not
+        // and this leads to a duplication of the attribute;
+        element.removeAttribute('xmlns');
+        return remove_entities('<!DOCTYPE html>\n' + serialize(element));
+    }
 }

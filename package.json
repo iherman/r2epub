@@ -43,13 +43,11 @@
         "jszip": "^3.2.2",
         "minimist": "^1.2.5",
         "node-fetch": "^2.6.1",
-        "parse5": "^5.1.1",
         "underscore": "^1.10.2",
         "url": "^0.11.0",
         "valid-url": "^1.0.9",
         "w3c-xmlserializer": "^3.0.0",
-        "xmlbuilder2": "^1.4.3",
-        "xmlserializer": "^0.6.1"
+        "xmlbuilder2": "^1.4.3"
     },
     "devDependencies": {
         "@types/ajv": "^1.0.0",

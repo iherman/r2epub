@@ -13,7 +13,7 @@
 
 
 import { ResourceRef, Global } from './convert';
-import * as xhtml              from './xhtml';
+import { to_xhtml }            from './utils';
 import * as common             from './common';
 
 
@@ -88,7 +88,7 @@ export function create_nav_file(global :Global) :ResourceRef[] {
         relative_url : 'nav.xhtml',
         id           : 'nav',
         properties   : 'nav',
-        text_content : xhtml.convert(final_nav),
+        text_content : to_xhtml(final_nav),
     })
 
     return retval;

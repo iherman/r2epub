@@ -19,7 +19,7 @@
 
 import * as urlHandler from 'url';
 import { ResourceRef, Global } from './convert';
-import * as xhtml              from './xhtml';
+import { to_xhtml }            from './utils';
 import * as common             from './common';
 
 /**
@@ -139,7 +139,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
         media_type   : common.media_types.xhtml,
         id           : 'main',
         relative_url : 'Overview.xhtml',
-        text_content : xhtml.convert(global.dom),
+        text_content : to_xhtml(global.dom),
         properties   : properties.join(' '),
     }]
 }
