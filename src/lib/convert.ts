@@ -112,6 +112,7 @@ export interface Global {
 
 /**
  * Interface for the HTML DOM elements, to be considered for possible internal references.
+ *
  */
 interface LocalLinks {
     /** CSS selector to locate the right DOM elements */

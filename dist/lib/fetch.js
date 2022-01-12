@@ -16,7 +16,7 @@ const node_fetch = require("node-fetch");
 const urlHandler = require("url");
 const validUrl = require("valid-url");
 const jsdom = require("jsdom");
-const constants = require("./constants");
+const common = require("./common");
 const fs = require("fs");
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
@@ -50,7 +50,7 @@ const check_Web_url = (address) => {
     // Run through the URL validator
     const retval = validUrl.isWebUri(address);
     if (retval === undefined) {
-        throw `The URL isn't valid`;
+        throw `The URL isn't valid (${address})`;
     }
     // Check the port
     if (parsed.port !== null) {
@@ -67,8 +67,8 @@ const check_Web_url = (address) => {
     // Check whether the URL is on an invalid host (mostly localhost). If the code is running in the browser, or
     // there is an explicit setting to allow localhost, then it is fine otherwise localhost
     // should be refused.
-    if (!(constants.is_browser || process.env.R2EPUB_LOCAL)) {
-        if (constants.invalid_host_names.includes(parsed.hostname)) {
+    if (!(common.is_browser || process.env.R2EPUB_LOCAL)) {
+        if (common.invalid_host_names.includes(parsed.hostname)) {
             throw `Invalid host used in URL (${parsed.hostname})`;
         }
     }
@@ -86,7 +86,7 @@ const check_Web_url = (address) => {
  *
  * I guess this makes this entry a bit polyfill like:-)
  */
-const my_fetch = constants.is_browser ? fetch : node_fetch.default;
+const my_fetch = common.is_browser ? fetch : node_fetch.default;
 /**
  * Fetch a resource.
  *
@@ -105,8 +105,8 @@ const my_fetch = constants.is_browser ? fetch : node_fetch.default;
  * @async
  */
 async function fetch_resource(resource_url, force_text = false) {
-    if (constants.is_browser === false && process.env.R2EPUB_MODIFIED_EPUB_FILES && resource_url.startsWith(constants.modified_epub_files)) {
-        const filename = resource_url.replace(constants.modified_epub_files, process.env.R2EPUB_MODIFIED_EPUB_FILES);
+    if (common.is_browser === false && process.env.R2EPUB_MODIFIED_EPUB_FILES && resource_url.startsWith(common.modified_epub_files)) {
+        const filename = resource_url.replace(common.modified_epub_files, `${process.env.R2EPUB_MODIFIED_EPUB_FILES}${common.process_version}/`);
         if (filename.endsWith('.png') && force_text === false) {
             // This is an image; it must be returned as a buffer
             return fs.promises.readFile(filename);
@@ -128,7 +128,7 @@ async function fetch_resource(resource_url, force_text = false) {
                         // If the response content type is set (which is usually the case, but not in all cases...)
                         const response_type = response.headers.get('content-type').split(';')[0].trim();
                         if (response_type && response_type !== '') {
-                            if (constants.text_content.includes(response_type)) {
+                            if (common.text_content.includes(response_type)) {
                                 // the simple way, just return text...
                                 resolve(response.text());
                             }
@@ -138,7 +138,7 @@ async function fetch_resource(resource_url, force_text = false) {
                                 }
                                 else {
                                     // return the body without processing, ie, as a blob or a stream
-                                    if (constants.is_browser) {
+                                    if (common.is_browser) {
                                         // In a browser, a blob should be returned
                                         resolve(response.blob());
                                     }

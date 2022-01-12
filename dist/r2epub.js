@@ -90,7 +90,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* Main imports */
 const r2epub = require("./index");
 const _ = require("underscore");
-const constants = require("./lib/constants");
+const common = require("./lib/common");
 const fs = require("fs");
 /** @hidden */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -114,7 +114,7 @@ async function cli() {
         .option('-r, --respec', 'the source must be pre-processed by ReSpec', false)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-s, --specStatus <type>', 'specification type', (value, dummy) => {
-        if (constants.spec_status_values.includes(value)) {
+        if (common.spec_status_values.includes(value)) {
             return value;
         }
         else {

@@ -119,7 +119,7 @@ class PackageWrapper {
                             "@property": "schema:accessibilitySummary",
                             '#': "Visual elements have captions and alternate descriptions. They are always non-normative and used for illustrative purposes only.",
                         }, {
-                            '@property': "a11:certifiedBy",
+                            '@property': "a11y:certifiedBy",
                             '#': "World Wide Web Consortium",
                         }],
                     "dc:rights": "https://www.w3.org/Consortium/Legal/2015/doc-license",
@@ -153,6 +153,7 @@ class PackageWrapper {
      * Add a manifest item, i.e., the reference to a resource that is part of the publication.
      *
      * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
+     * @add_spine_item - whether the item must be added to the spine, too (with a `linear=no` attribute value)
      */
     add_manifest_item(item, add_spine_item = false) {
         if (item['@properties'] === undefined || item['@properties'] === '') {
@@ -263,7 +264,7 @@ class PackageWrapper {
      * @returns - Pretty printed XML
      */
     serialize() {
-        return xmlbuilder2_1.convert({ encoding: "utf-8" }, this.thePackage, { prettyPrint: true });
+        return (0, xmlbuilder2_1.convert)({ encoding: "utf-8" }, this.thePackage, { prettyPrint: true });
     }
 }
 exports.PackageWrapper = PackageWrapper;

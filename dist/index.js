@@ -14,7 +14,7 @@ exports.convert = exports.OCF = exports.RespecToEPUB = void 0;
  *
  *
  */
-const constants = require("./lib/constants");
+const common = require("./lib/common");
 const ocf = require("./lib/ocf");
 const rConvert = require("./lib/convert");
 const cConvert = require("./clib/convert");
@@ -64,15 +64,15 @@ async function convert(url, options = {}, t = false, p = false) {
     if (url) {
         // Basic sanity check on the URL; secure that it is proper for relative URL-s
         const url_path = urlHandler.parse(url).path;
-        const proper_ending = constants.acceptable_url_endings.map((ending) => url_path.endsWith(ending)).includes(true);
+        const proper_ending = common.acceptable_url_endings.map((ending) => url_path.endsWith(ending)).includes(true);
         if (proper_ending) {
             let the_ocf;
             const media_type = await fetch.fetch_type(url);
-            if (media_type === constants.media_types.json) {
+            if (media_type === common.media_types.json) {
                 // If the URL refers to a JSON file, it is the configuration file for a full collection.
                 the_ocf = await cConvert.create_epub(url, p);
             }
-            else if (media_type === constants.media_types.html || media_type === constants.media_types.xhtml) {
+            else if (media_type === common.media_types.html || media_type === common.media_types.xhtml) {
                 // Just a sanity check that the return type is indeed HTML
                 the_ocf = await (new rConvert.RespecToEPUB(t, p)).create_epub(url, fill_default_options(options));
             }

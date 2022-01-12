@@ -8,7 +8,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Chapter = exports.transfer_once = void 0;
-const constants = require("../lib/constants");
+const common = require("../lib/common");
 const rConvert = require("../lib/convert");
 const xmldom = require("xmldom");
 /**
@@ -98,7 +98,7 @@ class Chapter {
                 const properties = item.hasAttribute('properties') ? item.getAttribute('properties') : undefined;
                 const id = item.getAttribute('id');
                 // This list in r2epub lists those media types that can be transferred as texts
-                const textual = constants.text_content.includes(media_type);
+                const textual = common.text_content.includes(media_type);
                 const promise = this._container.file(file_name).async(textual ? 'text' : 'base64');
                 // Create the relevant [[ManifestItem]]
                 this._manifest.push({

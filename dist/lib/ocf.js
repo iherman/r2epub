@@ -13,7 +13,7 @@ exports.OCF = void 0;
 /**
  *
  */
-const constants = require("./constants");
+const common = require("./common");
 const JSZip = require("jszip");
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
@@ -45,7 +45,7 @@ class OCF {
         this.content = null;
         this._book = new JSZip();
         this.name = name;
-        this._book.file('mimetype', constants.media_types.epub, { compression: 'STORE' });
+        this._book.file('mimetype', common.media_types.epub, { compression: 'STORE' });
         this._book.file('META-INF/container.xml', container_xml, { compression: 'STORE' });
     }
     /**
@@ -71,8 +71,8 @@ class OCF {
     async get_content() {
         if (this.content === null) {
             this.content = await this._book.generateAsync({
-                type: constants.is_browser ? 'blob' : 'nodebuffer',
-                mimeType: constants.media_types.epub,
+                type: common.is_browser ? 'blob' : 'nodebuffer',
+                mimeType: common.media_types.epub,
                 compressionOptions: {
                     level: 9,
                 },

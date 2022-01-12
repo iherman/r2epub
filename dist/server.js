@@ -51,7 +51,7 @@ const http = require("http");
 const urlHandler = require("url");
 const _ = require("underscore");
 const r2epub = require("./index");
-const constants = require("./lib/constants");
+const common = require("./lib/common");
 const home = require("./lib/home");
 /**
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Options]] structure based on the incoming URL's query string.
@@ -77,7 +77,7 @@ async function get_epub(query) {
     return {
         content: content,
         headers: {
-            'Content-type': constants.media_types.epub,
+            'Content-type': common.media_types.epub,
             'Expires': now,
             'Last-Modified': now,
             'Content-Length': content.length,
@@ -94,15 +94,15 @@ async function get_epub(query) {
  * @async
  */
 async function serve() {
-    const port = process.env.PORT || process.env.R2EPUB_PORT || constants.local_port_number;
+    const port = process.env.PORT || process.env.R2EPUB_PORT || common.local_port_number;
     console.log(`r2epub server starting on port ${port}`);
     http.createServer(async (request, response) => {
         const error = (code, e) => {
             const error_headers = {
-                'Content-type': constants.media_types.text,
+                'Content-type': common.media_types.text,
                 'Content-Language': 'en-US',
             };
-            response.writeHead(code, _.extend(error_headers, constants.CORS_headers));
+            response.writeHead(code, _.extend(error_headers, common.CORS_headers));
             response.write(e);
         };
         try {
@@ -111,12 +111,12 @@ async function serve() {
                 const host = `http://${request.headers.host}`;
                 if (query === null || query.url === undefined) {
                     // fall back on the fixed home page
-                    response.writeHead(200, _.extend({ 'Content-type': 'text/html' }, constants.CORS_headers));
+                    response.writeHead(200, _.extend({ 'Content-type': 'text/html' }, common.CORS_headers));
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));
                 }
                 else {
                     const the_book = await get_epub(query);
-                    response.writeHead(200, _.extend(the_book.headers, constants.CORS_headers));
+                    response.writeHead(200, _.extend(the_book.headers, common.CORS_headers));
                     response.write(the_book.content);
                 }
             }

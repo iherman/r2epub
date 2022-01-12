@@ -102,7 +102,7 @@ function fetch_book(resource_url) {
                                 }
                                 else {
                                     // Something else happened...
-                                    reject(new Error("HTTP response " + response.status + ": " + response.statusText + " on " + resource_url));
+                                    reject(new Error("HTTP response ".concat(response.status, ": ").concat(response.statusText, " on ").concat(resource_url)));
                                 }
                             }
                         })
@@ -113,7 +113,7 @@ function fetch_book(resource_url) {
                                 content: content
                             });
                         })["catch"](function (err) {
-                            reject(new Error("Problem accessing: " + err));
+                            reject(new Error("Problem accessing: ".concat(err)));
                         });
                     }
                     catch (err) {
@@ -168,25 +168,25 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
                 server = document.getElementById('serverChoice');
                 port = document.getElementById('portNumber');
                 if (!!(url.value === null || url.value === '')) return [3 /*break*/, 9];
-                service = (server.value.startsWith('http://localhost')) ? server.value + ":" + port.value : server.value;
+                service = (server.value.startsWith('http://localhost')) ? "".concat(server.value, ":").concat(port.value) : server.value;
                 query = [
-                    "url=" + url.value,
-                    "respec=" + (respec.value === 'true'),
+                    "url=".concat(url.value),
+                    "respec=".concat(respec.value === 'true'),
                 ];
                 if (publishDate.value !== '') {
-                    query.push("publishDate=" + publishDate.value);
+                    query.push("publishDate=".concat(publishDate.value));
                 }
                 if (specStatus.value !== "null") {
-                    query.push("specStatus=" + specStatus.value);
+                    query.push("specStatus=".concat(specStatus.value));
                 }
                 if (addSectionLinks.value !== "null") {
-                    query.push("addSectionLinks=" + addSectionLinks.value);
+                    query.push("addSectionLinks=".concat(addSectionLinks.value));
                 }
                 if (maxTocLevel.value !== '') {
-                    query.push("maxTocLevel=" + maxTocLevel.value);
+                    query.push("maxTocLevel=".concat(maxTocLevel.value));
                 }
                 store_server_data(server.value, port.value);
-                service_url = service + "?" + query.join('&');
+                service_url = "".concat(service, "?").concat(query.join('&'));
                 _a.label = 2;
             case 2:
                 _a.trys.push([2, 7, , 8]);
@@ -214,7 +214,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
             case 7:
                 e_1 = _a.sent();
                 progress.style.setProperty('visibility', 'hidden');
-                alert("" + e_1);
+                alert("".concat(e_1));
                 return [3 /*break*/, 8];
             case 8: return [3 /*break*/, 10];
             case 9:
@@ -223,7 +223,7 @@ var submit = function (event) { return __awaiter(_this, void 0, void 0, function
             case 10: return [3 /*break*/, 12];
             case 11:
                 e_2 = _a.sent();
-                alert("Form interpretation Error: " + e_2);
+                alert("Form interpretation Error: ".concat(e_2));
                 return [3 /*break*/, 12];
             case 12: return [2 /*return*/];
         }

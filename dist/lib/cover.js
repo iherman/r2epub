@@ -8,7 +8,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_cover_image = exports.cover_svg = void 0;
-const constants = require("./constants");
+const common = require("./common");
 const utils = require("./utils");
 /**
  * The SVG template to be used for the cover image.
@@ -88,7 +88,7 @@ function create_cover_image(global) {
         .replace('%%%TITLE%%%', utils.slice_text(title))
         .replace('%%%SUBTITLE%%%', `W3C ${subtitle}<br/>${date}`);
     return [{
-            media_type: constants.media_types.svg,
+            media_type: common.media_types.svg,
             relative_url: 'cover_image.svg',
             id: 'cover',
             text_content: final_cover,

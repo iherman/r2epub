@@ -8,8 +8,8 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_nav_file = void 0;
-const xhtml = require("./xhtml");
-const constants = require("./constants");
+const utils_1 = require("./utils");
+const common = require("./common");
 /**
  * Template of the XHTML file
  *
@@ -22,7 +22,7 @@ const nav = `<?xml version="1.0"?>
             %%%Title%%% — Contents
         </title>
         <link rel="stylesheet" type="text/css" href="StyleSheets/base.css" />
-        <link rel="stylesheet" type="text/css" href="StyleSheets/TR/2016/base.css" />
+        <link rel="stylesheet" type="text/css" href="StyleSheets/TR/%%%process%%%/base.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
         ol {
@@ -64,17 +64,18 @@ function create_nav_file(global) {
     });
     const final_nav = nav
         .replace('%%%Title%%%', title)
+        .replace('%%%process%%%', `${common.process_version}`)
         .replace('%%%TOC%%%', toc_ol.innerHTML.replace(/href="#/g, 'href="Overview.xhtml#'));
     // Remove the toc element from the Overview.xhtml altogether. Although it would be enough
     // to rely on CSS to make this element non-displayed, it seems that there are some
     // older reading systems that do not implement that...
     toc_ol.remove();
     retval.push({
-        media_type: constants.media_types.xhtml,
+        media_type: common.media_types.xhtml,
         relative_url: 'nav.xhtml',
         id: 'nav',
         properties: 'nav',
-        text_content: xhtml.convert(final_nav),
+        text_content: (0, utils_1.to_xhtml)(final_nav),
     });
     return retval;
 }

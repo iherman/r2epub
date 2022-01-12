@@ -5,8 +5,10 @@
  * @packageDocumentation
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.remove_entities = exports.date_to_string = exports.de_xml = exports.slice_text = void 0;
+exports.to_xhtml = exports.remove_entities = exports.date_to_string = exports.de_xml = exports.slice_text = void 0;
 const xmldom = require("xmldom");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const serialize = require("w3c-xmlserializer");
 /**
  * “Slice” a long text into lines separated by the (HTML) `<br/>` tag. Used as a rudimentary tool
  * when adding the title lines to an SVG content.
@@ -133,4 +135,23 @@ function remove_entities(inp) {
     return return_value;
 }
 exports.remove_entities = remove_entities;
+/**
+ * Convert an HTML5 content (in text or as a DOM) into XHTML5.
+ *
+ * @param dom - the original content
+ * @returns - Same content serialized as XHTML, with entities removed
+ */
+function to_xhtml(dom) {
+    if (typeof dom === "string") {
+        return remove_entities(dom);
+    }
+    else {
+        const element = dom.window.document.documentElement;
+        // This is necessary; the imported serializer method does not check whether the namespace is already there or not
+        // and this leads to a duplication of the attribute;
+        element.removeAttribute('xmlns');
+        return remove_entities('<!DOCTYPE html>\n' + serialize(element));
+    }
+}
+exports.to_xhtml = to_xhtml;
 //# sourceMappingURL=utils.js.map

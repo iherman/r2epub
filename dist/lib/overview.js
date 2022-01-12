@@ -19,8 +19,8 @@ exports.generate_overview_item = void 0;
  *
  */
 const urlHandler = require("url");
-const xhtml = require("./xhtml");
-const constants = require("./constants");
+const utils_1 = require("./utils");
+const common = require("./common");
 /**
  * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
  * properties (see [manifest item properties](https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab)).
@@ -52,7 +52,7 @@ function generate_overview_item(global) {
         const is_there_script = scripts.find((element) => {
             if (element.hasAttribute('type')) {
                 const type = element.getAttribute('type');
-                return ['application/javascript', 'application/ecmascript', constants.media_types.js, constants.media_types.es].includes(type);
+                return ['application/javascript', 'application/ecmascript', common.media_types.js, common.media_types.es].includes(type);
             }
             else {
                 return true;
@@ -62,7 +62,7 @@ function generate_overview_item(global) {
             properties.push('scripted');
         }
         else {
-            // 2a. check if there is a form element, that also sets a 'scripted' tag
+            // 2b. check if there is a form element, that also sets a 'scripted' tag
             if (global.html_element.querySelector('form') !== null) {
                 properties.push('scripted');
             }
@@ -130,10 +130,10 @@ function generate_overview_item(global) {
     // Add a fixed class to the body element to ensure that the full display is used
     body.classList.add('toc-inline');
     return [{
-            media_type: constants.media_types.xhtml,
+            media_type: common.media_types.xhtml,
             id: 'main',
             relative_url: 'Overview.xhtml',
-            text_content: xhtml.convert(global.dom),
+            text_content: (0, utils_1.to_xhtml)(global.dom),
             properties: properties.join(' '),
         }];
 }

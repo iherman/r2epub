@@ -8,7 +8,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create_title_page = void 0;
-const constants = require("./constants");
+const common = require("./common");
 /**
  * The template to be used for the title page.
  * @hidden
@@ -109,7 +109,7 @@ function create_title_page(global) {
         .replace('%%%%ISODATE%%%%', date.getAttribute('datetime'))
         .replace('%%%DATE%%%', date.textContent);
     retval.push({
-        media_type: constants.media_types.xhtml,
+        media_type: common.media_types.xhtml,
         relative_url: 'title.xhtml',
         id: 'title_page',
         text_content: final_title_page,

@@ -1,6 +1,6 @@
 # ReSpec to EPUB
 
-Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.2.
+Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.3.
 
 ## Single documents vs. Collections
 
