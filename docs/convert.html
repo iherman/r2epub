@@ -44,20 +44,21 @@
                             <option value="LD">LD</option>
                             <option value="LS">LS</option>
                             <option value="CR">CR</option>
-                            <option value="CRD">CR</option>
+                            <option value="CRD">CRD</option>
                             <option value="PR">PR</option>
                             <option value="PER">PER</option>
                             <option value="REC">REC</option>
                             <option value="RSCND">RSCND</option>
-                            <option value="FPWD-NOTE">FPWD-NOTE</option>
+                            <option value="STMT">STMT</option>
+                            <option value="DNOTE">DNOTE</option>
                             <option value="NOTE">NOTE</option>
-                            <option value="WG-NOTE">WG-NOTE</option>
                             <option value="BG-DRAFT">BG-DRAFT</option>
                             <option value="BG-FINAL">BG-FINAL</option>
                             <option value="CG-DRAFT">CG-DRAFT</option>
                             <option value="CG-FINAL">CG-FINAL</option>
                             <option value="Member-SUBM">Member-SUBM</option>
                             <option value="draft-finding">draft-finding</option>
+                            <option value="editor-draft-finding">editor-draft-finding</option>
                             <option value="finding">finding</option>
                         </select>
                         <label for="addSectionLinks">Add Section Links <sup><a href='#seclink'>(♰)</a></sup></label>
@@ -95,7 +96,7 @@
             <a style='display:none' id='download'>This is a dummy entry for saving the result</a>
             <section>
                 <h2>What is it?</h2>
-                <p>This is an interface an on-line service to convert W3C Technical Reports, authored in <a href="https://github.com/w3c/respec/wiki/">ReSpec</a>, to EPUB 3.2</p>
+                <p>This is an interface an on-line service to convert W3C Technical Reports, authored in <a href="https://respec.org/docs/">ReSpec</a>, to EPUB 3.3</p>
 
                 <p>
                     The service receives the parameters through the form above, and generates an EPUB 3.2 instance stored on the local machine. The possible form parameters are:
@@ -109,16 +110,16 @@
                     <dd><sup>(**)</sup>Whether the source has to be pre-processed by ReSpec (“true”) or is a final HTML (“false”). If the former, the source is converted using <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator</a> into HTML first.</dd>
 
                     <dt id='pdate'>“Publication Date”</dt>
-                    <dd><sup>(☨)</sup>Publication date. Overwrites the <a href='https://github.com/w3c/respec/wiki/publishDate'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dd><sup>(☨)</sup>Publication date. Overwrites the <a href='https://respec.org/docs/#publishDate'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                     <dt id="status">“Specification Status”</dt>
-                    <dd><sup>(§)</sup>Specification date. Overwrites the <a href='https://github.com/w3c/respec/wiki/specStatus'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dd><sup>(§)</sup>Specification date. Overwrites the <a href='https://respec.org/docs/#specStatus'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                     <dt id='seclink'>“Add Section Links”</dt>
-                    <dd><sup>(♰)</sup>Add section links with a <code>§</code> character. Overwrites the <a href='https://github.com/w3c/respec/wiki/addSectionLinks'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dd><sup>(♰)</sup>Add section links with a <code>§</code> character. Overwrites the <a href='https://respec.org/docs/#addSectionLinks'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                     <dt id='toclevel'>“Maximum Toc Level”</dt>
-                    <dd><sup>(⨢)</sup>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://github.com/w3c/respec/wiki/maxTocLevel'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
+                    <dd><sup>(⨢)</sup>Maximum sectioning level for the Table of Content. Overwrites the <a href='https://respec.org/docs/#maxTocLevel'>value in the “<code>respecConfig</code>” structure</a> in the source.</dd>
 
                     <dt id='serverinfo'>Server URL</dt>
                     <dd><sup>(⨯)</sup>The server has been installed at different places; it can also be run locally by installing the package. See the <a href='https://iherman.github.io/r2epub/'>documentation</a> for more details.</dd>
