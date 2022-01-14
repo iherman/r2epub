@@ -1,8 +1,8 @@
 #! /usr/local/bin/node
 /**
- * ## CLI to the ReSpec to EPUB 3.2 conversion. This may be the conversion of a single HTML file (possibly pre-processed through ReSpec) or a collection of several HTML files.
+ * ## CLI for the ReSpec to EPUB 3.3 conversion.
  *
- * The usage of the entry point is:
+ * This may be the conversion of a single HTML file (possibly pre-processed through ReSpec) or a collection of several HTML files. The usage of the entry point is:
  *
  * ```
  * Usage: r2epub [options] [url]
@@ -24,7 +24,7 @@
  *
  * For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). If any of those flags is set, `-r` is implied (i.e., it is not necessary to set it explicitly).
  *
- * This function is a wrapper around [[convert]].
+ * This function is a wrapper around the [[convert]] function.
  *
  * ### Usage examples:
  *

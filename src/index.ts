@@ -1,7 +1,7 @@
 /**
  * ## Externally accessible entries
  *
- * r2epub can be used as a library module both to TypeScript and to Javascript. The externally visible entities are listed below; see their respective documentations for further information.
+ * r2epub can be used as a library module both to TypeScript and to Javascript. The externally visible entities are listed below; see their respective documentations for further information. This module is the common entry point from either the [[cli]] or the [[serve]] functions for the command line interface and the server side, respectively.
  *
  * The top level functional entry point to the package is [[convert]].
  *
@@ -10,7 +10,8 @@
 
 /**
  *
- *
+ * classes/lib_convert.RespecToEPUB.html
+ * classes/index.RespecToEPUB.html
  */
 
 import * as common     from './lib/common';
@@ -23,13 +24,13 @@ import * as urlHandler from 'url';
 
 
 /**
- * Convenience class, to export the internal [RespecToEPUB](_lib_convert_.respectoepub.html) class for the package as a whole.
+ * Convenience class, to export the internal [RespecToEPUB](lib_convert.RespecToEpub.html) class for the package as a whole.
  * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)
  */
 export class RespecToEPUB extends rConvert.RespecToEPUB {}
 
 /**
- * Convenience class to export the internal [OCF](_lib_ocf_.ocf.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
+ * Convenience class to export the internal [OCF](lib_ocf.OCF.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
  */
 export class OCF extends ocf.OCF {}
 
@@ -47,7 +48,7 @@ interface ConfigOptions {
  * The original content file has to be pre-processed via the W3C [spec generator service](https://labs.w3.org/spec-generator/)
  * before further processing to convert the ReSpec source first. If that is the case (see [[Options.respec]]), it is also possible to set some of the ReSpec configuration options,
  * overwriting the values set in the `config` entry of the original file. The possible ReSpec options to be set are `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
- * See the [ReSpec editor's guide](https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide) for details.
+ * See the [ReSpec editor's guide](https://respec.org/docs/) for details.
  *
  */
 export interface Options {

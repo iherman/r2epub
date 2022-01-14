@@ -10,7 +10,7 @@
     "scripts": {
         "lint": "eslint . --ext .ts",
         "build": "tsc",
-        "docs": "typedoc src/",
+        "docs": "typedoc src/r2epub.ts src/server.ts",
         "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts)",
         "heroku": "git push heroku master",
         "origin": "git push origin main",
@@ -64,7 +64,7 @@
         "@typescript-eslint/parser": "^4.6.1",
         "eslint": "^7.13.0",
         "terser": "^4.6.11",
-        "typedoc": "^0.22.10",
+        "typedoc": "^0.15.8",
         "typescript": "^4.5.4"
     }
 }

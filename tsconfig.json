@@ -34,6 +34,10 @@
         "dist/**/*"
     ],
     "typedocOptions" : {
+        "entryPointStrategy": "expand",
+        "excludeInternal": true,
+        "excludeProtected": false,
+        "excludePrivate": false,
         "out" : "docs/typedoc",
         "theme": "default",
         "includeVersion": true,

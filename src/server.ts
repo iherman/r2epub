@@ -38,7 +38,13 @@
  * ``` sh
  * https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specStatus=REC`
  * ```
-
+ *
+ * Generates a collection, described by the configuration file. (See the [separate module](_clib_args_.html) for more details on the configuration file.)
+ *
+ * ```sh
+ *  https://epub.example.org?url=https://www.example.org/collection.json
+ * ```
+ *
  * @packageDocumentation
  */
 
