@@ -2,7 +2,7 @@
  * ## The OPF package
  *
  * Wrapper around the package. The details of the various entries are in the
- * [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
+ * [EPUB 3.3 Specification](https://www.w3.org/TR/epub-33/#sec-package-doc).
  *
  * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
  * the details; the short overview is:
@@ -182,7 +182,7 @@ export interface Package {
 /**
  * ## The OPF Wrapper
  *
- * Wrapper around the internal representation of a EPUB3 Package document, as defined in the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc)
+ * Wrapper around the internal representation of a EPUB3 Package document, as defined in the [EPUB 3.3 Specification](https://www.w3.org/TR/epub-33/#sec-package-doc)
  *
  * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
  * the details; the short overview is:
@@ -314,7 +314,7 @@ export class PackageWrapper {
     /**
      * Add a manifest item, i.e., the reference to a resource that is part of the publication.
      *
-     * @param item - manifest item, as defined in the [EPUB Packages specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-elem)
+     * @param item - manifest item, as defined in the [EPUB 3.3 Specification](https://www.w3.org/TR/epub-33/#sec-item-elem)
      * @add_spine_item - whether the item must be added to the spine, too (with a `linear=no` attribute value)
      */
     add_manifest_item(item :ManifestItem, add_spine_item = false) :void {

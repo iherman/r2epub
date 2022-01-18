@@ -1,14 +1,16 @@
 # ReSpec to EPUB
 
-Typescript program to convert W3C documents, produced by [ReSpec](https://github.com/w3c/respec), to EPUB 3.3.
+Typescript program to convert W3C documents, produced by [ReSpec](https://respec.org/docs/), to EPUB 3.3.
 
 ## Single documents vs. Collections
 
 The conversion can:
 
-* Convert a single HTML source that was produced by [ReSpec](https://github.com/w3c/respec).
-* Convert a single HTML source that has to be pre-processed by [ReSpec](https://github.com/w3c/respec) to get its final formats; the conversion pre-processes the source on the fly.
-* Convert a “collection“ of HTML sources (to be pre-processed or not) into one EPUB 3 instance.
+* Convert a single HTML source that was produced by [ReSpec](https://respec.org/docs/).
+* Convert a single HTML source that must be pre-processed by [ReSpec](https://respec.org/docs/) to get its final formats; the program pre-processes the source on the fly.
+* Convert and combine a “collection“ of HTML sources (to be pre-processed or not) into a single EPUB 3 instance.
+
+(The on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator service</a>. Alas!, that service may be down or slow, and this package has no control over that…)
 
 ## Package usage
 
@@ -18,56 +20,20 @@ There is a simple command line interface to run the script. See the the separate
 
 ### Run a service via HTTP
 
-There is also the possibility to run a simple server to generate EPUB 3.3 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/typedoc/modules/modules/_server_.html) for details and example.
+There is also the possibility to start a simple server to generate EPUB 3.3 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/typedoc/modules/modules/_server_.html) for details and examples of HTTP requests.
 
 The server has been deployed on the cloud at [heroku](https://r2epub.herokuapp.com/) using the `https://r2epub.herokuapp.com/` URL, as well at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
 
+(Note that the server running on W3C is used to generate an EPUB version of a document based on respec, using its `export` facility.)
+
 ### Use as a typescript/node package through an API
 
-The program can also be used from another Typescript or Javascript program. In Typescript, the simplest access is through:
-
-``` js
-import * as r2epub  from 'r2epub';
-import * as fs      from 'fs';
-// The creation itself is asynchronous (the content has to be fetched over the wire).
-// The result is the class instance encapsulating an OCF (zip) content
-const url :string = "http://www.example.org/doc.html",
-const args :r2epub.Options = {
-    respec : false,
-    config : {}
-};
-const ocf :r2epub.OCF = await r2epub.convert(url, args);
-// The zip file is finalized asynchronously
-const content :Buffer = await ocf.get_content();
-// Get the content out to the disk
-fs.writeFileSync(ocf.name, content);
-```
-
-The same in Javascript:
-
-``` js
-const r2epub  = require('r2epub');
-// The creation itself is asynchronous (the content has to be fetched over the wire).
-// The result is the class instance encapsulating an OCF (zip) content
-const url = "http://www.example.org/doc.html",
-const args  = {
-    respec : false,
-    config : {}
-};
-const ocf = await r2epub.convert(url, args);
-// The zip file is finalized asynchronously
-const content = await ocf.get_content();
-// Get the content out to the disk
-fs.writeFileSync(ocf.name, content);
-```
-
-See the specification of the [convert](https://iherman.github.io/r2epub/typedoc/modules/_index_.html#convert) function and the [OCF](https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html) class for further details.
+The program can also be used from another Typescript or Javascript program.
+See the separate [documentation on the API](https://iherman.github.io/r2epub/typedoc/modules/modules/_index_.html) for details and examples of the API usage.
 
 ## Installation, usage
 
 The implementation is in Typescript and on top of `node.js`.  The documentation is also available [on-line](https://iherman.github.io/r2epub/typedoc/).
-
-Note that the on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator</a>. Alas!, that service may be down or slow, and this package has no control over that…
 
 ### Installation
 
@@ -104,10 +70,10 @@ command.
 #### Environment variables
 
 * **`PORT` or `R2EPUB_PORT`:** the port number used by the server; failing these the default (i.e., 80) is used. (`PORT` takes precedence over `R2EPUB_PORT`.)
-* **`R2EPUB_LOCAL`:** By default, no URL-s on `localhost` are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.
+* **`R2EPUB_LOCAL`:** no URL-s on `localhost` are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.
 * **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.ivan-herman.net/r2epub/` is used as a base URL for those files. However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (Typically, the value points at `docs/epub_assets/` in the local clone of the distribution.)
 
-    (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this type of setup.)
+    (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)
 
 
 ### Usage
@@ -121,8 +87,6 @@ node dist/r2epub.js
 ```
 
 starts the command line interface.
-
-By default, no URL-s on `localhost` are considered as safe and are therefore rejected, _unless_ the environment variable `R2EPUB_LOCAL` is explicitly set (the value of the variable is not relevant, only the setting is).
 
 #### Server
 

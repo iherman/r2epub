@@ -142,7 +142,7 @@ class RespecToEPUB {
      *
      *
      * All the resource entries are first collected in the in a [[Global.resources]] array, to be then added to the
-     * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
+     * [`package.opf`](https://www.w3.org/TR/epub-33/#sec-package-doc) file as well as to download
      * the resources into the final epub result (see the last two steps above).
      *
      * @param url - The url of the document (serves also as a base for all the other resources)

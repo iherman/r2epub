@@ -100,15 +100,10 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited tsd-is-external">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="_index_.ocf.html#name" class="tsd-kind-icon">name</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-inherited tsd-is-external">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="_index_.ocf.html#book" class="tsd-kind-icon">book</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="_index_.ocf.html#container" class="tsd-kind-icon">container</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="_index_.ocf.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited tsd-is-external">
@@ -134,7 +129,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_lib_ocf_.ocf.html">OCF</a>.<a href="_lib_ocf_.ocf.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/061ee5e/src/lib/ocf.ts#L47">lib/ocf.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3b7a1c3/src/lib/ocf.ts#L47">lib/ocf.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -145,7 +140,7 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the file name of the final package</p>
+											<p>the file name of the final package. This is based on the short name of the document, or the name provided in the configuration file.</p>
 										</div>
 									</div>
 								</li>
@@ -156,41 +151,52 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited tsd-is-external">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_ocf_.ocf.html">OCF</a>.<a href="_lib_ocf_.ocf.html#name">name</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/iherman/r2epub/blob/061ee5e/src/lib/ocf.ts#L46">lib/ocf.ts:46</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited tsd-is-external">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-					<a name="book" class="tsd-anchor"></a>
-					<h3>book</h3>
+					<a name="container" class="tsd-anchor"></a>
+					<h3>container</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> book<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSZip</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> container<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSZip</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_lib_ocf_.ocf.html">OCF</a>.<a href="_lib_ocf_.ocf.html#book">book</a></p>
+								<p>Inherited from <a href="_lib_ocf_.ocf.html">OCF</a>.<a href="_lib_ocf_.ocf.html#container">container</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/061ee5e/src/lib/ocf.ts#L73">lib/ocf.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3b7a1c3/src/lib/ocf.ts#L84">lib/ocf.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>This may be temporary once the final format of usage becomes clear...</p>
+									<p>Returns the underlying ZIP container; this is used when creating a &quot;collection&quot;, ie, when the
+									the final content is generated from several zip containers.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">JSZip</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> name<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_lib_ocf_.ocf.html">OCF</a>.<a href="_lib_ocf_.ocf.html#name">name</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3b7a1c3/src/lib/ocf.ts#L76">lib/ocf.ts:76</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the name of the final file, as provided at constructor time.
+									This is based on the short name of the document, or the name provided in the configuration file.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -208,7 +214,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_lib_ocf_.ocf.html">OCF</a>.<a href="_lib_ocf_.ocf.html#append">append</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/061ee5e/src/lib/ocf.ts#L68">lib/ocf.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3b7a1c3/src/lib/ocf.ts#L68">lib/ocf.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -247,7 +253,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_lib_ocf_.ocf.html">OCF</a>.<a href="_lib_ocf_.ocf.html#get_content">get_content</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/061ee5e/src/lib/ocf.ts#L83">lib/ocf.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3b7a1c3/src/lib/ocf.ts#L94">lib/ocf.ts:94</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -359,11 +365,11 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="_index_.ocf.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-								<a href="_index_.ocf.html#name" class="tsd-kind-icon">name</a>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="_index_.ocf.html#container" class="tsd-kind-icon">container</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-								<a href="_index_.ocf.html#book" class="tsd-kind-icon">book</a>
+								<a href="_index_.ocf.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="_index_.ocf.html#append" class="tsd-kind-icon">append</a>

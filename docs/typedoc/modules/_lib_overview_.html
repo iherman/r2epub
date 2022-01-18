@@ -75,7 +75,7 @@
 					</div>
 					<p>Generation involves two different steps:</p>
 					<ol>
-						<li>The package entry for <code>Overview.xhtml</code> may contain a <code>properties</code> attribute; see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a> for further details.</li>
+						<li>The package entry for <code>Overview.xhtml</code> may contain a <code>properties</code> attribute; see <a href="https://www.w3.org/TR/epub-33/#app-item-properties-vocab">manifest item properties</a> for further details.</li>
 						<li>Due to the rigidity of the iBook reader, the DOM tree has to change: all children of the <code>&lt;body&gt;</code> should be encapsulated into a top level block
 							element (we use <code>&lt;div role=&quot;main&quot;&gt;</code>). This is because iBook imposes a zero padding on the body element, and that cannot be controlled by the user;
 						the introduction of the top level block element allows for suitable CSS adjustments in the <a href="https://www.ivan-herman.net/r2epub/base.css">common css file</a>.</li>
@@ -107,20 +107,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/061ee5e/src/lib/overview.ts#L42">lib/overview.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3b7a1c3/src/lib/overview.ts#L42">lib/overview.ts:42</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Generate the resource entry for the <code>Overview.xhtml</code> item into the package; that includes setting the various manifest item
-									properties (see <a href="https://www.w3.org/publishing/epub32/epub-packages.html#app-item-properties-vocab">manifest item properties</a>).</p>
+									properties (see <a href="https://www.w3.org/TR/epub-33/#app-item-properties-vocab">manifest item properties</a>).</p>
 								</div>
 								<p>The following properties are set, if applicable:</p>
 								<ul>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-mathml">mathml</a>: there is an explicit usage of mathml.</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-scripted">scripted</a>: there are active scripts.</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-svg">svg</a>: there is explicit svg usage.</li>
-									<li><a href="https://www.w3.org/publishing/epub32/epub-packages.html#sec-remote-resources">remote-resources</a>: there are remote resources, typically video, audio, or images.</li>
+									<li><a href="https://www.w3.org/TR/epub-33/#sec-mathml">mathml</a>: there is an explicit usage of mathml.</li>
+									<li><a href="https://www.w3.org/TR/epub-33/#sec-scripted">scripted</a>: there are active scripts.</li>
+									<li><a href="https://www.w3.org/TR/epub-33/#sec-svg-prop">svg</a>: there is explicit svg usage.</li>
+									<li><a href="https://www.w3.org/TR/epub-33/#sec-remote-resources">remote-resources</a>: there are remote resources, typically video, audio, or images.</li>
 								</ul>
 								<p>The function also modifies the DOM tree by introducing a <code>&lt;main&gt;</code> element right as a child of <code>body</code>, and adding the fixed <code>toc-inline</code> class to ensure that the
 								body occupies the whole width of the viewport.</p>

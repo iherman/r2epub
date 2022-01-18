@@ -114,7 +114,7 @@ export class Chapter {
     async initialize() :Promise<Chapter> {
         // First and foremost: create the OCF container
         this._ocf = await (new rConvert.RespecToEPUB()).create_epub(this._url, this._options);
-        this._container = this._ocf.book;
+        this._container = this._ocf.container;
         // remove the `.epub` suffix for the name
         this._chapter_name = this._ocf.name.slice(0,-5);
 
@@ -270,10 +270,10 @@ export class Chapter {
             }
             // store the value; note that the name is expanded to store the files in the separate folder for that chapter
             // Note the the Overview.xhtml file needs a special treatment...
-            target_ocf.book.file(
+            target_ocf.container.file(
                 this.set_name(item.href),
                 item.href === 'Overview.xhtml' ? this.handle_cross_references(item.content, target) : item.content,
-                option
+                option,
             );
         });
     }

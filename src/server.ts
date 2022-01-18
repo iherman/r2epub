@@ -5,7 +5,7 @@
  *
  * The possible query parameters are
  *
- * ```
+ * ```txt
  * url              The URL for the content
  * respec           Whether the source is in respec (true) or a final HTML (false).
  * publishDate      Publication date
@@ -30,13 +30,13 @@
  * Convert the HTML _ReSpec source_ to an EPUB 3.2 file. The source is converted on-the-fly by respec:
  *
  * ``` sh
- * https://epub.example.org?url=https://www.example.org/doc.html&respec=true`
+ * https://epub.example.org?url=https://www.example.org/doc.html&respec=true
  * ```
  *
  * Convert the HTML _ReSpec source_ to an EPUB 3.2 file, setting its spec status to REC. The source is converted on-the-fly by respec, overwriting the `specStatus` entry in the configuration to `REC`:
  *
  * ``` sh
- * https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specStatus=REC`
+ * https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specStatus=REC
  * ```
  *
  * Generates a collection, described by the configuration file. (See the [separate module](_clib_args_.html) for more details on the configuration file.)
@@ -126,8 +126,10 @@ async function get_epub(query :Query) : Promise<Content> {
 
 
 /**
- * Run a rudimentary Web server calling out to [[convert]] via [[get_epub]] to return an EPUB 3.2 instance when invoked.
+ * Run a rudimentary Web server calling out to [[convert]] via [[get_epub]] to return an EPUB 3.3 instance when invoked.
  * If there is no proper query string a fixed page is displayed.
+ *
+ * This function is automatically started when this module is used from a command line.
  *
  * @async
  */

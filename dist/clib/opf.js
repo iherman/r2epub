@@ -2,7 +2,7 @@
 /**
  * ## Collection OPF file
  *
- * Creation of the Package file for a collection, per the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc).
+ * Creation of the Package file for a collection, per the [EPUB 3.3 Package Document Specification](https://www.w3.org/TR/epub-33/#sec-package-doc).
  *
  * @packageDocumentation
  */
@@ -15,7 +15,7 @@ const opf = require("../lib/opf");
 const common = require("../lib/common");
 const chapter_1 = require("./chapter");
 /**
- * Creation of the of the Package file for a collection, per the [EPUB Packages 3.2 Specification](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-doc). See also [the `PackageWrapper` documentation](https://iherman.github.io/r2epub/typedoc/classes/_lib_opf_.packagewrapper.html).
+ * Creation of the of the Package file for a collection, per the [EPUB 3.3 Package Document Specification](https://www.w3.org/TR/epub-33/#sec-package-doc). See also [the `PackageWrapper` documentation](https://iherman.github.io/r2epub/typedoc/classes/_lib_opf_.packagewrapper.html).
  *
  * The method
  *

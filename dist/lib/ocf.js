@@ -16,7 +16,7 @@ exports.OCF = void 0;
 const common = require("./common");
 const JSZip = require("jszip");
 /**
- * The content of the required `container.xml` file (see the [EPUB 3.2 specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
+ * The content of the required `container.xml` file (see the [EPUB 3.3 specification](https://www.w3.org/TR/epub-33/#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
  */
 const container_xml = `<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -26,9 +26,9 @@ const container_xml = `<?xml version="1.0"?>
 </container>
 `;
 /**
- * ## The class representing the EPUB 3.2 OCF package.
+ * ## The class representing the EPUB 3.3 OCF package.
  *
- * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB. The constructor generates and adds the required content files, as described in the [EPUB Specification](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-container-metainf-container.xml), namely:
+ * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB. The constructor generates and adds the required content files, as described in the [EPUB Specification](https://www.w3.org/TR/epub-33/#sec-ocf), namely:
  *
  * * The `mimetype` file
  * * The `container.xml` file, see the value in [[container_xml]].
@@ -39,14 +39,14 @@ const container_xml = `<?xml version="1.0"?>
 class OCF {
     /**
      *
-     * @param name the file name of the final package
+     * @param name the file name of the final package. This is based on the short name of the document, or the name provided in the configuration file.
      */
     constructor(name) {
         this.content = null;
-        this._book = new JSZip();
-        this.name = name;
-        this._book.file('mimetype', common.media_types.epub, { compression: 'STORE' });
-        this._book.file('META-INF/container.xml', container_xml, { compression: 'STORE' });
+        this._container = new JSZip();
+        this._name = name;
+        this._container.file('mimetype', common.media_types.epub, { compression: 'STORE' });
+        this._container.file('META-INF/container.xml', container_xml, { compression: 'STORE' });
     }
     /**
      * Store a compressed content in the OCF file. The input can be a simple text or a Stream
@@ -56,11 +56,21 @@ class OCF {
      * @param path_name - Path name of the file for the content
      */
     append(content, path_name) {
-        this._book.file(path_name, content, { compression: 'DEFLATE' });
+        this._container.file(path_name, content, { compression: 'DEFLATE' });
     }
-    /** This may be temporary once the final format of usage becomes clear... */
-    get book() {
-        return this._book;
+    /**
+     * Return the name of the final file, as provided at constructor time.
+     * This is based on the short name of the document, or the name provided in the configuration file.
+     */
+    get name() {
+        return this._name;
+    }
+    /**
+     * Returns the underlying ZIP container; this is used when creating a "collection", ie, when the
+     * the final content is generated from several zip containers.
+     */
+    get container() {
+        return this._container;
     }
     /**
      * Return the final content of the book all packed up.
@@ -70,7 +80,7 @@ class OCF {
      */
     async get_content() {
         if (this.content === null) {
-            this.content = await this._book.generateAsync({
+            this.content = await this._container.generateAsync({
                 type: common.is_browser ? 'blob' : 'nodebuffer',
                 mimeType: common.media_types.epub,
                 compressionOptions: {

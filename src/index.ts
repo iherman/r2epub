@@ -1,9 +1,48 @@
 /**
  * ## Externally accessible entries
  *
- * r2epub can be used as a library module both to TypeScript and to Javascript. The externally visible entities are listed below; see their respective documentations for further information. This module is the common entry point from either the [[cli]] or the [[serve]] functions for the command line interface and the server side, respectively.
+ * r2epub can be used as a library module both to TypeScript and to Javascript. This module is the common entry point from both
+ * the [[cli]] or the [[serve]] functions for the command line interface and the server side, respectively. Furthermore,
+ * it provides an API that can be used directly; a simple example is as follows:
  *
- * The top level functional entry point to the package is [[convert]].
+ * In Typescript (using `node.js`):
+ *
+ * ```js
+ * import * as r2epub  from 'r2epub';
+ * import * as fs      from 'fs';
+ * // The creation itself is asynchronous (the content has to be fetched over the wire).
+ * // The result is the class instance encapsulating an OCF (zip) content
+ * const url :string = "http://www.example.org/doc.html",
+ * const args :r2epub.Options = {
+ *     respec : false,
+ *     config : {}
+ * };
+ * const ocf :r2epub.OCF = await r2epub.convert(url, args);
+ * // The zip file is finalized asynchronously
+ * const content :Buffer = await ocf.get_content();
+ * // Get the content out to the disk
+ * fs.writeFileSync(ocf.name, content);
+ * ```
+ *
+ * The same in Javascript (using `node.js`):
+ *
+ * ```js
+ * const r2epub  = require('r2epub');
+ * // The creation itself is asynchronous (the content has to be fetched over the wire).
+ * // The result is the class instance encapsulating an OCF (zip) content
+ * const url = "http://www.example.org/doc.html",
+ * const args  = {
+ *     respec : false,
+ *     config : {}
+ * };
+ * const ocf = await r2epub.convert(url, args);
+ * // The zip file is finalized asynchronously
+ * const content = await ocf.get_content();
+ * // Get the content out to the disk
+ * fs.writeFileSync(ocf.name, content);
+ * ```
+ *
+ * See the detailed specification of the API element below. The top level functional entry point to the package is [[convert]].
  *
  * @packageDocumentation
 */
@@ -22,10 +61,12 @@ import * as fetch      from './lib/fetch';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
-
 /**
  * Convenience class, to export the internal [RespecToEPUB](lib_convert.RespecToEpub.html) class for the package as a whole.
- * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used)
+ * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used).
+ *
+ * This class is largely for internal use to the package, and the API user can mostly ignore its details.
+ *
  */
 export class RespecToEPUB extends rConvert.RespecToEPUB {}
 
@@ -36,7 +77,7 @@ export class OCF extends ocf.OCF {}
 
 
 /**
- * Config options, to be used as part of the arguments in [[Options]] to overwrite the `config` options of ReSpec.
+ * Config options, to be used as part of the arguments in [[Options]] to overwrite the configuration options of ReSpec.
  */
 interface ConfigOptions {
     [x :string] :string
@@ -59,7 +100,7 @@ export interface Options {
     /**
      * Collection of respec config options, to be used with the spec generator (if applicable).
      */
-    config? :ConfigOptions
+    config? :ConfigOptions,
 }
 
 

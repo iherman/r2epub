@@ -67,66 +67,39 @@
 				<a href="#respec-to-epub" id="respec-to-epub" style="color: inherit; text-decoration: none;">
 					<h1>ReSpec to EPUB</h1>
 				</a>
-				<p>Typescript program to convert W3C documents, produced by <a href="https://github.com/w3c/respec">ReSpec</a>, to EPUB 3.3.</p>
+				<p>Typescript program to convert W3C documents, produced by <a href="https://respec.org/docs/">ReSpec</a>, to EPUB 3.3.</p>
 				<a href="#single-documents-vs-collections" id="single-documents-vs-collections" style="color: inherit; text-decoration: none;">
 					<h2>Single documents vs. Collections</h2>
 				</a>
 				<p>The conversion can:</p>
 				<ul>
-					<li>Convert a single HTML source that was produced by <a href="https://github.com/w3c/respec">ReSpec</a>.</li>
-					<li>Convert a single HTML source that has to be pre-processed by <a href="https://github.com/w3c/respec">ReSpec</a> to get its final formats; the conversion pre-processes the source on the fly.</li>
-					<li>Convert a “collection“ of HTML sources (to be pre-processed or not) into one EPUB 3 instance.</li>
+					<li>Convert a single HTML source that was produced by <a href="https://respec.org/docs/">ReSpec</a>.</li>
+					<li>Convert a single HTML source that must be pre-processed by <a href="https://respec.org/docs/">ReSpec</a> to get its final formats; the program pre-processes the source on the fly.</li>
+					<li>Convert and combine a “collection“ of HTML sources (to be pre-processed or not) into a single EPUB 3 instance.</li>
 				</ul>
+				<p>(The on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator service</a>. Alas!, that service may be down or slow, and this package has no control over that…)</p>
 				<a href="#package-usage" id="package-usage" style="color: inherit; text-decoration: none;">
 					<h2>Package usage</h2>
 				</a>
 				<a href="#command-line-usage" id="command-line-usage" style="color: inherit; text-decoration: none;">
 					<h3>Command line usage</h3>
 				</a>
-				<p>There is a simple command line interface to run the script. See the the separate <a href="modules/_r2epub_.html">documentation on cli</a> for details and examples.</p>
+				<p>There is a simple command line interface to run the script. See the the separate <a href="https://iherman.github.io/r2epub/typedoc/modules/modules/_r2epub_.html">documentation on cli</a> for details and examples.</p>
 				<a href="#run-a-service-via-http" id="run-a-service-via-http" style="color: inherit; text-decoration: none;">
 					<h3>Run a service via HTTP</h3>
 				</a>
-				<p>There is also the possibility to run a simple server to generate EPUB 3.3 instances on request. See the separate <a href="modules/_server_.html">documentation on the server</a> for details and example.</p>
+				<p>There is also the possibility to start a simple server to generate EPUB 3.3 instances on request. See the separate <a href="https://iherman.github.io/r2epub/typedoc/modules/modules/_server_.html">documentation on the server</a> for details and examples of HTTP requests.</p>
 				<p>The server has been deployed on the cloud at <a href="https://r2epub.herokuapp.com/">heroku</a> using the <code>https://r2epub.herokuapp.com/</code> URL, as well at <a href="https://labs.w3.org/r2epub">W3C</a> using the <code>https://labs.w3.org/r2epub</code> URL. A <a href="https://iherman.github.io/r2epub/convert.html">browser interface</a> to drive this server is also available.</p>
+				<p>(Note that the server running on W3C is used to generate an EPUB version of a document based on respec, using its <code>export</code> facility.)</p>
 				<a href="#use-as-a-typescriptnode-package-through-an-api" id="use-as-a-typescriptnode-package-through-an-api" style="color: inherit; text-decoration: none;">
 					<h3>Use as a typescript/node package through an API</h3>
 				</a>
-				<p>The program can also be used from another Typescript or Javascript program. In Typescript, the simplest access is through:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> r2epub  <span class="hljs-keyword">from</span> <span class="hljs-string">'r2epub'</span>;
-<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs      <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
-<span class="hljs-comment">// The creation itself is asynchronous (the content has to be fetched over the wire).</span>
-<span class="hljs-comment">// The result is the class instance encapsulating an OCF (zip) content</span>
-<span class="hljs-keyword">const</span> url :string = <span class="hljs-string">"http://www.example.org/doc.html"</span>,
-<span class="hljs-keyword">const</span> args :r2epub.Options = {
-    <span class="hljs-attr">respec</span> : <span class="hljs-literal">false</span>,
-    <span class="hljs-attr">config</span> : {}
-};
-<span class="hljs-keyword">const</span> ocf :r2epub.OCF = <span class="hljs-keyword">await</span> r2epub.convert(url, args);
-<span class="hljs-comment">// The zip file is finalized asynchronously</span>
-<span class="hljs-keyword">const</span> content :Buffer = <span class="hljs-keyword">await</span> ocf.get_content();
-<span class="hljs-comment">// Get the content out to the disk</span>
-fs.writeFileSync(ocf.name, content);</code></pre>
-				<p>The same in Javascript:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> r2epub  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'r2epub'</span>);
-<span class="hljs-comment">// The creation itself is asynchronous (the content has to be fetched over the wire).</span>
-<span class="hljs-comment">// The result is the class instance encapsulating an OCF (zip) content</span>
-<span class="hljs-keyword">const</span> url = <span class="hljs-string">"http://www.example.org/doc.html"</span>,
-<span class="hljs-keyword">const</span> args  = {
-    <span class="hljs-attr">respec</span> : <span class="hljs-literal">false</span>,
-    <span class="hljs-attr">config</span> : {}
-};
-<span class="hljs-keyword">const</span> ocf = <span class="hljs-keyword">await</span> r2epub.convert(url, args);
-<span class="hljs-comment">// The zip file is finalized asynchronously</span>
-<span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> ocf.get_content();
-<span class="hljs-comment">// Get the content out to the disk</span>
-fs.writeFileSync(ocf.name, content);</code></pre>
-				<p>See the specification of the <a href="https://iherman.github.io/r2epub/typedoc/modules/_index_.html#convert">convert</a> function and the <a href="https://iherman.github.io/r2epub/typedoc/classes/_lib_ocf_.ocf.html">OCF</a> class for further details.</p>
+				<p>The program can also be used from another Typescript or Javascript program.
+				See the separate <a href="https://iherman.github.io/r2epub/typedoc/modules/modules/_index_.html">documentation on the API</a> for details and examples of the API usage.</p>
 				<a href="#installation-usage" id="installation-usage" style="color: inherit; text-decoration: none;">
 					<h2>Installation, usage</h2>
 				</a>
 				<p>The implementation is in Typescript and on top of <code>node.js</code>.  The documentation is also available <a href="https://iherman.github.io/r2epub/typedoc/">on-line</a>.</p>
-				<p>Note that the on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator</a>. Alas!, that service may be down or slow, and this package has no control over that…</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h3>Installation</h3>
 				</a>
@@ -148,10 +121,10 @@ npm install</code></pre>
 				<ul>
 					<li><p><strong><code>PORT</code> or <code>R2EPUB_PORT</code>:</strong> the port number used by the server; failing these the default (i.e., 80) is used. (<code>PORT</code> takes precedence over <code>R2EPUB_PORT</code>.)</p>
 					</li>
-					<li><p><strong><code>R2EPUB_LOCAL</code>:</strong> By default, no URL-s on <code>localhost</code> are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.</p>
+					<li><p><strong><code>R2EPUB_LOCAL</code>:</strong> no URL-s on <code>localhost</code> are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.</p>
 					</li>
 					<li><p><strong><code>R2EPUB_MODIFIED_EPUB_FILES</code>:</strong> A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, <code>https://www.ivan-herman.net/r2epub/</code> is used as a base URL for those files. However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (Typically, the value points at <code>docs/epub_assets/</code> in the local clone of the distribution.)</p>
-						<p>  (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this type of setup.)</p>
+						<p>  (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)</p>
 					</li>
 				</ul>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
@@ -163,7 +136,6 @@ npm install</code></pre>
 				</a>
 				<pre><code class="language-sh">node dist/r2epub.js</code></pre>
 				<p>starts the command line interface.</p>
-				<p>By default, no URL-s on <code>localhost</code> are considered as safe and are therefore rejected, <em>unless</em> the environment variable <code>R2EPUB_LOCAL</code> is explicitly set (the value of the variable is not relevant, only the setting is).</p>
 				<a href="#server" id="server" style="color: inherit; text-decoration: none;">
 					<h4>Server</h4>
 				</a>

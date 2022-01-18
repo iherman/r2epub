@@ -104,7 +104,7 @@ export interface Global {
     /**
      * List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[create_epub_from_dom]]
      * function is to collect all relevant resources; once done, this array is used to generate the final
-     * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file
+     * [`package.opf`](https://www.w3.org/TR/epub-33/#sec-package-doc) file
      * as well as to collect the resources themselves and add them to the final epub file.
      */
     resources? :ResourceRef[]
@@ -153,7 +153,7 @@ export class RespecToEPUB {
      * - `object` elements
      *
      */
-    resource_references :LocalLinks[] = [
+    private resource_references :LocalLinks[] = [
         {
             query : 'img, script, audio, video, source',
             attr  : 'src',
@@ -245,7 +245,7 @@ export class RespecToEPUB {
      *
      *
      * All the resource entries are first collected in the in a [[Global.resources]] array, to be then added to the
-     * [`package.opf`](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-def) file as well as to download
+     * [`package.opf`](https://www.w3.org/TR/epub-33/#sec-package-doc) file as well as to download
      * the resources into the final epub result (see the last two steps above).
      *
      * @param url - The url of the document (serves also as a base for all the other resources)

@@ -73,8 +73,39 @@
 							<h2>Externally accessible entries</h2>
 						</a>
 					</div>
-					<p>r2epub can be used as a library module both to TypeScript and to Javascript. The externally visible entities are listed below; see their respective documentations for further information. This module is the common entry point from either the <a href="_r2epub_.html#cli">cli</a> or the <a href="_server_.html#serve">serve</a> functions for the command line interface and the server side, respectively.</p>
-					<p>The top level functional entry point to the package is <a href="_index_.html#convert">convert</a>.</p>
+					<p>r2epub can be used as a library module both to TypeScript and to Javascript. This module is the common entry point from both
+						the <a href="_r2epub_.html#cli">cli</a> or the <a href="_server_.html#serve">serve</a> functions for the command line interface and the server side, respectively. Furthermore,
+					it provides an API that can be used directly; a simple example is as follows:</p>
+					<p>In Typescript (using <code>node.js</code>):</p>
+					<pre><code class="language-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> r2epub  <span class="hljs-keyword">from</span> <span class="hljs-string">'r2epub'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs      <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
+<span class="hljs-comment">// The creation itself is asynchronous (the content has to be fetched over the wire).</span>
+<span class="hljs-comment">// The result is the class instance encapsulating an OCF (zip) content</span>
+<span class="hljs-keyword">const</span> url :string = <span class="hljs-string">"http://www.example.org/doc.html"</span>,
+<span class="hljs-keyword">const</span> args :r2epub.Options = {
+    <span class="hljs-attr">respec</span> : <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">config</span> : {}
+};
+<span class="hljs-keyword">const</span> ocf :r2epub.OCF = <span class="hljs-keyword">await</span> r2epub.convert(url, args);
+<span class="hljs-comment">// The zip file is finalized asynchronously</span>
+<span class="hljs-keyword">const</span> content :Buffer = <span class="hljs-keyword">await</span> ocf.get_content();
+<span class="hljs-comment">// Get the content out to the disk</span>
+fs.writeFileSync(ocf.name, content);</code></pre>
+					<p>The same in Javascript (using <code>node.js</code>):</p>
+					<pre><code class="language-js"><span class="hljs-keyword">const</span> r2epub  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'r2epub'</span>);
+<span class="hljs-comment">// The creation itself is asynchronous (the content has to be fetched over the wire).</span>
+<span class="hljs-comment">// The result is the class instance encapsulating an OCF (zip) content</span>
+<span class="hljs-keyword">const</span> url = <span class="hljs-string">"http://www.example.org/doc.html"</span>,
+<span class="hljs-keyword">const</span> args  = {
+    <span class="hljs-attr">respec</span> : <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">config</span> : {}
+};
+<span class="hljs-keyword">const</span> ocf = <span class="hljs-keyword">await</span> r2epub.convert(url, args);
+<span class="hljs-comment">// The zip file is finalized asynchronously</span>
+<span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> ocf.get_content();
+<span class="hljs-comment">// Get the content out to the disk</span>
+fs.writeFileSync(ocf.name, content);</code></pre>
+					<p>See the detailed specification of the API element below. The top level functional entry point to the package is <a href="_index_.html#convert">convert</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -116,7 +147,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/061ee5e/src/index.ts#L75">index.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/iherman/r2epub/blob/3b7a1c3/src/index.ts#L116">index.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
