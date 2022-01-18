@@ -37,7 +37,6 @@
     },
     "homepage": "https://iherman.github.io/r2epub/",
     "dependencies": {
-        "@xmldom/xmldom": "^0.7.5",
         "ajv": "^6.12.6",
         "commander": "^5.1.0",
         "jsdom": "^19.0.0",

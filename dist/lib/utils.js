@@ -6,7 +6,7 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.to_xhtml = exports.remove_entities = exports.date_to_string = exports.de_xml = exports.slice_text = void 0;
-const xmldom = require("xmldom");
+const jsdom = require("jsdom");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const serialize = require("w3c-xmlserializer");
 /**
@@ -59,16 +59,8 @@ function de_xml(inp) {
     // Do not use the sledgehammer if it makes no sense:
     if (inp.includes('<')) {
         try {
-            const clean_br = (txt) => {
-                return txt.replace(/<br[ ]*\/>/gi, ' ');
-            };
-            const option = {
-                locator: {},
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                errorHandler: (level, msg) => { return; },
-            };
-            const dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
-            return dom.childNodes[0].textContent;
+            const dom = jsdom.JSDOM.fragment(inp);
+            return dom.textContent;
         }
         catch (e) {
             // just silently return the original for any issue

@@ -4,7 +4,6 @@
  * @packageDocumentation
 */
 
-import * as xmldom from 'xmldom';
 import * as jsdom  from 'jsdom';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -59,16 +58,8 @@ export function de_xml(inp: string): string {
     // Do not use the sledgehammer if it makes no sense:
     if (inp.includes('<')) {
         try {
-            const clean_br = (txt: string): string => {
-                return txt.replace(/<br[ ]*\/>/gi, ' ');
-            }
-            const option = {
-                locator      : {},
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                errorHandler : (level: string, msg: any): any => { return; },
-            }
-            const dom = (new xmldom.DOMParser(option)).parseFromString(`<_x_>${clean_br(inp)}</_x_>`, 'text/xml');
-            return dom.childNodes[0].textContent;
+            const dom = jsdom.JSDOM.fragment(inp);
+            return dom.textContent;
         } catch (e) {
             // just silently return the original for any issue
             return inp;

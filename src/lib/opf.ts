@@ -24,7 +24,7 @@
 import { convert }   from "xmlbuilder2";
 import * as utils    from "./utils";
 
-// These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.2 package. See that document for details.
+// These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.3 package. See that document for details.
 /**
  *
  */
