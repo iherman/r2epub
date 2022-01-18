@@ -58,7 +58,6 @@
         "@types/node-fetch": "^2.5.5",
         "@types/underscore": "^1.9.4",
         "@types/valid-url": "^1.0.2",
-        "@types/xmldom": "^0.1.30",
         "@types/xmlserializer": "^0.6.0",
         "@typescript-eslint/eslint-plugin": "^4.6.1",
         "@typescript-eslint/parser": "^4.6.1",

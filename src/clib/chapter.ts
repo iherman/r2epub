@@ -16,7 +16,7 @@ import * as ocf       from '../lib/ocf';
 import * as common    from '../lib/common';
 import * as rConvert  from '../lib/convert';
 import * as cConvert  from './convert';
-import * as xmldom    from 'xmldom';
+import * as jsdom     from 'jsdom';
 import JSZip = require('jszip');
 
 /**
@@ -122,7 +122,7 @@ export class Chapter {
         // Get hold of the package file; it is used to establish the authors' list, publication date,
         // as well as the media types for all the content involved.
         const package_file = await this._container.file('package.opf').async('text');
-        const package_dom :XMLDocument = (new xmldom.DOMParser()).parseFromString(package_file);
+        const package_dom = (new jsdom.JSDOM(package_file, { contentType: "application/xml"})).window.document;
 
         // ---------------------------------------------------------------------------------------
         // Get the information on the manifest items
