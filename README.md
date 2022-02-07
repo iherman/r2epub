@@ -16,11 +16,11 @@ The conversion can:
 
 ### Command line usage
 
-There is a simple command line interface to run the script. See the the separate [documentation on cli](https://iherman.github.io/r2epub/typedoc/modules/modules/_r2epub_.html) for details and examples.
+There is a simple command line interface to run the script. See the the separate [documentation on cli](https://iherman.github.io/r2epub/typedoc/modules/_r2epub_.html) for details and examples.
 
 ### Run a service via HTTP
 
-There is also the possibility to start a simple server to generate EPUB 3.3 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/typedoc/modules/modules/_server_.html) for details and examples of HTTP requests.
+There is also the possibility to start a simple server to generate EPUB 3.3 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/typedoc/modules/_server_.html) for details and examples of HTTP requests.
 
 The server has been deployed on the cloud at [heroku](https://r2epub.herokuapp.com/) using the `https://r2epub.herokuapp.com/` URL, as well at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
 
