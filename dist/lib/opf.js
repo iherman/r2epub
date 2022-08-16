@@ -201,7 +201,7 @@ class PackageWrapper {
         creators.forEach((creator) => {
             this.thePackage.package.metadata["dc:creator"].push({
                 "@id": `creator_id_${this.id}`,
-                "#": creator,
+                "#": utils.de_xml(creator),
             });
             this.thePackage.package.metadata["meta"].push({
                 "@refines": `#creator_id_${this.id}`,
