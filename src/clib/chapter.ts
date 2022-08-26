@@ -257,13 +257,15 @@ export class Chapter {
      */
     store_manifest_items(target :cConvert.Collection) :void {
         const target_ocf :ocf.OCF = target.ocf;
-        interface Option {
-            compression :string,
+
+        type Compression = 'STORE' | 'DEFLATE';
+        interface JSZipOption {
+            compression :Compression,
             binary? :boolean,
             base64? :boolean
         }
         this._manifest.forEach((item :ManifestItem) :void => {
-            const option :Option = {compression: 'DEFLATE'};
+            const option :JSZipOption = {compression: 'DEFLATE'};
             if (!item.text_content) {
                 option.binary = true;
                 option.base64 = true;

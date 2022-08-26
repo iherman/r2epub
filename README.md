@@ -22,7 +22,7 @@ There is a simple command line interface to run the script. See the the separate
 
 There is also the possibility to start a simple server to generate EPUB 3.3 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/typedoc/modules/_server_.html) for details and examples of HTTP requests.
 
-The server has been deployed on the cloud at [heroku](https://r2epub.herokuapp.com/) using the `https://r2epub.herokuapp.com/` URL, as well at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
+The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
 
 (Note that the server running on W3C is used to generate an EPUB version of a document based on respec, using its `export` facility.)
 

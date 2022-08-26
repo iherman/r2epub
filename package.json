@@ -1,6 +1,6 @@
 {
     "name": "r2epub",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3.3",
     "engines": {
         "node": ">=16.x"
@@ -12,8 +12,6 @@
         "build": "tsc",
         "docs": "typedoc src/r2epub.ts src/server.ts",
         "dist": "tsc; (cd docs/assets/js; tsc server_interface.ts)",
-        "heroku": "git push heroku master",
-        "heroku-login": "heroku login -i",
         "origin": "git push origin main",
         "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js",
