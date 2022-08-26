@@ -80,7 +80,7 @@ export class OCF extends ocf.OCF {}
  * Config options, to be used as part of the arguments in [[Options]] to overwrite the configuration options of ReSpec.
  */
 interface ConfigOptions {
-    [x :string] :string
+    [x :string] :string|string[]|boolean
 }
 
 /**

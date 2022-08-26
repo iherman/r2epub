@@ -1,5 +1,18 @@
 # Changes
 
+## Version 1.3.2
+
+* Removed heroku as a possible web service (anticipating the closure of heroku's free accounts)
+* Adapted to latest version of TypeScript with a stricter type check
+
+## Version 1.3.1
+
+* de-xml creator metadata entries
+
+## Version 1.3.0
+
+* Adapting to EPUB 3.3 and process ≥ 2021
+
 ## Version 1.2.8
 
 * Added some additional EPUB A11y metadata to the generated package file
