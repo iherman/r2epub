@@ -1,0 +1,68 @@
+{
+    "name": "@iherman/r2epub",
+    "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
+    "version": "2.0.0",
+    "homepage": "https://github.com/w3c/yml2vocab",
+    "nodeModulesDir": "none",
+    "compilerOptions": {
+        "lib": ["dom", "deno.ns"]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/iherman/r2epub"
+    },
+    "tasks": {
+        "test": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/test/spec/Overview.html"
+    },
+    "exports": {
+        ".":     "./src/index.ts",
+        "./cli": "./src/r2epub.ts"
+    },
+    "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
+    "license": "W3C-20150513",
+    "exclude": ["dist/"],
+    "imports": {
+        "./lib/common"          : "./lib/common.ts",
+        "./lib/ocf"             : "./lib/ocf.ts",
+        "./lib/convert"         : "./lib/convert.ts",
+        "./clib/convert"        : "./clib/convert.ts",
+        "./lib/fetch"           : "./lib/fetch.ts",
+
+        "../index"              : "../index.ts",
+
+        "../lib/ocf"            : "../lib/ocf.ts",
+        "../lib/common"         : "../lib/common.ts",
+        "../lib/convert"        : "../lib/convert.ts",
+        "../lib/cover"          : "../lib/cover.ts",
+        "../lib/fetch"          : "../lib/fetch.ts",
+
+        "./opf"                 : "./opf.ts",
+        "./fetch"               : "./fetch.ts",
+        "./ocf"                 : "./ocf.ts",
+        "./css2016"             : "./css2016.ts",
+        "./css2021"             : "./css2021.ts",
+        "./title"               : "./title.ts",
+        "./cover"               : "./cover.ts",
+        "./nav"                 : "./nav.ts",
+        "./overview"            : "./overview.ts",
+        "./convert"             : "./convert.ts",
+        "./common"              : "./common.ts",
+        "./utils"               : "./utils.ts",
+        "./chapter"             : "./chapter.ts",
+        "./args"                : "./args.ts",
+
+        "jszip"                 : "npm:jszip",
+        "minimist"              : "npm:minimist",
+        "underscore"            : "npm:underscore",
+        "url"                   : "npm:url",
+        "valid-url"             : "npm:valid-url",
+        "w3c-xmlserializer"     : "npm:w3c-xmlserializer",
+        "xmlbuilder2"           : "npm:xmlbuilder2",
+        "yaml"                  : "npm:yaml@^2.7.0",
+        "commander"             : "npm:commander@^13.1.0",
+        "@exodus/schemasafe"    : "npm:@exodus/schemasafe@^1.3.0",
+        "jsdom"                 : "npm:jsdom@^26.0.0",
+
+        "stream"                : "node:stream"
+    }
+}
