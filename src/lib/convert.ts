@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable max-lines-per-function */
+// deno-lint-ignore-file no-explicit-any
 /**
  * ## Main entry points
  *
@@ -23,16 +25,16 @@ import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch';
-import {Options}       from '../index';
-import * as common     from './common';
-import * as opf        from './opf';
-import * as ocf        from './ocf';
-import * as css2016    from './css2016';
-import * as css2021    from './css2021';
-import * as title_page from './title';
-import * as cover_page from './cover';
-import * as nav        from './nav';
-import * as overview   from './overview';
+import type { Options } from '../index';
+import * as common      from './common';
+import * as opf         from './opf';
+import * as ocf         from './ocf';
+import * as css2016     from './css2016';
+import * as css2021     from './css2021';
+import * as title_page  from './title';
+import * as cover_page  from './cover';
+import * as nav         from './nav';
+import * as overview    from './overview';
 
 
 // ========================================================== The main conversion part ============================================ //
@@ -170,7 +172,7 @@ export class RespecToEPUB {
 
     private global :Global;
 
-    private global_url :string;
+    private global_url :string = "";
 
     constructor(trace = false, print_package = false) {
         this.global = {
@@ -181,7 +183,7 @@ export class RespecToEPUB {
     }
 
     /**
-     * Create an EPUB 3.2, ie, an OCF file from the original content
+     * Create an EPUB 3, ie, an OCF file from the original content
      *
      * This function is a wrapper around [[create_epub_from_dom]]:
      *
@@ -200,14 +202,14 @@ export class RespecToEPUB {
                 // Yep, the content has to go through the respec transformation service
                 // Collect the possible query parameters to control some details of the respec transformation
                 const config_options :string[] = _.keys(options.config)
-                    .map( (key :string) :string => {
+                    .map( (key :string) :string|null => {
                         if (options.config[key] === null || options.config[key] === '' || options.config[key] === 'null') {
                             return null;
                         } else {
                             return `${key}%3D${options.config[key]}`
                         }
                     })
-                    .filter((val) => val !== null);
+                    .filter((val :string|null) => val !== null);
                 const query_string = config_options.length === 0 ? '' : `%3F${config_options.join('%26')}`;
                 return `${common.spec_generator}${url}${query_string}`
             } else {
@@ -263,7 +265,8 @@ export class RespecToEPUB {
 
         {
             // Get hold of the configuration information
-            const initial_config_element = this.global.html_element.querySelector("script#initialUserConfig") as HTMLScriptElement;
+            // deno-lint-ignore no-explicit-any
+            const initial_config_element :any = this.global.html_element?.querySelector("script#initialUserConfig") as HTMLScriptElement;
             if ( initial_config_element === null ) {
                 throw "User config is not available"
             } else {
@@ -283,15 +286,15 @@ export class RespecToEPUB {
         // 2. Add the basic metadata (authors, dates) to the opf file
         {
             // Create the package content, and populate it with the essential metadata using the configuration
-            const title = this.global.html_element.querySelector('title').textContent;
+            const title = (this.global.html_element?.querySelector('title') as HTMLElement).textContent;
             this.global_url = `https://www.w3.org/TR/${this.global.config.shortName}/`;
             this.global.opf_content = new opf.PackageWrapper(this.global_url, title);
             this.global.opf_content.add_creators(
                 this.global.config.editors.map((entry: any) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`),
             );
 
-            const date = this.global.html_element.querySelector('time.dt-published');
-            this.global.opf_content.add_dates(date.getAttribute('datetime'));
+            const date = this.global.html_element?.querySelector('time.dt-published');
+            if (date) this.global.opf_content.add_dates(date.getAttribute('datetime'));
             if (this.global.trace) console.log(`global metadata set`);
         }
 
@@ -302,7 +305,7 @@ export class RespecToEPUB {
         // ------------------------------------------
         // 4. Add the reference to the W3C logo
         {
-            const logo_element = this.global.html_element.querySelector('img[alt="W3C"]');
+            const logo_element = this.global.html_element?.querySelector('img[alt="W3C"]') as HTMLImageElement;
             if (logo_element !== null) {
                 // This is set by respec and must be removed, otherwise the RS will not display the logo properly
                 logo_element.removeAttribute('crossorigin');
@@ -310,7 +313,7 @@ export class RespecToEPUB {
                 const relative_url =  `${common.local_style_files}logos/W3C.svg`;
                 logo_element.setAttribute('src', relative_url);
                 // There is an ugly story here. The SVG version of the logo, as stored on the W3C site, includes a reference
-                // the very complex SVG DTD, and epubcheck does not like it (EPUB v. 3 does not like it). So
+                // the very complex SVG DTD, and epubcheck does not like it (EPUB v3 does not like it). So
                 // I created a version of the logo without it and stored it at a fix URL...
                 // Note that EPUB 3.3 solved this issue, and so does epubcheck's version for EPUB 3.3.
                 // The 2016 version of this code went out of its way to get around this issue (a number of SVG files for logos
@@ -325,7 +328,7 @@ export class RespecToEPUB {
         }
         // 4.bis Add reference to the Member submission logo, if applicable
         {
-            const logo_element = this.global.html_element.querySelector('img[alt="W3C Member Submission"]');
+            const logo_element = this.global.html_element?.querySelector('img[alt="W3C Member Submission"]') as HTMLImageElement;
             if (logo_element !== null) {
                 // This is set by respec and must be removed, otherwise the RS will not display the logo properly
                 logo_element.removeAttribute('crossorigin');
@@ -344,9 +347,9 @@ export class RespecToEPUB {
         // the width of the display to, possibly, put the TOC onto the sidebar. Both are unnecessary and, actually,
         // (2) is problematic because it forces a narrow display of the text that we do not want.
         {
-            const fixup_element = this.global.html_element.querySelector(`script[src="${common.fixup_js}"]`);
+            const fixup_element = this.global.html_element?.querySelector(`script[src="${common.fixup_js}"]`);
             if (this.global.trace) console.log(`Got the the reference to the fixup script ${fixup_element} with url ${common.fixup_js}`);
-            fixup_element.remove();
+            if (fixup_element) fixup_element.remove();
         }
 
         // ------------------------------------------
@@ -539,25 +542,25 @@ export class RespecToEPUB {
 
         // The OCF class adds the fixed file like mime type and such automatically.
         // Add the package to the archives, with a fixed name:
-        the_book.append(this.global.opf_content.serialize(),'package.opf');
+        the_book.append(this.global.opf_content.serialize(), 'package.opf');
 
         // Add all the resources
         {
             // First, find the resources where the content is simply a text; this can be archived directly
             if (this.global.trace) console.log(`append locally generated contents to the epub file`);
-            this.global.resources
-                .filter((resource: ResourceRef): boolean => resource.text_content ? true : false)
+            this.global.resources?.filter((resource: ResourceRef): boolean => resource.text_content ? true : false)
                 .forEach((resource: ResourceRef): void => the_book.append(resource.text_content, resource.relative_url));
 
             // Second, find the resources where the content must be fetched...
-            const to_be_fetched = this.global.resources.filter((resource: ResourceRef): boolean => resource.absolute_url ? true : false);
+            const to_be_fetched = this.global.resources?.filter((resource: ResourceRef): boolean => resource.absolute_url ? true : false) || [];
             const file_names = to_be_fetched.map((resource :ResourceRef): string => resource.relative_url);
-            const urls       = to_be_fetched.map((resource :ResourceRef): string => resource.absolute_url);
+            const urls       = to_be_fetched.map((resource :ResourceRef): string => resource.absolute_url || '')
+                .filter((url :string): boolean => url !== '');
 
             if (this.global.trace) console.log(`fetch the external resources (${urls})`);
             const contents   = await Promise.all(urls.map((url: string): Promise<any> => fetch_resource(url)));
             if (this.global.trace) console.log(`append external resources to the epub file`);
-            _.zip(contents, file_names).forEach((arg: [any,string]) :void => the_book.append(arg[0], arg[1]));
+            _.zip(contents, file_names).forEach((arg: [any, string]) :void => the_book.append(arg[0], arg[1]));
         }
         return the_book;
     }

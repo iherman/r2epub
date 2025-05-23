@@ -20,7 +20,7 @@
     },
     "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
     "license": "W3C-20150513",
-    "exclude": ["dist/"],
+    "exclude": ["dist/", "_config.yml"],
     "imports": {
         "./lib/common"          : "./lib/common.ts",
         "./lib/ocf"             : "./lib/ocf.ts",

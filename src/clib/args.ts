@@ -1,3 +1,5 @@
+// deno-lint-ignore-file no-explicit-any
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * ## Collection Configuration
@@ -37,7 +39,7 @@
  *
  */
 import * as cConvert from './convert';
-import * as myAjv    from './js/myAjv';
+import { parser }    from '@exodus/schemasafe';
 
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
@@ -45,18 +47,18 @@ import * as myAjv    from './js/myAjv';
  * @param data
  * @throws invalid schema, or schema validation error on the data
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function get_book_configuration(data :any) :cConvert.CollectionConfiguration {
-    // const ajv = new Ajv({
-    //     "allErrors" : true,
-    // });
-    // const validator = ajv.compile(conf_schema);
-    // const valid     = validator(data);
-    const my_ajv = new myAjv.MyAjv();
-    const valid = my_ajv.validate(data);
+    const schema = JSON.parse(argument_schema);
+    const parse = parser(schema, {
+        mode                    : "default",
+        includeErrors           : true,
+        allErrors               : true,
+        requireStringValidation : false,
+    });
+    const result = parse(data);
 
-    if (!valid) {
-        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(my_ajv.errors,null,4)}\nValidation schema: https://github.com/iherman/r2epub/src/clib/r2epub.schema.json`
+    if (!result.valid) {
+        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(result.errors, null, 4)}`
     } else {
         const chapters :cConvert.ChapterConfiguration[] = data.readingOrder.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};
@@ -81,3 +83,93 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
         };
     }
 }
+
+
+/**
+ * The schema itself...
+ */
+const argument_schema = `{
+    "$schema"    : "http://json-schema.org/draft-07/schema#",
+    "$id"        : "https://github.com/iherman/r2epub/src/clib/r2epub.schema.json",
+    "title"      : "Argument structure for rs2epub",
+    "type"       : "object",
+    "properties" : {
+        "name" : {
+            "type" : "string"
+        },
+        "id" : {
+            "type" : "string"
+        },
+        "comment" : {
+            "type" : "string"
+        },
+        "readingOrder" : {
+            "type"  : "array",
+            "items" : {
+                "type" : "object",
+                "properties": {
+                    "url" : {
+                        "type" : "string",
+                        "format": "uri"
+                    },
+                    "respec" : {
+                        "type" : "boolean"
+                    },
+                    "config" : {
+                        "type" : "object",
+                        "properties" : {
+                            "specStatus" : {
+                                "type" : "string",
+                                "enum" : [
+                                    "base",
+                                    "MO",
+                                    "unofficial",
+                                    "ED",
+                                    "FPWD",
+                                    "WD",
+                                    "LC",
+                                    "LD",
+                                    "LS",
+                                    "CR",
+                                    "PR",
+                                    "PER",
+                                    "REC",
+                                    "RSCND",
+                                    "FPWD-NOTE",
+                                    "WG-NOTE",
+                                    "BG-DRAFT",
+                                    "BG-FINAL",
+                                    "CG-DRAFT",
+                                    "CG-FINAL",
+                                    "Member-SUBM",
+                                    "draft-finding",
+                                    "finding"
+                                ]
+                            },
+                            "publishDate" : {
+                                "type" : "string",
+                                "format" : "date"
+                            },
+                            "addSectionLinks" : {
+                                "type" : "boolean"
+                            },
+                            "maxTocLevel" : {
+                                "type" : "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "additionalProperties": false,
+                "required": ["url"]
+            },
+            "uniqueItems": true,
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "name", "id", "readingOrder"
+    ]
+}`;

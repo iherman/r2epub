@@ -1,3 +1,4 @@
+// deno-lint-ignore-file require-await no-explicit-any
 /**
  * ## Fetch
  *
@@ -12,12 +13,12 @@
  */
 
 
-import * as node_fetch from 'node-fetch';
 import * as urlHandler from 'url';
 import * as validUrl   from 'valid-url';
 import * as jsdom      from 'jsdom';
 import * as common     from './common';
-import * as fs         from 'fs';
+import * as fs         from 'node:fs';
+import * as process    from 'node:process';
 
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
@@ -63,7 +64,7 @@ const check_Web_url = (address :string) :string => {
             if (portNumber <= 1024) {
                 throw `Unsafe port number used in URL (${parsed.port})`;
             }
-        } catch (e) {
+        } catch (_e) {
             throw `Invalid port number used in URL (${parsed.port})`;
         }
     }
@@ -80,21 +81,6 @@ const check_Web_url = (address :string) :string => {
     // If we got this far, this is a proper URL, ready to be used.
     return retval;
 }
-
-
-/**
- * The effective fetch implementation run by the rest of the code.
- *
- * There is no default fetch implementation for `node.js`, hence the necessity to import 'node-fetch'. However, if the code
- * runs in a browser, there is an error message whereby only the fetch implementation in the Window is acceptable.
- *
- * This variable is a simple, polyfill like switch between the two, relying on the existence (or not) of the
- * `process` variable (built-in for `node.js`).
- *
- * I guess this makes this entry a bit polyfill like:-)
- */
-const my_fetch: ((arg :string) => Promise<any>) = common.is_browser ? fetch : node_fetch.default;
-
 
 /**
  * Fetch a resource.
@@ -129,11 +115,11 @@ export async function fetch_resource(resource_url :string, force_text = false) :
                 // This is a real URL, whose content must be accessed via HTTP(S)
                 // An exception is raised if the URL has security/sanity issues.
                 const final_url = check_Web_url(resource_url);
-                my_fetch(final_url)
+                fetch(final_url)
                     .then((response) => {
                         if (response.ok) {
                             // If the response content type is set (which is usually the case, but not in all cases...)
-                            const response_type = response.headers.get('content-type').split(';')[0].trim();
+                            const response_type = response.headers.get('content-type')?.split(';')[0].trim();
                             if (response_type && response_type !== '') {
                                 if (common.text_content.includes(response_type)) {
                                     // the simple way, just return text...
@@ -187,12 +173,17 @@ export async function fetch_type(resource_url :string) :Promise<string> {
             // This is a real URL, whose content must be accessed via HTTP(S)
             // An exception is raised if the URL has security/sanity issues.
             const final_url = check_Web_url(resource_url);
-            my_fetch(final_url)
+            fetch(final_url)
                 .then((response) => {
                     if (response.ok) {
                         // If the response content type is set (which is usually the case, but not in all cases...)
-                        const type :string = response.headers.get('content-type');
-                        resolve(type.split(';')[0].trim());
+                        const type :string | null = response.headers.get('content-type');
+                        if (type === null || type === '') {
+                            reject(new Error(`No content type returned for ${resource_url}`));
+                        } else {
+                            // The type is a string, but it may contain some additional information (charset, etc.)
+                            resolve(type.split(';')[0].trim());
+                        }
                     } else {
                         reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
                     }
