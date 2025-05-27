@@ -69,7 +69,7 @@ export interface ResourceRef {
 /** Interface of the "Global" data, to be used by various utilities */
 export interface Global {
     /** The URL of the document to be processed */
-    document_url? :string,
+    document_url :string,
 
     /** The DOM element, as returned from parsing */
     dom? : jsdom.JSDOM,
@@ -91,12 +91,12 @@ export interface Global {
     /**
      * [Debug] Whether trace information should be printed to the console
      */
-    trace? :boolean
+    trace :boolean
 
     /**
      * [Debug] Whether the opf instance should be should be printed to the console instead of generating an EPUB file
      */
-    package? :boolean
+    package :boolean
 
     /**
      * The class used for the generation of the EPUB opf file
@@ -109,7 +109,7 @@ export interface Global {
      * [`package.opf`](https://www.w3.org/TR/epub-33/#sec-package-doc) file
      * as well as to collect the resources themselves and add them to the final epub file.
      */
-    resources? :ResourceRef[]
+    resources :ResourceRef[]
 }
 
 /**
@@ -176,9 +176,10 @@ export class RespecToEPUB {
 
     constructor(trace = false, print_package = false) {
         this.global = {
-            trace     : trace,
-            package   : print_package,
-            resources : [],
+            document_url : '',
+            trace        : trace,
+            package      : print_package,
+            resources    : [],
         }
     }
 
@@ -265,14 +266,13 @@ export class RespecToEPUB {
 
         {
             // Get hold of the configuration information
-            // deno-lint-ignore no-explicit-any
-            const initial_config_element :any = this.global.html_element?.querySelector("script#initialUserConfig") as HTMLScriptElement;
+            const initial_config_element :HTMLScriptElement = this.global.html_element?.querySelector("script#initialUserConfig") as HTMLScriptElement;
             if ( initial_config_element === null ) {
                 throw "User config is not available"
             } else {
                 // Some constants depend on the process version 2016 vs. 2021, which is decided
                 // based on the date of the publication.
-                this.global.config = JSON.parse(initial_config_element.textContent);
+                this.global.config = JSON.parse(initial_config_element.textContent || '');
                 if (!this.global.config.publishDate) {
                     this.global.config.publishDate = this.global.config.publishISODate.split('T')[0];
                 }
@@ -444,12 +444,13 @@ export class RespecToEPUB {
         // Collect the set of resources from relative links in the source
         // The 'resource_references' array gives the pair of CSS query and attribute names to consider as
         // local resources. Those are collected in one array.
-        const target_urls = _.chain(this.resource_references)
+        const target_urls: string[] = _.chain(this.resource_references)
             // extract the possible references
             // Note that the map below generated an array of arrays; separate for images, objects, <a> elements, etc
-            .map((ref :LocalLinks) => {
+            .map((ref :LocalLinks) :string[] => {
                 // Get all the link type elements from the the HTML source.
-                let candidates :HTMLElement[] = Array.from(this.global.html_element.querySelectorAll(ref.query));
+                const refs = this.global.html_element?.querySelectorAll(ref.query);
+                let candidates :HTMLElement[] = (refs) ? Array.from(refs) as HTMLElement[] : [];
                 candidates = candidates.filter((element :HTMLElement) :boolean => {
                     if (element.tagName === 'A' && element.hasAttribute('href')) {
                         // Due to the constraints in EPUB 3, management of the 'a' values with relative URL-s deserve special attention
@@ -461,6 +462,10 @@ export class RespecToEPUB {
                         // 1. if the relative URL refers to an SVG content, the content is added to the spine with linear=false
                         // 2. for all other cases the relative URL is turned into absolute.
                         const href = element.getAttribute('href');
+
+                        // This should not happen, but if it does, we simply ignore this element
+                        if (href === null) return false;
+
                         const parsed = urlHandler.parse(href);
                         // 1. check whether this is a relative URL:
                         if (parsed.protocol === null && parsed.path !== null) {
@@ -469,7 +474,7 @@ export class RespecToEPUB {
                                 // this refers to an alternate epub
                                 element.removeAttribute('href');
                                 const text_content = element.textContent;
-                                element.replaceWith(text_content);
+                                if (text_content !== null) element.replaceWith(text_content);
                                 return false;
                             } else if (href.endsWith('.svg') || href.endsWith('.svgz')) {
                                 to_spine[href] = true;
@@ -487,12 +492,12 @@ export class RespecToEPUB {
                         return true;
                     }
                 });
-                return candidates.map((element) => element.getAttribute(ref.attr));
+                return candidates.map((element): string => element.getAttribute(ref.attr) || '');
             })
             // create one single array of the result (instead of an array or arrays)
-            .flatten()
+            .flatten() // @@@_ when getting out of underscore, the function to used is Array.flat(Infinity)
             // Remove absolute URL-s
-            .filter((ref) => {
+            .filter((ref: string) => {
                 if (ref !== '' && ref !== null) {
                     const parsed = urlHandler.parse(ref);
                     // Relative URL means that the protocol is null
@@ -502,7 +507,7 @@ export class RespecToEPUB {
                 }
             })
             // Remove fragment part, if any
-            .map((ref) => {
+            .map((ref: string) => {
                 const parsed = urlHandler.parse(ref);
                 parsed.hash = null;
                 return urlHandler.format(parsed);
@@ -511,7 +516,8 @@ export class RespecToEPUB {
 
         // Ensure that the list is duplicate free
         // (Why couldn't I put this into the chain???)
-        const relative_urls = _.uniq(target_urls);
+        // @@@_ Use the conversion to Set to ensure that the list is unique
+        const relative_urls: string[] = _.uniq(target_urls);
 
         const absolute_urls = relative_urls.map((ref :string) :string => urlHandler.resolve(this.global.document_url, ref));
         if (this.global.trace) console.log(`getting the resources' content types via a set of fetches`);

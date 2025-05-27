@@ -12,10 +12,10 @@
  *
  */
 
-import * as jsdom    from 'jsdom';
-import * as cConvert from './convert';
-import * as utils    from '../lib/utils';
-import { Chapter }   from './chapter';
+import * as jsdom         from 'jsdom';
+import type * as cConvert from './convert';
+import * as utils         from '../lib/utils';
+import type { Chapter }   from './chapter';
 
 
 /**

@@ -283,10 +283,10 @@ export class PackageWrapper {
                         '@property' : "a11y:certifiedBy",
                         '#'         : "World Wide Web Consortium",
                     }],
-                    "dc:rights"    : "https://www.w3.org/Consortium/Legal/2015/doc-license",
+                    "dc:rights"    : "https://www.w3.org/copyright/document-license-2023/",
                     "dc:publisher" : "World Wide Web Consortium",
                     "link"         : [{
-                        "@href" : "https://www.w3.org/Consortium/Legal/2015/doc-license",
+                        "@href" : "https://www.w3.org/copyright/document-license-2023/",
                         "@rel"  : "cc:license",
                     }],
                     "dc:creator" : [],
@@ -335,7 +335,7 @@ export class PackageWrapper {
      *
      */
     add_wcag_link() :void {
-        this.thePackage.package.metadata["link"].push({
+        this.thePackage.package.metadata["link"]?.push({
             "@rel"  : 'dcterms:conformsTo',
             '@href' : 'http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a',
         })
@@ -364,11 +364,11 @@ export class PackageWrapper {
      */
     add_creators(creators :string[]): void {
         creators.forEach((creator: string) => {
-            this.thePackage.package.metadata["dc:creator"].push({
+            this.thePackage.package.metadata["dc:creator"]?.push({
                 "@id" : `creator_id_${this.id}`,
                 "#"   : utils.de_xml(creator),
             });
-            this.thePackage.package.metadata["meta"].push({
+            this.thePackage.package.metadata["meta"]?.push({
                 "@refines"  : `#creator_id_${this.id}`,
                 "@property" : "role",
                 "@scheme"   : "marc:relators",

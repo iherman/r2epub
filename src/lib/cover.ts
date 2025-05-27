@@ -11,9 +11,9 @@
  *
  */
 
-import { ResourceRef, Global } from './convert';
-import * as common             from './common';
-import * as utils              from './utils';
+import type { ResourceRef, Global } from './convert';
+import * as common                  from './common';
+import * as utils                   from './utils';
 
 
 /**

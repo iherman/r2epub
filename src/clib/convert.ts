@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 /**
  * ## Main Entry point for collections
  *
@@ -23,7 +24,7 @@
  *
  */
 
-import { Options }      from '../index';
+import type { Options } from '../index';
 import * as ocf         from '../lib/ocf';
 import * as fetch       from '../lib/fetch';
 import { Chapter }      from './chapter';
@@ -144,10 +145,10 @@ export async function create_epub(config_url :string, print_package = false) :Pr
         console.log(the_opf);
         return {} as ocf.OCF;
     } else {
-        the_book.ocf.append(the_opf , 'package.opf');
-        the_book.ocf.append(title.create_title_page(the_book) , 'title.xhtml');
+        the_book.ocf.append(the_opf, 'package.opf');
+        the_book.ocf.append(title.create_title_page(the_book), 'title.xhtml');
         the_book.ocf.append(cover.create_cover_image(the_book), 'cover_image.svg');
-        the_book.ocf.append(nav.create_nav_page(the_book) , 'nav.xhtml');
+        the_book.ocf.append(nav.create_nav_page(the_book), 'nav.xhtml');
 
         // Store the data in the final zip file
         the_book.chapters.forEach((chapter :Chapter) :void => {

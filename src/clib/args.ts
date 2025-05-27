@@ -38,8 +38,8 @@
 /**
  *
  */
-import * as cConvert from './convert';
-import { parser }    from '@exodus/schemasafe';
+import type * as cConvert from './convert';
+import { parser }         from '@exodus/schemasafe';
 
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.

@@ -4,10 +4,9 @@
  * @packageDocumentation
 */
 
-import * as jsdom  from 'jsdom';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const serialize = require("w3c-xmlserializer");
+import * as jsdom       from 'jsdom';
+import { serialize }    from 'w3c-xmlserializer'
+import { entity_codes } from './common';
 
 
 /**
@@ -32,7 +31,7 @@ export function slice_text(inp: string): string {
                 current_length += words[0].length + 1;
                 final.push(`${words.shift()} `);
             } else {
-                final.push(`${final.pop().trim()}<br/>`)
+                final.push(`${final.pop()?.trim()}<br/>`)
                 return [...final, ...slice_text_array(words)]
             }
         }
@@ -90,26 +89,26 @@ export function date_to_string(date :string) :string {
 }
 
 
-/**
- * @hidden
- */
-const entity_codes :string[][] = [
-    ['&nbsp;', '&#160;'],
-    ['&lt;',    '&#60;'],
-    ['&gt;',    '&#62;'],
-    ['&quot;',  '&#34;'],
-    ['&apos;',  '&#39;'],
-    ['&reg;',   '&#174;'],
-    ['&pound;', '&#163;'],
-    ['&yen;',   '&#165;'],
-    ['&euro;',  '&#8364;'],
-    ['&cent;',  '&#162;'],
-    ['&mdash;', '&#8212;'],
-    ['&ndash;', '&#8211;'],
-    ['&emsp;',  '&#8195;'],
-    ['&ensp;',  '&#8194;'],
-    ['&thinsp;','&#8201;'],
-]
+// /**
+//  * @hidden
+//  */
+// const entity_codes :string[][] = [
+//     ['&nbsp;', '&#160;'],
+//     ['&lt;',    '&#60;'],
+//     ['&gt;',    '&#62;'],
+//     ['&quot;',  '&#34;'],
+//     ['&apos;',  '&#39;'],
+//     ['&reg;',   '&#174;'],
+//     ['&pound;', '&#163;'],
+//     ['&yen;',   '&#165;'],
+//     ['&euro;',  '&#8364;'],
+//     ['&cent;',  '&#162;'],
+//     ['&mdash;', '&#8212;'],
+//     ['&ndash;', '&#8211;'],
+//     ['&emsp;',  '&#8195;'],
+//     ['&ensp;',  '&#8194;'],
+//     ['&thinsp;','&#8201;'],
+// ]
 
 /**
  * Filter XML entities in an xhtml code, and turn them into their equivalent hexadecimal Unicode point

@@ -17,10 +17,10 @@
  *
  */
 
-import * as urlHandler from 'url';
-import { ResourceRef, Global } from './convert';
-import { to_xhtml }            from './utils';
-import * as common             from './common';
+import * as urlHandler              from 'url';
+import type { ResourceRef, Global } from './convert';
+import { to_xhtml }                 from './utils';
+import * as common                  from './common';
 
 /**
  * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item
@@ -53,7 +53,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
 
     {
         // 2a. are there active scripts. Care should be taken that a <script> element may be a data block, that does not count.
-        const scripts = Array.from(global.html_element.querySelectorAll('script'));
+        const scripts = Array.from(global.html_element.querySelectorAll('script')) as HTMLScriptElement[];
         const is_there_script = scripts.find((element: HTMLScriptElement): boolean => {
             if (element.hasAttribute('type')) {
                 const type = element.getAttribute('type');
@@ -77,10 +77,10 @@ export function generate_overview_item(global: Global): ResourceRef[] {
         properties.push('svg');
     } else {
         // look for possible svg image or picture references
-        const sources = Array.from(global.html_element.querySelectorAll('img, source, object, iframe'));
+        const sources = Array.from(global.html_element.querySelectorAll('img, source, object, iframe')) as HTMLElement[];
         const is_there_svg_usage = sources.find((element: HTMLElement): boolean => {
             if (element.hasAttribute('src')) {
-                return element.getAttribute('src').endsWith('.svg')
+                return (element.getAttribute('src') || '').endsWith('.svg')
             } else if (element.hasAttribute('type')) {
                 return element.getAttribute('type') === 'image/svg+xml';
             } else {
@@ -94,10 +94,10 @@ export function generate_overview_item(global: Global): ResourceRef[] {
 
     // 4. external resources
     {
-        const sources = Array.from(global.html_element.querySelectorAll('video, audio, img, source, iframe'));
+        const sources = Array.from(global.html_element.querySelectorAll('video, audio, img, source, iframe')) as HTMLElement[];
         const is_there_external_resources = sources.find((element: HTMLElement): boolean => {
             if (element.hasAttribute('src')) {
-                const parsed = urlHandler.parse(element.getAttribute('src'));
+                const parsed = urlHandler.parse(element.getAttribute('src') || '');
                 return parsed.protocol !== null && (parsed.host !== null && parsed.host !== 'www.w3.org');
             } else {
                 return false;

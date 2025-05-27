@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+// deno-lint-ignore-file no-explicit-any
 /**
  * ## Representation of a single chapter.
  *
@@ -11,13 +13,13 @@
  *
  */
 
-import { Options }    from '../index';
-import * as ocf       from '../lib/ocf';
-import * as common    from '../lib/common';
-import * as rConvert  from '../lib/convert';
-import * as cConvert  from './convert';
-import * as jsdom     from 'jsdom';
-import JSZip = require('jszip');
+import type { Options }    from '../index';
+import type * as ocf       from '../lib/ocf';
+import * as common         from '../lib/common';
+import * as rConvert       from '../lib/convert';
+import type * as cConvert  from './convert';
+import * as jsdom          from 'jsdom';
+import JSZip               from 'jszip';
 
 /**
  * Data needed for the creation of the package file for single constituent manifest item in the chapter (i.e., an individual file stored in the zip file).
@@ -70,12 +72,12 @@ export class Chapter {
     private _ocf :ocf.OCF;
     private _container :JSZip;
     private _manifest :ManifestItem[] = [];
-    private _chapter_name :string;
-    private _title :string;
-    private _identifier :string;
+    private _chapter_name :string = '';
+    private _title :string = '';
+    private _identifier :string = '';
     private _editors :string[] = [];
-    private _nav :string;
-    private _date :string;
+    private _nav :string = '';
+    private _date :string = '';
     private _non_linear_spine_items :string[] = [];
     private _wcag_conforms = false;
 
@@ -92,6 +94,9 @@ export class Chapter {
             config : args.config,
         }
         this._first_chapter = first;
+        // Note that this is not the real OCF, but a placeholder; it will be created in the `initialize` method
+        // This has been added to make the typescript happy, as it does not allow the `undefined` value for a class member
+        this._container = new JSZip();
     }
 
     /**
@@ -121,7 +126,7 @@ export class Chapter {
         // ---------------------------------------------------------------------------------------
         // Get hold of the package file; it is used to establish the authors' list, publication date,
         // as well as the media types for all the content involved.
-        const package_file = await this._container.file('package.opf').async('text');
+        const package_file = await this._container.file('package.opf')?.async('text');
         const package_dom = (new jsdom.JSDOM(package_file, { contentType: "application/xml"})).window.document;
 
         // ---------------------------------------------------------------------------------------
@@ -145,17 +150,20 @@ export class Chapter {
 
                 // This list in r2epub lists those media types that can be transferred as texts
                 const textual = common.text_content.includes(media_type);
-                const promise = this._container.file(file_name).async(textual ? 'text' : 'base64');
-
-                // Create the relevant [[ManifestItem]]
-                this._manifest.push({
-                    href         : file_name,
-                    media_type   : media_type,
-                    id           : id,
-                    properties   : properties,
-                    text_content : textual,
-                    promise      : promise,
-                })
+                const promise = this._container.file(file_name)?.async(textual ? 'text' : 'base64');
+                if (promise === undefined) {
+                    throw new Error(`Cannot find the file '${file_name}' in the chapter '${this._url}'`);
+                } else {
+                    // Create the relevant [[ManifestItem]]
+                    this._manifest.push({
+                        href         : file_name,
+                        media_type   : media_type,
+                        id           : id,
+                        properties   : properties,
+                        text_content : textual,
+                        promise      : promise,
+                    })
+                }
             }
         }
 
@@ -217,7 +225,8 @@ export class Chapter {
 
         // ---------------------------------------------------------------------------------------
         // Get the navigation file's content
-        this._nav = await this._container.file('nav.xhtml').async('text');
+        const nav = await this._container.file('nav.xhtml')?.async('text');
+        this._nav = nav === undefined ? '' : nav;
 
         // ---------------------------------------------------------------------------------------
         return this;

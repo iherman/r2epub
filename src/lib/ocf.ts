@@ -13,11 +13,10 @@
  */
 
 
-import * as common from './common';
-import * as stream from 'stream';
-import JSZip = require('jszip');
-
-
+import * as common      from './common';
+import type * as stream from 'node:stream';
+import type { Buffer }  from "node:buffer"
+import JSZip            from 'jszip';
 
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.3 specification](https://www.w3.org/TR/epub-33/#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
@@ -44,7 +43,7 @@ const container_xml  = `<?xml version="1.0"?>
 export class OCF {
     private _container :JSZip;
     private _name :string;
-    private content :Buffer|Blob = null;
+    private content :Buffer | Blob | null = null;
 
     /**
      *
@@ -65,7 +64,7 @@ export class OCF {
      * @param content - Content to be stored
      * @param path_name - Path name of the file for the content
      */
-    append(content :string|stream.Readable, path_name: string): void {
+    append(content :string | stream.Readable, path_name: string): void {
         this._container.file(path_name, content, {compression: 'DEFLATE'});
     }
 

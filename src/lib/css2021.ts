@@ -54,23 +54,27 @@ import * as common              from './common';
  * @returns - list of extracted additional resources
  */
 export function extract_css(global: Global): ResourceRef[] {
+    const retval: ResourceRef[] = [];
+
     /** Find the relevant CSS link in the DOM. There must be only one... */
-    const css_link_element = (): Element => {
-        const all_links = Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]'));
+    const the_link: Element | undefined = ((): Element|undefined => {
+        const all_links: HTMLLinkElement[] = Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) as HTMLLinkElement[];
         // What we want is the one owned by W3C (may be undefined!)
         return all_links.find((link: Element): boolean => {
             if (link.hasAttribute('href')) {
-                const parsed   = urlHandler.parse(link.getAttribute('href'));
-                return parsed.host === 'www.w3.org';
+                const url = link.getAttribute('href');
+                if (url === null) {
+                    return false;
+                } else {
+                    // The URL must be absolute, and it must be owned by W3C
+                    const parsed = urlHandler.parse(url);
+                    return parsed.host === 'www.w3.org';
+                }
             } else {
                 return false;
             }
         });
-    }
-
-    const retval :ResourceRef[] = [];
-
-    const the_link :Element = css_link_element();
+    })()
 
     if (the_link !== undefined) {
         retval.push({
@@ -79,8 +83,8 @@ export function extract_css(global: Global): ResourceRef[] {
             absolute_url : `${common.modified_epub_files}base.css`,
         });
 
-        const css_link :string = the_link.getAttribute('href');
-        const base_name :string = css_link.split('/').pop();
+        const css_link :string = the_link.getAttribute('href') || '';
+        const base_name :string = css_link.split('/').pop() || '';
 
         // In most cases some extra materials have to be retrieved: logo files, background files...
         // This is signalled by the fact that the included css file reflects the specStatus value in respec
@@ -90,7 +94,7 @@ export function extract_css(global: Global): ResourceRef[] {
             the_link.setAttribute('href', `${common.local_style_files}${base_name}`);
         } else {
             // Remove the 'W3C-' string to get the logo name; that is the pattern used in the official style files
-            const logo_name :string = base_name.split('-').pop();
+            const logo_name :string = base_name.split('-').pop() || '';
             the_link.setAttribute('href', `${common.local_style_files}${base_name}.css`);
             if (['cg-draft','bg-final','bg-draft','cg-final','W3C-UD', 'unofficial','W3C-Member-SUBM'].includes(base_name)) {
                 // The original css file may include absolute URLs and the logo setup

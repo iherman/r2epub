@@ -47,9 +47,9 @@
  */
 
 
-import { ResourceRef, Global }  from './convert';
-import * as urlHandler          from 'url';
-import * as common              from './common';
+import type { ResourceRef, Global }  from './convert';
+import * as urlHandler               from 'url';
+import * as common                   from './common';
 
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
 
@@ -109,7 +109,7 @@ interface specStatus_css_mappings {
     watermark :boolean,
 
     /** 'name' (filename) to be used for the logo, e.g., WD, REC, etc. */
-    logo_name :string,
+    logo_name :string | null,
 
     /** Media type of the logo. Usually SVG, but not always; if missing, `image/svg` is used. */
     logo_media_type? :string,
@@ -180,23 +180,27 @@ const specStatus_css :specStatus_mapping = {
  * @returns - list of extracted additional resources
  */
 export function extract_css(global: Global): ResourceRef[] {
+    const retval: ResourceRef[] = [];
+
     /** Find the relevant CSS link in the DOM. There must be only one... */
-    const css_link_element = (): Element => {
-        const all_links = Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]'));
+    const the_link: Element | undefined = ((): Element | undefined => {
+        const all_links :HTMLLinkElement[] = Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) as HTMLLinkElement[];
         // What we want, is the one owned by W3C (may be undefined!)
-        return all_links.find((link: Element): boolean => {
+        return all_links.find((link: HTMLLinkElement): boolean => {
             if (link.hasAttribute('href')) {
-                const parsed   = urlHandler.parse(link.getAttribute('href'));
-                return parsed.host === 'www.w3.org';
+                const url = link.getAttribute('href');
+                if (url === null) {
+                    return false;
+                } else {
+                    const parsed = urlHandler.parse(url);
+                    return parsed.host === 'www.w3.org';
+                }
             } else {
                 return false;
             }
         });
-    }
+    })()
 
-    const retval :ResourceRef[] = [];
-
-    const the_link :Element = css_link_element();
 
     if (the_link !== undefined) {
         // 'base' CSS file, to be added
@@ -269,7 +273,7 @@ export function extract_css(global: Global): ResourceRef[] {
             const new_css_link = global.html_element.ownerDocument.createElement('link');
             new_css_link.setAttribute('href', `${common.local_style_files}epub.css`);
             new_css_link.setAttribute('rel', 'stylesheet');
-            the_link.parentElement.append(new_css_link);
+            the_link.parentElement?.append(new_css_link);
         }
     }
     return retval;
