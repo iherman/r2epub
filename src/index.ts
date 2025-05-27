@@ -120,14 +120,14 @@ export async function convert(url: string, options: Options = {}, t = false, p =
      */
     const fill_default_options = (opts: Options) :Options => {
         const defaultConfig :ConfigOptions = {
-            publishDate     : null,
-            specStatus      : null,
-            addSectionLinks : null,
-            maxTocLevel     : null,
+            publishDate     : '',
+            specStatus      : 'base',
+            addSectionLinks : false,
+            maxTocLevel     : "7",
         }
         return {
             respec : opts.respec === undefined || opts.respec === null ? false : opts.respec,
-            config : _.defaults(opts.config, defaultConfig),
+            config : _.defaults(opts.config, defaultConfig), // @@@_
         };
     };
 
@@ -135,6 +135,10 @@ export async function convert(url: string, options: Options = {}, t = false, p =
     if (url) {
         // Basic sanity check on the URL; secure that it is proper for relative URL-s
         const url_path = urlHandler.parse(url).path;
+        if (url_path === undefined || url_path === null) {
+            throw "The URL must be a valid URL, with a proper path";
+        }
+        // Check that the URL ends with a proper ending, i.e., '.(x)html', '.json', etc
         const proper_ending :boolean = common.acceptable_url_endings.map((ending :string) :boolean => url_path.endsWith(ending)).includes(true);
         if (proper_ending) {
             let the_ocf :ocf.OCF;

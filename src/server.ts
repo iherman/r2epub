@@ -61,6 +61,8 @@ import * as r2epub     from './index';
 import * as common     from './lib/common';
 import * as ocf        from './lib/ocf';
 import * as home       from './lib/home';
+import * as process    from 'node:process';
+import { Buffer }      from 'node:buffer';
 
 
 /**
@@ -92,8 +94,8 @@ interface Query {
  * @param query - The query string from the client
  */
 async function get_epub(query :Query) : Promise<Content> {
-    const respec_args = _.omit(query, 'respec', 'url', 'submit');
-    _.keys(respec_args).forEach((key :string) => {
+    const respec_args = _.omit(query, 'respec', 'url', 'submit'); // @@@_
+    _.keys(respec_args).forEach((key :string) => { // @@@_
         if (respec_args[key] !== undefined && (respec_args[key] === '' || respec_args[key] === 'null')) {
             delete respec_args[key];
         }
@@ -106,7 +108,7 @@ async function get_epub(query :Query) : Promise<Content> {
     }
 
     const the_ocf :ocf.OCF     = await r2epub.convert(url, options)
-    const content :Buffer      = await the_ocf.get_content() as Buffer;
+    const content :Buffer      = await the_ocf.get_content() as Buffer; // To be changed if ArrayBuffer is used; for a server it will never be an ArrayBuffer now
 
     const now :string = (new Date()).toString();
 
@@ -133,7 +135,7 @@ async function get_epub(query :Query) : Promise<Content> {
  *
  * @async
  */
-async function serve() {
+async function serve(): Promise<void> {
     const port :string = process.env.PORT || process.env.R2EPUB_PORT || common.local_port_number;
     console.log(`r2epub server starting on port ${port}`);
     http.createServer(async (request :http.IncomingMessage, response :http.ServerResponse) => {
@@ -150,7 +152,11 @@ async function serve() {
         }
         try {
             if (request.method === 'GET' || request.method === 'HEAD') {
-                const query :Query = urlHandler.parse(request.url, true).query;
+                if (request.url === undefined) {
+                    error(400, 'EPUB Generation error: no URL provided');
+                    return;
+                }
+                const query  = urlHandler.parse(request.url, true).query;
                 const host = `http://${request.headers.host}`;
 
                 if (query === null || query.url === undefined) {
@@ -161,7 +167,7 @@ async function serve() {
                     ));
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));
                 } else {
-                    const the_book :Content = await get_epub(query);
+                    const the_book :Content = await get_epub(query as Query);
                     response.writeHead(200, _.extend(
                         the_book.headers,
                         common.CORS_headers,

@@ -99,10 +99,9 @@ import * as r2epub    from './index';
 import * as _         from 'underscore';
 import * as common    from './lib/common';
 import * as fs        from 'fs';
-
-/** @hidden */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { program } = require('commander');
+import * as process   from 'node:process'
+import { Command }    from 'commander';
+import { Buffer }     from "node:buffer"
 
 /** @hidden */
 const ERROR  = 'ERROR';
@@ -118,6 +117,7 @@ const ERROR  = 'ERROR';
  * @async
  */
 async function cli() {
+    const program = new Command();
     program
         .version('1.2.7')
         .name('r2epub')
@@ -126,7 +126,7 @@ async function cli() {
         .option('-o, --output <fname>', 'output file name. If missing, the short name of the document is used')
         .option('-r, --respec', 'the source must be pre-processed by ReSpec', false)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        .option('-s, --specStatus <type>', 'specification type', (value :string, dummy :any) :string => {
+        .option('-s, --specStatus <type>', 'specification type', (value :string, _dummy :unknown) :string => {
             if (common.spec_status_values.includes(value)) {
                 return value;
             } else {
@@ -137,7 +137,7 @@ async function cli() {
         .option('-d, --publishDate <date>', 'publication date')
         .option('-l, --addSectionLinks', 'add section links with "§".')
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        .option('-m, --maxTocLevel <number>', 'maximum TOC level', (value :string, dummy :any) :string => {
+        .option('-m, --maxTocLevel <number>', 'maximum TOC level', (value :string, _dummy :unknown) :string => {
             const n_value = Number(value);
             if (_.isNaN(n_value) || n_value < 0) {
                 console.error(`r2epub warning: invalid maximal TOC level (${value}); ignored`);
@@ -150,30 +150,40 @@ async function cli() {
         .option('-t, --trace', '[debug option] print built in trace information while processing.', false)
         .parse(process.argv);
 
+    const cli_options = program.opts();
 
     if (program.args.length === 0) {
         console.error("r2epub error: no URL has been provided; exiting");
         process.exit(-1);
     } else {
         const url = program.args[0];
-
         const options :r2epub.Options = {
             // eslint-disable-next-line max-len
-            respec : program.respec || ((program.specStatus || program.publishDate || program.addSectionLinks || program.maxTocLevel) ? true : false),
+            respec : cli_options.respec || ((cli_options.specStatus || cli_options.publishDate || cli_options.addSectionLinks || cli_options.maxTocLevel) ? true : false),
             config : {
-                publishDate     : program.publishDate,
-                specStatus      : program.specStatus === ERROR ? undefined : program.specStatus,
-                addSectionLinks : program.addSectionLinks ? "true" : undefined,
-                maxTocLevel     : program.maxTocLevel === ERROR ? undefined : program.maxTocLevel,
+                publishDate     : cli_options.publishDate,
+                specStatus      : cli_options.specStatus === ERROR ? undefined : cli_options.specStatus,
+                addSectionLinks : cli_options.addSectionLinks ? "true" : undefined,
+                maxTocLevel     : cli_options.maxTocLevel === ERROR ? undefined : cli_options.maxTocLevel,
             },
         }
 
         try {
-            const the_ocf :r2epub.OCF = await r2epub.convert(url, options, program.trace, program.package)
+            const the_ocf: r2epub.OCF = await r2epub.convert(url, options, cli_options.trace, cli_options.package)
             // In case of some debug settings no ocf is really generated...
+            // The trick is that, if the ocf is not generated, 'the_ocf' is, in fact, an empty object.
             if (the_ocf.get_content) {
-                const content :Buffer | Blob = await the_ocf.get_content();
-                fs.writeFileSync(program.output || the_ocf.name, content);
+                const get_content = async (): Promise<Buffer> => {
+                    const real_content = await the_ocf.get_content();
+                    if (real_content instanceof Buffer) {
+                        return real_content;
+                    } else if (real_content instanceof ArrayBuffer) {
+                        return Buffer.from(real_content);
+                    } else {
+                        throw new Error("r2epub error: the content is neither a Buffer nor an ArrayBuffer");
+                    }
+                }
+                fs.writeFileSync(cli_options.output || the_ocf.name, await get_content());
             }
         } catch (e) {
             console.error(`r2epub error: ${e}`);

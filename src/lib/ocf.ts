@@ -43,7 +43,7 @@ const container_xml  = `<?xml version="1.0"?>
 export class OCF {
     private _container :JSZip;
     private _name :string;
-    private content :Buffer | Blob | null = null;
+    private content :Buffer | ArrayBuffer | null = null;
 
     /**
      *
@@ -90,10 +90,10 @@ export class OCF {
      *
      * @async
      */
-    async get_content() :Promise<Buffer|Blob> {
+    async get_content() :Promise<Buffer | ArrayBuffer> {
         if (this.content === null) {
             this.content = await this._container.generateAsync({
-                type               : common.is_browser ? 'blob' : 'nodebuffer',
+                type               : common.is_browser ? 'arraybuffer' : 'nodebuffer',
                 mimeType           : common.media_types.epub,
                 compressionOptions : {
                     level : 9,
