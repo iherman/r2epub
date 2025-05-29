@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3.4",
     "engines": {
-        "node": ">=16.x"
+        "node": ">=24.x"
     },
     "main": "dist/index.js",
     "types": "src/index.ts",
