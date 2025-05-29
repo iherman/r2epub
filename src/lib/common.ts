@@ -6,6 +6,7 @@
 */
 import * as process from 'node:process';
 
+// eslint-disable-next-line no-shadow
 export enum Environment {
     browser = 'browser',
     nodejs  = 'nodejs',
@@ -13,9 +14,10 @@ export enum Environment {
 }
 
 /**
- * Flag to decide whether the code runs in a browser, Deno, or in node.js
+ * Flag to decide whether the code runs in a browser, Deno, or in node.js.
  */
-export function get_environment() :Environment {
+export const environment = (() :Environment => {
+    // Deno is detected first because we need 'process' elsewhere and it is imported from the node library.
     if (typeof Deno !== "undefined" && typeof Deno.version !== "undefined") {
         return Environment.deno;
     } else if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -25,10 +27,34 @@ export function get_environment() :Environment {
     } else {
         throw new Error('Unknown environment: neither Deno, nor Node.js, nor browser');
     }
+})();
+
+/**
+ * Config options, to be used as part of the arguments in [[Options]] to overwrite the configuration options of ReSpec.
+ */
+export interface ConfigOptions {
+    [x: string]: string | string[] | boolean;
 }
 
-// This is just to ensure backwards compatibility with the old code
-export const is_browser :boolean = (get_environment() === Environment.browser);
+/**
+ * Options provided by the user if and when the source has to be pre-processed via ReSpec.
+ *
+ * The original content file has to be pre-processed via the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * before further processing to convert the ReSpec source first. If that is the case (see [[Options.respec]]), it is also possible to set some of the ReSpec configuration options,
+ * overwriting the values set in the `config` entry of the original file. The possible ReSpec options to be set are `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
+ * See the [ReSpec editor's guide](https://respec.org/docs/) for details.
+ *
+ */
+export interface Options {
+    /**
+     * Is the source in ReSpec?
+     */
+    respec?: boolean,
+    /**
+     * Collection of respec config options, to be used with the spec generator (if applicable).
+     */
+    config?: ConfigOptions,
+}
 
 /**
  *

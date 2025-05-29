@@ -53,13 +53,28 @@
  * classes/index.RespecToEPUB.html
  */
 
-import * as common     from './lib/common.ts';
-import * as ocf        from './lib/ocf.ts';
-import * as rConvert   from './lib/convert.ts';
-import * as cConvert   from './clib/convert.ts';
-import * as fetch      from './lib/fetch.ts';
-import * as _          from 'underscore';
-import * as urlHandler from 'url';
+import type { Options, ConfigOptions }  from './lib/common.ts';
+import * as common                      from './lib/common.ts';
+import * as ocf                         from './lib/ocf.ts';
+import * as rConvert                    from './lib/convert.ts';
+import * as cConvert                    from './clib/convert.ts';
+import * as fetch                       from './lib/fetch.ts';
+import * as _                           from 'underscore';
+import * as urlHandler                  from 'url';
+
+/**
+ * Options provided by the user if and when the source has to be pre-processed via ReSpec.
+ *
+ * The original content file has to be pre-processed via the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * before further processing to convert the ReSpec source first. If that is the case (see [[Options.respec]]), it is also possible to set some of the ReSpec configuration options,
+ * overwriting the values set in the `config` entry of the original file. The possible ReSpec options to be set are `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
+ * See the [ReSpec editor's guide](https://respec.org/docs/) for details.
+ *
+ */
+export type { Options } from './lib/common.ts';
+
+/** Valid Spec Status values */
+export { spec_status_values } from './lib/common.ts';
 
 /**
  * Convenience class, to export the internal [RespecToEPUB](lib_convert.RespecToEpub.html) class for the package as a whole.
@@ -74,35 +89,6 @@ export class RespecToEPUB extends rConvert.RespecToEPUB {}
  * Convenience class to export the internal [OCF](lib_ocf.OCF.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
  */
 export class OCF extends ocf.OCF {}
-
-
-/**
- * Config options, to be used as part of the arguments in [[Options]] to overwrite the configuration options of ReSpec.
- */
-interface ConfigOptions {
-    [x :string] :string|string[]|boolean
-}
-
-/**
- * Options provided by the user if and when the source has to be pre-processed via ReSpec.
- *
- * The original content file has to be pre-processed via the W3C [spec generator service](https://labs.w3.org/spec-generator/)
- * before further processing to convert the ReSpec source first. If that is the case (see [[Options.respec]]), it is also possible to set some of the ReSpec configuration options,
- * overwriting the values set in the `config` entry of the original file. The possible ReSpec options to be set are `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
- * See the [ReSpec editor's guide](https://respec.org/docs/) for details.
- *
- */
-export interface Options {
-    /**
-     * Is the source in ReSpec?
-     */
-    respec? :boolean,
-    /**
-     * Collection of respec config options, to be used with the spec generator (if applicable).
-     */
-    config? :ConfigOptions,
-}
-
 
 /**
  * The top level entry in the package: convert a single Respec file, or a collection thereof, into an EPUB document.

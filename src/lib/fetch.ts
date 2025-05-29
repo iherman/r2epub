@@ -73,7 +73,7 @@ const check_Web_url = (address :string) :string => {
     // Check whether the URL is on an invalid host (mostly localhost). If the code is running in the browser, or
     // there is an explicit setting to allow localhost, then it is fine otherwise localhost
     // should be refused.
-    if ( !(common.is_browser || process.env.R2EPUB_LOCAL) ) {
+    if ( !(common.environment === common.Environment.browser || process.env.R2EPUB_LOCAL) ) {
         if (parsed.hostname && common.invalid_host_names.includes(parsed.hostname)) {
             throw `Invalid host used in URL (${parsed.hostname})`;
         }
@@ -101,7 +101,10 @@ const check_Web_url = (address :string) :string => {
  * @async
  */
 export async function fetch_resource(resource_url :string, force_text = false) :Promise<any> {
-    if (common.is_browser === false && process.env.R2EPUB_MODIFIED_EPUB_FILES && resource_url.startsWith(common.modified_epub_files)) {
+    if (common.environment !== common.Environment.browser &&
+        process.env.R2EPUB_MODIFIED_EPUB_FILES &&
+        resource_url.startsWith(common.modified_epub_files))
+    {
         const filename = resource_url.replace(common.modified_epub_files, `${process.env.R2EPUB_MODIFIED_EPUB_FILES}${common.process_version}/`);
         if (filename.endsWith('.png') && force_text === false) {
             // This is an image; it must be returned as a buffer
@@ -129,7 +132,7 @@ export async function fetch_resource(resource_url :string, force_text = false) :
                                     if (force_text){
                                         resolve(response.text())
                                     } else {
-                                        switch (common.get_environment()) {
+                                        switch (common.environment) {
                                             case common.Environment.browser :
                                                 // In a browser, the body is returned as a blob
                                                 resolve(response.blob());
@@ -238,8 +241,6 @@ export async function fetch_html(html_url :string) :Promise<jsdom.JSDOM> {
  * @throws Error if something goes wrong with fetch or DOM Parsing
  */
 export async function fetch_json(json_url :string) :Promise<any> {
-    // Note that if this was used in a browser only, there are shortcuts in the fetch function for this, but that is not the case for
-    // node-fetch. :-(
     try {
         const body = await fetch_resource(json_url, true);
 

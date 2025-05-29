@@ -95,13 +95,12 @@
 
 
 /* Main imports */
-import * as r2epub    from './index.ts';
-import * as _         from 'underscore';
-import * as common    from './lib/common.ts';
-import * as fs        from 'node:fs';
-import * as process   from 'node:process'
-import { Command }    from 'commander';
-import { Buffer }     from "node:buffer"
+import * as r2epub      from './index.ts';
+import * as _           from 'underscore';
+import * as fs          from 'node:fs';
+import * as process     from 'node:process'
+import { Command }      from 'commander';
+import { Buffer }       from "node:buffer"
 
 /** @hidden */
 const ERROR  = 'ERROR';
@@ -127,7 +126,7 @@ async function cli() {
         .option('-r, --respec', 'the source must be pre-processed by ReSpec', false)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-s, --specStatus <type>', 'specification type', (value :string, _dummy :unknown) :string => {
-            if (common.spec_status_values.includes(value)) {
+            if (r2epub.spec_status_values.includes(value)) {
                 return value;
             } else {
                 console.error(`r2epub warning: invalid spec status value (${value}); ignored`);

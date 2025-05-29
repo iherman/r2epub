@@ -106,7 +106,7 @@ export class OCF {
     async get_content() :Promise<Buffer | ArrayBuffer> {
         if (this.content === null) {
             this.content = await this._container.generateAsync({
-                type               : common.is_browser ? 'arraybuffer' : 'nodebuffer',
+                type               : 'arraybuffer',
                 mimeType           : common.media_types.epub,
                 compressionOptions : {
                     level : 9,

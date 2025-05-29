@@ -24,7 +24,7 @@
  *
  */
 
-import type { Options } from '../index.ts';
+import type { Options } from '../lib/common.ts';
 import * as ocf         from '../lib/ocf.ts';
 import * as fetch       from '../lib/fetch.ts';
 import { Chapter }      from './chapter.ts';

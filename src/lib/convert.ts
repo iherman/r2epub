@@ -25,7 +25,7 @@ import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch.ts';
-import type { Options } from '../index.ts';
+import type { Options } from './common.ts';
 import * as common      from './common.ts';
 import * as opf         from './opf.ts';
 import * as ocf         from './ocf.ts';

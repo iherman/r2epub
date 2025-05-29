@@ -13,7 +13,7 @@
  *
  */
 
-import type { Options }    from '../index.ts';
+import type { Options }    from '../lib/common.ts';
 import type * as ocf       from '../lib/ocf.ts';
 import * as common         from '../lib/common.ts';
 import * as rConvert       from '../lib/convert.ts';
