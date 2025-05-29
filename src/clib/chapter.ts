@@ -13,11 +13,11 @@
  *
  */
 
-import type { Options }    from '../index';
-import type * as ocf       from '../lib/ocf';
-import * as common         from '../lib/common';
-import * as rConvert       from '../lib/convert';
-import type * as cConvert  from './convert';
+import type { Options }    from '../index.ts';
+import type * as ocf       from '../lib/ocf.ts';
+import * as common         from '../lib/common.ts';
+import * as rConvert       from '../lib/convert.ts';
+import type * as cConvert  from './convert.ts';
 import * as jsdom          from 'jsdom';
 import JSZip               from 'jszip';
 

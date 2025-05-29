@@ -95,10 +95,10 @@
 
 
 /* Main imports */
-import * as r2epub    from './index';
+import * as r2epub    from './index.ts';
 import * as _         from 'underscore';
-import * as common    from './lib/common';
-import * as fs        from 'fs';
+import * as common    from './lib/common.ts';
+import * as fs        from 'node:fs';
 import * as process   from 'node:process'
 import { Command }    from 'commander';
 import { Buffer }     from "node:buffer"
@@ -119,7 +119,7 @@ const ERROR  = 'ERROR';
 async function cli() {
     const program = new Command();
     program
-        .version('1.2.7')
+        .version('2.0.0')
         .name('r2epub')
         .usage('[options] [url]')
         .description('Convert the file or collection configuration at [url] to EPUB 3.2')
@@ -148,6 +148,7 @@ async function cli() {
         })
         .option('-p, --package', '[debug option] do not generate an EPUB file, just print the package file content.', false)
         .option('-t, --trace', '[debug option] print built in trace information while processing.', false)
+        .argument('<url>', 'URL of the HTML file or collection configuration')
         .parse(process.argv);
 
     const cli_options = program.opts();
@@ -163,7 +164,7 @@ async function cli() {
             config : {
                 publishDate     : cli_options.publishDate,
                 specStatus      : cli_options.specStatus === ERROR ? undefined : cli_options.specStatus,
-                addSectionLinks : cli_options.addSectionLinks ? "true" : undefined,
+                addSectionLinks : cli_options.addSectionLinks ? true : false,
                 maxTocLevel     : cli_options.maxTocLevel === ERROR ? undefined : cli_options.maxTocLevel,
             },
         }
@@ -185,10 +186,11 @@ async function cli() {
                 }
                 fs.writeFileSync(cli_options.output || the_ocf.name, await get_content());
             }
-        } catch (e) {
-            console.error(`r2epub error: ${e}`);
+        } catch (e: unknown) {
+            console.error(`r2epub error: ${e}, ${e.stack}`); // eslint-disable-line no-console
         }
     }
 }
 
 cli();
+

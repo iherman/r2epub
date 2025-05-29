@@ -22,7 +22,7 @@
  */
 
 import { convert }   from "xmlbuilder2";
-import * as utils    from "./utils";
+import * as utils    from "./utils.ts";
 
 // These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.3 package. See that document for details.
 /**

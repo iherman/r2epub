@@ -1,5 +1,9 @@
 # Changes
 
+## Version 2.0.0
+
+* Major change: putting [deno](deno.land) into the center, instead of node.js. The environment is more stable (no module issues), the TypeScript compiler is stricter but then forces a better code.
+
 ## Version 1.3.2
 
 * Removed heroku as a possible web service (anticipating the closure of heroku's free accounts)

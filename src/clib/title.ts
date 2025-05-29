@@ -10,8 +10,8 @@
  *
  */
 
-import type * as cConvert from './convert';
-import * as utils         from '../lib/utils';
+import type * as cConvert from './convert.ts';
+import * as utils         from '../lib/utils.ts';
 
 /**
  * The template to be used for the title page.

@@ -44,6 +44,6 @@
         "categorizeByGroup": true,
         "gitRemote": "origin",
         "hideGenerator": true,
-        "name" : "r2epub — Converting HTML/ReSpec documents to EPUB 3.3"
+        "name" : "r2epub — Converting HTML/ReSpec documents to EPUB 3.4"
     }
 }

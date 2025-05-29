@@ -13,9 +13,9 @@
  */
 
 import * as jsdom         from 'jsdom';
-import type * as cConvert from './convert';
-import * as utils         from '../lib/utils';
-import type { Chapter }   from './chapter';
+import type * as cConvert from './convert.ts';
+import * as utils         from '../lib/utils.ts';
+import type { Chapter }   from './chapter.ts';
 
 
 /**
@@ -24,6 +24,7 @@ import type { Chapter }   from './chapter';
  * @hidden
  */
 const nav  = `<?xml version="1.0"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
     <head>
         <title>

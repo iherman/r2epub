@@ -11,8 +11,8 @@
  *
  */
 
-import type { ResourceRef, Global } from './convert';
-import * as common                  from './common';
+import type { ResourceRef, Global } from './convert.ts';
+import * as common                  from './common.ts';
 
 
 /**

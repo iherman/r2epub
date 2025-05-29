@@ -12,11 +12,9 @@
  */
 
 
-import type { ResourceRef, Global } from './convert';
-import { to_xhtml }                 from './utils';
-import * as common                  from './common';
-import { text_content } from './common';
-
+import type { ResourceRef, Global } from './convert.ts';
+import { to_xhtml }                 from './utils.ts';
+import * as common                  from './common.ts';
 
 /**
  * Template of the XHTML file
@@ -24,6 +22,7 @@ import { text_content } from './common';
  * @hidden
  */
 const nav  = `<?xml version="1.0"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
     <head>
         <title>

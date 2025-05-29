@@ -15,11 +15,11 @@
         "origin": "git push origin main",
         "r2epub": "node dist/r2epub.js",
         "server": "node dist/server.js",
-        "local-test-book": "ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub.json",
-        "local-test-document": "ts-node src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/test/spec/Overview.html",
-        "local-test-clreq": "ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/test/clreq/Overview.html",
+        "local-test-book": "node_modules/.bin/ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub.json",
+        "local-test-document": "node_modules/.bin/ts-node src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/test/spec/Overview.html",
+        "local-test-clreq": "node_modules/.bin/ts-node src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/test/clreq/Overview.html",
         "local-test-expand": "unzip epub33.epub -d test/epub",
-        "local-test": "ts-node src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json ; unzip epub33.epub -d test/epub"
+        "local-test": "node_modules/.bin/ts-node src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json ; unzip epub33.epub -d test/epub"
     },
     "repository": {
         "type": "git",
@@ -37,12 +37,10 @@
     "homepage": "https://iherman.github.io/r2epub/",
     "dependencies": {
         "@exodus/schemasafe": "^1.3.0",
-        "ajv": "^6.12.6",
         "commander": "^14.0.0",
         "jsdom": "^26.1.0",
         "jszip": "^3.10.1",
         "minimist": "^1.2.8",
-        "node-fetch": "^2.6.1",
         "underscore": "^1.10.2",
         "url": "^0.11.4",
         "valid-url": "^1.0.9",
@@ -50,20 +48,19 @@
         "xmlbuilder2": "^3.1.1"
     },
     "devDependencies": {
-        "@types/ajv": "^1.0.0",
         "@types/commander": "^2.12.0",
         "@types/jsdom": "^21.1.7",
         "@types/jszip": "^3.4.0",
-        "@types/node": "^22.15.21",
-        "@types/node-fetch": "^2.5.5",
+        "@types/node": "^22.15.23",
         "@types/underscore": "^1.9.4",
         "@types/valid-url": "^1.0.7",
         "@types/w3c-xmlserializer": "^2.0.4",
-        "@typescript-eslint/eslint-plugin": "^4.6.1",
-        "@typescript-eslint/parser": "^4.6.1",
-        "eslint": "^7.13.0",
-        "terser": "^4.6.11",
-        "typedoc": "^0.15.8",
-        "typescript": "^4.9.5"
+        "@typescript-eslint/eslint-plugin": "^8.33.0",
+        "@typescript-eslint/parser": "^8.33.0",
+        "eslint": "^9.27.0",
+        "terser": "^5.40.0",
+        "ts-node": "^10.9.2",
+        "typedoc": "^0.28.5",
+        "typescript": "^5.8.3"
     }
 }

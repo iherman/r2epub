@@ -20,21 +20,21 @@
  */
 
 
-import * as jsdom      from 'jsdom';
+import type * as jsdom from 'jsdom';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
-import { fetch_html, fetch_resource, fetch_type } from './fetch';
-import type { Options } from '../index';
-import * as common      from './common';
-import * as opf         from './opf';
-import * as ocf         from './ocf';
-import * as css2016     from './css2016';
-import * as css2021     from './css2021';
-import * as title_page  from './title';
-import * as cover_page  from './cover';
-import * as nav         from './nav';
-import * as overview    from './overview';
+import { fetch_html, fetch_resource, fetch_type } from './fetch.ts';
+import type { Options } from '../index.ts';
+import * as common      from './common.ts';
+import * as opf         from './opf.ts';
+import * as ocf         from './ocf.ts';
+import * as css2016     from './css2016.ts';
+import * as css2021     from './css2021.ts';
+import * as title_page  from './title.ts';
+import * as cover_page  from './cover.ts';
+import * as nav         from './nav.ts';
+import * as overview    from './overview.ts';
 
 
 // ========================================================== The main conversion part ============================================ //
@@ -204,10 +204,14 @@ export class RespecToEPUB {
                 // Collect the possible query parameters to control some details of the respec transformation
                 const config_options :string[] = _.keys(options.config)
                     .map( (key :string) :string|null => {
-                        if (options.config[key] === null || options.config[key] === '' || options.config[key] === 'null') {
-                            return null;
+                        if (options.config) {
+                            if (options.config[key] === null || options.config[key] === '' || options.config[key] === 'null') {
+                                return null;
+                            } else {
+                                return `${key}%3D${options.config[key]}`
+                            }
                         } else {
-                            return `${key}%3D${options.config[key]}`
+                            return null;
                         }
                     })
                     .filter((val :string|null) => val !== null);
@@ -218,11 +222,11 @@ export class RespecToEPUB {
             }
         }
 
-        if (this.global.trace) console.log(`Input arguments: ${url}, ${JSON.stringify(options)}`);
+        if (this.global.trace) console.log(`- Input arguments: ${url}, ${JSON.stringify(options)}`);
 
         // Fetch the real content (with a possible respec transformation) as a DOM tree for further processing
         const fetch_url = full_url();
-        if (this.global.trace) console.log(`URL for the spec to be fetched: ${fetch_url}`);
+        if (this.global.trace) console.log(`- URL for the spec to be fetched: ${fetch_url}`);
         const dom :jsdom.JSDOM = await fetch_html(fetch_url);
 
         return await this.create_epub_from_dom(url, dom);
@@ -276,10 +280,10 @@ export class RespecToEPUB {
                 if (!this.global.config.publishDate) {
                     this.global.config.publishDate = this.global.config.publishISODate.split('T')[0];
                 }
-                if (this.global.trace) console.log(`PublishDate: ${this.global.config.publishDate}`);
+                if (this.global.trace) console.log(`- PublishDate: ${this.global.config.publishDate}`);
                 common.finalize_style_constants(this.global.config);
             }
-            if (this.global.trace) console.log(`global config set`);
+            if (this.global.trace) console.log(`- Global config set`);
         }
 
         // ------------------------------------------
@@ -288,14 +292,14 @@ export class RespecToEPUB {
             // Create the package content, and populate it with the essential metadata using the configuration
             const title = (this.global.html_element?.querySelector('title') as HTMLElement).textContent;
             this.global_url = `https://www.w3.org/TR/${this.global.config.shortName}/`;
-            this.global.opf_content = new opf.PackageWrapper(this.global_url, title);
+            this.global.opf_content = new opf.PackageWrapper(this.global_url, title || '');
             this.global.opf_content.add_creators(
                 this.global.config.editors.map((entry: any) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`),
             );
 
             const date = this.global.html_element?.querySelector('time.dt-published');
-            if (date) this.global.opf_content.add_dates(date.getAttribute('datetime'));
-            if (this.global.trace) console.log(`global metadata set`);
+            if (date) this.global.opf_content.add_dates(date.getAttribute('datetime') || '');
+            if (this.global.trace) console.log(`- Global metadata set`);
         }
 
         // ------------------------------------------
@@ -348,7 +352,7 @@ export class RespecToEPUB {
         // (2) is problematic because it forces a narrow display of the text that we do not want.
         {
             const fixup_element = this.global.html_element?.querySelector(`script[src="${common.fixup_js}"]`);
-            if (this.global.trace) console.log(`Got the the reference to the fixup script ${fixup_element} with url ${common.fixup_js}`);
+            if (this.global.trace) console.log(`- Got the the reference to the fixup script ${fixup_element} with url ${common.fixup_js}`);
             if (fixup_element) fixup_element.remove();
         }
 
@@ -390,7 +394,7 @@ export class RespecToEPUB {
             // Populate the global package with the resource items
             let res_id_num = 1;
             this.global.resources.forEach((resource) => {
-                if (resource.relative_url) {
+                if (resource.relative_url && this.global.opf_content) {
                     this.global.opf_content.add_manifest_item({
                         "@href"       : resource.relative_url,
                         "@media-type" : resource.media_type,
@@ -433,7 +437,7 @@ export class RespecToEPUB {
         let global_url :string;
         const parsed_document_url = urlHandler.parse(this.global.document_url);
         // Check whether the document url is on localhost or other, invalid host name
-        if (common.invalid_host_names.includes(parsed_document_url.hostname)) {
+        if (parsed_document_url.hostname && common.invalid_host_names.includes(parsed_document_url.hostname)) {
             // check if the global url is there, using a fallback if not
             global_url = this.global_url || this.global.document_url;
         } else {
@@ -520,9 +524,9 @@ export class RespecToEPUB {
         const relative_urls: string[] = _.uniq(target_urls);
 
         const absolute_urls = relative_urls.map((ref :string) :string => urlHandler.resolve(this.global.document_url, ref));
-        if (this.global.trace) console.log(`getting the resources' content types via a set of fetches`);
+        if (this.global.trace) console.log(`- Getting the resources' content types via a set of fetches`);
         const media_types   = await Promise.all(absolute_urls.map((url) => fetch_type(url)));
-        if (this.global.trace) console.log(`Got the media types ${media_types}`);
+        if (this.global.trace) console.log(`- Got the media types ${media_types}`);
 
         return _.zip(relative_urls, media_types, absolute_urls).map((entry: string[]) :ResourceRef => {
             return {
@@ -548,14 +552,16 @@ export class RespecToEPUB {
 
         // The OCF class adds the fixed file like mime type and such automatically.
         // Add the package to the archives, with a fixed name:
-        the_book.append(this.global.opf_content.serialize(), 'package.opf');
+        if ( this.global.opf_content ) the_book.append(this.global.opf_content.serialize(), 'package.opf');
 
         // Add all the resources
         {
             // First, find the resources where the content is simply a text; this can be archived directly
-            if (this.global.trace) console.log(`append locally generated contents to the epub file`);
+            if (this.global.trace) console.log(`- Append locally generated contents to the epub file`);
             this.global.resources?.filter((resource: ResourceRef): boolean => resource.text_content ? true : false)
-                .forEach((resource: ResourceRef): void => the_book.append(resource.text_content, resource.relative_url));
+                // Note that the text_content is a string, so it can be appended directly
+                // It also exists, the '||' part is used to make the typescript checker happy
+                .forEach((resource: ResourceRef): void => the_book.append(resource.text_content || '', resource.relative_url));
 
             // Second, find the resources where the content must be fetched...
             const to_be_fetched = this.global.resources?.filter((resource: ResourceRef): boolean => resource.absolute_url ? true : false) || [];
@@ -563,10 +569,10 @@ export class RespecToEPUB {
             const urls       = to_be_fetched.map((resource :ResourceRef): string => resource.absolute_url || '')
                 .filter((url :string): boolean => url !== '');
 
-            if (this.global.trace) console.log(`fetch the external resources (${urls})`);
+            if (this.global.trace) console.log(`- Fetch the external resources (${urls})`);
             const contents   = await Promise.all(urls.map((url: string): Promise<any> => fetch_resource(url)));
-            if (this.global.trace) console.log(`append external resources to the epub file`);
-            _.zip(contents, file_names).forEach((arg: [any, string]) :void => the_book.append(arg[0], arg[1]));
+            if (this.global.trace) console.log(`- Append external resources to the epub file`);
+            _.zip(contents, file_names).forEach((arg: [any, string]) :void => the_book.append(arg[0], arg[1], this.global.trace));
         }
         return the_book;
     }

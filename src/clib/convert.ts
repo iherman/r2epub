@@ -24,15 +24,15 @@
  *
  */
 
-import type { Options } from '../index';
-import * as ocf         from '../lib/ocf';
-import * as fetch       from '../lib/fetch';
-import { Chapter }      from './chapter';
-import * as nav         from './nav';
-import * as opf         from './opf';
-import * as title       from './title';
-import * as cover       from './cover';
-import * as args        from './args';
+import type { Options } from '../index.ts';
+import * as ocf         from '../lib/ocf.ts';
+import * as fetch       from '../lib/fetch.ts';
+import { Chapter }      from './chapter.ts';
+import * as nav         from './nav.ts';
+import * as opf         from './opf.ts';
+import * as title       from './title.ts';
+import * as cover       from './cover.ts';
+import * as args        from './args.ts';
 import * as _           from 'underscore';
 
 /**
@@ -131,7 +131,6 @@ const generate_book_data = async (book_data :CollectionConfiguration) :Promise<C
  */
 export async function create_epub(config_url :string, print_package = false) :Promise<ocf.OCF> {
     const data :any = await fetch.fetch_json(config_url);
-
     // check, via a JSON schema, the validity of the input and create the right arguments
     const book_data :CollectionConfiguration = args.get_book_configuration(data);
 

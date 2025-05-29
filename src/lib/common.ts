@@ -4,13 +4,31 @@
  *
  * @packageDocumentation
 */
-
 import * as process from 'node:process';
-/**
- * Flag to decide whether the code runs in a browser or in node.js
- */
 
-export const is_browser :boolean = (process === undefined || process.title === 'browser');
+export enum Environment {
+    browser = 'browser',
+    nodejs  = 'nodejs',
+    deno    = 'deno',
+}
+
+/**
+ * Flag to decide whether the code runs in a browser, Deno, or in node.js
+ */
+export function get_environment() :Environment {
+    if (typeof Deno !== "undefined" && typeof Deno.version !== "undefined") {
+        return Environment.deno;
+    } else if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+        return Environment.browser;
+    } else if (typeof process !== 'undefined' && typeof process.versions === 'object' && typeof process.versions.node !== 'undefined') {
+        return Environment.nodejs;
+    } else {
+        throw new Error('Unknown environment: neither Deno, nor Node.js, nor browser');
+    }
+}
+
+// This is just to ensure backwards compatibility with the old code
+export const is_browser :boolean = (get_environment() === Environment.browser);
 
 /**
  *
@@ -34,6 +52,7 @@ export const media_types :MediaType = {
     png    : 'image/png',
     svg    : 'image/svg+xml',
     xhtml  : 'application/xhtml+xml',
+    ts     : 'text/x.typescript',
 };
 
 
@@ -48,6 +67,7 @@ export const text_content :string[] = [
     media_types.jsonld,
     media_types.svg,
     media_types.xhtml,
+    media_types.ts,
 ];
 
 /** Valid Spec Status values */

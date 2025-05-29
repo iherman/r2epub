@@ -47,9 +47,9 @@
  */
 
 
-import type { ResourceRef, Global }  from './convert';
+import type { ResourceRef, Global }  from './convert.ts';
 import * as urlHandler               from 'url';
-import * as common                   from './common';
+import * as common                   from './common.ts';
 
 /* ---------------------------------------------- CSS Templates ----------------------------------------- */
 

@@ -5,8 +5,8 @@
 */
 
 import * as jsdom       from 'jsdom';
-import { serialize }    from 'w3c-xmlserializer'
-import { entity_codes } from './common';
+import serialize        from 'w3c-xmlserializer'
+import { entity_codes } from './common.ts';
 
 
 /**
@@ -58,8 +58,8 @@ export function de_xml(inp: string): string {
     if (inp.includes('<')) {
         try {
             const dom = jsdom.JSDOM.fragment(inp);
-            return dom.textContent;
-        } catch (e) {
+            return dom.textContent || '';
+        } catch (_e) {
             // just silently return the original for any issue
             return inp;
         }

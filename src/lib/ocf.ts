@@ -13,10 +13,10 @@
  */
 
 
-import * as common      from './common';
-import type * as stream from 'node:stream';
-import type { Buffer }  from "node:buffer"
-import JSZip            from 'jszip';
+import * as common from './common.ts';
+import * as stream from 'node:stream';
+import { Buffer }  from "node:buffer"
+import JSZip       from 'jszip';
 
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.3 specification](https://www.w3.org/TR/epub-33/#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
@@ -64,7 +64,20 @@ export class OCF {
      * @param content - Content to be stored
      * @param path_name - Path name of the file for the content
      */
-    append(content :string | stream.Readable, path_name: string): void {
+    append(content :string|ArrayBuffer|Blob|stream.Readable, path_name: string, trace = false): void {
+        if (trace) {
+            let message = `- Appending resource (${path_name}) to OCF package`;
+            if (content instanceof stream.Readable) {
+                message += ` (stream)`;
+            } else if (content instanceof ArrayBuffer) {
+                message += ` (array buffer)`;
+            } else if (typeof content === 'string') {
+                message += ` (string)`;
+            } else {
+                message += ` (unknown type)`;
+            }
+            console.log(message);
+        }
         this._container.file(path_name, content, {compression: 'DEFLATE'});
     }
 

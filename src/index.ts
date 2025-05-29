@@ -53,11 +53,11 @@
  * classes/index.RespecToEPUB.html
  */
 
-import * as common     from './lib/common';
-import * as ocf        from './lib/ocf';
-import * as rConvert   from './lib/convert';
-import * as cConvert   from './clib/convert';
-import * as fetch      from './lib/fetch';
+import * as common     from './lib/common.ts';
+import * as ocf        from './lib/ocf.ts';
+import * as rConvert   from './lib/convert.ts';
+import * as cConvert   from './clib/convert.ts';
+import * as fetch      from './lib/fetch.ts';
 import * as _          from 'underscore';
 import * as urlHandler from 'url';
 

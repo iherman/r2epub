@@ -18,9 +18,9 @@
  */
 
 import * as urlHandler              from 'url';
-import type { ResourceRef, Global } from './convert';
-import { to_xhtml }                 from './utils';
-import * as common                  from './common';
+import type { ResourceRef, Global } from './convert.ts';
+import { to_xhtml }                 from './utils.ts';
+import * as common                  from './common.ts';
 
 /**
  * Generate the resource entry for the `Overview.xhtml` item into the package; that includes setting the various manifest item

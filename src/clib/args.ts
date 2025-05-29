@@ -38,8 +38,8 @@
 /**
  *
  */
-import type * as cConvert from './convert';
-import { parser }         from '@exodus/schemasafe';
+import type * as cConvert               from './convert.ts';
+import { parser, type ValidationError } from '@exodus/schemasafe';
 
 /**
  * Validates the input JSON configuration using the JSON schema, and converts the result to the internal data structure.
@@ -55,10 +55,19 @@ export function get_book_configuration(data :any) :cConvert.CollectionConfigurat
         allErrors               : true,
         requireStringValidation : false,
     });
-    const result = parse(data);
+    // Validation happens on a string, no the runtime object, so we have to stringify the data back first...
+    // Oh well, this is how it is done in the library...
+    const result = parse(JSON.stringify(data));
 
-    if (!result.valid) {
-        throw `Schema validation error on the collection configuration file: \n${JSON.stringify(result.errors, null, 4)}`
+    if (result.valid !== true) {
+        if (result.errors === undefined || result.errors.length === 0) {
+            throw 'Schema validation error on the collection configuration file: file invalid, but no errors found';
+        } else {
+            const errors :string[] = result.errors?.map((e: ValidationError): string => {
+                return `\n - error at ${e.instanceLocation}: ${e.keywordLocation};`;
+            });
+            throw `Schema validation error on the collection configuration file: ${errors.join()}`;
+        }
     } else {
         const chapters :cConvert.ChapterConfiguration[] = data.readingOrder.map((chapter :any) :cConvert.ChapterConfiguration => {
             const config :any = {};
@@ -131,10 +140,14 @@ const argument_schema = `{
                                     "LD",
                                     "LS",
                                     "CR",
+                                    "CRD",
                                     "PR",
                                     "PER",
                                     "REC",
                                     "RSCND",
+                                    "STMT",
+                                    "DISC",
+                                    "DNOTE",
                                     "FPWD-NOTE",
                                     "WG-NOTE",
                                     "BG-DRAFT",
@@ -143,6 +156,7 @@ const argument_schema = `{
                                     "CG-FINAL",
                                     "Member-SUBM",
                                     "draft-finding",
+                                    "editor-draft-finding",
                                     "finding"
                                 ]
                             },

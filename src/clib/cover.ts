@@ -6,9 +6,9 @@
  * @packageDocumentation
  */
 
-import type * as cConvert from './convert';
-import * as utils         from '../lib/utils';
-import { cover_svg }      from '../lib/cover';
+import type * as cConvert from './convert.ts';
+import * as utils         from '../lib/utils.ts';
+import { cover_svg }      from '../lib/cover.ts';
 
 
 /**

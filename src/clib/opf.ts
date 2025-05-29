@@ -10,10 +10,10 @@
  *
  */
 
-import * as opf                                              from '../lib/opf';
-import * as common                                           from '../lib/common';
-import type * as cConvert                                    from './convert';
-import { type Chapter, type OPFManifestItem, transfer_once } from './chapter';
+import * as opf                                              from '../lib/opf.ts';
+import * as common                                           from '../lib/common.ts';
+import type * as cConvert                                    from './convert.ts';
+import { type Chapter, type OPFManifestItem, transfer_once } from './chapter.ts';
 
 /**
  * Creation of the of the Package file for a collection, per the [EPUB 3.3 Package Document Specification](https://www.w3.org/TR/epub-33/#sec-package-doc). See also [the `PackageWrapper` documentation](https://iherman.github.io/r2epub/typedoc/classes/_lib_opf_.packagewrapper.html).

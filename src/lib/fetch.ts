@@ -16,9 +16,10 @@
 import * as urlHandler from 'url';
 import * as validUrl   from 'valid-url';
 import * as jsdom      from 'jsdom';
-import * as common     from './common';
+import * as common     from './common.ts';
 import * as fs         from 'node:fs';
 import * as process    from 'node:process';
+import type { Buffer } from "node:buffer";
 
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.
@@ -73,7 +74,7 @@ const check_Web_url = (address :string) :string => {
     // there is an explicit setting to allow localhost, then it is fine otherwise localhost
     // should be refused.
     if ( !(common.is_browser || process.env.R2EPUB_LOCAL) ) {
-        if (common.invalid_host_names.includes(parsed.hostname)) {
+        if (parsed.hostname && common.invalid_host_names.includes(parsed.hostname)) {
             throw `Invalid host used in URL (${parsed.hostname})`;
         }
     }
@@ -128,13 +129,25 @@ export async function fetch_resource(resource_url :string, force_text = false) :
                                     if (force_text){
                                         resolve(response.text())
                                     } else {
-                                        // return the body without processing, ie, as a blob or a stream
-                                        if (common.is_browser) {
-                                            // In a browser, a blob should be returned
-                                            resolve(response.blob())
-                                        } else {
-                                            // In node.js the body is returned as a stream
-                                            resolve(response.body)
+                                        switch (common.get_environment()) {
+                                            case common.Environment.browser :
+                                                // In a browser, the body is returned as a blob
+                                                resolve(response.blob());
+                                                break;
+                                            case common.Environment.deno :
+                                                // In deno, the body is, I believe, an Uint8Array, but other layers
+                                                // (like jszip) expect an ArrayBuffer, so we convert it
+                                                resolve(response.arrayBuffer());
+                                                break;
+                                            case common.Environment.nodejs :
+                                                // In Node.js, the body is returned as a stream
+                                                resolve(response.body);
+                                                break;
+                                            default:
+                                                // In other environments, we do not know what to do, so we return the body as a blob
+                                                // This is a fallback, but it should not happen
+                                                console.warn(`Unknown environment, returning body as blob: ${common.get_environment()}`);
+                                                resolve(response.blob());
                                         }
                                     }
                                 }
@@ -229,6 +242,7 @@ export async function fetch_json(json_url :string) :Promise<any> {
     // node-fetch. :-(
     try {
         const body = await fetch_resource(json_url, true);
+
         return JSON.parse(body);
     } catch (err) {
         throw new Error(`JSON parsing error in ${json_url}: ${err}`);
