@@ -96,7 +96,6 @@
 
 /* Main imports */
 import * as r2epub      from './index.ts';
-import * as _           from 'underscore';
 import * as fs          from 'node:fs';
 import * as process     from 'node:process'
 import { Command }      from 'commander';
@@ -138,7 +137,7 @@ async function cli() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .option('-m, --maxTocLevel <number>', 'maximum TOC level', (value :string, _dummy :unknown) :string => {
             const n_value = Number(value);
-            if (_.isNaN(n_value) || n_value < 0) {
+            if (Number.isNaN(n_value) || n_value < 0) {
                 console.error(`r2epub warning: invalid maximal TOC level (${value}); ignored`);
                 return ERROR;
             } else {

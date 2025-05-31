@@ -13,7 +13,8 @@
     },
     "tasks": {
         "test-document": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/test/spec/Overview.html",
-        "test-book": "deno run -A src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json"
+        "test-book": "deno run -A src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
+        "test-respec": "deno run -A src/r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
     },
     "exports": {
         ".":     "./src/index.ts",
@@ -24,7 +25,6 @@
     "exclude": ["dist/", "_config.yml"],
     "imports": {
         "jszip"                 : "npm:jszip@^3.10.1",
-        "underscore"            : "npm:underscore@^1.10.2",
         "url"                   : "npm:url@^0.11.4",
         "valid-url"             : "npm:valid-url@^1.0.9",
         "w3c-xmlserializer"     : "npm:w3c-xmlserializer@^5.0.0",

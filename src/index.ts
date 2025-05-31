@@ -59,7 +59,6 @@ import * as ocf                         from './lib/ocf.ts';
 import * as rConvert                    from './lib/convert.ts';
 import * as cConvert                    from './clib/convert.ts';
 import * as fetch                       from './lib/fetch.ts';
-import * as _                           from 'underscore';
 import * as urlHandler                  from 'url';
 
 /**
@@ -113,7 +112,7 @@ export async function convert(url: string, options: Options = {}, t = false, p =
         }
         return {
             respec : opts.respec === undefined || opts.respec === null ? false : opts.respec,
-            config : _.defaults(opts.config, defaultConfig), // @@@_
+            config : {...defaultConfig, ...opts.config},
         };
     };
 

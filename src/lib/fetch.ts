@@ -19,7 +19,6 @@ import * as jsdom      from 'jsdom';
 import * as common     from './common.ts';
 import * as fs         from 'node:fs';
 import * as process    from 'node:process';
-import type { Buffer } from "node:buffer";
 
 /**
 * Basic sanity check on a URL supposed to be used to retrieve a Web Resource.

@@ -33,7 +33,6 @@ import * as opf         from './opf.ts';
 import * as title       from './title.ts';
 import * as cover       from './cover.ts';
 import * as args        from './args.ts';
-import * as _           from 'underscore';
 
 /**
  * Arguments used by the internal conversion functions; just combining the possible options with the URL for a more compact handling.
@@ -95,7 +94,7 @@ const generate_book_data = async (book_data :CollectionConfiguration) :Promise<C
     const chapters :Chapter[] = await Promise.all(promises);
 
     // 4. Collect all the editors, it will be used later...
-    const editors :string[]  =  _.flatten(chapters.map((chapter :Chapter) :string[] => chapter.editors));
+    const editors :string[]  =  chapters.map((chapter :Chapter) :string[] => chapter.editors).flat();
 
     // 5. Collect the date, it will be used later...
     //    The maximal value of all constituent dates is used
@@ -106,7 +105,7 @@ const generate_book_data = async (book_data :CollectionConfiguration) :Promise<C
     return {
         title    : book_data.name,
         name     : book_data.id,
-        editors  : _.unique(editors),
+        editors  : [...new Set(editors)], // remove duplicates
         date     : date,
         ocf      : new ocf.OCF(`${book_data.id}.epub`),
         chapters : chapters,

@@ -13,10 +13,10 @@
  */
 
 
-import * as common from './common.ts';
-import * as stream from 'node:stream';
-import { Buffer }  from "node:buffer"
-import JSZip       from 'jszip';
+import * as common     from './common.ts';
+import * as stream     from 'node:stream';
+import type { Buffer } from "node:buffer"
+import JSZip           from 'jszip';
 
 /**
  * The content of the required `container.xml` file (see the [EPUB 3.3 specification](https://www.w3.org/TR/epub-33/#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level

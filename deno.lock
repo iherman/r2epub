@@ -7,7 +7,6 @@
     "npm:@types/jszip@^3.4.0": "3.4.1",
     "npm:@types/node@*": "22.15.15",
     "npm:@types/node@^22.15.23": "22.15.23",
-    "npm:@types/underscore@^1.9.4": "1.13.0",
     "npm:@types/valid-url@^1.0.7": "1.0.7",
     "npm:@types/w3c-xmlserializer@^2.0.4": "2.0.4",
     "npm:@typescript-eslint/eslint-plugin@^8.33.0": "8.33.0_@typescript-eslint+parser@8.33.0__eslint@9.27.0__typescript@5.8.3_eslint@9.27.0_typescript@5.8.3",
@@ -24,7 +23,6 @@
     "npm:ts-node@^10.9.2": "10.9.2_@types+node@22.15.15_typescript@5.8.3",
     "npm:typedoc@~0.28.5": "0.28.5_typescript@5.8.3",
     "npm:typescript@^5.8.3": "5.8.3",
-    "npm:underscore@^1.10.2": "1.13.7",
     "npm:url@~0.11.4": "0.11.4",
     "npm:valid-url@^1.0.9": "1.0.9",
     "npm:w3c-xmlserializer@*": "5.0.0",
@@ -331,9 +329,6 @@
     },
     "@types/tough-cookie@4.0.5": {
       "integrity": "sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA=="
-    },
-    "@types/underscore@1.13.0": {
-      "integrity": "sha512-L6LBgy1f0EFQZ+7uSA57+n2g/s4Qs5r06Vwrwn0/nuK1de+adz00NWaztRQ30aEqw5qOaWbPI8u2cGQ52lj6VA=="
     },
     "@types/unist@3.0.3": {
       "integrity": "sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q=="
@@ -1338,9 +1333,6 @@
       "integrity": "sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==",
       "bin": true
     },
-    "underscore@1.13.7": {
-      "integrity": "sha512-GMXzWtsc57XAtguZgaQViUOzs0KTkk8ojr3/xAxXLITqf/3EMwxC0inyETfDFjH/Krbhuep0HNbbjI9i/q3F3g=="
-    },
     "undici-types@6.21.0": {
       "integrity": "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="
     },
@@ -1436,7 +1428,6 @@
       "npm:commander@14",
       "npm:jsdom@26",
       "npm:jszip@^3.10.1",
-      "npm:underscore@^1.10.2",
       "npm:url@~0.11.4",
       "npm:valid-url@^1.0.9",
       "npm:w3c-xmlserializer@5",
@@ -1449,7 +1440,6 @@
         "npm:@types/jsdom@^21.1.7",
         "npm:@types/jszip@^3.4.0",
         "npm:@types/node@^22.15.23",
-        "npm:@types/underscore@^1.9.4",
         "npm:@types/valid-url@^1.0.7",
         "npm:@types/w3c-xmlserializer@^2.0.4",
         "npm:@typescript-eslint/eslint-plugin@^8.33.0",
@@ -1463,7 +1453,6 @@
         "npm:ts-node@^10.9.2",
         "npm:typedoc@~0.28.5",
         "npm:typescript@^5.8.3",
-        "npm:underscore@^1.10.2",
         "npm:url@~0.11.4",
         "npm:valid-url@^1.0.9",
         "npm:w3c-xmlserializer@5",

@@ -21,7 +21,6 @@
 
 
 import type * as jsdom from 'jsdom';
-import * as _          from 'underscore';
 import * as urlHandler from 'url';
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch.ts';
@@ -35,6 +34,12 @@ import * as title_page  from './title.ts';
 import * as cover_page  from './cover.ts';
 import * as nav         from './nav.ts';
 import * as overview    from './overview.ts';
+
+// Extra utility to simulate the _.zip function from underscore.js
+function zip<T extends unknown[][]>(...arrays: T): { [K in keyof T]: T[K] extends (infer V)[] ? V : never }[] {
+    const minLength = Math.min(...arrays.map((arr) => arr.length));
+    return Array.from({ length: minLength }, (_, i) => arrays.map((arr) => arr[i]) as any);
+}
 
 
 // ========================================================== The main conversion part ============================================ //
@@ -202,20 +207,33 @@ export class RespecToEPUB {
             if (options.respec) {
                 // Yep, the content has to go through the respec transformation service
                 // Collect the possible query parameters to control some details of the respec transformation
-                const config_options :string[] = _.keys(options.config)
-                    .map( (key :string) :string|null => {
-                        if (options.config) {
-                            if (options.config[key] === null || options.config[key] === '' || options.config[key] === 'null') {
-                                return null;
-                            } else {
-                                return `${key}%3D${options.config[key]}`
-                            }
-                        } else {
-                            return null;
-                        }
-                    })
-                    .filter((val :string|null) => val !== null);
+                const config_options :string[] = ((): string[] => {
+                    if (options.config === undefined) {
+                        return [];
+                    } else {
+                        return Object.keys(options.config)
+                            .map((key :string) :string|null => {
+                                if (options.config) {
+                                    if (options.config[key] === null || options.config[key] === '' || options.config[key] === 'null') {
+                                        return null;
+                                    } else if (options.config[key] === undefined) {
+                                        // If the value is undefined, we do not add it to the query string
+                                        return null;
+                                    } else {
+                                        return `${key}=${options.config[key]}`
+                                    }
+                                } else {
+                                    return null;
+                                }
+                            })
+                            .filter((val :string|null) => val !== null);
+                    }
+                })();
+                // The query string is a concatenation of the config options, separated by '&'
                 const query_string = config_options.length === 0 ? '' : `%3F${config_options.join('%26')}`;
+
+                if (this.global.trace) console.log(`- Respec transformation query: ${query_string}`);
+
                 return `${common.spec_generator}${url}${query_string}`
             } else {
                 return url;
@@ -448,10 +466,10 @@ export class RespecToEPUB {
         // Collect the set of resources from relative links in the source
         // The 'resource_references' array gives the pair of CSS query and attribute names to consider as
         // local resources. Those are collected in one array.
-        const target_urls: string[] = _.chain(this.resource_references)
+        const target_urls: string[] =
             // extract the possible references
-            // Note that the map below generated an array of arrays; separate for images, objects, <a> elements, etc
-            .map((ref :LocalLinks) :string[] => {
+            // Note that the map below generated an array of arrays; separate for images, objects, <a> elements, etc.
+            this.resource_references.map((ref :LocalLinks) :string[] => {
                 // Get all the link type elements from the the HTML source.
                 const refs = this.global.html_element?.querySelectorAll(ref.query);
                 let candidates :HTMLElement[] = (refs) ? Array.from(refs) as HTMLElement[] : [];
@@ -498,37 +516,36 @@ export class RespecToEPUB {
                 });
                 return candidates.map((element): string => element.getAttribute(ref.attr) || '');
             })
-            // create one single array of the result (instead of an array or arrays)
-            .flatten() // @@@_ when getting out of underscore, the function to used is Array.flat(Infinity)
-            // Remove absolute URL-s
-            .filter((ref: string) => {
-                if (ref !== '' && ref !== null) {
+                // create one single array of the result (instead of an array or arrays)
+                .flat()
+                // Remove absolute URL-s
+                .filter((ref: string) => {
+                    if (ref !== '' && ref !== null) {
+                        const parsed = urlHandler.parse(ref);
+                        // Relative URL means that the protocol is null
+                        return parsed.protocol === null && parsed.path !== null;
+                    } else {
+                        return false;
+                    }
+                })
+                // Remove fragment part, if any
+                .map((ref: string) => {
                     const parsed = urlHandler.parse(ref);
-                    // Relative URL means that the protocol is null
-                    return parsed.protocol === null && parsed.path !== null;
-                } else {
-                    return false;
-                }
-            })
-            // Remove fragment part, if any
-            .map((ref: string) => {
-                const parsed = urlHandler.parse(ref);
-                parsed.hash = null;
-                return urlHandler.format(parsed);
-            })
-            .value();
+                    parsed.hash = null;
+                    return urlHandler.format(parsed);
+                })
+            ;
 
         // Ensure that the list is duplicate free
         // (Why couldn't I put this into the chain???)
-        // @@@_ Use the conversion to Set to ensure that the list is unique
-        const relative_urls: string[] = _.uniq(target_urls);
+        const relative_urls: string[] = [...new Set(target_urls)];
 
         const absolute_urls = relative_urls.map((ref :string) :string => urlHandler.resolve(this.global.document_url, ref));
         if (this.global.trace) console.log(`- Getting the resources' content types via a set of fetches`);
         const media_types   = await Promise.all(absolute_urls.map((url) => fetch_type(url)));
         if (this.global.trace) console.log(`- Got the media types ${media_types}`);
 
-        return _.zip(relative_urls, media_types, absolute_urls).map((entry: string[]) :ResourceRef => {
+        return zip(relative_urls, media_types, absolute_urls).map((entry: string[]) :ResourceRef => {
             return {
                 relative_url : entry[0],
                 media_type   : entry[1],
@@ -572,7 +589,7 @@ export class RespecToEPUB {
             if (this.global.trace) console.log(`- Fetch the external resources (${urls})`);
             const contents   = await Promise.all(urls.map((url: string): Promise<any> => fetch_resource(url)));
             if (this.global.trace) console.log(`- Append external resources to the epub file`);
-            _.zip(contents, file_names).forEach((arg: [any, string]) :void => the_book.append(arg[0], arg[1], this.global.trace));
+            zip(contents, file_names).forEach((arg: [any, string]) :void => the_book.append(arg[0], arg[1], this.global.trace));
         }
         return the_book;
     }

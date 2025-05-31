@@ -54,13 +54,12 @@
  */
 
 
-import * as http       from 'http';
+import * as http       from 'node:http';
 import * as urlHandler from 'url';
-import * as _          from 'underscore';
-import * as r2epub     from './index';
-import * as common     from './lib/common';
-import * as ocf        from './lib/ocf';
-import * as home       from './lib/home';
+import * as r2epub     from './index.ts';
+import * as common     from './lib/common.ts';
+import type * as ocf   from './lib/ocf.ts';
+import * as home       from './lib/home.ts';
 import * as process    from 'node:process';
 import { Buffer }      from 'node:buffer';
 
@@ -72,7 +71,7 @@ interface Content {
     /**
      * The real epub content: a Buffer as generated through the [[OCF]] class.
      */
-    content :Buffer;
+    content Buffer;
     /**
      * Additional HTTP Response headers, to accompany the full response. (File name, dates, etc.).
      */
@@ -84,8 +83,10 @@ interface Content {
  * @hidden
  */
 interface Query {
-    [index :string] :string|string[]|boolean
+    [index :string] :string | string[] | boolean
 }
+
+type Args = Omit<Query, "respec" | "url" | "submit">;
 
 /**
  * Generate the EPUB file. This is a wrapper around [[create_epub]], creating the necessary arguments [[Options]] structure based on the incoming URL's query string.
@@ -94,12 +95,20 @@ interface Query {
  * @param query - The query string from the client
  */
 async function get_epub(query :Query) : Promise<Content> {
-    const respec_args = _.omit(query, 'respec', 'url', 'submit'); // @@@_
-    _.keys(respec_args).forEach((key :string) => { // @@@_
-        if (respec_args[key] !== undefined && (respec_args[key] === '' || respec_args[key] === 'null')) {
-            delete respec_args[key];
+
+    // const respec_args = {...query} as Args;
+
+    const respec_args :Args = ((): Args => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // deno-lint-ignore no-unused-vars
+        const { respec, url, submit, ...args } = query as Args;
+        for (const key of Object.keys(args)) {
+            if (args[key] !== undefined && (args[key] === '' || args[key] === 'null')) {
+                delete args[key];
+            }
         }
-    });
+        return args;
+    })()
 
     const url :string = query.url as string;
     const options :r2epub.Options = {
@@ -108,17 +117,17 @@ async function get_epub(query :Query) : Promise<Content> {
     }
 
     const the_ocf :ocf.OCF     = await r2epub.convert(url, options)
-    const content :Buffer      = await the_ocf.get_content() as Buffer; // To be changed if ArrayBuffer is used; for a server it will never be an ArrayBuffer now
-
-    const now :string = (new Date()).toString();
+    const content :ArrayBuffer = await the_ocf.get_content() as ArrayBuffer;
+    const finalContent :Buffer = Buffer.from(content);
+    const now :string          = (new Date()).toString();
 
     return {
-        content : content,
+        content: finalContent,
         headers : {
             'Content-type'        : common.media_types.epub,
             'Expires'             : now,
             'Last-Modified'       : now,
-            'Content-Length'      : content.length,
+            'Content-Length'      : finalContent.length,
             'Accept-Ranges'       : 'none',
             'Content-Language'    : 'en-US',
             'Content-Disposition' : `attachment; filename=${the_ocf.name}`,
@@ -144,10 +153,10 @@ async function serve(): Promise<void> {
                 'Content-type'     : common.media_types.text,
                 'Content-Language' : 'en-US',
             };
-            response.writeHead(code, _.extend(
-                error_headers,
-                common.CORS_headers,
-            ));
+            response.writeHead(code, {
+                ...common.CORS_headers,
+                ...error_headers,
+            });
             response.write(e);
         }
         try {
@@ -161,17 +170,17 @@ async function serve(): Promise<void> {
 
                 if (query === null || query.url === undefined) {
                     // fall back on the fixed home page
-                    response.writeHead(200, _.extend(
-                        { 'Content-type': 'text/html' },
-                        common.CORS_headers,
-                    ));
+                    response.writeHead(200, {
+                        ...common.CORS_headers,
+                        ...{ 'Content-type': 'text/html' },
+                    });
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));
                 } else {
                     const the_book :Content = await get_epub(query as Query);
-                    response.writeHead(200, _.extend(
-                        the_book.headers,
-                        common.CORS_headers,
-                    ));
+                    response.writeHead(200, {
+                        ...common.CORS_headers,
+                        ...the_book.headers,
+                    });
                     response.write(the_book.content);
                 }
             } else {
@@ -186,4 +195,6 @@ async function serve(): Promise<void> {
 }
 
 serve();
+
+
 
