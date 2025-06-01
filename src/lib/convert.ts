@@ -328,38 +328,29 @@ export class RespecToEPUB {
         // 4. Add the reference to the W3C logo
         {
             const logo_element = this.global.html_element?.querySelector('img[alt="W3C"]') as HTMLImageElement;
-            if (logo_element !== null) {
-                // This is set by respec and must be removed, otherwise the RS will not display the logo properly
-                logo_element.removeAttribute('crossorigin');
-
+            if (logo_element !== null && logo_element.getAttribute("src") !== undefined) {
+                const absolute_url: string = logo_element.getAttribute("src") || '';
                 const relative_url =  `${common.local_style_files}logos/W3C.svg`;
                 logo_element.setAttribute('src', relative_url);
-                // There is an ugly story here. The SVG version of the logo, as stored on the W3C site, includes a reference
-                // the very complex SVG DTD, and epubcheck does not like it (EPUB v3 does not like it). So
-                // I created a version of the logo without it and stored it at a fix URL...
-                // Note that EPUB 3.3 solved this issue, and so does epubcheck's version for EPUB 3.3.
-                // The 2016 version of this code went out of its way to get around this issue (a number of SVG files for logos
-                // were modified for local use). The 2021 version of the code does not care too much (in preparation for
-                // EPUB 3.3) but the code below is valid for both versions...
                 this.global.resources.push({
-                    relative_url : relative_url,
-                    media_type   : common.media_types.svg,
-                    absolute_url : `${common.modified_epub_files}W3C_logo.svg`,
+                    relative_url,
+                    media_type : common.media_types.svg,
+                    absolute_url,
                 })
             }
         }
+
         // 4.bis Add reference to the Member submission logo, if applicable
         {
             const logo_element = this.global.html_element?.querySelector('img[alt="W3C Member Submission"]') as HTMLImageElement;
-            if (logo_element !== null) {
-                // This is set by respec and must be removed, otherwise the RS will not display the logo properly
-                logo_element.removeAttribute('crossorigin');
+            if (logo_element !== null && logo_element.getAttribute("src") !== undefined) {
+                const absolute_url: string = logo_element.getAttribute("src") || '';
                 const relative_url =  `${common.local_icons}member_subm-v.svg`;
                 logo_element.setAttribute('src', relative_url);
                 this.global.resources.push({
-                    relative_url : relative_url,
-                    media_type   : common.media_types.svg,
-                    absolute_url : `${common.modified_epub_files}member_subm-v.svg`,
+                    relative_url,
+                    media_type : common.media_types.svg,
+                    absolute_url,
                 })
             }
         }
@@ -375,7 +366,19 @@ export class RespecToEPUB {
         }
 
         // ------------------------------------------
-        // 6. Add some of the global W3C CSS files, and auxiliary image files
+        // 6. Remove the link to the #toc, that is put into the source for older versions. This must be removed
+        // because the toc is not generated into the overview.xhtml file, and epubcheck does not like
+        // dangling references.
+        {
+            const toc_link_element = this.global.html_element?.querySelector('p#back-to-top');
+            if (toc_link_element) {
+                if (this.global.trace) console.log('- Got a "back-to-top" element; removing.');
+                toc_link_element.remove();
+            }
+        }
+
+        // ------------------------------------------
+        // 7. Add some of the global W3C CSS files, and auxiliary image files
         // (Using a switch because, I'm afraid, there will be more changes in the future...)
         switch (common.process_version) {
             case 2016:
@@ -388,23 +391,23 @@ export class RespecToEPUB {
         }
 
         // ------------------------------------------
-        // 7. Create a title page
+        // 8. Create a title page
         this.global.resources = [...title_page.create_title_page(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 8. Create the cover image
+        // 9. Create the cover image
         this.global.resources = [...cover_page.create_cover_image(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 9. Create a nav file
+        // 10. Create a nav file
         this.global.resources = [...nav.create_nav_file(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 10. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
+        // 11. Add main resource (i.e., Overview.xhtml) entry, with relevant properties
         this.global.resources = [...overview.generate_overview_item(this.global), ...this.global.resources];
 
         // ------------------------------------------
-        // 11. Finalize the package file
+        // 12. Finalize the package file
         {
             // Add the WCAG conformance, if applicable
             if (common.wcag_checked.includes(this.global.config.specStatus)) this.global.opf_content.add_wcag_link();

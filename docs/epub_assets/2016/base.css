@@ -21,7 +21,7 @@
  *   - .figure and .caption (HTML4) and figure and figcaption (HTML5)
  *     -> .sidefigure for right-floated figures
  *   - ins/del
- *     -> ins/del.c### for candidate and proposed changes (amendments)
+ *     -> ins/del[cite] for candidate and proposed changes (amendments)
  *
  * Code
  *   - pre and code
@@ -32,8 +32,10 @@
  *   - .issue      for issues                        (div, p, span)
  *   - .advisement for loud normative statements     (div, p, strong)
  *   - .annoying-warning for spec obsoletion notices (div, aside, details)
- *   - .amendment  for “candidate changes”           (div, aside, details)
- *   - .amendment.proposed for “proposed changes”    (div, aside, details)
+ *   - .correction for "candidate corrections"       (div, aside, details, section)
+ *   - .addition   for "candidate additions"         (div, aside, details, section)
+ *   - .correction.proposed for "proposed corrections" (div, aside, details, section)
+ *   - .addition.proposed   for "proposed additions"   (div, aside, details, section)
  *
  * Definition Boxes
  *   - pre.def   for WebIDL definitions
@@ -181,10 +183,10 @@
 		counter-reset: example figure issue;
 
 		/* Layout */
-		max-width: 50em;               /* limit line length to 50em for readability   */
-		margin: 0 auto;                /* center text within page                     */
-		padding: 1.6em 1.5em 2em 50px; /* assume 16px font size for downlevel clients */
-		padding: 1.6em 1.5em 2em calc(26px + 1.5em); /* leave space for status flag     */
+		max-width: 50em;             /* limit line length to 50em for readability   */
+		margin: 0 auto 4em;          /* center text within page, space for footers  */
+		padding: 1.6em 1.5em 0 50px; /* assume 16px font size for downlevel clients */
+		padding: 1.6em 1.5em 0 calc(26px + 1.5em); /* leave space for status flag   */
 
 		/* Typography */
 		line-height: 1.5;
@@ -594,16 +596,24 @@
 		background: var(--ins-bg);
 		text-decoration: underline;
 	}
+	ins:not([hidden]).diff-inactive,
+	del:not([hidden]).diff-inactive {
+		all: unset;
+	}
+	ins:not(.diff-inactive) *,
+	del:not(.diff-inactive) * {
+		color: inherit;
+	}
 
 	/* for amendments (candidate/proposed changes) */
 	.amendment ins, .correction ins, .addition ins,
-	ins[class^=c] { text-decoration-style: dotted; }
+	ins[cite] { text-decoration-style: dotted; }
 	.amendment del, .correction del, .addition del,
-	del[class^=c] { text-decoration-style: dotted; }
+	del[cite] { text-decoration-style: dotted; }
 	.amendment.proposed ins, .correction.proposed ins, .addition.proposed ins,
-	ins[class^=c].proposed { text-decoration-style: double; }
+	ins[cite].proposed { text-decoration-style: double; }
 	.amendment.proposed del, .correction.proposed del, .addition.proposed del,
-	del[class^=c].proposed { text-decoration-style: double; }
+	del[cite].proposed { text-decoration-style: double; }
 
 /** Miscellaneous improvements to inline formatting ***************************/
 
@@ -784,7 +794,11 @@
 	.note::before, .note > .marker,
 	details.note > summary > .marker,
 	.amendment::before, .amendment > .marker,
-	details.amendment > summary > .marker {
+	details.amendment > summary > .marker,
+	.correction::before, .correction > .marker,
+	details.correction > summary > .marker,
+	.addition::before, .addition > .marker,
+	details.addition > summary > .marker {
 		text-transform: uppercase;
 		padding-right: 1em;
 	}

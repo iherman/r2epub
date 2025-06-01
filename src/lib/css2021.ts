@@ -54,11 +54,13 @@ import * as common              from './common.ts';
  * @returns - list of extracted additional resources
  */
 export function extract_css(global: Global): ResourceRef[] {
+    if (global.trace === true) console.log("- Handling the 2021 version css structures")
     const retval: ResourceRef[] = [];
 
     /** Find the relevant CSS link in the DOM. There must be only one... */
     const the_link: Element | undefined = ((): Element|undefined => {
-        const all_links: HTMLLinkElement[] = Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) as HTMLLinkElement[];
+        const all_links: HTMLLinkElement[] =
+            (global.html_element ? Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) : []) as HTMLLinkElement[]
         // What we want is the one owned by W3C (may be undefined!)
         return all_links.find((link: Element): boolean => {
             if (link.hasAttribute('href')) {
@@ -77,6 +79,7 @@ export function extract_css(global: Global): ResourceRef[] {
     })()
 
     if (the_link !== undefined) {
+        // 'base' CSS file, to be added
         retval.push({
             relative_url : `${common.local_style_files}base.css`,
             media_type   : common.media_types.css,

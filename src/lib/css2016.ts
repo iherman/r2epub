@@ -180,11 +180,14 @@ const specStatus_css :specStatus_mapping = {
  * @returns - list of extracted additional resources
  */
 export function extract_css(global: Global): ResourceRef[] {
+
+    if (global.trace === true) console.log("- Handling the 2016 version css structures")
     const retval: ResourceRef[] = [];
 
     /** Find the relevant CSS link in the DOM. There must be only one... */
     const the_link: Element | undefined = ((): Element | undefined => {
-        const all_links :HTMLLinkElement[] = Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) as HTMLLinkElement[];
+        const all_links :HTMLLinkElement[] =
+            (global.html_element ? Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) : []) as HTMLLinkElement[]
         // What we want, is the one owned by W3C (may be undefined!)
         return all_links.find((link: HTMLLinkElement): boolean => {
             if (link.hasAttribute('href')) {
@@ -223,7 +226,6 @@ export function extract_css(global: Global): ResourceRef[] {
 
         // Adding the reference to the epub specific css file into the dom
         the_link.insertAdjacentHTML('afterend', `<link rel="stylesheet" href="${common.local_style_files}tr_epub.css">`)
-
 
         // Here comes the extra complication: depending on the respec spec status type, extra actions may have to be
         // taken...
@@ -270,10 +272,12 @@ export function extract_css(global: Global): ResourceRef[] {
                 text_content : template,
             });
 
-            const new_css_link = global.html_element.ownerDocument.createElement('link');
-            new_css_link.setAttribute('href', `${common.local_style_files}epub.css`);
-            new_css_link.setAttribute('rel', 'stylesheet');
-            the_link.parentElement?.append(new_css_link);
+            if (global.html_element !== undefined ) {
+                const new_css_link = global.html_element.ownerDocument.createElement('link');
+                new_css_link.setAttribute('href', `${common.local_style_files}epub.css`);
+                new_css_link.setAttribute('rel', 'stylesheet');
+                the_link.parentElement?.append(new_css_link);
+            }
         }
     }
     return retval;

@@ -13,6 +13,8 @@
     },
     "tasks": {
         "test-document": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/test/spec/Overview.html",
+        "test-2016": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/test/aria/Overview.html",
+        "test-clreq": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/test/clreq/Overview.html",
         "test-book": "deno run -A src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
         "test-respec": "deno run -A src/r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
     },
