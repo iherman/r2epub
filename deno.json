@@ -27,7 +27,6 @@
     "exclude": ["dist/", "_config.yml"],
     "imports": {
         "jszip"                 : "npm:jszip@^3.10.1",
-        "url"                   : "npm:url@^0.11.4",
         "valid-url"             : "npm:valid-url@^1.0.9",
         "w3c-xmlserializer"     : "npm:w3c-xmlserializer@^5.0.0",
         "xmlbuilder2"           : "npm:xmlbuilder2@^3.1.1",

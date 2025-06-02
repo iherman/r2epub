@@ -37,9 +37,9 @@
  * @packageDocumentation
 */
 
-import type { ResourceRef, Global }  from './convert.ts';
-import * as urlHandler          from 'url';
-import * as common              from './common.ts';
+import type { ResourceRef, Global } from './convert.ts';
+import * as urlHandler              from 'node:url';
+import * as common                  from './common.ts';
 
 
 /* ---------------------------------------------- Main entry point ----------------------------------------- */

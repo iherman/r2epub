@@ -227,17 +227,15 @@ export function finalize_style_constants(config :any) :void {
         fixup_js            = 'https://www.w3.org/scripts/TR/2021/fixup.js'
         TR_logo_files       = 'https://www.w3.org/StyleSheets/TR/2021/logos/';
         TR_css_files        = 'https://www.w3.org/StyleSheets/TR/2021/';
-        modified_epub_files = 'https://www.ivan-herman.net/r2epub/2021/';
+        modified_epub_files = 'https://www.w3.org/People/Ivan/r2epub/2021/';
         local_style_files   = 'StyleSheets/TR/2021/';
-        // modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/2021/';
     } else {
         process_version     = 2016;
         fixup_js            = 'https://www.w3.org/scripts/TR/2016/fixup.js'
         TR_logo_files       = 'https://www.w3.org/StyleSheets/TR/2016/logos/';
         TR_css_files        = 'https://www.w3.org/StyleSheets/TR/2016/';
-        modified_epub_files = 'https://www.ivan-herman.net/r2epub/2016/';
+        modified_epub_files = 'https://www.w3.org/People/Ivan/r2epub/2016/';
         local_style_files   = 'StyleSheets/TR/2016/';
-        // modified_epub_files = 'https://iherman.github.io/r2epub/epub_assets/2016/';
     }
 }
 

@@ -17,7 +17,7 @@
  *
  */
 
-import * as urlHandler              from 'url';
+import * as urlHandler              from 'node:url';
 import type { ResourceRef, Global } from './convert.ts';
 import { to_xhtml }                 from './utils.ts';
 import * as common                  from './common.ts';

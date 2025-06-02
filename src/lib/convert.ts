@@ -21,7 +21,7 @@
 
 
 import type * as jsdom from 'jsdom';
-import * as urlHandler from 'url';
+import * as urlHandler from 'node:url';
 
 import { fetch_html, fetch_resource, fetch_type } from './fetch.ts';
 import type { Options } from './common.ts';
@@ -589,9 +589,9 @@ export class RespecToEPUB {
             const urls       = to_be_fetched.map((resource :ResourceRef): string => resource.absolute_url || '')
                 .filter((url :string): boolean => url !== '');
 
-            if (this.global.trace) console.log(`- Fetch the external resources (${urls})`);
+            if (this.global.trace) console.log(`- Fetch the external resources \n  - ${urls.join("\n  - ")}`);
             const contents   = await Promise.all(urls.map((url: string): Promise<any> => fetch_resource(url)));
-            if (this.global.trace) console.log(`- Append external resources to the epub file`);
+            if (this.global.trace) console.log(`- Append external resources: to the epub file`);
             zip(contents, file_names).forEach((arg: [any, string]) :void => the_book.append(arg[0], arg[1], this.global.trace));
         }
         return the_book;

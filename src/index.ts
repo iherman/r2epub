@@ -59,7 +59,7 @@ import * as ocf                         from './lib/ocf.ts';
 import * as rConvert                    from './lib/convert.ts';
 import * as cConvert                    from './clib/convert.ts';
 import * as fetch                       from './lib/fetch.ts';
-import * as urlHandler                  from 'url';
+import * as urlHandler                  from 'node:url';
 
 /**
  * Options provided by the user if and when the source has to be pre-processed via ReSpec.
