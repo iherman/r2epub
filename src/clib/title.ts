@@ -67,12 +67,14 @@ const title_page = `<?xml version="1.0" encoding="utf-8"?>
       <h1 id="btitle">%%%TITLE2%%%</h1>
       <p class="larger" id="editors">%%%EDITORS%%%</p>
       <p class="logo"><a href="http://www.w3.org/"><img alt="W3C main logo" src="Icons/w3c_main.png"/></a></p>
-      <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-      © of the original documents: <time id="cpdate" datetime="%%%%ISODATE%%%%">%%%DATE%%%</time> W3C<sup>®</sup> (<a href="http://www.mit.edu">MIT</a>, <a href="http://www.ercim.eu/">ERCIM</a>,
-      <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>).<br/>
-      All right reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
-      <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>,
-      and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
+
+      <p class="disclaimer">Note: this EPUB edition does <em>not</em> represent the authoritative text of the specifications; please consult the original documents on the W3C Web Site.</p>
+
+      <p class="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © <time id="cpdate" datetime="%%%%ISODATE%%%%">%%%DATE%%%</time>
+      <a href="https://www.w3.org">World Wide Web Consortium</a>.
+      W3C<sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>,
+      <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a>,
+      and <a href="https://www.w3.org/copyright/software-license-2023/">permissive document use</a> rules apply.</p>
     </div>
   </body>
 </html>
@@ -88,18 +90,12 @@ const title_page = `<?xml version="1.0" encoding="utf-8"?>
  * @returns a text representation of the title xhtml file.
  */
 export function create_title_page(book :cConvert.Collection) :string {
-
     const [date, iso_date] = ((): [string, string] => {
-        if (book.date) {
-            const doc_date = book.date;
-            const doc_date_iso = (new Date(doc_date)).toISOString();
-            return [doc_date, doc_date_iso];
-        } else {
-            const today = (new Date()).toISOString();
-            return [today, today];
-        }
+        const theDate = (book.date) ? new Date(book.date) : new Date();
+        const doc_date = theDate.getFullYear().toString();
+        const doc_date_iso = theDate.toISOString();
+        return [doc_date, doc_date_iso];
     })();
-
     return title_page
         .replace('%%%TITLE1%%%', utils.de_xml(book.title))
         .replace('%%%TITLE2%%%', utils.de_xml(book.title))
