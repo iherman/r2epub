@@ -590,9 +590,17 @@ export class RespecToEPUB {
                 .filter((url :string): boolean => url !== '');
 
             if (this.global.trace) console.log(`- Fetch the external resources \n  - ${urls.join("\n  - ")}`);
-            const contents   = await Promise.all(urls.map((url: string): Promise<any> => fetch_resource(url)));
-            if (this.global.trace) console.log(`- Append external resources: to the epub file`);
-            zip(contents, file_names).forEach((arg: [any, string]) :void => the_book.append(arg[0], arg[1], this.global.trace));
+
+            const results = await Promise.allSettled(urls.map((url: string): Promise<any> => fetch_resource(url)));
+
+            if (this.global.trace) console.log(`- Append external resources to the epub file`);
+            zip(results, file_names).forEach(([result, file_name]) => {
+                if (result.status === "fulfilled") {
+                    the_book.append(result.value, file_name, this.global.trace);
+                } else {
+                    console.warn(`- Failed to fetch the source for ${file_name}:`, result.reason);
+                }
+            });
         }
         return the_book;
     }
