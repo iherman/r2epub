@@ -103,7 +103,7 @@ const nav  = `<?xml version="1.0"?>
 /**
  * Create the HTML navigation page.
  *
- * The function gathers the real content of the chapters’ navigation pages, extracts real TOC portions and puts together all of them as one
+ * The function gathers the real content of the chapters’ navigation pages, extracts real TOC portions and puts all of them together as one
  * large TOC structure. The result is added to a textual HTML template.
  *
  * Note that the links to the real content must be modified on the fly, because the original chapters are all put into a separate subdirectory.
@@ -115,9 +115,9 @@ export function create_nav_page(book :cConvert.Collection) :string {
     const get_nav_text = (chapter :Chapter) :string => {
         // Get the nav file from the chapter
         const dom  = new jsdom.JSDOM(chapter.nav);
-        const html = dom.window.document.documentElement.querySelector('nav#navigation > ol').innerHTML;
+        const html = dom.window.document.documentElement.querySelector('nav#navigation > ol')?.innerHTML;
         // the link elements must be changed to refer to the relevant subdirectory!
-        const html_final = html.replace(/"Overview.xhtml/g, `"${chapter.chapter_name}/Overview.xhtml`)
+        const html_final = html?.replace(/"Overview.xhtml/g, `"${chapter.chapter_name}/Overview.xhtml`)
         return `<li class="part-title-li"><a class="part-title" href="${chapter.chapter_name}/Overview.xhtml">${chapter.title}</a><ol>${html_final}</ol></li>`;
     }
 

@@ -20,5 +20,5 @@ import { cover_svg }      from '../lib/cover.ts';
 export function create_cover_image(book :cConvert.Collection) :string {
     return cover_svg
         .replace('%%%TITLE%%%', utils.slice_text(book.title))
-        .replace('%%%SUBTITLE%%%', utils.date_to_string(book.date));
+        .replace('%%%SUBTITLE%%%', utils.date_to_string(book.date || ''));
 }

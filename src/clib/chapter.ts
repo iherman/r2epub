@@ -69,7 +69,7 @@ export class Chapter {
     private _first_chapter = false;
     private _url :string;
     private _options :Options;
-    private _ocf :ocf.OCF;
+    private _ocf :ocf.OCF | null = null;
     private _container :JSZip;
     private _manifest :ManifestItem[] = [];
     private _chapter_name :string = '';
@@ -142,9 +142,9 @@ export class Chapter {
         for (let i = 0; i < items.length; i++) {
             // Whether the item is a textual content or not depends on its media type:
             const item       = items[i];
-            const file_name  = item.getAttribute('href');
+            const file_name  = item.getAttribute('href') || '';
             if (!not_to_transfer.includes(file_name)) {
-                const media_type = item.getAttribute('media-type');
+                const media_type = item.getAttribute('media-type') || '';
                 const properties = item.hasAttribute('properties') ? item.getAttribute('properties') : undefined;
                 const id         = item.getAttribute('id');
 
@@ -158,8 +158,8 @@ export class Chapter {
                     this._manifest.push({
                         href         : file_name,
                         media_type   : media_type,
-                        id           : id,
-                        properties   : properties,
+                        id           : id || '',
+                        properties   : properties || '',
                         text_content : textual,
                         promise      : promise,
                     })
@@ -177,18 +177,19 @@ export class Chapter {
         // Get the list of authors
         const editors = package_dom.getElementsByTagName('dc:creator');
         for (let i = 0; i < editors.length; i++) {
-            this._editors.push(editors[i].textContent);
+            const check = editors[i].textContent || '';
+            if (check !== '') this._editors.push(check);
         }
 
         // ---------------------------------------------------------------------------------------
         // Get the title of the publication
         const titles = package_dom.getElementsByTagName('dc:title');
-        this._title = titles[0].textContent;
+        this._title = titles[0].textContent || '';
 
         // ---------------------------------------------------------------------------------------
         // Get the identifier of the publication
         const identifiers = package_dom.getElementsByTagName('dc:identifier');
-        this._identifier = identifiers[0].textContent;
+        this._identifier = identifiers[0].textContent || '';
 
         // ---------------------------------------------------------------------------------------
         // Get the date of the publication
@@ -197,7 +198,8 @@ export class Chapter {
             const meta = meta_elements[i];
             // The (artificial) time portion is removed to avoid being duplicated
             if (meta.hasAttribute('property') && meta.getAttribute('property') === 'dcterms:date') {
-                this._date = meta.textContent.split('T')[0];
+                const dt = meta.textContent;
+                if (dt) this._date = dt.split('T')[0];
                 break;
             }
         }
@@ -219,7 +221,8 @@ export class Chapter {
         for (let i = 0; i < itemref_elements.length; i++) {
             const itemref = itemref_elements[i];
             if (itemref.hasAttribute('linear') && itemref.getAttribute('linear') === 'no') {
-                this._non_linear_spine_items.push(itemref.getAttribute('idref'));
+                const itr = itemref.getAttribute('idref');
+                if (itr) this._non_linear_spine_items.push(itr);
             }
         }
 

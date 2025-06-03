@@ -104,20 +104,31 @@ export function create_title_page(global :Global) :ResourceRef[] {
     ]
 
     const get_editors = () :string => global.config.editors
+        // deno-lint-ignore no-explicit-any
         .map((entry: any) => entry.company !== undefined ? `${entry.name}, ${entry.company}` : `${entry.name}`)
         .join('; ');
 
-    const title = global.html_element.querySelector('title').textContent;
-    const date = global.html_element.querySelector('time.dt-published');
+    const title: string = global.html_element?.querySelector('title')?.textContent || '';
+    const dateElement = global.html_element?.querySelector('time.dt-published');
+    const [date, iso_date] = ( () :[string, string] => {
+        if (dateElement && dateElement.textContent) {
+            const doc_date     = dateElement.textContent;
+            const doc_date_iso = (new Date(doc_date)).toISOString();
+            return [doc_date, doc_date_iso]
+        } else {
+            const today = (new Date()).toISOString();
+            return [today, today]
+        }
+    })();
 
     const final_title_page = title_page
         .replace('%%%TITLE1%%%', title)
         .replace('%%%TITLE2%%%', title)
-        .replace('%%%SUBTITLE%%%', date.parentElement.innerHTML)
+        .replace('%%%SUBTITLE%%%', dateElement?.parentElement?.innerHTML || '')
         .replace('%%%EDITORS%%%', get_editors())
         .replace('%%%ORIGINAL%%%', global.document_url)
-        .replace('%%%%ISODATE%%%%', date.getAttribute('datetime'))
-        .replace('%%%DATE%%%', date.textContent);
+        .replace('%%%%ISODATE%%%%', iso_date)
+        .replace('%%%DATE%%%', date);
 
     retval.push({
         media_type   : common.media_types.xhtml,

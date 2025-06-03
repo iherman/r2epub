@@ -148,7 +148,7 @@ export async function fetch_resource(resource_url :string, force_text = false) :
                                             default:
                                                 // In other environments, we do not know what to do, so we return the body as a blob
                                                 // This is a fallback, but it should not happen
-                                                console.warn(`Unknown environment, returning body as blob: ${common.get_environment()}`);
+                                                console.warn(`Unknown environment, returning body as blob: ${common.environment}`);
                                                 resolve(response.blob());
                                         }
                                     }

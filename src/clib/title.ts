@@ -88,11 +88,23 @@ const title_page = `<?xml version="1.0" encoding="utf-8"?>
  * @returns a text representation of the title xhtml file.
  */
 export function create_title_page(book :cConvert.Collection) :string {
+
+    const [date, iso_date] = ((): [string, string] => {
+        if (book.date) {
+            const doc_date = book.date;
+            const doc_date_iso = (new Date(doc_date)).toISOString();
+            return [doc_date, doc_date_iso];
+        } else {
+            const today = (new Date()).toISOString();
+            return [today, today];
+        }
+    })();
+
     return title_page
         .replace('%%%TITLE1%%%', utils.de_xml(book.title))
         .replace('%%%TITLE2%%%', utils.de_xml(book.title))
-        .replace('%%%EDITORS%%%', book.editors.join('; '))
-        .replace('%%%%ISODATE%%%%', book.date)
-        .replace('%%%DATE%%%', utils.date_to_string(book.date));
+        .replace('%%%EDITORS%%%', book.editors?.join('; ') || '')
+        .replace('%%%%ISODATE%%%%', iso_date)
+        .replace('%%%DATE%%%', date);
 }
 
