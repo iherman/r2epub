@@ -55,12 +55,12 @@ import * as common                  from './common.ts';
  */
 export function extract_css(global: Global): ResourceRef[] {
     if (global.trace === true) console.log("- Handling the 2021 version css structures")
-    const retval: ResourceRef[] = [];
+    const output: ResourceRef[] = [];
 
     /** Find the relevant CSS link in the DOM. There must be only one... */
     const the_link: Element | undefined = ((): Element|undefined => {
         const all_links: HTMLLinkElement[] =
-            (global.html_element ? Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) : []) as HTMLLinkElement[]
+            (global.html_element ? Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) : []) as HTMLLinkElement[];
         // What we want is the one owned by W3C (may be undefined!)
         return all_links.find((link: Element): boolean => {
             if (link.hasAttribute('href')) {
@@ -80,7 +80,7 @@ export function extract_css(global: Global): ResourceRef[] {
 
     if (the_link !== undefined) {
         // 'base' CSS file, to be added
-        retval.push({
+        output.push({
             relative_url : `${common.local_style_files}base.css`,
             media_type   : common.media_types.css,
             absolute_url : `${common.modified_epub_files}base.css`,
@@ -102,15 +102,15 @@ export function extract_css(global: Global): ResourceRef[] {
             if (['cg-draft','bg-final','bg-draft','cg-final','W3C-UD', 'unofficial','W3C-Member-SUBM'].includes(base_name)) {
                 // The original css file may include absolute URLs and the logo setup
                 // seems to be problematic for RS-s, so a modified version is used;
-                // I.e., the css file must be retrieved from the modified versions:
-                retval.push({
+                // I.e., the css file must be retrieved from among the modified versions:
+                output.push({
                     relative_url : `${common.local_style_files}${base_name}.css`,
                     media_type   : common.media_types.css,
                     absolute_url : `${common.modified_epub_files}${base_name}.css`,
                 })
 
                 if (['cg-draft', 'W3C-UD','unofficial'].includes(base_name)) {
-                    retval.push({
+                    output.push({
                         relative_url : `${common.local_style_files}logos/UD-watermark.png`,
                         media_type   : common.media_types.png,
                         absolute_url : `${common.TR_logo_files}UD-watermark.png`,
@@ -118,7 +118,7 @@ export function extract_css(global: Global): ResourceRef[] {
                 }
                 // Getting the logo in PNG format for those documents that have one referred to from their css files...
                 if (['cg-draft','bg-final','bg-draft','cg-final'].includes(base_name)) {
-                    retval.push({
+                    output.push({
                         relative_url : `${common.local_style_files}logos/back-${base_name}.png`,
                         media_type   : common.media_types.png,
                         absolute_url : `${common.TR_logo_files}back-${base_name}.png`,
@@ -128,14 +128,14 @@ export function extract_css(global: Global): ResourceRef[] {
                 // This is the simple, and general, case!
                 //
                 // The css file must be retrieved from the W3C site
-                retval.push({
+                output.push({
                     relative_url : `${common.local_style_files}${base_name}.css`,
                     media_type   : common.media_types.css,
                     absolute_url : `${css_link}.css`,
                 })
 
                 // Get the 'logo', ie, the vertical stripe on the left
-                retval.push({
+                output.push({
                     relative_url : `${common.local_style_files}logos/${logo_name}.svg`,
                     media_type   : common.media_types.svg,
                     absolute_url : `${common.TR_logo_files}${logo_name}.svg`,
@@ -143,8 +143,32 @@ export function extract_css(global: Global): ResourceRef[] {
             }
         }
 
+        // We should also locate, if available, the extra dark mode specific w3c css file
+        // It is still unclear what should be done with the dark mode.
+        // At the moment, the relevant css file is removed; unclear how an RS could
+        // handle it...
+        {
+            const all_links: HTMLLinkElement[] =
+                (global.html_element ? Array.from(global.html_element.querySelectorAll('link[rel="stylesheet"]')) : []) as HTMLLinkElement[];
+            for (const link of all_links) {
+                if (link.hasAttribute('href')) {
+                    const url = link.getAttribute('href');
+                    if (url?.endsWith("dark.css")) {
+                        link.remove();
+                        // output.push({
+                        //     relative_url : `${common.local_style_files}dark.css`,
+                        //     media_type   : common.media_types.css,
+                        //     absolute_url : `${common.modified_epub_files}dark.css`,
+                        // })
+                        // link.setAttribute('href', `${common.local_style_files}dark.css`);
+                        break;
+                    }
+                }
+            }
+        }
+
         // An extra CSS file must be added to the mix, to take care of the EPUB specificities
-        retval.push({
+        output.push({
             relative_url : `${common.local_style_files}tr_epub.css`,
             media_type   : common.media_types.css,
             text_content : common.tr_epub_css,
@@ -153,5 +177,5 @@ export function extract_css(global: Global): ResourceRef[] {
         // Adding the reference to the epub specific css file into the dom
         the_link.insertAdjacentHTML('afterend', `<link rel="stylesheet" href="${common.local_style_files}tr_epub.css">`)
     }
-    return retval;
+    return output;
 }

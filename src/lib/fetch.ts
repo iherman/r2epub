@@ -193,6 +193,7 @@ export async function fetch_type(resource_url :string) :Promise<string> {
                     if (response.ok) {
                         // If the response content type is set (which is usually the case, but not in all cases...)
                         const type :string | null = response.headers.get('content-type');
+                        response.body?.cancel(); // To avoid leaking
                         if (type === null || type === '') {
                             reject(new Error(`No content type returned for ${resource_url}`));
                         } else {

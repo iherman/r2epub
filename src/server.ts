@@ -71,7 +71,7 @@ interface Content {
     /**
      * The real epub content: a Buffer as generated through the [[OCF]] class.
      */
-    content Buffer;
+    content: Buffer;
     /**
      * Additional HTTP Response headers, to accompany the full response. (File name, dates, etc.).
      */

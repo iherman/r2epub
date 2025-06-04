@@ -2,7 +2,8 @@
 
 ## Version 2.0.0
 
-* Major change: putting [deno](deno.land) into the center, instead of node.js. The environment is more stable (no module issues), the TypeScript compiler is stricter but then forces a better code.
+* Major change: putting [deno](deno.land) into the center, instead of node.js. The environment is more stable (no module issues), the TypeScript compiler is stricter but then forces a better code. The code changes are numerous, way too many to list them all here. Functionality-wise the differences are minor:
+  * The "dark-mode" feature of newer specifications bring in a new css file (`dark.css`). At the moment, this CSS reference is simply removed, it clashes with the RS's own theme changes.
 
 ## Version 1.3.2
 
@@ -21,7 +22,6 @@
 
 * Added some additional EPUB A11y metadata to the generated package file
 * For some reasons the Ajv interface to TypeScript did not work well any more. I decided to create my own very small definition file to a simple interface to Ajv. Meaning that Ajv is accessed via Javascript and not Typescript. Hacky, but works...
-
 
 ## Version 1.2.7
 

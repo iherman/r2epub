@@ -184,7 +184,7 @@ async function cli() {
                 }
                 fs.writeFileSync(cli_options.output || the_ocf.name, await get_content());
             }
-        } catch (e: unknown) {
+        } catch (e: any) {
             console.error(`r2epub error: ${e}, ${e.stack}`); // eslint-disable-line no-console
         }
     }

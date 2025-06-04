@@ -39,10 +39,10 @@ export function create_opf(book :cConvert.Collection) :string {
     const the_opf :opf.PackageWrapper = new opf.PackageWrapper(`urn:w3c:tr:${book.name}`, book.title);
 
     // 1. editors should be collected from the chapters; this was done when initializing the book
-    the_opf.add_creators(book.editors);
+    the_opf.add_creators(book.editors || []);
 
     // 2. Set the date of this book
-    the_opf.add_dates(book.date);
+    the_opf.add_dates(book.date || '');
 
     // 3. add the fix values to the manifest, namely the title, cover, and the navigation file
     the_opf.add_manifest_item({
