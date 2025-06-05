@@ -23,15 +23,17 @@
         "test-clreq": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/clreq/Overview.html",
         "test-book": "deno run -A src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
         "test-respec": "deno run -A src/r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/",
-        "test": "(cd testing; deno test -A)"
+        "test": "(cd testing; deno test -A)",
+        "server": "deno run -A src/server.ts"
     },
     "exports": {
         ".":     "./src/index.ts",
-        "./cli": "./src/r2epub.ts"
+        "./cli": "./src/r2epub.ts",
+        "./serve": "./src/server.ts"
     },
     "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
     "license": "W3C-20150513",
-    "exclude": ["dist/", "_config.yml"],
+    "exclude": ["dist/", "_config.yml", "explore/", ".editorconfig", "node_modules/"],
     "imports": {
         "jszip"                 : "npm:jszip@^3.10.1",
         "valid-url"             : "npm:valid-url@^1.0.9",

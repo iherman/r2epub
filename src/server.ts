@@ -122,7 +122,7 @@ async function get_epub(query :Query) : Promise<Content> {
     const now :string          = (new Date()).toString();
 
     return {
-        content: finalContent,
+        content : finalContent,
         headers : {
             'Content-type'        : common.media_types.epub,
             'Expires'             : now,
@@ -137,7 +137,7 @@ async function get_epub(query :Query) : Promise<Content> {
 
 
 /**
- * Run a rudimentary Web server calling out to [[convert]] via [[get_epub]] to return an EPUB 3.3 instance when invoked.
+ * Run a rudimentary Web server calling out to [[convert]] via [[get_epub]] to return an EPUB 3.4 instance when invoked.
  * If there is no proper query string a fixed page is displayed.
  *
  * This function is automatically started when this module is used from a command line.
