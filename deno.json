@@ -23,6 +23,7 @@
         "test-clreq": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/clreq/Overview.html",
         "test-book": "deno run -A src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
         "test-respec": "deno run -A src/r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/",
+        "test-vc": "deno run -A src/r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json",
         "test": "(cd testing; deno test -A)",
         "server": "deno run -A src/server.ts"
     },

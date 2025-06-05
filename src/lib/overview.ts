@@ -43,7 +43,7 @@ export function generate_overview_item(global: Global): ResourceRef[] {
     const properties: string[] = [];
 
     // 1. Mathml usage
-    if (global.html_element.querySelector('mathml') !== null) {
+    if (global.html_element.querySelector('math') !== null) {
         properties.push('mathml');
         global.opf_content?.add_a11y_feature(['MathML']);
     }

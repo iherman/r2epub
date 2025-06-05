@@ -1,15 +1,34 @@
 {
-    "name": "Verifiable Credentials",
-    "id": "verifiable_credentials",
+    "name": "Verifiable Credentials 2.0",
+    "id": "verifiable_credentials_20",
     "comment": "No ReSpec preprocessing involved",
     "readingOrder": [
         {
-            "url": "https://www.w3.org/TR/vc-data-model/"
+            "url": "https://www.w3.org/TR/vc-overview/"
         },
         {
-            "url": "http://www.w3.org/TR/vc-use-cases/",
-            "respec": false,
-            "config": {}
+            "url": "https://www.w3.org/TR/vc-data-model-2.0/"
+        },
+        {
+            "url": "https://www.w3.org/TR/cid-1.0/"
+        },
+        {
+            "url": "https://www.w3.org/TR/vc-jose-cose/"
+        },
+        {
+            "url": "https://www.w3.org/TR/vc-data-integrity/"
+        },
+        {
+            "url": "https://www.w3.org/TR/vc-di-ecdsa/"
+        },
+        {
+            "url": "https://www.w3.org/TR/vc-di-eddsa/"
+        },
+        {
+            "url": "https://www.w3.org/TR/vc-bitstring-status-list/"
+        },
+        {
+            "url": "https://www.w3.org/TR/vc-json-schema/"
         }
     ]
 }
