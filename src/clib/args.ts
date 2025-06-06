@@ -28,7 +28,7 @@
  *
  * For the meaning of the configuration options, see the [ReSpec manual](https://www.w3.org/respec/). The "name", "id", "readingOrder", and "url" fields are required, all others are optional. The value of "comment" is ignored by the module.
  *
- * The JSON collection configuration file is checked against the JSON [schema](https://github.com/iherman/src/clib/r2epub.schema.json) in the [[get_book_configuration]] function.
+ * The JSON collection configuration file is checked against the JSON schema (see below in the code) in the [[get_book_configuration]] function.
  *
  * See also some [example collection configurations files](https://iherman.github.io/r2epub/collections/).
  *

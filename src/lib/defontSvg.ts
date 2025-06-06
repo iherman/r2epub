@@ -15,6 +15,15 @@
 
 import { JSDOM } from 'jsdom';
 
+/**
+ * Replace all occurrences of the `<font>` element in the SVG file by a `<span>`.
+ *
+ * Hopefully, this module can be removed, eventually, because draw.io will not generate such diagrams. (Although the module
+ * may have to remain after all to ensure backward compatibility…)
+ *
+ * @param svg_text
+ * @returns
+ */
 export function deFontSvg(svg_text: string): string {
     const dom = new JSDOM(svg_text, { contentType: "image/svg+xml" });
     const svg = dom.window.document;

@@ -19,7 +19,7 @@ import type { Buffer } from "node:buffer"
 import JSZip           from 'jszip';
 
 /**
- * The content of the required `container.xml` file (see the [EPUB 3.3 specification](https://www.w3.org/TR/epub-33/#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
+ * The content of the required `container.xml` file (see the [EPUB 3.4 specification](https://www.w3.org/TR/epub-33/#sec-container-metainf-container.xml)). The root is set to `package.opf` at the top level
  */
 const container_xml  = `<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -30,7 +30,7 @@ const container_xml  = `<?xml version="1.0"?>
 `
 
 /**
- * ## The class representing the EPUB 3.3 OCF package.
+ * ## The class representing the EPUB 3.4 OCF package.
  *
  * Simple wrapper around the [JSZip](https://stuk.github.io/jszip/) package to create an OCF specific packaging for EPUB. The constructor generates and adds the required content files, as described in the [EPUB Specification](https://www.w3.org/TR/epub-33/#sec-ocf), namely:
  *

@@ -33,7 +33,8 @@ import * as process    from 'node:process';
 * 1. Check whether the protocol is http(s). Other protocols are not accepted (actually rejected by fetch, too);
 * 2. Run the URL through a valid-url check, which looks at the validity of the URL in terms of characters used, for example;
 * 3. Check that the port (if specified) is in the allowed range, i.e., > 1024;
-* 4. Check whether the host name is not `localhost` (or equivalents, see [[invalid_host_names]]); this is not allowed, unless the code runs in a client or the environment variable `R2EPUB_LOCAL` is set.
+* 4. Check whether the host name is not `localhost` (or equivalents, see [[invalid_host_names]]); this is not allowed, unless the code runs in a
+* client or the environment variable `R2EPUB_LOCAL` is set.
 *
 * @param address
 * @returns  - the URL itself (which might be slightly improved by the valid-url method) or `null` if this is, in fact, not a URL
@@ -112,6 +113,8 @@ export async function fetch_resource(resource_url :string, force_text = false) :
             return fs.promises.readFile(filename, 'utf-8');
         }
     } else {
+        // Note that the code was originally written when promises were new and the "await" paradigm did not exist yet.
+        // The code would look different if written today. Maybe, at some point, it will get re-written...
         // If there is a problem, an exception is raised
         return new Promise((resolve, reject) => {
             try {
@@ -121,7 +124,7 @@ export async function fetch_resource(resource_url :string, force_text = false) :
                 fetch(final_url)
                     .then((response) => {
                         if (response.ok) {
-                            // If the response content type is set (which is usually the case, but not in all cases...)
+                            // If the response content type is set (which is usually the case, but not always…)
                             const response_type = response.headers.get('content-type')?.split(';')[0].trim();
                             if (response_type && response_type !== '') {
                                 if (common.text_content.includes(response_type)) {
@@ -193,7 +196,7 @@ export async function fetch_type(resource_url :string) :Promise<string> {
                     if (response.ok) {
                         // If the response content type is set (which is usually the case, but not in all cases...)
                         const type :string | null = response.headers.get('content-type');
-                        response.body?.cancel(); // To avoid leaking
+                        response.body?.cancel(); // To avoid leaking and open communication. Deno tests shout at you if you don't do this...
                         if (type === null || type === '') {
                             reject(new Error(`No content type returned for ${resource_url}`));
                         } else {

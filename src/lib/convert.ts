@@ -37,6 +37,7 @@ import * as overview    from './overview.ts';
 import { deFontSvg }    from './defontSvg.ts';
 
 // Extra utility to simulate the _.zip function from underscore.js
+// The main structure was provided by perplexity, with minor modifications
 function zip<T extends unknown[][]>(...arrays: T): { [K in keyof T]: T[K] extends (infer V)[] ? V : never }[] {
     const minLength = Math.min(...arrays.map((arr) => arr.length));
     return Array.from({ length: minLength }, (_, i) => arrays.map((arr) => arr[i]) as any);
@@ -138,8 +139,8 @@ interface LocalLinks {
  * On a high level, the task of creating the EPUB file consists of:
  *
  * * Collect all the dependent resources like images, scripts, css files, audio, video, etc, that are "part" of the specification. In practical terms that means all resources with a relative URL should be collected.
- * * Set the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in `https://www.w3.org/StyleSheet/TR/2016/*`;
- *   these style files, and the related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. (See the [“css” module](./_lib_css_.html).)
+ * * Set the right CSS files. W3C TR documents refer (via absolute URL-s) to CSS files in `https://www.w3.org/StyleSheet/TR/2016/*` or `https://www.w3.org/StyleSheet/TR/2021/*`, depending on the date of the document.;
+ *   these style files, and the related images, depend on the exact nature of the TR document: REC, WD, etc. All these should be collected/created as resources for the EPUB file. (See the [“css2016”](./_lib_css2016_.html) and [“css2021”](./_lib_css2021_.html) modules, respectively.)
  * * Follow similar actions for some system wide javascript files (although, at this moment, it is a single JS file that must be taken care of).
  * * Extract the various metadata items (title, editors, dates, etc.) for the package file.
  * * Remove the TOC from the TR document (i.e., making it `display:none`), extract that HTML fragment and put it into a separate `nav` file, per EPUB3 specification. (See the [“nav” module](./_lib_nav_.html).)

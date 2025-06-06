@@ -31,8 +31,8 @@
  *
  * ### Small note on the SVG Logo files
  *
- * Some of the SVG files include a `<!DOCTYPE`, which leads to an error in epubcheck for EPUB 3.2. However, these are allowed in EPUB 3.3, and the errors may be safely ignored. The newer version of epubcheck accepts these
- * SVG files. (All EPUB Reading System work well with included `<!DOCTYPE`.)
+ * Some of the SVG files include a `<!DOCTYPE`, which led to an error in epubcheck for EPUB 3.2. However, these are allowed starting EPUB 3.3, and the errors
+ * may be safely ignored. The newer version of epubcheck accepts these SVG files. (All EPUB Reading System work well with included `<!DOCTYPE`.)
  *
  * @packageDocumentation
 */
@@ -45,7 +45,8 @@ import * as common                  from './common.ts';
 /* ---------------------------------------------- Main entry point ----------------------------------------- */
 
 /**
- * Extract/add the right CSS references and gathers all resources (logo files, watermark image, etc.) to be added to the overall set of resources in the final book. Note that the HTML DOM of the main file is modified on the fly:
+ * Extract/add the right CSS references and gathers all resources (logo files, watermark image, etc.) to be added to the overall set of resources in the final book.
+ * Note that the HTML DOM of the main file is modified on the fly:
  *
  * - The reference to the core CSS is changed to `base.css`.
  * - The background/watermark handling is stored in a separate, extra CSS file, whose reference is added to the document.

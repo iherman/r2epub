@@ -1,7 +1,7 @@
 /**
  * ## Simple server for EPUB generation
  *
- * It takes the parameters in a query string, generates and returns an EPUB 3.2 instance to the caller.
+ * It takes the parameters in a query string, generates and returns an EPUB 3.4 instance to the caller.
  *
  * The possible query parameters are
  *
@@ -27,13 +27,13 @@
  * https://epub.example.org?url=https://www.example.org/doc.html
  * ```
  *
- * Convert the HTML _ReSpec source_ to an EPUB 3.2 file. The source is converted on-the-fly by respec:
+ * Convert the HTML _ReSpec source_ to an EPUB 3.4 file. The source is converted on-the-fly by respec:
  *
  * ``` sh
  * https://epub.example.org?url=https://www.example.org/doc.html&respec=true
  * ```
  *
- * Convert the HTML _ReSpec source_ to an EPUB 3.2 file, setting its spec status to REC. The source is converted on-the-fly by respec, overwriting the `specStatus` entry in the configuration to `REC`:
+ * Convert the HTML _ReSpec source_ to an EPUB 3.4 file, setting its spec status to REC. The source is converted on-the-fly by respec, overwriting the `specStatus` entry in the configuration to `REC`:
  *
  * ``` sh
  * https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specStatus=REC

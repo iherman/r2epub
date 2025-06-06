@@ -2,7 +2,7 @@
  * ## The OPF package
  *
  * Wrapper around the package. The details of the various entries are in the
- * [EPUB 3.3 Specification](https://www.w3.org/TR/epub-33/#sec-package-doc).
+ * [EPUB 3 Specification](https://www.w3.org/TR/epub/#sec-package-doc).
  *
  * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
  * the details; the short overview is:
@@ -24,7 +24,7 @@
 import { convert }   from "xmlbuilder2";
 import * as utils    from "./utils.ts";
 
-// These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.3 package. See that document for details.
+// These are just the encodings, per xmlbuilder, of the various items as defined for the EPUB 3.4 package. See that document for details.
 /**
  *
  */
@@ -182,14 +182,14 @@ export interface Package {
 /**
  * ## The OPF Wrapper
  *
- * Wrapper around the internal representation of a EPUB3 Package document, as defined in the [EPUB 3.3 Specification](https://www.w3.org/TR/epub-33/#sec-package-doc)
+ * Wrapper around the internal representation of a EPUB3 Package document, as defined in the [EPUB 3 Specification](https://www.w3.org/TR/epub/#sec-package-doc)
  *
  * The module relies on the [`xmlbuilder2` package](https://oozcitak.github.io/xmlbuilder2/), which generates an XML file out of a set of JS objects. See the documentation of that library for
  * the details; the short overview is:
  *
  * - JSON names starting with `"@""` represent an attribute.
  * - JSON name `"#""` represent textual content of the element.
- * - Otherwise a JSON name refers to an embedded dictionary representing a subelement in XML.
+ * - Otherwise a JSON name refers to an embedded dictionary representing a sub-element in XML.
  *
  * The type hierarchy to represent an OPF file through such objects is defined through [[Package]]. Those types and default values do not reflect all possibilities of Package documents, only those that are relevant for W3C Technical reports.
  *
@@ -314,7 +314,7 @@ export class PackageWrapper {
     /**
      * Add a manifest item, i.e., the reference to a resource that is part of the publication.
      *
-     * @param item - manifest item, as defined in the [EPUB 3.3 Specification](https://www.w3.org/TR/epub-33/#sec-item-elem)
+     * @param item - manifest item, as defined in the [EPUB 3 Specification](https://www.w3.org/TR/epub/#sec-item-elem)
      * @add_spine_item - whether the item must be added to the spine, too (with a `linear=no` attribute value)
      */
     add_manifest_item(item :ManifestItem, add_spine_item = false) :void {

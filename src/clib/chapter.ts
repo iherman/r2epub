@@ -103,7 +103,7 @@ export class Chapter {
      * The real initialization must be done in a separate method and not in the constructor, because
      * async actions are (heavily) involved...
      *
-     * The method starts by running r2epub on the original arguments, and the uses the jszip methods (see the [jszip documentation](https://stuk.github.io/jszip/)) to extract the content.
+     * The method starts by running r2epub on the original arguments, and then uses the jszip methods (see the [jszip documentation](https://stuk.github.io/jszip/)) to extract the content.
      *
      * The following items are extracted, and stored, from the chapter’s OCF:
      *

@@ -14,7 +14,7 @@ export enum Environment {
 }
 
 /**
- * Flag to decide whether the code runs in a browser, Deno, or in node.js.
+ * Flag to decide whether the code runs in a browser, in Deno, or in node.js.
  */
 export const environment = (() :Environment => {
     // Deno is detected first because we need 'process' elsewhere and it is imported from the node library.
@@ -141,7 +141,7 @@ export const wcag_checked :string[] = [
 
 /**
  * Invalid host names (essentially "localhost" and friends); unless explicitly set in the environment, these are considered to be unsafe.
- * This is important for server deployment.
+ * This is important for server deployment: servers should never accept these host names
  */
 export const invalid_host_names :string[] = [
     '127.0.0.1', '127.254.1.2', '10.1.2.3', '10.254.4.5',
@@ -202,6 +202,7 @@ export const W3C_icons = 'https://www.w3.org/Icons/';
 
 export const local_icons = 'Icons/';
 
+/** Cut-off date for the publication process change */
 export const process_2021_date      = '2021-11-02';
 
 /** Base URL for the official W3C logos (only the non-SVG ones are used directly). */
@@ -280,8 +281,8 @@ export const CORS_headers = {
  * main CSS file. The features are
  *
  * 1. Due to the problems with Apple Books, the target DOM is modified by adding an extra `div` element, which carries the padding statements. Books does not understand a padding and margin on the body element, hence this addition...
- * 2. A number of page break control added to header elements, definition lists, or figure elements (even if, at this time, not many reading systems really honer these...)
- * 3. The outdated warning boxes are stuck to the bottom, instead coming up with interaction
+ * 2. A number of page break control added to header elements, definition lists, or figure elements (even if, at this time, not many reading systems really honor these...)
+ * 3. The "outdated" warning boxes are stuck to the bottom, instead coming up with interaction
  * 4. The table of content, as generated into the file, is removed (via a `display` attribute); its content is put into a separate navigation file used by the reading system.
  */
 export const tr_epub_css = `
