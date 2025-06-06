@@ -34,6 +34,7 @@ import * as title_page  from './title.ts';
 import * as cover_page  from './cover.ts';
 import * as nav         from './nav.ts';
 import * as overview    from './overview.ts';
+import { deFontSvg }    from './defontSvg.ts';
 
 // Extra utility to simulate the _.zip function from underscore.js
 function zip<T extends unknown[][]>(...arrays: T): { [K in keyof T]: T[K] extends (infer V)[] ? V : never }[] {
@@ -596,7 +597,9 @@ export class RespecToEPUB {
             if (this.global.trace) console.log(`- Append external resources to the epub file`);
             zip(results, file_names).forEach(([result, file_name]) => {
                 if (result.status === "fulfilled") {
-                    the_book.append(result.value, file_name, this.global.trace);
+                    // Remove the <font> element from the SVG files, if used
+                    const value = (typeof result.value === "string" && file_name.endsWith(".svg")) ? deFontSvg(result.value) : result.value;
+                    the_book.append(value, file_name, this.global.trace);
                 } else {
                     console.warn(`- Failed to fetch the source for ${file_name}:`, result.reason);
                 }

@@ -243,7 +243,6 @@ export async function fetch_html(html_url :string) :Promise<jsdom.JSDOM> {
 export async function fetch_json(json_url :string) :Promise<any> {
     try {
         const body = await fetch_resource(json_url, true);
-
         return JSON.parse(body);
     } catch (err) {
         throw new Error(`JSON parsing error in ${json_url}: ${err}`);
