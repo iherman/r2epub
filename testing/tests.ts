@@ -1,4 +1,4 @@
-import * as r2epub from '../src/index.ts';
+import * as r2epub from '../index.ts';
 import * as fs     from 'node:fs';
 import { Buffer }  from 'node:buffer';
 
@@ -32,7 +32,7 @@ function assert(condition: boolean, message: string): void {
 }
 
 async function epubcheck(filename: string, flags: string[] = []): Promise<boolean> {
-    const args = ["-jar", "epubcheck.jar", ...flags, filename];
+    const args = ["-jar", "/Users/ivan/Source/JavaLibraries/epubcheck-5.2.1/epubcheck.jar", ...flags, filename];
     const cmd = new Deno.Command("/usr/bin/java", {
         args,
         stdout : "piped",
@@ -82,7 +82,7 @@ const tests: Suite = {
         url    : "https://www.w3.org/TR/epub-overview-33/",
         respec : false,
         output : "epub-overview-33.epub",
-        remove : false,
+        remove : true,
         trace  : false,
     },
 
@@ -90,7 +90,7 @@ const tests: Suite = {
         url    : "https://w3c.github.io/epub-specs/epub33/overview/",
         respec : true,
         output : "epub-overview-ed.epub",
-        remove : false,
+        remove : true,
         trace  : false,
     },
 
@@ -98,7 +98,7 @@ const tests: Suite = {
         url    : "http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
         respec : false,
         output : "epub-book.epub",
-        remove : false,
+        remove : true,
         trace  : false,
     },
 
@@ -106,7 +106,7 @@ const tests: Suite = {
         url    : "https://www.w3.org/TR/dpub-aria-1.0/",
         respec : false,
         output : "aria.epub",
-        remove : false,
+        remove : true,
         trace  : false,
     },
 
@@ -114,7 +114,7 @@ const tests: Suite = {
         url    : "https://www.w3.org/TR/clreq/",
         respec : false,
         output : "clreq.epub",
-        remove : false,
+        remove : true,
         trace  : false,
         eflags : ["-f"],
     },
@@ -123,7 +123,7 @@ const tests: Suite = {
         url    : "https://www.w3.org/TR/epub-overview-34/",
         respec : false,
         output : "epub-overview-34.epub",
-        remove : false,
+        remove : true,
         trace  : false,
     },
 
@@ -131,7 +131,7 @@ const tests: Suite = {
         url    : "http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json",
         respec : false,
         output : "vc.epub",
-        remove : false,
+        remove : true,
         trace  : false,
         eflags : ["-f"],
     },
