@@ -2,7 +2,7 @@
     "name": "@iherman/r2epub",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
     "version": "2.0.0",
-    "homepage": "https://github.com/w3c/yml2vocab",
+    "homepage": "https://github.com/iherman/r2epub",
     "nodeModulesDir": "none",
     "compilerOptions": {
         "lib": ["dom", "deno.ns"]
@@ -17,20 +17,20 @@
         ]
     },
     "tasks": {
-        "test-dark-mode": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/darkmode/Overview.html",
-        "test-document": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/spec/Overview.html",
-        "test-2016": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/aria/Overview.html",
-        "test-clreq": "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/clreq/Overview.html",
-        "test-book": "deno run -A src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
-        "test-respec": "deno run -A src/r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/",
-        "test-vc": "deno run -A src/r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json",
-        "test": "(cd testing; deno test -A)",
-        "server": "deno run -A src/server.ts"
+        "test-dark-mode" : "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/darkmode/Overview.html",
+        "test-document"  : "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/spec/Overview.html",
+        "test-2016"      : "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/aria/Overview.html",
+        "test-clreq"     : "deno run -A src/r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/explore/clreq/Overview.html",
+        "test-book"      : "deno run -A src/r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
+        "test-respec"    : "deno run -A src/r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/",
+        "test-vc"        : "deno run -A src/r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json",
+        "test"           : "(cd testing; deno test -A)",
+        "server"         : "deno run -A src/server.ts"
     },
     "exports": {
-        ".":     "./src/index.ts",
-        "./cli": "./src/r2epub.ts",
-        "./serve": "./src/server.ts"
+        "."       :     "./src/index.ts",
+        "./cli"   : "./src/r2epub.ts",
+        "./serve" : "./src/server.ts"
     },
     "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
     "license": "W3C-20150513",
