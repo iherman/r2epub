@@ -4,6 +4,7 @@
  * Creation of the title page.
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

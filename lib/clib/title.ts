@@ -4,6 +4,7 @@
  * Creation of a title page for a collection. See [[create_title_page]] for the details.
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

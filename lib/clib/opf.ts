@@ -4,6 +4,7 @@
  * Creation of the Package file for a collection, per the [EPUB 3 Package Document Specification](https://www.w3.org/TR/epub/#sec-package-doc).
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

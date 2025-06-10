@@ -39,6 +39,7 @@
  * (e.g., BG/CG documents) are described in the [[specStatus_css]] object, based on the [[specStatus_css_mappings]] interface.
  *
  * @packageDocumentation
+ * @module
 */
 
 /**

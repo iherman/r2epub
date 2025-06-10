@@ -3,6 +3,7 @@
  * ## Global constants used at various places.
  *
  * @packageDocumentation
+ * @module
 */
 import * as process from 'node:process';
 

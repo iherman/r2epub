@@ -2,6 +2,7 @@
  * ## Some common utilities
  *
  * @packageDocumentation
+ * @module
 */
 
 import * as jsdom       from 'jsdom';

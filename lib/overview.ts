@@ -11,6 +11,7 @@
  *
  *
  * @packageDocumentation
+ * @module
 */
 
 import * as urlHandler              from 'node:url';

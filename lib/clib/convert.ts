@@ -17,6 +17,7 @@
  * See [[create_epub]] for further details.
  *
  * @packageDocumentation
+ * @module
  */
 
 

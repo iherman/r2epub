@@ -2,6 +2,7 @@
     "name": "@iherman/r2epub",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
     "version": "2.0.0",
+    "date": "2025-06-17",
     "homepage": "https://github.com/iherman/r2epub",
     "nodeModulesDir": "none",
     "compilerOptions": {
@@ -20,24 +21,53 @@
         "include": ["./lib", "./lib/clib"]
     },
     "tasks": {
-        "test-dark-mode" : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/darkmode/Overview.html",
-        "test-document"  : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/spec/Overview.html",
-        "test-2016"      : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/aria/Overview.html",
-        "test-clreq"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/clreq/Overview.html",
-        "test-book"      : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json",
-        "test-respec"    : "deno run -A r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/",
-        "test-vc"        : "deno run -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json",
-        "test"           : "deno test -A",
-        "server"         : "deno run -A server.ts"
+        "test-dark-mode" : {
+            "description" : "Convert a single document, using the latest dark-mode css",
+            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/darkmode/Overview.html"
+        },
+        "test-document" : {
+            "description" : "Convert a single document, using the post-2021 setup",
+            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/spec/Overview.html"
+        },
+        "test-2016"      : {
+            "description" : "Convert a single document, using a pre-2011 setup",
+            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/aria/Overview.html"
+        },
+        "test-clreq"     : {
+            "description" : "Convert a file with a large number of images, and font settings. Relies on EPUB 3.4 for using ITS attributes.",
+            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/clreq/Overview.html"
+        },
+        "test-book"      : {
+            "description" : "Convert a simple, 2-chapter book",
+            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json"
+        },
+        "test-respec"    : {
+            "description" : "Convert a respec source, pre-processing through the spec generator",
+            "command"     : "deno run -A r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
+        },
+        "test-vc"        : {
+            "description" : "Stress-test: convert a book of 8 chapters. Note that some diagrams are erroneous SVG (draw.io bug) and epubcheck complains",
+            "command"     : "deno run -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json"
+        },
+        "test"           : {
+            "description" : "Deno test using the examples above. Note that the tests rely on the local availability of epubcheck; see the path setting in the test suite.",
+            "command": "deno test -A"
+        },
+        "serve"          : "deno run -A serve.ts",
+        "docs"           : {
+            "description" : "Generate the deno documentation (for what it is worth...). The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.",
+            "command"     : "deno doc --html --name='r2epub converter' --private --output='docs/doc' index.ts r2epub.ts serve.ts lib/*"
+        },
+        "package"         : "deno run -A tools/build_npm.ts"
     },
     "exports": {
         "."       : "./index.ts",
         "./cli"   : "./r2epub.ts",
-        "./serve" : "./server.ts"
+        "./serve" : "./serve.ts"
     },
     "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
     "license": "W3C-20150513",
-    "exclude": [".npm", "Attic"],
+    "exclude": [".npm", "Attic", "testing/examples"],
     "imports": {
         "jszip"                 : "npm:jszip@^3.10.1",
         "valid-url"             : "npm:valid-url@^1.0.9",

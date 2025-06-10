@@ -4,6 +4,7 @@
  * Creation of the navigation file combining a template with the TOC fragment retrieved from the content DOM.
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

@@ -6,9 +6,9 @@ Typescript program to convert W3C documents, produced by [ReSpec](https://respec
 
 The conversion can:
 
-* Convert a single HTML source that was produced by [ReSpec](https://respec.org/docs/).
+* Convert a single HTML source produced by [ReSpec](https://respec.org/docs/).
 * Convert a single HTML source that must be pre-processed by [ReSpec](https://respec.org/docs/) to get its final formats; the program pre-processes the source on the fly.
-* Convert and combine a “collection“ of HTML sources (to be pre-processed or not) into a single EPUB 3 instance.
+* Convert and combine a “collection“ of HTML sources (to be pre-processed or not) into a single EPUB 3 document.
 
 (The on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator service</a>. Alas!, that service may be down or slow, and this package has no control over that…)
 
@@ -16,56 +16,20 @@ The conversion can:
 
 ### Command line usage
 
-There is a simple command line interface to run the script. See the the separate [documentation on cli](https://iherman.github.io/r2epub/typedoc/modules/_r2epub_.html) for details and examples.
+There is a simple command line interface to run the script. See the the separate [documentation on cli](https://iherman.github.io/r2epub/doc/cli/) for details and examples.
 
 ### Run a service via HTTP
 
-There is also the possibility to start a simple server to generate EPUB 3.4 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/typedoc/modules/_server_.html) for details and examples of HTTP requests.
+There is also the possibility to start a simple server to generate EPUB 3.4 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/doc/serve/) for details and examples of HTTP requests.
 
 The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
 
-(Note that the server running on W3C is used to generate an EPUB version of a document based on respec, using its `export` facility.)
+(Note that the server running on W3C is also used to generate an EPUB version of a document based on respec, using its `export` facility.)
 
 ### Use as a typescript/node package through an API
 
-The program can also be used from another Typescript or Javascript program.
-See the separate [documentation on the API](https://iherman.github.io/r2epub/typedoc/modules/modules/_index_.html) for details and examples of the API usage.
+The program can be run from deno (relying on the jsr package `@iherman/r2epub`) or from node.js (relying on the npm package `r2epub`). See the separate [documentation on the API](https://iherman.github.io/r2epub/doc/) for details and examples of the API usage.
 
-## Installation, usage
-
-The implementation is in Typescript and on top of `node.js`.  The documentation is also available [on-line](https://iherman.github.io/r2epub/typedoc/).
-
-### Installation
-
-The usual `npm` approach applies:
-
-``` sh
-git clone https://github.com/iherman/r2epub.git
-cd r2epub
-npm install
-```
-
-or simply use
-
-``` sh
-npm install r2epub
-```
-
-to get to the latest, published version.
-
-The repository contains both the typescript code (in the `src` directory) as well as the transformed javascript code (in the `dist` directory). If, for some reasons, the latter is not in the repository or is not up to date, the
-
-``` sh
-npm run build
-```
-
-command takes care of that. The documentation can also be generated locally through the
-
-``` sh
-npm run docs
-```
-
-command.
 
 #### Environment variables
 
@@ -83,19 +47,18 @@ Once installed locally, follow specific instructions based on your needs/interes
 #### Command Line
 
 ``` sh
-node dist/r2epub.js
+deno run -A r2epub.ts
 ```
-
 starts the command line interface.
 
 #### Server
 
 ``` sh
-node dist/server.js
+deno run -A serve.ts
 ```
 
 starts up the server locally.
 
 ---
 
-Copyright © 2020 [Ivan Herman](https://www.ivan-herman.net) (a.k.a. [@iherman](https://github.com/iherman)).
+Copyright © 2025 [Ivan Herman](https://www.ivan-herman.net) (a.k.a. [@iherman](https://github.com/iherman)).

@@ -33,6 +33,7 @@
  * See also some [example collection configurations files](https://iherman.github.io/r2epub/collections/).
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

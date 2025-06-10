@@ -6,6 +6,7 @@
  * The core of the module is in the [[OCF]] class.
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

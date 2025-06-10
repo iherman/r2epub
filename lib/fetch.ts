@@ -3,7 +3,8 @@
  * ## Fetch
  *
  * Wrappers around the fetch function.
- *
+ * 
+ * @module
  * @packageDocumentation
  */
 

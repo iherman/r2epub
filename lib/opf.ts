@@ -14,6 +14,7 @@
  * The core of the module is in the [[PackageWrapper]] class.
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

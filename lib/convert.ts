@@ -10,7 +10,7 @@
  * * A representation of the EPUB OCF instances (i.e., of the ZIP file for the final content): the [[OCF]] class;
  * * A representation of the EPUB “package”, i.e., the XML file providing the main manifest of the EPUB file: the [[PackageWrapper]] class.
  *
- *
+ * @module
  * @packageDocumentation
 */
 

@@ -7,6 +7,7 @@
  * (It is a single string with the HTML content, with a pattern: this is replaced by the host URL.)
  *
  * @packageDocumentation
+ * @module
  */
 
 /**

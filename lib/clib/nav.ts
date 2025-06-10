@@ -5,6 +5,7 @@
  * Creation of a collection navigation page. See [[create_nav_page]] for details
  *
  * @packageDocumentation
+ * @module
  */
 
 

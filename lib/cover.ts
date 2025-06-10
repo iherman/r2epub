@@ -2,7 +2,8 @@
  * ## Cover page
  *
  * Creation of a cover image.
- *
+ * 
+ * @module
  * @packageDocumentation
  */
 

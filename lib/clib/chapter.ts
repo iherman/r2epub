@@ -6,6 +6,7 @@
  * See [[Chapter]] for the details.
  *
  * @packageDocumentation
+ * @module
  */
 
 

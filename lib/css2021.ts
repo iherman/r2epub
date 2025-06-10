@@ -35,6 +35,7 @@
  * may be safely ignored. The newer version of epubcheck accepts these SVG files. (All EPUB Reading System work well with included `<!DOCTYPE`.)
  *
  * @packageDocumentation
+ * @module
 */
 
 import type { ResourceRef, Global } from './convert.ts';

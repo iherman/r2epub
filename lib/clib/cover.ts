@@ -4,6 +4,7 @@
  * Creation of a cover image for a collection. See [[create_cover_image]] for the details.
  *
  * @packageDocumentation
+ * @module
  */
 
 import type * as cConvert from './convert.ts';

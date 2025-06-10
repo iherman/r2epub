@@ -11,6 +11,7 @@
  * The only reasonable thing to do is for draw.io to avoid doing this.
  *
  * @packageDocumentation
+ * @module
 */
 
 import { JSDOM } from 'jsdom';
