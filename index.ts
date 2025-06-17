@@ -59,7 +59,7 @@ import * as urlHandler                  from 'node:url';
 export type { Options } from './lib/common.ts';
 
 /** Valid Spec Status values */
-export { spec_status_values } from './lib/common.ts';
+export { spec_status_values, ENV_MODIFIED_FILE_LOCATION } from './lib/common.ts';
 
 /**
  * Convenience class, to export the internal [RespecToEPUB](lib_convert.RespecToEpub.html) class for the package as a whole.

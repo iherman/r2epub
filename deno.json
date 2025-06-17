@@ -39,20 +39,40 @@
         },
         "test-book"      : {
             "description" : "Convert a simple, 2-chapter book",
-            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_local.json"
+            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_small.json"
         },
         "test-respec"    : {
             "description" : "Convert a respec source, pre-processing through the spec generator",
             "command"     : "deno run -A r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
         },
         "test-vc"        : {
-            "description" : "Stress-test: convert a book of 8 chapters. Note that some diagrams are erroneous SVG (draw.io bug) and epubcheck complains",
+            "description" : "Stress-test: convert a book of 8 chapters (VC specs). Note that some diagrams are erroneous SVG (draw.io bug) and epubcheck complains",
             "command"     : "deno run -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json"
         },
-        "test"           : {
-            "description" : "Deno test using the examples above. Note that the tests rely on the local availability of epubcheck; see the path setting in the test suite.",
+        "epub33": {
+            "description": "Stress-test: convert a book of 10 chapters (the EPUB 33 specs, i.e., eat your own dogfood…)",
+            "command": "deno run -A r2epub.ts https://iherman.github.io/r2epub/collections/epub.json"
+        },
+        "config-error"   : {
+            "description" : "This is a negative test: it should fail on the JSON schema check",
+            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/config_err.json"
+        },
+        "single": {
+            "description": "A collection with a single entry",
+            "command": "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/single.json"
+        },
+
+        "jsonld": {
+            "description": "This is just for testing purposes to shake the whole system...",
+            "command": "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/json-ld_test.json"
+        },
+
+
+         "test"           : {
+            "description" : "Deno tests using the examples above. Note that the tests rely on the local availability of epubcheck; see the path setting in the test suite.",
             "command": "deno test -A"
         },
+        
         "serve"          : "deno run -A serve.ts",
         "docs"           : {
             "description" : "Generate the deno documentation (for what it is worth...). The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.",

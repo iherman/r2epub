@@ -103,10 +103,10 @@ const check_Web_url = (address :string) :string => {
  */
 export async function fetch_resource(resource_url :string, force_text = false) :Promise<any> {
     if (common.environment !== common.Environment.browser &&
-        process.env.R2EPUB_MODIFIED_EPUB_FILES &&
+        process.env[common.ENV_MODIFIED_FILE_LOCATION] &&
         resource_url.startsWith(common.modified_epub_files))
     {
-        const filename = resource_url.replace(common.modified_epub_files, `${process.env.R2EPUB_MODIFIED_EPUB_FILES}${common.process_version}/`);
+        const filename = resource_url.replace(common.modified_epub_files, `${process.env[common.ENV_MODIFIED_FILE_LOCATION]}${common.process_version}/`);
         if (filename.endsWith('.png') && force_text === false) {
             // This is an image; it must be returned as a buffer
             return fs.promises.readFile(filename);
@@ -123,48 +123,58 @@ export async function fetch_resource(resource_url :string, force_text = false) :
                 // An exception is raised if the URL has security/sanity issues.
                 const final_url = check_Web_url(resource_url);
                 fetch(final_url)
-                    .then((response) => {
-                        if (response.ok) {
-                            // If the response content type is set (which is usually the case, but not always…)
-                            const response_type = response.headers.get('content-type')?.split(';')[0].trim();
-                            if (response_type && response_type !== '') {
-                                if (common.text_content.includes(response_type)) {
-                                    // the simple way, just return text...
-                                    resolve(response.text())
-                                } else {
-                                    if (force_text){
-                                        resolve(response.text())
+                    .then(async (response) => {
+                        try {
+                            if (response.ok) {
+                                // If the response content type is set (which is usually the case, but not always…)
+                                const response_type = response.headers.get('content-type')?.split(';')[0].trim();
+                                if (response_type && response_type !== '') {
+                                    if (common.text_content.includes(response_type)) {
+                                        // the simple way, just return text...
+                                        const output = await response.text();
+                                        resolve(output)
                                     } else {
-                                        switch (common.environment) {
-                                            case common.Environment.browser :
-                                                // In a browser, the body is returned as a blob
-                                                resolve(response.blob());
-                                                break;
-                                            case common.Environment.deno :
-                                                // In deno, the body is, I believe, an Uint8Array, but other layers
-                                                // (like jszip) expect an ArrayBuffer, so we convert it
-                                                resolve(response.arrayBuffer());
-                                                break;
-                                            case common.Environment.nodejs :
-                                                // In Node.js, the body is returned as a stream
-                                                resolve(response.body);
-                                                break;
-                                            default:
-                                                // In other environments, we do not know what to do, so we return the body as a blob
-                                                // This is a fallback, but it should not happen
-                                                console.warn(`Unknown environment, returning body as blob: ${common.environment}`);
-                                                resolve(response.blob());
+                                        if (force_text){
+                                            const output = await response.text();
+                                            resolve(output)
+                                        } else {
+                                            switch (common.environment) {
+                                                case common.Environment.browser :
+                                                    // In a browser, the body is returned as a blob
+                                                    resolve(await response.blob());
+                                                    break;
+                                                case common.Environment.deno :
+                                                    // In deno, the body is, I believe, an Uint8Array, but other layers
+                                                    // (like jszip) expect an ArrayBuffer, so we convert it
+                                                    resolve(await response.arrayBuffer());
+                                                    break;
+                                                case common.Environment.nodejs :
+                                                    // In Node.js, the body is returned as a stream
+                                                    resolve(await response.arrayBuffer());
+                                                    break;
+                                                default:
+                                                    // In other environments, we do not know what to do, so we return the body as a blob
+                                                    // This is a fallback, but it should not happen
+                                                    console.warn(`Unknown environment, returning body as blob: ${common.environment}`);
+                                                    resolve(await response.blob());
+                                            }
                                         }
                                     }
+                                } else {
+                                    console.log("return text by default")
+                                    // No type information on return, let us hope this is something proper
+                                    // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
+                                    const output = await response.text();
+                                    resolve(output);
                                 }
                             } else {
-                                console.log("return text by default")
-                                // No type information on return, let us hope this is something proper
-                                // TODO: (in case of a full implementation) to do something intelligent if there is no response header content type.
-                                resolve(response.text());
+                                reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
                             }
-                        } else {
-                            reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                        } finally {
+                            // Always close the body if not already consumed
+                            if (response.body) {
+                                try { await response.body.cancel(); } catch {/* This is just a placeholder */}
+                            }
                         }
                     })
                     .catch((err) => {
@@ -247,7 +257,8 @@ export async function fetch_html(html_url :string) :Promise<jsdom.JSDOM> {
 export async function fetch_json(json_url :string) :Promise<any> {
     try {
         const body = await fetch_resource(json_url, true);
-        return JSON.parse(body);
+        const output = JSON.parse(body);
+        return output;
     } catch (err) {
         throw new Error(`JSON parsing error in ${json_url}: ${err}`);
     }

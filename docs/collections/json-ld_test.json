@@ -1,14 +1,14 @@
 {
     "name": "JSON LD 1.1",
     "id": "jsonld11_test",
-    "comment": "This is just for testing purposes to shake the whole system....",
+    "comment": "This is just for testing purposes to shake the whole system...",
     "readingOrder": [
         {
             "url": "https://w3c.github.io/json-ld-syntax/",
             "respec" : true,
             "config" : {
                 "specStatus"      : "REC",
-                "publishDate"     : "2020-06-15",
+                "publishDate"     : "2025-06-15",
                 "addSectionLinks" : false
             }
         },
@@ -17,7 +17,7 @@
             "respec" : true,
             "config" : {
                 "specStatus"      : "REC",
-                "publishDate"     : "2020-06-15",
+                "publishDate"     : "2025-06-15",
                 "addSectionLinks" : false
             }
         },
@@ -26,7 +26,7 @@
             "respec" : true,
             "config" : {
                 "specStatus"      : "REC",
-                "publishDate"     : "2020-06-15",
+                "publishDate"     : "2025-06-15",
                 "addSectionLinks" : false
             }
         },

@@ -7,6 +7,11 @@
 */
 import * as process from 'node:process';
 
+/**
+ * Environmental variable name for the location of external copies of some css and image files
+ */
+export const ENV_MODIFIED_FILE_LOCATION = "R2EPUB_MODIFIED_EPUB_FILES";
+
 // eslint-disable-next-line no-shadow
 export enum Environment {
     browser = 'browser',

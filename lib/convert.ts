@@ -363,6 +363,7 @@ export class RespecToEPUB {
         // the width of the display to, possibly, put the TOC onto the sidebar. Both are unnecessary and, actually,
         // (2) is problematic because it forces a narrow display of the text that we do not want.
         {
+            if (this.global.trace) console.log(`- Checking for a reference for the fixup script ${common.fixup_js}`);
             const fixup_element = this.global.html_element?.querySelector(`script[src="${common.fixup_js}"]`);
             if (this.global.trace) console.log(`- Got the the reference to the fixup script ${fixup_element} with url ${common.fixup_js}`);
             if (fixup_element) fixup_element.remove();
