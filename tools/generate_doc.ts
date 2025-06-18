@@ -17,8 +17,8 @@ const deno_json = JSON.parse(Deno.readTextFileSync("deno.json"));
 /* These entry may have to be adapted to the local requirements */
 const README: string       = "README.md";
 const INDEX_ANCHOR: string = " * @module"; // The anchor line in index.ts where a copy of the README.md should go
-const EXTRAS: string[]     = ["lib/*"];    // Extra directories to be added to the generated documentation.
-const OUTPUT_DIR: string   = "docs";       // Directory for the documentation
+const EXTRAS: string[]     = ["r2epub.ts", "serve.ts", "lib/*"];    // Extra files directories to be added to the generated documentation.
+const OUTPUT_DIR: string   = "docs/doc";       // Directory for the documentation
 
 
 /* The various variables that are used below; these may have to be adapted to local setups */
@@ -27,7 +27,7 @@ const params = {
     readme : README,
 
     /* The entry point to the package, ie, the module that is exported */
-    index : deno_json.exports,
+    index : "index.ts",
 
     /*
         The index file is supposed to begin with a jsdoc string; the anchor is the text where the
@@ -60,7 +60,7 @@ function copy_readme() {
         if (indexLine.startsWith(params.indexAnchor)) {
             // copy the content of the readme file, preceded with the documentation mark
             for (const readmeLine of readme) {
-                result.push(` * ${readmeLine}`);
+                if (readmeLine.startsWith("> **Warning:**") === false) result.push(` * ${readmeLine}`);
             }
         }
         result.push(indexLine);
@@ -122,4 +122,4 @@ Deno.copyFileSync(tempFile, params.index);
 Deno.removeSync(tempFile);
 
 /* Add a .nojekyll file into the directory to make the result usable as a GitHub page */
-Deno.writeTextFileSync("./docs/.nojekyll", "");
+Deno.writeTextFileSync(`./${params.output_dir}/.nojekyll`, "");

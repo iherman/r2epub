@@ -1,36 +1,7 @@
 /**
- * ## Externally accessible entries
- *
- * 
- * r2epub can be used as a library module both to TypeScript and to Javascript. This module is the common entry point from both
- * the [cli](./cli/) or the [serve](./serve/) functions for the command line interface and the server side, respectively. Furthermore,
- * it provides an API that can be used directly. A simple example is as follows:
- *
- * In Typescript (using `deno`):
- *
- * ```js
- * import * as r2epub  from 'npm:r2epub'; // or 'jsr:@iherman/r2epub'
- * import * as fs      from 'node:fs';
- * // The creation itself is asynchronous (the content has to be fetched over the wire).
- * // The result is the class instance encapsulating an OCF (zip) content
- * const url :string = "http://www.example.org/doc.html",
- * const args :r2epub.Options = {
- *     respec : false,
- *     config : {}
- * };
- * const ocf :r2epub.OCF = await r2epub.convert(url, args);
- * // The zip file is finalized asynchronously
- * const content :Buffer = await ocf.get_content();
- * // Get the content out to the disk
- * fs.writeFileSync(ocf.name, content);
- * ```
- *
- * The same can be done in `node.js` by installing the `r2epub` package from `npm`.
- *
- * See the detailed specification of the API element. The top level functional entry point to the package is [`convert`](./~/convert.html).
- *
- * @packageDocumentation
  * @module
+ * 
+ * @packageDocumentation
 */
 
 /**

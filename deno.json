@@ -76,7 +76,7 @@
 
         "docs"           : {
             "description" : "Generate the deno documentation (for what it is worth...). The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.",
-            "command"     : "deno doc --html --name='r2epub converter' --private --output='docs/doc' index.ts r2epub.ts serve.ts lib/* ; touch docs/doc/.nojekyll"
+            "command"     : "deno run -A tools/generate_doc.ts"
         },
         
         "package"         : "deno run -A tools/build_npm.ts"

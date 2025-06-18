@@ -1,8 +1,8 @@
 # ReSpec to EPUB
 
-> Warning: this repository undergoes a major change, and is not in line with the corresponding package on npm. Also, the detailed API documentation is lousy, because the `deno doc --html` command still does a substandard job compared to, say, `typedoc` (but mixing `typedoc` and `deno` is not a viable alternative either…)
-
 Typescript program to convert W3C documents, produced by [ReSpec](https://respec.org/docs/), to EPUB 3.4.
+
+> **Warning:** this repository undergoes a major change, and is not in line with the corresponding package on npm. Also, the detailed API documentation is lousy, because the `deno doc --html` command still does a substandard job compared to, say, `typedoc` (but mixing `typedoc` and `deno` is not a viable alternative either…)
 
 ## Single documents vs. Collections
 
@@ -12,7 +12,7 @@ The conversion can:
 * Convert a single HTML source that must be pre-processed by [ReSpec](https://respec.org/docs/) to get its final formats; the program pre-processes the source on the fly.
 * Convert and combine a “collection“ of HTML sources (to be pre-processed or not) into a single EPUB 3 document.
 
-(The on-the-fly conversion via ReSpec is done by running the <a href="https://github.com/w3c/spec-generator">W3C’s Spec Generator service</a>. Alas!, that service may be down or slow, and this package has no control over that…)
+(The on-the-fly conversion via ReSpec is done by running the [W3C’s Spec Generator service](https://github.com/w3c/spec-generator). Alas!, that service may be down or slow, and this package has no control over that…)
 
 ## Package usage
 
@@ -60,6 +60,35 @@ deno run -A serve.ts
 ```
 
 starts up the server locally.
+
+## Externally accessible entry points
+ 
+r2epub can also be used as a library module both to TypeScript and to Javascript. A simple example In Typescript (using `deno`) is as follows:
+
+```js
+import * as r2epub  from 'npm:r2epub'; // or 'jsr:@iherman/r2epub'
+import * as fs      from 'node:fs';
+
+// The creation itself is asynchronous (the content has to be fetched over the wire).
+// The result is the class instance encapsulating an OCF (zip) content
+const url :string = "http://www.example.org/doc.html",
+const args :r2epub.Options = {
+    respec : false,
+    config : {}
+};
+const ocf :r2epub.OCF = await r2epub.convert(url, args);
+
+// The zip file is finalized asynchronously; it is a Buffer or an ArrayBuffer, depending on the run-time environment
+const content = await ocf.get_content();
+
+// Get the content out to the disk
+fs.writeFileSync(ocf.name, content);
+```
+
+The same can be done in `node.js` by installing the `r2epub` package from `npm`.
+
+See the detailed specification of the API elements. The top level functional entry point to the package is [convert](https://iherman.github.io/r2epub/convert.html).
+
 
 ---
 
