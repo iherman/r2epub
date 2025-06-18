@@ -30,7 +30,7 @@
  *
  * For the `-d`, `-s`, `-l`, or `-m` flags, see the [ReSpec manual](https://www.w3.org/respec/). If any of those flags is set, `-r` is implied (i.e., it is not necessary to set it explicitly).
  *
- * This function is a wrapper around the [convert](../~/convert.html) function.
+ * This function is a wrapper around the [convert](../lib/convert.ts/index.html) function.
  *
  * ### Usage examples:
  *

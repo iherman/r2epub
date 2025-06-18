@@ -1,6 +1,6 @@
 # ReSpec to EPUB
 
-> Warning: this repository undergoes a major change, and is not in line with the corresponding package on npm...
+> Warning: this repository undergoes a major change, and is not in line with the corresponding package on npm. Also, the detailed API documentation is lousy, because the `deno doc --html` command still does a substandard job compared to, say, `typedoc` (but mixing `typedoc` and `deno` is not a viable alternative either…)
 
 Typescript program to convert W3C documents, produced by [ReSpec](https://respec.org/docs/), to EPUB 3.4.
 
@@ -37,7 +37,7 @@ The program can be run from `deno` (relying on the jsr package [`@iherman/r2epub
 
 * **`PORT` or `R2EPUB_PORT`:** the port number used by the server; failing these the default (i.e., 80) is used. (`PORT` takes precedence over `R2EPUB_PORT`.)
 * **`R2EPUB_LOCAL`:** no URL-s on `localhost` are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.
-* **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.w3.org/People/Ivan/r2epub/` is used as a base URL for those files. However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (The value may point at `docs/epub_assets/` in the local clone of the distribution; this folder has all the necessary files.)
+* **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.w3.org/People/Ivan/r2epub/` is used as a base URL for those files. However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (The value may point at `docs/epub_assets/` in the local clone of the distribution; that folder has a copy of all the necessary files, too.)
 
     (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)
 
