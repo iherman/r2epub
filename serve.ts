@@ -15,7 +15,7 @@
  *```
  *
  *
- * The module is a wrapper around a standard node.js `http.CreateServer`, and a call to the [convert](../~/convert.html) function.
+ * The module is a wrapper around a standard node.js `http.CreateServer`, and a call to the [convert](../lib/convert.ts/index.html) function.
  *
  * ### Usage examples:
  *
@@ -39,7 +39,7 @@
  * https://epub.example.org?url=https://www.example.org/doc.html&respec=true&specStatus=REC
  * ```
  *
- * Generates a collection, described by the configuration file. (See the [separate module](https://iherman.github.io/r2epub/doc/lib/clib/args.ts/) for more details on the configuration file.)
+ * Generates a collection, described by the configuration file. (See the [separate module](../lib/clib/args.ts/) for more details on the configuration file.)
  *
  * ```sh
  *  https://epub.example.org?url=https://www.example.org/collection.json
