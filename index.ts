@@ -27,7 +27,7 @@
  *
  * The same can be done in `node.js` by installing the `r2epub` package from `npm`.
  *
- * See the detailed specification of the API element. The top level functional entry point to the package is `convert`.
+ * See the detailed specification of the API element. The top level functional entry point to the package is [`convert`](./~/convert.html).
  *
  * @packageDocumentation
  * @module
@@ -62,8 +62,8 @@ export type { Options } from './lib/common.ts';
 export { spec_status_values, ENV_MODIFIED_FILE_LOCATION } from './lib/common.ts';
 
 /**
- * Convenience class, to export the internal [RespecToEPUB](lib_convert.RespecToEpub.html) class for the package as a whole.
- * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](_lib_convert_.respectoepub.html#create_epub_from_dom). In general, [[convert]] should be used).
+ * Convenience class, to export the internal [RespecToEPUB](./lib/convert.ts/~/RespecToEPUB.html) class for the package as a whole.
+ * (This is only useful if, for some reasons, the conversion is done starting with a DOM tree, using [create_epub_from_dom](./lib/convert.ts/~/RespecToEPUB.prototype.create_epub_from_dom.html). In general, [`convert`](./~/convert.html) should be used).
  *
  * This class is largely for internal use to the package, and the API user can mostly ignore its details.
  *
@@ -71,7 +71,7 @@ export { spec_status_values, ENV_MODIFIED_FILE_LOCATION } from './lib/common.ts'
 export class RespecToEPUB extends rConvert.RespecToEPUB {}
 
 /**
- * Convenience class to export the internal [OCF](lib_ocf.OCF.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
+ * Convenience class to export the internal [OCF](./lib/ocf.ts/~/OCF.html) class for the package as a whole. Conversion methods or functions return an instance of this class, containing the generated EPUB content.
  */
 export class OCF extends ocf.OCF {}
 

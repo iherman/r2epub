@@ -67,17 +67,18 @@
             "command": "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/json-ld_test.json"
         },
 
-
          "test"           : {
             "description" : "Deno tests using the examples above. Note that the tests rely on the local availability of epubcheck; see the path setting in the test suite.",
             "command": "deno test -A"
         },
         
         "serve"          : "deno run -A serve.ts",
+
         "docs"           : {
             "description" : "Generate the deno documentation (for what it is worth...). The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.",
-            "command"     : "deno doc --html --name='r2epub converter' --private --output='docs/doc' index.ts r2epub.ts serve.ts lib/*"
+            "command"     : "deno doc --html --name='r2epub converter' --private --output='docs/doc' index.ts r2epub.ts serve.ts lib/* ; touch docs/doc/.nojekyll"
         },
+        
         "package"         : "deno run -A tools/build_npm.ts"
     },
     "exports": {

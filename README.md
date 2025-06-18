@@ -30,7 +30,7 @@ The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) u
 
 ### Use as a typescript/node package through an API
 
-The program can be run from deno (relying on the jsr package `@iherman/r2epub`) or from node.js (relying on the npm package `r2epub`). See the separate [documentation on the API](https://iherman.github.io/r2epub/doc/) for details and examples of the API usage.
+The program can be run from `deno` (relying on the jsr package [`@iherman/r2epub`](https://jsr.io/@iherman/r2epub)) or from `node.js` (relying on the npm package [`r2epub`](https://www.npmjs.com/package/r2epub)). See the separate [documentation on the API](https://iherman.github.io/r2epub/doc/) for details and examples of the API usage.
 
 
 #### Environment variables
