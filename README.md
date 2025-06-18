@@ -1,5 +1,7 @@
 # ReSpec to EPUB
 
+> Warning: this repository undergoes a major change, and is not in line with the corresponding package on npm...
+
 Typescript program to convert W3C documents, produced by [ReSpec](https://respec.org/docs/), to EPUB 3.4.
 
 ## Single documents vs. Collections
