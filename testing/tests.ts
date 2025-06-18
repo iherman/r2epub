@@ -231,8 +231,7 @@ Deno.test({
     },
 });
 
-// Ignore until the configuration fils are pushed on github.io
-Deno.test.ignore({
+Deno.test({
     name: "003. Convert a simple, 2-chapter book. (output: epub-book)",
     sanitizeResources: false,
     fn: async () => {
@@ -305,8 +304,7 @@ Deno.test({
     },
 });
 
-// Ignore until the configuration files are pushed on github.io
-Deno.test.ignore({
+Deno.test({
     name: "010. Stress-test: convert a book with 4 chapters (the JSON-LD 1.1 specs). All replacement files are strictly remote and all sources are pre-processed by respec. (output: jsonld)",
     sanitizeResources: false,
     fn: async () => {
