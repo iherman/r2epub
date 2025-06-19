@@ -2,7 +2,7 @@
     "name": "@iherman/r2epub",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
     "version": "2.0.0",
-    "date": "2025-06-17",
+    "date": "2025-06-20",
     "homepage": "https://github.com/iherman/r2epub",
     "nodeModulesDir": "none",
     "compilerOptions": {
@@ -88,7 +88,7 @@
     },
     "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
     "license": "W3C-20150513",
-    "exclude": [".npm", "Attic", "testing/examples"],
+    "exclude": [".npm", "Attic", "testing/examples","docs"],
     "imports": {
         "jszip"                 : "npm:jszip@^3.10.1",
         "valid-url"             : "npm:valid-url@^1.0.9",
