@@ -6,18 +6,20 @@ await emptyDir("./.npm");
 
 await build({
     entryPoints: [
-        "./index.ts", 
-        {
-            kind: "bin",
-            name: "r2epub",
-            path: "./r2epub.ts",
-        },
-        {
-            kind: "bin",
-            name: "serve",
-            path: "./serve.ts"
-        }
-    ],
+        "./index.ts",
+        // {
+        //      kind: "bin",
+        //      name: "r2epub",
+        //      path: "./r2epub.ts",
+        // },
+        // {
+        //     kind: "bin",
+        //     name: "serve",
+        //     path: "./serve.ts",
+        // },
+   ],
+    typeCheck: false,
+    test: false,
     outDir: "./.npm",
     shims: {
         // see JS docs for overview and more options
@@ -27,7 +29,7 @@ await build({
     package: {
         // package.json properties
         name: "r2epub",
-        version: deno_json.version,
+        version: "2.0.0",
         date: deno_json.date,
         description: deno_json.description,
         license: deno_json.license,

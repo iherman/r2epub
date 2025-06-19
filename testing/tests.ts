@@ -249,8 +249,7 @@ Deno.test({
     },
 });
 
-// We know that, currently, epubcheck rejects this, and the error message is huge; better ignore until epubcheck gets updated
-Deno.test.ignore({
+Deno.test({
     name: "005. Convert a file with a large number of images, and font settings. Relies on EPUB 3.4 for using ITS attributes; epubcheck is currently weakened to pass. (output: clreq)",
     sanitizeResources: false,
     fn: async () => {
