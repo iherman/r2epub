@@ -17,8 +17,14 @@ await build({
         //     name: "serve",
         //     path: "./serve.ts",
         // },
-   ],
-    typeCheck: false,
+    ],
+    // jsdom and xmlserializer npm packages do not seem to have a proper typescript data
+    // definition file, and the typechecker complains for those two.
+    // At this moment there is no real replacement for the tools in deno land
+    // (The real missing bit is xmlserializer working with the dom, which does not seem to exist in
+    // deno-dom.)
+    // So typechecking is switched off. Oh well...
+    typeCheck: false,    
     test: false,
     outDir: "./.npm",
     shims: {
