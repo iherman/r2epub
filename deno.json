@@ -58,20 +58,24 @@
             "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/config_err.json"
         },
         "single": {
-            "description": "A collection with a single entry",
-            "command": "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/single.json"
+            "description" : "A collection with a single entry",
+            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/single.json"
         },
 
         "jsonld": {
-            "description": "This is just for testing purposes to shake the whole system...",
-            "command": "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/json-ld_test.json"
+            "description" : "This is just for testing purposes to shake the whole system...",
+            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/json-ld_test.json"
         },
 
          "test"           : {
-            "description" : "Deno tests using the examples above. Note that the tests rely on the local availability of epubcheck; see the path setting in the test suite.",
-            "command": "deno test -A"
+            "description" : "Deno tests use the examples in the other tasks, combined with an automatic epubcheck. Note, however, that the tests rely on the local availability of epubcheck; see the path setting in the test suite.",
+            "command"     : "deno test -A"
         },
         
+        "compile"        : {
+            "command": "deno compile -qA r2epub.ts && deno compile -qA -o serve_r2epub serve.ts" 
+        },
+
         "serve"          : "deno run -A serve.ts",
 
         "docs"           : {

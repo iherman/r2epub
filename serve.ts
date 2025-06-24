@@ -96,9 +96,6 @@ type Args = Omit<Query, "respec" | "url" | "submit">;
  * @param query - The query string from the client
  */
 async function get_epub(query :Query) : Promise<Content> {
-
-    // const respec_args = {...query} as Args;
-
     const respec_args :Args = ((): Args => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         // deno-lint-ignore no-unused-vars
@@ -147,7 +144,7 @@ async function get_epub(query :Query) : Promise<Content> {
  */
 async function serve(): Promise<void> {
     const port :string = process.env.PORT || process.env.R2EPUB_PORT || common.local_port_number;
-    console.log(`r2epub server starting on port ${port}`);
+    console.log(`r2epub server starting on port ${port} (${(new Date().toISOString())})`);
     http.createServer(async (request :http.IncomingMessage, response :http.ServerResponse) => {
         const error = (code :number, e :string) => {
             const error_headers = {
