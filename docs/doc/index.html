@@ -68,11 +68,10 @@ Command line usage</h3>
 <h3 id="run-a-service-via-http">
 Run a service via HTTP</h3>
 <p>There is also the possibility to start a simple server to generate EPUB 3.4 instances on request. See the separate <a href="https://iherman.github.io/r2epub/doc/serve/">documentation on the server</a> for details and examples of HTTP requests.</p>
-<p>The server has been deployed on the cloud at <a href="https://labs.w3.org/r2epub">W3C</a> using the <code>https://labs.w3.org/r2epub</code> URL. A <a href="https://iherman.github.io/r2epub/convert.html">browser interface</a> to drive this server is also available.</p>
-<p>(Note that the server running on W3C is also used to generate an EPUB version of a document based on respec, using its <code>export</code> facility.)</p>
-<h3 id="use-as-a-typescript/node-package-through-an-api">
-Use as a typescript/node package through an API</h3>
-<p>The program can be run from <code>deno</code> (relying on the jsr package <a href="https://jsr.io/@iherman/r2epub"><code>@iherman/r2epub</code></a>) or from <code>node.js</code> (relying on the npm package <a href="https://www.npmjs.com/package/r2epub"><code>r2epub</code></a>). See the separate <a href="https://iherman.github.io/r2epub/doc/">documentation on the API</a> for details and examples of the API usage.</p>
+<p>The server has been deployed on the cloud at <a href="https://labs.w3.org/r2epub">W3C</a> using the <code>https://labs.w3.org/r2epub</code> URL. A <a href="https://iherman.github.io/r2epub/convert.html">browser interface</a> to drive this server is also available. (Note that the server running on W3C is also used to generate an EPUB version of a document based on respec directly from the respec <code>export</code> facility.)</p>
+<h3 id="use-as-a-typescript-package-through-an-api">
+Use as a typescript package through an API</h3>
+<p>The program can be run from <code>deno</code> (relying on the jsr package <a href="https://jsr.io/@iherman/r2epub"><code>@iherman/r2epub</code></a>). See the separate <a href="https://iherman.github.io/r2epub/doc/">documentation on the API</a> for details and examples of the API usage.</p>
 <h4 id="environment-variables">
 Environment variables</h4>
 <ul>
@@ -80,11 +79,11 @@ Environment variables</h4>
 <p><strong><code>PORT</code> or <code>R2EPUB_PORT</code>:</strong> the port number used by the server; failing these the default (i.e., 80) is used. (<code>PORT</code> takes precedence over <code>R2EPUB_PORT</code>.)</p>
 </li>
 <li>
-<p><strong><code>R2EPUB_LOCAL</code>:</strong> no URL-s on <code>localhost</code> are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.</p>
+<p><strong><code>R2EPUB_LOCAL</code>:</strong> no URL-s on <code>localhost</code> are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers and its usage is advised for local testing purposes only.</p>
 </li>
 <li>
-<p><strong><code>R2EPUB_MODIFIED_EPUB_FILES</code>:</strong> A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, <code>https://www.w3.org/People/Ivan/r2epub/</code> is used as a base URL for those files. However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (The value may point at <code>docs/epub_assets/</code> in the local clone of the distribution; that folder has a copy of all the necessary files, too.)</p>
-<p>(Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)</p>
+<p><strong><code>R2EPUB_MODIFIED_EPUB_FILES</code>:</strong> A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, <code>https://www.w3.org/People/Ivan/r2epub/</code> is used as a base URL for those files. If the environment variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc.</p>
+<p>(The local clone of the distribution has a copy of all the necessary files, too, and can be used for local testing via <code>localhost</code>. Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)</p>
 </li>
 </ul>
 <h3 id="usage">
@@ -123,7 +122,7 @@ Server</h4>
 <h2 id="externally-accessible-entry-points">
 Externally accessible entry points</h2>
 <p>r2epub can also be used as a library module both to TypeScript and to Javascript. A simple example In Typescript (using <code>deno</code>) is as follows:</p>
-<pre class="highlight"><code class="language-js">import * as r2epub  from 'npm:r2epub'; // or 'jsr:@iherman/r2epub'
+<pre class="highlight"><code class="language-js">import * as r2epub  from 'jsr:@iherman/r2epub';
 import * as fs      from 'node:fs';
 
 // The creation itself is asynchronous (the content has to be fetched over the wire).
@@ -140,7 +139,7 @@ const content = await ocf.get_content();
 
 // Get the content out to the disk
 fs.writeFileSync(ocf.name, content);
-</code><button class="copyButton" data-copy="import * as r2epub  from 'npm:r2epub'; // or 'jsr:@iherman/r2epub'
+</code><button class="copyButton" data-copy="import * as r2epub  from 'jsr:@iherman/r2epub';
 import * as fs      from 'node:fs';
 
 // The creation itself is asynchronous (the content has to be fetched over the wire).
@@ -167,7 +166,7 @@ fs.writeFileSync(ocf.name, content);
 <path d="M5 12l5 5l10 -10" />
 </svg>
 </button><code></code></pre>
-<p>The same can be done in <code>node.js</code> by installing the <code>r2epub</code> package from <code>npm</code>.</p>
+<p>The same can be done in <code>node.js</code> by installing the <code>r2epub</code> package from <code>npm</code>. (See warning in the introduction.)</p>
 <p>See the detailed specification of the API elements. The top level functional entry point to the package is <a href="https://iherman.github.io/r2epub/convert.html">convert</a>.</p>
 <hr />
 <p>Copyright © 2025 <a href="https://www.ivan-herman.net">Ivan Herman</a> (a.k.a. <a href="https://github.com/iherman">@iherman</a>).</p>
@@ -217,7 +216,7 @@ fs.writeFileSync(ocf.name, content);
 	<path fill-rule="evenodd" clip-rule="evenodd" d="M5.76748 11.8159C5.5378 11.577 5.54525 11.1972 5.78411 10.9675L8.93431 8L5.78411 5.0325C5.54525 4.80282 5.5378 4.423 5.76748 4.18413C5.99715 3.94527 6.37698 3.93782 6.61584 4.1675L10.2158 7.5675C10.3335 7.68062 10.4 7.83679 10.4 8C10.4 8.16321 10.3335 8.31938 10.2158 8.4325L6.61584 11.8325C6.37698 12.0622 5.99715 12.0547 5.76748 11.8159Z" fill="currentColor" />
 </svg>
 </a></nav><nav class="documentNavigation">
-          <h3>Document Navigation</h3><ul><li><a href="#respec-to-epub" title="ReSpec to EPUB">ReSpec to EPUB</a></li><li><ul><li><a href="#single-documents-vs.-collections" title="Single documents vs. Collections">Single documents vs. Collections</a></li><li><a href="#package-usage" title="Package usage">Package usage</a></li><li><ul><li><a href="#command-line-usage" title="Command line usage">Command line usage</a></li><li><a href="#run-a-service-via-http" title="Run a service via HTTP">Run a service via HTTP</a></li><li><a href="#use-as-a-typescript/node-package-through-an-api" title="Use as a typescript/node package through an API">Use as a typescript/node package through an API</a></li><li><ul><li><a href="#environment-variables" title="Environment variables">Environment variables</a></li></ul></li><li><a href="#usage" title="Usage">Usage</a></li><li><ul><li><a href="#command-line" title="Command Line">Command Line</a></li><li><a href="#server" title="Server">Server</a></li></ul></li><li><a href="#externally-accessible-entry-points" title="Externally accessible entry points">Externally accessible entry points</a></li></ul></li></ul></li></ul></nav></div>
+          <h3>Document Navigation</h3><ul><li><a href="#respec-to-epub" title="ReSpec to EPUB">ReSpec to EPUB</a></li><li><ul><li><a href="#single-documents-vs.-collections" title="Single documents vs. Collections">Single documents vs. Collections</a></li><li><a href="#package-usage" title="Package usage">Package usage</a></li><li><ul><li><a href="#command-line-usage" title="Command line usage">Command line usage</a></li><li><a href="#run-a-service-via-http" title="Run a service via HTTP">Run a service via HTTP</a></li><li><a href="#use-as-a-typescript-package-through-an-api" title="Use as a typescript package through an API">Use as a typescript package through an API</a></li><li><ul><li><a href="#environment-variables" title="Environment variables">Environment variables</a></li></ul></li><li><a href="#usage" title="Usage">Usage</a></li><li><ul><li><a href="#command-line" title="Command Line">Command Line</a></li><li><a href="#server" title="Server">Server</a></li></ul></li><li><a href="#externally-accessible-entry-points" title="Externally accessible entry points">Externally accessible entry points</a></li></ul></li></ul></li></ul></nav></div>
   </div></div>
 </div>
 </div>

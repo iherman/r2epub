@@ -2,7 +2,7 @@
 
 Typescript program to convert W3C documents, produced by [ReSpec](https://respec.org/docs/), to EPUB 3.4.
 
-> **Warning:** this repository undergoes a major change, and is not in sync with the corresponding package on npm. Also, the detailed API documentation is not perfect, because the `deno doc --html` command doesn't do as good a job as, say, `typedoc`. (Mixing `typedoc` and `deno` is not a viable alternative either…)
+> **Warning:** this repository is not (yet, hopefully) in sync with the corresponding package on [npm](https://www.npmjs.com/package/r2epub). For an up-to-date version you should use [jsr](https://jsr.io/@iherman/r2epub). The reason is that, while the program itself is maintained in [deno](https://deno.land), the conversion to [node.js](https://nodejs.org)/[npm](https:/www.npmjs.com) has problems. Also, the detailed API documentation is not perfect, because the `deno doc --html` command doesn't do as good a job as, say, `typedoc`. (Mixing `typedoc` and `deno` is not a viable alternative either…). Also, the latest, 3.4 version is not yet deployed on the W3C site!
 
 ## Single documents vs. Collections
 
@@ -24,49 +24,58 @@ There is a simple command line interface to run the script. See the the separate
 
 There is also the possibility to start a simple server to generate EPUB 3.4 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/doc/serve/) for details and examples of HTTP requests.
 
-The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available.
+The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available. (Note that the server running on W3C is also used to generate an EPUB version of a document based on respec directly from the respec `export` facility.)
 
-(Note that the server running on W3C is also used to generate an EPUB version of a document based on respec, using its `export` facility.)
+### Use as a typescript package through an API
 
-### Use as a typescript/node package through an API
-
-The program can be run from `deno` (relying on the jsr package [`@iherman/r2epub`](https://jsr.io/@iherman/r2epub)) or from `node.js` (relying on the npm package [`r2epub`](https://www.npmjs.com/package/r2epub)). See the separate [documentation on the API](https://iherman.github.io/r2epub/doc/) for details and examples of the API usage.
+The program can be run from `deno` (relying on the jsr package [`@iherman/r2epub`](https://jsr.io/@iherman/r2epub)). See the separate [documentation on the API](https://iherman.github.io/r2epub/doc/) for details and examples of the API usage.
 
 
 #### Environment variables
 
 * **`PORT` or `R2EPUB_PORT`:** the port number used by the server; failing these the default (i.e., 80) is used. (`PORT` takes precedence over `R2EPUB_PORT`.)
-* **`R2EPUB_LOCAL`:** no URL-s on `localhost` are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers.
-* **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.w3.org/People/Ivan/r2epub/` is used as a base URL for those files. However, if the variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. (The value may point at `docs/epub_assets/` in the local clone of the distribution; that folder has a copy of all the necessary files, too.)
-
-    (Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)
+* **`R2EPUB_LOCAL`:** no URL-s on `localhost` are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers and its usage is advised for local testing purposes only.
+* **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.w3.org/People/Ivan/r2epub/` is used as a base URL for those files. If the environment variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. 
+    
+    (The local clone of the distribution has a copy of all the necessary files, too, and can be used for local testing via `localhost`. Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)
 
 
 ### Usage
 
-Once installed locally, follow specific instructions based on your needs/interest below:
+The programs can be run without any local installation as follows:
 
-#### Command Line
-
-``` sh
-deno run -A r2epub.ts
 ```
-starts the command line interface.
+deno run -A jsr:@iherman/r2epub/cli [filename]
+```
 
-#### Server
+starts up the command line interpreter to convert the file in the argument. A local server can also be started as follows:
+
+```
+deno run -A jsr:@iherman/r2epub/serve
+```
+
+If the repository is locally cloned, the following two commands can be used in the repository to run the command line interpreter or the server, respectively:
 
 ``` sh
+deno run -A r2epub.ts [filename]
 deno run -A serve.ts
 ```
 
-starts up the server locally.
+Finally, issuing
+
+```sh
+deno task compile
+```
+
+on the local repository clone generates the executables `r2epub` and `serve` that can be moved and/or renamed at will.
+
 
 ## Externally accessible entry points
  
 r2epub can also be used as a library module both to TypeScript and to Javascript. A simple example In Typescript (using `deno`) is as follows:
 
 ```js
-import * as r2epub  from 'npm:r2epub'; // or 'jsr:@iherman/r2epub'
+import * as r2epub  from 'jsr:@iherman/r2epub';
 import * as fs      from 'node:fs';
 
 // The creation itself is asynchronous (the content has to be fetched over the wire).

@@ -2,7 +2,7 @@
     "name": "@iherman/r2epub",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
     "version": "2.0.0",
-    "date": "2025-06-20",
+    "date": "2025-06-27",
     "homepage": "https://github.com/iherman/r2epub",
     "nodeModulesDir": "none",
     "compilerOptions": {
@@ -73,7 +73,7 @@
         },
         
         "compile"        : {
-            "command": "deno compile -qA r2epub.ts && deno compile -qA -o serve_r2epub serve.ts" 
+            "command": "deno compile -qA r2epub.ts && deno compile -qA serve.ts" 
         },
 
         "serve"          : "deno run -A serve.ts",
