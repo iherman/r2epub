@@ -86,7 +86,9 @@
             "command"     : "deno run -A tools/generate_doc.ts"
         },
         
-        "package"         : "deno run -A tools/build_npm.ts"
+        "package"         : "deno run -A tools/build_npm.ts",
+
+        "assets"          : "cd docs/assets/js; deno bundle -o server_interface.js server_interface.ts"
     },
     "exports": {
         "."       : "./index.ts",

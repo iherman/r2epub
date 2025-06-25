@@ -69,26 +69,36 @@ async function fetch_book(resource_url :string) :Promise<ReturnedData> {
             window.fetch(resource_url, {mode: 'cors'})
                 // eslint-disable-next-line consistent-return
                 .then((response) => {
-                    content_type = response.headers.get('Content-type');
-                    if (response.ok) {
-                        fname = response.headers.get('Content-Disposition').split(';')[1].split('=')[1]
-                        return response.blob()
+                    const ct = response.headers.get('Content-type');
+                    if(ct === null) {
+                        reject(new Error(`HTTP response did not include a content type on ${resource_url}`));
                     } else {
-                        if (response.status === 400) {
-                            // this is a "controlled" bad response meaning that an error message was sent by the r2epub software
-                            return response.blob();
+                        // The second part is superfluous but makes TS happy
+                        content_type = response.headers.get('Content-type') || '';
+                        if (response.ok) {
+                            fname = response.headers.get('Content-Disposition')?.split(';')[1].split('=')[1] || '';
+                            return response.blob()
                         } else {
-                            // Something else happened...
-                            reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                            if (response.status === 400) {
+                                // this is a "controlled" bad response meaning that an error message was sent by the r2epub software
+                                return response.blob();
+                            } else {
+                                // Something else happened...
+                                reject(new Error(`HTTP response ${response.status}: ${response.statusText} on ${resource_url}`));
+                            }
                         }
                     }
                 })
                 .then((content) => {
-                    resolve({
-                        content_type : content_type,
-                        file_name    : fname,
-                        content      : content,
-                    });
+                    if (content) {
+                        resolve({
+                            content_type: content_type,
+                            file_name: fname,
+                            content: content,
+                        });    
+                    } else {
+                        reject(new Error(`Empty content has been returned for ${resource_url}`))
+                    }
                 })
                 .catch((err) => {
                     reject(new Error(`Problem accessing: ${err}`));
@@ -139,7 +149,7 @@ const submit = async (event :Event) :Promise<any> => {
 
     // This is to allow for async to work properly and avoid reloading the page
     event.preventDefault();
-    const done :HTMLElement             = document.getElementById('done');
+    const done :HTMLElement             = document.getElementById('done') as HTMLElement;
     const progress :HTMLProgressElement = document.getElementById('progress') as HTMLProgressElement;
 
     try {
@@ -212,5 +222,5 @@ const submit = async (event :Event) :Promise<any> => {
 window.addEventListener('load', () => {
     retrieve_server_data();
     const submit_button = document.getElementById('submit');
-    submit_button.addEventListener('click', submit);
+    if (submit_button) submit_button.addEventListener('click', submit);
 });
