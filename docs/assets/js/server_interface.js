@@ -4,7 +4,7 @@
  * Bridge between the HTML form and the conversion server. It relies on `<input>` elements with the `id` values set to
  * `url`, `respec`, `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
  *
- * The script relies on the service running at 'https://r2epub.herokuapp.com/'
+ * The script relies on the service running at 'https://labs.w3.org/r2epub/'
  *
  * This script must be converted to Javascript.
  *
@@ -129,7 +129,7 @@ function fetch_book(resource_url) {
  *
  * The method is set as an even handler for a submit button. The `event` argument is only used to prevent the default behavior of the button (i.e., to avoid reloading the page).
  *
- * By default, the service to be used is `http://r2epub.herokuapp.com/`, unless `data-r2epubservice` attribute is set to a different URL on the form element.
+ * By default, the service to be used is `https://labs.w3.org/r2epub/`.
  *
  * @param event - Event object as forwarded to an HTML event handler.
  *

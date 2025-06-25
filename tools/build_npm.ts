@@ -24,7 +24,8 @@ await build({
     // (The real missing bit is xmlserializer working with the dom, which does not seem to exist in
     // deno-dom.)
     // So typechecking is switched off. Oh well...
-    typeCheck: false,    
+    typeCheck: false,
+    // The test suite depends on the availability of epubcheck. Can't be really re-used easily...    
     test: false,
     outDir: "./.npm",
     shims: {
@@ -35,17 +36,18 @@ await build({
     package: {
         // package.json properties
         name: "r2epub",
-        version: "2.0.0",
+        version: deno_json.version,
         date: deno_json.date,
         description: deno_json.description,
         license: deno_json.license,
         repository: {
-            type: "git",
-            url: "git+https://github.com/iherman/r2epub.git",
+            type: deno_json.repository.type,
+            url: deno_json.repository.url,
         },
         bugs: {
-            url: "https://github.com/iherman/r2epub/issues",
+            url: deno_json.bugs.url,
         },
+        author: deno_json.author,
     },
     postBuild() {
         // steps to run after building and before running the tests

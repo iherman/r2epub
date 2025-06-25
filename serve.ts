@@ -15,7 +15,7 @@
  *```
  *
  *
- * The module is a wrapper around a standard node.js `http.CreateServer`, and a call to the [convert](../lib/convert.ts/index.html) function.
+ * The module is a wrapper around a standard node.js `http.CreateServer` (emulated in `deno`), and a call to the [convert](../lib/convert.ts/index.html) function.
  *
  * ### Usage examples:
  *
@@ -144,7 +144,7 @@ async function get_epub(query :Query) : Promise<Content> {
  */
 async function serve(): Promise<void> {
     const port :string = process.env.PORT || process.env.R2EPUB_PORT || common.local_port_number;
-    console.log(`r2epub server starting on port ${port} (${(new Date().toISOString())})`);
+    console.log(`r2epub service: server starting on port ${port} (${(new Date().toISOString())})`);
     http.createServer(async (request :http.IncomingMessage, response :http.ServerResponse) => {
         const error = (code :number, e :string) => {
             const error_headers = {
@@ -164,7 +164,12 @@ async function serve(): Promise<void> {
                     return;
                 }
                 const query  = urlHandler.parse(request.url, true).query;
-                const host = `http://${request.headers.host}`;
+                // On labs.w3.org this will produce a localhost:8000, which is incorrect.
+                // I am not sure how to find out, on labs, that is really using w3c's lab, and,
+                // for the time being, w3c lab is the only deployment, so I hardcode the host. To
+                // find out later...
+                // const host = `http://${request.headers.host}`; 
+                const host = "https://labs.w3.org/r2epub/";
 
                 if (query === null || query.url === undefined) {
                     // fall back on the fixed home page
@@ -174,6 +179,7 @@ async function serve(): Promise<void> {
                     });
                     response.write(home.homepage.replace(/%%%SERVER%%%/g, host));
                 } else {
+                    console.log(`r2epub service: converting ${query.url} (${(new Date().toISOString())})`)
                     const the_book :Content = await get_epub(query as Query);
                     response.writeHead(200, {
                         ...common.CORS_headers,
