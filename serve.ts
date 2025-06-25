@@ -160,16 +160,11 @@ async function serve(): Promise<void> {
         try {
             if (request.method === 'GET' || request.method === 'HEAD') {
                 if (request.url === undefined) {
-                    error(400, 'EPUB Generation error: no URL provided');
+                    error(400, 'r2epub service: EPUB Generation error, no URL provided');
                     return;
                 }
                 const query  = urlHandler.parse(request.url, true).query;
-                // On labs.w3.org this will produce a localhost:8000, which is incorrect.
-                // I am not sure how to find out, on labs, that is really using w3c's lab, and,
-                // for the time being, w3c lab is the only deployment, so I hardcode the host. To
-                // find out later...
-                // const host = `http://${request.headers.host}`; 
-                const host = "https://labs.w3.org/r2epub/";
+                const host = `http://${request.headers.host}`; 
 
                 if (query === null || query.url === undefined) {
                     // fall back on the fixed home page
@@ -188,11 +183,11 @@ async function serve(): Promise<void> {
                     response.write(the_book.content);
                 }
             } else {
-                error(501, `Invalid HTTP request method: ${request.method}`);
+                error(501, `r2epub service: invalid HTTP request method (${request.method})`);
             }
         } catch (e) {
             const errorMessage = (e instanceof Error) ? e.toString() : String(e);
-            error(400, `EPUB Generation error: ${errorMessage}`);
+            error(400, `r2epub service: EPUB Generation error (${errorMessage})`);
         } finally {
             response.end();
         }
