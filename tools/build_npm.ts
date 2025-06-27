@@ -6,17 +6,7 @@ await emptyDir("./.npm");
 
 await build({
     entryPoints: [
-        "./index.ts",
-        // {
-        //      kind: "bin",
-        //      name: "r2epub",
-        //      path: "./r2epub.ts",
-        // },
-        // {
-        //     kind: "bin",
-        //     name: "serve",
-        //     path: "./serve.ts",
-        // },
+        "./index.ts"
     ],
     // jsdom and xmlserializer npm packages do not seem to have a proper typescript data
     // definition file, and the typechecker complains for those two.
@@ -49,9 +39,9 @@ await build({
         },
         author: deno_json.author,
     },
-    postBuild() {
-        // steps to run after building and before running the tests
-        Deno.copyFileSync("LICENSE.md", ".npm/LICENSE.md");
-        Deno.copyFileSync("README.md", ".npm/README.md");
-    },
 });
+
+// steps to run after building
+Deno.copyFileSync("LICENSE.md", ".npm/LICENSE.md");
+Deno.copyFileSync("README.md", ".npm/README.md");
+
