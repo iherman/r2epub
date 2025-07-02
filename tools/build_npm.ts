@@ -7,7 +7,12 @@ await emptyDir("./.npm");
 
 await build({
     entryPoints: [
-        "./index.ts"
+        "index.ts", 
+        {
+            kind : "bin",
+            name : "serve",
+            path : "./serve.ts"
+        }
     ],
     // jsdom and xmlserializer npm packages do not seem to have a proper typescript data
     // definition file, and the typechecker complains for those two.
@@ -31,9 +36,9 @@ await build({
         date: deno_json.date,
         description: deno_json.description,
         license: deno_json.license,
-        repository: {
-            type: deno_json.repository.type,
-            url: deno_json.repository.url,
+        repository : {
+            type : deno_json.repository.type,
+            url  : deno_json.repository.url,
         },
         bugs: {
             url: deno_json.bugs.url,
