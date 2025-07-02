@@ -2,7 +2,7 @@
 
 Typescript program to convert W3C documents, produced by [ReSpec](https://respec.org/docs/), to EPUB 3.4.
 
-> **Warning:** this repository is not (yet, hopefully) in sync with the corresponding package on [npm](https://www.npmjs.com/package/r2epub). For an up-to-date version you should use [jsr](https://jsr.io/@iherman/r2epub). The reason is that, while the program itself is maintained in [deno](https://deno.land), the conversion to [node.js](https://nodejs.org)/[npm](https:/www.npmjs.com) has problems. Also, the detailed API documentation is not perfect, because the `deno doc --html` command doesn't do as good a job as, say, `typedoc`. (Mixing `typedoc` and `deno` is not a viable alternative either…). Also, the latest, 3.4 version is not yet deployed on the W3C site!
+> **Warning:** the detailed API documentation is not perfect, because the `deno doc --html` command doesn't do as good a job as, say, `typedoc`. (Mixing `typedoc` and `deno` is not a viable alternative either…). 
 
 ## Single documents vs. Collections
 
