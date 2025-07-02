@@ -23,6 +23,7 @@
     "lint": {
         "include": ["./lib", "./lib/clib"]
     },
+    
     "tasks": {
         "test-dark-mode" : {
             "description" : "Convert a single document, using the latest dark-mode css",
@@ -71,9 +72,10 @@
         },
 
          "test"           : {
-            "description" : "Deno tests use the examples in the other tasks, combined with an automatic epubcheck. Note, however, that the tests rely on the local availability of epubcheck; see the path setting in the test suite.",
-            "command"     : "deno test -A"
-        },
+            // The tests rely on the local availability of epubcheck; see the path setting in the test suite.
+            "description": "Deno tests use the examples in the other tasks, combined with an automatic epubcheck. ",
+            "command": "deno test -A"
+         },
         
         "compile"        : {
             "command": "deno compile -qA r2epub.ts && deno compile -qA serve.ts" 
@@ -82,14 +84,19 @@
         "serve"          : "deno run -A serve.ts",
 
         "docs"           : {
-            "description" : "Generate the deno documentation (for what it is worth...). The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.",
+            // The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.
+            // This file is added by the script (beyond other things).
+            "description" : "Generate the deno documentation (for what it is worth...). ",
             "command"     : "deno run -A tools/generate_doc.ts"
         },
         
         "package"         : "deno run -A tools/build_npm.ts",
 
+        // In this case deno bundle merely compiles the ts file into js, because there are no dependencies...
         "assets"          : "cd docs/assets/js; deno bundle -o server_interface.js server_interface.ts"
     },
+
+    // Package entry points
     "exports": {
         "."       : "./index.ts",
         "./cli"   : "./r2epub.ts",

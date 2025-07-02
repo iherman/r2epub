@@ -1,6 +1,7 @@
 import { build, emptyDir } from "jsr:@deno/dnt";
+import { parse }           from "jsr:@std/jsonc";
 
-const deno_json = JSON.parse(Deno.readTextFileSync("deno.json"));
+const deno_json = parse(Deno.readTextFileSync("deno.jsonc"));
 
 await emptyDir("./.npm");
 
@@ -22,7 +23,7 @@ await build({
         // see JS docs for overview and more options
         deno: true,
     },
-    importMap: "deno.json",
+    importMap: "deno.jsonc",
     package: {
         // package.json properties
         name: "r2epub",
