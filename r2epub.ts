@@ -1,4 +1,3 @@
-#! /usr/local/bin/node
 /**
  * ## CLI for the ReSpec to EPUB 3.4 conversion.
  *
@@ -89,22 +88,15 @@
  * @module
  */
 
-/**
- *
- *
- */
 
-
-/* Main imports */
-import * as r2epub      from './index.ts';
-import * as fs          from 'node:fs';
-import * as process     from 'node:process'
-import { Command }      from 'npm:commander@^14.0.0';
-import { Buffer }       from "node:buffer"
+import * as r2epub  from './index.ts';
+import * as fs      from 'node:fs';
+import * as process from 'node:process';
+import { Command }  from 'npm:commander@^14.0.0';
+import { Buffer }   from "node:buffer";
 
 /** @hidden */
-const ERROR  = 'ERROR';
-
+const ERROR = 'ERROR';
 
 /**
  * CLI to the ReSpec to EPUB 3.4 conversion.
@@ -192,4 +184,3 @@ async function cli() {
 }
 
 cli();
-

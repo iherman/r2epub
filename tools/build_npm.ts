@@ -12,7 +12,12 @@ await build({
             kind : "bin",
             name : "serve",
             path : "./serve.ts"
-        }
+        },
+        {
+            kind: "bin",
+            name: "r2epub",
+            path: "./r2epub.ts"
+        },
     ],
     // jsdom and xmlserializer npm packages do not seem to have a proper typescript data
     // definition file, and the typechecker complains for those two.
