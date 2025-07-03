@@ -27,48 +27,48 @@
     "tasks": {
         "test-dark-mode" : {
             "description" : "Convert a single document, using the latest dark-mode css",
-            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/darkmode/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/darkmode/Overview.html"
         },
         "test-document" : {
             "description" : "Convert a single document, using the post-2021 setup",
-            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/spec/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/spec/Overview.html"
         },
         "test-2016"      : {
             "description" : "Convert a single document, using a pre-2011 setup",
-            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/aria/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/aria/Overview.html"
         },
         "test-clreq"     : {
             "description" : "Convert a file with a large number of images, and font settings. Relies on EPUB 3.4 for using ITS attributes.",
-            "command"     : "deno run -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/clreq/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/clreq/Overview.html"
         },
         "test-book"      : {
             "description" : "Convert a simple, 2-chapter book",
-            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_small.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_small.json"
         },
         "test-respec"    : {
             "description" : "Convert a respec source, pre-processing through the spec generator",
-            "command"     : "deno run -A r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
+            "command"     : "deno -A r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
         },
         "test-vc"        : {
             "description" : "Stress-test: convert a book of 8 chapters (VC specs). Note that some diagrams are erroneous SVG (draw.io bug) and epubcheck complains",
-            "command"     : "deno run -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json"
+            "command"     : "deno -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json"
         },
         "epub33": {
             "description": "Stress-test: convert a book of 10 chapters (the EPUB 33 specs, i.e., eat your own dogfood…)",
-            "command": "deno run -A r2epub.ts https://iherman.github.io/r2epub/collections/epub.json"
+            "command": "deno -A r2epub.ts https://iherman.github.io/r2epub/collections/epub.json"
         },
         "config-error"   : {
             "description" : "This is a negative test: it should fail on the JSON schema check",
-            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/config_err.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/config_err.json"
         },
         "single": {
             "description" : "A collection with a single entry",
-            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/single.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/single.json"
         },
 
         "jsonld": {
             "description" : "This is just for testing purposes to shake the whole system...",
-            "command"     : "deno run -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/json-ld_test.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/json-ld_test.json"
         },
 
          "test"           : {
@@ -81,16 +81,16 @@
             "command": "deno compile -qA r2epub.ts && deno compile -qA serve.ts" 
         },
 
-        "serve"          : "deno run -A serve.ts",
+        "serve"          : "deno -A serve.ts",
 
         "docs"           : {
             // The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.
             // This file is added by the script (beyond other things).
             "description" : "Generate the deno documentation (for what it is worth...). ",
-            "command"     : "deno run -A tools/generate_doc.ts"
+            "command"     : "deno -A tools/generate_doc.ts"
         },
         
-        "package"         : "deno run -A tools/build_npm.ts",
+        "package"         : "deno -A tools/build_npm.ts",
 
         // In this case deno bundle merely compiles the ts file into js, because there are no dependencies...
         "assets"          : "cd docs/assets/js; deno bundle -o server_interface.js server_interface.ts"
