@@ -110,7 +110,7 @@ const ERROR = 'ERROR';
 async function cli() {
     const program = new Command();
     program
-        .version('2.0.0')
+        .version('2.0.2')
         .name('r2epub')
         .usage('[options] [url]')
         .description('Convert the file or collection configuration at [url] to EPUB 3.4')

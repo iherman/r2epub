@@ -104,7 +104,7 @@
     },
     "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
     "license": "W3C-20150513",
-    "exclude": [".npm", "Attic/*", "testing/examples/*","docs/*", ".nojekyll", ".vscode", "nodes.md"],
+    "exclude": [".npm", "Attic/*", "testing/examples/*","docs/*", ".nojekyll", ".vscode", "notes.md"],
     "imports": {
         "jszip"                 : "npm:jszip@^3.10.1",
         "valid-url"             : "npm:valid-url@^1.0.9",
