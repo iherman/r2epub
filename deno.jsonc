@@ -1,8 +1,8 @@
 {
     "name": "@iherman/r2epub",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
-    "version": "2.0.2",
-    "date": "2025-07-02",
+    "version": "2.0.3",
+    "date": "2025-07-31",
     "homepage": "https://github.com/iherman/r2epub",
     "nodeModulesDir": "none",
     "compilerOptions": {
@@ -27,23 +27,23 @@
     "tasks": {
         "test-dark-mode" : {
             "description" : "Convert a single document, using the latest dark-mode css",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/darkmode/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/darkmode/Overview.html"
         },
         "test-document" : {
             "description" : "Convert a single document, using the post-2021 setup",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/spec/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/spec/Overview.html"
         },
         "test-2016"      : {
             "description" : "Convert a single document, using a pre-2011 setup",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/aria/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/aria/Overview.html"
         },
         "test-clreq"     : {
             "description" : "Convert a file with a large number of images, and font settings. Relies on EPUB 3.4 for using ITS attributes.",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/Tools/r2epub/testing/examples/clreq/Overview.html"
+            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/clreq/Overview.html"
         },
         "test-book"      : {
             "description" : "Convert a simple, 2-chapter book",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/epub_small.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/epub_small.json"
         },
         "test-respec"    : {
             "description" : "Convert a respec source, pre-processing through the spec generator",
@@ -51,7 +51,7 @@
         },
         "test-vc"        : {
             "description" : "Stress-test: convert a book of 8 chapters (VC specs). Note that some diagrams are erroneous SVG (draw.io bug) and epubcheck complains",
-            "command"     : "deno -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/vc.json"
+            "command"     : "deno -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/vc.json"
         },
         "epub33": {
             "description": "Stress-test: convert a book of 10 chapters (the EPUB 33 specs, i.e., eat your own dogfood…)",
@@ -59,16 +59,16 @@
         },
         "config-error"   : {
             "description" : "This is a negative test: it should fail on the JSON schema check",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/config_err.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/config_err.json"
         },
         "single": {
             "description" : "A collection with a single entry",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/single.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/single.json"
         },
 
         "jsonld": {
             "description" : "This is just for testing purposes to shake the whole system...",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/Tools/r2epub/docs/collections/json-ld_test.json"
+            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/json-ld_test.json"
         },
 
          "test"           : {
