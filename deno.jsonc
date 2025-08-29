@@ -16,102 +16,111 @@
         "url": "https://github.com/iherman/r2epub/issues"
     },
     "test": {
-        "include": [
-            "testing/tests.ts"
-        ]
+        "include": ["testing/tests.ts"]
     },
     "lint": {
         "include": ["./lib", "./lib/clib"]
     },
-    
     "tasks": {
-        "test-dark-mode" : {
-            "description" : "Convert a single document, using the latest dark-mode css",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/darkmode/Overview.html"
+        "test-dark-mode": {
+            "description": "Convert a single document, using the latest dark-mode css",
+            "command": "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/darkmode/Overview.html"
         },
-        "test-document" : {
-            "description" : "Convert a single document, using the post-2021 setup",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/spec/Overview.html"
+        "test-document": {
+            "description": "Convert a single document, using the post-2021 setup",
+            "command": "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/spec/Overview.html"
         },
-        "test-2016"      : {
-            "description" : "Convert a single document, using a pre-2011 setup",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/aria/Overview.html"
+        "test-2016": {
+            "description": "Convert a single document, using a pre-2011 setup",
+            "command": "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/aria/Overview.html"
         },
-        "test-clreq"     : {
-            "description" : "Convert a file with a large number of images, and font settings. Relies on EPUB 3.4 for using ITS attributes.",
-            "command"     : "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/clreq/Overview.html"
+        "test-clreq": {
+            "description": "Convert a file with a large number of images, and font settings. Relies on EPUB 3.4 for using ITS attributes.",
+            "command": "deno -A r2epub.ts -t http://localhost:8001/LocalData/github/EPUB/r2epub/testing/examples/clreq/Overview.html"
         },
-        "test-book"      : {
-            "description" : "Convert a simple, 2-chapter book",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/epub_small.json"
+        "test-book": {
+            "description": "Convert a simple, 2-chapter book",
+            "command": "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/epub_small.json"
         },
-        "test-respec"    : {
-            "description" : "Convert a respec source, pre-processing through the spec generator",
-            "command"     : "deno -A r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
+        "test-respec": {
+            "description": "Convert a respec source, pre-processing through the spec generator",
+            "command": "deno -A r2epub.ts -t -r https://w3c.github.io/epub-specs/epub33/overview/"
         },
-        "test-vc"        : {
-            "description" : "Stress-test: convert a book of 8 chapters (VC specs). Note that some diagrams are erroneous SVG (draw.io bug) and epubcheck complains",
-            "command"     : "deno -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/vc.json"
+        "test-vc": {
+            "description": "Stress-test: convert a book of 8 chapters (VC specs). Note that some diagrams are erroneous SVG (draw.io bug) and epubcheck complains",
+            "command": "deno -A r2epub.ts -o vc.epub http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/vc.json"
         },
         "epub33": {
             "description": "Stress-test: convert a book of 10 chapters (the EPUB 33 specs, i.e., eat your own dogfood…)",
             "command": "deno -A r2epub.ts https://iherman.github.io/r2epub/collections/epub.json"
         },
-        "config-error"   : {
-            "description" : "This is a negative test: it should fail on the JSON schema check",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/config_err.json"
+        "config-error": {
+            "description": "This is a negative test: it should fail on the JSON schema check",
+            "command": "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/config_err.json"
         },
         "single": {
-            "description" : "A collection with a single entry",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/single.json"
+            "description": "A collection with a single entry",
+            "command": "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/single.json"
         },
-
         "jsonld": {
-            "description" : "This is just for testing purposes to shake the whole system...",
-            "command"     : "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/json-ld_test.json"
+            "description": "This is just for testing purposes to shake the whole system...",
+            "command": "deno -A r2epub.ts http://localhost:8001/LocalData/github/EPUB/r2epub/docs/collections/json-ld_test.json"
         },
-
-         "test"           : {
+        "test": {
             // The tests rely on the local availability of epubcheck; see the path setting in the test suite.
             "description": "Deno tests use the examples in the other tasks, combined with an automatic epubcheck. ",
             "command": "deno test -A"
-         },
-        
-        "compile"        : {
-            "command": "deno compile -qA r2epub.ts && deno compile -qA serve.ts" 
         },
-
-        "serve"          : "deno -A serve.ts",
-
-        "docs"           : {
+        "compile": {
+            "command": "deno compile -qA r2epub.ts && deno compile -qA serve.ts"
+        },
+        "serve": "deno -A serve.ts",
+        "docs": {
             // The '.nojekyll' file must be in the document hierarchy to avoid choking on the directories named '~'.
             // This file is added by the script (beyond other things).
-            "description" : "Generate the deno documentation (for what it is worth...). ",
-            "command"     : "deno -A tools/generate_doc.ts"
+            "description": "Generate the deno documentation (for what it is worth...). ",
+            "command": "deno -A tools/generate_doc.ts"
         },
-        
-        "package"         : "deno -A tools/build_npm.ts",
+        "package": "deno -A tools/build_npm.ts",
 
         // In this case deno bundle merely compiles the ts file into js, because there are no dependencies...
-        "assets"          : "cd docs/assets/js; deno bundle -o server_interface.js server_interface.ts"
+        "assets": "cd docs/assets/js; deno bundle -o server_interface.js server_interface.ts"
     },
 
     // Package entry points
     "exports": {
-        "."       : "./index.ts",
-        "./cli"   : "./r2epub.ts",
-        "./serve" : "./serve.ts"
+        ".": "./index.ts",
+        "./cli": "./r2epub.ts",
+        "./serve": "./serve.ts"
     },
     "author": "Ivan Herman <ivan@w3.org> (https://www.w3.org/People/Ivan/)",
     "license": "W3C-20150513",
-    "exclude": [".npm", "Attic/*", "testing/examples/*","docs/*", ".nojekyll", ".vscode", "notes.md"],
+    "exclude": [
+        ".npm",
+        "Attic/*",
+        "testing/examples/*",
+        "docs/*",
+        ".nojekyll",
+        ".vscode",
+        "notes.md"
+    ],
     "imports": {
-        "jszip"                 : "npm:jszip@^3.10.1",
-        "valid-url"             : "npm:valid-url@^1.0.9",
-        "w3c-xmlserializer"     : "npm:w3c-xmlserializer@^5.0.0",
-        "xmlbuilder2"           : "npm:xmlbuilder2@^3.1.1",
-        "commander"             : "npm:commander@^14.0.0",
-        "@exodus/schemasafe"    : "npm:@exodus/schemasafe@^1.3.0",
-        "jsdom"                 : "npm:jsdom@^26.0.0"
+        "jszip"              : "npm:jszip@^3.10.1",
+        "valid-url"          : "npm:valid-url@^1.0.9",
+
+        // This is necessary to produce XHTML into the spine. If
+        // the non-XML syntax was allowed in EPUB, this would go
+        "w3c-xmlserializer"  : "npm:w3c-xmlserializer@^5.0.0",
+
+        "xmlbuilder2"        : "npm:xmlbuilder2@^3.1.1",
+        "commander"          : "npm:commander@^14.0.0",
+        "@exodus/schemasafe" : "npm:@exodus/schemasafe@^1.3.0", // JSON schema library
+        "jsdom"              : "npm:jsdom@^26.0.0"
+    },
+    "deploy": {
+        "project"    : "e31fb90a-1e3c-403b-b30a-4b046b0f54d9",
+        "exclude"    : ["**/node_modules"],
+        "include"    : [],
+        "entrypoint" : "serve.ts"
     }
 }
