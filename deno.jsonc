@@ -1,8 +1,8 @@
 {
     "name": "@iherman/r2epub",
     "description": "Typescript based conversion of Respec generated HTML files into EPUB 3",
-    "version": "2.0.3",
-    "date": "2025-07-31",
+    "version": "2.0.4",
+    "date": "2025-10-07",
     "homepage": "https://github.com/iherman/r2epub",
     "nodeModulesDir": "none",
     "compilerOptions": {

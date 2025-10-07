@@ -137,8 +137,8 @@ async function cli() {
                 return value;
             }
         })
-        .option('-p, --package', '[debug option] do not generate an EPUB file, just print the package file content.', false)
-        .option('-t, --trace', '[debug option] print built in trace information while processing.', false)
+        .option('-p, --package', '[debug option] do not generate an EPUB file, just print the package file content', false)
+        .option('-t, --trace', '[debug option] print built in trace information while processing', false)
         .argument('<url>', 'URL of the HTML file or collection configuration')
         .parse(process.argv);
 

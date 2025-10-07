@@ -93,7 +93,7 @@ export function extract_css(global: Global): ResourceRef[] {
 
         // In most cases some extra materials have to be retrieved: logo files, background files...
         // This is signalled by the fact that the included css file reflects the specStatus value in respec
-        // In some cases this is not the case, e.g., TAG findings, member submissions...; in all those coses
+        // Sometimes this is not the case, e.g., TAG findings, member submissions...; in all those cases
         // the 'base.css' file is the only one used
         if (base_name === 'base.css') {
             the_link.setAttribute('href', `${common.local_style_files}${base_name}`);
