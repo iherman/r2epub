@@ -1,5 +1,9 @@
 # Changes
 
+## Version 2.0.4 (October 2025)
+
+* Handling of the new, 2025 versions of the W3C logo
+
 ## Version 2.0.0
 
 * Major change: putting [deno](deno.land) into the center, instead of node.js. The environment is more stable (no module issues), the TypeScript compiler is stricter but then forces a better code. The code changes are numerous, way too many to list them all here. Functionality-wise the differences are minor:
