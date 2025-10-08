@@ -332,7 +332,15 @@ export class RespecToEPUB {
         {
             const logo_element = this.global.html_element?.querySelector('img[alt="W3C"]') as HTMLImageElement;
             if (logo_element !== null && logo_element.getAttribute("src") !== undefined) {
-                const absolute_url: string = logo_element.getAttribute("src") || '';
+                // Nasty. For the pre 2021 base.css the new (2025) logo creates problems with the logo size
+                // (No idea why). This means that, for older documents, the old, pre-2021 logo must be used...
+                const absolute_url: string = ((): string => {
+                    if (common.process_version === 2016) {
+                        return `${common.modified_epub_files}/W3C.svg`
+                    } else {
+                        return logo_element.getAttribute("src") || ''
+                    }
+                })();
                 const relative_url =  `${common.local_style_files}logos/W3C.svg`;
                 logo_element.setAttribute('src', relative_url);
                 this.global.resources.push({

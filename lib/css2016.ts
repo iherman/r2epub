@@ -217,7 +217,6 @@ export function extract_css(global: Global): ResourceRef[] {
         // The html content should be modified to refer to the base directly
         the_link.setAttribute('href', `${common.local_style_files}base.css`);
 
-
         // An extra CSS file must be added to the mix, to take care of the EPUB specificities
         retval.push({
             relative_url : `${common.local_style_files}tr_epub.css`,
