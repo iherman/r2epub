@@ -11,8 +11,9 @@ I hope that, at some point, this tools will become unnecessary, and `deno doc`
 will be comparable to, say, typedoc...
 **************************************************************************** */
 
-// Some data are picked from deno.json...
-const deno_json = JSON.parse(Deno.readTextFileSync("deno.json"));
+// Some data are picked from deno.json... Use the jsonc parser (supports comments/trailing commas)
+import { parse } from "jsr:@std/jsonc";
+const deno_json = parse(Deno.readTextFileSync("deno.jsonc"));
 
 /* These entry may have to be adapted to the local requirements */
 const README: string       = "README.md";

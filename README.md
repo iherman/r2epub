@@ -24,7 +24,7 @@ There is a simple command line interface to run the script. See the the separate
 
 There is also the possibility to start a simple server to generate EPUB 3.4 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/doc/serve/) for details and examples of HTTP requests.
 
-The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available. (Note that the server running on W3C is also used to generate an EPUB version of a document based on respec directly from the respec `export` facility.)
+The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available. (Note that the server running on W3C is also used to generate an EPUB version of a document based on respec directly from the respec `export` facility.) As an alternative, the server has also be deployed via [Deno's Deploy](https://deno.com/deploy) on https://iherman-r2epub.deno.dev/ (which includes its own user interface).
 
 ### Use as a typescript package through an API
 
