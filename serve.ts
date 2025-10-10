@@ -142,6 +142,7 @@ async function get_epub(query :Query) : Promise<Content> {
  *
  * @async
  */
+// deno-lint-ignore require-await
 async function serve(): Promise<void> {
     const port :string = process.env.PORT || process.env.R2EPUB_PORT || common.local_port_number;
     console.log(`r2epub service: server starting on port ${port} (${(new Date().toISOString())})`);

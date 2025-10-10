@@ -92,7 +92,7 @@
 import * as r2epub  from './index.ts';
 import * as fs      from 'node:fs';
 import * as process from 'node:process';
-import { Command }  from 'npm:commander@^14.0.0';
+import { Command }  from 'commander';
 import { Buffer }   from "node:buffer";
 
 /** @hidden */
