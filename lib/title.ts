@@ -70,7 +70,7 @@ const title_page = `<?xml version="1.0" encoding="utf-8"?>
       <h1 id="btitle">%%%TITLE2%%%</h1>
       <h2 id="subtitle">%%%SUBTITLE%%%</h2>
       <p class="larger" id="editors">%%%EDITORS%%%</p>
-      <p class="logo"><a href="http://www.w3.org/"><img alt="W3C main logo" src="Icons/w3c_main.png"/></a></p>
+      <p class="logo"><a href="http://www.w3.org/"><img alt="W3C main logo" src="Icons/w3c_main.svg"/></a></p>
       <p class="disclaimer">Note: this EPUB edition does <em>not</em> represent the authoritative text of the specification; please consult the <a id="%%%ORIGINAL%%%">original document</a> on the W3C Web Site.</p>
 
       <p class="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © <time id="cpdate" datetime="%%%%ISODATE%%%%">%%%DATE%%%</time>
@@ -93,9 +93,9 @@ export function create_title_page(global :Global) :ResourceRef[] {
     // The W3C long logo must be added to the overall resources
     const retval :ResourceRef[] = [
         {
-            media_type   : 'image/png',
-            relative_url : 'Icons/w3c_main.png',
-            absolute_url : 'https://www.w3.org/Icons/w3c_main.png',
+            media_type   : common.media_types.svg,
+            relative_url : 'Icons/w3c_main.svg',
+            absolute_url : `${common.modified_epub_files}w3c_main.svg`,
         },
         {
             media_type   : 'text/css',

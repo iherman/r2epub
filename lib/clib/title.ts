@@ -67,7 +67,7 @@ const title_page = `<?xml version="1.0" encoding="utf-8"?>
     <div id="title" role="main">
       <h1 id="btitle">%%%TITLE2%%%</h1>
       <p class="larger" id="editors">%%%EDITORS%%%</p>
-      <p class="logo"><a href="http://www.w3.org/"><img alt="W3C main logo" src="Icons/w3c_main.png"/></a></p>
+      <p class="logo"><a href="http://www.w3.org/"><img alt="W3C main logo" src="Icons/w3c_main.svg"/></a></p>
 
       <p class="disclaimer">Note: this EPUB edition does <em>not</em> represent the authoritative text of the specifications; please consult the original documents on the W3C Web Site.</p>
 

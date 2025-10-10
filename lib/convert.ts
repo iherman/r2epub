@@ -339,7 +339,7 @@ export class RespecToEPUB {
                 // (No idea why). This means that, for older documents, the old, pre-2021 logo must be used...
                 const absolute_url: string = ((): string => {
                     if (common.process_version === 2016) {
-                        return `${common.modified_epub_files}/W3C.svg`
+                        return `${common.modified_epub_files}W3C.svg`
                     } else {
                         return logo_element.getAttribute("src") || ''
                     }

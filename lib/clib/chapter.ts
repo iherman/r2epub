@@ -48,7 +48,7 @@ interface ManifestItem extends OPFManifestItem {
  */
 export const transfer_once :string[] = [
     'StyleSheets/base.css',
-    'Icons/w3c_main.png',
+    'Icons/w3c_main.svg',
 ]
 
 /**
