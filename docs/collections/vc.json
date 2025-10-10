@@ -25,6 +25,9 @@
             "url": "https://www.w3.org/TR/vc-di-eddsa/"
         },
         {
+            "url": "https://www.w3.org/TR/vc-di-bbs/"
+        },
+        {
             "url": "https://www.w3.org/TR/vc-bitstring-status-list/"
         },
         {

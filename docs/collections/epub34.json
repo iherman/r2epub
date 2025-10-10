@@ -1,0 +1,46 @@
+{
+    "name" : "EPUB 3.3",
+    "id" : "epub33",
+    "readingOrder" : [
+        {
+            "url": "https://www.w3.org/TR/epub-overview-34/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-34/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-rs-34/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-a11y-12/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-a11y-tech-12/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-a11y-eaa-mapping/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-multi-rend-11/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-tts-10/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-ssv-11/",
+            "respec": false
+        },
+        {
+            "url": "https://www.w3.org/TR/epub-aria-authoring-11/",
+            "respec": false
+        }
+    ]
+}
