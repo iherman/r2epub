@@ -21,8 +21,9 @@
     "lint": {
         "include": ["./lib", "./lib/clib"],
         "rules" : {
-            // This rule would clash with deno compile...
-            // "exclude": ["no-import-prefix"]
+            // I use 'any' very rarely, but when I do, it saves me unnecessary work (e.g., creating
+            // a type for respec configuration)
+            "exclude": ["no-explicit-any"]
         }
     },
     "tasks": {

@@ -88,7 +88,7 @@ interface Creator {
 }
 
 /**
- * The minimal metadata, used by the TR documents.
+ * The minimal metadata used by the TR documents.
  */
 interface Metadata {
     "dc:identifier" :DCIdentifier[],

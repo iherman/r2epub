@@ -87,7 +87,10 @@ export interface Global {
 
     /**
      * The  initial config object, originally filled by the user (respec puts a copy of this
-     * object, as JSON, into the header of the generated content.
+     * object, as JSON, into the header of the generated content).
+     * 
+     * Using `any` as a type, because creating a full-blown type for the respec config would be 
+     * complex and unnecessary for our purposes.
     */
     config? :any,
 
