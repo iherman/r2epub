@@ -55,7 +55,7 @@ function assert(condition: boolean, message: string): void {
  * @returns 
  */
 async function epubcheck(filename: string, flags: string[] = []): Promise<boolean> {
-    const args = ["-jar", "/Users/ivan/Source/JavaLibraries/epubcheck-5.2.1/epubcheck.jar", ...flags, filename];
+    const args = ["-jar", "/Users/ivan/Source/JavaLibraries/epubcheck-5.3.0/epubcheck.jar", ...flags, filename];
     const cmd = new Deno.Command("/usr/bin/java", {
         args,
         stdout : "piped",
@@ -203,7 +203,7 @@ const tests: Suite = {
         url    : "https://iherman.github.io/r2epub/collections/json-ld_test.json",
         respec : false,
         output : "jsonld.epub",
-        remove : false,
+        remove : true,
         trace  : false,
     }
 };
