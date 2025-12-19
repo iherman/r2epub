@@ -45,7 +45,7 @@ export interface ConfigOptions {
 /**
  * Options provided by the user if and when the source has to be pre-processed via ReSpec.
  *
- * The original content file has to be pre-processed via the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * The original content file has to be pre-processed via the W3C [spec generator service](https://www.w3.org/publications/spec-generator/)
  * before further processing to convert the ReSpec source first. If that is the case (see [[Options.respec]]), it is also possible to set some of the ReSpec configuration options,
  * overwriting the values set in the `config` entry of the original file. The possible ReSpec options to be set are `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
  * See the [ReSpec editor's guide](https://respec.org/docs/) for details.
@@ -198,7 +198,7 @@ export const entity_codes :string[][] = [
 export const local_port_number     = '80';
 
 /** URL of the spec generator service, used if the source has to be transformed via respec first. */
-export const spec_generator        = 'https://labs.w3.org/spec-generator/?type=respec&url='
+export const spec_generator        = 'https://www.w3.org/publications/spec-generator/?type=respec&url='
 
 /** Generic 'fixup' script (used for warnings for rescinded or obsolete versions). */
 export let fixup_js :string;
