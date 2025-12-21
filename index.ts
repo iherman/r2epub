@@ -21,7 +21,7 @@ import * as urlHandler                  from 'node:url';
 /**
  * Options provided by the user if and when the source has to be pre-processed via ReSpec.
  *
- * The original content file has to be pre-processed via the W3C [spec generator service](https://labs.w3.org/spec-generator/)
+ * The original content file has to be pre-processed via the W3C [spec generator service](https://www.w3.org/publications/spec-generator/)
  * before further processing to convert the ReSpec source first. If that is the case (see [[Options.respec]]), it is also possible to set some of the ReSpec configuration options,
  * overwriting the values set in the `config` entry of the original file. The possible ReSpec options to be set are `publishDate`, `specStatus`, `addSectionLinks`, and `maxTocLevel`.
  * See the [ReSpec editor's guide](https://respec.org/docs/) for details.
