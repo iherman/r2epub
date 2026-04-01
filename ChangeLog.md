@@ -1,5 +1,9 @@
 # Changes
 
+## Version 2.0.6
+
+* Moved to deno deploy from deno deploy classic; it required some minor changes.
+
 ## Version 2.0.4 (October 2025)
 
 * Handling of the new, 2025 versions of the W3C logo

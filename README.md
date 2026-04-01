@@ -2,7 +2,7 @@
 
 Typescript program to convert W3C documents, produced by [ReSpec](https://respec.org/docs/), to EPUB 3.4.
 
-> **Warning:** the detailed API documentation is not perfect, because the `deno doc --html` command doesn't do as good a job as, say, `typedoc`. (Mixing `typedoc` and `deno` is not a viable alternative either…). 
+> **Warning:** the detailed API documentation is not perfect, because the `deno doc --html` command doesn't do as good a job as, say, `typedoc`. (Mixing `typedoc` and `deno` is not a viable alternative either…).
 
 ## Single documents vs. Collections
 
@@ -24,7 +24,7 @@ There is a simple command line interface to run the script. See the the separate
 
 There is also the possibility to start a simple server to generate EPUB 3.4 instances on request. See the separate [documentation on the server](https://iherman.github.io/r2epub/doc/serve/) for details and examples of HTTP requests.
 
-The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available. (Note that the server running on W3C is also used to generate an EPUB version of a document based on respec directly from the respec `export` facility.) As an alternative, the server has also be deployed via [Deno's Deploy](https://deno.com/deploy) on https://iherman-r2epub.deno.dev/ (which includes its own user interface).
+The server has been deployed on the cloud at [W3C](https://labs.w3.org/r2epub) using the `https://labs.w3.org/r2epub` URL. A [browser interface](https://iherman.github.io/r2epub/convert.html) to drive this server is also available. (Note that the server running on W3C is also used to generate an EPUB version of a document based on respec directly from the respec `export` facility.) As an alternative, the server has also be deployed via [Deno's Deploy](https://docs.deno.com/deploy/) on https://r2epub.iherman.deno.net (which includes its own user interface).
 
 ### Use as a typescript package through an API
 
@@ -35,8 +35,8 @@ The program can be run from `deno` (relying on the jsr package [`@iherman/r2epub
 
 * **`PORT` or `R2EPUB_PORT`:** the port number used by the server; failing these the default (i.e., 80) is used. (`PORT` takes precedence over `R2EPUB_PORT`.)
 * **`R2EPUB_LOCAL`:** no URL-s on `localhost` are accepted, unless this environment variable set (the value of the variable is not relevant, only the setting is). For security reasons this variable should not be set for deployed servers and its usage is advised for local testing purposes only.
-* **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.w3.org/People/Ivan/r2epub/` is used as a base URL for those files. If the environment variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc. 
-    
+* **`R2EPUB_MODIFIED_EPUB_FILES`:** A number of W3C specific files (logos, some css files) had to be adapted for EPUB 3 usage, and are retrieved from a separate site. At the moment, `https://www.w3.org/People/Ivan/r2epub/` is used as a base URL for those files. If the environment variable is set, its value is used as a prefix for the copy of the files on the local file system and the files are read directly from the disc.
+
     (The local clone of the distribution has a copy of all the necessary files, too, and can be used for local testing via `localhost`. Some server may have problems with a burst of access to the same base URL resulting in run-time error, hence the advantage to use this local alternative to setup.)
 
 
@@ -71,7 +71,7 @@ on the local repository clone generates the executables `r2epub` and `serve` tha
 
 
 ## Externally accessible entry points
- 
+
 r2epub can also be used as a library module both to TypeScript and to Javascript. A simple example In Typescript (using `deno`) is as follows:
 
 ```js
