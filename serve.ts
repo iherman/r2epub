@@ -165,7 +165,7 @@ async function serve(): Promise<void> {
                     return;
                 }
                 const query  = urlHandler.parse(request.url, true).query;
-                const host = `http://${request.headers.host}`; 
+                const host = `http://${request.headers.host}`;
 
                 if (query === null || query.url === undefined) {
                     // fall back on the fixed home page
@@ -182,6 +182,7 @@ async function serve(): Promise<void> {
                         ...the_book.headers,
                     });
                     response.write(the_book.content);
+                    response.end();
                 }
             } else {
                 error(501, `r2epub service: invalid HTTP request method (${request.method})`);
