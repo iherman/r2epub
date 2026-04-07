@@ -1,5 +1,9 @@
 # Changes
 
+## Version 2.0.7
+
+* Added deno-types directives to get the documentation properly generated
+
 ## Version 2.0.6
 
 * Moved to deno deploy from deno deploy classic; it required some minor changes.

@@ -15,7 +15,10 @@
 <div class="ddoc">
 <div><nav id="topnav">
   <div class="h-full">
-    <div class="flex items-center"><ul class="breadcrumbs"><li><a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a></li><span class="text-black dark:text-white"><svg
+    <div class="flex items-center"><ul class="breadcrumbs">
+  <li>
+    <a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a>
+  </li><span class="text-black dark:text-white"><svg
   width="16"
   height="16"
   viewBox="0 0 16 16"
@@ -29,7 +32,7 @@
     fill="currentColor"
   />
 </svg>
-</span><li>lib&#x2F;ocf.ts</li></ul>
+</span>lib&#x2F;ocf.ts</ul>
 </div>
 
     <div class="flex items-center gap-2">
@@ -99,8 +102,8 @@
 OCF Package</h2>
 <p>Simple wrapper around the <a href="https://stuk.github.io/jszip/">JSZip</a> package to create an OCF specific packaging for EPUB.</p>
 <p>The core of the module is in the [[OCF]] class.</p>
-</div><section class="section"  id="Classes"><div>
-      <h2 class="anchorable mb-1"><a href="#Classes" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+</div><section class="section"  id="lib&#x2F;ocf_ts_classes"><div>
+      <h2 class="anchorable mb-1"><a href="#lib&#x2F;ocf_ts_classes" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -124,10 +127,31 @@ OCF Package</h2>
 </a>
 Classes</h2></div><div class="namespaceSection"><div id="namespace_ocf" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html" title="OCF">OCF</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><h2>The class representing the EPUB 3.4 OCF package.</h2>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#property__container">_container</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#property__name">_name</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#method_append_0">append</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#accessor_container">container</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#property_content">content</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#method_get_content_0">get_content</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#accessor_name">name</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html" title="OCF">
+			    <span>OCF</span><span>(<span><span>name<span>: <span class="td-kw">string</span></span></span></span>)</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><h2>The class representing the EPUB 3.4 OCF package.</h2>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#property__container">
+                  <span>_container</span><span>: <span class="td-ref">JSZip</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#property__name">
+                  <span>_name</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#method_append_0">
+                  <span>append</span><span>(<div class="ml-4"><div><span>content<span>: <span><span class="td-kw">string</span><span class="td-op"> | </span><span class="td-ref">ArrayBuffer</span><span class="td-op"> | </span><span class="td-ref">Blob</span><span class="td-op"> | </span><span class="td-ref">stream.Readable</span></span></span></span>,</div><div><span>path_name<span>: <span class="td-kw">string</span></span></span>,</div><div><span>trace<span class="td-op">?</span><span>: <span class="td-kw">boolean</span></span></span></div></div>)<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Store a compressed content in the OCF file. The input can be a simple text or a Stream
+(the relevant <code>archiver</code> function takes care of disambiguation).</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#accessor_container">
+                  <span>container</span><span>()<span>: <span class="td-ref">JSZip</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Returns the underlying ZIP container; this is used when creating a &quot;collection&quot;, ie, when the
+the final content is generated from several zip containers.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#property_content">
+                  <span>content</span><span>: <span><span class="td-ref">Buffer</span><span class="td-op"> | </span><span class="td-ref">ArrayBuffer</span><span class="td-op"> | </span><span class="td-kw">null</span></span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#method_get_content_0">
+                  <span>get_content</span><span>()<span>: <span class="td-ref">Promise</span>&lt;<span><span class="td-ref">Buffer</span><span class="td-op"> | </span><span class="td-ref">ArrayBuffer</span></span>&gt;</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Return the final content of the book all packed up.
+If not yet done, the content is generated using the relevant <code>jszip</code> function, packaging all content that has been added.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;ocf.ts&#x2F;~&#x2F;OCF.html#accessor_name">
+                  <span>name</span><span>()<span>: <span class="td-kw">string</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Return the name of the final file, as provided at constructor time.
+This is based on the short name of the document, or the name provided in the configuration file.</p>
+</div></div></li></ul></div>
     </div></div>
 </section>
 </div>
@@ -171,21 +195,21 @@ Classes</h2></div><div class="namespaceSection"><div id="namespace_ocf" class="n
 </div></div><nav class="topSymbols">
           <h3>Symbols</h3>
           <ul><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
-<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
-                    ENV_MODIFIED_FILE_LOCATION
-                  </span>
-                </a>
-              </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    OCF
-                  </span>
-                </a>
-              </li><li>
                 <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;Options.html" title="Options"><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <span class="hover:bg-Interface/15 hover:bg-InterfaceDark/15">
                     Options
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;spec_status_values.html" title="spec_status_values"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    spec_status_values
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    ENV_MODIFIED_FILE_LOCATION
                   </span>
                 </a>
               </li><li>
@@ -195,9 +219,9 @@ Classes</h2></div><div class="namespaceSection"><div id="namespace_ocf" class="n
                   </span>
                 </a>
               </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;convert.html" title="convert"><div class="docNodeKindIcon"><div class="text-Function bg-Function/15 dark:text-FunctionDark dark:bg-FunctionDark/15" title="Function">f</div></div>
-<span class="hover:bg-Function/15 hover:bg-FunctionDark/15">
-                    convert
+                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
+<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
+                    OCF
                   </span>
                 </a>
               </li></ul><a class="flex items-center gap-0.5" href="..&#x2F;..&#x2F;.&#x2F;all_symbols.html">
@@ -216,7 +240,7 @@ Classes</h2></div><div class="namespaceSection"><div id="namespace_ocf" class="n
   />
 </svg>
 </a></nav><nav class="documentNavigation">
-          <h3>Document Navigation</h3><ul><li><ul><li><a href="#ocf-package" title="OCF Package">OCF Package</a></li></ul></li><li><a href="#classes" title="Classes">Classes</a></li><li><ul><li><a href="#namespace_ocf" title="OCF">OCF</a></li></ul></li></ul></nav></div>
+          <h3>Document Navigation</h3><ul><li><ul><li><a href="#ocf-package" title="OCF Package">OCF Package</a></li></ul></li><li><a href="#lib/ocf_ts_classes" title="Classes">Classes</a></li><li><ul><li><a href="#namespace_ocf" title="OCF">OCF</a></li></ul></li></ul></nav></div>
   </div></div>
 </div>
 </div>

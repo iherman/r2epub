@@ -15,7 +15,10 @@
 <div class="ddoc">
 <div><nav id="topnav">
   <div class="h-full">
-    <div class="flex items-center"><ul class="breadcrumbs"><li><a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a></li><span class="text-black dark:text-white"><svg
+    <div class="flex items-center"><ul class="breadcrumbs">
+  <li>
+    <a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a>
+  </li><span class="text-black dark:text-white"><svg
   width="16"
   height="16"
   viewBox="0 0 16 16"
@@ -29,7 +32,7 @@
     fill="currentColor"
   />
 </svg>
-</span><li>lib&#x2F;home.ts</li></ul>
+</span>lib&#x2F;home.ts</ul>
 </div>
 
     <div class="flex items-center gap-2">
@@ -99,8 +102,8 @@
 Service home page</h2>
 <p>The stable Web page, displayed by the server if there is no query string. It just displays some basic information about the usage of a server.</p>
 <p>(It is a single string with the HTML content, with a pattern: this is replaced by the host URL.)</p>
-</div><section class="section"  id="Variables"><div>
-      <h2 class="anchorable mb-1"><a href="#Variables" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+</div><section class="section"  id="lib&#x2F;home_ts_variables"><div>
+      <h2 class="anchorable mb-1"><a href="#lib&#x2F;home_ts_variables" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -124,9 +127,76 @@ Service home page</h2>
 </a>
 Variables</h2></div><div class="namespaceSection"><div id="namespace_homepage" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;home.ts&#x2F;~&#x2F;homepage.html" title="homepage">homepage</a>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;home.ts&#x2F;~&#x2F;homepage.html" title="homepage">
+			    <span>homepage</span><span>: <span class="td-str">`&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;title&gt;Service to convert W3C Technical Reports to EPUB 3&lt;/title&gt;
+    &lt;link rel='stylesheet' href='https://iherman.github.io/r2epub/assets/css/convert.css' /&gt;
+&lt;/head&gt;
 
-	      <div class="namespaceItemContentDoc"><span class="italic">No documentation available</span></div></div>
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;h1&gt;Service to convert W3C Technical Reports to EPUB 3&lt;/h1&gt;
+
+        &lt;p&gt;This is an interface an on-line service to convert W3C Technical Reports, authored in &lt;a href="https://respec.org/docs/"&gt;ReSpec&lt;/a&gt;, to EPUB 3&lt;/p&gt;
+
+        &lt;p&gt;
+            The service receives the parameters through the form above, and generates an EPUB 3 instance stored on the local machine. The possible form parameters are:
+        &lt;/p&gt;
+
+        &lt;dl&gt;
+            &lt;dt id='url'&gt;&lt;code&gt;url&lt;/code&gt;&lt;/dt&gt;
+            &lt;dd&gt;The URL for the either the (HTML) content &lt;em&gt;or&lt;/em&gt; for the &lt;a href='https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html'&gt;(JSON) configuration file&lt;/a&gt; for a collection of documents. In the second case all other parameter values are ignored. &lt;em&gt;This value is required&lt;/em&gt;.&lt;/dd&gt;
+
+            &lt;dt id='respec'&gt;&lt;code&gt;respec&lt;/code&gt;&lt;/dt&gt;
+            &lt;dd&gt;Whether the source has to be pre-processed by ReSpec (“true”) or is a final HTML (“false”). If the former, the source is converted using &lt;a href="https://github.com/w3c/spec-generator"&gt;W3C’s Spec Generator&lt;/a&gt; into HTML first.&lt;/dd&gt;
+
+            &lt;dt id='pdate'&gt;&lt;code&gt;publishDate&lt;/code&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;sup&gt;(☨)&lt;/sup&gt;Publication date. Overwrites the &lt;a href='https://github.com/w3c/respec/wiki/publishDate'&gt;value in the “&lt;code&gt;respecConfig&lt;/code&gt;” structure&lt;/a&gt; in the source.&lt;/dd&gt;
+
+            &lt;dt id="status"&gt;&lt;code&gt;specStatus&lt;/code&gt;&lt;/dt&gt;
+            &lt;dd&gt;Specification date. Overwrites the &lt;a href='https://github.com/w3c/respec/wiki/specStatus'&gt;value in the “&lt;code&gt;respecConfig&lt;/code&gt;” structure&lt;/a&gt; in the source.&lt;/dd&gt;
+
+            &lt;dt id='seclink'&gt;&lt;code&gt;addSectionLinks&lt;/code&gt;&lt;/dt&gt;
+            &lt;dd&gt;Add section links with a &lt;code&gt;§&lt;/code&gt; character. Overwrites the &lt;a href='https://github.com/w3c/respec/wiki/addSectionLinks'&gt;value in the “&lt;code&gt;respecConfig&lt;/code&gt;” structure&lt;/a&gt; in the source.&lt;/dd&gt;
+
+            &lt;dt id='toclevel'&gt;&lt;code&gt;maxTocLevel&lt;/code&gt;&lt;/dt&gt;
+            &lt;dd&gt;Maximum sectioning level for the Table of Content. Overwrites the &lt;a href='https://github.com/w3c/respec/wiki/maxTocLevel'&gt;value in the “&lt;code&gt;respecConfig&lt;/code&gt;” structure&lt;/a&gt; in the source.&lt;/dd&gt;
+        &lt;/dl&gt;
+
+        &lt;p&gt;
+            By default, the value of &lt;code&gt;respec&lt;/code&gt; is &lt;code&gt;false&lt;/code&gt;. However, if one of &lt;code&gt;publishDate&lt;/code&gt;, &lt;code&gt;specStatus&lt;/code&gt;, &lt;code&gt;addSectionLinks&lt;/code&gt;, or &lt;code&gt;maxTocLevel&lt;/code&gt; are set, &lt;code&gt;respec=true&lt;/code&gt; is implied (i.e., it is not necessary to set it explicitly).
+        &lt;/p&gt;
+
+        &lt;h2&gt;Usage examples&lt;/h2&gt;
+
+        &lt;p&gt;
+            Convert the HTML file (as generated by ReSpec) to an EPUB 3 file. The generated publication's name is &lt;code&gt;short-name.epub&lt;/code&gt;, where &lt;code&gt;short-name&lt;/code&gt; is set in the ReSpec configuration:
+        &lt;/p&gt;
+
+        &lt;pre&gt;%%%SERVER%%%?url=https://www.example.org/doc.html&lt;/pre&gt;
+
+        &lt;p&gt;Convert the HTML &lt;em&gt;ReSpec source&lt;/em&gt; to an EPUB 3 file. The source is converted on-the-fly by respec:&lt;/p&gt;
+
+        &lt;pre&gt;%%%SERVER%%%?url=https://www.example.org/doc.html&amp;respec=true&lt;/pre&gt;
+
+        &lt;p&gt;Convert the HTML &lt;em&gt;ReSpec source&lt;/em&gt; to an EPUB 3 file, setting its spec status to REC. The source is converted on-the-fly by respec, overwriting the &lt;code&gt;specStatus&lt;/code&gt; entry in the configuration to &lt;code&gt;REC&lt;/code&gt;:&lt;/p&gt;
+
+        &lt;pre&gt;%%%SERVER%%%?url=https://www.example.org/doc.html&amp;respec=true&amp;specStatus=REC&lt;/pre&gt;
+
+        &lt;p&gt;Generates a collection of HTML documents to an EPUB 3 file, described by a &lt;a href='https://iherman.github.io/r2epub/typedoc/modules/_clib_args_.html'&gt;(JSON) configuration file&lt;/a&gt;:&lt;/p&gt;
+
+        &lt;pre&gt;%%%SERVER%%%?url=https://www.example.org/collection.json&lt;/pre&gt;
+
+    &lt;/main&gt;
+    &lt;footer style='font-size:80%; border-top: thin solid black;'&gt;
+        &lt;p&gt;This server runs the &lt;a href='https://github.com/iherman/r2epub/'&gt;r2epub&lt;/a&gt; script; see the &lt;a href='https://iherman.github.io/r2epub/'&gt;documentation&lt;/a&gt; for more details. Copyright © 2025 &lt;a href='https://www.ivan-herman.net/'&gt;Ivan Herman&lt;/a&gt;. &lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+`</span></span></a></div>
     </div></div>
 </section>
 </div>
@@ -170,21 +240,21 @@ Variables</h2></div><div class="namespaceSection"><div id="namespace_homepage" c
 </div></div><nav class="topSymbols">
           <h3>Symbols</h3>
           <ul><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
-<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
-                    ENV_MODIFIED_FILE_LOCATION
-                  </span>
-                </a>
-              </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    OCF
-                  </span>
-                </a>
-              </li><li>
                 <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;Options.html" title="Options"><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <span class="hover:bg-Interface/15 hover:bg-InterfaceDark/15">
                     Options
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;spec_status_values.html" title="spec_status_values"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    spec_status_values
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    ENV_MODIFIED_FILE_LOCATION
                   </span>
                 </a>
               </li><li>
@@ -194,9 +264,9 @@ Variables</h2></div><div class="namespaceSection"><div id="namespace_homepage" c
                   </span>
                 </a>
               </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;convert.html" title="convert"><div class="docNodeKindIcon"><div class="text-Function bg-Function/15 dark:text-FunctionDark dark:bg-FunctionDark/15" title="Function">f</div></div>
-<span class="hover:bg-Function/15 hover:bg-FunctionDark/15">
-                    convert
+                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
+<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
+                    OCF
                   </span>
                 </a>
               </li></ul><a class="flex items-center gap-0.5" href="..&#x2F;..&#x2F;.&#x2F;all_symbols.html">
@@ -215,7 +285,7 @@ Variables</h2></div><div class="namespaceSection"><div id="namespace_homepage" c
   />
 </svg>
 </a></nav><nav class="documentNavigation">
-          <h3>Document Navigation</h3><ul><li><ul><li><a href="#service-home-page" title="Service home page">Service home page</a></li></ul></li><li><a href="#variables" title="Variables">Variables</a></li><li><ul><li><a href="#namespace_homepage" title="homepage">homepage</a></li></ul></li></ul></nav></div>
+          <h3>Document Navigation</h3><ul><li><ul><li><a href="#service-home-page" title="Service home page">Service home page</a></li></ul></li><li><a href="#lib/home_ts_variables" title="Variables">Variables</a></li><li><ul><li><a href="#namespace_homepage" title="homepage">homepage</a></li></ul></li></ul></nav></div>
   </div></div>
 </div>
 </div>

@@ -15,7 +15,10 @@
 <div class="ddoc">
 <div><nav id="topnav">
   <div class="h-full">
-    <div class="flex items-center"><ul class="breadcrumbs"><li><a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a></li><span class="text-black dark:text-white"><svg
+    <div class="flex items-center"><ul class="breadcrumbs">
+  <li>
+    <a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a>
+  </li><span class="text-black dark:text-white"><svg
   width="16"
   height="16"
   viewBox="0 0 16 16"
@@ -29,7 +32,7 @@
     fill="currentColor"
   />
 </svg>
-</span><li>lib&#x2F;opf.ts</li></ul>
+</span>lib&#x2F;opf.ts</ul>
 </div>
 
     <div class="flex items-center gap-2">
@@ -107,8 +110,8 @@ the details; the short overview is:</p>
 <li>Otherwise a JSON name refers to an embedded dictionary representing a subelement in XML.</li>
 </ul>
 <p>The core of the module is in the [[PackageWrapper]] class.</p>
-</div><section class="section"  id="Classes"><div>
-      <h2 class="anchorable mb-1"><a href="#Classes" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+</div><section class="section"  id="lib&#x2F;opf_ts_classes"><div>
+      <h2 class="anchorable mb-1"><a href="#lib&#x2F;opf_ts_classes" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -132,14 +135,44 @@ the details; the short overview is:</p>
 </a>
 Classes</h2></div><div class="namespaceSection"><div id="namespace_packagewrapper" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html" title="PackageWrapper">PackageWrapper</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><h2>The OPF Wrapper</h2>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_a11y_feature_0">add_a11y_feature</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_collection_0">add_collection</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_creators_0">add_creators</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_dates_0">add_dates</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_manifest_item_0">add_manifest_item</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_spine_item_0">add_spine_item</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_wcag_link_0">add_wcag_link</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#property_id">id</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_serialize_0">serialize</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#property_thepackage">thePackage</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html" title="PackageWrapper">
+			    <span>PackageWrapper</span><span>(<div class="ml-4"><div><span>identifier<span>: <span class="td-kw">string</span></span></span>,</div><div><span>title<span>: <span class="td-kw">string</span></span></span></div></div>)</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><h2>The OPF Wrapper</h2>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_a11y_feature_0">
+                  <span>add_a11y_feature</span><span>(<span><span>features<span>: <span class="td-kw">string</span>[]</span></span></span>)<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Add accessibility feature strings to the metadata</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_collection_0">
+                  <span>add_collection</span><span>(<span><span>new_collection<span>: <span class="td-ref">Collection</span></span></span></span>)<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Add a new OPF collection. This is used when the final EPUB is itself a collection of parts; each collection in the
+OPF sense collects the constituents of a specific part.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_creators_0">
+                  <span>add_creators</span><span>(<span><span>creators<span>: <span class="td-kw">string</span>[]</span></span></span>)<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Add a list of creators (authors) to the publication.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_dates_0">
+                  <span>add_dates</span><span>(<span><span>date<span>: <span class="td-kw">string</span></span></span></span>)<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Set the date and the modification date of the publication.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_manifest_item_0">
+                  <span>add_manifest_item</span><span>(<div class="ml-4"><div><span>item<span>: <span class="td-ref">ManifestItem</span></span></span>,</div><div><span>add_spine_item<span class="td-op">?</span><span>: <span class="td-kw">boolean</span></span></span></div></div>)<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Add a manifest item, i.e., the reference to a resource that is part of the publication.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_spine_item_0">
+                  <span>add_spine_item</span><span>(<div class="ml-4"><div><span>idref<span>: <span class="td-kw">string</span></span></span>,</div><div><span>add_linear<span class="td-op">?</span><span>: <span class="td-kw">boolean</span></span></span></div></div>)<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Add a spine item, i.e., the reference to the resource in the manifest that is a constituent of the spite (i.e., reading order) of the book</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_add_wcag_link_0">
+                  <span>add_wcag_link</span><span>()<span>: <span class="td-kw">void</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Add an A11y link to WCAG A, to specify that the document conforms to this level</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#property_id">
+                  <span>id</span><span>: <span class="td-kw">number</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Id generated to the editors for cross reference</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#method_serialize_0">
+                  <span>serialize</span><span>()<span>: <span class="td-kw">string</span></span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Serialize the Package document into (pretty printed) XML.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;PackageWrapper.html#property_thepackage">
+                  <span>thePackage</span><span>: <span class="td-ref">Package</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The Package document content itself, stored in a JSON object for an easier manipulation</p>
+</div></div></li></ul></div>
     </div></div>
 </section>
-<section class="section"  id="Interfaces"><div>
-      <h2 class="anchorable mb-1"><a href="#Interfaces" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+<section class="section"  id="lib&#x2F;opf_ts_interfaces"><div>
+      <h2 class="anchorable mb-1"><a href="#lib&#x2F;opf_ts_interfaces" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -163,34 +196,65 @@ Classes</h2></div><div class="namespaceSection"><div id="namespace_packagewrappe
 </a>
 Interfaces</h2></div><div class="namespaceSection"><div id="namespace_collection" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html" title="Collection">Collection</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Representations of the &quot;collections&quot; element</p>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html#property_@role">@role</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html#property_link">link</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html#property_metadata">metadata</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html" title="Collection">
+			    <span>Collection</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Representations of the &quot;collections&quot; element</p>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html#property_@role">
+                  <span>@role</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html#property_link">
+                  <span>link</span><span>: <span class="td-ref">Link</span>[]</span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Collection.html#property_metadata">
+                  <span>metadata</span><span>: <span class="td-ref">CollectionMetadata</span></span></a></li></ul></div>
     </div><div id="namespace_collectionmetadata" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html" title="CollectionMetadata">CollectionMetadata</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The minimal metadata, used in collections</p>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html#property_dc:identifier">dc:identifier</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html#property_dc:language">dc:language</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html#property_dc:title">dc:title</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html" title="CollectionMetadata">
+			    <span>CollectionMetadata</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The minimal metadata, used in collections</p>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html#property_dc:identifier">
+                  <span>dc:identifier</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html#property_dc:language">
+                  <span>dc:language</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;CollectionMetadata.html#property_dc:title">
+                  <span>dc:title</span><span>: <span class="td-kw">string</span></span></a></li></ul></div>
     </div><div id="namespace_link" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html" title="Link">Link</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The &quot;link&quot; element content, as define in the spec. <code>@rel</code> is optional, because it is also used for OPF collections, and
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html" title="Link">
+			    <span>Link</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The &quot;link&quot; element content, as define in the spec. <code>@rel</code> is optional, because it is also used for OPF collections, and
 <code>@rel</code> is indeed optional in that context.</p>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@href">@href</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@id">@id</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@media-type">@media-type</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@properties">@properties</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@refines">@refines</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@rel">@rel</a></li></ul></div>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@href">
+                  <span>@href</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@id">
+                  <span>@id</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@media-type">
+                  <span>@media-type</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@properties">
+                  <span>@properties</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@refines">
+                  <span>@refines</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Link.html#property_@rel">
+                  <span>@rel</span><span>: <span class="td-kw">string</span></span></a></li></ul></div>
     </div><div id="namespace_manifestitem" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html" title="ManifestItem">ManifestItem</a>
-
-	      <div class="namespaceItemContentDoc"><span class="italic">No documentation available</span></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@href">@href</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@id">@id</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@media-overlay">@media-overlay</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@media-type">@media-type</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@properties">@properties</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html" title="ManifestItem">
+			    <span>ManifestItem</span></a><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@href">
+                  <span>@href</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@id">
+                  <span>@id</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@media-overlay">
+                  <span>@media-overlay</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@media-type">
+                  <span>@media-type</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;ManifestItem.html#property_@properties">
+                  <span>@properties</span><span>: <span class="td-kw">string</span></span></a></li></ul></div>
     </div><div id="namespace_package" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Package.html" title="Package">Package</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Encoding of the XML structure of the package file in JSON; simply a wrapper around [[PackageContent]].</p>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Package.html#property_package">package</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Package.html" title="Package">
+			    <span>Package</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Encoding of the XML structure of the package file in JSON; simply a wrapper around [[PackageContent]].</p>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;opf.ts&#x2F;~&#x2F;Package.html#property_package">
+                  <span>package</span><span>: <span class="td-ref">PackageContent</span></span></a></li></ul></div>
     </div></div>
 </section>
 </div>
@@ -234,21 +298,21 @@ Interfaces</h2></div><div class="namespaceSection"><div id="namespace_collection
 </div></div><nav class="topSymbols">
           <h3>Symbols</h3>
           <ul><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
-<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
-                    ENV_MODIFIED_FILE_LOCATION
-                  </span>
-                </a>
-              </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    OCF
-                  </span>
-                </a>
-              </li><li>
                 <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;Options.html" title="Options"><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <span class="hover:bg-Interface/15 hover:bg-InterfaceDark/15">
                     Options
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;spec_status_values.html" title="spec_status_values"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    spec_status_values
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    ENV_MODIFIED_FILE_LOCATION
                   </span>
                 </a>
               </li><li>
@@ -258,9 +322,9 @@ Interfaces</h2></div><div class="namespaceSection"><div id="namespace_collection
                   </span>
                 </a>
               </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;convert.html" title="convert"><div class="docNodeKindIcon"><div class="text-Function bg-Function/15 dark:text-FunctionDark dark:bg-FunctionDark/15" title="Function">f</div></div>
-<span class="hover:bg-Function/15 hover:bg-FunctionDark/15">
-                    convert
+                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
+<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
+                    OCF
                   </span>
                 </a>
               </li></ul><a class="flex items-center gap-0.5" href="..&#x2F;..&#x2F;.&#x2F;all_symbols.html">
@@ -279,7 +343,7 @@ Interfaces</h2></div><div class="namespaceSection"><div id="namespace_collection
   />
 </svg>
 </a></nav><nav class="documentNavigation">
-          <h3>Document Navigation</h3><ul><li><ul><li><a href="#the-opf-package" title="The OPF package">The OPF package</a></li></ul></li><li><a href="#classes" title="Classes">Classes</a></li><li><ul><li><a href="#namespace_packagewrapper" title="PackageWrapper">PackageWrapper</a></li></ul></li><li><a href="#interfaces" title="Interfaces">Interfaces</a></li><li><ul><li><a href="#namespace_collection" title="Collection">Collection</a></li><li><a href="#namespace_collectionmetadata" title="CollectionMetadata">CollectionMetadata</a></li><li><a href="#namespace_link" title="Link">Link</a></li><li><a href="#namespace_manifestitem" title="ManifestItem">ManifestItem</a></li><li><a href="#namespace_package" title="Package">Package</a></li></ul></li></ul></nav></div>
+          <h3>Document Navigation</h3><ul><li><ul><li><a href="#the-opf-package" title="The OPF package">The OPF package</a></li></ul></li><li><a href="#lib/opf_ts_classes" title="Classes">Classes</a></li><li><ul><li><a href="#namespace_packagewrapper" title="PackageWrapper">PackageWrapper</a></li></ul></li><li><a href="#lib/opf_ts_interfaces" title="Interfaces">Interfaces</a></li><li><ul><li><a href="#namespace_collection" title="Collection">Collection</a></li><li><a href="#namespace_collectionmetadata" title="CollectionMetadata">CollectionMetadata</a></li><li><a href="#namespace_link" title="Link">Link</a></li><li><a href="#namespace_manifestitem" title="ManifestItem">ManifestItem</a></li><li><a href="#namespace_package" title="Package">Package</a></li></ul></li></ul></nav></div>
   </div></div>
 </div>
 </div>

@@ -5,7 +5,9 @@
  * @module
 */
 
+// @deno-types="npm:@types/jsdom@^28.0.1"
 import * as jsdom       from 'jsdom';
+// @deno-types="npm:@types/w3c-xmlserializer@^2.0.4"
 import serialize        from 'w3c-xmlserializer'
 import { entity_codes } from './common.ts';
 

@@ -19,6 +19,7 @@ import type * as ocf       from '../ocf.ts';
 import * as common         from '../common.ts';
 import * as rConvert       from '../convert.ts';
 import type * as cConvert  from './convert.ts';
+// @deno-types="npm:@types/jsdom@^28.0.1"
 import * as jsdom          from 'jsdom';
 import JSZip               from 'jszip';
 

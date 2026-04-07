@@ -3,7 +3,7 @@
  * ## Fetch
  *
  * Wrappers around the fetch function.
- * 
+ *
  * @module
  * @packageDocumentation
  */
@@ -15,7 +15,9 @@
 
 
 import * as urlHandler from 'node:url';
+// @deno-types="npm:@types/valid-url@^1.0.7"
 import * as validUrl   from 'valid-url';
+// @deno-types="npm:@types/jsdom@^28.0.1"
 import * as jsdom      from 'jsdom';
 import * as common     from './common.ts';
 import * as fs         from 'node:fs';

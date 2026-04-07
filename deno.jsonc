@@ -1,8 +1,8 @@
 {
     "name": "@iherman/r2epub",
     "description": "Conversion of Respec generated HTML files into EPUB 3. The program must be run from Deno (version 2.*)",
-    "version": "2.0.6",
-    "date": "2026-04-01",
+    "version": "2.0.7",
+    "date": "2026-04-07",
     "homepage": "https://github.com/iherman/r2epub",
     "nodeModulesDir": "none",
     "compilerOptions": {
@@ -110,12 +110,15 @@
         "notes.md"
     ],
     "imports": {
-        "jszip"              : "npm:jszip@^3.10.1",
-        "valid-url"          : "npm:valid-url@^1.0.9",
-        "w3c-xmlserializer"  : "npm:w3c-xmlserializer@^5.0.0",
-        "xmlbuilder2"        : "npm:xmlbuilder2@^3.1.1",
-        "commander"          : "npm:commander@^14.0.3",
-        "@exodus/schemasafe" : "npm:@exodus/schemasafe@^1.3.0", // JSON schema library
-        "jsdom"              : "npm:jsdom@^29.0.1"
+        "jszip"                      : "npm:jszip@^3.10.1",
+        "valid-url"                  : "npm:valid-url@^1.0.9",
+        "@types/valid-url"           : "npm:@types/valid-url@^1.0.7",
+        "w3c-xmlserializer"          : "npm:w3c-xmlserializer@^5.0.0",
+        "@types/w3c-xmlserializer"   : "npm:@types/w3c-xmlserializer@^2.0.4",
+        "xmlbuilder2"                : "npm:xmlbuilder2@^3.1.1",
+        "commander"                  : "npm:commander@^14.0.3",
+        "@exodus/schemasafe"         : "npm:@exodus/schemasafe@^1.3.0", // JSON schema library
+        "jsdom"                      : "npm:jsdom@^29.0.1",
+        "@types/jsdom"               : "npm:@types/jsdom@^28.0.1"
     }
 }

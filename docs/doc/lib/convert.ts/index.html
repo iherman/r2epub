@@ -15,7 +15,10 @@
 <div class="ddoc">
 <div><nav id="topnav">
   <div class="h-full">
-    <div class="flex items-center"><ul class="breadcrumbs"><li><a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a></li><span class="text-black dark:text-white"><svg
+    <div class="flex items-center"><ul class="breadcrumbs">
+  <li>
+    <a href="..&#x2F;..&#x2F;" class="contextLink">&quot;@iherman&#x2F;r2epub&quot;</a>
+  </li><span class="text-black dark:text-white"><svg
   width="16"
   height="16"
   viewBox="0 0 16 16"
@@ -29,7 +32,7 @@
     fill="currentColor"
   />
 </svg>
-</span><li>lib&#x2F;convert.ts</li></ul>
+</span>lib&#x2F;convert.ts</ul>
 </div>
 
     <div class="flex items-center gap-2">
@@ -103,8 +106,8 @@ Main entry points</h2>
 <li>A representation of the EPUB OCF instances (i.e., of the ZIP file for the final content): the [[OCF]] class;</li>
 <li>A representation of the EPUB “package”, i.e., the XML file providing the main manifest of the EPUB file: the [[PackageWrapper]] class.</li>
 </ul>
-</div><section class="section"  id="Classes"><div>
-      <h2 class="anchorable mb-1"><a href="#Classes" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+</div><section class="section"  id="lib&#x2F;convert_ts_classes"><div>
+      <h2 class="anchorable mb-1"><a href="#lib&#x2F;convert_ts_classes" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -128,14 +131,34 @@ Main entry points</h2>
 </a>
 Classes</h2></div><div class="namespaceSection"><div id="namespace_respectoepub" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html" title="RespecToEPUB">RespecToEPUB</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><h2>Main Processing class</h2>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_create_epub_0">create_epub</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_create_epub_from_dom_0">create_epub_from_dom</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_generate_epub_0">generate_epub</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_get_extra_resources_0">get_extra_resources</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#property_global">global</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#property_global_url">global_url</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#property_resource_references">resource_references</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html" title="RespecToEPUB">
+			    <span>RespecToEPUB</span><span>(<div class="ml-4"><div><span>trace<span class="td-op">?</span><span>: <span class="td-kw">boolean</span></span></span>,</div><div><span>print_package<span class="td-op">?</span><span>: <span class="td-kw">boolean</span></span></span></div></div>)</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><h2>Main Processing class</h2>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_create_epub_0">
+                  <span>create_epub</span><span>(<div class="ml-4"><div><span>url<span>: <span class="td-kw">string</span></span></span>,</div><div><span>options<span>: <span class="td-ref">Options</span></span></span></div></div>)<span>: <span class="td-ref">Promise</span>&lt;<span class="td-ref">ocf.OCF</span>&gt;</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Create an EPUB 3, ie, an OCF file from the original content</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_create_epub_from_dom_0">
+                  <span>create_epub_from_dom</span><span>(<div class="ml-4"><div><span>url<span>: <span class="td-kw">string</span></span></span>,</div><div><span>dom<span>: <span class="td-ref">jsdom.JSDOM</span></span></span></div></div>)<span>: <span class="td-ref">Promise</span>&lt;<span class="td-ref">ocf.OCF</span>&gt;</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Create an OCF instance from DOM representing the original content.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_generate_epub_0">
+                  <span>generate_epub</span><span>()<span>: <span class="td-ref">Promise</span>&lt;<span class="td-ref">ocf.OCF</span>&gt;</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Create the final epub file (ie, an OCF instance): download all resources, if applicable, add them all, as well as the
+generated content (package file, nav file, the original content file, etc.) to an OCF instance.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#method_get_extra_resources_0">
+                  <span>get_extra_resources</span><span>()<span>: <span class="td-ref">Promise</span>&lt;<span class="td-ref">ResourceRef</span>[]&gt;</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Collect the references to the extra resources, to be added to the EPUB file as well as the package opf file.
+It relies on searching through the HTML source file, based on the query patterns given in [[resource_references]].</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#property_global">
+                  <span>global</span><span>: <span class="td-ref">Global</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#property_global_url">
+                  <span>global_url</span><span>: <span class="td-kw">string</span></span></a></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;RespecToEPUB.html#property_resource_references">
+                  <span>resource_references</span><span>: <span class="td-ref">LocalLinks</span>[]</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Arrays of query/attribute pairs that may refer to a resource to be collected:</p>
+</div></div></li></ul></div>
     </div></div>
 </section>
-<section class="section"  id="Interfaces"><div>
-      <h2 class="anchorable mb-1"><a href="#Interfaces" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+<section class="section"  id="lib&#x2F;convert_ts_interfaces"><div>
+      <h2 class="anchorable mb-1"><a href="#lib&#x2F;convert_ts_interfaces" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -159,16 +182,66 @@ Classes</h2></div><div class="namespaceSection"><div id="namespace_respectoepub"
 </a>
 Interfaces</h2></div><div class="namespaceSection"><div id="namespace_global" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html" title="Global">Global</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Interface of the &quot;Global&quot; data, to be used by various utilities</p>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_config">config</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_document_url">document_url</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_dom">dom</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_html_element">html_element</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_opf_content">opf_content</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_package">package</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_process_version">process_version</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_resources">resources</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_trace">trace</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html" title="Global">
+			    <span>Global</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Interface of the &quot;Global&quot; data, to be used by various utilities</p>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_config">
+                  <span>config</span><span>: <span class="td-kw">any</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The  initial config object, originally filled by the user (respec puts a copy of this
+object, as JSON, into the header of the generated content).</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_document_url">
+                  <span>document_url</span><span>: <span class="td-kw">string</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The URL of the document to be processed</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_dom">
+                  <span>dom</span><span>: <span class="td-ref">jsdom.JSDOM</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The DOM element, as returned from parsing</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_html_element">
+                  <span>html_element</span><span>: <span class="td-ref">Element</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The DOM HTML element of the main document</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_opf_content">
+                  <span>opf_content</span><span>: <span class="td-ref">opf.PackageWrapper</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The class used for the generation of the EPUB opf file</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_package">
+                  <span>package</span><span>: <span class="td-kw">boolean</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>[Debug] Whether the opf instance should be should be printed to the console instead of generating an EPUB file</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_process_version">
+                  <span>process_version</span><span>: <span class="td-kw">number</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Process version used to generate this file. The possible values are 2016 and 2021</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_resources">
+                  <span>resources</span><span>: <span class="td-ref">ResourceRef</span>[]</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>List of extra resources, to be added to the opf file and into the final EPUB file. The main role of the [[create_epub_from_dom]]
+function is to collect all relevant resources; once done, this array is used to generate the final
+<a href="https://www.w3.org/TR/epub-33/#sec-package-doc"><code>package.opf</code></a> file
+as well as to collect the resources themselves and add them to the final epub file.</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;Global.html#property_trace">
+                  <span>trace</span><span>: <span class="td-kw">boolean</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>[Debug] Whether trace information should be printed to the console</p>
+</div></div></li></ul></div>
     </div><div id="namespace_resourceref" class="namespaceItem" ><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <div class="namespaceItemContent">
-		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html" title="ResourceRef">ResourceRef</a>
-
-	      <div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Interface for the resources that, eventually, should be added to the EPUB file</p>
-</div></div><ul class="namespaceItemContentSubItems"><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_absolute_url">absolute_url</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_add_to_spine">add_to_spine</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_id">id</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_media_type">media_type</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_properties">properties</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_relative_url">relative_url</a></li><li><a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_text_content">text_content</a></li></ul></div>
+		    <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html" title="ResourceRef">
+			    <span>ResourceRef</span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Interface for the resources that, eventually, should be added to the EPUB file</p>
+</div></div><ul class="namespaceItemContentSubItems"><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_absolute_url">
+                  <span>absolute_url</span><span>: <span class="td-kw">string</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>URL of the resource in case it must be fetched</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_add_to_spine">
+                  <span>add_to_spine</span><span>: <span class="td-kw">boolean</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Flag whether the resource reference should also be added to the spine with a 'linear=no' attribute</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_id">
+                  <span>id</span><span>: <span class="td-kw">string</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The item must have a fixed id, rather than a generated one</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_media_type">
+                  <span>media_type</span><span>: <span class="td-kw">string</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Media type of the resource; this must be added to the package manifest entry</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_properties">
+                  <span>properties</span><span>: <span class="td-kw">string</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Extra properties, defined by the package specification, to be added to the entry</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_relative_url">
+                  <span>relative_url</span><span>: <span class="td-kw">string</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>The URL to be used within the EPUB; relative to the top of the file</p>
+</div></div></li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;convert.ts&#x2F;~&#x2F;ResourceRef.html#property_text_content">
+                  <span>text_content</span><span>: <span class="td-kw">string</span></span></a><div class="namespaceItemContentDoc"><div class="markdown_summary"><p>Content of the resource in case it is generated by this program</p>
+</div></div></li></ul></div>
     </div></div>
 </section>
 </div>
@@ -212,21 +285,21 @@ Interfaces</h2></div><div class="namespaceSection"><div id="namespace_global" cl
 </div></div><nav class="topSymbols">
           <h3>Symbols</h3>
           <ul><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
-<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
-                    ENV_MODIFIED_FILE_LOCATION
-                  </span>
-                </a>
-              </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    OCF
-                  </span>
-                </a>
-              </li><li>
                 <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;Options.html" title="Options"><div class="docNodeKindIcon"><div class="text-Interface bg-Interface/15 dark:text-InterfaceDark dark:bg-InterfaceDark/15" title="Interface">I</div></div>
 <span class="hover:bg-Interface/15 hover:bg-InterfaceDark/15">
                     Options
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;spec_status_values.html" title="spec_status_values"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    spec_status_values
+                  </span>
+                </a>
+              </li><li>
+                <a href="..&#x2F;..&#x2F;.&#x2F;lib&#x2F;common.ts&#x2F;~&#x2F;ENV_MODIFIED_FILE_LOCATION.html" title="ENV_MODIFIED_FILE_LOCATION"><div class="docNodeKindIcon"><div class="text-Variable bg-Variable/15 dark:text-VariableDark dark:bg-VariableDark/15" title="Variable">v</div></div>
+<span class="hover:bg-Variable/15 hover:bg-VariableDark/15">
+                    ENV_MODIFIED_FILE_LOCATION
                   </span>
                 </a>
               </li><li>
@@ -236,9 +309,9 @@ Interfaces</h2></div><div class="namespaceSection"><div id="namespace_global" cl
                   </span>
                 </a>
               </li><li>
-                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;convert.html" title="convert"><div class="docNodeKindIcon"><div class="text-Function bg-Function/15 dark:text-FunctionDark dark:bg-FunctionDark/15" title="Function">f</div></div>
-<span class="hover:bg-Function/15 hover:bg-FunctionDark/15">
-                    convert
+                <a href="..&#x2F;..&#x2F;.&#x2F;.&#x2F;~&#x2F;OCF.html" title="OCF"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
+<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
+                    OCF
                   </span>
                 </a>
               </li></ul><a class="flex items-center gap-0.5" href="..&#x2F;..&#x2F;.&#x2F;all_symbols.html">
@@ -257,7 +330,7 @@ Interfaces</h2></div><div class="namespaceSection"><div id="namespace_global" cl
   />
 </svg>
 </a></nav><nav class="documentNavigation">
-          <h3>Document Navigation</h3><ul><li><ul><li><a href="#main-entry-points" title="Main entry points">Main entry points</a></li></ul></li><li><a href="#classes" title="Classes">Classes</a></li><li><ul><li><a href="#namespace_respectoepub" title="RespecToEPUB">RespecToEPUB</a></li></ul></li><li><a href="#interfaces" title="Interfaces">Interfaces</a></li><li><ul><li><a href="#namespace_global" title="Global">Global</a></li><li><a href="#namespace_resourceref" title="ResourceRef">ResourceRef</a></li></ul></li></ul></nav></div>
+          <h3>Document Navigation</h3><ul><li><ul><li><a href="#main-entry-points" title="Main entry points">Main entry points</a></li></ul></li><li><a href="#lib/convert_ts_classes" title="Classes">Classes</a></li><li><ul><li><a href="#namespace_respectoepub" title="RespecToEPUB">RespecToEPUB</a></li></ul></li><li><a href="#lib/convert_ts_interfaces" title="Interfaces">Interfaces</a></li><li><ul><li><a href="#namespace_global" title="Global">Global</a></li><li><a href="#namespace_resourceref" title="ResourceRef">ResourceRef</a></li></ul></li></ul></nav></div>
   </div></div>
 </div>
 </div>

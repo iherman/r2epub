@@ -21,6 +21,7 @@
 
 
 // deno-lint-ignore verbatim-module-syntax
+// @deno-types="npm:@types/jsdom@^28.0.1"
 import * as jsdom      from 'jsdom';
 import * as urlHandler from 'node:url';
 
@@ -88,8 +89,8 @@ export interface Global {
     /**
      * The  initial config object, originally filled by the user (respec puts a copy of this
      * object, as JSON, into the header of the generated content).
-     * 
-     * Using `any` as a type, because creating a full-blown type for the respec config would be 
+     *
+     * Using `any` as a type, because creating a full-blown type for the respec config would be
      * complex and unnecessary for our purposes.
     */
     config? :any,

@@ -14,6 +14,7 @@
  * @module
 */
 
+// @deno-types="npm:@types/jsdom@^28.0.1"
 import { JSDOM } from 'jsdom';
 
 /**
